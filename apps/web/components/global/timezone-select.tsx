@@ -102,7 +102,7 @@ export const TimezoneSelect = observer(function TimezoneSelect(props: TTimezoneS
           filter={(option, query) => contains(option.query, query)}
           disabled={isSelectDisabled}
         >
-          <ComboboxTrigger size={size} placeholder={label} />
+          <ComboboxTrigger size={size} placeholder={label} dir="ltr" />
           <ComboboxContent
             aria-label={label}
             sizing="anchor"
@@ -110,7 +110,9 @@ export const TimezoneSelect = observer(function TimezoneSelect(props: TTimezoneS
           >
             <ComboboxEmpty>{t("common.search.no_matches_found")}</ComboboxEmpty>
             <ComboboxList aria-label={label}>
-              {(option: TTimezoneOption) => <ComboboxItem key={option.value} value={option} label={option.label} />}
+              {(option: TTimezoneOption) => (
+                <ComboboxItem key={option.value} value={option} label={option.label} dir="ltr" />
+              )}
             </ComboboxList>
           </ComboboxContent>
         </Combobox>

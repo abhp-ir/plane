@@ -219,7 +219,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
               className="h-44 w-full rounded-lg"
               alt={currentUser?.first_name ?? "Cover image"}
             />
-            <div className="absolute -bottom-6 left-6 flex items-end justify-between">
+            <div className="absolute start-6 -bottom-6 flex items-end justify-between">
               <div className="flex gap-3">
                 <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-surface-2">
                   <button type="button" onClick={() => setIsImageUploadModalOpen(true)}>
@@ -242,7 +242,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                 </div>
               </div>
             </div>
-            <div className="absolute right-3 bottom-3 flex">
+            <div className="absolute end-3 bottom-3 flex">
               <Controller
                 control={control}
                 name="cover_image_url"
@@ -261,18 +261,20 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
           <div className="item-center mt-6 flex justify-between">
             <div className="flex flex-col">
               <div className="item-center flex text-16 font-medium text-secondary">
-                <span>{`${watch("first_name")} ${watch("last_name")}`}</span>
+                <bdi>{`${watch("first_name")} ${watch("last_name")}`}</bdi>
               </div>
-              <span className="text-13 tracking-tight text-tertiary">{watch("email")}</span>
+              <span dir="ltr" className="text-13 tracking-tight text-tertiary">
+                {watch("email")}
+              </span>
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 xl:grid-cols-3">
               <div className="flex flex-col gap-1">
-                <h4 className="text-13 font-medium text-secondary">
+                <label htmlFor="first_name" className="text-13 font-medium text-secondary">
                   {t("first_name")}&nbsp;
                   <span className="text-danger-primary">*</span>
-                </h4>
+                </label>
                 <Controller
                   control={control}
                   name="first_name"
@@ -287,6 +289,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           size="2xl"
                           id="first_name"
                           name="first_name"
+                          dir="auto"
                           type="text"
                           value={value}
                           onChange={onChange}
@@ -302,7 +305,9 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                 {errors.first_name && <span className="text-11 text-danger-primary">{errors.first_name.message}</span>}
               </div>
               <div className="flex flex-col gap-1">
-                <h4 className="text-13 font-medium text-secondary">{t("last_name")}</h4>
+                <label htmlFor="last_name" className="text-13 font-medium text-secondary">
+                  {t("last_name")}
+                </label>
                 <Controller
                   control={control}
                   name="last_name"
@@ -316,6 +321,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           size="2xl"
                           id="last_name"
                           name="last_name"
+                          dir="auto"
                           type="text"
                           value={value}
                           onChange={onChange}
@@ -331,10 +337,10 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                 {errors.last_name && <span className="text-11 text-danger-primary">{errors.last_name.message}</span>}
               </div>
               <div className="flex flex-col gap-1">
-                <h4 className="text-13 font-medium text-secondary">
+                <label htmlFor="display_name" className="text-13 font-medium text-secondary">
                   {t("display_name")}&nbsp;
                   <span className="text-danger-primary">*</span>
-                </h4>
+                </label>
                 <Controller
                   control={control}
                   name="display_name"
@@ -349,6 +355,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           size="2xl"
                           id="display_name"
                           name="display_name"
+                          dir="auto"
                           type="text"
                           value={value}
                           onChange={onChange}
@@ -365,10 +372,10 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                 )}
               </div>
               <div className="flex flex-col gap-1">
-                <h4 className="text-13 font-medium text-secondary">
+                <label htmlFor="email" className="text-13 font-medium text-secondary">
                   {t("auth.common.email.label")}&nbsp;
                   <span className="text-danger-primary">*</span>
-                </h4>
+                </label>
                 <Controller
                   control={control}
                   name="email"
@@ -382,6 +389,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           size="2xl"
                           id="email"
                           name="email"
+                          dir="ltr"
                           type="email"
                           value={value}
                           ref={ref}

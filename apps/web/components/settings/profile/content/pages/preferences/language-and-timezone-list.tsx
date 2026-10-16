@@ -35,14 +35,14 @@ export const ProfileSettingsLanguageAndTimezonePreferencesList = observer(
       try {
         await updateCurrentUser({ user_timezone: value });
         setToast({
-          title: "Success!",
-          message: "Timezone updated successfully",
+          title: t("toast.success"),
+          message: t("entity.update.success", { entity: t("timezone") }),
           type: "success",
         });
       } catch (_error) {
         setToast({
-          title: "Error!",
-          message: "Failed to update timezone",
+          title: t("toast.error"),
+          message: t("entity.update.failed", { entity: t("timezone") }),
           type: "error",
         });
       }
@@ -52,14 +52,14 @@ export const ProfileSettingsLanguageAndTimezonePreferencesList = observer(
       try {
         await updateUserProfile({ language: value });
         setToast({
-          title: "Success!",
-          message: "Language updated successfully",
+          title: t("toast.success"),
+          message: t("entity.update.success", { entity: t("language") }),
           type: "success",
         });
       } catch (_error) {
         setToast({
-          title: "Error!",
-          message: "Failed to update language",
+          title: t("toast.error"),
+          message: t("entity.update.failed", { entity: t("language") }),
           type: "error",
         });
       }
@@ -82,7 +82,13 @@ export const ProfileSettingsLanguageAndTimezonePreferencesList = observer(
         <SettingsControlItem
           title={t("timezone")}
           description={t("timezone_setting")}
-          control={<TimezoneSelect value={user?.user_timezone || "Asia/Kolkata"} onChange={handleTimezoneChange} />}
+          control={
+            <TimezoneSelect
+              value={user?.user_timezone || "Asia/Kolkata"}
+              onChange={handleTimezoneChange}
+              label={t("timezone")}
+            />
+          }
         />
         <SettingsControlItem
           title={t("language")}

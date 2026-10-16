@@ -244,9 +244,11 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
               )}
             />
             <div className="flex flex-col gap-1 truncate text-on-color">
-              <span className="truncate text-16 font-semibold">{watch("name")}</span>
+              <span dir="auto" title={watch("name")} className="truncate text-16 font-semibold">
+                {watch("name")}
+              </span>
               <span className="flex items-center gap-2 text-13">
-                <span>{watch("identifier")} .</span>
+                <bdi dir="ltr">{watch("identifier")} .</bdi>
                 <span className="flex items-center gap-1.5">
                   {project.network === 0 && <LockOutline className="h-2.5 w-2.5 text-on-color" />}
                   {currentNetwork && t(currentNetwork?.i18n_label)}
@@ -276,7 +278,9 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
       </div>
       <div className="mt-8 flex flex-col gap-8">
         <div className="flex flex-col gap-1">
-          <h4 className="text-13">{t("common.project_name")}</h4>
+          <label htmlFor="name" className="text-13">
+            {t("common.project_name")}
+          </label>
           <Controller
             control={control}
             name="name"
@@ -309,7 +313,9 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
           <span className="text-11 text-danger-primary">{errors?.name?.message}</span>
         </div>
         <div className="flex flex-col gap-1">
-          <h4 className="text-13">{t("description")}</h4>
+          <label htmlFor="description" className="text-13">
+            {t("description")}
+          </label>
           <Controller
             name="description"
             control={control}
@@ -335,8 +341,10 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="flex flex-col gap-1">
-            <h4 className="text-13">{t("project_id")}</h4>
-            <div className="relative">
+            <label htmlFor="identifier" className="text-13">
+              {t("project_id")}
+            </label>
+            <div dir="ltr" className="relative">
               <Controller
                 control={control}
                 name="identifier"
@@ -378,7 +386,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                 align="start"
                 disabled={isMobile}
               >
-                <InfoOutline className="absolute top-2.5 right-2 h-4 w-4 text-placeholder" />
+                <InfoOutline className="absolute end-2 top-2.5 h-4 w-4 text-placeholder" />
               </Tooltip>
             </div>
             <span className="text-11 text-danger-primary">

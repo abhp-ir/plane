@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { ArrowNarrowLeftOutline } from "@makeplane/propel/icons";
+import { ArrowNarrowLeftOutline, ArrowNarrowRightOutline } from "@makeplane/propel/icons";
 import { observer } from "mobx-react";
 // plane imports
 import { ROLE_DETAILS } from "@plane/constants";
@@ -29,17 +29,17 @@ export const WorkspaceSettingsSidebarHeader = observer(function WorkspaceSetting
     ? getWorkspaceRoleByWorkspaceSlug(currentWorkspace.slug)
     : undefined;
   // translation
-  const { t } = useTranslation();
+  const { t, direction } = useTranslation();
 
   if (!currentWorkspaceRole) return null;
 
   return (
     <div className="shrink-0">
-      <div className="flex items-center gap-1 py-3 pr-5 pl-4 text-body-md-medium">
+      <div className="flex items-center gap-1 py-3 ps-4 pe-5 text-body-md-medium">
         <IconButton
           variant="ghost"
           size="sm"
-          icon={<Icon icon={ArrowNarrowLeftOutline} />}
+          icon={<Icon icon={direction === "rtl" ? ArrowNarrowRightOutline : ArrowNarrowLeftOutline} />}
           aria-label={t("back_to_workspace")}
           onClick={() => router.push(`/${currentWorkspace?.slug}/`)}
         />
@@ -53,7 +53,9 @@ export const WorkspaceSettingsSidebarHeader = observer(function WorkspaceSetting
             classNames="shrink-0 size-8 border border-subtle"
           />
           <div className="truncate">
-            <p className="truncate text-body-sm-medium">{currentWorkspace?.name}</p>
+            <p dir="auto" title={currentWorkspace?.name} className="truncate text-body-sm-medium">
+              {currentWorkspace?.name}
+            </p>
             <p className="truncate text-caption-md-regular">{t(ROLE_DETAILS[currentWorkspaceRole].i18n_title)}</p>
           </div>
         </div>

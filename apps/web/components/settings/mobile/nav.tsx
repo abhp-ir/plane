@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useRef } from "react";
+import { useId, useRef } from "react";
 import { observer } from "mobx-react";
 import { Menu } from "lucide-react";
 import { useOutsideClickDetector } from "@plane/hooks";
@@ -23,6 +23,8 @@ export const SettingsMobileNav = observer(function SettingsMobileNav(props: Prop
   const { hamburgerContent: HamburgerContent, activePath } = props;
   // refs
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const sidebarId = useId();
   // store hooks
   const { sidebarCollapsed, toggleSidebar } = useUserSettings();
   const { t } = useTranslation();
@@ -33,24 +35,38 @@ export const SettingsMobileNav = observer(function SettingsMobileNav(props: Prop
 
   return (
     <div className="flex items-center gap-4 border-b border-subtle px-page-x py-3 md:hidden">
-      <div ref={sidebarRef} className="relative z-50 w-fit">
+      <div
+        ref={sidebarRef}
+        role="group"
+        className="relative z-50 w-fit"
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && !sidebarCollapsed) {
+            event.preventDefault();
+            toggleSidebar(true);
+            triggerRef.current?.focus();
+          }
+        }}
+      >
         {!sidebarCollapsed && (
-          <div className="absolute top-10.5 left-0 z-50">
+          <div id={sidebarId} className="absolute start-0 top-10.5 z-50">
             <HamburgerContent className="max-h-100 rounded-lg border border-subtle pb-3" />
           </div>
         )}
         <IconButton
+          ref={triggerRef}
           variant="secondary"
           size="sm"
           render={<button type="button" className="group z-50 shrink-0" />}
           icon={<Icon icon={Menu} />}
-          aria-label="Toggle settings menu"
+          aria-label={t("settings")}
+          aria-expanded={!sidebarCollapsed}
+          aria-controls={sidebarCollapsed ? undefined : sidebarId}
           onClick={() => toggleSidebar()}
         />
       </div>
       {/* path */}
       <div className="flex items-center gap-2">
-        <ChevronRightOutline className="size-4 text-tertiary" />
+        <ChevronRightOutline className="size-4 text-tertiary rtl:rotate-180" />
         <span className="text-13 font-medium text-secondary">{t(activePath)}</span>
       </div>
     </div>

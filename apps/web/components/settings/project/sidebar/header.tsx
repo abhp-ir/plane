@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { ArrowNarrowLeftOutline } from "@makeplane/propel/icons";
+import { ArrowNarrowLeftOutline, ArrowNarrowRightOutline } from "@makeplane/propel/icons";
 import { observer } from "mobx-react";
 // plane imports
 import { ROLE_DETAILS } from "@plane/constants";
@@ -36,18 +36,18 @@ export const ProjectSettingsSidebarHeader = observer(function ProjectSettingsSid
     ? getProjectRoleByWorkspaceSlugAndProjectId(currentWorkspace.slug, projectId)
     : undefined;
   // translation
-  const { t } = useTranslation();
+  const { t, direction } = useTranslation();
 
   if (!currentProjectRole) return null;
 
   return (
     <div className="shrink-0">
-      <div className="flex items-center gap-1 py-3 pr-5 pl-4 text-body-md-medium">
+      <div className="flex items-center gap-1 py-3 ps-4 pe-5 text-body-md-medium">
         <IconButton
           variant="ghost"
           size="sm"
-          icon={<Icon icon={ArrowNarrowLeftOutline} />}
-          aria-label="Back to project"
+          icon={<Icon icon={direction === "rtl" ? ArrowNarrowRightOutline : ArrowNarrowLeftOutline} />}
+          aria-label={t("common.go_back")}
           onClick={() => router.push(`/${currentWorkspace?.slug}/projects/${projectId}/issues/`)}
         />
         <p>Project settings</p>
@@ -57,7 +57,9 @@ export const ProjectSettingsSidebarHeader = observer(function ProjectSettingsSid
           <Logo logo={projectDetails?.logo_props} size={20} />
         </div>
         <div className="truncate">
-          <p className="truncate text-body-sm-medium">{projectDetails?.name}</p>
+          <p dir="auto" title={projectDetails?.name} className="truncate text-body-sm-medium">
+            {projectDetails?.name}
+          </p>
           <p className="truncate text-caption-md-regular">{t(ROLE_DETAILS[currentProjectRole].i18n_title)}</p>
         </div>
       </div>

@@ -9,12 +9,13 @@ import type { ReactNode } from "react";
 
 // plane imports
 import { Popover as BasePopover } from "@base-ui/react/popover";
+import { useDirection } from "@base-ui/react/direction-provider";
 // local imports
 import { MenuPanel, MenuRow } from "../menu-parts";
 import { SubmenuChildLevelContext, SubmenuSideContext, useSubmenuGroup } from "./nested-submenu.context";
 import type { SubmenuGroupContextValue } from "./nested-submenu.context";
 import { NESTED_SUBMENU_CLOSE_DELAY_MS, NESTED_SUBMENU_OPEN_DELAY_MS } from "./nested-submenu.constants";
-import { ChevronRightOutline } from "@makeplane/propel/icons";
+import { ChevronLeftOutline, ChevronRightOutline } from "@makeplane/propel/icons";
 
 export type NestedSubmenuProps = {
   /** Identity within the enclosing `NestedSubmenu.Group`; exclusivity is keyed on it. */
@@ -53,6 +54,9 @@ export function NestedSubmenuRoot(props: NestedSubmenuProps) {
   const { id, trigger, children, contentClassName } = props;
   const group = useSubmenuGroup();
   const inheritedSide = useContext(SubmenuSideContext);
+  const direction = useDirection();
+  const forwardSide = direction === "rtl" ? "left" : "right";
+  const ForwardIcon = direction === "rtl" ? ChevronLeftOutline : ChevronRightOutline;
   const open = group.activeId === id;
 
   // This flyout owns its CHILD level's state (the `NestedSubmenu.Group` in its panel adopts it),
@@ -164,14 +168,18 @@ export function NestedSubmenuRoot(props: NestedSubmenuProps) {
           pointerInsideRef.current = false;
         }}
         onKeyDown={(event) => {
-          if (event.key === "Enter" || event.key === " " || event.key === "ArrowRight") {
+          if (
+            event.key === "Enter" ||
+            event.key === " " ||
+            event.key === (direction === "rtl" ? "ArrowLeft" : "ArrowRight")
+          ) {
             event.preventDefault();
             group.setActiveId(id);
           }
         }}
       >
         <span className="flex min-w-0 grow items-center gap-2">{trigger}</span>
-        <ChevronRightOutline className="size-4 shrink-0 text-tertiary" aria-hidden />
+        <ForwardIcon className="size-4 shrink-0 text-tertiary" aria-hidden />
       </BasePopover.Trigger>
       {/* Only mount the portal while open — avoids a detached-anchor flash when the parent closes. */}
       {open ? (
@@ -179,7 +187,7 @@ export function NestedSubmenuRoot(props: NestedSubmenuProps) {
           <BasePopover.Positioner
             // Inherit the cascade direction: once an ancestor flipped (viewport edge), descendants
             // keep flowing that way instead of zig-zagging back over their parents.
-            side={inheritedSide ?? "right"}
+            side={inheritedSide ?? forwardSide}
             align="start"
             sideOffset={4}
             className="z-70"

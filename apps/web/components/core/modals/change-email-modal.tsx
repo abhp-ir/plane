@@ -161,9 +161,9 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
             <DialogBody tabIndex={0}>
               <div className="space-y-4">
                 <div className="flex flex-col gap-1">
-                  {secondStep && (
-                    <h4 className="text-13 font-medium text-secondary">{changeEmailT("form.email.label")}</h4>
-                  )}
+                  <label htmlFor="new-email" className="text-13 font-medium text-secondary">
+                    {changeEmailT("form.email.label")}
+                  </label>
                   <Controller
                     control={control}
                     name="email"
@@ -179,9 +179,10 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
                         <InputGroup size="2xl">
                           <Input
                             size="2xl"
-                            id="email"
+                            id="new-email"
                             name="email"
                             type="email"
+                            dir="ltr"
                             value={value}
                             onChange={onChange}
                             ref={ref}
@@ -198,7 +199,9 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
 
                 {secondStep && (
                   <div className="flex flex-col gap-1">
-                    <h4 className="text-13 font-medium text-secondary">{changeEmailT("form.code.label")}</h4>
+                    <label htmlFor="email-code" className="text-13 font-medium text-secondary">
+                      {changeEmailT("form.code.label")}
+                    </label>
                     <Controller
                       control={control}
                       name="code"
@@ -207,7 +210,8 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
                         <InputGroup size="2xl">
                           <Input
                             size="2xl"
-                            id="code"
+                            id="email-code"
+                            dir="ltr"
                             name="code"
                             value={value}
                             onChange={onChange}

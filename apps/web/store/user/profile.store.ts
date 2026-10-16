@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { cloneDeep, set } from "lodash-es";
+import { cloneDeep, pick, set } from "lodash-es";
 import { action, makeObservable, observable, runInAction } from "mobx";
 // plane imports
 import { setLanguage } from "@plane/i18n";
@@ -107,13 +107,13 @@ export class ProfileStore implements IUserProfileStore {
         this.error = undefined;
       });
       const userProfile = await this.userService.getCurrentUserProfile();
+      if (userProfile.language) {
+        await setLanguage(userProfile.language as TLanguage);
+      }
       runInAction(() => {
         this.isLoading = false;
         this.data = userProfile;
       });
-      if (userProfile.language) {
-        void setLanguage(userProfile.language as TLanguage);
-      }
       return userProfile;
     } catch (error) {
       runInAction(() => {
@@ -133,26 +133,25 @@ export class ProfileStore implements IUserProfileStore {
    * @returns {Promise<TUserProfile | undefined>}
    */
   updateUserProfile = async (data: Partial<TUserProfile>): Promise<TUserProfile | undefined> => {
-    const currentUserProfileData = this.data;
+    const currentUserProfileData = cloneDeep(pick(this.data, Object.keys(data)));
     try {
       if (currentUserProfileData) {
         this.mutateUserProfile(data);
       }
-      if (data.language) {
-        void setLanguage(data.language as TLanguage);
-      }
       const userProfile = await this.userService.updateCurrentUserProfile(data);
-      return userProfile;
-    } catch {
-      if (currentUserProfileData) {
-        this.mutateUserProfile(currentUserProfileData);
+      if (data.language) {
+        await setLanguage(userProfile.language as TLanguage);
       }
+      return userProfile;
+    } catch (error) {
       runInAction(() => {
+        if (currentUserProfileData) this.mutateUserProfile(currentUserProfileData);
         this.error = {
           status: "user-profile-update-error",
           message: "Failed to update user profile",
         };
       });
+      throw error;
     }
   };
 
