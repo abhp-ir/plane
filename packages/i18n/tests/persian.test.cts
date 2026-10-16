@@ -46,7 +46,8 @@ test("every registered namespace has a loadable Persian resource", () => {
 });
 
 // Keep native Node on the ICU package's CJS export; browser integration is tested in Vite.
-for (const namespace of ["common", "navigation", "auth"]) {
+const translatedNamespaces = ["common", "navigation", "auth", "accessibility", "settings", "home", "project-settings"];
+for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
     const english = load("en", namespace);
     const persian = load("fa", namespace);
@@ -63,25 +64,48 @@ for (const namespace of ["common", "navigation", "auth"]) {
       assert.deepEqual(variables(target), variables(source), key);
       assert.deepEqual(target.match(/<[^>]+>/g), source.match(/<[^>]+>/g), key);
       assert.equal(target.split("\n").length, source.split("\n").length, key);
+      if (/\{\w+,\s*plural,/.test(target)) {
+        assert.match(target, /\bone\s*\{/, `${key}: Persian one form`);
+        assert.match(target, /\bother\s*\{/, `${key}: Persian other form`);
+        assert.doesNotMatch(target, /\b(?:zero|two|few|many)\s*\{/, `${key}: unsupported Persian form`);
+      }
       assert.ok(!/[يك]/u.test(target), `${key}: use Persian ی and ک`);
-      for (const brand of ["Plane", "Intake", "Stickies", "OIDC", "SAML", "SSO", "IdP", "URL"]) {
+      for (const brand of [
+        "Plane",
+        "Intake",
+        "Stickies",
+        "Business",
+        "Enterprise",
+        "GitHub",
+        "OIDC",
+        "SAML",
+        "SSO",
+        "IdP",
+        "URL",
+        "API",
+      ]) {
+        // Business development is an ordinary job role, not the Business plan.
+        if (brand === "Business" && key === "user_roles.sales_or_business_development") continue;
         if (new RegExp(`\\b${brand}\\b`).test(source)) assert.ok(target.includes(brand), `${key}: ${brand}`);
       }
     }
   });
 }
 
-test("real backend loads Persian, ICU counts, English fallback and LTR locales", async () => {
+test("i18next resource backend loads Persian, ICU counts, English fallback and LTR locales", async () => {
   await initPromise;
   await setLanguage("fa");
   assert.equal(i18nInstance.language, "fa");
   assert.equal(i18nInstance.dir(), "rtl");
   assert.equal(i18nInstance.t("sidebar.projects"), "پروژه‌ها");
   assert.equal(i18nInstance.t("auth.common.resend_in", { seconds: 12 }), "ارسال دوباره تا 12 ثانیهٔ دیگر");
-  for (const namespace of ["common", "auth", "navigation"]) {
+  for (const namespace of translatedNamespaces) {
     for (const [key, message] of Object.entries(load("fa", namespace))) {
+      const numericVariables = [...message.matchAll(/\{(\w+),\s*(?:plural|selectordinal|number)/g)].map(
+        (match) => match[1]
+      );
       const params = Object.fromEntries(
-        variables(message).map((variable) => [variable, variable === "count" ? 2 : "Plane-42"])
+        variables(message).map((variable) => [variable, numericVariables.includes(variable) ? 2 : "Plane-42"])
       );
       const rendered = i18nInstance.t(key, params);
       assert.equal(typeof rendered, "string", key);
@@ -96,6 +120,10 @@ test("real backend loads Persian, ICU counts, English fallback and LTR locales",
   for (const count of [0, 0.5, 1, 1.1, 2, 5, 100]) {
     assert.equal(i18nInstance.t("member", { count }), `${new Intl.NumberFormat("fa").format(count)} عضو`);
     assert.equal(i18nInstance.t("labels_count", { count }), `${new Intl.NumberFormat("fa").format(count)} برچسب`);
+    assert.equal(
+      i18nInstance.t("home.business_trial_banner.trial_ends_in_days", { days: count }),
+      `دورهٔ آزمایشی تا ${new Intl.NumberFormat("fa").format(count)} روز دیگر پایان می‌یابد`
+    );
   }
   const fallbackKey = Object.keys(load("en", "project"))[0];
   assert.equal(i18nInstance.t(fallbackKey), i18nInstance.t(fallbackKey, { lng: "en" }));
