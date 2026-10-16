@@ -45,7 +45,7 @@ export const ProfileSettingsModal = observer(function ProfileSettingsModal() {
       }}
     >
       <DialogContent size="xl" height="fixed">
-        <DialogCloseGroup>
+        <DialogCloseGroup render={<div className="end-4" />}>
           <IconButton
             size="sm"
             variant="tertiary"
