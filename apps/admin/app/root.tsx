@@ -5,6 +5,7 @@
  */
 
 import type { ReactNode } from "react";
+import { useTranslation } from "@plane/i18n";
 import { Links, Meta, Outlet, Scripts } from "react-router";
 import type { LinksFunction } from "react-router";
 import appleTouchIcon from "@/app/assets/favicon/apple-touch-icon.png?url";
@@ -42,8 +43,9 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: ReactNode }) {
+  const { currentLocale, direction } = useTranslation();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={currentLocale} dir={direction} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -104,6 +104,7 @@ export function AuthUniqueCodeForm(props: TAuthUniqueCodeForm) {
             id="email"
             name="email"
             type="email"
+            dir="ltr"
             value={uniqueCodeFormData.email}
             onChange={(e) => handleFormChange("email", e.target.value)}
             placeholder={t("auth.common.email.placeholder")}
@@ -132,6 +133,7 @@ export function AuthUniqueCodeForm(props: TAuthUniqueCodeForm) {
             size="2xl"
             name="code"
             id="unique-code"
+            dir="ltr"
             value={uniqueCodeFormData.code}
             onChange={(e) => handleFormChange("code", e.target.value)}
             placeholder={t("auth.common.unique_code.placeholder")}

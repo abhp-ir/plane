@@ -6,6 +6,7 @@
 
 export type TLanguage =
   | "en"
+  | "fa"
   | "fr"
   | "es"
   | "ja"

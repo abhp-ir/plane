@@ -128,6 +128,7 @@ export const ResetPasswordForm = observer(function ResetPasswordForm() {
               id="email"
               name="email"
               type="email"
+              dir="ltr"
               value={resetFormData.email}
               placeholder={t("auth.common.email.placeholder")}
               autoComplete="off"

@@ -114,6 +114,7 @@ export const LinkCreateUpdateModal = observer(function LinkCreateUpdateModal(pro
                           <Input
                             size="2xl"
                             id="url"
+                            dir="ltr"
                             type="text"
                             value={value}
                             onChange={onChange}

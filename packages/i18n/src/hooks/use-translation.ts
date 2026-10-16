@@ -6,12 +6,14 @@
 
 import { useCallback } from "react";
 import { useTranslation as useI18nextTranslation } from "react-i18next";
-import { SUPPORTED_LANGUAGES, LANGUAGE_STORAGE_KEY } from "../constants/language";
+import { FALLBACK_LANGUAGE, SUPPORTED_LANGUAGES } from "../constants/language";
+import { setLanguage } from "../core/set-language";
 import type { TLanguage, ILanguageOption } from "../types";
 
 export type TTranslationStore = {
   t: (key: string, params?: Record<string, unknown>) => string;
   currentLocale: TLanguage;
+  direction: "ltr" | "rtl";
   changeLanguage: (lng: TLanguage) => void;
   languages: ILanguageOption[];
 };
@@ -42,26 +44,15 @@ export function useTranslation(): TTranslationStore {
   // async loads per component, causing a re-render cascade.
   const { t, i18n } = useI18nextTranslation();
 
-  const changeLanguage = useCallback(
-    (lng: TLanguage) => {
-      void (async () => {
-        try {
-          await i18n.changeLanguage(lng);
-          if (typeof window === "undefined") return;
-          localStorage.setItem(LANGUAGE_STORAGE_KEY, lng);
-          document.documentElement.lang = lng;
-        } catch (err) {
-          console.error("Failed to change language:", err);
-        }
-      })();
-    },
-    [i18n]
-  );
+  const changeLanguage = useCallback((lng: TLanguage) => {
+    void setLanguage(lng).catch((err: unknown) => console.error("Failed to change language:", err));
+  }, []);
 
   return {
     t: (key: string, params?: Record<string, unknown>) =>
       coerceToString(key, params === undefined ? t(key) : t(key, params)),
-    currentLocale: i18n.language as TLanguage,
+    currentLocale: (i18n.language || FALLBACK_LANGUAGE) as TLanguage,
+    direction: i18n.dir(i18n.language),
     changeLanguage,
     languages: SUPPORTED_LANGUAGES,
   };

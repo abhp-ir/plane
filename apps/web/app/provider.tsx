@@ -8,6 +8,7 @@ import { lazy, Suspense } from "react";
 import { SWRConfig } from "swr";
 // Plane Imports
 import { WEB_SWR_CONFIG } from "@plane/constants";
+import { LocaleDirectionProvider } from "@plane/blocks/layout";
 import { TranslationProvider } from "@plane/i18n";
 import { PlaneToastProvider } from "@plane/blocks/toast";
 // mobx store provider
@@ -38,17 +39,19 @@ export function AppProvider(props: IAppProvider) {
       <>
         <AppProgressBar />
         <TranslationProvider>
-          {/* The toast viewport is a provider that calls `useTranslation`, so it sits inside
+          <LocaleDirectionProvider>
+            {/* The toast viewport is a provider that calls `useTranslation`, so it sits inside
               TranslationProvider and wraps everything that can raise a toast. */}
-          <PlaneToastProvider>
-            <StoreWrapper>
-              <InstanceWrapper>
-                <Suspense>
-                  <SWRConfig value={WEB_SWR_CONFIG}>{children}</SWRConfig>
-                </Suspense>
-              </InstanceWrapper>
-            </StoreWrapper>
-          </PlaneToastProvider>
+            <PlaneToastProvider>
+              <StoreWrapper>
+                <InstanceWrapper>
+                  <Suspense>
+                    <SWRConfig value={WEB_SWR_CONFIG}>{children}</SWRConfig>
+                  </Suspense>
+                </InstanceWrapper>
+              </StoreWrapper>
+            </PlaneToastProvider>
+          </LocaleDirectionProvider>
         </TranslationProvider>
       </>
     </StoreProvider>

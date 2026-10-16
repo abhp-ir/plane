@@ -61,13 +61,16 @@ export const ProfileSettingsModal = observer(function ProfileSettingsModal() {
         </div>
         {/* A plain two-column row rather than `DialogPanes`/`DialogAside`/`DialogMain`: the sidebar and
             content roots carry their own gutters and scroll areas, which the pane slots would pad again. */}
-        <div className="@container flex min-h-0 flex-1">
+        <div className="@container flex min-h-0 flex-1 flex-col md:flex-row">
           <ProfileSettingsSidebarRoot
             activeTab={activeTab}
-            className="w-[250px] rounded-l-xl"
+            className="max-h-[35vh] w-full rounded-t-xl md:max-h-none md:w-[250px] md:rounded-s-xl md:rounded-e-none"
             updateActiveTab={(tab) => toggleProfileSettingsModal({ activeTab: tab })}
           />
-          <ProfileSettingsContent activeTab={activeTab} className="flex-1 rounded-r-xl" />
+          <ProfileSettingsContent
+            activeTab={activeTab}
+            className="flex-1 rounded-b-xl md:rounded-s-none md:rounded-e-xl"
+          />
         </div>
       </DialogContent>
     </Dialog>

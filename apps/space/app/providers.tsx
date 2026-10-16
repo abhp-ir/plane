@@ -6,6 +6,7 @@
 
 import { ThemeProvider } from "next-themes";
 // components
+import { LocaleDirectionProvider } from "@plane/blocks/layout";
 import { TranslationProvider } from "@plane/i18n";
 import { AppProgressBar } from "@/lib/b-progress";
 import { InstanceProvider } from "@/lib/instance-provider";
@@ -18,9 +19,11 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       <StoreProvider>
         <AppProgressBar />
         <TranslationProvider>
-          <ToastProvider>
-            <InstanceProvider>{children}</InstanceProvider>
-          </ToastProvider>
+          <LocaleDirectionProvider>
+            <ToastProvider>
+              <InstanceProvider>{children}</InstanceProvider>
+            </ToastProvider>
+          </LocaleDirectionProvider>
         </TranslationProvider>
       </StoreProvider>
     </ThemeProvider>

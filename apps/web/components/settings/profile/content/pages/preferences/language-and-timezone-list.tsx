@@ -94,14 +94,14 @@ export const ProfileSettingsLanguageAndTimezonePreferencesList = observer(
               onChange={(value) => void handleLanguageChange(value)}
               getOptionValue={(option) => option.value}
               getOptionLabel={(option) => option.label}
-              placeholder="Select a language"
+              placeholder={t("language")}
               showSearch={false}
               pinSelected={false}
               contentSizing="anchor"
             >
               <Select.Trigger<LanguageOption> variant="select-md" className="w-42 max-w-full">
-                <span className="min-w-0 grow truncate text-left">
-                  {profile?.language ? getLanguageLabel(profile.language) : "Select a language"}
+                <span className="min-w-0 grow truncate text-start">
+                  {profile?.language ? getLanguageLabel(profile.language) : t("language")}
                 </span>
               </Select.Trigger>
             </Select>

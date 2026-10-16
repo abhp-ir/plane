@@ -4,7 +4,9 @@
  * See the LICENSE file for details.
  */
 
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
+import { useTranslation } from "@plane/i18n";
 import { Links, Meta, Outlet, Scripts } from "react-router";
 import type { LinksFunction } from "react-router";
 import { ThemeProvider, useTheme } from "next-themes";
@@ -54,8 +56,9 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: ReactNode }) {
+  const { currentLocale, direction } = useTranslation();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={currentLocale} dir={direction} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -116,10 +119,12 @@ export default function Root() {
 }
 
 export function HydrateFallback() {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
   const { resolvedTheme } = useTheme();
 
-  // if we are on the server or the theme is not resolved, return an empty div
-  if (typeof window === "undefined" || resolvedTheme === undefined) return <div />;
+  // Match the prerendered shell before showing the client-resolved theme.
+  if (!isMounted || resolvedTheme === undefined) return <div />;
 
   return (
     <div className="relative flex h-screen w-full items-center justify-center bg-canvas">

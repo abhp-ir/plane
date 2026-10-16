@@ -1,0 +1,25 @@
+/* Vazirmatn v33.003 by The Vazirmatn Project Authors, SIL OFL-1.1 (see vazirmatn/OFL.txt). */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("@plane/tailwind-config/fonts/Vazirmatn-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  /* Latin text keeps Inter; download the font only when Persian glyphs are used. */
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+200C-200F, U+202A-202E, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+html:lang(fa) {
+  --font-body:
+    "Vazirmatn", "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading:
+    "Vazirmatn", "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html[dir="rtl"] :where(code, pre, kbd, input[type="email"], input[type="url"]) {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+}

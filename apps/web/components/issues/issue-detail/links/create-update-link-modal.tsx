@@ -110,6 +110,7 @@ export const IssueLinkCreateUpdateModal = observer(function IssueLinkCreateUpdat
                     size="lg"
                     orientation="vertical"
                     id="url"
+                    dir="ltr"
                     type="text"
                     label={t("common.url")}
                     value={value}

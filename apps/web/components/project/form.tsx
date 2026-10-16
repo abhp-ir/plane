@@ -293,6 +293,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                   <Input
                     size="2xl"
                     id="name"
+                    dir="auto"
                     name="name"
                     type="text"
                     ref={ref}
@@ -321,6 +322,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                     autoResize
                     maxRows={8}
                     id="description"
+                    dir="auto"
                     name="description"
                     value={value}
                     placeholder={t("project_description_placeholder")}
@@ -333,7 +335,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="flex flex-col gap-1">
-            <h4 className="text-13">Project ID</h4>
+            <h4 className="text-13">{t("project_id")}</h4>
             <div className="relative">
               <Controller
                 control={control}
@@ -356,6 +358,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                       <Input
                         size="2xl"
                         id="identifier"
+                        dir="ltr"
                         name="identifier"
                         type="text"
                         value={value}

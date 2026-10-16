@@ -75,6 +75,7 @@ function ProjectCommonAttributes(props: Props) {
                 <Input
                   size="2xl"
                   id="name"
+                  dir="auto"
                   name="name"
                   type="text"
                   value={value}
@@ -112,6 +113,7 @@ function ProjectCommonAttributes(props: Props) {
                 <Input
                   size="2xl"
                   id="identifier"
+                  dir="ltr"
                   name="identifier"
                   type="text"
                   value={value}
@@ -147,6 +149,7 @@ function ProjectCommonAttributes(props: Props) {
                   autoResize
                   maxRows={8}
                   id="description"
+                  dir="auto"
                   name="description"
                   value={value}
                   placeholder={t("description")}

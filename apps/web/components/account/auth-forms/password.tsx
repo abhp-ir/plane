@@ -172,6 +172,7 @@ export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props)
               id="email"
               name="email"
               type="email"
+              dir="ltr"
               value={passwordFormData.email}
               onChange={(e) => handleFormChange("email", e.target.value)}
               placeholder={t("auth.common.email.placeholder")}

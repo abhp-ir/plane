@@ -8,3 +8,4 @@ export * from "./content-wrapper/content-wrapper";
 export * from "./control-link/control-link";
 export * from "./header/header";
 export * from "./row/row";
+export * from "./locale-direction-provider";

@@ -8,8 +8,9 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import ICU from "i18next-icu";
 import resourcesToBackend from "i18next-resources-to-backend";
-import { SUPPORTED_LANGUAGES, FALLBACK_LANGUAGE, LANGUAGE_STORAGE_KEY } from "../constants/language";
+import { SUPPORTED_LANGUAGES, FALLBACK_LANGUAGE } from "../constants/language";
 import { NAMESPACES, DEFAULT_NAMESPACE } from "../constants/namespaces";
+import { getStoredLanguage, syncDocumentLanguage } from "./document-language";
 
 import type { i18n as I18nInstance } from "i18next";
 
@@ -20,8 +21,13 @@ i18nInstance
   .use(initReactI18next)
   .use(resourcesToBackend((language: string, namespace: string) => import(`../locales/${language}/${namespace}.json`)));
 
-const initialLng =
-  typeof window !== "undefined" ? localStorage.getItem(LANGUAGE_STORAGE_KEY) || FALLBACK_LANGUAGE : FALLBACK_LANGUAGE;
+const initialLng = getStoredLanguage();
+
+// Run before hydration, and use the same event for hook, profile, and logout changes.
+syncDocumentLanguage(initialLng, i18nInstance.dir(initialLng));
+i18nInstance.on("languageChanged", (language) => {
+  syncDocumentLanguage(language, i18nInstance.dir(language));
+});
 
 export const initPromise = i18nInstance
   .init({

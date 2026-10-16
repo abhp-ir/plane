@@ -4,15 +4,20 @@
  * See the LICENSE file for details.
  */
 
+import { initPromise } from "@plane/i18n";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
 
-startTransition(() => {
-  hydrateRoot(
-    document,
-    <StrictMode>
-      <HydratedRouter />
-    </StrictMode>
-  );
-});
+void initPromise
+  .catch(() => {})
+  .then(() => {
+    startTransition(() => {
+      hydrateRoot(
+        document,
+        <StrictMode>
+          <HydratedRouter />
+        </StrictMode>
+      );
+    });
+  });

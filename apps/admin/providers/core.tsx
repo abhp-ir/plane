@@ -7,6 +7,7 @@
 import { ThemeProvider } from "next-themes";
 import { SWRConfig } from "swr";
 import { PlaneToastProvider } from "@plane/blocks/toast";
+import { LocaleDirectionProvider } from "@plane/blocks/layout";
 import { TranslationProvider } from "@plane/i18n";
 import { AppProgressBar } from "@/lib/b-progress";
 // local imports
@@ -30,15 +31,17 @@ export function CoreProviders({ children }: { children: React.ReactNode }) {
       {/* The toast viewport is a provider that calls `useTranslation`. Admin had no i18n provider,
           so TranslationProvider is mounted here for it. */}
       <TranslationProvider>
-        <PlaneToastProvider>
-          <SWRConfig value={DEFAULT_SWR_CONFIG}>
-            <StoreProvider>
-              <InstanceProvider>
-                <UserProvider>{children}</UserProvider>
-              </InstanceProvider>
-            </StoreProvider>
-          </SWRConfig>
-        </PlaneToastProvider>
+        <LocaleDirectionProvider>
+          <PlaneToastProvider>
+            <SWRConfig value={DEFAULT_SWR_CONFIG}>
+              <StoreProvider>
+                <InstanceProvider>
+                  <UserProvider>{children}</UserProvider>
+                </InstanceProvider>
+              </StoreProvider>
+            </SWRConfig>
+          </PlaneToastProvider>
+        </LocaleDirectionProvider>
       </TranslationProvider>
     </ThemeProvider>
   );

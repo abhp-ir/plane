@@ -108,15 +108,14 @@ export function DeleteProjectModal(props: DeleteProjectModal) {
             </DialogHeader>
             <DialogBody>
               <div className="flex flex-col gap-6">
-                <p className="text-13 leading-7 text-secondary">
+                <p dir="auto" className="text-13 leading-7 text-secondary">
                   Are you sure you want to delete project{" "}
-                  <span className="font-semibold break-words">{project?.name}</span>? All of the data related to the
+                  <bdi className="font-semibold break-words">{project?.name}</bdi>? All of the data related to the
                   project will be permanently removed. This action cannot be undone
                 </p>
                 <div className="text-secondary">
-                  <p className="text-13 break-words">
-                    Enter the project name <span className="font-medium text-primary">{project?.name}</span> to
-                    continue:
+                  <p dir="auto" className="text-13 break-words">
+                    Enter the project name <bdi className="font-medium text-primary">{project?.name}</bdi> to continue:
                   </p>
                   <Controller
                     control={control}
@@ -127,6 +126,7 @@ export function DeleteProjectModal(props: DeleteProjectModal) {
                           <Input
                             size="2xl"
                             id="projectName"
+                            dir="auto"
                             name="projectName"
                             type="text"
                             value={value}
@@ -141,7 +141,7 @@ export function DeleteProjectModal(props: DeleteProjectModal) {
                   />
                 </div>
                 <div className="text-secondary">
-                  <p className="text-13">
+                  <p dir="auto" className="text-13">
                     To confirm, type <span className="font-medium text-primary">delete my project</span> below:
                   </p>
                   <Controller
@@ -153,6 +153,7 @@ export function DeleteProjectModal(props: DeleteProjectModal) {
                           <Input
                             size="2xl"
                             id="confirmDelete"
+                            dir="ltr"
                             name="confirmDelete"
                             type="text"
                             value={value}

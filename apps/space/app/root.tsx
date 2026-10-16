@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { Links, Meta, Outlet, Scripts } from "react-router";
 // assets
 import appleTouchIcon from "@/app/assets/favicon/apple-touch-icon.png?url";
@@ -51,8 +52,9 @@ export const headers: Route.HeadersFunction = () => ({
 });
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { currentLocale, direction } = useTranslation();
   return (
-    <html lang="en">
+    <html lang={currentLocale} dir={direction} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

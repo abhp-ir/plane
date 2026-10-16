@@ -24,7 +24,7 @@ export function ProfileSettingsSidebarRoot(props: Props) {
   return (
     <div
       className={cn(
-        "flex shrink-0 flex-col overflow-hidden border-r border-r-subtle bg-surface-2 px-3 py-4",
+        "flex min-h-0 shrink-0 flex-col overflow-hidden border-b border-subtle bg-surface-2 px-3 py-4 md:border-e md:border-b-0",
         className
       )}
     >

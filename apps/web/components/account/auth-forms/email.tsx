@@ -70,6 +70,7 @@ export const AuthEmailForm = observer(function AuthEmailForm(props: TAuthEmailFo
               id="email"
               name="email"
               type="email"
+              dir="ltr"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t("auth.common.email.placeholder")}

@@ -26,31 +26,25 @@ type TAuthHeader = {
 
 const Titles = {
   [EAuthModes.SIGN_IN]: {
-    [EAuthSteps.EMAIL]: {
-      header: "Work in all dimensions.",
-      subHeader: "Welcome back to Plane.",
-    },
+    [EAuthSteps.EMAIL]: { header: "auth.sign_in.header.step.email.header", subHeader: "auth.sign_in.header.label" },
     [EAuthSteps.PASSWORD]: {
-      header: "Work in all dimensions.",
-      subHeader: "Welcome back to Plane.",
+      header: "auth.sign_in.header.step.password.header",
+      subHeader: "auth.sign_in.header.step.password.sub_header",
     },
     [EAuthSteps.UNIQUE_CODE]: {
-      header: "Work in all dimensions.",
-      subHeader: "Welcome back to Plane.",
+      header: "auth.sign_in.header.step.unique_code.header",
+      subHeader: "auth.sign_in.header.step.unique_code.sub_header",
     },
   },
   [EAuthModes.SIGN_UP]: {
-    [EAuthSteps.EMAIL]: {
-      header: "Work in all dimensions.",
-      subHeader: "Create your Plane account.",
-    },
+    [EAuthSteps.EMAIL]: { header: "auth.sign_up.header.step.email.header", subHeader: "auth.sign_up.header.label" },
     [EAuthSteps.PASSWORD]: {
-      header: "Work in all dimensions.",
-      subHeader: "Create your Plane account.",
+      header: "auth.sign_up.header.step.password.header",
+      subHeader: "auth.sign_up.header.step.password.sub_header",
     },
     [EAuthSteps.UNIQUE_CODE]: {
-      header: "Work in all dimensions.",
-      subHeader: "Create your Plane account.",
+      header: "auth.sign_up.header.step.unique_code.header",
+      subHeader: "auth.sign_up.header.step.unique_code.sub_header",
     },
   },
 };
@@ -84,17 +78,15 @@ export const AuthHeader = observer(function AuthHeader(props: TAuthHeader) {
           <div className="relative inline-flex items-center gap-2">
             {t("common.join")}{" "}
             <WorkspaceLogo logo={workspace?.logo_url} name={workspace?.name} classNames="size-9 flex-shrink-0" />{" "}
-            {workspace.name}
+            <bdi>{workspace.name}</bdi>
           </div>
         ),
-        subHeader:
-          mode == EAuthModes.SIGN_UP
-            ? "Create an account to start managing work with your team."
-            : "Log in to start managing work with your team.",
+        subHeader: mode == EAuthModes.SIGN_UP ? t("auth.sign_up.header.label") : t("auth.sign_in.header.label"),
       };
     }
 
-    return Titles[mode][step];
+    const titles = Titles[mode][step];
+    return { header: t(titles.header), subHeader: t(titles.subHeader) };
   };
 
   const { header, subHeader } = getHeaderSubHeader(currentAuthStep, authMode, invitation || undefined, invitationEmail);
@@ -117,8 +109,12 @@ type TAuthHeaderBase = {
 export function AuthHeaderBase(props: TAuthHeaderBase) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-h4-semibold text-primary">{props.header}</span>
-      <span className="text-h4-semibold text-placeholder">{props.subHeader}</span>
+      <span dir="auto" className="text-h4-semibold text-primary">
+        {props.header}
+      </span>
+      <span dir="auto" className="text-h4-semibold text-placeholder">
+        {props.subHeader}
+      </span>
     </div>
   );
 }

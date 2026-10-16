@@ -104,6 +104,7 @@ export const ForgotPasswordForm = observer(function ForgotPasswordForm() {
                     id="email"
                     name="email"
                     type="email"
+                    dir="ltr"
                     value={value}
                     onChange={onChange}
                     ref={ref}
