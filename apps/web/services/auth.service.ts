@@ -12,16 +12,20 @@ import type { ICsrfTokenData, IEmailCheckData, IEmailCheckResponse } from "@plan
 import { APIService } from "@/services/api.service";
 
 export class AuthService extends APIService {
+  private csrfRequest: Promise<ICsrfTokenData> | undefined;
+
   constructor() {
     super(API_BASE_URL);
   }
 
   async requestCSRFToken(): Promise<ICsrfTokenData> {
-    return this.get("/auth/get-csrf-token/")
+    // Concurrent cold requests would each create a different CSRF cookie.
+    this.csrfRequest ??= this.get("/auth/get-csrf-token/")
       .then((response) => response.data)
-      .catch((error) => {
-        throw error;
+      .finally(() => {
+        this.csrfRequest = undefined;
       });
+    return this.csrfRequest;
   }
 
   emailCheck = async (data: IEmailCheckData): Promise<IEmailCheckResponse> =>

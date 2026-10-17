@@ -16,6 +16,8 @@ import { APIService } from "../api.service";
  * @extends {APIService}
  */
 export class AuthService extends APIService {
+  private csrfRequest: Promise<ICsrfTokenData> | undefined;
+
   /**
    * Creates an instance of AuthService
    * Initializes with the base API URL
@@ -31,11 +33,13 @@ export class AuthService extends APIService {
    * @remarks This method uses the validateStatus: null option to bypass interceptors for unauthorized errors.
    */
   async requestCSRFToken(): Promise<ICsrfTokenData> {
-    return this.get("/auth/get-csrf-token/", { validateStatus: null })
+    // Concurrent cold requests would each create a different CSRF cookie.
+    this.csrfRequest ??= this.get("/auth/get-csrf-token/", { validateStatus: null })
       .then((response) => response.data)
-      .catch((error) => {
-        throw error;
+      .finally(() => {
+        this.csrfRequest = undefined;
       });
+    return this.csrfRequest;
   }
 
   /**
@@ -125,7 +129,7 @@ export class AuthService extends APIService {
 
       document.body.appendChild(form);
 
-      form.submit();
+      return form.submit();
     });
   }
 }
