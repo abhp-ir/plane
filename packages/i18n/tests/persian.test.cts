@@ -57,6 +57,10 @@ const translatedNamespaces = [
   "workspace-settings",
   "workspace",
   "empty-state",
+  "project",
+  "cycle",
+  "module",
+  "page",
 ];
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
@@ -83,6 +87,11 @@ for (const namespace of translatedNamespaces) {
       assert.ok(!/[يك]/u.test(target), `${key}: use Persian ی and ک`);
       for (const brand of [
         "Plane",
+        "Plane AI",
+        "Power K",
+        "PQL",
+        "Active Cycles",
+        "Sticky",
         "Intake",
         "Stickies",
         "Business",
@@ -139,8 +148,16 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
       i18nInstance.t("workspace.members_import.summary.message.success", { count, plural: count === 1 ? "" : "s" }),
       `تعداد ${new Intl.NumberFormat("fa").format(count)} عضو با موفقیت به فضای کاری افزوده شد.`
     );
+    for (const plural of ["", "s"]) {
+      assert.equal(
+        i18nInstance.t("project.members_import.summary.message.success", { count, plural }),
+        `تعداد ${new Intl.NumberFormat("fa").format(count)} عضو با موفقیت به پروژه افزوده شد.`
+      );
+    }
+    assert.equal(i18nInstance.t("cycle.label", { count }), count <= 1 ? "چرخه" : "چرخه‌ها");
+    assert.equal(i18nInstance.t("module.label", { count }), count <= 1 ? "ماژول" : "ماژول‌ها");
   }
-  const fallbackKey = Object.keys(load("en", "project"))[0];
+  const fallbackKey = Object.keys(load("en", "automation"))[0];
   assert.equal(i18nInstance.t(fallbackKey), i18nInstance.t(fallbackKey, { lng: "en" }));
   assert.equal(i18nInstance.t("common.from", { name: "Plane ABC-42" }), "از Plane ABC-42");
   for (const locale of SUPPORTED_LANGUAGES) {
