@@ -5,6 +5,8 @@
  */
 
 import type { ReactNode } from "react";
+import { Nav } from "react-day-picker";
+import type { NavProps } from "react-day-picker";
 import { useTranslation } from "@plane/i18n";
 import { Button } from "@makeplane/propel/components/button";
 import { Popover, PopoverBody, PopoverContent, PopoverTrigger } from "@makeplane/propel/components/popover";
@@ -22,6 +24,11 @@ export type PopoverAlign = NonNullable<PopoverContentProps["align"]>;
 
 /** First day of the week, `date-fns` / react-day-picker numbering. The app wrapper supplies the user's profile value. */
 export type WeekStart = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+/** Propel's inset-e utility resolves physically in the app build and overlaps the RTL caption. */
+export function DateSelectNav(props: NavProps) {
+  return <Nav {...props} style={{ ...props.style, insetInlineStart: "auto", insetInlineEnd: 0 }} />;
+}
 
 /** Everything both date pickers take, minus their own value/selection shape. */
 export type DateSelectCommonProps = {
@@ -143,7 +150,7 @@ export function DateSelectShell(props: DateSelectShellProps) {
           isEmpty={isEmpty}
           tabIndex={tabIndex}
         >
-          <span className="min-w-0 grow truncate text-left">{label}</span>
+          <span className="min-w-0 grow truncate text-start">{label}</span>
         </SelectTriggerChrome>
       }
     />

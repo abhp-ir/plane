@@ -5,11 +5,12 @@
  */
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { DateLib } from "react-day-picker";
+import { useTranslation } from "@plane/i18n";
 import { Calendar } from "@makeplane/propel/components/calendar";
 import type { DateSelectCommonProps } from "./date-select-shell";
-import { DateSelectShell } from "./date-select-shell";
-import { buildDisabledMatchers, DEFAULT_DATE_FORMAT_TOKEN } from "./date-select.utils";
+import { DateSelectNav, DateSelectShell } from "./date-select-shell";
+import { buildDisabledMatchers, DEFAULT_DATE_FORMAT_TOKEN, getDateSelectOptions } from "./date-select.utils";
 
 export type DateSelectProps = DateSelectCommonProps & {
   /** The picked day, or `null` when nothing is set. */
@@ -38,8 +39,11 @@ export function DateSelect(props: DateSelectProps) {
   } = props;
   // states
   const [isOpen, setIsOpen] = useState(props.defaultOpen ?? false);
+  const { currentLocale, direction } = useTranslation();
   // derived values
-  const formatted = value ? format(value, formatToken) : "";
+  const dateOptions = getDateSelectOptions(currentLocale);
+  const dateLib = new DateLib(dateOptions);
+  const formatted = value ? dateLib.format(value, formatToken) : "";
   const disabledMatchers = buildDisabledMatchers(minDate, maxDate);
 
   const handleOpenChange = (open: boolean) => {
@@ -62,6 +66,9 @@ export function DateSelect(props: DateSelectProps) {
       }}
     >
       <Calendar
+        {...dateOptions}
+        dir={direction}
+        components={{ Nav: DateSelectNav }}
         mode="single"
         selected={value ?? undefined}
         defaultMonth={value ?? defaultMonth}

@@ -339,6 +339,9 @@ catalogs:
     prosemirror-codemark:
       specifier: ^0.4.2
       version: 0.4.2
+    react-day-picker:
+      specifier: 10.0.1
+      version: 10.0.1
     react-dropzone:
       specifier: ^14.2.3
       version: 14.3.8
@@ -1205,6 +1208,9 @@ importers:
       react-dom:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
+      react-day-picker:
+        specifier: 'catalog:'
+        version: 10.0.1(@types/react@19.2.17)(react@19.2.8)
       recharts:
         specifier: 'catalog:'
         version: 2.15.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)

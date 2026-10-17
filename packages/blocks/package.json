@@ -68,6 +68,7 @@
     "lodash-es": "catalog:",
     "lucide-react": "catalog:",
     "react": "catalog:",
+    "react-day-picker": "catalog:",
     "react-dom": "catalog:",
     "recharts": "catalog:",
     "use-font-face-observer": "catalog:"

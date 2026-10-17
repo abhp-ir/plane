@@ -5,9 +5,10 @@
  */
 
 import { useState } from "react";
-import { render, screen, within } from "@testing-library/react";
+import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { TranslationProvider, initPromise, setLanguage } from "@plane/i18n";
 import type { DateRangeValue } from "./date-range-select";
 import { DateRangeSelect } from "./date-range-select";
 import { DateSelect } from "./date-select";
@@ -21,6 +22,65 @@ const FORM_TAB_INDEX = 4;
 const popup = () => within(document.body);
 /** react-day-picker names each day button by its full date ("Sunday, June 15th, 2025"). */
 const day = (name: string) => popup().getByRole("button", { name: new RegExp(name) });
+
+it.each(["single", "range"])("localizes the %s calendar and preserves RTL keyboard date semantics", async (mode) => {
+  await initPromise;
+  await setLanguage("fa");
+  const user = userEvent.setup();
+  const onChange = vi.fn();
+  const selected = new Date(2025, 5, 15);
+  try {
+    render(
+      <TranslationProvider>
+        {mode === "single" ? (
+          <DateSelect
+            value={selected}
+            onChange={onChange}
+            variant="select-md"
+            weekStartsOn={0}
+            minDate={selected}
+            maxDate={new Date(2025, 5, 17)}
+          />
+        ) : (
+          <DateRangeSelect
+            value={{ from: selected, to: new Date(2025, 5, 17) }}
+            onChange={onChange}
+            variant="select-md"
+            weekStartsOn={0}
+            minDate={selected}
+            maxDate={new Date(2025, 5, 17)}
+            mergeDates
+          />
+        )}
+      </TranslationProvider>
+    );
+    const trigger = screen.getByRole("button", { name: /ژوئن/ });
+    expect(trigger.textContent).toContain("۱۵");
+    await user.click(trigger);
+    expect(popup().getByRole("button", { name: "رفتن به ماه بعد" })).toBeDefined();
+    const grid = popup().getByRole("grid");
+    expect(grid.querySelector("th")?.getAttribute("aria-label")).toBe("یکشنبه");
+    expect(grid.closest("[dir]")?.getAttribute("dir")).toBe("rtl");
+    expect(day("۱۴.*ژوئن.*۲۰۲۵").hasAttribute("disabled")).toBe(true);
+    expect(day("۱۸.*ژوئن.*۲۰۲۵").hasAttribute("disabled")).toBe(true);
+    const selectedDay = popup().getAllByRole("button", { name: /۱۵.*ژوئن.*۲۰۲۵/ })[0]!;
+    selectedDay.focus();
+    await user.keyboard("{ArrowLeft}");
+    expect(document.activeElement?.getAttribute("aria-label")).toMatch(/۱۶.*ژوئن.*۲۰۲۵/);
+    if (mode === "single") {
+      await user.keyboard("{Enter}");
+      expect(onChange).toHaveBeenCalledWith(new Date(2025, 5, 16));
+      await user.click(trigger);
+    }
+    await act(() => setLanguage("en"));
+    expect(popup().getByRole("button", { name: "Go to the Next Month" })).toBeDefined();
+    expect(popup().getByRole("grid").closest("[dir]")?.getAttribute("dir")).toBe("ltr");
+    expect(trigger.textContent).toContain("Jun");
+  } finally {
+    cleanup();
+    await setLanguage("en");
+  }
+});
 
 describe("DateSelect", () => {
   it("opens the calendar and reports the picked day", async () => {
