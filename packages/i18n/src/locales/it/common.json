@@ -880,5 +880,11 @@
       "max_length": "Il nome deve contenere al massimo 50 caratteri",
       "invalid": "I nomi possono contenere solo lettere, spazi, trattini e apostrofi"
     }
+  },
+  "image_upload": {
+    "drop": "Rilasci qui l’immagine per caricarla",
+    "drag_drop": "Trascini e rilasci qui l’immagine",
+    "formats": "Formati di file supportati:",
+    "alt": "Immagine"
   }
 }

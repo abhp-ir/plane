@@ -880,5 +880,11 @@
       "max_length": "Ad en fazla 50 karakter olmalıdır",
       "invalid": "Adlar yalnızca harf, boşluk, kısa çizgi ve kesme işareti içerebilir"
     }
+  },
+  "image_upload": {
+    "drop": "Yüklemek için görseli buraya bırakın",
+    "drag_drop": "Görseli buraya sürükleyip bırakın",
+    "formats": "Desteklenen dosya biçimleri:",
+    "alt": "Görsel"
   }
 }

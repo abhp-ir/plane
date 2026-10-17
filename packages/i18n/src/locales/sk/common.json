@@ -880,5 +880,11 @@
       "max_length": "Meno môže obsahovať najviac 50 znakov",
       "invalid": "Mená môžu obsahovať iba písmená, medzery, spojovníky a apostrofy"
     }
+  },
+  "image_upload": {
+    "drop": "Presunutím obrázka sem ho nahráte",
+    "drag_drop": "Presuňte a pustite obrázok sem",
+    "formats": "Podporované formáty súborov:",
+    "alt": "Obrázok"
   }
 }

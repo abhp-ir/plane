@@ -880,5 +880,11 @@
       "max_length": "De naam mag maximaal 50 tekens bevatten",
       "invalid": "Namen mogen alleen letters, spaties, koppeltekens en apostroffen bevatten"
     }
+  },
+  "image_upload": {
+    "drop": "Zet de afbeelding hier neer om te uploaden",
+    "drag_drop": "Sleep de afbeelding hierheen",
+    "formats": "Ondersteunde bestandsindelingen:",
+    "alt": "Afbeelding"
   }
 }

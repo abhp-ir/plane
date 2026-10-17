@@ -880,5 +880,11 @@
       "max_length": "El nombre debe tener como máximo 50 caracteres",
       "invalid": "Los nombres solo pueden contener letras, espacios, guiones y apóstrofos"
     }
+  },
+  "image_upload": {
+    "drop": "Suelte la imagen aquí para subirla",
+    "drag_drop": "Arrastre y suelte la imagen aquí",
+    "formats": "Formatos de archivo compatibles:",
+    "alt": "Imagen"
   }
 }

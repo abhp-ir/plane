@@ -880,5 +880,11 @@
       "max_length": "Der Name darf höchstens 50 Zeichen enthalten",
       "invalid": "Namen dürfen nur Buchstaben, Leerzeichen, Bindestriche und Apostrophe enthalten"
     }
+  },
+  "image_upload": {
+    "drop": "Bild zum Hochladen hier ablegen",
+    "drag_drop": "Bild hierher ziehen und ablegen",
+    "formats": "Unterstützte Dateiformate:",
+    "alt": "Bild"
   }
 }

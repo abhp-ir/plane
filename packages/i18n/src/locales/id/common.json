@@ -880,5 +880,11 @@
       "max_length": "Nama harus terdiri dari maksimal 50 karakter",
       "invalid": "Nama hanya boleh berisi huruf, spasi, tanda hubung, dan apostrof"
     }
+  },
+  "image_upload": {
+    "drop": "Lepaskan gambar di sini untuk mengunggah",
+    "drag_drop": "Seret dan lepaskan gambar di sini",
+    "formats": "Format berkas yang didukung:",
+    "alt": "Gambar"
   }
 }

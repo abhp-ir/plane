@@ -10,6 +10,7 @@ import { observer } from "mobx-react";
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Menu, MenuContent, MenuItem, MenuTrigger } from "@makeplane/propel/components/menu";
 import { getFileURL } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
 // hooks
 import { useUser } from "@/hooks/store/user";
 // components
@@ -21,6 +22,7 @@ type TSwitchAccountDropdownProps = {
 
 export const SwitchAccountDropdown = observer(function SwitchAccountDropdown(props: TSwitchAccountDropdownProps) {
   const { fullName } = props;
+  const { t } = useTranslation();
   // states
   const [showSwitchAccountModal, setShowSwitchAccountModal] = useState(false);
   // store hooks
@@ -40,7 +42,10 @@ export const SwitchAccountDropdown = observer(function SwitchAccountDropdown(pro
       <Menu>
         <MenuTrigger
           render={
-            <button type="button" className="z-10 flex items-center gap-x-2.5 rounded-lg bg-layer-1 px-2 py-1.5" />
+            <button
+              type="button"
+              className="z-10 flex max-w-xs min-w-0 items-center gap-x-2.5 rounded-lg bg-layer-1 px-2 py-1.5"
+            />
           }
         >
           <Avatar
@@ -49,10 +54,16 @@ export const SwitchAccountDropdown = observer(function SwitchAccountDropdown(pro
             alt={user?.display_name ?? displayName}
             fallback={fullName?.[0] ?? "R"}
           />
-          <span className="text-13 font-medium text-secondary">{displayName}</span>
+          <bdi title={displayName} className="min-w-0 truncate text-13 font-medium text-secondary">
+            {displayName}
+          </bdi>
         </MenuTrigger>
         <MenuContent side="bottom" align="end">
-          <MenuItem variant="danger" label="Wrong e-mail address?" onClick={() => setShowSwitchAccountModal(true)} />
+          <MenuItem
+            variant="danger"
+            label={t("onboarding.switch_account.wrong_email")}
+            onClick={() => setShowSwitchAccountModal(true)}
+          />
         </MenuContent>
       </Menu>
     </>

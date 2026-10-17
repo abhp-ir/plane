@@ -880,5 +880,11 @@
       "max_length": "Jméno může mít nejvýše 50 znaků",
       "invalid": "Jména mohou obsahovat pouze písmena, mezery, spojovníky a apostrofy"
     }
+  },
+  "image_upload": {
+    "drop": "Přetažením obrázku sem jej nahrajete",
+    "drag_drop": "Přetáhněte sem obrázek",
+    "formats": "Podporované formáty souborů:",
+    "alt": "Obrázek"
   }
 }

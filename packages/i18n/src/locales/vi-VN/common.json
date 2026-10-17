@@ -880,5 +880,11 @@
       "max_length": "Tên không được vượt quá 50 ký tự",
       "invalid": "Tên chỉ được chứa chữ cái, dấu cách, dấu gạch nối và dấu nháy đơn"
     }
+  },
+  "image_upload": {
+    "drop": "Thả ảnh vào đây để tải lên",
+    "drag_drop": "Kéo và thả ảnh vào đây",
+    "formats": "Định dạng tệp được hỗ trợ:",
+    "alt": "Hình ảnh"
   }
 }

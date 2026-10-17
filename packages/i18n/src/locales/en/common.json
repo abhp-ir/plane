@@ -880,5 +880,11 @@
       "max_length": "Name must be 50 characters or less",
       "invalid": "Names can only contain letters, spaces, hyphens, and apostrophes"
     }
+  },
+  "image_upload": {
+    "drop": "Drop image here to upload",
+    "drag_drop": "Drag & drop image here",
+    "formats": "Supported file formats:",
+    "alt": "Image"
   }
 }

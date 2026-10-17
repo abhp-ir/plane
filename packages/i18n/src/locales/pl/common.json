@@ -880,5 +880,11 @@
       "max_length": "Imię i nazwisko mogą zawierać maksymalnie 50 znaków",
       "invalid": "Imiona i nazwiska mogą zawierać tylko litery, spacje, łączniki i apostrofy"
     }
+  },
+  "image_upload": {
+    "drop": "Upuść obraz tutaj, aby go przesłać",
+    "drag_drop": "Przeciągnij i upuść obraz tutaj",
+    "formats": "Obsługiwane formaty plików:",
+    "alt": "Obraz"
   }
 }

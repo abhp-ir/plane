@@ -880,5 +880,11 @@
       "max_length": "Numele trebuie să aibă cel mult 50 de caractere",
       "invalid": "Numele pot conține doar litere, spații, cratime și apostrofuri"
     }
+  },
+  "image_upload": {
+    "drop": "Plasați imaginea aici pentru a o încărca",
+    "drag_drop": "Trageți și plasați imaginea aici",
+    "formats": "Formate de fișiere acceptate:",
+    "alt": "Imagine"
   }
 }
