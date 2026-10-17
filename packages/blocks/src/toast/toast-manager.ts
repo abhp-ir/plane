@@ -203,26 +203,29 @@ export const updateToast = (id: string, props: SetToastProps): void => {
  * Returns `void` (not the promise) so call sites stay plain statements.
  */
 export const setPromiseToast = <TData>(promise: Promise<TData>, options: PromiseToastOptions<TData>): void => {
-  void toastManager.promise(promise, {
-    loading: {
-      title: options.loading ?? DEFAULT_LOADING_TITLE,
-      ...timeoutFor("loading"),
-      data: toastDataFor("loading"),
-    },
-    success: (data: TData) => ({
-      title: options.success.title,
-      description: options.success.message?.(data),
-      ...timeoutFor("success"),
-      data: toastDataFor("success", options.success.actionItems?.(data)),
-    }),
-    // Matches the previous module: the error callbacks are typed against the resolved value.
-    error: (error: TData) => ({
-      title: options.error.title,
-      description: options.error.message?.(error),
-      ...timeoutFor("error"),
-      data: toastDataFor("error", options.error.actionItems?.(error)),
-    }),
-  });
+  // The manager rethrows after showing the error toast; this void API owns that rejection.
+  void toastManager
+    .promise(promise, {
+      loading: {
+        title: options.loading ?? DEFAULT_LOADING_TITLE,
+        ...timeoutFor("loading"),
+        data: toastDataFor("loading"),
+      },
+      success: (data: TData) => ({
+        title: options.success.title,
+        description: options.success.message?.(data),
+        ...timeoutFor("success"),
+        data: toastDataFor("success", options.success.actionItems?.(data)),
+      }),
+      // Matches the previous module: the error callbacks are typed against the resolved value.
+      error: (error: TData) => ({
+        title: options.error.title,
+        description: options.error.message?.(error),
+        ...timeoutFor("error"),
+        data: toastDataFor("error", options.error.actionItems?.(error)),
+      }),
+    })
+    .catch(() => undefined);
 };
 
 /** Closes the toast with the given id. */
