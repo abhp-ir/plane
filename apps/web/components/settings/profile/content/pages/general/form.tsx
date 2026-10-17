@@ -277,7 +277,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                   control={control}
                   name="first_name"
                   rules={{
-                    required: "Please enter first name",
+                    required: t("common.errors.entity_required", { entity: t("first_name") }),
                     validate: validatePersonName,
                   }}
                   render={({ field: { value, onChange, ref } }) => (
@@ -300,7 +300,9 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                     </Field>
                   )}
                 />
-                {errors.first_name && <span className="text-11 text-danger-primary">{errors.first_name.message}</span>}
+                {errors.first_name && (
+                  <span className="text-11 text-danger-primary">{t(errors.first_name.message ?? "")}</span>
+                )}
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="last_name" className="text-13 font-medium text-secondary">
@@ -332,7 +334,9 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                     </Field>
                   )}
                 />
-                {errors.last_name && <span className="text-11 text-danger-primary">{errors.last_name.message}</span>}
+                {errors.last_name && (
+                  <span className="text-11 text-danger-primary">{t(errors.last_name.message ?? "")}</span>
+                )}
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="display_name" className="text-13 font-medium text-secondary">

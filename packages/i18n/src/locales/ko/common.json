@@ -874,5 +874,11 @@
       "short_description": "JSON으로 내보내기"
     }
   },
-  "labels_count": "{count, plural, one {레이블 #개} other {레이블 #개}}"
+  "labels_count": "{count, plural, one {레이블 #개} other {레이블 #개}}",
+  "validation": {
+    "person_name": {
+      "max_length": "이름은 50자 이하여야 합니다",
+      "invalid": "이름에는 문자, 공백, 하이픈, 아포스트로피만 사용할 수 있습니다"
+    }
+  }
 }

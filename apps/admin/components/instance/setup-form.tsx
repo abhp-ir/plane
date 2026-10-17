@@ -14,6 +14,7 @@ import { Button } from "@makeplane/propel/components/button";
 import { Checkbox } from "@makeplane/propel/components/checkbox";
 import { Input, InputGroup } from "@makeplane/propel/components/input";
 import { AuthService } from "@plane/services";
+import { useTranslation } from "@plane/i18n";
 import { getPasswordStrength, validatePersonName, validateCompanyName } from "@plane/utils";
 // components
 import { AuthHeader } from "@/app/(all)/(home)/auth-header";
@@ -60,6 +61,7 @@ const defaultFromData: TFormData = {
 };
 
 export function InstanceSetupForm() {
+  const { t } = useTranslation();
   // search params
   const searchParams = useSearchParams();
   const firstNameParam = searchParams?.get("first_name") || undefined;
@@ -178,7 +180,7 @@ export function InstanceSetupForm() {
                     onChange={(e) => {
                       handleFormChange("first_name", e.target.value);
                       const validation = validatePersonName(e.target.value);
-                      e.target.setCustomValidity(e.target.value && typeof validation === "string" ? validation : "");
+                      e.target.setCustomValidity(e.target.value && typeof validation === "string" ? t(validation) : "");
                     }}
                     autoComplete="off"
                     maxLength={50}
@@ -200,7 +202,7 @@ export function InstanceSetupForm() {
                     onChange={(e) => {
                       handleFormChange("last_name", e.target.value);
                       const validation = validatePersonName(e.target.value);
-                      e.target.setCustomValidity(e.target.value && typeof validation === "string" ? validation : "");
+                      e.target.setCustomValidity(e.target.value && typeof validation === "string" ? t(validation) : "");
                     }}
                     autoComplete="off"
                     maxLength={50}

@@ -874,5 +874,11 @@
       "short_description": "Export as json"
     }
   },
-  "labels_count": "{count, plural, one {# label} other {# labels}}"
+  "labels_count": "{count, plural, one {# label} other {# labels}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Name must be 50 characters or less",
+      "invalid": "Names can only contain letters, spaces, hyphens, and apostrophes"
+    }
+  }
 }

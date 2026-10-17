@@ -874,5 +874,11 @@
       "short_description": "Ekspor sebagai json"
     }
   },
-  "labels_count": "{count, plural, one {# label} other {# label}}"
+  "labels_count": "{count, plural, one {# label} other {# label}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Nama harus terdiri dari maksimal 50 karakter",
+      "invalid": "Nama hanya boleh berisi huruf, spasi, tanda hubung, dan apostrof"
+    }
+  }
 }

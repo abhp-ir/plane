@@ -874,5 +874,11 @@
       "short_description": "خروجی در قالب json"
     }
   },
-  "labels_count": "{count, plural, one {# برچسب} other {# برچسب}}"
+  "labels_count": "{count, plural, one {# برچسب} other {# برچسب}}",
+  "validation": {
+    "person_name": {
+      "max_length": "نام باید حداکثر ۵۰ نویسه باشد",
+      "invalid": "نام فقط می‌تواند شامل حروف، فاصله، خط تیره و آپاستروف باشد"
+    }
+  }
 }

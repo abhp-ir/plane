@@ -874,5 +874,11 @@
       "short_description": "Exporteren als json"
     }
   },
-  "labels_count": "{count, plural, one {# label} other {# labels}}"
+  "labels_count": "{count, plural, one {# label} other {# labels}}",
+  "validation": {
+    "person_name": {
+      "max_length": "De naam mag maximaal 50 tekens bevatten",
+      "invalid": "Namen mogen alleen letters, spaties, koppeltekens en apostroffen bevatten"
+    }
+  }
 }

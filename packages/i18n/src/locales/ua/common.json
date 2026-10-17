@@ -874,5 +874,11 @@
       "short_description": "Експортувати як JSON"
     }
   },
-  "labels_count": "{count, plural, one {# мітка} few {# мітки} many {# міток} other {# мітки}}"
+  "labels_count": "{count, plural, one {# мітка} few {# мітки} many {# міток} other {# мітки}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Ім’я має містити не більше ніж 50 символів",
+      "invalid": "Імена можуть містити лише літери, пробіли, дефіси та апострофи"
+    }
+  }
 }

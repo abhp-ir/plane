@@ -874,5 +874,11 @@
       "short_description": "Als JSON exportieren"
     }
   },
-  "labels_count": "{count, plural, one {# Label} other {# Labels}}"
+  "labels_count": "{count, plural, one {# Label} other {# Labels}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Der Name darf höchstens 50 Zeichen enthalten",
+      "invalid": "Namen dürfen nur Buchstaben, Leerzeichen, Bindestriche und Apostrophe enthalten"
+    }
+  }
 }

@@ -29,6 +29,9 @@ test("person names preserve Unicode letters, combining marks, apostrophes and in
 });
 
 test("person names reject unsafe controls, markup, invalid ZWNJ boundaries and overlong input", () => {
+  assert.equal(validatePersonName(""), "name_is_required");
+  assert.equal(validatePersonName("a".repeat(51)), "validation.person_name.max_length");
+  assert.equal(validatePersonName("<script>"), "validation.person_name.invalid");
   for (const name of [
     "",
     " ",

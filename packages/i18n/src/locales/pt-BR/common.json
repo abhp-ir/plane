@@ -874,5 +874,11 @@
       "short_description": "Exportar como JSON"
     }
   },
-  "labels_count": "{count, plural, one {# etiqueta} many {# etiquetas} other {# etiquetas}}"
+  "labels_count": "{count, plural, one {# etiqueta} many {# etiquetas} other {# etiquetas}}",
+  "validation": {
+    "person_name": {
+      "max_length": "O nome deve ter no máximo 50 caracteres",
+      "invalid": "Os nomes só podem conter letras, espaços, hífens e apóstrofos"
+    }
+  }
 }

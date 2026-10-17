@@ -61,7 +61,7 @@ export const SLUG_REGEX = /^[\p{L}\p{N}_-]+$/u;
 /**
  * @description Validates person names (first name, last name)
  * @param {string} name - Name to validate
- * @returns {boolean | string} true if valid, error message if invalid
+ * @returns {boolean | string} true if valid, translation key if invalid
  * @example
  * validatePersonName("John") // returns true
  * validatePersonName("O'Brien") // returns true
@@ -70,15 +70,15 @@ export const SLUG_REGEX = /^[\p{L}\p{N}_-]+$/u;
  */
 export const validatePersonName = (name: string): boolean | string => {
   if (!name || name.trim() === "") {
-    return "Name is required";
+    return "name_is_required";
   }
 
   if (name.length > 50) {
-    return "Name must be 50 characters or less";
+    return "validation.person_name.max_length";
   }
 
   if (!PERSON_NAME_REGEX.test(name) || !HAS_ALPHANUMERIC_REGEX.test(name)) {
-    return "Names can only contain letters, spaces, hyphens, and apostrophes";
+    return "validation.person_name.invalid";
   }
 
   return true;

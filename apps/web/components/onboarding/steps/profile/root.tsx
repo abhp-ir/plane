@@ -10,6 +10,7 @@ import { Controller, useForm } from "react-hook-form";
 import { ImageOutline } from "@makeplane/propel/icons";
 // plane imports
 import { E_PASSWORD_STRENGTH } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 import { Button } from "@makeplane/propel/components/button";
 import { setToast } from "@plane/blocks/toast";
 import type { IUser } from "@plane/types";
@@ -60,6 +61,7 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
   const { data: user, updateCurrentUser } = useUser();
   const { updateUserProfile } = useUserProfile();
   const { config: instanceConfig } = useInstance();
+  const { t } = useTranslation();
   // form info
   const {
     getValues,
@@ -85,7 +87,8 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
     await authService.setPassword(token, { password });
   };
 
-  const handleSubmitUserDetail = async (formData: TProfileSetupFormValues) => {
+  const onSubmit = async (formData: TProfileSetupFormValues) => {
+    if (!user) return;
     const userDetailsPayload: Partial<IUser> = {
       first_name: formData.first_name,
       last_name: formData.last_name,
@@ -94,24 +97,17 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
     try {
       await Promise.all([
         updateCurrentUser(userDetailsPayload),
+        updateUserProfile({ has_marketing_email_consent: formData.has_marketing_email_consent }),
         formData.password && handleSetPassword(formData.password),
       ]);
+      handleStepChange(EOnboardingSteps.PROFILE_SETUP);
     } catch {
       setToast({
         type: "error",
-        title: "Error",
-        message: "User details update failed. Please try again!",
+        title: t("toast.error"),
+        message: t("entity.update.failed", { entity: t("profile.label") }),
       });
     }
-  };
-
-  const onSubmit = async (formData: TProfileSetupFormValues) => {
-    if (!user) return;
-    updateUserProfile({
-      has_marketing_email_consent: formData.has_marketing_email_consent,
-    });
-    await handleSubmitUserDetail(formData);
-    handleStepChange(EOnboardingSteps.PROFILE_SETUP);
   };
 
   const handleDelete = (url: string | null | undefined) => {
@@ -125,29 +121,21 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
   const currentConfirmPassword = watch("confirm_password") || undefined;
 
   const isValidPassword = useMemo(() => {
-    if (currentPassword) {
-      if (
-        currentPassword === currentConfirmPassword &&
-        getPasswordStrength(currentPassword) === E_PASSWORD_STRENGTH.STRENGTH_VALID
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return true;
-    }
+    return (
+      !currentPassword ||
+      (currentPassword === currentConfirmPassword &&
+        getPasswordStrength(currentPassword) === E_PASSWORD_STRENGTH.STRENGTH_VALID)
+    );
   }, [currentPassword, currentConfirmPassword]);
 
   // Check for all available fields validation and if password field is available, then checks for password validation (strength + confirmation).
   // Also handles the condition for optional password i.e if password field is optional it only checks for above validation if it's not empty.
-  const isButtonDisabled =
-    !isSubmitting && isValid ? (isPasswordAlreadySetup ? false : isValidPassword ? false : true) : true;
+  const isButtonDisabled = isSubmitting || !isValid || (!isPasswordAlreadySetup && !isValidPassword);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
       {/* Header */}
-      <CommonOnboardingHeader title="Create your profile." description="This is how you will appear in Plane." />
+      <CommonOnboardingHeader title={t("onboarding.profile.title")} description={t("onboarding.profile.description")} />
 
       {/* Profile Picture Section */}
       <Controller
@@ -170,12 +158,12 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
         <button
           className="flex size-12 items-center justify-center rounded-full bg-accent-primary text-18 font-semibold text-on-color"
           type="button"
+          aria-label={t(userAvatar ? "onboarding.image.change" : "onboarding.image.upload")}
           onClick={() => setIsImageUploadModalOpen(true)}
         >
           {userAvatar ? (
             <img
               src={getFileURL(userAvatar ?? "")}
-              onClick={() => setIsImageUploadModalOpen(true)}
               alt={user?.display_name}
               className="h-full w-full rounded-full object-cover"
             />
@@ -190,7 +178,7 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
           onClick={() => setIsImageUploadModalOpen(true)}
         >
           <ImageOutline className="size-4" />
-          <span className="text-13">{userAvatar ? "Change image" : "Upload image"}</span>
+          <span className="text-13">{t(userAvatar ? "onboarding.image.change" : "onboarding.image.upload")}</span>
         </button>
       </div>
 
@@ -198,20 +186,20 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
         {/* Name Input */}
         <div className="flex flex-col gap-2">
           <label
-            className="block text-13 font-medium text-tertiary after:ml-0.5 after:text-danger-primary after:content-['*']"
+            className="block text-13 font-medium text-tertiary after:ms-0.5 after:text-danger-primary after:content-['*']"
             htmlFor="first_name"
           >
-            Name
+            {t("name")}
           </label>
           <Controller
             control={control}
             name="first_name"
             rules={{
-              required: "Name is required",
+              required: "name_is_required",
               validate: validatePersonName,
               maxLength: {
                 value: 50,
-                message: "Name must be within 50 characters.",
+                message: "validation.person_name.max_length",
               },
             }}
             render={({ field: { value, onChange, ref } }) => (
@@ -220,9 +208,11 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
                 id="first_name"
                 name="first_name"
                 type="text"
+                dir="auto"
+                aria-invalid={Boolean(errors.first_name)}
+                aria-describedby={errors.first_name ? "first_name_error" : undefined}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                autoFocus
                 className={cn(
                   "w-full rounded-md border border-strong bg-surface-1 px-3 py-2 text-secondary transition-all duration-200 placeholder:text-placeholder focus:border-transparent focus:ring-2 focus:ring-accent-strong focus:outline-none",
                   {
@@ -230,12 +220,16 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
                     "border-danger-strong": errors.first_name,
                   }
                 )}
-                placeholder="Enter your full name"
-                autoComplete="on"
+                placeholder={t("onboarding.profile.name_placeholder")}
+                autoComplete="name"
               />
             )}
           />
-          {errors.first_name && <span className="text-13 text-danger-primary">{errors.first_name.message}</span>}
+          {errors.first_name && (
+            <span id="first_name_error" className="text-13 text-danger-primary">
+              {t(errors.first_name.message ?? "")}
+            </span>
+          )}
         </div>
 
         {/* setting up password for the first time */}
@@ -247,7 +241,14 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
         )}
       </div>
       {/* Continue Button */}
-      <Button variant="primary" type="submit" stretch="full" size="lg" disabled={isButtonDisabled} label="Continue" />
+      <Button
+        variant="primary"
+        type="submit"
+        stretch="full"
+        size="lg"
+        disabled={isButtonDisabled}
+        label={t("common.continue")}
+      />
 
       {/* Marketing Consent */}
       {!instanceConfig?.is_self_managed && (

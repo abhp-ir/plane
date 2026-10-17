@@ -874,5 +874,11 @@
       "short_description": "JSONとしてエクスポート"
     }
   },
-  "labels_count": "{count, plural, one {#件のラベル} other {#件のラベル}}"
+  "labels_count": "{count, plural, one {#件のラベル} other {#件のラベル}}",
+  "validation": {
+    "person_name": {
+      "max_length": "名前は50文字以内で入力してください",
+      "invalid": "名前に使用できるのは文字、スペース、ハイフン、アポストロフィのみです"
+    }
+  }
 }

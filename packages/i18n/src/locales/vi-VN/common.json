@@ -874,5 +874,11 @@
       "short_description": "Xuất sang JSON"
     }
   },
-  "labels_count": "{count, plural, one {# nhãn} other {# nhãn}}"
+  "labels_count": "{count, plural, one {# nhãn} other {# nhãn}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Tên không được vượt quá 50 ký tự",
+      "invalid": "Tên chỉ được chứa chữ cái, dấu cách, dấu gạch nối và dấu nháy đơn"
+    }
+  }
 }

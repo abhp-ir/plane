@@ -874,5 +874,11 @@
       "short_description": "Экспорт в json"
     }
   },
-  "labels_count": "{count, plural, one {# метка} few {# метки} many {# меток} other {# метки}}"
+  "labels_count": "{count, plural, one {# метка} few {# метки} many {# меток} other {# метки}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Имя должно содержать не более 50 символов",
+      "invalid": "Имена могут содержать только буквы, пробелы, дефисы и апострофы"
+    }
+  }
 }

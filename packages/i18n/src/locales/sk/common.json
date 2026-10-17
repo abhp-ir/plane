@@ -874,5 +874,11 @@
       "short_description": "Exportovať ako JSON"
     }
   },
-  "labels_count": "{count, plural, one {# štítok} few {# štítky} many {# štítku} other {# štítkov}}"
+  "labels_count": "{count, plural, one {# štítok} few {# štítky} many {# štítku} other {# štítkov}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Meno môže obsahovať najviac 50 znakov",
+      "invalid": "Mená môžu obsahovať iba písmená, medzery, spojovníky a apostrofy"
+    }
+  }
 }

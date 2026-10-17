@@ -874,5 +874,11 @@
       "short_description": "Exportă ca JSON"
     }
   },
-  "labels_count": "{count, plural, one {# etichetă} few {# etichete} other {# de etichete}}"
+  "labels_count": "{count, plural, one {# etichetă} few {# etichete} other {# de etichete}}",
+  "validation": {
+    "person_name": {
+      "max_length": "Numele trebuie să aibă cel mult 50 de caractere",
+      "invalid": "Numele pot conține doar litere, spații, cratime și apostrofuri"
+    }
+  }
 }
