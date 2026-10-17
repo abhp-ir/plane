@@ -56,6 +56,7 @@ const translatedNamespaces = [
   "project-settings",
   "workspace-settings",
   "workspace",
+  "empty-state",
 ];
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
