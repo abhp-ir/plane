@@ -168,14 +168,18 @@ export function ProjectSelect(props: ProjectSelectProps) {
                 )}
                 {(!!selected || !!placeholder) &&
                   (selectedDescription ? (
-                    <span className="flex min-w-0 grow flex-col items-start text-left">
-                      <span className="w-full truncate text-body-sm-medium text-primary">{label}</span>
+                    <span className="flex min-w-0 grow flex-col items-start text-start">
+                      <span className="w-full truncate text-body-sm-medium text-primary">
+                        <bdi>{label}</bdi>
+                      </span>
                       <span className="w-full truncate text-caption-md-regular text-tertiary">
                         {selectedDescription}
                       </span>
                     </span>
                   ) : (
-                    <span className="min-w-0 grow truncate text-left">{label}</span>
+                    <span className="min-w-0 grow truncate text-start">
+                      <bdi>{label}</bdi>
+                    </span>
                   ))}
                 {/* `select` and `select-ghost` chrome get their chevron from SelectContent's own default; pill/table-cell/breadcrumb need it here. */}
                 {selectedDescription ? (
@@ -238,7 +242,9 @@ export function ProjectSelect(props: ProjectSelectProps) {
                       className="flex h-5 max-w-full items-center gap-1 rounded-sm bg-layer-3 px-1.5 text-caption-md-medium text-secondary"
                     >
                       <ProjectLogo logoProps={project.logo_props} density="chip" />
-                      <span className="truncate">{project.name}</span>
+                      <span className="truncate" title={project.name}>
+                        <bdi>{project.name}</bdi>
+                      </span>
                     </span>
                   ))}
                 </div>
@@ -247,8 +253,8 @@ export function ProjectSelect(props: ProjectSelectProps) {
                   {/* `select` empty state is text-only (pills cover the non-empty case). */}
                   {!isSelect && <TriggerLogos selected={projects} />}
                   {(projects.length > 0 || !!placeholder) && (
-                    <span className="min-w-0 grow truncate text-left">
-                      {triggerLabel(projects, showCountOnMultiple, placeholder)}
+                    <span className="min-w-0 grow truncate text-start">
+                      <bdi>{triggerLabel(projects, showCountOnMultiple, placeholder)}</bdi>
                     </span>
                   )}
                 </>
