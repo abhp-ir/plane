@@ -46,7 +46,16 @@ test("every registered namespace has a loadable Persian resource", () => {
 });
 
 // Keep native Node on the ICU package's CJS export; browser integration is tested in Vite.
-const translatedNamespaces = ["common", "navigation", "auth", "accessibility", "settings", "home", "project-settings"];
+const translatedNamespaces = [
+  "common",
+  "navigation",
+  "auth",
+  "accessibility",
+  "settings",
+  "home",
+  "project-settings",
+  "workspace-settings",
+];
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
     const english = load("en", namespace);
@@ -57,7 +66,7 @@ for (const namespace of translatedNamespaces) {
       if (target === source && /[A-Za-z]/.test(source)) {
         assert.match(
           source,
-          /^(Plane(?: AI| Pro)?|Intake|Stickies|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|URL|CSV|Excel|JSON|plane\.so|name@company\.com)$/,
+          /^(Plane(?: AI| Pro| Runner)?|Intake|Stickies|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|URL|CSV|Excel|JSON|plane\.so|name@company\.com|https:\/\/example\.com(?:\/(?:setup|webhook))?|https:\/\/example\.com https:\/\/example\.com\/)$/,
           `${key}: English filler`
         );
       }
@@ -101,11 +110,11 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
   assert.equal(i18nInstance.t("auth.common.resend_in", { seconds: 12 }), "ارسال دوباره تا 12 ثانیهٔ دیگر");
   for (const namespace of translatedNamespaces) {
     for (const [key, message] of Object.entries(load("fa", namespace))) {
-      const numericVariables = [...message.matchAll(/\{(\w+),\s*(?:plural|selectordinal|number)/g)].map(
-        (match) => match[1]
+      const numericVariables = new Set(
+        [...message.matchAll(/\{(\w+),\s*(?:plural|selectordinal|number)/g)].map((match) => match[1])
       );
       const params = Object.fromEntries(
-        variables(message).map((variable) => [variable, numericVariables.includes(variable) ? 2 : "Plane-42"])
+        variables(message).map((variable) => [variable, numericVariables.has(variable) ? 2 : "Plane-42"])
       );
       const rendered = i18nInstance.t(key, params);
       assert.equal(typeof rendered, "string", key);
