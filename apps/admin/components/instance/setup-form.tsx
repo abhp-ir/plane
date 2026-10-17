@@ -66,7 +66,7 @@ export function InstanceSetupForm() {
   const lastNameParam = searchParams?.get("last_name") || undefined;
   const companyParam = searchParams?.get("company") || undefined;
   const emailParam = searchParams?.get("email") || undefined;
-  const isTelemetryEnabledParam = (searchParams?.get("is_telemetry_enabled") === "True" ? true : false) || true;
+  const isTelemetryEnabledParam = searchParams?.get("is_telemetry_enabled") === "True" || true;
   const errorCode = searchParams?.get("error_code") || undefined;
   const errorMessage = searchParams?.get("error_message") || undefined;
   // state
@@ -123,14 +123,14 @@ export function InstanceSetupForm() {
 
   const isButtonDisabled = useMemo(
     () =>
-      !isSubmitting &&
-      formData.first_name &&
-      formData.email &&
-      formData.password &&
-      getPasswordStrength(formData.password) === E_PASSWORD_STRENGTH.STRENGTH_VALID &&
-      formData.password === formData.confirm_password
-        ? false
-        : true,
+      !(
+        !isSubmitting &&
+        formData.first_name &&
+        formData.email &&
+        formData.password &&
+        getPasswordStrength(formData.password) === E_PASSWORD_STRENGTH.STRENGTH_VALID &&
+        formData.password === formData.confirm_password
+      ),
     [formData.confirm_password, formData.email, formData.first_name, formData.password, isSubmitting]
   );
 
@@ -176,13 +176,11 @@ export function InstanceSetupForm() {
                     placeholder="Wilber"
                     value={formData.first_name}
                     onChange={(e) => {
+                      handleFormChange("first_name", e.target.value);
                       const validation = validatePersonName(e.target.value);
-                      if (validation === true || e.target.value === "") {
-                        handleFormChange("first_name", e.target.value);
-                      }
+                      e.target.setCustomValidity(e.target.value && typeof validation === "string" ? validation : "");
                     }}
                     autoComplete="off"
-                    autoFocus
                     maxLength={50}
                   />
                 </InputGroup>
@@ -200,10 +198,9 @@ export function InstanceSetupForm() {
                     placeholder="Wright"
                     value={formData.last_name}
                     onChange={(e) => {
+                      handleFormChange("last_name", e.target.value);
                       const validation = validatePersonName(e.target.value);
-                      if (validation === true || e.target.value === "") {
-                        handleFormChange("last_name", e.target.value);
-                      }
+                      e.target.setCustomValidity(e.target.value && typeof validation === "string" ? validation : "");
                     }}
                     autoComplete="off"
                     maxLength={50}
@@ -225,7 +222,7 @@ export function InstanceSetupForm() {
                   placeholder="name@company.com"
                   value={formData.email}
                   onChange={(e) => handleFormChange("email", e.target.value)}
-                  aria-invalid={errorData.type && errorData.type === EErrorCodes.INVALID_EMAIL ? true : false}
+                  aria-invalid={errorData.type === EErrorCodes.INVALID_EMAIL}
                   autoComplete="off"
                 />
               </InputGroup>
@@ -270,7 +267,7 @@ export function InstanceSetupForm() {
                   placeholder="New password"
                   value={formData.password}
                   onChange={(e) => handleFormChange("password", e.target.value)}
-                  aria-invalid={errorData.type && errorData.type === EErrorCodes.INVALID_PASSWORD ? true : false}
+                  aria-invalid={errorData.type === EErrorCodes.INVALID_PASSWORD}
                   onFocus={() => setIsPasswordInputFocused(true)}
                   onBlur={() => setIsPasswordInputFocused(false)}
                   autoComplete="new-password"

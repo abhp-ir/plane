@@ -15,6 +15,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch --no-clean",
+    "test": "pnpm run build --no-clean && node --test tests/*.test.mjs",
     "check:lint": "oxlint --max-warnings=38 .",
     "check:types": "tsc --noEmit",
     "check:format": "oxfmt --check .",

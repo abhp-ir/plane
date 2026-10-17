@@ -8,6 +8,7 @@ from rest_framework import serializers
 # Module import
 from plane.db.models import Account, Profile, User, Workspace, WorkspaceMemberInvite
 from plane.utils.url import contains_url
+from plane.utils.validation import is_valid_person_name
 
 from .base import BaseSerializer
 
@@ -16,11 +17,15 @@ class UserSerializer(BaseSerializer):
     def validate_first_name(self, value):
         if contains_url(value):
             raise serializers.ValidationError("First name cannot contain a URL.")
+        if not is_valid_person_name(value):
+            raise serializers.ValidationError("First name contains invalid characters.")
         return value
 
     def validate_last_name(self, value):
         if contains_url(value):
             raise serializers.ValidationError("Last name cannot contain a URL.")
+        if not is_valid_person_name(value):
+            raise serializers.ValidationError("Last name contains invalid characters.")
         return value
 
     class Meta:

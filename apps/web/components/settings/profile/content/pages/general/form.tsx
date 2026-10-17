@@ -232,9 +232,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                         <img
                           src={getFileURL(userAvatar)}
                           className="absolute top-0 left-0 h-full w-full rounded-lg object-cover"
-                          onClick={() => setIsImageUploadModalOpen(true)}
                           alt={currentUser?.display_name}
-                          role="button"
                         />
                       </div>
                     )}
@@ -312,7 +310,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                   control={control}
                   name="last_name"
                   rules={{
-                    validate: validatePersonName,
+                    validate: (value) => !value || validatePersonName(value),
                   }}
                   render={({ field: { value, onChange, ref } }) => (
                     <Field name="last_name" invalid={Boolean(errors.last_name)}>

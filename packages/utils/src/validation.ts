@@ -8,9 +8,7 @@
  * Input Validation Utilities
  * Following OWASP Input Validation best practices using allowlist approach
  *
- * Security: Blocks injection-risk characters: < > ' " % # { } [ ] * ^ !
- * These patterns are designed to prevent XSS, SQL injection, template injection,
- * and other security vulnerabilities while maintaining good UX
+ * Field-specific allowlists complement output escaping and parameterized queries.
  */
 
 // =============================================================================
@@ -19,11 +17,12 @@
 
 /**
  * Person Name Pattern (for first_name, last_name)
- * Allows: Unicode letters (\p{L}), spaces, hyphens, apostrophes
+ * Allows: Unicode letters/marks, spaces, hyphens, apostrophes and interior ZWNJ
  * Use case: Accommodates international names like "José", "李明", "محمد", "Müller"
  * Blocks: Injection-risk characters and special symbols
  */
-export const PERSON_NAME_REGEX = /^[\p{L}\s'-]+$/u;
+// ZWNJ separates letters inside a name; other invisible controls are not names.
+export const PERSON_NAME_REGEX = /^(?:[\p{L}\p{M} '’-]|(?<=[\p{L}\p{M}])\u200C(?=\p{L}))+$/u;
 
 /**
  * Display Name Pattern (for display_name, usernames)
@@ -78,11 +77,7 @@ export const validatePersonName = (name: string): boolean | string => {
     return "Name must be 50 characters or less";
   }
 
-  if (hasInjectionRiskChars(name)) {
-    return "Names cannot contain special characters like < > ' \" { } [ ] * ^ ! # %";
-  }
-
-  if (!PERSON_NAME_REGEX.test(name)) {
+  if (!PERSON_NAME_REGEX.test(name) || !HAS_ALPHANUMERIC_REGEX.test(name)) {
     return "Names can only contain letters, spaces, hyphens, and apostrophes";
   }
 
