@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { add } from "date-fns";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@makeplane/propel/components/button";
@@ -26,7 +26,7 @@ import { Select } from "@plane/blocks/select";
 import { setToast } from "@plane/blocks/toast";
 import { useTranslation } from "@plane/i18n";
 import type { IApiToken } from "@plane/types";
-import { renderFormattedDate, renderFormattedTime } from "@plane/utils";
+import { renderLocalizedDateTime } from "@plane/utils";
 // hooks
 import { useUserProfile } from "@/hooks/store/user";
 // helpers
@@ -40,33 +40,28 @@ type Props = {
 const EXPIRY_DATE_OPTIONS = [
   {
     key: "1_week",
-    label: "1 week",
+    label: "notification.snooze.1_week",
     value: { weeks: 1 },
   },
   {
     key: "1_month",
-    label: "1 month",
+    label: "workspace_settings.settings.api_tokens.one_month",
     value: { months: 1 },
   },
   {
     key: "3_months",
-    label: "3 months",
+    label: "workspace_settings.settings.api_tokens.three_months",
     value: { months: 3 },
   },
   {
     key: "1_year",
-    label: "1 year",
+    label: "workspace_settings.settings.api_tokens.one_year",
     value: { years: 1 },
   },
 ];
 
 /** The expiry picker's rows: the presets plus the "Custom" row that reveals the date picker. */
 type TExpiryOption = { key: string; label: string };
-
-const EXPIRY_SELECT_OPTIONS: TExpiryOption[] = [
-  ...EXPIRY_DATE_OPTIONS.map(({ key, label }) => ({ key, label })),
-  { key: "custom", label: "Custom" },
-];
 
 const defaultValues: Partial<IApiToken> = {
   label: "",
@@ -91,6 +86,7 @@ const getFormattedDate = (date: Date): Date => {
 
 export function CreateApiTokenForm(props: Props) {
   const { handleClose, neverExpires, toggleNeverExpires, onSubmit } = props;
+  const neverExpiresLabelId = useId();
   // states
   const [customDate, setCustomDate] = useState<Date | null>(null);
   // form
@@ -102,7 +98,11 @@ export function CreateApiTokenForm(props: Props) {
     watch,
   } = useForm<IApiToken>({ defaultValues });
   // hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const expiryOptions: TExpiryOption[] = [
+    ...EXPIRY_DATE_OPTIONS.map(({ key, label }) => ({ key, label: t(label) })),
+    { key: "custom", label: t("notification.snooze.custom") },
+  ];
   // store hooks
   const { data: userProfile } = useUserProfile();
 
@@ -111,8 +111,8 @@ export function CreateApiTokenForm(props: Props) {
     if (!neverExpires && (!data.expired_at || (data.expired_at === "custom" && !customDate)))
       return setToast({
         type: "error",
-        title: "Error!",
-        message: "Please select an expiration date.",
+        title: t("error"),
+        message: t("workspace_settings.settings.api_tokens.select_expiration_date"),
       });
 
     const payload: Partial<IApiToken> = {
@@ -147,6 +147,7 @@ export function CreateApiTokenForm(props: Props) {
   const expiredAt = watch("expired_at");
   const expiryDate = getExpiryDate(expiredAt ?? "");
   const customDateFormatted = customDate && getFormattedDate(customDate);
+  const selectedExpiry = expiredAt === "custom" ? customDateFormatted : expiryDate;
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="flex min-h-0 flex-1 flex-col">
@@ -172,6 +173,7 @@ export function CreateApiTokenForm(props: Props) {
               render={({ field: { value, onChange, ref } }) => (
                 <InputField
                   type="text"
+                  dir="auto"
                   size="2xl"
                   orientation="vertical"
                   value={value}
@@ -188,6 +190,7 @@ export function CreateApiTokenForm(props: Props) {
               name="description"
               render={({ field: { value, onChange } }) => (
                 <TextAreaField
+                  dir="auto"
                   size="lg"
                   resize="none"
                   autoResize
@@ -200,17 +203,17 @@ export function CreateApiTokenForm(props: Props) {
                 />
               )}
             />
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex min-w-0 flex-wrap items-center gap-2">
                 <Controller
                   control={control}
                   name="expired_at"
                   render={({ field: { onChange, value } }) => {
-                    const selectedOption = EXPIRY_SELECT_OPTIONS.find((option) => option.key === value) ?? null;
+                    const selectedOption = expiryOptions.find((option) => option.key === value) ?? null;
 
                     return (
                       <Select<TExpiryOption>
-                        getValues={() => EXPIRY_SELECT_OPTIONS}
+                        getValues={() => expiryOptions}
                         value={selectedOption}
                         onChange={onChange}
                         getOptionValue={(option) => option.key}
@@ -223,8 +226,11 @@ export function CreateApiTokenForm(props: Props) {
                           `SelectTriggerChrome` clamps every pill trigger to `max-w-40`, which clips
                           the longest label here ("Set expiration date"). */}
                         <Select.Trigger variant="select-md" className="w-auto" prependIcon={<CalendarOutline />}>
-                          <span className="min-w-0 grow truncate text-left">
-                            {value === "custom" ? "Custom date" : (selectedOption?.label ?? "Set expiration date")}
+                          <span className="min-w-0 grow truncate text-start">
+                            {value === "custom"
+                              ? t("workspace_settings.settings.api_tokens.custom_date")
+                              : (selectedOption?.label ??
+                                t("workspace_settings.settings.api_tokens.set_expiration_date"))}
                           </span>
                         </Select.Trigger>
                       </Select>
@@ -237,7 +243,7 @@ export function CreateApiTokenForm(props: Props) {
                     onChange={(date) => setCustomDate(date)}
                     minDate={tomorrow}
                     icon={<CalendarOutline />}
-                    placeholder="Set date"
+                    placeholder={t("workspace_settings.settings.api_tokens.set_date")}
                     disabled={neverExpires}
                     clearable
                     weekStartsOn={userProfile?.start_of_the_week}
@@ -245,15 +251,12 @@ export function CreateApiTokenForm(props: Props) {
                   />
                 )}
               </div>
-              {!neverExpires && (
+              {!neverExpires && selectedExpiry && (
                 <span className="text-caption-sm-regular text-placeholder">
-                  {expiredAt === "custom"
-                    ? customDate
-                      ? `Expires ${renderFormattedDate(customDateFormatted ?? "")} at ${renderFormattedTime(customDateFormatted ?? "")}`
-                      : null
-                    : expiredAt
-                      ? `Expires ${renderFormattedDate(expiryDate ?? "")} at ${renderFormattedTime(expiryDate ?? "")}`
-                      : null}
+                  {t(
+                    "workspace_settings.settings.api_tokens.expires_at",
+                    renderLocalizedDateTime(selectedExpiry, currentLocale)
+                  )}
                 </span>
               )}
             </div>
@@ -267,9 +270,9 @@ export function CreateApiTokenForm(props: Props) {
               size="sm"
               checked={neverExpires}
               onCheckedChange={toggleNeverExpires}
-              aria-label={t("workspace_settings.settings.api_tokens.never_expires")}
+              aria-labelledby={neverExpiresLabelId}
             />
-            <span>{t("workspace_settings.settings.api_tokens.never_expires")}</span>
+            <span id={neverExpiresLabelId}>{t("workspace_settings.settings.api_tokens.never_expires")}</span>
           </label>
         </DialogInfo>
         <Button variant="secondary" size="sm" stretch="auto" label={t("cancel")} onClick={handleClose} />

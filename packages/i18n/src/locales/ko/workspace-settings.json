@@ -172,7 +172,18 @@
             "title": "오류!",
             "message": "API 토큰을 삭제할 수 없습니다"
           }
-        }
+        },
+        "one_month": "1개월",
+        "three_months": "3개월",
+        "one_year": "1년",
+        "custom_date": "사용자 지정 날짜",
+        "set_expiration_date": "만료일 설정",
+        "set_date": "날짜 설정",
+        "select_expiration_date": "만료일을 선택하십시오.",
+        "expires_at": "{date} {time}에 만료됩니다",
+        "expired_at": "{date} {time}에 만료되었습니다",
+        "expired": "만료됨",
+        "copy_secret_key": "비밀 키 복사"
       },
       "integrations": {
         "title": "인테그레이션",

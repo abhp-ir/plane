@@ -172,7 +172,18 @@
             "title": "错误！",
             "message": "无法删除 API 令牌"
           }
-        }
+        },
+        "one_month": "1 个月",
+        "three_months": "3 个月",
+        "one_year": "1 年",
+        "custom_date": "自定义日期",
+        "set_expiration_date": "设置到期日期",
+        "set_date": "设置日期",
+        "select_expiration_date": "请选择到期日期。",
+        "expires_at": "将于 {date} {time} 到期",
+        "expired_at": "已于 {date} {time} 到期",
+        "expired": "已过期",
+        "copy_secret_key": "复制密钥"
       },
       "integrations": {
         "title": "集成",

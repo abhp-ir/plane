@@ -172,7 +172,18 @@
             "title": "Грешка!",
             "message": "Токенът не можа да бъде изтрит"
           }
-        }
+        },
+        "one_month": "1 месец",
+        "three_months": "3 месеца",
+        "one_year": "1 година",
+        "custom_date": "Персонализирана дата",
+        "set_expiration_date": "Задаване на дата на изтичане",
+        "set_date": "Задаване на дата",
+        "select_expiration_date": "Моля, изберете дата на изтичане.",
+        "expires_at": "Изтича на {date} в {time}",
+        "expired_at": "Изтекъл на {date} в {time}",
+        "expired": "Изтекъл",
+        "copy_secret_key": "Копирай тайния ключ"
       },
       "integrations": {
         "title": "Интеграции",

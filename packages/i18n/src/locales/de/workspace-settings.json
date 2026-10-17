@@ -172,7 +172,18 @@
             "title": "Fehler!",
             "message": "Löschen des Tokens fehlgeschlagen"
           }
-        }
+        },
+        "one_month": "1 Monat",
+        "three_months": "3 Monate",
+        "one_year": "1 Jahr",
+        "custom_date": "Benutzerdefiniertes Datum",
+        "set_expiration_date": "Ablaufdatum festlegen",
+        "set_date": "Datum festlegen",
+        "select_expiration_date": "Bitte wählen Sie ein Ablaufdatum aus.",
+        "expires_at": "Läuft am {date} um {time} ab",
+        "expired_at": "Am {date} um {time} abgelaufen",
+        "expired": "Abgelaufen",
+        "copy_secret_key": "Geheimen Schlüssel kopieren"
       },
       "integrations": {
         "title": "Integrationen",

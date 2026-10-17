@@ -172,7 +172,18 @@
             "title": "Ошибка!",
             "message": "Не удалось удалить токен"
           }
-        }
+        },
+        "one_month": "1 месяц",
+        "three_months": "3 месяца",
+        "one_year": "1 год",
+        "custom_date": "Своя дата",
+        "set_expiration_date": "Установить срок действия",
+        "set_date": "Установить дату",
+        "select_expiration_date": "Выберите дату окончания срока действия.",
+        "expires_at": "Истекает {date} в {time}",
+        "expired_at": "Истёк {date} в {time}",
+        "expired": "Истёк",
+        "copy_secret_key": "Копировать секретный ключ"
       },
       "integrations": {
         "title": "Интеграции",

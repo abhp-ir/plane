@@ -172,7 +172,18 @@
             "title": "Fout!",
             "message": "Het token kon niet worden verwijderd"
           }
-        }
+        },
+        "one_month": "1 maand",
+        "three_months": "3 maanden",
+        "one_year": "1 jaar",
+        "custom_date": "Aangepaste datum",
+        "set_expiration_date": "Vervaldatum instellen",
+        "set_date": "Datum instellen",
+        "select_expiration_date": "Selecteer een vervaldatum.",
+        "expires_at": "Verloopt op {date} om {time}",
+        "expired_at": "Verlopen op {date} om {time}",
+        "expired": "Verlopen",
+        "copy_secret_key": "Geheime sleutel kopiëren"
       },
       "integrations": {
         "title": "Integraties",

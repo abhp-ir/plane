@@ -172,7 +172,18 @@
             "title": "¡Error!",
             "message": "No se pudo eliminar el token de API"
           }
-        }
+        },
+        "one_month": "1 mes",
+        "three_months": "3 meses",
+        "one_year": "1 año",
+        "custom_date": "Fecha personalizada",
+        "set_expiration_date": "Establecer fecha de vencimiento",
+        "set_date": "Establecer fecha",
+        "select_expiration_date": "Seleccione una fecha de vencimiento.",
+        "expires_at": "Vence el {date} a las {time}",
+        "expired_at": "Venció el {date} a las {time}",
+        "expired": "Vencido",
+        "copy_secret_key": "Copiar clave secreta"
       },
       "integrations": {
         "title": "Integraciones",

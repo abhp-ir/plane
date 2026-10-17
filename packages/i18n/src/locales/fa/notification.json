@@ -1,1 +1,8 @@
-{}
+{
+  "notification": {
+    "snooze": {
+      "1_week": "۱ هفته",
+      "custom": "سفارشی"
+    }
+  }
+}

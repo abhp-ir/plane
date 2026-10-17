@@ -172,7 +172,18 @@
             "title": "Kesalahan!",
             "message": "Token API tidak dapat dihapus"
           }
-        }
+        },
+        "one_month": "1 bulan",
+        "three_months": "3 bulan",
+        "one_year": "1 tahun",
+        "custom_date": "Tanggal khusus",
+        "set_expiration_date": "Tetapkan tanggal kedaluwarsa",
+        "set_date": "Tetapkan tanggal",
+        "select_expiration_date": "Silakan pilih tanggal kedaluwarsa.",
+        "expires_at": "Kedaluwarsa pada {date} pukul {time}",
+        "expired_at": "Telah kedaluwarsa pada {date} pukul {time}",
+        "expired": "Kedaluwarsa",
+        "copy_secret_key": "Salin kunci rahasia"
       },
       "integrations": {
         "title": "Integrasi",

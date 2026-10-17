@@ -172,7 +172,18 @@
             "title": "Erro!",
             "message": "O token de API não pôde ser excluído"
           }
-        }
+        },
+        "one_month": "1 mês",
+        "three_months": "3 meses",
+        "one_year": "1 ano",
+        "custom_date": "Data personalizada",
+        "set_expiration_date": "Definir data de expiração",
+        "set_date": "Definir data",
+        "select_expiration_date": "Selecione uma data de expiração.",
+        "expires_at": "Expira em {date} às {time}",
+        "expired_at": "Expirou em {date} às {time}",
+        "expired": "Expirado",
+        "copy_secret_key": "Copiar chave secreta"
       },
       "integrations": {
         "title": "Integrações",

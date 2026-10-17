@@ -172,7 +172,18 @@
             "title": "خطا",
             "message": "حذف توکن امکان‌پذیر نبود"
           }
-        }
+        },
+        "one_month": "۱ ماه",
+        "three_months": "۳ ماه",
+        "one_year": "۱ سال",
+        "custom_date": "تاریخ سفارشی",
+        "set_expiration_date": "تنظیم تاریخ انقضا",
+        "set_date": "تنظیم تاریخ",
+        "select_expiration_date": "لطفاً تاریخ انقضا را انتخاب کنید.",
+        "expires_at": "در {date} ساعت {time} منقضی می‌شود",
+        "expired_at": "در {date} ساعت {time} منقضی شده است",
+        "expired": "منقضی‌شده",
+        "copy_secret_key": "کپی کلید محرمانه"
       },
       "integrations": {
         "title": "یکپارچه‌سازی‌ها",

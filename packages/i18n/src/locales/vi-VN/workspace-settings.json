@@ -172,7 +172,18 @@
             "title": "Lỗi!",
             "message": "Không thể xóa token API"
           }
-        }
+        },
+        "one_month": "1 tháng",
+        "three_months": "3 tháng",
+        "one_year": "1 năm",
+        "custom_date": "Ngày tùy chỉnh",
+        "set_expiration_date": "Đặt ngày hết hạn",
+        "set_date": "Đặt ngày",
+        "select_expiration_date": "Vui lòng chọn ngày hết hạn.",
+        "expires_at": "Hết hạn vào {date} lúc {time}",
+        "expired_at": "Đã hết hạn vào {date} lúc {time}",
+        "expired": "Đã hết hạn",
+        "copy_secret_key": "Sao chép khóa bí mật"
       },
       "integrations": {
         "title": "Tích hợp",

@@ -4,10 +4,11 @@
  * See the LICENSE file for details.
  */
 
+import { useRef } from "react";
 import { useTranslation } from "@plane/i18n";
 import { Button } from "@makeplane/propel/components/button";
 import { CopyOutline } from "@makeplane/propel/icons";
-import { setToast } from "@plane/blocks/toast";
+import { dismissToast, setToast } from "@plane/blocks/toast";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { IApiToken } from "@plane/types";
 import {
@@ -20,7 +21,7 @@ import {
   DialogMain,
   DialogTitle,
 } from "@makeplane/propel/components/dialog";
-import { renderFormattedDate, renderFormattedTime, copyTextToClipboard } from "@plane/utils";
+import { renderLocalizedDateTime, copyTextToClipboard } from "@plane/utils";
 // hooks
 import { usePlatformOS } from "@/hooks/use-platform-os";
 
@@ -32,15 +33,24 @@ type Props = {
 export function GeneratedTokenDetails(props: Props) {
   const { handleClose, tokenDetails } = props;
   const { isMobile } = usePlatformOS();
-  const { t } = useTranslation();
-  const copyApiToken = (token: string) => {
-    copyTextToClipboard(token).then(() =>
-      setToast({
+  const { t, currentLocale } = useTranslation();
+  const copyToast = useRef<string | null>(null);
+  const copyApiToken = async (token: string) => {
+    if (copyToast.current) dismissToast(copyToast.current);
+    try {
+      await copyTextToClipboard(token);
+      copyToast.current = setToast({
         type: "success",
-        title: `${t("success")}!`,
+        title: t("success"),
         message: t("workspace_settings.token_copied"),
-      })
-    );
+      });
+    } catch {
+      copyToast.current = setToast({
+        type: "error",
+        title: t("error"),
+        message: t("workspace_settings.settings.webhooks.toasts.secret_key_not_copied.message"),
+      });
+    }
   };
 
   return (
@@ -53,25 +63,40 @@ export function GeneratedTokenDetails(props: Props) {
           </DialogHeading>
         </DialogHeader>
         <DialogBody>
-          <button
-            type="button"
-            onClick={() => copyApiToken(tokenDetails.token ?? "")}
-            className="flex w-full items-center justify-between truncate rounded-md border-[0.5px] border-subtle px-3 py-2 text-13 font-medium outline-none"
-          >
-            <span className="truncate pr-2">{tokenDetails.token}</span>
-            <Tooltip label="Copy secret key" disabled={isMobile}>
-              <CopyOutline className="h-4 w-4 flex-shrink-0 text-placeholder" />
-            </Tooltip>
-          </button>
+          <Tooltip label={t("workspace_settings.settings.api_tokens.copy_secret_key")} disabled={isMobile}>
+            <button
+              type="button"
+              aria-label={t("workspace_settings.settings.api_tokens.copy_secret_key")}
+              onClick={() => copyApiToken(tokenDetails.token ?? "")}
+              className="flex w-full items-center justify-between gap-2 rounded-md border-[0.5px] border-subtle px-3 py-2 text-13 font-medium outline-none focus-visible:ring-2 focus-visible:ring-accent-strong"
+            >
+              <span dir="ltr" className="min-w-0 truncate text-start">
+                {tokenDetails.token}
+              </span>
+              <CopyOutline className="h-4 w-4 flex-shrink-0 text-placeholder" aria-hidden="true" />
+            </button>
+          </Tooltip>
         </DialogBody>
       </DialogMain>
       <DialogActions>
         <DialogInfo>
           {tokenDetails.expired_at
-            ? `Expires ${renderFormattedDate(tokenDetails.expired_at)} at ${renderFormattedTime(tokenDetails.expired_at)}`
-            : "Never expires"}
+            ? t(
+                "workspace_settings.settings.api_tokens.expires_at",
+                renderLocalizedDateTime(tokenDetails.expired_at, currentLocale)
+              )
+            : t("workspace_settings.settings.api_tokens.never_expires")}
         </DialogInfo>
-        <Button variant="secondary" size="sm" stretch="auto" label={t("close")} onClick={handleClose} />
+        <Button
+          variant="secondary"
+          size="sm"
+          stretch="auto"
+          label={t("close")}
+          onClick={() => {
+            if (copyToast.current) dismissToast(copyToast.current);
+            handleClose();
+          }}
+        />
       </DialogActions>
     </>
   );

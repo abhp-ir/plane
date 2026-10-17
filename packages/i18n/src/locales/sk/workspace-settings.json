@@ -172,7 +172,18 @@
             "title": "Chyba!",
             "message": "Mazanie tokenu zlyhalo"
           }
-        }
+        },
+        "one_month": "1 mesiac",
+        "three_months": "3 mesiace",
+        "one_year": "1 rok",
+        "custom_date": "Vlastný dátum",
+        "set_expiration_date": "Nastaviť dátum vypršania",
+        "set_date": "Nastaviť dátum",
+        "select_expiration_date": "Vyberte dátum vypršania platnosti.",
+        "expires_at": "Platnosť vyprší {date} o {time}",
+        "expired_at": "Platnosť vypršala {date} o {time}",
+        "expired": "Platnosť vypršala",
+        "copy_secret_key": "Kopírovať tajný kľúč"
       },
       "integrations": {
         "title": "Integrácie",

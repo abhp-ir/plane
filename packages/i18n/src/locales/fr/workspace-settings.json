@@ -172,7 +172,18 @@
             "title": "Erreur !",
             "message": "Le jeton API n’a pas pu être supprimé"
           }
-        }
+        },
+        "one_month": "1 mois",
+        "three_months": "3 mois",
+        "one_year": "1 an",
+        "custom_date": "Date personnalisée",
+        "set_expiration_date": "Définir la date d’expiration",
+        "set_date": "Définir la date",
+        "select_expiration_date": "Veuillez sélectionner une date d’expiration.",
+        "expires_at": "Expire le {date} à {time}",
+        "expired_at": "A expiré le {date} à {time}",
+        "expired": "Expiré",
+        "copy_secret_key": "Copier la clé secrète"
       },
       "integrations": {
         "title": "Intégrations",

@@ -172,7 +172,18 @@
             "title": "エラー！",
             "message": "APIトークンを削除できませんでした"
           }
-        }
+        },
+        "one_month": "1か月",
+        "three_months": "3か月",
+        "one_year": "1年",
+        "custom_date": "カスタム日付",
+        "set_expiration_date": "有効期限を設定",
+        "set_date": "日付を設定",
+        "select_expiration_date": "有効期限を選択してください。",
+        "expires_at": "{date} {time}に期限切れになります",
+        "expired_at": "{date} {time}に期限切れになりました",
+        "expired": "期限切れ",
+        "copy_secret_key": "シークレットキーをコピー"
       },
       "integrations": {
         "title": "インテグレーション",

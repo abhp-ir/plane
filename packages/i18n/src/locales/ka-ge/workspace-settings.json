@@ -172,7 +172,18 @@
             "title": "შეცდომა!",
             "message": "ტოკენის წაშლა ვერ მოხერხდა"
           }
-        }
+        },
+        "one_month": "1 თვე",
+        "three_months": "3 თვე",
+        "one_year": "1 წელი",
+        "custom_date": "მორგებული თარიღი",
+        "set_expiration_date": "ვადის გასვლის თარიღის დაყენება",
+        "set_date": "თარიღის დაყენება",
+        "select_expiration_date": "აირჩიეთ ვადის გასვლის თარიღი.",
+        "expires_at": "ვადა გასდის {date}, {time}",
+        "expired_at": "ვადა გავიდა {date}, {time}",
+        "expired": "ვადაგასული",
+        "copy_secret_key": "საიდუმლო გასაღების კოპირება"
       },
       "integrations": {
         "title": "Integrations",

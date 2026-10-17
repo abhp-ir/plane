@@ -172,7 +172,18 @@
             "title": "Hata!",
             "message": "API token'ı silinemedi"
           }
-        }
+        },
+        "one_month": "1 ay",
+        "three_months": "3 ay",
+        "one_year": "1 yıl",
+        "custom_date": "Özel tarih",
+        "set_expiration_date": "Son kullanma tarihini ayarla",
+        "set_date": "Tarih ayarla",
+        "select_expiration_date": "Lütfen bir son kullanma tarihi seçin.",
+        "expires_at": "{date} tarihinde saat {time} itibarıyla süresi dolar",
+        "expired_at": "{date} tarihinde saat {time} itibarıyla süresi doldu",
+        "expired": "Süresi doldu",
+        "copy_secret_key": "Gizli anahtarı kopyala"
       },
       "integrations": {
         "title": "Entegrasyonlar",

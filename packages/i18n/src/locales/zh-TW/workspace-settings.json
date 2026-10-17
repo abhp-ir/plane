@@ -172,7 +172,18 @@
             "title": "錯誤！",
             "message": "無法刪除 API 權杖"
           }
-        }
+        },
+        "one_month": "1 個月",
+        "three_months": "3 個月",
+        "one_year": "1 年",
+        "custom_date": "自訂日期",
+        "set_expiration_date": "設定到期日期",
+        "set_date": "設定日期",
+        "select_expiration_date": "請選擇到期日期。",
+        "expires_at": "將於 {date} {time} 到期",
+        "expired_at": "已於 {date} {time} 到期",
+        "expired": "已到期",
+        "copy_secret_key": "複製密鑰"
       },
       "integrations": {
         "title": "整合",

@@ -172,7 +172,18 @@
             "title": "Помилка!",
             "message": "Не вдалося видалити токен"
           }
-        }
+        },
+        "one_month": "1 місяць",
+        "three_months": "3 місяці",
+        "one_year": "1 рік",
+        "custom_date": "Власна дата",
+        "set_expiration_date": "Установити термін дії",
+        "set_date": "Установити дату",
+        "select_expiration_date": "Виберіть дату завершення терміну дії.",
+        "expires_at": "Термін дії спливає {date} о {time}",
+        "expired_at": "Термін дії сплив {date} о {time}",
+        "expired": "Термін дії сплив",
+        "copy_secret_key": "Копіювати секретний ключ"
       },
       "integrations": {
         "title": "Інтеграції",

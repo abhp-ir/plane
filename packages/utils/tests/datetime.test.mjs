@@ -6,7 +6,16 @@
 
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { getWeekdayLabel } from "../dist/index.js";
+import { getWeekdayLabel, renderLocalizedDateTime } from "../dist/index.js";
+
+test("localized timestamps retain Gregorian dates and 24-hour local time", () => {
+  const date = new Date(2025, 5, 15, 18, 30);
+  assert.deepEqual(renderLocalizedDateTime(date, "en"), { date: "Jun 15, 2025", time: "18:30" });
+  assert.deepEqual(renderLocalizedDateTime(date, "fa"), { date: "۱۵ ژوئن ۲۰۲۵", time: "۱۸:۳۰" });
+  assert.equal(renderLocalizedDateTime(date, "ua").date, "15 черв. 2025 р.");
+  assert.deepEqual(renderLocalizedDateTime(date.toISOString(), "fa"), renderLocalizedDateTime(date, "fa"));
+  assert.deepEqual(renderLocalizedDateTime("invalid", "fa"), { date: "", time: "" });
+});
 
 test("weekday labels localize the stored Sunday-zero enum without shifting its values", () => {
   assert.deepEqual(

@@ -172,7 +172,18 @@
             "title": "Błąd!",
             "message": "Usunięcie tokena nie powiodło się"
           }
-        }
+        },
+        "one_month": "1 miesiąc",
+        "three_months": "3 miesiące",
+        "one_year": "1 rok",
+        "custom_date": "Niestandardowa data",
+        "set_expiration_date": "Ustaw datę wygaśnięcia",
+        "set_date": "Ustaw datę",
+        "select_expiration_date": "Proszę wybrać datę wygaśnięcia.",
+        "expires_at": "Wygasa {date} o {time}",
+        "expired_at": "Wygasł {date} o {time}",
+        "expired": "Wygasł",
+        "copy_secret_key": "Kopiuj tajny klucz"
       },
       "integrations": {
         "title": "Integracje",
