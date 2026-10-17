@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "为您的工作区命名",
-        "placeholder": "熟悉且易于识别的名称总是最好的。"
+        "placeholder": "熟悉且易于识别的名称总是最好的。",
+        "input_placeholder": "请输入工作空间名称"
       },
       "url": {
         "label": "设置您的工作区 URL",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "有多少人将使用这个工作区？",
-        "placeholder": "选择一个范围"
+        "placeholder": "选择一个范围",
+        "just_myself": "仅我自己"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "名称限制在 80 个字符以内。",
         "url_alphanumeric": "URL 只能包含 ('-') 和字母数字字符。",
         "url_length": "URL 限制在 48 个字符以内。",
-        "url_already_taken": "工作区 URL 已被占用！"
-      }
+        "url_already_taken": "工作区 URL 已被占用！",
+        "name_contains_letter_number": "工作空间名称必须包含至少一个文字或数字"
+      },
+      "no_invites_creation_disabled": "您似乎尚未收到任何工作空间邀请，且您的实例管理员已限制创建新的工作空间。请先让工作空间所有者或管理员邀请您，然后返回此页面加入。"
     },
     "request_email": {
       "subject": "请求新工作区",
@@ -48,7 +52,8 @@
         "title": "错误",
         "message": "工作区创建失败。请重试。"
       }
-    }
+    },
+    "unified_description": "所有工作，尽在一处。"
   },
   "workspace_dashboard": {
     "empty_state": {

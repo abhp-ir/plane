@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Denumește-ți spațiul de lucru",
-        "placeholder": "Cel mai bine este să alegi ceva familiar și ușor de recunoscut."
+        "placeholder": "Cel mai bine este să alegi ceva familiar și ușor de recunoscut.",
+        "input_placeholder": "Introduceți numele spațiului de lucru"
       },
       "url": {
         "label": "Setează URL-ul spațiului de lucru",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Câți oameni vor folosi acest spațiu de lucru?",
-        "placeholder": "Selectează un interval"
+        "placeholder": "Selectează un interval",
+        "just_myself": "Doar eu"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Limitează numele la 80 de caractere.",
         "url_alphanumeric": "URL-urile pot conține doar ('-') și caractere alfanumerice.",
         "url_length": "Limitează URL-ul la 48 de caractere.",
-        "url_already_taken": "URL-ul spațiului de lucru este deja folosit!"
-      }
+        "url_already_taken": "URL-ul spațiului de lucru este deja folosit!",
+        "name_contains_letter_number": "Numele spațiului de lucru trebuie să conțină cel puțin o literă sau o cifră"
+      },
+      "no_invites_creation_disabled": "Se pare că nu aveți invitații la un spațiu de lucru, iar administratorul instanței dumneavoastră a restricționat crearea de spații noi. Rugați mai întâi un proprietar sau un administrator al unui spațiu de lucru să vă invite, apoi reveniți la acest ecran pentru a vă alătura."
     },
     "request_email": {
       "subject": "Solicitare creare spațiu de lucru nou",
@@ -48,7 +52,8 @@
         "title": "Eroare",
         "message": "Spațiul de lucru nu a putut fi creat. Te rugăm să încerci din nou."
       }
-    }
+    },
+    "unified_description": "Toată munca dumneavoastră — într-un singur loc."
   },
   "workspace_dashboard": {
     "empty_state": {

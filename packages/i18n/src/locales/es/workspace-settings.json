@@ -26,7 +26,9 @@
           "success_title": "Espacio de trabajo eliminado.",
           "success_message": "Pronto irá a su página de perfil.",
           "error_title": "Eso no funcionó.",
-          "error_message": "Por favor, inténtelo de nuevo."
+          "error_message": "Por favor, inténtelo de nuevo.",
+          "type_name": "Escriba el nombre de este espacio de trabajo para continuar.",
+          "type_confirmation": "Para la confirmación final, escriba la frase que aparece a continuación."
         },
         "errors": {
           "name": {

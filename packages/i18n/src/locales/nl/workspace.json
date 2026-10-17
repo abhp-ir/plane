@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Geef je werkruimte een naam",
-        "placeholder": "Iets vertrouwds en herkenbaars werkt altijd het beste."
+        "placeholder": "Iets vertrouwds en herkenbaars werkt altijd het beste.",
+        "input_placeholder": "Voer de naam van de werkruimte in"
       },
       "url": {
         "label": "Stel de URL van je werkruimte in",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Hoeveel mensen gaan deze werkruimte gebruiken?",
-        "placeholder": "Kies een bereik"
+        "placeholder": "Kies een bereik",
+        "just_myself": "Alleen ik"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Beperk je naam tot 80 tekens.",
         "url_alphanumeric": "URL's mogen alleen ('-') en alfanumerieke tekens bevatten.",
         "url_length": "Beperk je URL tot 48 tekens.",
-        "url_already_taken": "Deze werkruimte-URL is al in gebruik!"
-      }
+        "url_already_taken": "Deze werkruimte-URL is al in gebruik!",
+        "name_contains_letter_number": "De naam van de werkruimte moet minstens één letter of cijfer bevatten"
+      },
+      "no_invites_creation_disabled": "U lijkt geen uitnodigingen voor een werkruimte te hebben, en uw instantiebeheerder heeft het aanmaken van nieuwe werkruimtes beperkt. Vraag eerst een eigenaar of beheerder van een werkruimte om u uit te nodigen en kom daarna terug naar dit scherm om deel te nemen."
     },
     "request_email": {
       "subject": "Aanvraag voor een nieuwe werkruimte",
@@ -48,7 +52,8 @@
         "title": "Fout",
         "message": "Werkruimte kon niet worden aangemaakt. Probeer het opnieuw."
       }
-    }
+    },
+    "unified_description": "Al uw werk — op één plek."
   },
   "workspace_dashboard": {
     "empty_state": {

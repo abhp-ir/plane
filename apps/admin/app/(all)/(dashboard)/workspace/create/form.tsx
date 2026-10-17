@@ -14,6 +14,7 @@ import { Button } from "@makeplane/propel/components/button";
 import { Input, InputGroup } from "@makeplane/propel/components/input";
 import { Select, SelectContent, SelectItem, SelectList, SelectTrigger } from "@makeplane/propel/components/select";
 import { InstanceWorkspaceService } from "@plane/services";
+import { useTranslation } from "@plane/i18n";
 import type { IWorkspace } from "@plane/types";
 import { validateSlug, validateWorkspaceName } from "@plane/utils";
 // components
@@ -24,6 +25,7 @@ import { useWorkspace } from "@/hooks/store";
 const instanceWorkspaceService = new InstanceWorkspaceService();
 
 export function WorkspaceCreateForm() {
+  const { t } = useTranslation();
   // router
   const router = useRouter();
   // states
@@ -66,7 +68,7 @@ export function WorkspaceCreateForm() {
                 title: "Success!",
                 message: "Workspace created successfully.",
               });
-              router.push(`/workspace`);
+              return router.push(`/workspace`);
             })
             .catch(() => {
               setToast({
@@ -76,6 +78,7 @@ export function WorkspaceCreateForm() {
               });
             });
         } else setSlugError(true);
+        return undefined;
       })
       .catch(() => {
         setToast({
@@ -112,6 +115,7 @@ export function WorkspaceCreateForm() {
                     size="lg"
                     id="workspaceName"
                     type="text"
+                    dir="auto"
                     value={value}
                     onChange={(e) => {
                       onChange(e.target.value);
@@ -128,7 +132,7 @@ export function WorkspaceCreateForm() {
                 </InputGroup>
               )}
             />
-            <span className="text-11 text-danger-primary">{errors?.name?.message}</span>
+            <span className="text-11 text-danger-primary">{t(errors.name?.message ?? "")}</span>
           </div>
         </div>
         <div className="flex flex-col gap-1">

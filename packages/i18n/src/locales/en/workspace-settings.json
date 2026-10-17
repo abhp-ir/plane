@@ -26,7 +26,9 @@
           "success_title": "Workspace deleted.",
           "success_message": "You will soon go to your profile page.",
           "error_title": "That didn't work.",
-          "error_message": "Try again, please."
+          "error_message": "Try again, please.",
+          "type_name": "Type this workspace's name to continue.",
+          "type_confirmation": "For final confirmation, type the phrase below."
         },
         "errors": {
           "name": {

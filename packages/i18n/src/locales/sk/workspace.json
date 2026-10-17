@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Pomenujte svoj pracovný priestor",
-        "placeholder": "Vhodné je použiť niečo známe a rozpoznateľné."
+        "placeholder": "Vhodné je použiť niečo známe a rozpoznateľné.",
+        "input_placeholder": "Zadajte názov pracovného priestoru"
       },
       "url": {
         "label": "Nastavte URL vášho priestoru",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Koľko ľudí bude tento priestor používať?",
-        "placeholder": "Vyberte rozsah"
+        "placeholder": "Vyberte rozsah",
+        "just_myself": "Len ja"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Názov je obmedzený na 80 znakov.",
         "url_alphanumeric": "URL môžu obsahovať iba ('-') a alfanumerické znaky.",
         "url_length": "URL je obmedzená na 48 znakov.",
-        "url_already_taken": "URL pracovného priestoru je už obsadená!"
-      }
+        "url_already_taken": "URL pracovného priestoru je už obsadená!",
+        "name_contains_letter_number": "Názov pracovného priestoru musí obsahovať aspoň jedno písmeno alebo číslicu"
+      },
+      "no_invites_creation_disabled": "Zdá sa, že nemáte žiadne pozvánky do pracovného priestoru a správca Vašej inštancie obmedzil vytváranie nových pracovných priestorov. Najprv požiadajte vlastníka alebo správcu pracovného priestoru, aby Vás pozval, a potom sa vráťte na túto obrazovku a pripojte sa."
     },
     "request_email": {
       "subject": "Žiadosť o nový pracovný priestor",
@@ -48,7 +52,8 @@
         "title": "Chyba",
         "message": "Vytvorenie pracovného priestoru zlyhalo. Skúste to prosím znova."
       }
-    }
+    },
+    "unified_description": "Všetka Vaša práca — na jednom mieste."
   },
   "workspace_dashboard": {
     "empty_state": {

@@ -110,12 +110,13 @@ export const DeleteWorkspaceForm = observer(function DeleteWorkspaceForm(props: 
         <DialogBody tabIndex={0}>
           <div className="space-y-4">
             <p className="text-body-xs-regular text-secondary">
-              You are about to delete the workspace{" "}
-              <span className="text-body-xs-semibold break-words">{data?.name}</span>. If you confirm, you will lose
-              access to all your work data in this workspace without any way to restore it. Tread very carefully.
+              {t("workspace_settings.settings.general.delete_workspace_description")}
+              <bdi className="mt-2 block text-body-xs-semibold break-words">{data?.name}</bdi>
             </p>
             <div className="text-secondary">
-              <p className="text-body-xs-regular break-words">Type in this workspace&apos;s name to continue.</p>
+              <label htmlFor="workspaceName" className="text-body-xs-regular break-words">
+                {t("workspace_settings.settings.general.delete_modal.type_name")}
+              </label>
               <Controller
                 control={control}
                 name="workspaceName"
@@ -127,6 +128,7 @@ export const DeleteWorkspaceForm = observer(function DeleteWorkspaceForm(props: 
                         id="workspaceName"
                         name="workspaceName"
                         type="text"
+                        dir="auto"
                         value={value}
                         onChange={onChange}
                         ref={ref}
@@ -139,11 +141,12 @@ export const DeleteWorkspaceForm = observer(function DeleteWorkspaceForm(props: 
               />
             </div>
             <div className="text-secondary">
-              <p className="text-body-xs-regular">
-                For final confirmation, type{" "}
-                <span className="text-body-xs-medium text-primary">delete my workspace </span>
-                below.
-              </p>
+              <label htmlFor="confirmDelete" className="text-body-xs-regular">
+                {t("workspace_settings.settings.general.delete_modal.type_confirmation")}
+                <bdi dir="ltr" className="block text-body-xs-medium text-primary">
+                  delete my workspace
+                </bdi>
+              </label>
               <Controller
                 control={control}
                 name="confirmDelete"
@@ -155,6 +158,7 @@ export const DeleteWorkspaceForm = observer(function DeleteWorkspaceForm(props: 
                         id="confirmDelete"
                         name="confirmDelete"
                         type="text"
+                        dir="ltr"
                         value={value}
                         onChange={onChange}
                         ref={ref}

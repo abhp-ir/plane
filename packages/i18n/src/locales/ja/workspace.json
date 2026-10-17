@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "ワークスペース名を設定",
-        "placeholder": "馴染みがあり認識しやすい名前が最適です。"
+        "placeholder": "馴染みがあり認識しやすい名前が最適です。",
+        "input_placeholder": "ワークスペース名を入力してください"
       },
       "url": {
         "label": "ワークスペースのURLを設定",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "このワークスペースを何人で使用しますか？",
-        "placeholder": "範囲を選択"
+        "placeholder": "範囲を選択",
+        "just_myself": "自分だけ"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "名前は80文字以内にしてください。",
         "url_alphanumeric": "URLには ('-') と英数字のみ使用できます。",
         "url_length": "URLは48文字以内にしてください。",
-        "url_already_taken": "ワークスペースのURLは既に使用されています！"
-      }
+        "url_already_taken": "ワークスペースのURLは既に使用されています！",
+        "name_contains_letter_number": "ワークスペース名には少なくとも1文字の文字または数字を含めてください"
+      },
+      "no_invites_creation_disabled": "ワークスペースへの招待がなく、インスタンス管理者によって新しいワークスペースの作成が制限されています。まずワークスペースの所有者または管理者に招待を依頼し、この画面に戻って参加してください。"
     },
     "request_email": {
       "subject": "新規ワークスペースのリクエスト",
@@ -48,7 +52,8 @@
         "title": "エラー",
         "message": "ワークスペースを作成できませんでした。もう一度お試しください。"
       }
-    }
+    },
+    "unified_description": "すべての作業をひとつに。"
   },
   "workspace_dashboard": {
     "empty_state": {

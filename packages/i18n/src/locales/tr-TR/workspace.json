@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Çalışma Alanınıza Ad Verin",
-        "placeholder": "Tanıdık ve tanınabilir bir şey her zaman iyidir."
+        "placeholder": "Tanıdık ve tanınabilir bir şey her zaman iyidir.",
+        "input_placeholder": "Çalışma alanının adını girin"
       },
       "url": {
         "label": "Çalışma Alanı URL'nizi Belirleyin",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Bu çalışma alanını kaç kişi kullanacak?",
-        "placeholder": "Bir aralık seçin"
+        "placeholder": "Bir aralık seçin",
+        "just_myself": "Yalnızca ben"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Adınızı 80 karakterle sınırlayın.",
         "url_alphanumeric": "URL'ler yalnızca ('-') ve alfasayısal karakterler içerebilir.",
         "url_length": "URL'nizi 48 karakterle sınırlayın.",
-        "url_already_taken": "Çalışma alanı URL'si zaten alınmış!"
-      }
+        "url_already_taken": "Çalışma alanı URL'si zaten alınmış!",
+        "name_contains_letter_number": "Çalışma alanı adı en az bir harf veya rakam içermelidir"
+      },
+      "no_invites_creation_disabled": "Görünüşe göre hiçbir çalışma alanına davet edilmemişsiniz ve örnek yöneticiniz yeni çalışma alanı oluşturmayı kısıtlamış. Önce bir çalışma alanı sahibinden veya yöneticisinden sizi davet etmesini isteyin, ardından katılmak için bu ekrana dönün."
     },
     "request_email": {
       "subject": "Yeni çalışma alanı isteği",
@@ -48,7 +52,8 @@
         "title": "Hata",
         "message": "Çalışma alanı oluşturulamadı. Lütfen tekrar deneyin."
       }
-    }
+    },
+    "unified_description": "Tüm işleriniz — tek bir yerde."
   },
   "workspace_dashboard": {
     "empty_state": {

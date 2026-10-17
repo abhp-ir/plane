@@ -26,7 +26,9 @@
           "success_title": "Spazio di lavoro eliminato.",
           "success_message": "Presto verrai reindirizzato alla tua pagina del profilo.",
           "error_title": "Qualcosa non ha funzionato.",
-          "error_message": "Riprova, per favore."
+          "error_message": "Riprova, per favore.",
+          "type_name": "Inserisca il nome di questo spazio di lavoro per continuare.",
+          "type_confirmation": "Per la conferma finale, digiti la frase qui sotto."
         },
         "errors": {
           "name": {

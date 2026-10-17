@@ -12,6 +12,7 @@ import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { TOnboardingStep } from "@plane/types";
 import { EOnboardingSteps } from "@plane/types";
 import { cn } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
 // hooks
 import { useInstance } from "@/hooks/store/use-instance";
 import { useUser } from "@/hooks/store/user";
@@ -26,6 +27,7 @@ type OnboardingHeaderProps = {
 
 export const OnboardingHeader = observer(function OnboardingHeader(props: OnboardingHeaderProps) {
   const { currentStep, updateCurrentStep, hasInvitations } = props;
+  const { t } = useTranslation();
   // store hooks
   const { data: user } = useUser();
   const { config: instanceConfig } = useInstance();
@@ -77,11 +79,17 @@ export const OnboardingHeader = observer(function OnboardingHeader(props: Onboar
           />
         </Tooltip>
       </div>
-      <div className={cn("flex w-full items-center justify-between gap-6 px-6", canGoBack && "pr-6 pl-4")}>
+      <div className={cn("flex w-full items-center justify-between gap-6 px-6", canGoBack && "ps-4 pe-6")}>
         <div className="flex items-center gap-2.5">
           {canGoBack && (
-            <button onClick={handleStepBack} className="cursor-pointer" type="button" disabled={!canGoBack}>
-              <ChevronLeftOutline className="size-6 text-placeholder" />
+            <button
+              aria-label={t("common.go_back")}
+              onClick={handleStepBack}
+              className="cursor-pointer"
+              type="button"
+              disabled={!canGoBack}
+            >
+              <ChevronLeftOutline className="size-6 text-placeholder rtl:rotate-180" />
             </button>
           )}
           <PlaneLockup height={20} width={95} className="text-primary" />

@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Nazwij swoją przestrzeń roboczą",
-        "placeholder": "Użyj czegoś rozpoznawalnego."
+        "placeholder": "Użyj czegoś rozpoznawalnego.",
+        "input_placeholder": "Wpisz nazwę przestrzeni roboczej"
       },
       "url": {
         "label": "Skonfiguruj adres URL swojej przestrzeni",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Ile osób będzie używać tej przestrzeni?",
-        "placeholder": "Wybierz zakres"
+        "placeholder": "Wybierz zakres",
+        "just_myself": "Tylko ja"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Nazwa ograniczona do 80 znaków.",
         "url_alphanumeric": "Adres URL może zawierać tylko ('-') i znaki alfanumeryczne.",
         "url_length": "Adres URL ograniczony do 48 znaków.",
-        "url_already_taken": "Adres URL przestrzeni roboczej jest już zajęty!"
-      }
+        "url_already_taken": "Adres URL przestrzeni roboczej jest już zajęty!",
+        "name_contains_letter_number": "Nazwa przestrzeni roboczej musi zawierać co najmniej jedną literę lub cyfrę"
+      },
+      "no_invites_creation_disabled": "Wygląda na to, że nie masz zaproszeń do przestrzeni roboczej, a administrator instancji ograniczył tworzenie nowych przestrzeni. Najpierw poproś właściciela lub administratora przestrzeni roboczej o zaproszenie, a następnie wróć na ten ekran, aby dołączyć."
     },
     "request_email": {
       "subject": "Prośba o nową przestrzeń roboczą",
@@ -48,7 +52,8 @@
         "title": "Błąd",
         "message": "Nie udało się utworzyć przestrzeni roboczej. Spróbuj ponownie."
       }
-    }
+    },
+    "unified_description": "Cała Twoja praca — w jednym miejscu."
   },
   "workspace_dashboard": {
     "empty_state": {

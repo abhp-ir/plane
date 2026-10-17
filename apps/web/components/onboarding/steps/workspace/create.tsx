@@ -119,9 +119,7 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
     return (
       <div className="flex flex-col gap-10">
         <span className="text-center text-14 text-tertiary">
-          You don&apos;t seem to have any invites to a workspace and your instance admin has restricted creation of new
-          workspaces. Please ask a workspace owner or admin to invite you to a workspace first and come back to this
-          screen to join.
+          {t("workspace_creation.errors.no_invites_creation_disabled")}
         </span>
       </div>
     );
@@ -133,11 +131,14 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
         void handleSubmit(handleCreateWorkspace)(e);
       }}
     >
-      <CommonOnboardingHeader title="Create your workspace" description="All your work — unified." />
+      <CommonOnboardingHeader
+        title={t("workspace_creation.heading")}
+        description={t("workspace_creation.unified_description")}
+      />
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
           <label
-            className="text-13 font-medium text-tertiary after:ml-0.5 after:text-danger-primary after:content-['*']"
+            className="text-13 font-medium text-tertiary after:ms-0.5 after:text-danger-primary after:content-['*']"
             htmlFor="name"
           >
             {t("workspace_creation.form.name.label")}
@@ -159,6 +160,9 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
                   id="name"
                   name="name"
                   type="text"
+                  dir="auto"
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? "workspace-name-error" : undefined}
                   value={value}
                   onChange={(event) => {
                     onChange(event.target.value);
@@ -167,7 +171,7 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
                       shouldValidate: true,
                     });
                   }}
-                  placeholder="Enter workspace name"
+                  placeholder={t("workspace_creation.form.name.input_placeholder")}
                   ref={ref}
                   className={cn(
                     "w-full rounded-md border border-strong bg-surface-1 px-3 py-2 text-secondary transition-all duration-200 placeholder:text-placeholder focus:border-transparent focus:ring-2 focus:ring-accent-strong focus:outline-none",
@@ -176,17 +180,19 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
                       "border-danger-strong": errors.name,
                     }
                   )}
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus
                 />
               </div>
             )}
           />
-          {errors.name && <span className="text-13 text-danger-primary">{errors.name.message}</span>}
+          {errors.name && (
+            <span id="workspace-name-error" className="text-13 text-danger-primary">
+              {t(errors.name.message ?? "")}
+            </span>
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <label
-            className="text-13 font-medium text-tertiary after:ml-0.5 after:text-danger-primary after:content-['*']"
+            className="text-13 font-medium text-tertiary after:ms-0.5 after:text-danger-primary after:content-['*']"
             htmlFor="slug"
           >
             {t("workspace_creation.form.url.label")}
@@ -203,21 +209,22 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
             }}
             render={({ field: { value, ref, onChange } }) => (
               <div
+                dir="ltr"
                 className={cn(
                   "flex w-full items-center rounded-md border border-strong bg-surface-1 px-3 py-2 text-secondary transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-accent-strong focus:outline-none",
                   {
-                    "border-strong": !errors.name,
-                    "border-danger-strong": errors.name,
+                    "border-strong": !errors.slug && !invalidSlug && !slugError,
+                    "border-danger-strong": errors.slug || invalidSlug || slugError,
                   }
                 )}
               >
-                <span className={cn("rounded-md pr-0 whitespace-nowrap text-secondary")}>
-                  {window && window.location.host}/
-                </span>
+                <span className="shrink-0 whitespace-nowrap text-secondary">{window && window.location.host}/</span>
                 <input
                   id="slug"
                   name="slug"
                   type="text"
+                  dir="ltr"
+                  aria-invalid={invalidSlug || slugError || Boolean(errors.slug)}
                   value={value.toLocaleLowerCase().trim().replace(/ /g, "-")}
                   onChange={(e) => {
                     const validation = validateSlug(e.target.value);
@@ -228,7 +235,7 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
                   ref={ref}
                   placeholder={t("workspace_creation.form.url.placeholder")}
                   className={cn(
-                    "ring-none w-full rounded-md border-none bg-surface-1 px-3 py-0 pl-0 text-secondary outline-none placeholder:text-placeholder"
+                    "ring-none w-full min-w-0 rounded-md border-none bg-surface-1 px-3 py-0 pl-0 text-secondary outline-none placeholder:text-placeholder"
                   )}
                 />
               </div>
@@ -246,23 +253,25 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
           {errors.slug && <span className="text-13 text-danger-primary">{errors.slug.message}</span>}
         </div>
         <div className="flex flex-col gap-2">
-          <label
-            className="text-13 font-medium text-tertiary after:ml-0.5 after:text-danger-primary after:content-['*']"
-            htmlFor="organization_size"
+          <span
+            className="text-13 font-medium text-tertiary after:ms-0.5 after:text-danger-primary after:content-['*']"
+            id="organization-size-label"
           >
             {t("workspace_creation.form.organization_size.label")}
-          </label>
+          </span>
           <div className="w-full">
             <Controller
               name="organization_size"
               control={control}
               rules={{ required: t("common.errors.required") }}
               render={({ field: { value, onChange } }) => (
-                <div className="flex flex-wrap gap-3">
+                <div role="group" aria-labelledby="organization-size-label" className="flex flex-wrap gap-3">
                   {ORGANIZATION_SIZE.map((size) => {
                     const isSelected = value === size;
                     return (
                       <button
+                        type="button"
+                        aria-pressed={isSelected}
                         key={size}
                         onClick={(e) => {
                           e.preventDefault();
@@ -277,7 +286,9 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
                       >
                         <TickCircleOutline className={cn("size-4 text-placeholder", isSelected && "text-secondary")} />
 
-                        <span className="font-medium">{size}</span>
+                        <span className="font-medium" dir={size === "Just myself" ? undefined : "ltr"}>
+                          {size === "Just myself" ? t("workspace_creation.form.organization_size.just_myself") : size}
+                        </span>
                       </button>
                     );
                   })}
@@ -300,7 +311,7 @@ export const WorkspaceCreateStep = observer(function WorkspaceCreateStep({
             size="lg"
             stretch="full"
             onClick={handleCurrentViewChange}
-            label="Join existing workspace"
+            label={t("join_a_workspace")}
           />
         )}
       </div>

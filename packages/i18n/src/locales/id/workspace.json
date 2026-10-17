@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Nama ruang kerja Anda",
-        "placeholder": "Sesuatu yang familiar dan dapat dikenali selalu lebih baik."
+        "placeholder": "Sesuatu yang familiar dan dapat dikenali selalu lebih baik.",
+        "input_placeholder": "Masukkan nama ruang kerja"
       },
       "url": {
         "label": "Atur URL ruang kerja Anda",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Berapa banyak orang yang akan menggunakan ruang kerja ini?",
-        "placeholder": "Pilih rentang"
+        "placeholder": "Pilih rentang",
+        "just_myself": "Hanya saya"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Batasi nama Anda hingga 80 karakter.",
         "url_alphanumeric": "URL hanya boleh berisi ('-') dan karakter alfanumerik.",
         "url_length": "Batasi URL Anda hingga 48 karakter.",
-        "url_already_taken": "URL ruang kerja sudah diambil!"
-      }
+        "url_already_taken": "URL ruang kerja sudah diambil!",
+        "name_contains_letter_number": "Nama ruang kerja harus berisi setidaknya satu huruf atau angka"
+      },
+      "no_invites_creation_disabled": "Sepertinya Anda belum memiliki undangan ke ruang kerja, dan admin instans Anda telah membatasi pembuatan ruang kerja baru. Mintalah pemilik atau admin ruang kerja untuk mengundang Anda terlebih dahulu, lalu kembali ke layar ini untuk bergabung."
     },
     "request_email": {
       "subject": "Meminta ruang kerja baru",
@@ -48,7 +52,8 @@
         "title": "Kesalahan",
         "message": "Ruang kerja tidak dapat dibuat. Silakan coba lagi."
       }
-    }
+    },
+    "unified_description": "Semua pekerjaan Anda — dalam satu tempat."
   },
   "workspace_dashboard": {
     "empty_state": {

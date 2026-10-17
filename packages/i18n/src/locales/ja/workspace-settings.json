@@ -26,7 +26,9 @@
           "success_title": "ワークスペースが削除されました。",
           "success_message": "まもなくプロフィールページに移動します。",
           "error_title": "操作に失敗しました。",
-          "error_message": "もう一度お試しください。"
+          "error_message": "もう一度お試しください。",
+          "type_name": "続行するには、このワークスペースの名前を入力してください。",
+          "type_confirmation": "最終確認のため、以下のフレーズを入力してください。"
         },
         "errors": {
           "name": {

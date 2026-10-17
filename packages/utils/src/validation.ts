@@ -156,27 +156,27 @@ export const validateCompanyName = (companyName: string, required: boolean = fal
  * @example
  * validateWorkspaceName("Acme Corp") // returns true
  * validateWorkspaceName("Acme_Corp-123") // returns true
- * validateWorkspaceName("Acme{Corp}") // returns error message
+ * validateWorkspaceName("Acme{Corp}") // returns a translation key
  */
 export const validateWorkspaceName = (workspaceName: string, required: boolean = false): boolean | string => {
   if (!workspaceName || workspaceName.trim() === "") {
-    return required ? "Workspace name is required" : true;
+    return required ? "name_is_required" : true;
   }
 
   if (workspaceName.length > 80) {
-    return "Workspace name must be 80 characters or less";
+    return "workspace_creation.errors.validation.name_length";
   }
 
   if (hasInjectionRiskChars(workspaceName)) {
-    return "Workspace name cannot contain special characters like < > ' \" { } [ ] * ^ ! # %";
+    return "workspace_creation.errors.validation.name_alphanumeric";
   }
 
   if (!COMPANY_NAME_REGEX.test(workspaceName)) {
-    return "Workspace name can only contain letters, numbers, spaces, hyphens, and underscores";
+    return "workspace_creation.errors.validation.name_alphanumeric";
   }
 
   if (!HAS_ALPHANUMERIC_REGEX.test(workspaceName)) {
-    return "Workspace name must contain at least one letter or number";
+    return "workspace_creation.errors.validation.name_contains_letter_number";
   }
 
   return true;

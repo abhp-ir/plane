@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Nommez votre espace de travail",
-        "placeholder": "Quelque chose de familier et reconnaissable est toujours préférable."
+        "placeholder": "Quelque chose de familier et reconnaissable est toujours préférable.",
+        "input_placeholder": "Saisissez le nom de l’espace de travail"
       },
       "url": {
         "label": "Définissez l’URL de votre espace de travail",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Combien de personnes utiliseront cet espace de travail ?",
-        "placeholder": "Sélectionnez une plage"
+        "placeholder": "Sélectionnez une plage",
+        "just_myself": "Moi uniquement"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Limitez votre nom à 80 caractères.",
         "url_alphanumeric": "Les URL ne peuvent contenir que ('-') et des caractères alphanumériques.",
         "url_length": "Limitez votre URL à 48 caractères.",
-        "url_already_taken": "L’URL de l’espace de travail est déjà prise !"
-      }
+        "url_already_taken": "L’URL de l’espace de travail est déjà prise !",
+        "name_contains_letter_number": "Le nom de l’espace de travail doit contenir au moins une lettre ou un chiffre"
+      },
+      "no_invites_creation_disabled": "Vous ne semblez avoir aucune invitation à un espace de travail, et l’administrateur de votre instance a restreint la création de nouveaux espaces. Demandez d’abord au propriétaire ou à l’administrateur d’un espace de travail de vous inviter, puis revenez sur cet écran pour le rejoindre."
     },
     "request_email": {
       "subject": "Demande d’un nouvel espace de travail",
@@ -48,7 +52,8 @@
         "title": "Erreur",
         "message": "L’espace de travail n’a pas pu être créé. Veuillez réessayer."
       }
-    }
+    },
+    "unified_description": "Tout votre travail, au même endroit."
   },
   "workspace_dashboard": {
     "empty_state": {

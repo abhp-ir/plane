@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Geben Sie Ihrem Arbeitsbereich einen Namen",
-        "placeholder": "Etwas Bekanntes und Wiedererkennbares wäre sinnvoll."
+        "placeholder": "Etwas Bekanntes und Wiedererkennbares wäre sinnvoll.",
+        "input_placeholder": "Geben Sie einen Namen für den Arbeitsbereich ein"
       },
       "url": {
         "label": "Legen Sie die URL Ihres Arbeitsbereichs fest",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Wie viele Personen werden diesen Bereich nutzen?",
-        "placeholder": "Wählen Sie einen Bereich"
+        "placeholder": "Wählen Sie einen Bereich",
+        "just_myself": "Nur ich"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Name ist auf 80 Zeichen begrenzt.",
         "url_alphanumeric": "URLs dürfen nur ('-') und alphanumerische Zeichen enthalten.",
         "url_length": "URL ist auf 48 Zeichen begrenzt.",
-        "url_already_taken": "Die Arbeitsbereichs-URL ist bereits vergeben!"
-      }
+        "url_already_taken": "Die Arbeitsbereichs-URL ist bereits vergeben!",
+        "name_contains_letter_number": "Der Name des Arbeitsbereichs muss mindestens einen Buchstaben oder eine Ziffer enthalten"
+      },
+      "no_invites_creation_disabled": "Sie haben offenbar keine Einladungen zu einem Arbeitsbereich, und Ihr Instanzadministrator hat die Erstellung neuer Arbeitsbereiche eingeschränkt. Bitten Sie zunächst einen Eigentümer oder Administrator eines Arbeitsbereichs, Sie einzuladen. Kehren Sie danach zu diesem Bildschirm zurück, um beizutreten."
     },
     "request_email": {
       "subject": "Anfrage für einen neuen Arbeitsbereich",
@@ -48,7 +52,8 @@
         "title": "Fehler",
         "message": "Arbeitsbereich konnte nicht erstellt werden. Bitte versuchen Sie es erneut."
       }
-    }
+    },
+    "unified_description": "Ihre gesamte Arbeit — an einem Ort."
   },
   "workspace_dashboard": {
     "empty_state": {

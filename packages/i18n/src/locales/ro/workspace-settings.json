@@ -26,7 +26,9 @@
           "success_title": "Spațiul de lucru a fost șters.",
           "success_message": "Vei fi redirecționat în curând către pagina de profil.",
           "error_title": "Ceva nu a funcționat.",
-          "error_message": "Încearcă din nou, te rog."
+          "error_message": "Încearcă din nou, te rog.",
+          "type_name": "Introduceți numele acestui spațiu de lucru pentru a continua.",
+          "type_confirmation": "Pentru confirmarea finală, introduceți expresia de mai jos."
         },
         "errors": {
           "name": {

@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Nomeie seu espaço de trabalho",
-        "placeholder": "Algo familiar e reconhecível é sempre melhor."
+        "placeholder": "Algo familiar e reconhecível é sempre melhor.",
+        "input_placeholder": "Digite o nome do espaço de trabalho"
       },
       "url": {
         "label": "Defina o URL do seu espaço de trabalho",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "Quantas pessoas usarão este espaço de trabalho?",
-        "placeholder": "Selecione um intervalo"
+        "placeholder": "Selecione um intervalo",
+        "just_myself": "Apenas eu"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Limite seu nome a 80 caracteres.",
         "url_alphanumeric": "Os URLs podem conter apenas ('-') e caracteres alfanuméricos.",
         "url_length": "Limite seu URL a 48 caracteres.",
-        "url_already_taken": "O URL do espaço de trabalho já está em uso!"
-      }
+        "url_already_taken": "O URL do espaço de trabalho já está em uso!",
+        "name_contains_letter_number": "O nome do espaço de trabalho deve conter pelo menos uma letra ou um número"
+      },
+      "no_invites_creation_disabled": "Parece que você não tem convites para um espaço de trabalho e o administrador da sua instância restringiu a criação de novos espaços. Peça primeiro ao proprietário ou administrador de um espaço de trabalho que convide você e volte a esta tela para participar."
     },
     "request_email": {
       "subject": "Solicitando um novo espaço de trabalho",
@@ -48,7 +52,8 @@
         "title": "Erro",
         "message": "Não foi possível criar o espaço de trabalho. Por favor, tente novamente."
       }
-    }
+    },
+    "unified_description": "Todo o seu trabalho, em um só lugar."
   },
   "workspace_dashboard": {
     "empty_state": {

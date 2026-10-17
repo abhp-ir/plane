@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Name your workspace",
-        "placeholder": "Something familiar and recognizable is always best."
+        "placeholder": "Something familiar and recognizable is always best.",
+        "input_placeholder": "Enter workspace name"
       },
       "url": {
         "label": "Set your workspace's URL",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "How many people will use this workspace?",
-        "placeholder": "Select a range"
+        "placeholder": "Select a range",
+        "just_myself": "Just myself"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Limit your name to 80 characters.",
         "url_alphanumeric": "URLs can contain only ('-') and alphanumeric characters.",
         "url_length": "Limit your URL to 48 characters.",
-        "url_already_taken": "Workspace URL is already taken!"
-      }
+        "url_already_taken": "Workspace URL is already taken!",
+        "name_contains_letter_number": "Workspace name must contain at least one letter or number"
+      },
+      "no_invites_creation_disabled": "You don't seem to have any invites to a workspace and your instance admin has restricted creation of new workspaces. Please ask a workspace owner or admin to invite you to a workspace first and come back to this screen to join."
     },
     "request_email": {
       "subject": "Requesting a new workspace",
@@ -48,7 +52,8 @@
         "title": "Error",
         "message": "Workspace could not be created. Please try again."
       }
-    }
+    },
+    "unified_description": "All your work — unified."
   },
   "workspace_dashboard": {
     "empty_state": {

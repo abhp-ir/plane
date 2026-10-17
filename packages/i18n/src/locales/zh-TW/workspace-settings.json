@@ -26,7 +26,9 @@
           "success_title": "工作區已刪除。",
           "success_message": "您很快就會進入個人資料頁面。",
           "error_title": "操作失敗。",
-          "error_message": "請重試。"
+          "error_message": "請重試。",
+          "type_name": "請輸入此工作空間的名稱以繼續。",
+          "type_confirmation": "若要完成最終確認，請輸入下方的詞句。"
         },
         "errors": {
           "name": {

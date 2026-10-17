@@ -158,6 +158,7 @@ export const CreateWorkspace = observer(function CreateWorkspace(props: Props) {
                       id="name"
                       name="name"
                       type="text"
+                      dir="auto"
                       value={value}
                       onChange={(event) => {
                         onChange(event.target.value);
@@ -168,14 +169,13 @@ export const CreateWorkspace = observer(function CreateWorkspace(props: Props) {
                       }}
                       placeholder={t("workspace_creation.form.name.placeholder")}
                       ref={ref}
-                      autoFocus
                     />
                   </InputGroup>
                 </Field>
               </div>
             )}
           />
-          {errors.name && <span className="text-13 text-danger-primary">{errors.name.message}</span>}
+          {errors.name && <span className="text-13 text-danger-primary">{t(errors.name.message ?? "")}</span>}
         </div>
         <div className="space-y-1">
           <label
@@ -196,13 +196,14 @@ export const CreateWorkspace = observer(function CreateWorkspace(props: Props) {
             }}
             render={({ field: { value, ref, onChange } }) => (
               <Field name="slug" invalid={invalidSlug || Boolean(errors.slug)}>
-                <InputGroup size="2xl">
+                <InputGroup size="2xl" dir="ltr">
                   <span className="text-13 whitespace-nowrap">{window && window.location.host}/</span>
                   <Input
                     size="2xl"
                     id="slug"
                     name="slug"
                     type="text"
+                    dir="ltr"
                     value={value.toLocaleLowerCase().trim().replace(/ /g, "-")}
                     onChange={(e) => {
                       const validation = validateSlug(e.target.value);
@@ -247,19 +248,23 @@ export const CreateWorkspace = observer(function CreateWorkspace(props: Props) {
                   onChange={onChange}
                   getValues={() => ORGANIZATION_SIZE}
                   getOptionValue={(item) => item}
-                  getOptionLabel={(item) => item}
+                  getOptionLabel={(item) =>
+                    item === "Just myself" ? t("workspace_creation.form.organization_size.just_myself") : item
+                  }
                   showSearch={false}
                   pinSelected={false}
                   placeholder={t("workspace_creation.form.organization_size.placeholder")}
                 >
                   <Select.Trigger<string> id="organization_size" variant="select-xl">
                     {(selected) => (
-                      <span className="grow truncate text-left">
-                        {selected[0] ?? (
-                          <span className="text-placeholder">
-                            {t("workspace_creation.form.organization_size.placeholder")}
-                          </span>
-                        )}
+                      <span className="grow truncate text-start">
+                        {selected[0] === "Just myself"
+                          ? t("workspace_creation.form.organization_size.just_myself")
+                          : (selected[0] ?? (
+                              <span className="text-placeholder">
+                                {t("workspace_creation.form.organization_size.placeholder")}
+                              </span>
+                            ))}
                       </span>
                     )}
                   </Select.Trigger>

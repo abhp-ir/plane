@@ -26,7 +26,9 @@
           "success_title": "Đã xóa không gian làm việc.",
           "success_message": "Sắp chuyển hướng đến trang hồ sơ của bạn.",
           "error_title": "Thao tác thất bại.",
-          "error_message": "Vui lòng thử lại."
+          "error_message": "Vui lòng thử lại.",
+          "type_name": "Nhập tên không gian làm việc này để tiếp tục.",
+          "type_confirmation": "Để xác nhận lần cuối, hãy nhập cụm từ bên dưới."
         },
         "errors": {
           "name": {

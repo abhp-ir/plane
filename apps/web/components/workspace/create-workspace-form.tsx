@@ -121,7 +121,7 @@ export const CreateWorkspaceForm = observer(function CreateWorkspaceForm(props: 
         <div className="flex flex-col gap-2 text-13">
           <label htmlFor="workspaceName">
             {t("workspace_creation.form.name.label")}
-            <span className="ml-0.5 text-danger-primary">*</span>
+            <span className="ms-0.5 text-danger-primary">*</span>
           </label>
           <div className="flex flex-col gap-1">
             <Controller
@@ -142,6 +142,7 @@ export const CreateWorkspaceForm = observer(function CreateWorkspaceForm(props: 
                       size="2xl"
                       id="workspaceName"
                       type="text"
+                      dir="auto"
                       value={value}
                       onChange={(e) => {
                         onChange(e.target.value);
@@ -157,13 +158,13 @@ export const CreateWorkspaceForm = observer(function CreateWorkspaceForm(props: 
                 </Field>
               )}
             />
-            <span className="text-11 text-danger-primary">{errors?.name?.message}</span>
+            <span className="text-11 text-danger-primary">{t(errors.name?.message ?? "")}</span>
           </div>
         </div>
         <div className="flex flex-col gap-2 text-13">
           <label htmlFor="workspaceUrl">
             {t("workspace_creation.form.url.label")}
-            <span className="ml-0.5 text-danger-primary">*</span>
+            <span className="ms-0.5 text-danger-primary">*</span>
           </label>
           <Controller
             control={control}
@@ -177,12 +178,13 @@ export const CreateWorkspaceForm = observer(function CreateWorkspaceForm(props: 
             }}
             render={({ field: { onChange, value, ref } }) => (
               <Field name="workspaceUrl" invalid={invalidSlug || Boolean(errors.slug)}>
-                <InputGroup size="2xl">
+                <InputGroup size="2xl" dir="ltr">
                   <span className="text-12 whitespace-nowrap text-secondary">{window && window.location.host}/</span>
                   <Input
                     size="2xl"
                     id="workspaceUrl"
                     type="text"
+                    dir="ltr"
                     value={value.toLocaleLowerCase().trim().replace(/ /g, "-")}
                     onChange={(e) => {
                       const validation = validateSlug(e.target.value);
@@ -210,7 +212,7 @@ export const CreateWorkspaceForm = observer(function CreateWorkspaceForm(props: 
         <div className="flex flex-col gap-2 text-13">
           <span>
             {t("workspace_creation.form.organization_size.label")}
-            <span className="ml-0.5 text-danger-primary">*</span>
+            <span className="ms-0.5 text-danger-primary">*</span>
           </span>
           <div className="w-full">
             <Controller
@@ -223,15 +225,19 @@ export const CreateWorkspaceForm = observer(function CreateWorkspaceForm(props: 
                   onChange={onChange}
                   getValues={() => ORGANIZATION_SIZE}
                   getOptionValue={(item) => item}
-                  getOptionLabel={(item) => item}
+                  getOptionLabel={(item) =>
+                    item === "Just myself" ? t("workspace_creation.form.organization_size.just_myself") : item
+                  }
                   showSearch={false}
                   pinSelected={false}
                   placeholder={t("workspace_creation.form.organization_size.placeholder")}
                 >
                   <Select.Trigger<string> variant="select-2xl">
                     {(selected) => (
-                      <span className="grow truncate text-left">
-                        {selected[0] ?? t("workspace_creation.form.organization_size.placeholder")}
+                      <span className="grow truncate text-start">
+                        {selected[0] === "Just myself"
+                          ? t("workspace_creation.form.organization_size.just_myself")
+                          : (selected[0] ?? t("workspace_creation.form.organization_size.placeholder"))}
                       </span>
                     )}
                   </Select.Trigger>

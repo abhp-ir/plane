@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "Nombra tu espacio de trabajo",
-        "placeholder": "Algo familiar y reconocible es siempre lo mejor."
+        "placeholder": "Algo familiar y reconocible es siempre lo mejor.",
+        "input_placeholder": "Introduzca el nombre del espacio de trabajo"
       },
       "url": {
         "label": "Establece la URL de tu espacio de trabajo",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "¿Cuántas personas usarán este espacio de trabajo?",
-        "placeholder": "Selecciona un rango"
+        "placeholder": "Selecciona un rango",
+        "just_myself": "Solo yo"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "Limita tu nombre a 80 caracteres.",
         "url_alphanumeric": "Las URLs solo pueden contener ('-') y caracteres alfanuméricos.",
         "url_length": "Limita tu URL a 48 caracteres.",
-        "url_already_taken": "¡La URL del espacio de trabajo ya está en uso!"
-      }
+        "url_already_taken": "¡La URL del espacio de trabajo ya está en uso!",
+        "name_contains_letter_number": "El nombre del espacio de trabajo debe contener al menos una letra o un número"
+      },
+      "no_invites_creation_disabled": "Parece que no tiene invitaciones a ningún espacio de trabajo y el administrador de su instancia ha restringido la creación de nuevos espacios. Pida primero al propietario o administrador de un espacio de trabajo que le invite y vuelva a esta pantalla para unirse."
     },
     "request_email": {
       "subject": "Solicitando un nuevo espacio de trabajo",
@@ -48,7 +52,8 @@
         "title": "Error",
         "message": "No se pudo crear el espacio de trabajo. Por favor, inténtalo de nuevo."
       }
-    }
+    },
+    "unified_description": "Todo su trabajo, en un solo lugar."
   },
   "workspace_dashboard": {
     "empty_state": {

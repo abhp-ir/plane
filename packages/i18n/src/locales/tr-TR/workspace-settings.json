@@ -26,7 +26,9 @@
           "success_title": "Çalışma alanı silindi.",
           "success_message": "Kısa süre sonra profil sayfanıza yönlendirileceksiniz.",
           "error_title": "Bu işe yaramadı.",
-          "error_message": "Lütfen tekrar deneyin."
+          "error_message": "Lütfen tekrar deneyin.",
+          "type_name": "Devam etmek için bu çalışma alanının adını yazın.",
+          "type_confirmation": "Son onay için aşağıdaki ifadeyi yazın."
         },
         "errors": {
           "name": {

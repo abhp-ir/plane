@@ -26,7 +26,9 @@
           "success_title": "Werkruimte verwijderd.",
           "success_message": "Je gaat zo naar je profielpagina.",
           "error_title": "Dat werkte niet.",
-          "error_message": "Probeer het opnieuw."
+          "error_message": "Probeer het opnieuw.",
+          "type_name": "Typ de naam van deze werkruimte om door te gaan.",
+          "type_confirmation": "Typ de onderstaande zin voor de definitieve bevestiging."
         },
         "errors": {
           "name": {

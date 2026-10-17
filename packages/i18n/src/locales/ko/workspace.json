@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "작업 공간 이름",
-        "placeholder": "익숙하고 인식 가능한 이름이 가장 좋습니다."
+        "placeholder": "익숙하고 인식 가능한 이름이 가장 좋습니다.",
+        "input_placeholder": "워크스페이스 이름을 입력하세요"
       },
       "url": {
         "label": "작업 공간 URL 설정",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "이 작업 공간을 사용할 사람 수",
-        "placeholder": "범위 선택"
+        "placeholder": "범위 선택",
+        "just_myself": "나 혼자"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "이름은 80자 이내로 제한하세요.",
         "url_alphanumeric": "URL에는 ('-') 및 영숫자 문자만 포함될 수 있습니다.",
         "url_length": "URL은 48자 이내로 제한하세요.",
-        "url_already_taken": "작업 공간 URL이 이미 사용 중입니다!"
-      }
+        "url_already_taken": "작업 공간 URL이 이미 사용 중입니다!",
+        "name_contains_letter_number": "워크스페이스 이름에는 문자나 숫자가 하나 이상 포함되어야 합니다"
+      },
+      "no_invites_creation_disabled": "워크스페이스 초대가 없으며 인스턴스 관리자가 새 워크스페이스 생성을 제한한 것으로 보입니다. 먼저 워크스페이스 소유자나 관리자에게 초대를 요청한 후, 이 화면으로 돌아와 참여하세요."
     },
     "request_email": {
       "subject": "새 작업 공간 요청",
@@ -48,7 +52,8 @@
         "title": "오류",
         "message": "작업 공간을 생성할 수 없습니다. 다시 시도해주세요."
       }
-    }
+    },
+    "unified_description": "모든 작업을 한곳에."
   },
   "workspace_dashboard": {
     "empty_state": {

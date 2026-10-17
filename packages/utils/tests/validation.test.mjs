@@ -6,7 +6,7 @@
 
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { validatePersonName, validateDisplayName } from "../dist/index.js";
+import { validatePersonName, validateDisplayName, validateWorkspaceName } from "../dist/index.js";
 
 test("person names preserve Unicode letters, combining marks, apostrophes and interior ZWNJ", () => {
   for (const name of [
@@ -26,6 +26,17 @@ test("person names preserve Unicode letters, combining marks, apostrophes and in
   ]) {
     assert.equal(validatePersonName(name), true, name);
   }
+});
+
+test("workspace name validation retains its policy and returns translatable error keys", () => {
+  for (const name of ["Acme Corp", "فضای کاری", "شرکت_123", "a".repeat(80)]) {
+    assert.equal(validateWorkspaceName(name, true), true);
+  }
+  assert.equal(validateWorkspaceName(""), true);
+  assert.equal(validateWorkspaceName("", true), "name_is_required");
+  assert.equal(validateWorkspaceName("a".repeat(81)), "workspace_creation.errors.validation.name_length");
+  assert.equal(validateWorkspaceName("<script>"), "workspace_creation.errors.validation.name_alphanumeric");
+  assert.equal(validateWorkspaceName("---"), "workspace_creation.errors.validation.name_contains_letter_number");
 });
 
 test("person names reject unsafe controls, markup, invalid ZWNJ boundaries and overlong input", () => {

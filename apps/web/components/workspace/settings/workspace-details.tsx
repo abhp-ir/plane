@@ -43,6 +43,10 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
   const { currentWorkspace, updateWorkspace } = useWorkspace();
   const { allowPermissions } = useUserPermissions();
   const { t } = useTranslation();
+  const organizationSizeOptions = ORGANIZATION_SIZE.map((value) => ({
+    value,
+    label: value === "Just myself" ? t("workspace_creation.form.organization_size.just_myself") : value,
+  }));
 
   // form info
   const {
@@ -71,12 +75,17 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
     try {
       await updateWorkspace(currentWorkspace.slug, payload);
       setToast({
-        title: "Success!",
+        title: t("toast.success"),
         type: "success",
-        message: "Workspace updated successfully",
+        message: t("entity.update.success", { entity: t("common.workspace") }),
       });
     } catch (err: unknown) {
       console.error(err);
+      setToast({
+        type: "error",
+        title: t("toast.error"),
+        message: t("entity.update.failed", { entity: t("common.workspace") }),
+      });
     } finally {
       setTimeout(() => {
         setIsLoading(false);
@@ -93,14 +102,14 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
       });
       setToast({
         type: "success",
-        title: "Success!",
-        message: "Workspace picture removed successfully.",
+        title: t("toast.success"),
+        message: t("entity.remove.success", { entity: t("workspace_logo") }),
       });
     } catch {
       setToast({
         type: "error",
-        title: "Error!",
-        message: "There was some error in deleting your profile picture. Please try again.",
+        title: t("toast.error"),
+        message: t("entity.remove.failed", { entity: t("workspace_logo") }),
       });
     }
   };
@@ -112,7 +121,7 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
       .then(() => {
         setToast({
           type: "success",
-          title: "Workspace URL copied to the clipboard.",
+          title: t("entity.link_copied_to_clipboard", { entity: t("common.workspace") }),
         });
         return undefined;
       })
@@ -150,13 +159,22 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
       <div className={cn("flex w-full flex-col gap-y-7", { "opacity-60": !isAdmin })}>
         <div className="flex items-center gap-5">
           <div className="flex shrink-0 flex-col gap-1">
-            <button type="button" onClick={() => setIsImageUploadModalOpen(true)} disabled={!isAdmin}>
+            <button
+              type="button"
+              aria-label={t(
+                workspaceLogo
+                  ? "workspace_settings.settings.general.edit_logo"
+                  : "workspace_settings.settings.general.upload_logo"
+              )}
+              onClick={() => setIsImageUploadModalOpen(true)}
+              disabled={!isAdmin}
+            >
               {workspaceLogo && workspaceLogo !== "" ? (
                 <div className="relative flex size-14">
                   <img
                     src={getFileURL(workspaceLogo)}
                     className="absolute top-0 left-0 size-full rounded-md object-cover"
-                    alt="Workspace Logo"
+                    alt={t("workspace_logo")}
                   />
                 </div>
               ) : (
@@ -167,14 +185,21 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
             </button>
           </div>
           <div className="flex flex-col gap-1">
-            <div className="mb:-my-5 text-h5-semibold leading-6">{watch("name")}</div>
-            <button type="button" onClick={handleCopyUrl} className="text-left text-body-xs-regular tracking-tight">{`${
+            <div className="mb:-my-5 text-h5-semibold leading-6">
+              <bdi>{watch("name")}</bdi>
+            </div>
+            <button
+              dir="ltr"
+              type="button"
+              onClick={handleCopyUrl}
+              className="text-start text-body-xs-regular tracking-tight"
+            >{`${
               typeof window !== "undefined" && window.location.origin.replace("http://", "").replace("https://", "")
             }/${currentWorkspace.slug}`}</button>
             {isAdmin && (
               <button
                 type="button"
-                className="flex items-center gap-1.5 text-left text-caption-sm-medium text-accent-primary"
+                className="flex items-center gap-1.5 text-start text-caption-sm-medium text-accent-primary"
                 onClick={() => setIsImageUploadModalOpen(true)}
               >
                 {workspaceLogo && workspaceLogo !== "" ? (
@@ -192,7 +217,9 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
         <div className="flex flex-col gap-7">
           <div className="grid-col grid w-full grid-cols-1 items-center justify-between gap-10 xl:grid-cols-2 2xl:grid-cols-3">
             <div className="flex flex-col gap-2">
-              <h4 className="text-body-sm-medium text-tertiary">{t("workspace_settings.settings.general.name")}</h4>
+              <label htmlFor="name" className="text-body-sm-medium text-tertiary">
+                {t("workspace_settings.settings.general.name")}
+              </label>
               <Controller
                 control={control}
                 name="name"
@@ -207,6 +234,7 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
                         id="name"
                         name="name"
                         type="text"
+                        dir="auto"
                         value={value}
                         onChange={onChange}
                         ref={ref}
@@ -217,29 +245,33 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
                   </Field>
                 )}
               />
-              {errors.name && <p className="text-caption-sm-regular text-danger-primary">{errors.name.message}</p>}
+              {errors.name && (
+                <p className="text-caption-sm-regular text-danger-primary">{t(errors.name.message ?? "")}</p>
+              )}
             </div>
             <div className="flex flex-col gap-2">
-              <h4 className="text-body-sm-medium text-tertiary">
+              <p id="workspace-company-size-label" className="text-body-sm-medium text-tertiary">
                 {t("workspace_settings.settings.general.company_size")}
-              </h4>
+              </p>
               <Controller
                 name="organization_size"
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <Select<string>
+                    items={organizationSizeOptions}
                     value={value || null}
                     onValueChange={(next) => onChange(next ?? "")}
                     disabled={!isAdmin}
                   >
                     <SelectTrigger
+                      aria-labelledby="workspace-company-size-label"
                       size="2xl"
                       placeholder={t("workspace_settings.settings.general.errors.company_size.select_a_range")}
                     />
                     <SelectContent side="bottom" align="end">
                       <SelectList>
-                        {ORGANIZATION_SIZE.map((item) => (
-                          <SelectItem key={item} value={item} size="lg" label={item} />
+                        {organizationSizeOptions.map(({ value: size, label }) => (
+                          <SelectItem key={size} value={size} size="lg" label={label} />
                         ))}
                       </SelectList>
                     </SelectContent>
@@ -248,7 +280,9 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <h4 className="text-body-sm-medium text-tertiary">{t("workspace_settings.settings.general.url")}</h4>
+              <label htmlFor="url" className="text-body-sm-medium text-tertiary">
+                {t("workspace_settings.settings.general.url")}
+              </label>
               <Controller
                 control={control}
                 name="url"
@@ -260,6 +294,7 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
                         id="url"
                         name="url"
                         type="url"
+                        dir="ltr"
                         value={`${
                           typeof window !== "undefined" &&
                           window.location.origin.replace("http://", "").replace("https://", "")
@@ -282,7 +317,12 @@ export const WorkspaceDetails = observer(function WorkspaceDetails() {
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <>
-                    <TimezoneSelect value={value} onChange={onChange} disabled={!isAdmin} />
+                    <TimezoneSelect
+                      value={value}
+                      onChange={onChange}
+                      disabled={!isAdmin}
+                      label={t("workspace_settings.settings.general.workspace_timezone")}
+                    />
                   </>
                 )}
               />

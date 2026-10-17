@@ -26,7 +26,9 @@
           "success_title": "Przestrzeń usunięta.",
           "success_message": "Zostaniesz przekierowany do profilu.",
           "error_title": "Nie udało się.",
-          "error_message": "Spróbuj ponownie."
+          "error_message": "Spróbuj ponownie.",
+          "type_name": "Wpisz nazwę tej przestrzeni roboczej, aby kontynuować.",
+          "type_confirmation": "Aby ostatecznie potwierdzić, wpisz poniższą frazę."
         },
         "errors": {
           "name": {

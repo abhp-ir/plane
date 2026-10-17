@@ -26,7 +26,9 @@
           "success_title": "Arbeitsbereich gelöscht.",
           "success_message": "Sie werden auf Ihr Profil umgeleitet.",
           "error_title": "Fehlgeschlagen.",
-          "error_message": "Bitte versuchen Sie es erneut."
+          "error_message": "Bitte versuchen Sie es erneut.",
+          "type_name": "Geben Sie den Namen dieses Arbeitsbereichs ein, um fortzufahren.",
+          "type_confirmation": "Geben Sie zur endgültigen Bestätigung den folgenden Satz ein."
         },
         "errors": {
           "name": {

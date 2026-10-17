@@ -5,7 +5,8 @@
     "form": {
       "name": {
         "label": "為您的工作區命名",
-        "placeholder": "最好使用熟悉且容易識別的名稱。"
+        "placeholder": "最好使用熟悉且容易識別的名稱。",
+        "input_placeholder": "請輸入工作空間名稱"
       },
       "url": {
         "label": "設定您的工作區網址",
@@ -14,7 +15,8 @@
       },
       "organization_size": {
         "label": "有多少人會使用這個工作區？",
-        "placeholder": "選擇一個範圍"
+        "placeholder": "選擇一個範圍",
+        "just_myself": "僅我自己"
       }
     },
     "errors": {
@@ -28,8 +30,10 @@
         "name_length": "名稱請限制在 80 個字元以內。",
         "url_alphanumeric": "網址只能包含 ('-') 和英數字元。",
         "url_length": "網址請限制在 48 個字元以內。",
-        "url_already_taken": "工作區網址已被使用！"
-      }
+        "url_already_taken": "工作區網址已被使用！",
+        "name_contains_letter_number": "工作空間名稱必須包含至少一個文字或數字"
+      },
+      "no_invites_creation_disabled": "您似乎尚未收到任何工作空間邀請，且您的執行個體管理員已限制建立新的工作空間。請先讓工作空間擁有者或管理員邀請您，再返回此畫面加入。"
     },
     "request_email": {
       "subject": "請求新工作區",
@@ -48,7 +52,8 @@
         "title": "錯誤",
         "message": "無法建立工作區。請再試一次。"
       }
-    }
+    },
+    "unified_description": "所有工作，盡在一處。"
   },
   "workspace_dashboard": {
     "empty_state": {
