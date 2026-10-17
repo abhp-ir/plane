@@ -61,6 +61,10 @@ const translatedNamespaces = [
   "cycle",
   "module",
   "page",
+  "work-item",
+  "inbox",
+  "editor",
+  "notification",
 ];
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
@@ -72,7 +76,7 @@ for (const namespace of translatedNamespaces) {
       if (target === source && /[A-Za-z]/.test(source)) {
         assert.match(
           source,
-          /^(Plane(?: AI| Pro| Runner)?|Intake|Stickies|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|URL|CSV|Excel|JSON|plane\.so|name@company\.com|https:\/\/example\.com(?:\/(?:setup|webhook))?|https:\/\/example\.com https:\/\/example\.com\/)$/,
+          /^(Plane(?: AI| Pro| Runner)?|Intake|\{workspace\} - Intake|Stickies|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|ID|URL|CSV|Excel|JSON|plane\.so|name@company\.com|https:\/\/example\.com(?:\/(?:setup|webhook))?|https:\/\/example\.com https:\/\/example\.com\/)$/,
           `${key}: English filler`
         );
       }
@@ -97,6 +101,9 @@ for (const namespace of translatedNamespaces) {
         "Business",
         "Enterprise",
         "GitHub",
+        "YouTube",
+        "Figma",
+        "Google Docs",
         "OIDC",
         "SAML",
         "SSO",
@@ -156,6 +163,12 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
     }
     assert.equal(i18nInstance.t("cycle.label", { count }), count <= 1 ? "چرخه" : "چرخه‌ها");
     assert.equal(i18nInstance.t("module.label", { count }), count <= 1 ? "ماژول" : "ماژول‌ها");
+    assert.equal(i18nInstance.t("issue.label", { count }), count <= 1 ? "آیتم کاری" : "آیتم‌های کاری");
+    assert.equal(i18nInstance.t("epic.label", { count }), count <= 1 ? "اپیک" : "اپیک‌ها");
+    assert.equal(
+      i18nInstance.t("inbox_issue.status.snoozed.description", { days: count }),
+      `${new Intl.NumberFormat("fa").format(count)} روز باقی مانده است`
+    );
   }
   const fallbackKey = Object.keys(load("en", "automation"))[0];
   assert.equal(i18nInstance.t(fallbackKey), i18nInstance.t(fallbackKey, { lng: "en" }));
