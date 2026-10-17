@@ -123,10 +123,11 @@ export const SidebarMenuItems = observer(function SidebarMenuItems() {
               onClick={() => toggleExtendedSidebar()}
               className="flex flex-grow items-center gap-1.5 text-13 font-medium text-tertiary"
               id="extended-sidebar-toggle"
+              aria-expanded={Boolean(isExtendedSidebarOpened)}
               aria-label={t(
                 isExtendedSidebarOpened
-                  ? "aria_labels.app_sidebar.close_extended_sidebar"
-                  : "aria_labels.app_sidebar.open_extended_sidebar"
+                  ? "aria_labels.projects_sidebar.close_extended_sidebar"
+                  : "aria_labels.projects_sidebar.open_extended_sidebar"
               )}
             >
               <MoreHorizontalOutline className="size-4 flex-shrink-0" />
