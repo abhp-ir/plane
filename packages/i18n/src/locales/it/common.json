@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Il nome deve contenere al massimo 50 caratteri",
       "invalid": "I nomi possono contenere solo lettere, spazi, trattini e apostrofi"
+    },
+    "display_name": {
+      "max_length": "Il nome visualizzato deve contenere al massimo 50 caratteri",
+      "invalid": "Il nome visualizzato può contenere solo lettere, numeri, punti, trattini e trattini bassi"
     }
   },
   "image_upload": {

@@ -37,6 +37,11 @@
         "states": {
           "sending": "Отправка…"
         }
+      },
+      "placeholders": {
+        "first_name": "Введите своё имя",
+        "last_name": "Введите свою фамилию",
+        "display_name": "Введите своё отображаемое имя"
       }
     },
     "preferences": {

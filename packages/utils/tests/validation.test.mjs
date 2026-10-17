@@ -39,6 +39,16 @@ test("workspace name validation retains its policy and returns translatable erro
   assert.equal(validateWorkspaceName("---"), "workspace_creation.errors.validation.name_contains_letter_number");
 });
 
+test("display names retain their Unicode username policy and return translatable errors", () => {
+  for (const name of ["", " ", "سارا_۱۲۳", "李明.dev", "john.doe-123", "a".repeat(50)]) {
+    assert.equal(validateDisplayName(name), true, name);
+  }
+  assert.equal(validateDisplayName("a".repeat(51)), "validation.display_name.max_length");
+  for (const name of ["<script>", "O'Brien", "john doe", "سارا‌احمدی", "name\u202e", "name\n"]) {
+    assert.equal(validateDisplayName(name), "validation.display_name.invalid", name);
+  }
+});
+
 test("person names reject unsafe controls, markup, invalid ZWNJ boundaries and overlong input", () => {
   assert.equal(validatePersonName(""), "name_is_required");
   assert.equal(validatePersonName("a".repeat(51)), "validation.person_name.max_length");

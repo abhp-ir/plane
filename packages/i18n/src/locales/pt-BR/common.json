@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "O nome deve ter no máximo 50 caracteres",
       "invalid": "Os nomes só podem conter letras, espaços, hífens e apóstrofos"
+    },
+    "display_name": {
+      "max_length": "O nome de exibição deve ter no máximo 50 caracteres",
+      "invalid": "O nome de exibição só pode conter letras, números, pontos, hifens e sublinhados"
     }
   },
   "image_upload": {

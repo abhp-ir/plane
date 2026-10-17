@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Tên không được vượt quá 50 ký tự",
       "invalid": "Tên chỉ được chứa chữ cái, dấu cách, dấu gạch nối và dấu nháy đơn"
+    },
+    "display_name": {
+      "max_length": "Tên hiển thị không được dài quá 50 ký tự",
+      "invalid": "Tên hiển thị chỉ được chứa chữ cái, chữ số, dấu chấm, dấu gạch nối và dấu gạch dưới"
     }
   },
   "image_upload": {

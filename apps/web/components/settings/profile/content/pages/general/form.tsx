@@ -100,8 +100,8 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
       .then(() => {
         setToast({
           type: "success",
-          title: "Success!",
-          message: "Profile picture deleted successfully.",
+          title: t("toast.success"),
+          message: t("entity.remove.success", { entity: t("avatar") }),
         });
         setValue("avatar_url", "");
         return;
@@ -109,8 +109,8 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
       .catch(() => {
         setToast({
           type: "error",
-          title: "Error!",
-          message: "There was some error in deleting your profile picture. Please try again.",
+          title: t("toast.error"),
+          message: t("entity.remove.failed", { entity: t("avatar") }),
         });
       })
       .finally(() => {
@@ -142,7 +142,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
       setToast({
         type: "error",
         title: t("toast.error"),
-        message: error instanceof Error ? error.message : "Failed to process cover image",
+        message: t("entity.update.failed", { entity: t("cover_image") }),
       });
       setIsLoading(false);
       return;
@@ -178,14 +178,14 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
       .finally(() => setIsLoading(false));
 
     setPromiseToast(updatePromise, {
-      loading: "Updating...",
+      loading: t("updating"),
       success: {
-        title: "Success!",
-        message: () => `Profile updated successfully.`,
+        title: t("toast.success"),
+        message: () => t("entity.update.success", { entity: t("profile.label") }),
       },
       error: {
-        title: "Error!",
-        message: () => `There was some error in updating your profile. Please try again.`,
+        title: t("toast.error"),
+        message: () => t("entity.update.failed", { entity: t("profile.label") }),
       },
     });
   };
@@ -217,12 +217,16 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
             <CoverImage
               src={userCover}
               className="h-44 w-full rounded-lg"
-              alt={currentUser?.first_name ?? "Cover image"}
+              alt={currentUser?.first_name ?? t("cover_image")}
             />
             <div className="absolute start-6 -bottom-6 flex items-end justify-between">
               <div className="flex gap-3">
                 <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-surface-2">
-                  <button type="button" onClick={() => setIsImageUploadModalOpen(true)}>
+                  <button
+                    type="button"
+                    aria-label={t(userAvatar ? "onboarding.image.change" : "onboarding.image.upload")}
+                    onClick={() => setIsImageUploadModalOpen(true)}
+                  >
                     {!userAvatar || userAvatar === "" ? (
                       <div className="h-16 w-16 rounded-md bg-layer-1 p-2">
                         <UserOutline className="h-full w-full text-secondary" />
@@ -269,8 +273,8 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
           <div className="flex flex-col gap-2">
             <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 xl:grid-cols-3">
               <div className="flex flex-col gap-1">
-                <label htmlFor="first_name" className="text-13 font-medium text-secondary">
-                  {t("first_name")}&nbsp;
+                <label htmlFor="first_name" className="flex items-center gap-1 text-13 font-medium text-secondary">
+                  {t("first_name")}
                   <span className="text-danger-primary">*</span>
                 </label>
                 <Controller
@@ -292,7 +296,10 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           value={value}
                           onChange={onChange}
                           ref={ref}
-                          placeholder="Enter your first name"
+                          placeholder={t("account_settings.profile.placeholders.first_name")}
+                          aria-required="true"
+                          aria-invalid={Boolean(errors.first_name)}
+                          aria-describedby={errors.first_name ? "first_name_error" : undefined}
                           maxLength={50}
                           autoComplete="on"
                         />
@@ -301,7 +308,9 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                   )}
                 />
                 {errors.first_name && (
-                  <span className="text-11 text-danger-primary">{t(errors.first_name.message ?? "")}</span>
+                  <span id="first_name_error" role="alert" className="text-11 text-danger-primary">
+                    {t(errors.first_name.message ?? "")}
+                  </span>
                 )}
               </div>
               <div className="flex flex-col gap-1">
@@ -326,7 +335,9 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           value={value}
                           onChange={onChange}
                           ref={ref}
-                          placeholder="Enter your last name"
+                          placeholder={t("account_settings.profile.placeholders.last_name")}
+                          aria-invalid={Boolean(errors.last_name)}
+                          aria-describedby={errors.last_name ? "last_name_error" : undefined}
                           maxLength={50}
                           autoComplete="on"
                         />
@@ -335,19 +346,21 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                   )}
                 />
                 {errors.last_name && (
-                  <span className="text-11 text-danger-primary">{t(errors.last_name.message ?? "")}</span>
+                  <span id="last_name_error" role="alert" className="text-11 text-danger-primary">
+                    {t(errors.last_name.message ?? "")}
+                  </span>
                 )}
               </div>
               <div className="flex flex-col gap-1">
-                <label htmlFor="display_name" className="text-13 font-medium text-secondary">
-                  {t("display_name")}&nbsp;
+                <label htmlFor="display_name" className="flex items-center gap-1 text-13 font-medium text-secondary">
+                  {t("display_name")}
                   <span className="text-danger-primary">*</span>
                 </label>
                 <Controller
                   control={control}
                   name="display_name"
                   rules={{
-                    required: "Display name is required.",
+                    required: t("common.errors.entity_required", { entity: t("display_name") }),
                     validate: validateDisplayName,
                   }}
                   render={({ field: { value, onChange, ref } }) => (
@@ -362,7 +375,10 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           value={value}
                           onChange={onChange}
                           ref={ref}
-                          placeholder="Enter your display name"
+                          placeholder={t("account_settings.profile.placeholders.display_name")}
+                          aria-required="true"
+                          aria-invalid={Boolean(errors.display_name)}
+                          aria-describedby={errors.display_name ? "display_name_error" : undefined}
                           maxLength={50}
                         />
                       </InputGroup>
@@ -370,19 +386,21 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                   )}
                 />
                 {errors?.display_name && (
-                  <span className="text-11 text-danger-primary">{errors?.display_name?.message}</span>
+                  <span id="display_name_error" role="alert" className="text-11 text-danger-primary">
+                    {t(errors.display_name.message ?? "")}
+                  </span>
                 )}
               </div>
               <div className="flex flex-col gap-1">
-                <label htmlFor="email" className="text-13 font-medium text-secondary">
-                  {t("auth.common.email.label")}&nbsp;
+                <label htmlFor="email" className="flex items-center gap-1 text-13 font-medium text-secondary">
+                  {t("auth.common.email.label")}
                   <span className="text-danger-primary">*</span>
                 </label>
                 <Controller
                   control={control}
                   name="email"
                   rules={{
-                    required: "Email is required.",
+                    required: t("auth.common.email.errors.required"),
                   }}
                   render={({ field: { value, ref } }) => (
                     <Field name="email" invalid={Boolean(errors.email)}>
@@ -395,7 +413,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           type="email"
                           value={value}
                           ref={ref}
-                          placeholder="Enter your email"
+                          placeholder={t("account_settings.profile.change_email_modal.form.email.placeholder")}
                           autoComplete="on"
                           disabled
                         />

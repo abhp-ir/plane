@@ -37,6 +37,11 @@
         "states": {
           "sending": "送信中…"
         }
+      },
+      "placeholders": {
+        "first_name": "名を入力してください",
+        "last_name": "姓を入力してください",
+        "display_name": "表示名を入力してください"
       }
     },
     "preferences": {

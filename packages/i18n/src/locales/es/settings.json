@@ -37,6 +37,11 @@
         "states": {
           "sending": "Enviando…"
         }
+      },
+      "placeholders": {
+        "first_name": "Introduzca su nombre",
+        "last_name": "Introduzca sus apellidos",
+        "display_name": "Introduzca su nombre para mostrar"
       }
     },
     "preferences": {

@@ -37,6 +37,11 @@
         "states": {
           "sending": "전송 중…"
         }
+      },
+      "placeholders": {
+        "first_name": "이름을 입력하세요",
+        "last_name": "성을 입력하세요",
+        "display_name": "표시 이름을 입력하세요"
       }
     },
     "preferences": {

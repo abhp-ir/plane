@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Meno môže obsahovať najviac 50 znakov",
       "invalid": "Mená môžu obsahovať iba písmená, medzery, spojovníky a apostrofy"
+    },
+    "display_name": {
+      "max_length": "Zobrazované meno môže mať najviac 50 znakov",
+      "invalid": "Zobrazované meno môže obsahovať iba písmená, číslice, bodky, spojovníky a podčiarkovníky"
     }
   },
   "image_upload": {

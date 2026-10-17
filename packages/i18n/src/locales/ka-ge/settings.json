@@ -37,6 +37,11 @@
         "states": {
           "sending": "Sending"
         }
+      },
+      "placeholders": {
+        "first_name": "შეიყვანეთ თქვენი სახელი",
+        "last_name": "შეიყვანეთ თქვენი გვარი",
+        "display_name": "შეიყვანეთ თქვენი საჩვენებელი სახელი"
       }
     },
     "preferences": {

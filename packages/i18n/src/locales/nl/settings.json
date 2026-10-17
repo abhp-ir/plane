@@ -37,6 +37,11 @@
         "states": {
           "sending": "Verzenden"
         }
+      },
+      "placeholders": {
+        "first_name": "Voer uw voornaam in",
+        "last_name": "Voer uw achternaam in",
+        "display_name": "Voer uw weergavenaam in"
       }
     },
     "preferences": {

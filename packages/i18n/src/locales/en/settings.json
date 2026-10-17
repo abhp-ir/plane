@@ -37,6 +37,11 @@
         "states": {
           "sending": "Sending"
         }
+      },
+      "placeholders": {
+        "first_name": "Enter your first name",
+        "last_name": "Enter your last name",
+        "display_name": "Enter your display name"
       }
     },
     "preferences": {

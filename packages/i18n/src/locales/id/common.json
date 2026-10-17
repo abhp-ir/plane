@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Nama harus terdiri dari maksimal 50 karakter",
       "invalid": "Nama hanya boleh berisi huruf, spasi, tanda hubung, dan apostrof"
+    },
+    "display_name": {
+      "max_length": "Nama tampilan tidak boleh lebih dari 50 karakter",
+      "invalid": "Nama tampilan hanya boleh berisi huruf, angka, titik, tanda hubung, dan garis bawah"
     }
   },
   "image_upload": {

@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Jméno může mít nejvýše 50 znaků",
       "invalid": "Jména mohou obsahovat pouze písmena, mezery, spojovníky a apostrofy"
+    },
+    "display_name": {
+      "max_length": "Zobrazované jméno může mít nejvýše 50 znaků",
+      "invalid": "Zobrazované jméno může obsahovat pouze písmena, číslice, tečky, pomlčky a podtržítka"
     }
   },
   "image_upload": {

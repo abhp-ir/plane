@@ -37,6 +37,11 @@
         "states": {
           "sending": "Надсилання…"
         }
+      },
+      "placeholders": {
+        "first_name": "Введіть своє ім’я",
+        "last_name": "Введіть своє прізвище",
+        "display_name": "Введіть своє відображуване ім’я"
       }
     },
     "preferences": {

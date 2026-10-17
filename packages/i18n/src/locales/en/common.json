@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Name must be 50 characters or less",
       "invalid": "Names can only contain letters, spaces, hyphens, and apostrophes"
+    },
+    "display_name": {
+      "max_length": "Display name must be 50 characters or less",
+      "invalid": "Display name can only contain letters, numbers, periods, hyphens, and underscores"
     }
   },
   "image_upload": {

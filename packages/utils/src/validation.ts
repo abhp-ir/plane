@@ -87,7 +87,7 @@ export const validatePersonName = (name: string): boolean | string => {
 /**
  * @description Validates display names and usernames
  * @param {string} displayName - Display name to validate
- * @returns {boolean | string} true if valid, error message if invalid
+ * @returns {boolean | string} true if valid, translation key if invalid
  * @example
  * validateDisplayName("john_doe") // returns true
  * validateDisplayName("john.doe-123") // returns true
@@ -100,15 +100,11 @@ export const validateDisplayName = (displayName: string): boolean | string => {
   }
 
   if (displayName.length > 50) {
-    return "Display name must be 50 characters or less";
+    return "validation.display_name.max_length";
   }
 
-  if (hasInjectionRiskChars(displayName)) {
-    return "Display name cannot contain special characters like < > ' \" { } [ ] * ^ ! # %";
-  }
-
-  if (!DISPLAY_NAME_REGEX.test(displayName)) {
-    return "Display name can only contain letters, numbers, periods, hyphens, and underscores";
+  if (hasInjectionRiskChars(displayName) || !DISPLAY_NAME_REGEX.test(displayName)) {
+    return "validation.display_name.invalid";
   }
 
   return true;

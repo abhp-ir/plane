@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Ad en fazla 50 karakter olmalıdır",
       "invalid": "Adlar yalnızca harf, boşluk, kısa çizgi ve kesme işareti içerebilir"
+    },
+    "display_name": {
+      "max_length": "Görünen ad en fazla 50 karakter olabilir",
+      "invalid": "Görünen ad yalnızca harf, rakam, nokta, kısa çizgi ve alt çizgi içerebilir"
     }
   },
   "image_upload": {

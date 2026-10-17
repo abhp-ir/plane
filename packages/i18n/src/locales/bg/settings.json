@@ -37,6 +37,11 @@
         "states": {
           "sending": "Изпращане"
         }
+      },
+      "placeholders": {
+        "first_name": "Въведете собственото си име",
+        "last_name": "Въведете фамилията си",
+        "display_name": "Въведете показваното си име"
       }
     },
     "preferences": {

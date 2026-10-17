@@ -37,6 +37,11 @@
         "states": {
           "sending": "Se trimite…"
         }
+      },
+      "placeholders": {
+        "first_name": "Introduceți prenumele",
+        "last_name": "Introduceți numele de familie",
+        "display_name": "Introduceți numele afișat"
       }
     },
     "preferences": {

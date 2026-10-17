@@ -37,6 +37,11 @@
         "states": {
           "sending": "Đang gửi…"
         }
+      },
+      "placeholders": {
+        "first_name": "Nhập tên của bạn",
+        "last_name": "Nhập họ của bạn",
+        "display_name": "Nhập tên hiển thị của bạn"
       }
     },
     "preferences": {

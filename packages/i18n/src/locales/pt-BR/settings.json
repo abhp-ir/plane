@@ -37,6 +37,11 @@
         "states": {
           "sending": "Enviando…"
         }
+      },
+      "placeholders": {
+        "first_name": "Digite seu nome",
+        "last_name": "Digite seu sobrenome",
+        "display_name": "Digite seu nome de exibição"
       }
     },
     "preferences": {

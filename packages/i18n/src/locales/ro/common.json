@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Numele trebuie să aibă cel mult 50 de caractere",
       "invalid": "Numele pot conține doar litere, spații, cratime și apostrofuri"
+    },
+    "display_name": {
+      "max_length": "Numele afișat trebuie să aibă cel mult 50 de caractere",
+      "invalid": "Numele afișat poate conține doar litere, cifre, puncte, cratime și linii de subliniere"
     }
   },
   "image_upload": {

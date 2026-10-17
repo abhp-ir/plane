@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "De naam mag maximaal 50 tekens bevatten",
       "invalid": "Namen mogen alleen letters, spaties, koppeltekens en apostroffen bevatten"
+    },
+    "display_name": {
+      "max_length": "De weergavenaam mag maximaal 50 tekens bevatten",
+      "invalid": "De weergavenaam mag alleen letters, cijfers, punten, koppeltekens en onderstrepingstekens bevatten"
     }
   },
   "image_upload": {

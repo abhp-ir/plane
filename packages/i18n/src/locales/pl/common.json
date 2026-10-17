@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "Imię i nazwisko mogą zawierać maksymalnie 50 znaków",
       "invalid": "Imiona i nazwiska mogą zawierać tylko litery, spacje, łączniki i apostrofy"
+    },
+    "display_name": {
+      "max_length": "Nazwa wyświetlana może mieć maksymalnie 50 znaków",
+      "invalid": "Nazwa wyświetlana może zawierać tylko litery, cyfry, kropki, łączniki i podkreślenia"
     }
   },
   "image_upload": {

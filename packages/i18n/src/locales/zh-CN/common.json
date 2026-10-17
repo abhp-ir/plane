@@ -879,6 +879,10 @@
     "person_name": {
       "max_length": "姓名不得超过 50 个字符",
       "invalid": "姓名只能包含文字、空格、连字符和撇号"
+    },
+    "display_name": {
+      "max_length": "显示名称不得超过50个字符",
+      "invalid": "显示名称只能包含字母、数字、句点、连字符和下划线"
     }
   },
   "image_upload": {

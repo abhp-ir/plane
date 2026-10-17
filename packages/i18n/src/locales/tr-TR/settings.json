@@ -37,6 +37,11 @@
         "states": {
           "sending": "Gönderiliyor…"
         }
+      },
+      "placeholders": {
+        "first_name": "Adınızı girin",
+        "last_name": "Soyadınızı girin",
+        "display_name": "Görünen adınızı girin"
       }
     },
     "preferences": {

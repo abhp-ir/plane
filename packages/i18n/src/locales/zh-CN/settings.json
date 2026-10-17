@@ -37,6 +37,11 @@
         "states": {
           "sending": "发送中…"
         }
+      },
+      "placeholders": {
+        "first_name": "输入您的名字",
+        "last_name": "输入您的姓氏",
+        "display_name": "输入您的显示名称"
       }
     },
     "preferences": {

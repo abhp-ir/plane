@@ -37,6 +37,11 @@
         "states": {
           "sending": "Odesílání…"
         }
+      },
+      "placeholders": {
+        "first_name": "Zadejte své křestní jméno",
+        "last_name": "Zadejte své příjmení",
+        "display_name": "Zadejte své zobrazované jméno"
       }
     },
     "preferences": {

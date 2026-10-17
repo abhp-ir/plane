@@ -37,6 +37,11 @@
         "states": {
           "sending": "در حال ارسال"
         }
+      },
+      "placeholders": {
+        "first_name": "نام خود را وارد کنید",
+        "last_name": "نام خانوادگی خود را وارد کنید",
+        "display_name": "نام نمایشی خود را وارد کنید"
       }
     },
     "preferences": {

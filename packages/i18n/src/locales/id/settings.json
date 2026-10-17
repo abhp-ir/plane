@@ -37,6 +37,11 @@
         "states": {
           "sending": "Mengirim…"
         }
+      },
+      "placeholders": {
+        "first_name": "Masukkan nama depan Anda",
+        "last_name": "Masukkan nama belakang Anda",
+        "display_name": "Masukkan nama tampilan Anda"
       }
     },
     "preferences": {
