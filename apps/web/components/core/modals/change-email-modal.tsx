@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { Controller, useForm } from "react-hook-form";
 // plane imports
@@ -56,11 +56,16 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
     handleSubmit,
     control,
     setError,
+    setFocus,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<TUniqueCodeValuesForm>({ defaultValues });
 
   const secondStep = currentStep === "UNIQUE_CODE";
+
+  useEffect(() => {
+    if (secondStep) setFocus("code");
+  }, [secondStep, setFocus]);
 
   const handleClose = () => {
     reset({ ...defaultValues });
@@ -188,13 +193,19 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
                             ref={ref}
                             placeholder={changeEmailT("form.email.placeholder")}
                             autoComplete="off"
+                            aria-invalid={Boolean(errors.email)}
+                            aria-describedby={errors.email ? "new-email-error" : undefined}
                             disabled={secondStep}
                           />
                         </InputGroup>
                       </Field>
                     )}
                   />
-                  {errors?.email && <span className="text-11 text-danger-primary">{errors?.email?.message}</span>}
+                  {errors.email && (
+                    <span id="new-email-error" role="alert" className="text-11 text-danger-primary">
+                      {errors.email.message}
+                    </span>
+                  )}
                 </div>
 
                 {secondStep && (
@@ -218,15 +229,20 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
                             ref={ref}
                             placeholder={changeEmailT("form.code.placeholder")}
                             autoComplete="off"
-                            autoFocus
+                            aria-invalid={Boolean(errors.code)}
+                            aria-describedby={errors.code ? "email-code-error" : "email-code-help"}
                           />
                         </InputGroup>
                       )}
                     />
                     {errors?.code ? (
-                      <span className="text-11 text-danger-primary">{errors?.code?.message}</span>
+                      <span id="email-code-error" role="alert" className="text-11 text-danger-primary">
+                        {errors.code.message}
+                      </span>
                     ) : (
-                      <span className="text-11 text-success-primary">{changeEmailT("form.code.helper_text")}</span>
+                      <span id="email-code-help" className="text-11 text-success-primary">
+                        {changeEmailT("form.code.helper_text")}
+                      </span>
                     )}
                   </div>
                 )}
