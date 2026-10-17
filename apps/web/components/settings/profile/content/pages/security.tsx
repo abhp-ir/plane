@@ -96,7 +96,7 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
       });
     } catch (error: unknown) {
       const err = error as Error & { error_code?: string };
-      const code = err.error_code?.toString();
+      const code = err?.error_code?.toString();
       const errorInfo = code ? authErrorHandler(code as EAuthenticationErrorCodes) : undefined;
 
       setToast({
@@ -131,6 +131,7 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
     );
 
   const renderPasswordMatchError = !isRetryPasswordInputFocused || confirmPassword.length >= password.length;
+  const hasPasswordMismatch = !!confirmPassword && password !== confirmPassword && renderPasswordMatchError;
 
   return (
     <div className="size-full">
@@ -139,22 +140,30 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
         <div className="flex flex-col gap-y-7">
           {oldPasswordRequired && (
             <div className="flex flex-col gap-y-2">
-              <h4 className="text-13">{t("auth.common.password.current_password.label")}</h4>
+              <label htmlFor="old_password" className="text-13">
+                {t("auth.common.password.current_password.label")}
+              </label>
               <Controller
                 control={control}
                 name="old_password"
                 rules={{
                   required: t("common.errors.required"),
                 }}
-                render={({ field: { value, onChange } }) => (
+                render={({ field: { value, onChange, ref } }) => (
                   <Field name="old_password" invalid={Boolean(errors.old_password)}>
                     <InputGroup size="2xl">
                       <Input
                         size="2xl"
                         id="old_password"
+                        name="old_password"
+                        dir="ltr"
                         type={showPassword?.oldPassword ? "text" : "password"}
                         value={value}
                         onChange={onChange}
+                        ref={ref}
+                        aria-required="true"
+                        aria-invalid={Boolean(errors.old_password)}
+                        aria-describedby={errors.old_password ? "old_password_error" : undefined}
                         placeholder={t("old_password")}
                         autoComplete="current-password"
                       />
@@ -162,7 +171,12 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
                         type="button"
                         className="grid size-5 place-items-center"
                         onClick={() => handleShowPassword("oldPassword")}
-                        aria-label={showPassword?.oldPassword ? "Hide password" : "Show password"}
+                        aria-label={t(
+                          showPassword.oldPassword
+                            ? "aria_labels.auth_forms.hide_password"
+                            : "aria_labels.auth_forms.show_password"
+                        )}
+                        aria-controls="old_password"
                       >
                         {showPassword?.oldPassword ? (
                           <HideOutline className="size-5 text-placeholder" />
@@ -175,27 +189,45 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
                 )}
               />
               {errors.old_password && (
-                <span className="text-11 text-danger-primary">{errors.old_password.message}</span>
+                <span id="old_password_error" role="alert" className="text-11 text-danger-primary">
+                  {errors.old_password.message}
+                </span>
               )}
             </div>
           )}
           <div className="grid gap-x-4 gap-y-7 sm:grid-cols-2">
             <div className="flex flex-col gap-y-2">
-              <h4 className="text-13">{t("auth.common.password.new_password.label")}</h4>
+              <label htmlFor="new_password" className="text-13">
+                {t("auth.common.password.new_password.label")}
+              </label>
               <Controller
                 control={control}
                 name="new_password"
                 rules={{
                   required: t("common.errors.required"),
                 }}
-                render={({ field: { value, onChange } }) => (
+                render={({ field: { value, onChange, ref } }) => (
                   <Field name="new_password" invalid={Boolean(errors.new_password)}>
                     <InputGroup size="2xl">
                       <Input
                         size="2xl"
                         id="new_password"
+                        name="new_password"
+                        dir="ltr"
                         type={showPassword?.password ? "text" : "password"}
                         value={value}
+                        ref={ref}
+                        aria-required="true"
+                        aria-invalid={
+                          Boolean(errors.new_password) || (isNewPasswordSameAsOldPassword && !isPasswordInputFocused)
+                        }
+                        aria-describedby={
+                          errors.new_password
+                            ? "new_password_error"
+                            : isNewPasswordSameAsOldPassword && !isPasswordInputFocused
+                              ? "new_password_same_error"
+                              : undefined
+                        }
                         placeholder={t("auth.common.password.new_password.placeholder")}
                         onChange={onChange}
                         onFocus={() => setIsPasswordInputFocused(true)}
@@ -206,7 +238,12 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
                         type="button"
                         className="grid size-5 place-items-center"
                         onClick={() => handleShowPassword("password")}
-                        aria-label={showPassword?.password ? "Hide password" : "Show password"}
+                        aria-label={t(
+                          showPassword.password
+                            ? "aria_labels.auth_forms.hide_password"
+                            : "aria_labels.auth_forms.show_password"
+                        )}
+                        aria-controls="new_password"
                       >
                         {showPassword?.password ? (
                           <HideOutline className="size-5 text-placeholder" />
@@ -220,31 +257,43 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
               />
               {passwordSupport}
               {errors.new_password && (
-                <span className="text-11 text-danger-primary">{errors.new_password.message}</span>
+                <span id="new_password_error" role="alert" className="text-11 text-danger-primary">
+                  {errors.new_password.message}
+                </span>
               )}
               {isNewPasswordSameAsOldPassword && !isPasswordInputFocused && (
-                <span className="text-11 text-danger-primary">
+                <span id="new_password_same_error" role="alert" className="text-11 text-danger-primary">
                   {t("new_password_must_be_different_from_old_password")}
                 </span>
               )}
             </div>
             <div className="flex flex-col gap-y-2">
-              <h4 className="text-13">{t("auth.common.password.confirm_password.label")}</h4>
+              <label htmlFor="confirm_password" className="text-13">
+                {t("auth.common.password.confirm_password.label")}
+              </label>
               <Controller
                 control={control}
                 name="confirm_password"
                 rules={{
                   required: t("common.errors.required"),
                 }}
-                render={({ field: { value, onChange } }) => (
+                render={({ field: { value, onChange, ref } }) => (
                   <Field name="confirm_password" invalid={Boolean(errors.confirm_password)}>
                     <InputGroup size="2xl">
                       <Input
                         size="2xl"
                         id="confirm_password"
+                        name="confirm_password"
+                        dir="ltr"
                         type={showPassword?.confirmPassword ? "text" : "password"}
                         placeholder={t("auth.common.password.confirm_password.placeholder")}
                         value={value}
+                        ref={ref}
+                        aria-required="true"
+                        aria-invalid={Boolean(errors.confirm_password) || hasPasswordMismatch}
+                        aria-describedby={
+                          errors.confirm_password || hasPasswordMismatch ? "confirm_password_error" : undefined
+                        }
                         onChange={onChange}
                         onFocus={() => setIsRetryPasswordInputFocused(true)}
                         onBlur={() => setIsRetryPasswordInputFocused(false)}
@@ -254,7 +303,12 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
                         type="button"
                         className="grid size-5 place-items-center"
                         onClick={() => handleShowPassword("confirmPassword")}
-                        aria-label={showPassword?.confirmPassword ? "Hide password" : "Show password"}
+                        aria-label={t(
+                          showPassword.confirmPassword
+                            ? "aria_labels.auth_forms.hide_password"
+                            : "aria_labels.auth_forms.show_password"
+                        )}
+                        aria-controls="confirm_password"
                       >
                         {showPassword?.confirmPassword ? (
                           <HideOutline className="size-5 text-placeholder" />
@@ -266,8 +320,10 @@ export const SecurityProfileSettings = observer(function SecurityProfileSettings
                   </Field>
                 )}
               />
-              {!!confirmPassword && password !== confirmPassword && renderPasswordMatchError && (
-                <span className="text-13 text-danger-primary">{t("auth.common.password.errors.match")}</span>
+              {(errors.confirm_password || hasPasswordMismatch) && (
+                <span id="confirm_password_error" role="alert" className="text-13 text-danger-primary">
+                  {errors.confirm_password?.message ?? t("auth.common.password.errors.match")}
+                </span>
               )}
             </div>
           </div>

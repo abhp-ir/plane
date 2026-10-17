@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { Controller, useForm } from "react-hook-form";
 // plane imports
@@ -28,6 +28,7 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
   const { data } = props;
   // translation
   const { t } = useTranslation();
+  const [isSaving, setIsSaving] = useState(false);
   // form data
   const { control, reset } = useForm<IUserEmailNotificationSettings>({
     defaultValues: {
@@ -35,11 +36,17 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
     },
   });
 
-  const handleSettingChange = async (key: keyof IUserEmailNotificationSettings, value: boolean) => {
+  const handleSettingChange = async (
+    key: keyof IUserEmailNotificationSettings,
+    value: boolean,
+    onChange: (value: boolean) => void
+  ) => {
+    setIsSaving(true);
     try {
       await userService.updateCurrentUserEmailNotificationSettings({
         [key]: value,
       });
+      onChange(value);
       setToast({
         title: t("success"),
         type: "success",
@@ -51,6 +58,8 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
         type: "error",
         message: t("failed_to_update_email_notification_setting"),
       });
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -71,9 +80,9 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
               <Switch
                 size="sm"
                 checked={value}
+                disabled={isSaving}
                 onCheckedChange={(newValue) => {
-                  onChange(newValue);
-                  void handleSettingChange("property_change", newValue);
+                  void handleSettingChange("property_change", newValue, onChange);
                 }}
                 aria-label={t("property_changes")}
               />
@@ -92,9 +101,9 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
               <Switch
                 size="sm"
                 checked={value}
+                disabled={isSaving}
                 onCheckedChange={(newValue) => {
-                  onChange(newValue);
-                  void handleSettingChange("state_change", newValue);
+                  void handleSettingChange("state_change", newValue, onChange);
                 }}
                 aria-label={t("state_change")}
               />
@@ -102,7 +111,7 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
           />
         }
       />
-      <div className="border-l-3 border-subtle-1 pl-3">
+      <div className="border-s-3 border-subtle-1 ps-3">
         <SettingsControlItem
           title={t("issue_completed")}
           description={t("issue_completed_description")}
@@ -114,9 +123,9 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
                 <Switch
                   size="sm"
                   checked={value}
+                  disabled={isSaving}
                   onCheckedChange={(newValue) => {
-                    onChange(newValue);
-                    void handleSettingChange("issue_completed", newValue);
+                    void handleSettingChange("issue_completed", newValue, onChange);
                   }}
                   aria-label={t("issue_completed")}
                 />
@@ -136,9 +145,9 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
               <Switch
                 size="sm"
                 checked={value}
+                disabled={isSaving}
                 onCheckedChange={(newValue) => {
-                  onChange(newValue);
-                  void handleSettingChange("comment", newValue);
+                  void handleSettingChange("comment", newValue, onChange);
                 }}
                 aria-label={t("comments")}
               />
@@ -157,9 +166,9 @@ export const NotificationsProfileSettingsForm = observer(function NotificationsP
               <Switch
                 size="sm"
                 checked={value}
+                disabled={isSaving}
                 onCheckedChange={(newValue) => {
-                  onChange(newValue);
-                  void handleSettingChange("mention", newValue);
+                  void handleSettingChange("mention", newValue, onChange);
                 }}
                 aria-label={t("mentions")}
               />
