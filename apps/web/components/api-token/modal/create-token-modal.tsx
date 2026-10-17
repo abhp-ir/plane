@@ -9,6 +9,7 @@ import { mutate } from "swr";
 // plane imports
 import { Dialog, DialogContent } from "@makeplane/propel/components/dialog";
 import { setToast } from "@plane/blocks/toast";
+import { useTranslation } from "@plane/i18n";
 import { APITokenService } from "@plane/services";
 import type { IApiToken } from "@plane/types";
 import { renderFormattedDate, csvDownload } from "@plane/utils";
@@ -31,6 +32,7 @@ export function CreateApiTokenModal(props: Props) {
   // states
   const [neverExpires, setNeverExpires] = useState<boolean>(false);
   const [generatedToken, setGeneratedToken] = useState<IApiToken | null | undefined>(null);
+  const { t } = useTranslation();
 
   const handleClose = () => {
     onClose();
@@ -53,32 +55,28 @@ export function CreateApiTokenModal(props: Props) {
   };
 
   const handleCreateToken = async (data: Partial<IApiToken>) => {
-    // make the request to generate the token
-    await apiTokenService
-      .create(data)
-      .then((res) => {
-        setGeneratedToken(res);
-        downloadSecretKey(res);
+    try {
+      const res = await apiTokenService.create(data);
+      setGeneratedToken(res);
+      downloadSecretKey(res);
 
-        mutate<IApiToken[]>(
-          API_TOKENS_LIST,
-          (prevData) => {
-            if (!prevData) return;
+      mutate<IApiToken[]>(
+        API_TOKENS_LIST,
+        (prevData) => {
+          if (!prevData) return;
 
-            return [res, ...prevData];
-          },
-          false
-        );
-      })
-      .catch((err) => {
-        setToast({
-          type: "error",
-          title: "Error!",
-          message: err.message || err.detail,
-        });
-
-        throw err;
+          return [res, ...prevData];
+        },
+        false
+      );
+    } catch (error) {
+      setToast({
+        type: "error",
+        title: t("error"),
+        message: t("common.errors.default.message"),
       });
+      throw error;
+    }
   };
 
   return (

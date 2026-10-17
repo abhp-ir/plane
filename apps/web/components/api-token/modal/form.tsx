@@ -132,10 +132,14 @@ export function CreateApiTokenForm(props: Props) {
       if (expiryDate) payload.expired_at = expiryDate.toISOString();
     }
 
-    await onSubmit(payload).then(() => {
-      reset(defaultValues);
-      setCustomDate(null);
-    });
+    try {
+      await onSubmit(payload);
+    } catch {
+      // The modal reports the error; keep the form values for retry.
+      return;
+    }
+    reset(defaultValues);
+    setCustomDate(null);
   };
 
   const today = new Date();
