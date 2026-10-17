@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Předvolby",
-      "description": "Přizpůsobte si prostředí aplikace podle toho, jak pracujete"
+      "description": "Přizpůsobte si prostředí aplikace podle toho, jak pracujete",
+      "start_of_week": {
+        "title": "První den v týdnu",
+        "description": "Tím se změní vzhled všech kalendářů ve Vaší aplikaci."
+      }
     },
     "notifications": {
       "heading": "E-mailová oznámení",

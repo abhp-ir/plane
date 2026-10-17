@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Tercihler",
-      "description": "Uygulama deneyiminizi çalışma şeklinize göre özelleştirin"
+      "description": "Uygulama deneyiminizi çalışma şeklinize göre özelleştirin",
+      "start_of_week": {
+        "title": "Haftanın ilk günü",
+        "description": "Bu ayar, uygulamanızdaki tüm takvimlerin görünümünü değiştirir."
+      }
     },
     "notifications": {
       "heading": "E-posta bildirimleri",

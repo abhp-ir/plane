@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Preferências",
-      "description": "Personalize sua experiência no aplicativo do jeito que você trabalha"
+      "description": "Personalize sua experiência no aplicativo do jeito que você trabalha",
+      "start_of_week": {
+        "title": "Primeiro dia da semana",
+        "description": "Esta opção altera a aparência de todos os calendários no seu aplicativo."
+      }
     },
     "notifications": {
       "heading": "Notificações por e-mail",

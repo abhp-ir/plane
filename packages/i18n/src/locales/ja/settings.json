@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "環境設定",
-      "description": "あなたの働き方に合わせてアプリの体験をカスタマイズします"
+      "description": "あなたの働き方に合わせてアプリの体験をカスタマイズします",
+      "start_of_week": {
+        "title": "週の開始曜日",
+        "description": "アプリ内のすべてのカレンダーの表示が変わります。"
+      }
     },
     "notifications": {
       "heading": "メール通知",

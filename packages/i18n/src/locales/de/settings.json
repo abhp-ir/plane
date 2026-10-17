@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Einstellungen",
-      "description": "Passen Sie Ihre App-Erfahrung an Ihre Arbeitsweise an"
+      "description": "Passen Sie Ihre App-Erfahrung an Ihre Arbeitsweise an",
+      "start_of_week": {
+        "title": "Erster Tag der Woche",
+        "description": "Diese Einstellung ändert die Darstellung aller Kalender in Ihrer App."
+      }
     },
     "notifications": {
       "heading": "E-Mail-Benachrichtigungen",

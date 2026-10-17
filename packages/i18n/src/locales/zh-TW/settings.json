@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "偏好設定",
-      "description": "以您工作的方式自訂您的應用程式體驗"
+      "description": "以您工作的方式自訂您的應用程式體驗",
+      "start_of_week": {
+        "title": "每週的第一天",
+        "description": "此設定會變更您應用程式中所有日曆的顯示方式。"
+      }
     },
     "notifications": {
       "heading": "電子郵件通知",

@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Voorkeuren",
-      "description": "Pas je app-ervaring aan zoals jij werkt"
+      "description": "Pas je app-ervaring aan zoals jij werkt",
+      "start_of_week": {
+        "title": "Eerste dag van de week",
+        "description": "Dit wijzigt de weergave van alle agenda’s in uw app."
+      }
     },
     "notifications": {
       "heading": "E-mailmeldingen",

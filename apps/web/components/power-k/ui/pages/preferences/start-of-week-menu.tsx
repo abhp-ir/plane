@@ -8,6 +8,8 @@ import React from "react";
 import { Command } from "cmdk";
 // plane imports
 import { START_OF_THE_WEEK_OPTIONS } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
+import { getWeekdayLabel } from "@plane/utils";
 import type { EStartOfTheWeek } from "@plane/types";
 // local imports
 import { PowerKModalCommandItem } from "../../modal/command-item";
@@ -18,11 +20,16 @@ type Props = {
 
 export function PowerKPreferencesStartOfWeekMenu(props: Props) {
   const { onSelect } = props;
+  const { currentLocale } = useTranslation();
 
   return (
     <Command.Group>
       {START_OF_THE_WEEK_OPTIONS.map((day) => (
-        <PowerKModalCommandItem key={day.value} onSelect={() => onSelect(day.value)} label={day.label} />
+        <PowerKModalCommandItem
+          key={day.value}
+          onSelect={() => onSelect(day.value)}
+          label={getWeekdayLabel(day.value, currentLocale)}
+        />
       ))}
     </Command.Group>
   );

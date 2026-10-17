@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Predvoľby",
-      "description": "Prispôsobte si aplikáciu spôsobu, akým pracujete"
+      "description": "Prispôsobte si aplikáciu spôsobu, akým pracujete",
+      "start_of_week": {
+        "title": "Prvý deň týždňa",
+        "description": "Toto nastavenie zmení zobrazenie všetkých kalendárov vo Vašej aplikácii."
+      }
     },
     "notifications": {
       "heading": "E-mailové oznámenia",

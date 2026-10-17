@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Preferensi",
-      "description": "Sesuaikan pengalaman aplikasi Anda dengan cara kerja Anda"
+      "description": "Sesuaikan pengalaman aplikasi Anda dengan cara kerja Anda",
+      "start_of_week": {
+        "title": "Hari pertama dalam minggu",
+        "description": "Pengaturan ini mengubah tampilan semua kalender di aplikasi Anda."
+      }
     },
     "notifications": {
       "heading": "Notifikasi email",

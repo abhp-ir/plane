@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Preferences",
-      "description": "Customize your app experience the way you work"
+      "description": "Customize your app experience the way you work",
+      "start_of_week": {
+        "title": "First day of the week",
+        "description": "This will change how all calendars in your app look."
+      }
     },
     "notifications": {
       "heading": "Email notifications",

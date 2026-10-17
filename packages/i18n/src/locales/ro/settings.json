@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Preferințe",
-      "description": "Personalizează experiența aplicației așa cum lucrezi"
+      "description": "Personalizează experiența aplicației așa cum lucrezi",
+      "start_of_week": {
+        "title": "Prima zi a săptămânii",
+        "description": "Această setare modifică afișarea tuturor calendarelor din aplicația dumneavoastră."
+      }
     },
     "notifications": {
       "heading": "Notificări prin e-mail",

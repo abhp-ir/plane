@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Preferencje",
-      "description": "Dostosuj sposób korzystania z aplikacji do swojego stylu pracy"
+      "description": "Dostosuj sposób korzystania z aplikacji do swojego stylu pracy",
+      "start_of_week": {
+        "title": "Pierwszy dzień tygodnia",
+        "description": "To ustawienie zmieni wygląd wszystkich kalendarzy w aplikacji."
+      }
     },
     "notifications": {
       "heading": "Powiadomienia e-mail",

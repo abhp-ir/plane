@@ -52,8 +52,8 @@ export const ProfileSettingsLanguageAndTimezonePreferencesList = observer(
       try {
         await updateUserProfile({ language: value });
         setToast({
-          title: t("toast.success"),
-          message: t("entity.update.success", { entity: t("language") }),
+          title: t("toast.success", { lng: value }),
+          message: t("entity.update.success", { entity: t("language", { lng: value }), lng: value }),
           type: "success",
         });
       } catch (_error) {
@@ -115,8 +115,8 @@ export const ProfileSettingsLanguageAndTimezonePreferencesList = observer(
         />
         <StartOfWeekPreference
           option={{
-            title: "First day of the week",
-            description: "This will change how all calendars in your app look.",
+            title: t("account_settings.preferences.start_of_week.title"),
+            description: t("account_settings.preferences.start_of_week.description"),
           }}
         />
       </div>

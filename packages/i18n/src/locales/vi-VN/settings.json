@@ -41,7 +41,11 @@
     },
     "preferences": {
       "heading": "Tùy chọn",
-      "description": "Tùy chỉnh trải nghiệm ứng dụng theo cách bạn làm việc"
+      "description": "Tùy chỉnh trải nghiệm ứng dụng theo cách bạn làm việc",
+      "start_of_week": {
+        "title": "Ngày đầu tuần",
+        "description": "Thiết lập này sẽ thay đổi cách hiển thị của tất cả lịch trong ứng dụng của bạn."
+      }
     },
     "notifications": {
       "heading": "Thông báo qua email",

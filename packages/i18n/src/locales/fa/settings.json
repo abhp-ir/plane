@@ -29,11 +29,24 @@
             }
           }
         },
-        "actions": { "continue": "ادامه", "confirm": "تأیید", "cancel": "انصراف" },
-        "states": { "sending": "در حال ارسال" }
+        "actions": {
+          "continue": "ادامه",
+          "confirm": "تأیید",
+          "cancel": "انصراف"
+        },
+        "states": {
+          "sending": "در حال ارسال"
+        }
       }
     },
-    "preferences": { "heading": "ترجیحات", "description": "تجربهٔ برنامه را متناسب با شیوهٔ کار خود تنظیم کنید" },
+    "preferences": {
+      "heading": "ترجیحات",
+      "description": "تجربهٔ برنامه را متناسب با شیوهٔ کار خود تنظیم کنید",
+      "start_of_week": {
+        "title": "روز آغاز هفته",
+        "description": "چیدمان همهٔ تقویم‌های برنامه با این تنظیم تغییر می‌کند."
+      }
+    },
     "notifications": {
       "heading": "اعلان‌های ایمیلی",
       "description": "از آیتم‌های کاری که دنبال می‌کنید باخبر بمانید. برای دریافت اعلان، این گزینه را فعال کنید.",
@@ -41,7 +54,9 @@
       "compact": "فشرده",
       "full": "تمام‌صفحه"
     },
-    "security": { "heading": "امنیت" },
+    "security": {
+      "heading": "امنیت"
+    },
     "api_tokens": {
       "title": "توکن‌های دسترسی شخصی",
       "description": "برای یکپارچه‌سازی داده‌های خود با سامانه‌ها و برنامه‌های خارجی، توکن‌های امن API ایجاد کنید."
@@ -60,7 +75,10 @@
     "label": "پروفایل",
     "page_label": "کارهای شما",
     "work": "کار",
-    "details": { "joined_on": "تاریخ عضویت", "time_zone": "منطقهٔ زمانی" },
+    "details": {
+      "joined_on": "تاریخ عضویت",
+      "time_zone": "منطقهٔ زمانی"
+    },
     "stats": {
       "workload": "حجم کار",
       "overview": "نمای کلی",
@@ -119,12 +137,24 @@
   },
   "themes": {
     "theme_options": {
-      "system_preference": { "label": "مطابق سیستم" },
-      "light": { "label": "روشن" },
-      "dark": { "label": "تیره" },
-      "light_contrast": { "label": "روشن با کنتراست بالا" },
-      "dark_contrast": { "label": "تیره با کنتراست بالا" },
-      "custom": { "label": "پوستهٔ سفارشی" }
+      "system_preference": {
+        "label": "مطابق سیستم"
+      },
+      "light": {
+        "label": "روشن"
+      },
+      "dark": {
+        "label": "تیره"
+      },
+      "light_contrast": {
+        "label": "روشن با کنتراست بالا"
+      },
+      "dark_contrast": {
+        "label": "تیره با کنتراست بالا"
+      },
+      "custom": {
+        "label": "پوستهٔ سفارشی"
+      }
     }
   }
 }
