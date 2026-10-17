@@ -25,7 +25,8 @@
             "helper_text": "Ověřovací kód byl odeslán na váš nový e-mail.",
             "errors": {
               "required": "Jedinečný kód je povinný",
-              "invalid": "Neplatný ověřovací kód. Zkuste to znovu."
+              "invalid": "Neplatný ověřovací kód. Zkuste to znovu.",
+              "expired": "Ověřovací kód vypršel nebo je neplatný. Vyžádejte si nový kód."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Odesílání…"
-        }
+        },
+        "code_description": "Zadejte novou e-mailovou adresu, na kterou obdržíte ověřovací kód."
       },
       "placeholders": {
         "first_name": "Zadejte své křestní jméno",

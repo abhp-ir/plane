@@ -25,7 +25,8 @@
             "helper_text": "Kod weryfikacyjny wysłano na nowy e-mail.",
             "errors": {
               "required": "Unikalny kod jest wymagany",
-              "invalid": "Nieprawidłowy kod weryfikacyjny. Spróbuj ponownie."
+              "invalid": "Nieprawidłowy kod weryfikacyjny. Spróbuj ponownie.",
+              "expired": "Kod weryfikacyjny wygasł lub jest nieprawidłowy. Należy poprosić o nowy kod."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Wysyłanie…"
-        }
+        },
+        "code_description": "Aby otrzymać kod weryfikacyjny, należy podać nowy adres e-mail."
       },
       "placeholders": {
         "first_name": "Wprowadź swoje imię",

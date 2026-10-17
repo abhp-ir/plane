@@ -25,7 +25,8 @@
             "helper_text": "Code de vérification envoyé à votre nouvel e-mail.",
             "errors": {
               "required": "Le code unique est requis",
-              "invalid": "Code de vérification invalide. Veuillez réessayer."
+              "invalid": "Code de vérification invalide. Veuillez réessayer.",
+              "expired": "Le code de vérification a expiré ou n’est pas valide. Veuillez demander un nouveau code."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Envoi…"
-        }
+        },
+        "code_description": "Saisissez une nouvelle adresse e-mail pour recevoir un code de vérification."
       },
       "placeholders": {
         "first_name": "Saisissez votre prénom",

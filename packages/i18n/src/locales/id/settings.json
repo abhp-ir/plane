@@ -25,7 +25,8 @@
             "helper_text": "Kode verifikasi dikirim ke email baru Anda.",
             "errors": {
               "required": "Kode unik wajib diisi",
-              "invalid": "Kode verifikasi tidak valid. Coba lagi."
+              "invalid": "Kode verifikasi tidak valid. Coba lagi.",
+              "expired": "Kode verifikasi telah kedaluwarsa atau tidak valid. Silakan minta kode baru."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Mengirim…"
-        }
+        },
+        "code_description": "Masukkan alamat email baru untuk menerima kode verifikasi."
       },
       "placeholders": {
         "first_name": "Masukkan nama depan Anda",

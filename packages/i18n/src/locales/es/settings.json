@@ -25,7 +25,8 @@
             "helper_text": "Código de verificación enviado a tu nuevo correo electrónico.",
             "errors": {
               "required": "El código único es obligatorio",
-              "invalid": "Código de verificación inválido. Inténtalo de nuevo."
+              "invalid": "Código de verificación inválido. Inténtalo de nuevo.",
+              "expired": "El código de verificación ha caducado o no es válido. Solicite un código nuevo."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Enviando…"
-        }
+        },
+        "code_description": "Introduzca una nueva dirección de correo electrónico para recibir un código de verificación."
       },
       "placeholders": {
         "first_name": "Introduzca su nombre",

@@ -25,7 +25,8 @@
             "helper_text": "驗證碼已傳送到你的新電子郵件。",
             "errors": {
               "required": "驗證碼為必填",
-              "invalid": "驗證碼無效，請再試一次。"
+              "invalid": "驗證碼無效，請再試一次。",
+              "expired": "驗證碼已過期或無效。請申請新的驗證碼。"
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "傳送中…"
-        }
+        },
+        "code_description": "請輸入新的電子郵件地址以接收驗證碼。"
       },
       "placeholders": {
         "first_name": "輸入您的名字",

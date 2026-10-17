@@ -25,7 +25,8 @@
             "helper_text": "Codul de verificare a fost trimis la noul e-mail.",
             "errors": {
               "required": "Codul unic este obligatoriu",
-              "invalid": "Cod de verificare invalid. Încercați din nou."
+              "invalid": "Cod de verificare invalid. Încercați din nou.",
+              "expired": "Codul de verificare a expirat sau nu este valid. Solicitați un cod nou."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Se trimite…"
-        }
+        },
+        "code_description": "Introduceți o nouă adresă de e-mail pentru a primi un cod de verificare."
       },
       "placeholders": {
         "first_name": "Introduceți prenumele",

@@ -25,7 +25,8 @@
             "helper_text": "验证码已发送至你的新邮箱。",
             "errors": {
               "required": "验证码为必填项",
-              "invalid": "验证码无效，请重试。"
+              "invalid": "验证码无效，请重试。",
+              "expired": "验证码已过期或无效。请申请新的验证码。"
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "发送中…"
-        }
+        },
+        "code_description": "请输入新的邮箱地址以接收验证码。"
       },
       "placeholders": {
         "first_name": "输入您的名字",

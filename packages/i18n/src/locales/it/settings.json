@@ -25,7 +25,8 @@
             "helper_text": "Codice di verifica inviato alla tua nuova email.",
             "errors": {
               "required": "Il codice univoco è obbligatorio",
-              "invalid": "Codice di verifica non valido. Riprova."
+              "invalid": "Codice di verifica non valido. Riprova.",
+              "expired": "Il codice di verifica è scaduto o non è valido. Richieda un nuovo codice."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Invio…"
-        }
+        },
+        "code_description": "Inserisca un nuovo indirizzo email per ricevere un codice di verifica."
       },
       "placeholders": {
         "first_name": "Inserisca il suo nome",

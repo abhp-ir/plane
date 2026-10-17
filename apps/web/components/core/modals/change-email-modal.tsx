@@ -25,8 +25,7 @@ import {
 } from "@makeplane/propel/components/dialog";
 import { setToast } from "@plane/blocks/toast";
 // helpers
-import { authErrorHandler } from "@/helpers/authentication.helper";
-import type { EAuthenticationErrorCodes } from "@/helpers/authentication.helper";
+import { getChangeEmailErrorKey } from "@/helpers/change-email.helper";
 // hooks
 import { useUser } from "@/hooks/store/user";
 // services
@@ -99,11 +98,7 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
         await handleSignOut();
         handleClose();
       } catch (error: unknown) {
-        const errorMessage =
-          (error as { error?: string; message?: string })?.error ||
-          (error as { error?: string; message?: string })?.message ||
-          changeEmailT("form.code.errors.invalid");
-        setError("code", { type: "custom", message: errorMessage });
+        setError("code", { type: "custom", message: t(getChangeEmailErrorKey(error)) });
       }
       return;
     }
@@ -129,21 +124,7 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
       // Move to verification code step
       setCurrentStep("UNIQUE_CODE");
     } catch (error: unknown) {
-      // Extract error code and message from backend response
-      const err = error as { error_code?: number | string; error_message?: string };
-      const errorCode = err?.error_code?.toString();
-
-      // Use authErrorHandler to get user-friendly error message
-      const errorInfo = errorCode ? authErrorHandler(errorCode as EAuthenticationErrorCodes) : undefined;
-
-      // Get error message from handler or fallback
-      const errorMessage = errorInfo
-        ? typeof errorInfo.message === "string"
-          ? errorInfo.message
-          : String(errorInfo.message)
-        : err?.error_message || changeEmailT("form.email.errors.validation_failed");
-
-      setError("email", { type: "custom", message: errorMessage });
+      setError("email", { type: "custom", message: t(getChangeEmailErrorKey(error)) });
     }
   };
 
@@ -160,7 +141,7 @@ export const ChangeEmailModal = observer(function ChangeEmailModal(props: Props)
             <DialogHeader>
               <DialogHeading>
                 <DialogTitle>{changeEmailT("title")}</DialogTitle>
-                <DialogDescription>{changeEmailT("description")}</DialogDescription>
+                <DialogDescription>{changeEmailT("code_description")}</DialogDescription>
               </DialogHeading>
             </DialogHeader>
             <DialogBody tabIndex={0}>

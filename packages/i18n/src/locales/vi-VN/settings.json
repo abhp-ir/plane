@@ -25,7 +25,8 @@
             "helper_text": "Mã xác minh đã được gửi tới email mới của bạn.",
             "errors": {
               "required": "Mã duy nhất là bắt buộc",
-              "invalid": "Mã xác minh không hợp lệ. Thử lại."
+              "invalid": "Mã xác minh không hợp lệ. Thử lại.",
+              "expired": "Mã xác minh đã hết hạn hoặc không hợp lệ. Vui lòng yêu cầu mã mới."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Đang gửi…"
-        }
+        },
+        "code_description": "Nhập địa chỉ email mới để nhận mã xác minh."
       },
       "placeholders": {
         "first_name": "Nhập tên của bạn",

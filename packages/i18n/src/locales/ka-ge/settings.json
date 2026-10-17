@@ -25,7 +25,8 @@
             "helper_text": "Verification code sent to your new email.",
             "errors": {
               "required": "Unique code is required",
-              "invalid": "Invalid verification code. Please try again."
+              "invalid": "Invalid verification code. Please try again.",
+              "expired": "დადასტურების კოდის ვადა გასულია ან კოდი არასწორია. მოითხოვეთ ახალი კოდი."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Sending"
-        }
+        },
+        "code_description": "დადასტურების კოდის მისაღებად შეიყვანეთ ახალი ელფოსტის მისამართი."
       },
       "placeholders": {
         "first_name": "შეიყვანეთ თქვენი სახელი",

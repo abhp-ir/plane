@@ -25,7 +25,8 @@
             "helper_text": "Doğrulama kodu yeni e-postanıza gönderildi.",
             "errors": {
               "required": "Benzersiz kod zorunludur",
-              "invalid": "Geçersiz doğrulama kodu. Lütfen tekrar deneyin."
+              "invalid": "Geçersiz doğrulama kodu. Lütfen tekrar deneyin.",
+              "expired": "Doğrulama kodunun süresi dolmuş veya kod geçersiz. Lütfen yeni bir kod isteyin."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Gönderiliyor…"
-        }
+        },
+        "code_description": "Doğrulama kodu almak için yeni bir e-posta adresi girin."
       },
       "placeholders": {
         "first_name": "Adınızı girin",

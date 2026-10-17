@@ -25,7 +25,8 @@
             "helper_text": "Verification code sent to your new email.",
             "errors": {
               "required": "Unique code is required",
-              "invalid": "Invalid verification code. Please try again."
+              "invalid": "Invalid verification code. Please try again.",
+              "expired": "Verification code has expired or is invalid. Please request a new code."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Sending"
-        }
+        },
+        "code_description": "Enter a new email address to receive a verification code."
       },
       "placeholders": {
         "first_name": "Enter your first name",

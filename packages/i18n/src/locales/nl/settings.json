@@ -25,7 +25,8 @@
             "helper_text": "Verificatiecode verzonden naar je nieuwe e-mailadres.",
             "errors": {
               "required": "Unieke code is verplicht",
-              "invalid": "Ongeldige verificatiecode. Probeer het opnieuw."
+              "invalid": "Ongeldige verificatiecode. Probeer het opnieuw.",
+              "expired": "De verificatiecode is verlopen of ongeldig. Vraag een nieuwe code aan."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Verzenden"
-        }
+        },
+        "code_description": "Voer een nieuw e-mailadres in om een verificatiecode te ontvangen."
       },
       "placeholders": {
         "first_name": "Voer uw voornaam in",

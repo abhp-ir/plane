@@ -25,7 +25,8 @@
             "helper_text": "Overovací kód bol odoslaný na váš nový e-mail.",
             "errors": {
               "required": "Jedinečný kód je povinný",
-              "invalid": "Neplatný overovací kód. Skúste znova."
+              "invalid": "Neplatný overovací kód. Skúste znova.",
+              "expired": "Platnosť overovacieho kódu vypršala alebo je kód neplatný. Vyžiadajte si nový kód."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Odosielanie…"
-        }
+        },
+        "code_description": "Zadajte novú e-mailovú adresu, na ktorú dostanete overovací kód."
       },
       "placeholders": {
         "first_name": "Zadajte svoje krstné meno",

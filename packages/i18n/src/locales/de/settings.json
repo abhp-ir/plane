@@ -25,7 +25,8 @@
             "helper_text": "Verifizierungscode wurde an deine neue E-Mail gesendet.",
             "errors": {
               "required": "Einmaliger Code ist erforderlich",
-              "invalid": "Ungültiger Verifizierungscode. Bitte versuche es erneut."
+              "invalid": "Ungültiger Verifizierungscode. Bitte versuche es erneut.",
+              "expired": "Der Verifizierungscode ist abgelaufen oder ungültig. Bitte einen neuen Code anfordern."
             }
           }
         },
@@ -36,7 +37,8 @@
         },
         "states": {
           "sending": "Wird gesendet…"
-        }
+        },
+        "code_description": "Geben Sie eine neue E-Mail-Adresse ein, um einen Verifizierungscode zu erhalten."
       },
       "placeholders": {
         "first_name": "Geben Sie Ihren Vornamen ein",
