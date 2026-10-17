@@ -70,7 +70,7 @@ export const SidebarProjectsList = observer(function SidebarProjectsList() {
 
   const handleCopyText = (projectId: string) => {
     copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
-      setToast({
+      return setToast({
         type: "success",
         title: t("link_copied"),
         message: t("project_link_copied_to_clipboard"),
@@ -223,10 +223,11 @@ export const SidebarProjectsList = observer(function SidebarProjectsList() {
                     onClick={() => toggleExtendedProjectSidebar()}
                     className="flex flex-grow items-center gap-1.5 text-13 font-medium text-tertiary"
                     id="extended-project-sidebar-toggle"
+                    aria-expanded={Boolean(isExtendedProjectSidebarOpened)}
                     aria-label={t(
                       isExtendedProjectSidebarOpened
-                        ? "aria_labels.app_sidebar.close_extended_sidebar"
-                        : "aria_labels.app_sidebar.open_extended_sidebar"
+                        ? "aria_labels.projects_sidebar.close_extended_sidebar"
+                        : "aria_labels.projects_sidebar.open_extended_sidebar"
                     )}
                   >
                     <MoreHorizontalOutline className="size-4 flex-shrink-0" />
