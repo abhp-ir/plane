@@ -55,6 +55,7 @@ const translatedNamespaces = [
   "home",
   "project-settings",
   "workspace-settings",
+  "workspace",
 ];
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
@@ -132,6 +133,10 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
     assert.equal(
       i18nInstance.t("home.business_trial_banner.trial_ends_in_days", { days: count }),
       `دورهٔ آزمایشی تا ${new Intl.NumberFormat("fa").format(count)} روز دیگر پایان می‌یابد`
+    );
+    assert.equal(
+      i18nInstance.t("workspace.members_import.summary.message.success", { count, plural: count === 1 ? "" : "s" }),
+      `تعداد ${new Intl.NumberFormat("fa").format(count)} عضو با موفقیت به فضای کاری افزوده شد.`
     );
   }
   const fallbackKey = Object.keys(load("en", "project"))[0];
