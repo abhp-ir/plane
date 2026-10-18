@@ -69,6 +69,8 @@ const translatedNamespaces = [
   "tour",
   "stickies",
   "update",
+  "work-item-type",
+  "workflow",
 ];
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
@@ -77,7 +79,11 @@ for (const namespace of translatedNamespaces) {
     assert.deepEqual(Object.keys(persian).toSorted(), Object.keys(english).toSorted());
     for (const [key, source] of Object.entries(english)) {
       const target = persian[key];
-      if (target === source && /[A-Za-z]/.test(source)) {
+      if (
+        target === source &&
+        /[A-Za-z]/.test(source) &&
+        key !== "work_item_type_hierarchy.break_hierarchy_modal.confirm_input.placeholder"
+      ) {
         assert.match(
           source,
           /^(Plane(?: AI| Pro| Runner)?|Intake|\{workspace\} - Intake|Stickies|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|ID|URL|CSV|Excel|JSON|plane\.so|name@company\.com|https:\/\/example\.com(?:\/(?:setup|webhook))?|https:\/\/example\.com https:\/\/example\.com\/)$/,
@@ -130,6 +136,10 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
   assert.equal(i18nInstance.dir(), "rtl");
   assert.equal(i18nInstance.t("sidebar.projects"), "پروژه‌ها");
   assert.equal(i18nInstance.t("auth.common.resend_in", { seconds: 12 }), "ارسال دوباره تا 12 ثانیهٔ دیگر");
+  // The source confirmation prompt requires this exact typed token.
+  assert.equal(i18nInstance.t("work_item_type_hierarchy.break_hierarchy_modal.confirm_input.placeholder"), "Confirm");
+  assert.ok(i18nInstance.t("work_item_type_hierarchy.break_hierarchy_modal.confirm_input.label").includes("Confirm"));
+  assert.ok(i18nInstance.t("work_item_types.settings.properties.formula.tooltip").includes("{Field Name}"));
   for (const namespace of translatedNamespaces) {
     for (const [key, message] of Object.entries(load("fa", namespace))) {
       const numericVariables = new Set(
@@ -176,6 +186,14 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
     assert.equal(
       i18nInstance.t("updates.progress.comments", { count }),
       `${new Intl.NumberFormat("fa").format(count)} دیدگاه`
+    );
+    assert.equal(
+      i18nInstance.t("workflows.workflow_states.state_change_count", { count }),
+      `${new Intl.NumberFormat("fa").format(count)} تغییر وضعیت مجاز`
+    );
+    assert.equal(
+      i18nInstance.t("workflows.workflow_states.movers_count", { count }),
+      `${new Intl.NumberFormat("fa").format(count)} بازبین فهرست‌شده`
     );
   }
   const fallbackKey = Object.keys(load("en", "automation"))[0];
