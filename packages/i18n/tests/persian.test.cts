@@ -76,6 +76,7 @@ const translatedNamespaces = [
   "integration",
   "automation",
   "template",
+  "wiki",
 ];
 
 // Protocol examples and product names must stay exact, including ASCII identifiers.
@@ -248,6 +249,14 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
     assert.equal(
       i18nInstance.t("automations.action.configuration.change_property.placeholders.property_value_select", { count }),
       count <= 1 ? "مقدار را انتخاب کنید" : "مقادیر را انتخاب کنید"
+    );
+    assert.equal(
+      i18nInstance.t("wiki_collections.delete_modal.page_count", { pageCount: count }),
+      `این مجموعه ${new Intl.NumberFormat("fa").format(count)} صفحه دارد. مشخص کنید با آن‌ها چه شود.`
+    );
+    assert.equal(
+      i18nInstance.t("wiki_collections.add_existing_page_modal.success_message", { count }),
+      `${new Intl.NumberFormat("fa").format(count)} صفحه به مجموعه اضافه شد.`
     );
   }
   for (const isPublished of [true, "true"]) {

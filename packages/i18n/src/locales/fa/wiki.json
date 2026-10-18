@@ -1,1 +1,113 @@
-{}
+{
+  "wiki_collections": {
+    "predefined": {
+      "general": "عمومی",
+      "private": "خصوصی",
+      "shared": "اشتراکی",
+      "archived": "بایگانی‌شده"
+    },
+    "fallback_name": "مجموعه",
+    "form": {
+      "name_required": "عنوان مجموعه الزامی است",
+      "name_max_length": "نام مجموعه باید کمتر از ۲۵۵ نویسه باشد",
+      "name_placeholder_create": "عنوانی برای مجموعه انتخاب کنید",
+      "name_placeholder_edit": "نام مجموعه"
+    },
+    "create_modal": {
+      "title": "ایجاد مجموعه",
+      "submit": "ایجاد مجموعه"
+    },
+    "edit_modal": {
+      "title": "ویرایش مجموعه"
+    },
+    "delete_modal": {
+      "title": "حذف مجموعه",
+      "page_count": "این مجموعه {pageCount, number} {pageCount, plural, one {صفحه} other {صفحه}} دارد. مشخص کنید با آن‌ها چه شود.",
+      "transfer_title": "انتقال صفحه‌ها و حذف مجموعه",
+      "transfer_description": "پیش از حذف، همهٔ صفحه‌ها را به مجموعه‌ای دیگر منتقل کنید. صفحه‌ها و مجوزهای آن‌ها حفظ می‌شوند.",
+      "transfer_warning": "صفحه‌های منتقل‌شده مجوزهای مجموعهٔ انتخاب‌شده را به ارث می‌برند.",
+      "transfer_target_label": "انتقال صفحه‌ها به",
+      "transfer_target_placeholder": "یک مجموعه انتخاب کنید",
+      "delete_with_pages_title": "حذف مجموعه همراه با صفحه‌ها",
+      "delete_with_pages_description": "مجموعه و همهٔ صفحه‌های آن را برای همیشه حذف کنید. این کار برگشت‌پذیر نیست.",
+      "submit": "حذف مجموعه"
+    },
+    "header": {
+      "add_page": "افزودن صفحه"
+    },
+    "menu": {
+      "create_new_page": "ایجاد صفحهٔ جدید",
+      "add_existing_page": "افزودن صفحهٔ موجود",
+      "edit_collection": "ویرایش مجموعه",
+      "collection_options": "گزینه‌های مجموعه"
+    },
+    "add_existing_page_modal": {
+      "search_placeholder": "جست‌وجوی صفحه‌ها",
+      "success_message": "{count, number} {count, plural, one {صفحه} other {صفحه}} به مجموعه اضافه شد.",
+      "error_message": "انتقال صفحه‌ها انجام نشد. لطفاً دوباره تلاش کنید.",
+      "no_pages_found": "صفحه‌ای مطابق جست‌وجوی شما یافت نشد",
+      "no_pages_available": "صفحه‌ای برای انتقال در دسترس نیست",
+      "submit": "انتقال"
+    },
+    "list": {
+      "invite_only": "فقط با دعوت",
+      "remove_error": "حذف صفحه از مجموعه انجام نشد.",
+      "no_matching_pages": "صفحهٔ منطبقی وجود ندارد",
+      "remove_search_criteria": "برای دیدن همهٔ صفحه‌ها، معیارهای جست‌وجو را پاک کنید",
+      "remove_filters": "برای دیدن همهٔ صفحه‌ها، فیلترها را پاک کنید",
+      "no_pages_title": "هنوز صفحه‌ای وجود ندارد",
+      "no_pages_description": "این مجموعه اکنون هیچ صفحه‌ای ندارد.",
+      "untitled": "بدون عنوان",
+      "restricted_access": "دسترسی محدود",
+      "collapse_page": "جمع‌کردن صفحه",
+      "expand_page": "گسترش صفحه",
+      "page_actions": "عملیات صفحه",
+      "page_link_copied": "پیوند صفحه در کلیپ‌بورد کپی شد.",
+      "columns": {
+        "page_name": "نام صفحه",
+        "owner": "مالک",
+        "nested_pages": "صفحه‌های تودرتو",
+        "last_activity": "آخرین فعالیت",
+        "actions": "عملیات"
+      }
+    },
+    "toasts": {
+      "created": "مجموعه با موفقیت ایجاد شد.",
+      "create_error": "ایجاد مجموعه انجام نشد. لطفاً دوباره تلاش کنید.",
+      "renamed": "نام مجموعه با موفقیت تغییر کرد.",
+      "rename_error": "به‌روزرسانی مجموعه انجام نشد. لطفاً دوباره تلاش کنید.",
+      "transferred_deleted": "صفحه‌ها منتقل شدند و مجموعه حذف شد.",
+      "deleted_with_pages": "مجموعه و صفحه‌های آن حذف شدند.",
+      "delete_error": "حذف مجموعه انجام نشد. لطفاً دوباره تلاش کنید.",
+      "target_required": "لطفاً مجموعه‌ای برای انتقال صفحه‌ها به آن انتخاب کنید.",
+      "create_page_error": "ایجاد صفحه انجام نشد. لطفاً دوباره تلاش کنید.",
+      "create_page_in_collection_error": "ایجاد صفحه یا افزودن آن به مجموعه انجام نشد. لطفاً دوباره تلاش کنید.",
+      "collection_link_copied": "پیوند مجموعه در کلیپ‌بورد کپی شد."
+    }
+  },
+  "wiki": {
+    "upgrade_flow": {
+      "title": "برای دسترسی به ویکی، طرح را ارتقا دهید",
+      "description": "با Plane Pro به صفحه‌های عمومی، تاریخچهٔ نسخه‌ها، صفحه‌های اشتراکی، همکاری هم‌زمان و صفحه‌های فضای کاری برای ویکی‌ها، مستندات سراسری شرکت و پایگاه‌های دانش دسترسی پیدا کنید.",
+      "upgrade_button": {
+        "text": "ارتقا"
+      },
+      "learn_more_button": {
+        "text": "بیشتر بدانید"
+      },
+      "download_button": {
+        "text": "دریافت داده‌ها",
+        "loading": "در حال دریافت"
+      },
+      "tabs": {
+        "nested_pages": "صفحه‌های تودرتو",
+        "add_embeds": "افزودن محتوای جاسازی‌شده",
+        "publish_pages": "انتشار صفحه‌ها",
+        "comments": "دیدگاه‌ها"
+      }
+    },
+    "nested_pages_download_banner": {
+      "title": "صفحه‌های تودرتو به طرح پولی نیاز دارند. برای دسترسی، طرح را ارتقا دهید."
+    }
+  }
+}
