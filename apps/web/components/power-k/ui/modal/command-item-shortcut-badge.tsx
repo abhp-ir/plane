@@ -71,7 +71,7 @@ export function ShortcutBadge({ shortcut }: { shortcut: string | undefined }) {
   if (labels.length === 0) return null;
 
   return (
-    <div className="pointer-events-none inline-flex shrink-0 items-center gap-1 font-medium select-none">
+    <div dir="ltr" className="pointer-events-none inline-flex shrink-0 items-center gap-1 font-medium select-none">
       {labels.map((label, index) => (
         <kbd
           // oxlint-disable-next-line react/no-array-index-key -- static list from a constant string, never reordered
@@ -97,7 +97,7 @@ export function KeySequenceBadge({ sequence, separator }: TKeySequenceBadgeProps
   const chars = sequence.split("");
 
   return (
-    <div className="pointer-events-none inline-flex shrink-0 items-center gap-1 font-medium select-none">
+    <div dir="ltr" className="pointer-events-none inline-flex shrink-0 items-center gap-1 font-medium select-none">
       {chars.map((char, index) => (
         // oxlint-disable-next-line react/no-array-index-key -- static list from a constant string, never reordered
         <React.Fragment key={index}>

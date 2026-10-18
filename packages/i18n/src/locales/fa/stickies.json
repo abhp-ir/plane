@@ -1,1 +1,59 @@
-{}
+{
+  "stickies": {
+    "title": "Stickies شما",
+    "placeholder": "برای نوشتن اینجا کلیک کنید",
+    "all": "همهٔ Stickies",
+    "no-data": "ایده‌ای یادداشت کنید، نکته‌ای تازه را ثبت کنید یا فکری ناگهانی را بنویسید. برای شروع، یک Sticky اضافه کنید.",
+    "add": "افزودن Sticky",
+    "search_placeholder": "جست‌وجو بر اساس عنوان",
+    "delete": "حذف Sticky",
+    "delete_confirmation": "آیا مطمئن هستید که می‌خواهید این Sticky را حذف کنید؟",
+    "empty_state": {
+      "simple": "ایده‌ای یادداشت کنید، نکته‌ای تازه را ثبت کنید یا فکری ناگهانی را بنویسید. برای شروع، یک Sticky اضافه کنید.",
+      "general": {
+        "title": "Stickies یادداشت‌های کوتاه و کارهای پیش رو هستند که همان لحظه ثبت می‌کنید.",
+        "description": "با ایجاد Stickies، افکار و ایده‌های خود را به‌راحتی ثبت کنید و هر زمان و از هر جا به آن‌ها دسترسی داشته باشید.",
+        "primary_button": {
+          "text": "افزودن Sticky"
+        }
+      },
+      "search": {
+        "title": "این عبارت با هیچ‌یک از Stickies شما مطابقت ندارد.",
+        "description": "عبارت دیگری را امتحان کنید یا اگر از درستی جست‌وجوی خود\nمطمئن هستید، به ما اطلاع دهید. ",
+        "primary_button": {
+          "text": "افزودن Sticky"
+        }
+      }
+    },
+    "toasts": {
+      "errors": {
+        "wrong_name": "نام Sticky نمی‌تواند بیشتر از ۱۰۰ نویسه باشد.",
+        "already_exists": "از قبل یک Sticky بدون توضیحات وجود دارد"
+      },
+      "created": {
+        "title": "Sticky ایجاد شد",
+        "message": "Sticky با موفقیت ایجاد شد"
+      },
+      "not_created": {
+        "title": "Sticky ایجاد نشد",
+        "message": "ایجاد Sticky انجام نشد"
+      },
+      "updated": {
+        "title": "Sticky به‌روزرسانی شد",
+        "message": "Sticky با موفقیت به‌روزرسانی شد"
+      },
+      "not_updated": {
+        "title": "Sticky به‌روزرسانی نشد",
+        "message": "به‌روزرسانی Sticky انجام نشد"
+      },
+      "removed": {
+        "title": "Sticky حذف شد",
+        "message": "Sticky با موفقیت حذف شد"
+      },
+      "not_removed": {
+        "title": "Sticky حذف نشد",
+        "message": "حذف Sticky انجام نشد"
+      }
+    }
+  }
+}

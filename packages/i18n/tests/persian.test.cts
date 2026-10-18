@@ -65,6 +65,10 @@ const translatedNamespaces = [
   "inbox",
   "editor",
   "notification",
+  "power-k",
+  "tour",
+  "stickies",
+  "update",
 ];
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
@@ -168,6 +172,10 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
     assert.equal(
       i18nInstance.t("inbox_issue.status.snoozed.description", { days: count }),
       `${new Intl.NumberFormat("fa").format(count)} روز باقی مانده است`
+    );
+    assert.equal(
+      i18nInstance.t("updates.progress.comments", { count }),
+      `${new Intl.NumberFormat("fa").format(count)} دیدگاه`
     );
   }
   const fallbackKey = Object.keys(load("en", "automation"))[0];
