@@ -1,1 +1,273 @@
-{}
+{
+  "automations": {
+    "settings": {
+      "title": "خودکارسازی‌های سفارشی",
+      "create_automation": "ایجاد خودکارسازی"
+    },
+    "scope": {
+      "label": "محدوده",
+      "run_on": "اجرا روی"
+    },
+    "trigger": {
+      "label": "محرک",
+      "add_trigger": "افزودن محرک",
+      "sidebar_header": "پیکربندی محرک",
+      "input_label": "محرک این خودکارسازی چیست؟",
+      "input_placeholder": "یک گزینه انتخاب کنید",
+      "section_plane_events": "رویدادهای Plane",
+      "section_time_based": "مبتنی بر زمان",
+      "fixed_schedule": "زمان‌بندی ثابت",
+      "schedule": {
+        "frequency": "تناوب",
+        "select_day": "روز را انتخاب کنید",
+        "day_of_month": "روز ماه",
+        "monthly_every": "هر",
+        "monthly_day_aria": "روز {day}",
+        "time": "زمان",
+        "hour": "ساعت",
+        "minute": "دقیقه",
+        "hour_suffix": "ساعت",
+        "minute_suffix": "دقیقه",
+        "am": "AM",
+        "pm": "PM",
+        "timezone": "منطقهٔ زمانی",
+        "timezone_placeholder": "منطقهٔ زمانی را انتخاب کنید",
+        "frequency_daily": "روزانه",
+        "frequency_weekly": "هفتگی",
+        "frequency_monthly": "ماهانه",
+        "on": "در",
+        "validation_weekly_day_required": "حداقل یک روز هفته را انتخاب کنید.",
+        "validation_monthly_date_required": "یک روز ماه را انتخاب کنید.",
+        "main_content_schedule_summary_daily": "هر روز ساعت {time} ({timezone}).",
+        "main_content_schedule_summary_weekly": "هر هفته، {days}، ساعت {time} ({timezone}).",
+        "main_content_schedule_summary_monthly": "هر ماه روز {day}، ساعت {time} ({timezone}).",
+        "schedule_mode": "حالت زمان‌بندی",
+        "schedule_mode_fixed": "ثابت",
+        "schedule_mode_cron": "Cron",
+        "cron_expression_label": "عبارت Cron را وارد کنید",
+        "cron_expression_placeholder": "0 9 * * 1-5",
+        "cron_invalid": "عبارت Cron نامعتبر است.",
+        "cron_preview": "این عبارت Cron به‌صورت «{description}» اجرا می‌شود.",
+        "main_content_cron_summary": "{description} ({timezone})."
+      },
+      "button": {
+        "previous": "بازگشت",
+        "next": "افزودن عملیات"
+      },
+      "warning": {
+        "disabled_trigger_switching": "پس از ایجاد، نمی‌توانید نوع محرک را تغییر دهید"
+      }
+    },
+    "condition": {
+      "label": "به‌شرطی که",
+      "add_condition": "افزودن شرط",
+      "adding_condition": "در حال افزودن شرط"
+    },
+    "action": {
+      "label": "عملیات",
+      "add_action": "افزودن عملیات",
+      "sidebar_header": "عملیات",
+      "input_label": "این خودکارسازی چه کاری انجام می‌دهد؟",
+      "input_placeholder": "یک گزینه انتخاب کنید",
+      "handler_name": {
+        "add_comment": "افزودن دیدگاه",
+        "change_property": "تغییر ویژگی",
+        "run_script": "اجرای اسکریپت"
+      },
+      "configuration": {
+        "label": "پیکربندی",
+        "change_property": {
+          "placeholders": {
+            "property_name": "یک ویژگی انتخاب کنید",
+            "change_type": "انتخاب کنید",
+            "property_value_select": "{count, plural, one{مقدار را انتخاب کنید} other{مقادیر را انتخاب کنید}}",
+            "property_value_select_date": "تاریخ را انتخاب کنید"
+          },
+          "validation": {
+            "property_name_required": "نام ویژگی الزامی است",
+            "change_type_required": "نوع تغییر الزامی است",
+            "property_value_required": "مقدار ویژگی الزامی است"
+          }
+        }
+      },
+      "comment_block": {
+        "title": "افزودن دیدگاه"
+      },
+      "run_script_block": {
+        "title": "اجرای اسکریپت"
+      },
+      "change_property_block": {
+        "title": "تغییر ویژگی"
+      },
+      "validation": {
+        "delete_only_action": "پیش از حذف تنها عملیات، خودکارسازی را غیرفعال کنید."
+      }
+    },
+    "conjunctions": {
+      "and": "و",
+      "or": "یا",
+      "if": "اگر",
+      "then": "آنگاه"
+    },
+    "enable": {
+      "alert": "پس از تکمیل خودکارسازی، «فعال‌سازی» را بزنید. پس از فعال‌سازی، خودکارسازی آمادهٔ اجرا خواهد بود.",
+      "validation": {
+        "required": "برای فعال‌سازی خودکارسازی، یک محرک و حداقل یک عملیات لازم است."
+      }
+    },
+    "delete": {
+      "validation": {
+        "enabled": "پیش از حذف خودکارسازی، باید آن را غیرفعال کنید."
+      }
+    },
+    "table": {
+      "title": "عنوان خودکارسازی",
+      "scope": "محدوده",
+      "projects": "پروژه‌ها",
+      "last_run_on": "زمان آخرین اجرا",
+      "created_on": "تاریخ ایجاد",
+      "last_updated_on": "تاریخ آخرین به‌روزرسانی",
+      "last_run_status": "وضعیت آخرین اجرا",
+      "average_duration": "میانگین مدت اجرا",
+      "owner": "مالک",
+      "executions": "اجراها"
+    },
+    "create_modal": {
+      "heading": {
+        "create": "ایجاد خودکارسازی",
+        "update": "به‌روزرسانی خودکارسازی"
+      },
+      "title": {
+        "placeholder": "نامی برای خودکارسازی وارد کنید.",
+        "required_error": "عنوان الزامی است"
+      },
+      "description": {
+        "placeholder": "خودکارسازی را توضیح دهید."
+      },
+      "submit_button": {
+        "create": "ایجاد خودکارسازی",
+        "update": "به‌روزرسانی خودکارسازی"
+      }
+    },
+    "delete_modal": {
+      "heading": "حذف خودکارسازی"
+    },
+    "activity": {
+      "filters": {
+        "show_fails": "نمایش اجراهای ناموفق",
+        "all": "همه",
+        "only_activity": "فقط فعالیت",
+        "only_run_history": "فقط تاریخچهٔ اجرا"
+      },
+      "run_history": {
+        "initiator": "آغازکننده"
+      }
+    },
+    "toasts": {
+      "create": {
+        "success": {
+          "title": "موفقیت",
+          "message": "خودکارسازی با موفقیت ایجاد شد."
+        },
+        "error": {
+          "title": "خطا",
+          "message": "ایجاد خودکارسازی انجام نشد."
+        }
+      },
+      "update": {
+        "success": {
+          "title": "موفقیت",
+          "message": "خودکارسازی با موفقیت به‌روزرسانی شد."
+        },
+        "error": {
+          "title": "خطا",
+          "message": "به‌روزرسانی خودکارسازی انجام نشد."
+        }
+      },
+      "enable": {
+        "success": {
+          "title": "موفقیت",
+          "message": "خودکارسازی با موفقیت فعال شد."
+        },
+        "error": {
+          "title": "خطا",
+          "message": "فعال‌سازی خودکارسازی انجام نشد."
+        }
+      },
+      "disable": {
+        "success": {
+          "title": "موفقیت",
+          "message": "خودکارسازی با موفقیت غیرفعال شد."
+        },
+        "error": {
+          "title": "خطا",
+          "message": "غیرفعال‌سازی خودکارسازی انجام نشد."
+        }
+      },
+      "delete": {
+        "success": {
+          "title": "خودکارسازی حذف شد",
+          "message": "خودکارسازی «{name}» از پروژهٔ شما حذف شد."
+        },
+        "error": {
+          "title": "این بار حذف خودکارسازی انجام نشد.",
+          "message": "دوباره برای حذف تلاش کنید یا بعداً به آن برگردید. اگر آن زمان هم نتوانستید حذفش کنید، با ما تماس بگیرید."
+        }
+      },
+      "action": {
+        "create": {
+          "error": {
+            "title": "خطا",
+            "message": "ایجاد عملیات انجام نشد. دوباره تلاش کنید."
+          }
+        },
+        "update": {
+          "error": {
+            "title": "خطا",
+            "message": "به‌روزرسانی عملیات انجام نشد. دوباره تلاش کنید."
+          }
+        }
+      }
+    },
+    "empty_state": {
+      "no_automations": {
+        "title": "هنوز خودکارسازی‌ای برای نمایش وجود ندارد.",
+        "description": "خودکارسازی‌ها با تعیین محرک‌ها، شرط‌ها و عملیات به حذف کارهای تکراری کمک می‌کنند. با ایجاد خودکارسازی، در زمان صرفه‌جویی کنید و کارها را به‌آسانی پیش ببرید."
+      },
+      "upgrade": {
+        "title": "خودکارسازی‌ها",
+        "description": "خودکارسازی‌ها راهی برای خودکارکردن وظیفه‌های پروژه هستند.",
+        "sub_description": "با خودکارسازی‌ها، زمان امور مدیریتی خود را ۸۰٪ کاهش دهید."
+      }
+    },
+    "global_automations": {
+      "project_select": {
+        "label": "پروژه‌ها را برای اجرای این خودکارسازی انتخاب کنید",
+        "all_projects": {
+          "label": "همهٔ پروژه‌ها",
+          "description": "خودکارسازی برای همهٔ پروژه‌های فضای کاری اجرا می‌شود."
+        },
+        "select_projects": {
+          "label": "انتخاب پروژه‌ها",
+          "description": "خودکارسازی برای پروژه‌های انتخاب‌شدهٔ فضای کاری اجرا می‌شود.",
+          "placeholder": "پروژه‌ها را انتخاب کنید"
+        }
+      },
+      "settings": {
+        "sidebar_label": "خودکارسازی‌ها",
+        "title": "خودکارسازی‌ها",
+        "description": "با خودکارسازی‌های سراسری، فرایندهای فضای کاری را یکسان‌سازی کنید."
+      },
+      "table": {
+        "scope": {
+          "global": "سراسری",
+          "project": {
+            "label": "پروژه",
+            "multiple": "چند پروژه",
+            "all": "همه"
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,6 +8,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
+import { createInstance } from "i18next";
+import ICU from "i18next-icu";
 import { SUPPORTED_LANGUAGES } from "../src/constants/language";
 import { NAMESPACES } from "../src/constants/namespaces";
 import { initPromise, i18nInstance } from "../src/core/instance";
@@ -72,6 +74,8 @@ const translatedNamespaces = [
   "work-item-type",
   "workflow",
   "integration",
+  "automation",
+  "template",
 ];
 
 // Protocol examples and product names must stay exact, including ASCII identifiers.
@@ -92,6 +96,16 @@ const exactTechnicalValues: Record<string, string> = {
   "oauth_bridge_integration.provider_form.audience_placeholder": "api://my-app-id",
   "oauth_bridge_integration.provider_form.user_claims_placeholder": "email, preferred_username, upn",
   "oauth_bridge_integration.provider_form.rate_limit_placeholder": "120/minute",
+  "automations.trigger.schedule.am": "AM",
+  "automations.trigger.schedule.pm": "PM",
+  "automations.trigger.schedule.schedule_mode_cron": "Cron",
+  "automations.trigger.schedule.cron_expression_placeholder": "0 9 * * 1-5",
+  "automations.trigger.schedule.main_content_cron_summary": "{description} ({timezone}).",
+  "templates.settings.form.publish.website.placeholder": "https://plane.so",
+  "templates.settings.form.publish.company_name.placeholder": "Plane",
+  "templates.settings.form.publish.contact_email.placeholder": "help@plane.so",
+  "templates.settings.form.publish.privacy_policy_url.placeholder": "https://planes.so/privacy-policy",
+  "templates.settings.form.publish.terms_of_service_url.placeholder": "https://planes.so/terms-of-use",
 };
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
@@ -150,6 +164,7 @@ for (const namespace of translatedNamespaces) {
         "MR",
         "DMs",
         "JSON Web Key Set",
+        "Cron",
         "SAML",
         "SSO",
         "IdP",
@@ -171,7 +186,7 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
   assert.equal(i18nInstance.dir(), "rtl");
   assert.equal(i18nInstance.t("sidebar.projects"), "پروژه‌ها");
   assert.equal(i18nInstance.t("auth.common.resend_in", { seconds: 12 }), "ارسال دوباره تا 12 ثانیهٔ دیگر");
-  // The source confirmation prompt requires this exact typed token.
+  // Confirmation tokens, technical examples and opaque compositions stay exact.
   for (const [key, value] of Object.entries(exactTechnicalValues)) assert.equal(i18nInstance.t(key), value, key);
   assert.ok(i18nInstance.t("work_item_type_hierarchy.break_hierarchy_modal.confirm_input.label").includes("Confirm"));
   assert.ok(i18nInstance.t("work_item_types.settings.properties.formula.tooltip").includes("{Field Name}"));
@@ -230,9 +245,36 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
       i18nInstance.t("workflows.workflow_states.movers_count", { count }),
       `${new Intl.NumberFormat("fa").format(count)} بازبین فهرست‌شده`
     );
+    assert.equal(
+      i18nInstance.t("automations.action.configuration.change_property.placeholders.property_value_select", { count }),
+      count <= 1 ? "مقدار را انتخاب کنید" : "مقادیر را انتخاب کنید"
+    );
   }
-  const fallbackKey = Object.keys(load("en", "automation"))[0];
-  assert.equal(i18nInstance.t(fallbackKey), i18nInstance.t(fallbackKey, { lng: "en" }));
+  for (const isPublished of [true, "true"]) {
+    assert.equal(i18nInstance.t("templates.settings.form.publish.action", { isPublished }), "تنظیمات انتشار");
+  }
+  for (const isPublished of [false, "false", "unknown"]) {
+    assert.equal(i18nInstance.t("templates.settings.form.publish.action", { isPublished }), "انتشار در بازارچه");
+  }
+  assert.equal(
+    i18nInstance.t("automations.trigger.schedule.main_content_cron_summary", {
+      description: "Cron-42",
+      timezone: "UTC+03:30",
+    }),
+    "Cron-42 (UTC+03:30)."
+  );
+  assert.equal(
+    i18nInstance.t("templates.delete_confirmation.description.prefix") +
+      "Plane-42" +
+      i18nInstance.t("templates.delete_confirmation.description.suffix"),
+    "آیا مطمئن هستید که می‌خواهید الگوی Plane-42 را حذف کنید؟ همهٔ داده‌های مرتبط با این الگو برای همیشه حذف می‌شوند. این کار برگشت‌پذیر نیست."
+  );
+  assert.equal(
+    i18nInstance.t("templates.unpublish_confirmation.description.prefix") +
+      "Plane-42" +
+      i18nInstance.t("templates.unpublish_confirmation.description.suffix"),
+    "آیا مطمئن هستید که می‌خواهید انتشار الگوی Plane-42 را لغو کنید؟ این الگو دیگر در دسترس کاربران بازارچه نخواهد بود."
+  );
   assert.equal(i18nInstance.t("common.from", { name: "Plane ABC-42" }), "از Plane ABC-42");
   for (const locale of SUPPORTED_LANGUAGES) {
     if (locale.value !== "fa") assert.equal(i18nInstance.dir(locale.value), "ltr", locale.value);
@@ -240,4 +282,22 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
   await setLanguage("en");
   assert.equal(i18nInstance.dir(), "ltr");
   assert.equal(i18nInstance.t("sidebar.projects"), "Projects");
+});
+
+test("English fallback works with a missing Persian bundle", async () => {
+  await initPromise;
+  // Isolate ICU's memoized results from the complete real Persian resources.
+  const fallback = createInstance().use(ICU);
+  await fallback.init({
+    ...i18nInstance.options,
+    lng: "fa",
+    ns: ["navigation"],
+    defaultNS: "navigation",
+    fallbackNS: [],
+    resources: { en: { navigation: i18nInstance.getResourceBundle("en", "navigation") } },
+  });
+  assert.equal(fallback.language, "fa");
+  assert.equal(fallback.dir(fallback.language), "rtl");
+  assert.equal(fallback.t("sidebar.home"), "Home");
+  assert.equal(fallback.hasResourceBundle("fa", "navigation"), false);
 });
