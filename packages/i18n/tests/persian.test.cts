@@ -43,6 +43,35 @@ test("Persian is registered once as fa / فارسی", () => {
   );
 });
 
+test("icon picker actions and tabs are translated in every supported locale", async () => {
+  await initPromise;
+  const keys = ["common.icon.label", "common.emoji.label", "common.icon.add", "common.icon.change"];
+  const english = load("en", "common");
+
+  try {
+    for (const { value: language } of SUPPORTED_LANGUAGES) {
+      const messages = load(language, "common");
+      // eslint-disable-next-line no-await-in-loop -- Locale switches share one instance and must finish in order.
+      await setLanguage(language);
+      for (const key of keys) {
+        assert.ok(messages[key]?.trim(), `${language}: ${key}`);
+        assert.equal(i18nInstance.t(key), messages[key], `${language}: render ${key}`);
+        assert.deepEqual(variables(messages[key]), variables(english[key]));
+      }
+      if (language !== "en") {
+        for (const key of ["common.icon.add", "common.icon.change"]) assert.notEqual(messages[key], english[key]);
+      }
+    }
+  } finally {
+    await setLanguage("en");
+  }
+
+  assert.deepEqual(
+    keys.map((key) => load("fa", "common")[key]),
+    ["آیکون", "ایموجی", "افزودن آیکون", "تغییر آیکون"]
+  );
+});
+
 test("every registered namespace has a loadable Persian resource", () => {
   for (const namespace of NAMESPACES) load("fa", namespace);
 });

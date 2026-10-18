@@ -420,6 +420,14 @@
     }
   },
   "common": {
+    "icon": {
+      "label": "Pictogramă",
+      "add": "Adăugați o pictogramă",
+      "change": "Schimbați pictograma"
+    },
+    "emoji": {
+      "label": "Emoji"
+    },
     "all": "Toate",
     "no_items_in_this_group": "Nu există elemente în acest grup",
     "drop_here_to_move": "Eliberează aici pentru a muta",

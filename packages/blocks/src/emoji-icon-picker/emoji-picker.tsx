@@ -108,7 +108,7 @@ export function EmojiPicker(props: EmojiPickerProps) {
         showEmojiTab
           ? {
               key: "emoji",
-              label: "Emoji",
+              label: t("common.emoji.label"),
               content: (
                 <EmojiRoot
                   onChange={handleEmojiChange}
@@ -122,7 +122,7 @@ export function EmojiPicker(props: EmojiPickerProps) {
           : null,
         {
           key: "icon",
-          label: "Icon",
+          label: t("common.icon.label"),
           content: (
             <IconRoot
               defaultColor={defaultIconColor}
@@ -145,6 +145,7 @@ export function EmojiPicker(props: EmojiPickerProps) {
       handleEmojiChange,
       handleIconChange,
       showEmojiTab,
+      t,
     ]
   );
 

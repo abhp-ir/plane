@@ -420,6 +420,14 @@
     }
   },
   "common": {
+    "icon": {
+      "label": "图标",
+      "add": "添加图标",
+      "change": "更改图标"
+    },
+    "emoji": {
+      "label": "表情符号"
+    },
     "all": "全部",
     "no_items_in_this_group": "此组中没有项目",
     "drop_here_to_move": "拖放到此处以移动",

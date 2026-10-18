@@ -420,6 +420,14 @@
     }
   },
   "common": {
+    "icon": {
+      "label": "アイコン",
+      "add": "アイコンを追加",
+      "change": "アイコンを変更"
+    },
+    "emoji": {
+      "label": "絵文字"
+    },
     "all": "すべて",
     "no_items_in_this_group": "このグループにアイテムはありません",
     "drop_here_to_move": "移動するにはここにドロップ",

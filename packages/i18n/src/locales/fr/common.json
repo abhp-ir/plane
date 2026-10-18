@@ -420,6 +420,14 @@
     }
   },
   "common": {
+    "icon": {
+      "label": "Icône",
+      "add": "Ajouter une icône",
+      "change": "Changer l’icône"
+    },
+    "emoji": {
+      "label": "Émoji"
+    },
     "all": "Tout",
     "no_items_in_this_group": "Aucun élément dans ce groupe",
     "drop_here_to_move": "Déposer ici pour déplacer",
