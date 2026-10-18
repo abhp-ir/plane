@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import type { FileRejection } from "react-dropzone";
 import { useDropzone } from "react-dropzone";
 import { AddOutline } from "@makeplane/propel/icons";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import { setToast } from "@plane/blocks/toast";
 import type { TIssueServiceType } from "@plane/types";
@@ -23,13 +24,15 @@ type Props = {
   workspaceSlug: string;
   projectId: string;
   issueId: string;
-  customButton?: React.ReactNode;
+  /** Custom triggers must forward native button props and ref to their button. */
+  customButton?: React.ReactElement<React.ComponentPropsWithRef<"button">>;
   disabled?: boolean;
   issueServiceType: TIssueServiceType;
 };
 
 export const IssueAttachmentActionButton = observer(function IssueAttachmentActionButton(props: Props) {
   const { workspaceSlug, projectId, issueId, customButton, disabled = false, issueServiceType } = props;
+  const { t } = useTranslation();
   // state
   const [isLoading, setIsLoading] = useState(false);
   // store hooks
@@ -94,17 +97,30 @@ export const IssueAttachmentActionButton = observer(function IssueAttachmentActi
     disabled: isLoading || disabled,
   });
 
+  const buttonProps = getRootProps<React.ComponentPropsWithRef<"button">>({
+    role: "button",
+    type: "button",
+    disabled: isLoading || disabled,
+  });
+
   return (
     <div
+      role="presentation"
       onClick={(e) => {
-        // TODO: Remove extra div and move event propagation to button
         e.stopPropagation();
       }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") e.stopPropagation();
+      }}
     >
-      <button {...getRootProps()} type="button" disabled={disabled}>
-        <input {...getInputProps()} />
-        {customButton ? customButton : <AddOutline className="h-4 w-4" />}
-      </button>
+      <input {...getInputProps()} />
+      {customButton ? (
+        React.cloneElement(customButton, buttonProps)
+      ) : (
+        <button {...buttonProps} aria-label={t("common.attach")}>
+          <AddOutline className="h-4 w-4" />
+        </button>
+      )}
     </div>
   );
 });

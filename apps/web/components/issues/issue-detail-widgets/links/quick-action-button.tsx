@@ -7,19 +7,22 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { AddOutline } from "@makeplane/propel/icons";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import type { TIssueServiceType } from "@plane/types";
 // hooks
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
 
 type Props = {
-  customButton?: React.ReactNode;
+  /** Custom triggers must forward native button props to their button. */
+  customButton?: React.ReactElement<React.ComponentPropsWithRef<"button">>;
   disabled?: boolean;
   issueServiceType: TIssueServiceType;
 };
 
 export const IssueLinksActionButton = observer(function IssueLinksActionButton(props: Props) {
   const { customButton, disabled = false, issueServiceType } = props;
+  const { t } = useTranslation();
   // store hooks
   const { toggleIssueLinkModal } = useIssueDetail(issueServiceType);
 
@@ -30,9 +33,11 @@ export const IssueLinksActionButton = observer(function IssueLinksActionButton(p
     toggleIssueLinkModal(true);
   };
 
-  return (
-    <button type="button" onClick={handleOnClick} disabled={disabled}>
-      {customButton ? customButton : <AddOutline className="h-4 w-4" />}
+  return customButton ? (
+    React.cloneElement(customButton, { type: "button", onClick: handleOnClick, disabled })
+  ) : (
+    <button type="button" onClick={handleOnClick} disabled={disabled} aria-label={t("issue.add.link")}>
+      <AddOutline className="h-4 w-4" />
     </button>
   );
 });
