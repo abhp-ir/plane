@@ -45,23 +45,23 @@ export const DescriptionVersionsDropdown = observer(function DescriptionVersions
           <button
             type="button"
             className={cn(
-              "flex items-center justify-between gap-1 rounded-md px-2.5 py-1 text-11 whitespace-nowrap text-secondary duration-300 data-[popup-open]:text-primary",
+              "flex max-w-full items-center justify-between gap-1 rounded-md px-2.5 py-1 text-start text-11 text-secondary duration-300 data-[popup-open]:text-primary",
               disabled ? "cursor-not-allowed" : "cursor-pointer hover:bg-layer-transparent-hover"
             )}
           />
         }
       >
-        <div className="flex items-center gap-1 text-tertiary">
+        <div className="flex min-w-0 items-center gap-1 text-tertiary">
           <span className="grid size-4 flex-shrink-0 place-items-center">
             <HistoryOutline className="size-3.5" />
           </span>
-          <p className="text-11">
+          <p className="text-11 wrap-anywhere">
             {t("description_versions.last_edited_by")}{" "}
             <span className="font-medium">{lastUpdatedByUserDisplayName ?? t("common.deactivated_user")}</span>{" "}
             {calculateTimeAgo(lastUpdatedAt)}
           </p>
         </div>
-        {!disabled && <ChevronDownOutline className="size-3.5" />}
+        {!disabled && <ChevronDownOutline className="size-3.5 shrink-0" />}
       </MenuTrigger>
       <MenuContent side="bottom" align="end">
         <MenuGroup>

@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { observer } from "mobx-react";
 // plane imports
 import { EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
@@ -22,6 +22,7 @@ import { useIssueDetail } from "@/hooks/store/use-issue-detail";
 import { useIssues } from "@/hooks/store/use-issues";
 import { useUserPermissions } from "@/hooks/store/user";
 import { useAppRouter } from "@/hooks/use-app-router";
+import useSize from "@/hooks/use-window-size";
 // local components
 import { IssuePeekOverview } from "../peek-overview";
 import { IssueMainContent } from "./main-content";
@@ -60,7 +61,12 @@ export type TIssueDetailRoot = {
 
 export const IssueDetailRoot = observer(function IssueDetailRoot(props: TIssueDetailRoot) {
   const { t } = useTranslation();
-  const { workspaceSlug, projectId, issueId, is_archived = false } = props;
+  const {
+    workspaceSlug: currentWorkspaceSlug,
+    projectId: currentProjectId,
+    issueId: currentIssueId,
+    is_archived = false,
+  } = props;
   // router
   const router = useAppRouter();
   // hooks
@@ -80,7 +86,14 @@ export const IssueDetailRoot = observer(function IssueDetailRoot(props: TIssueDe
     issues: { removeIssue: removeArchivedIssue },
   } = useIssues(EIssuesStoreType.ARCHIVED);
   const { allowPermissions } = useUserPermissions();
-  const { issueDetailSidebarCollapsed } = useAppTheme();
+  const { issueDetailSidebarCollapsed, toggleIssueDetailSidebar } = useAppTheme();
+  const [windowWidth] = useSize();
+
+  useEffect(() => {
+    // Browse and archived work items share the same responsive properties layout.
+    const collapsed = windowWidth < 1024;
+    if (issueDetailSidebarCollapsed !== collapsed) toggleIssueDetailSidebar(collapsed);
+  }, [windowWidth, issueDetailSidebarCollapsed, toggleIssueDetailSidebar]);
 
   const issueOperations: TIssueOperations = useMemo(
     () => ({
@@ -216,13 +229,13 @@ export const IssueDetailRoot = observer(function IssueDetailRoot(props: TIssueDe
   );
 
   // issue details
-  const issue = getIssueById(issueId);
+  const issue = getIssueById(currentIssueId);
   // checking if issue is editable, based on user role
   const isEditable = allowPermissions(
     [EUserPermissions.ADMIN, EUserPermissions.MEMBER],
     EUserPermissionsLevel.PROJECT,
-    workspaceSlug,
-    projectId
+    currentWorkspaceSlug,
+    currentProjectId
   );
 
   return (
@@ -234,29 +247,29 @@ export const IssueDetailRoot = observer(function IssueDetailRoot(props: TIssueDe
           description={t("issue.empty_state.issue_detail.description")}
           primaryButton={{
             text: t("issue.empty_state.issue_detail.primary_button.text"),
-            onClick: () => router.push(`/${workspaceSlug}/projects/${projectId}/issues`),
+            onClick: () => router.push(`/${currentWorkspaceSlug}/projects/${currentProjectId}/issues`),
           }}
         />
       ) : (
         <div className="flex h-full w-full overflow-hidden">
           <div className="h-full w-full space-y-6 overflow-y-auto px-9 py-5">
             <IssueMainContent
-              workspaceSlug={workspaceSlug}
-              projectId={projectId}
-              issueId={issueId}
+              workspaceSlug={currentWorkspaceSlug}
+              projectId={currentProjectId}
+              issueId={currentIssueId}
               issueOperations={issueOperations}
               isEditable={isEditable}
               isArchived={is_archived}
             />
           </div>
           <div
-            className="fixed right-0 z-[5] h-full w-full min-w-[300px] border-l border-subtle bg-surface-1 sm:w-1/2 md:relative md:w-1/4 lg:min-w-80 xl:min-w-96"
-            style={issueDetailSidebarCollapsed ? { right: "-100vw" } : {}}
+            className="relative z-[5] hidden h-full w-1/4 min-w-80 border-s border-subtle bg-surface-1 lg:block xl:min-w-96"
+            style={issueDetailSidebarCollapsed ? { display: "none" } : undefined}
           >
             <IssueDetailsSidebar
-              workspaceSlug={workspaceSlug}
-              projectId={projectId}
-              issueId={issueId}
+              workspaceSlug={currentWorkspaceSlug}
+              projectId={currentProjectId}
+              issueId={currentIssueId}
               issueOperations={issueOperations}
               isEditable={!is_archived && isEditable}
             />

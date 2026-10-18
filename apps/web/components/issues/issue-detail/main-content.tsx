@@ -127,7 +127,7 @@ export const IssueMainContent = observer(function IssueMainContent(props: Props)
           workspaceSlug={workspaceSlug}
         />
 
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           {currentUser && (
             <IssueReaction
               className="flex-shrink-0"
@@ -170,7 +170,7 @@ export const IssueMainContent = observer(function IssueMainContent(props: Props)
         issueServiceType={EIssueServiceType.ISSUES}
       />
 
-      {windowSize[0] < 768 && (
+      {windowSize[0] < 1024 && (
         <PeekOverviewProperties
           workspaceSlug={workspaceSlug}
           projectId={projectId}

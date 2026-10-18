@@ -90,7 +90,7 @@ export const DescriptionVersionsRoot = observer(function DescriptionVersionsRoot
         projectId={projectId}
         workspaceSlug={workspaceSlug}
       />
-      <div className={cn(className)}>
+      <div className={cn("max-w-full", className)}>
         <DescriptionVersionsDropdown
           disabled={versionsCount === 0}
           entityInformation={entityInformation}
