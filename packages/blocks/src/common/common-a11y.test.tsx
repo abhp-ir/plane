@@ -4,9 +4,11 @@
  * See the LICENSE file for details.
  */
 
-import { render, screen } from "@testing-library/react";
+import { createRef } from "react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { Tooltip } from "@makeplane/propel/components/tooltip";
 import { ColorPicker } from "./color-picker/color-picker";
 import { DragHandle } from "./drag-handle";
 import { FavoriteStar } from "./favorite-star";
@@ -44,6 +46,55 @@ describe("DragHandle", () => {
   it("renders no button when disabled", () => {
     render(<DragHandle disabled />);
     expect(screen.queryByRole("button")).toBeNull();
+  });
+
+  it("forwards native trigger attributes, events and ref while containing context menus", async () => {
+    const ref = createRef<HTMLButtonElement>();
+    const onPointerEnter = vi.fn();
+    const onClick = vi.fn();
+    const onContextMenu = vi.fn();
+    const onParentContextMenu = vi.fn();
+    render(
+      <div onContextMenu={onParentContextMenu}>
+        <span id="reorder-hint">Reorder this widget</span>
+        <DragHandle
+          ref={ref}
+          id="widget-handle"
+          aria-describedby="reorder-hint"
+          onPointerEnter={onPointerEnter}
+          onClick={onClick}
+          onContextMenu={onContextMenu}
+        />
+      </div>
+    );
+    const button = screen.getByRole("button", { name: "Drag to rearrange" });
+    expect(ref.current).toBe(button);
+    expect(button.id).toBe("widget-handle");
+    expect(button.getAttribute("aria-describedby")).toBe("reorder-hint");
+    await userEvent.hover(button);
+    expect(onPointerEnter).toHaveBeenCalledTimes(1);
+    await userEvent.click(button);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    const event = new MouseEvent("contextmenu", { bubbles: true, cancelable: true });
+    fireEvent(button, event);
+    expect(event.defaultPrevented).toBe(true);
+    expect(onContextMenu).toHaveBeenCalledTimes(1);
+    expect(onParentContextMenu).not.toHaveBeenCalled();
+  });
+
+  it("anchors a keyboard tooltip to one native button", async () => {
+    render(
+      <Tooltip label="Reorder this widget">
+        <DragHandle />
+      </Tooltip>
+    );
+    expect(screen.getAllByRole("button")).toHaveLength(1);
+    const button = screen.getByRole("button", { name: "Drag to rearrange" });
+    await userEvent.tab();
+    const tooltip = await screen.findByRole("tooltip");
+    expect(document.activeElement).toBe(button);
+    expect(tooltip.textContent).toBe("Reorder this widget");
+    expect(button.getAttribute("aria-describedby")).toContain(tooltip.id);
   });
 });
 

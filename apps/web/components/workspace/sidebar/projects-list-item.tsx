@@ -292,6 +292,7 @@ export const SidebarProjectsListItem = observer(function SidebarProjectsListItem
         <div
           id={`sidebar-${projectId}-${projectListType}`}
           className={cn("relative", {
+            "ps-3": !disableDrag,
             "bg-layer-1 opacity-60": isDragging,
           })}
           ref={projectRef}
@@ -313,10 +314,9 @@ export const SidebarProjectsListItem = observer(function SidebarProjectsListItem
                 align="end"
                 disabled={isDragging || isMobile}
               >
-                <button
-                  type="button"
+                <DragHandle
                   className={cn(
-                    "absolute top-1/2 -left-3 hidden -translate-y-1/2 cursor-grab items-center justify-center rounded-sm text-placeholder group-hover/project-item:flex",
+                    "absolute -start-3 top-1/2 hidden -translate-y-1/2 cursor-grab items-center justify-center rounded-sm bg-transparent text-placeholder group-focus-within/project-item:flex group-hover/project-item:flex",
                     {
                       "cursor-not-allowed opacity-60": project.sort_order === null,
                       "cursor-grabbing": isDragging,
@@ -324,9 +324,7 @@ export const SidebarProjectsListItem = observer(function SidebarProjectsListItem
                     }
                   )}
                   ref={dragHandleRef}
-                >
-                  <DragHandle className="bg-transparent" />
-                </button>
+                />
               </Tooltip>
             )}
             <>

@@ -160,6 +160,7 @@ export const ExtendedSidebarItem = observer(function ExtendedSidebarItem(props: 
     <div
       id={`sidebar-${item.key}`}
       className={cn("relative", {
+        "ps-3": !disableDrag,
         "bg-layer-1 opacity-60": isDragging,
       })}
       ref={navigationIemRef}
@@ -173,19 +174,16 @@ export const ExtendedSidebarItem = observer(function ExtendedSidebarItem(props: 
       >
         {!disableDrag && (
           <Tooltip label={t("drag_to_rearrange")} align="start" disabled={isDragging}>
-            <button
-              type="button"
+            <DragHandle
               className={cn(
-                "absolute top-1/2 -left-3 flex -translate-y-1/2 cursor-grab items-center justify-center rounded text-placeholder opacity-0 group-hover/project-item:opacity-100",
+                "absolute -start-3 top-1/2 flex -translate-y-1/2 cursor-grab items-center justify-center rounded bg-transparent text-placeholder opacity-0 group-focus-within/project-item:opacity-100 group-hover/project-item:opacity-100",
                 {
                   "cursor-grabbing": isDragging,
                   "opacity-100": isDragging,
                 }
               )}
               ref={dragHandleRef}
-            >
-              <DragHandle className="bg-transparent" />
-            </button>
+            />
           </Tooltip>
         )}
         <SidebarNavItem isActive={isActive}>

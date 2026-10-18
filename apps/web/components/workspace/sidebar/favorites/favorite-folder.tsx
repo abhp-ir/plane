@@ -34,7 +34,7 @@ import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { IFavorite, InstructionType } from "@plane/types";
 import { Icon } from "@makeplane/propel/components/icon";
 import { Menu, MenuContent, MenuItem, MenuTrigger } from "@makeplane/propel/components/menu";
-import { DropIndicator, DragHandle } from "@plane/blocks/common";
+import { DropIndicator } from "@plane/blocks/common";
 // helpers
 import { cn } from "@plane/utils";
 // hooks
@@ -113,7 +113,7 @@ export function FavoriteFolder(props: Props) {
       dropTargetForElements({
         element,
         canDrop: ({ source }) => getCanDrop(source, favorite, false),
-        getData: ({ input, element }) => {
+        getData: ({ input, element: dropElement }) => {
           const blockedStates: InstructionType[] = [];
           if (!isLastChild) {
             blockedStates.push("reorder-below");
@@ -121,7 +121,7 @@ export function FavoriteFolder(props: Props) {
 
           return attachInstruction(initialData, {
             input,
-            element,
+            element: dropElement,
             currentLevel: 0,
             indentPerLevel: 0,
             mode: isLastChild ? "last-in-group" : "standard",
@@ -129,8 +129,8 @@ export function FavoriteFolder(props: Props) {
           });
         },
         onDrag: ({ source, self, location }) => {
-          const instruction = getInstructionFromPayload(self, source, location);
-          setInstruction(instruction);
+          const dropInstruction = getInstructionFromPayload(self, source, location);
+          setInstruction(dropInstruction);
         },
         onDragLeave: () => {
           setInstruction(undefined);
@@ -190,7 +190,7 @@ export function FavoriteFolder(props: Props) {
                   onClick={() => setIsOpen(!isOpen)}
                 >
                   <Tooltip
-                    label={favorite.sort_order === null ? "Join the project to rearrange" : "Drag to rearrange"}
+                    label={favorite.sort_order === null ? t("join_the_project_to_rearrange") : t("drag_to_rearrange")}
                     align="end"
                     disabled={isDragging || isMobile}
                   >
@@ -198,14 +198,18 @@ export function FavoriteFolder(props: Props) {
                         nesting a second button inside the folder toggle. Clicks bubble to the toggle as before. */}
                     <span
                       className={cn(
-                        "absolute top-1/2 -left-3 hidden -translate-y-1/2 cursor-grab items-center justify-center rounded-sm text-placeholder group-hover/project-item:flex",
+                        "absolute -start-3 top-1/2 hidden -translate-y-1/2 cursor-grab items-center justify-center rounded-sm p-0.5 text-placeholder group-focus-within/project-item:flex group-hover/project-item:flex",
                         {
                           "cursor-not-allowed opacity-60": favorite.sort_order === null,
                           "cursor-grabbing": isDragging,
                         }
                       )}
+                      onContextMenu={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }}
                     >
-                      <DragHandle className="bg-transparent" />
+                      <DragDropOutline className="size-3.5" aria-hidden="true" />
                     </span>
                   </Tooltip>
                   <div className="grid size-5 flex-shrink-0 place-items-center">
