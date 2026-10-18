@@ -4,14 +4,14 @@
  * See the LICENSE file for details.
  */
 
-import { FALLBACK_LANGUAGE, LANGUAGE_STORAGE_KEY, SUPPORTED_LANGUAGES } from "../constants/language";
+import { FALLBACK_LANGUAGE, LANGUAGE_STORAGE_KEY, getRegisteredLanguage } from "../constants/language";
 import type { TLanguage } from "../types";
 
 export function getStoredLanguage(): TLanguage {
   if (typeof window === "undefined") return FALLBACK_LANGUAGE;
   try {
     const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    return SUPPORTED_LANGUAGES.find(({ value }) => value === stored)?.value ?? FALLBACK_LANGUAGE;
+    return getRegisteredLanguage(stored) ?? FALLBACK_LANGUAGE;
   } catch {
     // Storage may be disabled; language selection must still work for this session.
     return FALLBACK_LANGUAGE;
@@ -20,10 +20,11 @@ export function getStoredLanguage(): TLanguage {
 
 export function syncDocumentLanguage(language: string, direction: "ltr" | "rtl"): void {
   if (typeof document === "undefined") return;
-  document.documentElement.lang = language;
+  const registered = getRegisteredLanguage(language) ?? FALLBACK_LANGUAGE;
+  document.documentElement.lang = registered;
   document.documentElement.dir = direction;
   try {
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, registered);
   } catch {
     // Keep the document usable even when the browser refuses persistence.
   }

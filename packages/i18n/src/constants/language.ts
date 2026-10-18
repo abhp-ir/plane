@@ -35,3 +35,8 @@ export const SUPPORTED_LANGUAGES: ILanguageOption[] = [
 ];
 
 export const LANGUAGE_STORAGE_KEY = "userLanguage";
+
+export function getRegisteredLanguage(language: unknown): TLanguage | undefined {
+  if (typeof language !== "string") return undefined;
+  return SUPPORTED_LANGUAGES.find(({ value }) => value.toLowerCase() === language.toLowerCase())?.value;
+}

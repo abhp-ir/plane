@@ -34,6 +34,9 @@ test("saved Persian is applied before readiness; profile and logout changes stay
     assert.equal(saved.get("userLanguage"), "en");
     await setLanguage("fa");
     assert.deepEqual(root, { lang: "fa", dir: "rtl" });
+    await setLanguage("ka-ge");
+    assert.deepEqual(root, { lang: "ka-ge", dir: "ltr" });
+    assert.equal(saved.get("userLanguage"), "ka-ge");
     await setLanguage("unsupported" as never);
     assert.deepEqual(root, { lang: "en", dir: "ltr" });
   } finally {

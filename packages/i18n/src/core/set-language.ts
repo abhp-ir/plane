@@ -5,11 +5,11 @@
  */
 
 import { initPromise, i18nInstance } from "./instance";
-import { FALLBACK_LANGUAGE, SUPPORTED_LANGUAGES } from "../constants/language";
+import { FALLBACK_LANGUAGE, getRegisteredLanguage } from "../constants/language";
 import type { TLanguage } from "../types";
 
 export async function setLanguage(lng: TLanguage): Promise<void> {
   await initPromise;
-  const language = SUPPORTED_LANGUAGES.find(({ value }) => value === lng)?.value ?? FALLBACK_LANGUAGE;
+  const language = getRegisteredLanguage(lng) ?? FALLBACK_LANGUAGE;
   await i18nInstance.changeLanguage(language);
 }
