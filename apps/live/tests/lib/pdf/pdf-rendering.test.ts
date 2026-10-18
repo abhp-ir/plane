@@ -84,6 +84,67 @@ describe("PDF Rendering Integration", () => {
       expect(text).toContain("Subheading");
     });
 
+    it("should preserve Persian text and mixed Latin identifiers in exported PDFs", async () => {
+      const doc: TipTapDocument = {
+        type: "doc",
+        content: [
+          {
+            type: "heading",
+            attrs: { level: 2 },
+            content: [{ type: "text", text: "گزارش پروژه" }],
+          },
+          {
+            type: "paragraph",
+            content: [{ type: "text", text: "فارسی روان، می‌نویسیم. Plane ABC-42" }],
+          },
+        ],
+      };
+
+      const buffer = await renderPlaneDocToPdfBuffer(doc, { title: "صفحه آزمون ABC-42" });
+      const text = await extractPdfText(buffer);
+      for (const expected of ["صفحه", "آزمون", "گزارش", "پروژه", "فارسی", "روان", "می‌نویسیم", "Plane ABC-42"]) {
+        // PDF text extraction represents the zero-width non-joining boundary as whitespace.
+        expect(text.replace(/\u200c/g, " ")).toContain(expected.replace(/\u200c/g, " "));
+      }
+      expect(buffer.toString("latin1")).toMatch(/\/BaseFont \/[A-Z]+\+Inter-/);
+    });
+
+    it("should preserve Persian in bold, italic, combined and monospace text", async () => {
+      const doc: TipTapDocument = {
+        type: "doc",
+        content: [
+          ...[
+            { text: "پررنگ Bold", marks: [{ type: "bold" }] },
+            { text: "مورب Italic", marks: [{ type: "italic" }] },
+            { text: "ترکیبی Bold italic", marks: [{ type: "bold" }, { type: "italic" }] },
+            { text: "کد Inline code", marks: [{ type: "code" }] },
+          ].map((node) => ({ type: "paragraph", content: [{ type: "text", ...node }] })),
+          {
+            type: "codeBlock",
+            content: [{ type: "text", text: 'const نام = "فارسی"; // ABC-42' }],
+          },
+        ],
+      };
+
+      const buffer = await renderPlaneDocToPdfBuffer(doc);
+      const text = await extractPdfText(buffer);
+      for (const expected of [
+        "پررنگ",
+        "مورب",
+        "ترکیبی",
+        "کد",
+        "نام",
+        "فارسی",
+        "Bold",
+        "Italic",
+        "Inline code",
+        "ABC-42",
+      ]) {
+        expect(text).toContain(expected);
+      }
+      expect(buffer.toString("latin1")).toContain("/BaseFont /Courier");
+    });
+
     it("should render paragraph with text and verify content", async () => {
       const doc: TipTapDocument = {
         type: "doc",

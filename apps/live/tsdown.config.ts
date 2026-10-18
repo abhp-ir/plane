@@ -7,5 +7,6 @@ export default defineConfig({
   dts: false,
   clean: true,
   sourcemap: false,
+  copy: [{ from: "src/lib/pdf/fonts", to: "dist/fonts" }],
   exports: true,
 });

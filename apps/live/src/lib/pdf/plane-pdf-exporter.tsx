@@ -50,6 +50,18 @@ Font.register({
   ],
 });
 
+// Bundle static Arabic-script faces; Latin text continues to use Inter or Courier.
+const amiriFontDir = path.dirname(require.resolve("./fonts/amiri/Amiri-Regular.ttf"));
+Font.register({
+  family: "Amiri",
+  fonts: [
+    { src: path.join(amiriFontDir, "Amiri-Regular.ttf"), fontWeight: 400 },
+    { src: path.join(amiriFontDir, "Amiri-Bold.ttf"), fontWeight: 700 },
+    { src: path.join(amiriFontDir, "Amiri-Italic.ttf"), fontWeight: 400, fontStyle: "italic" },
+    { src: path.join(amiriFontDir, "Amiri-BoldItalic.ttf"), fontWeight: 700, fontStyle: "italic" },
+  ],
+});
+
 export const createPdfDocument = (doc: TipTapDocument, options: PDFExportOptions = {}) => {
   const { title, author, subject, pageSize = "A4", pageOrientation = "portrait", metadata, noAssets } = options;
 

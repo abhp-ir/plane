@@ -18,7 +18,7 @@ import {
 export const pdfStyles = StyleSheet.create({
   page: {
     padding: 40,
-    fontFamily: "Inter",
+    fontFamily: ["Inter", "Amiri"],
     fontSize: 11,
     lineHeight: 1.6,
     color: TEXT_COLORS.primary,
@@ -92,7 +92,7 @@ export const pdfStyles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLORS.layer1, // bg-layer-1 equivalent
     padding: 12,
     borderRadius: 4,
-    fontFamily: "Courier",
+    fontFamily: ["Courier", "Amiri"],
     fontSize: 10,
     marginVertical: 8,
     color: TEXT_COLORS.primary,
@@ -103,7 +103,7 @@ export const pdfStyles = StyleSheet.create({
     padding: 2,
     paddingHorizontal: 4,
     borderRadius: 2,
-    fontFamily: "Courier",
+    fontFamily: ["Courier", "Amiri"],
     fontSize: 10,
     color: CODE_COLORS.text, // Red for inline code
   },

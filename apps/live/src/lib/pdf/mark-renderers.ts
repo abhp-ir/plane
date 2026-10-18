@@ -38,7 +38,7 @@ export const markRenderers: MarkRendererRegistry = {
 
   code: (_mark: TipTapMark, style: Style): Style => ({
     ...style,
-    fontFamily: "Courier",
+    fontFamily: ["Courier", "Amiri"],
     fontSize: 10,
     backgroundColor: BACKGROUND_COLORS.layer1,
     color: CODE_COLORS.text,
