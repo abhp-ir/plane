@@ -44,11 +44,20 @@
   padding-inline-start: 1em;
 }
 
+/* List items and quotes follow their first text block's native direction. */
+.ProseMirror :is(li, blockquote):has(> :is(.editor-paragraph-block, .editor-heading-block):first-child:dir(rtl)) {
+  direction: rtl;
+}
+
+.ProseMirror :is(li, blockquote):has(> :is(.editor-paragraph-block, .editor-heading-block):first-child:dir(ltr)) {
+  direction: ltr;
+}
+
 /* block quotes */
 .ProseMirror blockquote {
   font-style: normal;
   font-weight: 400;
-  @apply border-l-[3px] border-strong;
+  @apply border-s-[3px] border-strong;
 }
 
 .ProseMirror blockquote p::before,

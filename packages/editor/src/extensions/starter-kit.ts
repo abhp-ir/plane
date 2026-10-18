@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import StarterKit from "@tiptap/starter-kit";
+import { StarterKit } from "@tiptap/starter-kit";
 
 type TArgs = {
   enableHistory: boolean;
@@ -16,17 +16,17 @@ export const CustomStarterKitExtension = (args: TArgs) => {
   return StarterKit.configure({
     bulletList: {
       HTMLAttributes: {
-        class: "list-disc pl-7 space-y-(--list-spacing-y)",
+        class: "list-disc ps-0 space-y-(--list-spacing-y)",
       },
     },
     orderedList: {
       HTMLAttributes: {
-        class: "list-decimal pl-7 space-y-(--list-spacing-y)",
+        class: "list-decimal ps-0 space-y-(--list-spacing-y)",
       },
     },
     listItem: {
       HTMLAttributes: {
-        class: "not-prose space-y-2",
+        class: "not-prose ms-7 space-y-2",
       },
     },
     code: false,
@@ -36,11 +36,13 @@ export const CustomStarterKitExtension = (args: TArgs) => {
     paragraph: {
       HTMLAttributes: {
         class: "editor-paragraph-block",
+        dir: "auto",
       },
     },
     heading: {
       HTMLAttributes: {
         class: "editor-heading-block",
+        dir: "auto",
       },
     },
     dropcursor: {
