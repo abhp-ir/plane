@@ -7,8 +7,10 @@
 import type { Dispatch, ReactElement, SetStateAction } from "react";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 // helpers
-import { usePlatformOS } from "@plane/hooks";
+import { useOutsideClickDetector, usePlatformOS } from "@plane/hooks";
 import { cn } from "@plane/utils";
+// hooks
+import useSize from "@/hooks/use-window-size";
 
 interface ResizableSidebarProps {
   showPeek?: boolean;
@@ -56,8 +58,10 @@ export function ResizableSidebar({
   const peekTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const initialWidthRef = useRef<number>(0);
   const initialMouseXRef = useRef<number>(0);
+  const sidebarRef = useRef<HTMLDivElement>(null);
   // hooks
   const { isMobile } = usePlatformOS();
+  const [windowWidth] = useSize();
   // handlers
   const setShowPeek = useCallback(
     (value: boolean) => {
@@ -90,14 +94,26 @@ export function ResizableSidebar({
     setIsResizing(false);
   }, []);
 
-  const toggleCollapsed = useCallback(() => {
-    toggleCollapsedProp();
-    setShowPeek(false);
-    setIsHoveringTrigger(false);
-    if (peekTimeoutRef.current) {
-      clearTimeout(peekTimeoutRef.current);
-    }
-  }, [toggleCollapsedProp, setShowPeek]);
+  const toggleCollapsed = useCallback(
+    (collapsed?: boolean) => {
+      toggleCollapsedProp(collapsed);
+      setShowPeek(false);
+      setIsHoveringTrigger(false);
+      if (peekTimeoutRef.current) {
+        clearTimeout(peekTimeoutRef.current);
+      }
+    },
+    [toggleCollapsedProp, setShowPeek]
+  );
+
+  useOutsideClickDetector(sidebarRef, () => {
+    if (window.innerWidth < 768 && !isCollapsed) toggleCollapsed(true);
+  });
+
+  useEffect(() => {
+    // Main and peek share children; responsive state belongs to this single owner.
+    if (windowWidth < 768) toggleCollapsed(true);
+  }, [windowWidth, toggleCollapsed]);
 
   const handlePeekEnter = useCallback(() => {
     if (isCollapsed && showPeek) {
@@ -146,13 +162,13 @@ export function ResizableSidebar({
     if (!isAnySidebarDropdownOpen && isCollapsed && isHoveringTrigger) {
       handlePeekLeave();
     }
-  }, [isAnySidebarDropdownOpen]);
+  }, [isAnySidebarDropdownOpen, isCollapsed, isHoveringTrigger, handlePeekLeave]);
 
   useEffect(() => {
     if (!isAnyExtendedSidebarExpanded && isCollapsed && isHoveringTrigger) {
       handlePeekLeave();
     }
-  }, [isAnyExtendedSidebarExpanded]);
+  }, [isAnyExtendedSidebarExpanded, isCollapsed, isHoveringTrigger, handlePeekLeave]);
 
   // Reset peek when sidebar is expanded
   useEffect(() => {
@@ -179,11 +195,11 @@ export function ResizableSidebar({
       {/* Main Sidebar */}
       <div
         id="main-sidebar"
+        ref={sidebarRef}
         className={cn(
-          "z-20 h-full border-r border-subtle bg-surface-1",
+          "absolute start-0 z-20 h-full border-e border-subtle bg-surface-1 md:relative",
           !isResizing && "transition-all duration-300 ease-in-out",
-          isCollapsed ? "w-0 translate-x-[-100%] opacity-0" : "translate-x-0 opacity-100",
-          isMobile && "absolute",
+          isCollapsed ? "w-0 translate-x-[-100%] border-e-0 opacity-0" : "translate-x-0 opacity-100",
           className
         )}
         style={{
@@ -193,6 +209,8 @@ export function ResizableSidebar({
         }}
         role="complementary"
         aria-label="Main sidebar"
+        aria-hidden={isCollapsed}
+        inert={isCollapsed}
         data-prevent-outside-click={isMobile}
       >
         <aside
@@ -222,7 +240,7 @@ export function ResizableSidebar({
       {/* Peek View */}
       <div
         className={cn(
-          "shadow-sm absolute left-0 z-20 h-full bg-surface-1",
+          "shadow-sm absolute left-0 z-20 hidden h-full bg-surface-1 md:block",
           !isResizing && "transition-all duration-300 ease-in-out",
           isCollapsed && showPeek ? "translate-x-0 opacity-100" : "translate-x-[-100%] opacity-0",
           "pointer-events-none",
@@ -236,6 +254,8 @@ export function ResizableSidebar({
         onMouseLeave={handlePeekLeave}
         role="complementary"
         aria-label="Sidebar peek view"
+        aria-hidden={!isCollapsed || !showPeek}
+        inert={!isCollapsed || !showPeek}
       >
         <aside
           className={cn(
@@ -263,7 +283,7 @@ export function ResizableSidebar({
       </div>
 
       {/* Extended Sidebar */}
-      {extendedSidebar && extendedSidebar}
+      {extendedSidebar}
     </>
   );
 }
