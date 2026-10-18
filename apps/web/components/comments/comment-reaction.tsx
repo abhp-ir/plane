@@ -78,16 +78,17 @@ export const CommentReactions = observer(function CommentReactions(props: TProps
         handleToggle={setIsPickerOpen}
         onChange={handleEmojiSelect}
         disabled={disabled}
-        label={
+        placement="bottom-start"
+      >
+        {(trigger) => (
           <EmojiReactionGroup
             reactions={reactions}
             onReactionClick={handleReactionClick}
             showAddButton={showAddButton}
-            onAddReaction={() => setIsPickerOpen(true)}
+            addButton={trigger}
           />
-        }
-        placement="bottom-start"
-      />
+        )}
+      </EmojiReactionPicker>
     </div>
   );
 });

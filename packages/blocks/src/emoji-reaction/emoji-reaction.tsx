@@ -34,6 +34,7 @@ export type EmojiReactionGroupProps = React.ComponentPropsWithRef<"div"> & {
   reactions: EmojiReactionType[];
   onReactionClick?: (emoji: string) => void;
   onAddReaction?: () => void;
+  addButton?: React.ReactNode;
   showAddButton?: boolean;
   maxDisplayUsers?: number;
 };
@@ -114,8 +115,8 @@ const EmojiReactionButton = React.forwardRef(function EmojiReactionButton(
   return (
     // propel: `IconButton` takes an icon ELEMENT, a required `aria-label` and no className —
     // the caller's class rides a wrapper.
-    <Tooltip label={t("common.actions.add_reaction")}>
-      <span className={className}>
+    <span className={className}>
+      <Tooltip label={t("common.actions.add_reaction")}>
         <IconButton
           ref={ref}
           icon={<PropelIcon icon={<ReactionOutline className="size-3.5" />} />}
@@ -125,8 +126,8 @@ const EmojiReactionButton = React.forwardRef(function EmojiReactionButton(
           onClick={onAddReaction}
           {...props}
         />
-      </span>
-    </Tooltip>
+      </Tooltip>
+    </span>
   );
 });
 
@@ -135,6 +136,7 @@ const EmojiReactionGroup = React.forwardRef(function EmojiReactionGroup(
     reactions,
     onReactionClick,
     onAddReaction,
+    addButton,
     className,
     showAddButton = true,
     maxDisplayUsers = 5,
@@ -144,9 +146,9 @@ const EmojiReactionGroup = React.forwardRef(function EmojiReactionGroup(
 ) {
   return (
     <div ref={ref} className={cn("flex flex-wrap items-center gap-2", className)} {...props}>
-      {reactions.map((reaction, index) => (
+      {reactions.map((reaction) => (
         <EmojiReaction
-          key={`${reaction.emoji}-${index}`}
+          key={reaction.emoji}
           emoji={reaction.emoji}
           count={reaction.count}
           reacted={reaction.reacted}
@@ -154,7 +156,7 @@ const EmojiReactionGroup = React.forwardRef(function EmojiReactionGroup(
           onReactionClick={onReactionClick}
         />
       ))}
-      {showAddButton && <EmojiReactionButton onAddReaction={onAddReaction} />}
+      {showAddButton && (addButton ?? <EmojiReactionButton onAddReaction={onAddReaction} />)}
     </div>
   );
 });

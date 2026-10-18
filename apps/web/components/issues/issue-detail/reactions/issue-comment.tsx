@@ -95,18 +95,16 @@ export const IssueCommentReaction = observer(function IssueCommentReaction(props
   };
 
   // Transform reactions data to Propel EmojiReactionType format
-  const reactions: EmojiReactionType[] = useMemo(() => {
-    if (!reactionIds) return [];
-
-    return Object.keys(reactionIds)
-      .filter((reaction) => reactionIds[reaction]?.length > 0)
-      .map((reaction) => ({
-        emoji: stringToEmoji(reaction),
-        count: reactionIds[reaction].length,
-        reacted: userReactions.includes(reaction),
-        users: getReactionUsers(reaction),
-      }));
-  }, [reactionIds, userReactions]);
+  const reactions: EmojiReactionType[] = reactionIds
+    ? Object.keys(reactionIds)
+        .filter((reaction) => reactionIds[reaction]?.length > 0)
+        .map((reaction) => ({
+          emoji: stringToEmoji(reaction),
+          count: reactionIds[reaction].length,
+          reacted: userReactions.includes(reaction),
+          users: getReactionUsers(reaction),
+        }))
+    : [];
 
   const handleReactionClick = (emoji: string) => {
     if (disabled) return;
@@ -128,16 +126,17 @@ export const IssueCommentReaction = observer(function IssueCommentReaction(props
         handleToggle={setIsPickerOpen}
         onChange={handleEmojiSelect}
         disabled={disabled}
-        label={
+        placement="bottom-start"
+      >
+        {(trigger) => (
           <EmojiReactionGroup
             reactions={reactions}
             onReactionClick={handleReactionClick}
             showAddButton={!disabled}
-            onAddReaction={() => setIsPickerOpen(true)}
+            addButton={trigger}
           />
-        }
-        placement="bottom-start"
-      />
+        )}
+      </EmojiReactionPicker>
     </div>
   );
 });

@@ -113,15 +113,16 @@ export const IssueEmojiReactions = observer(function IssueEmojiReactions(props: 
       isOpen={isPickerOpen}
       handleToggle={setIsPickerOpen}
       onChange={handleEmojiSelect}
-      label={
+      placement="bottom-start"
+    >
+      {(trigger) => (
         <EmojiReactionGroup
           reactions={propelReactions}
           onReactionClick={handleEmojiClick}
           showAddButton
-          onAddReaction={() => setIsPickerOpen(true)}
+          addButton={trigger}
         />
-      }
-      placement="bottom-start"
-    />
+      )}
+    </EmojiReactionPicker>
   );
 });

@@ -12,6 +12,7 @@ import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 import { convertPlacementToSideAndAlign } from "../utils/placement";
 import type { Placement, Side, Align } from "../utils/placement";
+import { EmojiReactionButton } from "./emoji-reaction";
 
 export type EmojiReactionPickerProps = {
   isOpen: boolean;
@@ -20,7 +21,7 @@ export type EmojiReactionPickerProps = {
   closeOnSelect?: boolean;
   disabled?: boolean;
   dropdownClassName?: string;
-  label: React.ReactNode;
+  children?: (trigger: React.ReactElement) => React.ReactNode;
   onChange: (emoji: string) => void;
   placement?: Placement;
   searchDisabled?: boolean;
@@ -37,7 +38,7 @@ export function EmojiReactionPicker(props: EmojiReactionPickerProps) {
     closeOnSelect = true,
     disabled = false,
     dropdownClassName,
-    label,
+    children,
     onChange,
     placement = "bottom-start",
     searchDisabled = false,
@@ -80,14 +81,16 @@ export function EmojiReactionPicker(props: EmojiReactionPickerProps) {
     [onChange, closeOnSelect, handleOpenChange]
   );
 
+  const trigger = (
+    <PopoverTrigger
+      disabled={disabled}
+      render={<EmojiReactionButton className={buttonClassName} disabled={disabled} />}
+    />
+  );
+
   return (
     <Popover open={isOpen} onOpenChange={handleOpenChange}>
-      <PopoverTrigger
-        disabled={disabled}
-        render={<button type="button" className={cn("outline-none", buttonClassName)} disabled={disabled} />}
-      >
-        {label}
-      </PopoverTrigger>
+      {children ? children(trigger) : trigger}
       <PopoverContent
         variant="rich"
         side={finalSide}

@@ -129,16 +129,17 @@ export const CommentReactions = observer(function CommentReactions(props: Props)
         handleToggle={setIsPickerOpen}
         onChange={handleEmojiSelect}
         disabled={isInIframe}
-        label={
+        placement="bottom-start"
+      >
+        {(trigger) => (
           <EmojiReactionGroup
             reactions={propelReactions}
             onReactionClick={handleEmojiClick}
             showAddButton={!isInIframe}
-            onAddReaction={() => setIsPickerOpen(true)}
+            addButton={trigger}
           />
-        }
-        placement="bottom-start"
-      />
+        )}
+      </EmojiReactionPicker>
     </div>
   );
 });

@@ -22,7 +22,7 @@ import { LiteTextEditor } from "@/components/editor/lite-text";
 // local imports
 import { CommentReactions } from "../comment-reaction";
 import { CommentCardEditForm } from "./edit-form";
-import { EmojiReactionButton, EmojiReactionPicker } from "@plane/blocks/emoji-reaction";
+import { EmojiReactionPicker } from "@plane/blocks/emoji-reaction";
 import { useMember } from "@/hooks/store/use-member";
 
 export type TCommentCardDisplayProps = {
@@ -143,7 +143,6 @@ export const CommentCardDisplay = observer(function CommentCardDisplay(props: TC
               handleToggle={setIsPickerOpen}
               onChange={handleEmojiSelect}
               disabled={disabled}
-              label={<EmojiReactionButton onAddReaction={() => setIsPickerOpen(true)} />}
               placement="bottom-start"
             />
             {renderQuickActions ? renderQuickActions() : null}
