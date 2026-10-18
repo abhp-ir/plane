@@ -71,7 +71,28 @@ const translatedNamespaces = [
   "update",
   "work-item-type",
   "workflow",
+  "integration",
 ];
+
+// Protocol examples and product names must stay exact, including ASCII identifiers.
+const exactTechnicalValues: Record<string, string> = {
+  "work_item_type_hierarchy.break_hierarchy_modal.confirm_input.placeholder": "Confirm",
+  "github_integration.name": "GitHub",
+  "gitlab_integration.name": "GitLab",
+  "gitlab_enterprise_integration.name": "GitLab Enterprise",
+  "slack_integration.name": "Slack",
+  "sentry_integration.name": "Sentry",
+  "bitbucket_dc_integration.name": "Bitbucket Data Center",
+  "oauth_bridge_integration.name": "OAuth Bridge",
+  "github_enterprise_integration.name": "GitHub Enterprise",
+  "oauth_bridge_integration.provider_form.issuer_placeholder": "https://login.microsoftonline.com/tenant-id/v2.0",
+  "oauth_bridge_integration.provider_form.jwks_url_placeholder":
+    "https://login.microsoftonline.com/tenant-id/discovery/v2.0/keys",
+  "oauth_bridge_integration.provider_form.jwks_url_label": "JWKS URL",
+  "oauth_bridge_integration.provider_form.audience_placeholder": "api://my-app-id",
+  "oauth_bridge_integration.provider_form.user_claims_placeholder": "email, preferred_username, upn",
+  "oauth_bridge_integration.provider_form.rate_limit_placeholder": "120/minute",
+};
 for (const namespace of translatedNamespaces) {
   test(`${namespace}: exact source keys, ICU variables and markup are preserved`, () => {
     const english = load("en", namespace);
@@ -79,11 +100,8 @@ for (const namespace of translatedNamespaces) {
     assert.deepEqual(Object.keys(persian).toSorted(), Object.keys(english).toSorted());
     for (const [key, source] of Object.entries(english)) {
       const target = persian[key];
-      if (
-        target === source &&
-        /[A-Za-z]/.test(source) &&
-        key !== "work_item_type_hierarchy.break_hierarchy_modal.confirm_input.placeholder"
-      ) {
+      if (Object.hasOwn(exactTechnicalValues, key)) assert.equal(target, exactTechnicalValues[key], key);
+      if (target === source && /[A-Za-z]/.test(source) && !Object.hasOwn(exactTechnicalValues, key)) {
         assert.match(
           source,
           /^(Plane(?: AI| Pro| Runner)?|Intake|\{workspace\} - Intake|Stickies|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|ID|URL|CSV|Excel|JSON|plane\.so|name@company\.com|https:\/\/example\.com(?:\/(?:setup|webhook))?|https:\/\/example\.com https:\/\/example\.com\/)$/,
@@ -111,10 +129,27 @@ for (const namespace of translatedNamespaces) {
         "Business",
         "Enterprise",
         "GitHub",
+        "GitLab",
+        "Slack",
+        "Sentry",
+        "Bitbucket Data Center",
+        "OAuth Bridge",
+        "Azure AD",
+        "Okta",
         "YouTube",
         "Figma",
         "Google Docs",
         "OIDC",
+        "OAuth",
+        "JWT",
+        "JWKS",
+        "HTTPS",
+        "TTL",
+        "Base64",
+        "PR",
+        "MR",
+        "DMs",
+        "JSON Web Key Set",
         "SAML",
         "SSO",
         "IdP",
@@ -137,7 +172,7 @@ test("i18next resource backend loads Persian, ICU counts, English fallback and L
   assert.equal(i18nInstance.t("sidebar.projects"), "پروژه‌ها");
   assert.equal(i18nInstance.t("auth.common.resend_in", { seconds: 12 }), "ارسال دوباره تا 12 ثانیهٔ دیگر");
   // The source confirmation prompt requires this exact typed token.
-  assert.equal(i18nInstance.t("work_item_type_hierarchy.break_hierarchy_modal.confirm_input.placeholder"), "Confirm");
+  for (const [key, value] of Object.entries(exactTechnicalValues)) assert.equal(i18nInstance.t(key), value, key);
   assert.ok(i18nInstance.t("work_item_type_hierarchy.break_hierarchy_modal.confirm_input.label").includes("Confirm"));
   assert.ok(i18nInstance.t("work_item_types.settings.properties.formula.tooltip").includes("{Field Name}"));
   for (const namespace of translatedNamespaces) {
