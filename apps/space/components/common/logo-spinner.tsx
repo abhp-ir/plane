@@ -4,19 +4,19 @@
  * See the LICENSE file for details.
  */
 
-import { useTheme } from "next-themes";
-// assets
-import LogoSpinnerDark from "@/app/assets/images/logo-spinner-dark.gif?url";
-import LogoSpinnerLight from "@/app/assets/images/logo-spinner-light.gif?url";
+import { LogoSpinner as LogoSpinnerRoot, LogoSpinnerImage } from "@makeplane/propel/elements/logo-spinner";
+import LogoSpinnerDark from "@makeplane/propel/components/logo-spinner/logo-spinner-dark.gif?url";
+import LogoSpinnerLight from "@makeplane/propel/components/logo-spinner/logo-spinner-light.gif?url";
+import LogoSpinnerDarkStill from "@makeplane/propel/components/logo-spinner/logo-spinner-dark-still.png?url";
+import LogoSpinnerLightStill from "@makeplane/propel/components/logo-spinner/logo-spinner-light-still.png?url";
 
 export function LogoSpinner() {
-  const { resolvedTheme } = useTheme();
-
-  const logoSrc = resolvedTheme === "dark" ? LogoSpinnerLight : LogoSpinnerDark;
-
   return (
-    <div className="flex items-center justify-center">
-      <img src={logoSrc} alt="logo" className="h-6 w-auto sm:h-11" />
-    </div>
+    <LogoSpinnerRoot>
+      <LogoSpinnerImage size="fluid" theme="light" src={LogoSpinnerLight} alt="logo" />
+      <LogoSpinnerImage size="fluid" theme="dark" src={LogoSpinnerDark} alt="logo" />
+      <LogoSpinnerImage size="fluid" theme="light" motion="still" src={LogoSpinnerLightStill} alt="logo" />
+      <LogoSpinnerImage size="fluid" theme="dark" motion="still" src={LogoSpinnerDarkStill} alt="logo" />
+    </LogoSpinnerRoot>
   );
 }
