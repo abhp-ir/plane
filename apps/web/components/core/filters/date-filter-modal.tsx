@@ -6,7 +6,7 @@
 
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@makeplane/propel/components/button";
-import { Calendar } from "@makeplane/propel/components/calendar";
+import { DateSelect } from "@plane/blocks/property-select";
 import {
   Dialog,
   DialogActions,
@@ -20,7 +20,8 @@ import { Icon } from "@makeplane/propel/components/icon";
 import { IconButton } from "@makeplane/propel/components/icon-button";
 import { CloseOutline } from "@makeplane/propel/icons";
 import { useTranslation } from "@plane/i18n";
-import { renderFormattedPayloadDate, renderFormattedDate, getDate } from "@plane/utils";
+import { renderFormattedPayloadDate, getDate } from "@plane/utils";
+import { useUserProfile } from "@/hooks/store/user";
 import { DateFilterSelect } from "./date-filter-select";
 type Props = {
   title: string;
@@ -44,6 +45,7 @@ const defaultValues: TFormValues = {
 export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props) {
   // plane hooks
   const { t } = useTranslation();
+  const { data: userProfile } = useUserProfile();
   const { handleSubmit, watch, control } = useForm<TFormValues>({
     defaultValues,
   });
@@ -59,7 +61,7 @@ export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props)
   };
 
   const date1 = getDate(watch("date1"));
-  const date2 = getDate(watch("date1"));
+  const date2 = getDate(watch("date2"));
 
   const isInvalid = watch("filterType") === "range" && date1 && date2 ? date1 > date2 : false;
 
@@ -70,7 +72,7 @@ export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props)
         if (!open) handleClose();
       }}
     >
-      <DialogContent size="md">
+      <DialogContent size="md" aria-label={title}>
         <DialogCloseGroup>
           <IconButton
             variant="ghost"
@@ -93,71 +95,71 @@ export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props)
                     )}
                   />
                 </div>
-                <div className="flex w-full justify-between gap-4">
-                  <Controller
-                    control={control}
-                    name="date1"
-                    render={({ field: { value, onChange } }) => {
-                      const dateValue = getDate(value);
-                      const date2Value = getDate(watch("date2"));
-                      return (
-                        <Calendar
-                          selected={dateValue}
-                          defaultMonth={dateValue}
-                          onSelect={(date: Date | undefined) => {
-                            if (!date) return;
-                            onChange(date);
-                          }}
-                          mode="single"
-                          showOutsideDays
-                          disabled={date2Value ? [{ after: date2Value }] : undefined}
-                        />
-                      );
-                    }}
-                  />
-                  {watch("filterType") === "range" && (
+                <div className="flex w-full flex-wrap gap-4">
+                  <fieldset className="min-w-0 flex-1 space-y-1">
+                    <legend className="text-11 text-secondary">
+                      {t(watch("filterType") === "range" ? "start_date" : "date")}
+                    </legend>
                     <Controller
                       control={control}
-                      name="date2"
+                      name="date1"
                       render={({ field: { value, onChange } }) => {
                         const dateValue = getDate(value);
-                        const date1Value = getDate(watch("date1"));
+                        const date2Value = getDate(watch("date2"));
                         return (
-                          <Calendar
-                            selected={dateValue}
-                            defaultMonth={dateValue}
-                            onSelect={(date: Date | undefined) => {
+                          <DateSelect
+                            variant="select-md"
+                            value={dateValue ?? null}
+                            onChange={(date) => {
                               if (!date) return;
                               onChange(date);
                             }}
-                            mode="single"
-                            showOutsideDays
-                            disabled={date1Value ? [{ before: date1Value }] : undefined}
+                            maxDate={date2Value}
+                            weekStartsOn={userProfile?.start_of_the_week}
+                            testId="date-filter-start-select"
                           />
                         );
                       }}
                     />
+                  </fieldset>
+                  {watch("filterType") === "range" && (
+                    <fieldset className="min-w-0 flex-1 space-y-1">
+                      <legend className="text-11 text-secondary">{t("end_date")}</legend>
+                      <Controller
+                        control={control}
+                        name="date2"
+                        render={({ field: { value, onChange } }) => {
+                          const dateValue = getDate(value);
+                          const date1Value = getDate(watch("date1"));
+                          return (
+                            <DateSelect
+                              variant="select-md"
+                              value={dateValue ?? null}
+                              onChange={(date) => {
+                                if (!date) return;
+                                onChange(date);
+                              }}
+                              minDate={date1Value}
+                              weekStartsOn={userProfile?.start_of_the_week}
+                              testId="date-filter-end-select"
+                            />
+                          );
+                        }}
+                      />
+                    </fieldset>
                   )}
                 </div>
-                {watch("filterType") === "range" && (
-                  <h6 className="flex items-center gap-1 text-11">
-                    <span className="text-secondary">After:</span>
-                    <span>{renderFormattedDate(watch("date1"))}</span>
-                    <span className="ml-1 text-secondary">Before:</span>
-                    {!isInvalid && <span>{renderFormattedDate(watch("date2"))}</span>}
-                  </h6>
-                )}
               </div>
             </DialogBody>
           </DialogMain>
           <DialogActions>
-            <Button variant="secondary" size="md" stretch="auto" label="Cancel" onClick={handleClose} />
+            <Button variant="secondary" size="md" stretch="auto" label={t("cancel")} onClick={handleClose} />
             <Button
               variant="primary"
               size="md"
               stretch="auto"
               type="button"
-              label="Apply"
+              label={t("common.apply")}
               onClick={() => {
                 void handleSubmit(handleFormSubmit)();
               }}

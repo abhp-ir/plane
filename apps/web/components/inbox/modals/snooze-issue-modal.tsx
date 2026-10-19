@@ -9,8 +9,9 @@ import { addDays } from "date-fns";
 // ui
 import { useTranslation } from "@plane/i18n";
 import { Button } from "@makeplane/propel/components/button";
-import { Calendar } from "@makeplane/propel/components/calendar";
+import { DateSelect } from "@plane/blocks/property-select";
 import { Dialog, DialogActions, DialogBody, DialogContent, DialogMain } from "@makeplane/propel/components/dialog";
+import { useUserProfile } from "@/hooks/store/user";
 
 export type InboxIssueSnoozeModalProps = {
   isOpen: boolean;
@@ -33,6 +34,7 @@ export function InboxIssueSnoozeModal(props: InboxIssueSnoozeModalProps) {
   const [pickedDate, setPickedDate] = useState<Date | undefined>();
   //hooks
   const { t } = useTranslation();
+  const { data: userProfile } = useUserProfile();
   // derived values
   // A snooze ends at 00:00 of the picked day in the project timezone, so any day that has already
   // started there would lapse at once. The pick is cleared on close because this modal stays
@@ -56,20 +58,16 @@ export function InboxIssueSnoozeModal(props: InboxIssueSnoozeModalProps) {
       <DialogContent size="xs" aria-label={t("inbox_issue.actions.snooze")}>
         <DialogMain>
           <DialogBody>
-            <Calendar
-              selected={date}
-              defaultMonth={date}
-              onSelect={(selected: Date | undefined) => {
+            <DateSelect
+              variant="select-md"
+              value={date}
+              onChange={(selected) => {
                 if (!selected) return;
                 setPickedDate(selected);
               }}
-              mode="single"
-              showOutsideDays
-              disabled={[
-                {
-                  before: tomorrow,
-                },
-              ]}
+              minDate={tomorrow}
+              weekStartsOn={userProfile?.start_of_the_week}
+              testId="intake-snooze-date-select"
             />
           </DialogBody>
         </DialogMain>

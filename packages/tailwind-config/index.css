@@ -31,6 +31,11 @@ body {
   @apply font-body bg-canvas text-primary;
 }
 
+/* Base UI's fixed focus guards use a -1px margin that overflows the RTL viewport. */
+:root[dir="rtl"] [data-base-ui-focus-guard] {
+  margin: 0 !important;
+}
+
 /* emoji icon picker */
 @utility conical-gradient {
   background: conic-gradient(
