@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import React from "react";
 import { observer } from "mobx-react";
 // helpers
@@ -24,12 +25,13 @@ type Props = {
  */
 export const MergedDateDisplay = observer(function MergedDateDisplay(props: Props) {
   const { startDate, endDate, className = "" } = props;
+  const { currentLocale } = useTranslation();
 
   // Parse dates
   const parsedStartDate = getDate(startDate);
   const parsedEndDate = getDate(endDate);
 
-  const displayText = formatDateRange(parsedStartDate, parsedEndDate);
+  const displayText = formatDateRange(parsedStartDate, parsedEndDate, currentLocale);
 
   if (!displayText) {
     return null;

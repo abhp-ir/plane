@@ -11,6 +11,12 @@ export default defineConfig({
   resolve: { alias: { "@": fileURLToPath(new URL(".", import.meta.url)) } },
   test: {
     environment: "node",
-    include: ["store/**/*.test.ts", "services/**/*.test.ts", "helpers/**/*.test.ts", "components/**/*.test.ts"],
+    include: [
+      "store/**/*.test.ts",
+      "services/**/*.test.ts",
+      "helpers/**/*.test.ts",
+      "components/**/*.test.ts",
+      "hooks/**/*.test.ts",
+    ],
   },
 });

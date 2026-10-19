@@ -5,7 +5,9 @@
  */
 
 import { differenceInDays, format, formatDistanceToNow, isAfter, isEqual, isValid, parseISO } from "date-fns";
+import { getMonth as getJalaliMonth, getYear as getJalaliYear } from "date-fns-jalali";
 import { isNumber } from "lodash-es";
+import { formatDateForLocale, getDateCalendar } from "./localized-datetime";
 
 // Format Date Helpers
 /**
@@ -18,7 +20,8 @@ import { isNumber } from "lodash-es";
  */
 export const renderFormattedDate = (
   date: string | Date | undefined | null,
-  formatToken: string = "MMM dd, yyyy"
+  formatToken: string = "MMM dd, yyyy",
+  locale: string = "en"
 ): string | undefined => {
   // Parse the date to check if it is valid
   const parsedDate = getDate(date);
@@ -29,10 +32,10 @@ export const renderFormattedDate = (
   let formattedDate;
   try {
     // Format the date in the format provided or default format (MMM dd, yyyy)
-    formattedDate = format(parsedDate, formatToken);
+    formattedDate = formatDateForLocale(parsedDate, formatToken, locale);
   } catch (_e) {
     // Format the date in format (MMM dd, yyyy) in case of any error
-    formattedDate = format(parsedDate, "MMM dd, yyyy");
+    formattedDate = formatDateForLocale(parsedDate, "MMM dd, yyyy", locale);
   }
   return formattedDate;
 };
@@ -43,7 +46,7 @@ export const renderFormattedDate = (
  * @param {string | Date} date
  * @example renderShortDateFormat("2024-01-01") // Jan 01
  */
-export const renderFormattedDateWithoutYear = (date: string | Date): string => {
+export const renderFormattedDateWithoutYear = (date: string | Date, locale: string = "en"): string => {
   // Parse the date to check if it is valid
   const parsedDate = getDate(date);
   // return if undefined
@@ -51,7 +54,7 @@ export const renderFormattedDateWithoutYear = (date: string | Date): string => {
   // Check if the parsed date is valid before formatting
   if (!isValid(parsedDate)) return ""; // Return empty string for invalid dates
   // Format the date in short format (MMM dd)
-  const formattedDate = format(parsedDate, "MMM dd");
+  const formattedDate = formatDateForLocale(parsedDate, "MMM dd", locale);
   return formattedDate;
 };
 
@@ -284,7 +287,10 @@ export const getDate = (date: string | Date | undefined | null): Date | undefine
   try {
     if (!date || date === "") return;
 
-    if (typeof date !== "string" && !(date instanceof String)) return date;
+    if (typeof date !== "string") {
+      if (Object.prototype.toString.call(date) !== "[object String]") return date;
+      date = String(date);
+    }
 
     const [yearString, monthString, dayString] = date.substring(0, 10).split("-");
     const year = parseInt(yearString);
@@ -391,7 +397,7 @@ export const getReadTimeFromWordsCount = (wordsCount: number): number => {
  */
 export const generateDateArray = (startDate: string | Date, endDate: string | Date) => {
   // Convert the start and end dates to Date objects if they aren't already
-  const start = new Date(startDate);
+  let start = new Date(startDate);
   // start.setDate(start.getDate() + 1);
   const end = new Date(endDate);
   end.setDate(end.getDate() + 2);
@@ -406,7 +412,7 @@ export const generateDateArray = (startDate: string | Date, endDate: string | Da
       date: new Date(start).toISOString().split("T")[0],
     });
     // Increment the date by 1 day (86400000 milliseconds)
-    start.setDate(start.getDate() + 1);
+    start = new Date(start.setDate(start.getDate() + 1));
   }
 
   return dateArray;
@@ -491,7 +497,8 @@ export const checkDateCriteria = (dateToCheck: Date | null, filterDate: Date, ty
  */
 export const formatDateRange = (
   parsedStartDate: Date | null | undefined,
-  parsedEndDate: Date | null | undefined
+  parsedEndDate: Date | null | undefined,
+  locale: string = "en"
 ): string => {
   // If no dates are provided
   if (!parsedStartDate && !parsedEndDate) {
@@ -500,38 +507,38 @@ export const formatDateRange = (
 
   // If only start date is provided
   if (parsedStartDate && !parsedEndDate) {
-    return format(parsedStartDate, "MMM dd, yyyy");
+    return formatDateForLocale(parsedStartDate, "MMM dd, yyyy", locale);
   }
 
   // If only end date is provided
   if (!parsedStartDate && parsedEndDate) {
-    return format(parsedEndDate, "MMM dd, yyyy");
+    return formatDateForLocale(parsedEndDate, "MMM dd, yyyy", locale);
   }
 
   // If both dates are provided
   if (parsedStartDate && parsedEndDate) {
-    const startYear = parsedStartDate.getFullYear();
-    const startMonth = parsedStartDate.getMonth();
-    const endYear = parsedEndDate.getFullYear();
-    const endMonth = parsedEndDate.getMonth();
+    const isJalali = getDateCalendar(locale) === "persian";
+    const startYear = isJalali ? getJalaliYear(parsedStartDate) : parsedStartDate.getFullYear();
+    const startMonth = isJalali ? getJalaliMonth(parsedStartDate) : parsedStartDate.getMonth();
+    const endYear = isJalali ? getJalaliYear(parsedEndDate) : parsedEndDate.getFullYear();
+    const endMonth = isJalali ? getJalaliMonth(parsedEndDate) : parsedEndDate.getMonth();
+    const yearLabel = isJalali ? formatDateForLocale(parsedStartDate, "yyyy", locale) : startYear;
 
     // Same year, same month
     if (startYear === endYear && startMonth === endMonth) {
-      const startDay = format(parsedStartDate, "dd");
-      const endDay = format(parsedEndDate, "dd");
-      return `${format(parsedStartDate, "MMM")} ${startDay} - ${endDay}, ${startYear}`;
+      return `${formatDateForLocale(parsedStartDate, "MMM dd", locale)} - ${formatDateForLocale(parsedEndDate, "dd", locale)}, ${yearLabel}`;
     }
 
     // Same year, different month
     if (startYear === endYear) {
-      const startFormatted = format(parsedStartDate, "MMM dd");
-      const endFormatted = format(parsedEndDate, "MMM dd");
-      return `${startFormatted} - ${endFormatted}, ${startYear}`;
+      const startFormatted = formatDateForLocale(parsedStartDate, "MMM dd", locale);
+      const endFormatted = formatDateForLocale(parsedEndDate, "MMM dd", locale);
+      return `${startFormatted} - ${endFormatted}, ${yearLabel}`;
     }
 
     // Different year
-    const startFormatted = format(parsedStartDate, "MMM dd, yyyy");
-    const endFormatted = format(parsedEndDate, "MMM dd, yyyy");
+    const startFormatted = formatDateForLocale(parsedStartDate, "MMM dd, yyyy", locale);
+    const endFormatted = formatDateForLocale(parsedEndDate, "MMM dd, yyyy", locale);
     return `${startFormatted} - ${endFormatted}`;
   }
 

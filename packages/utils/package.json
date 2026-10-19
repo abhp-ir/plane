@@ -30,6 +30,7 @@
     "chroma-js": "catalog:",
     "clsx": "catalog:",
     "date-fns": "catalog:",
+    "date-fns-jalali": "catalog:",
     "hast": "catalog:",
     "hast-util-to-mdast": "catalog:",
     "lodash-es": "catalog:",

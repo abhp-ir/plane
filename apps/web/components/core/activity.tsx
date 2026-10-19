@@ -5,6 +5,7 @@
  */
 
 import { useEffect } from "react";
+import { useTranslation } from "@plane/i18n";
 import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // store hooks
@@ -148,7 +149,12 @@ const getInboxUserActivityMessage = (activity: IIssueActivity, showIssue: boolea
 
 const activityDetails: {
   [key: string]: {
-    message: (activity: IIssueActivity, showIssue: boolean, workspaceSlug: string) => React.ReactNode;
+    message: (
+      activity: IIssueActivity,
+      showIssue: boolean,
+      workspaceSlug: string,
+      currentLocale: string
+    ) => React.ReactNode;
     icon: React.ReactNode;
   };
 } = {
@@ -666,7 +672,7 @@ const activityDetails: {
     icon: <GridOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   start_date: {
-    message: (activity, showIssue) => {
+    message: (activity, showIssue, _workspaceSlug, currentLocale) => {
       if (!activity.new_value)
         return (
           <>
@@ -684,7 +690,7 @@ const activityDetails: {
           <>
             set the start date to{" "}
             <span className="font-medium whitespace-nowrap text-primary">
-              {renderFormattedDate(activity.new_value)}
+              {renderFormattedDate(activity.new_value, undefined, currentLocale)}
             </span>
             {showIssue && (
               <>
@@ -698,7 +704,7 @@ const activityDetails: {
     icon: <CalendarOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   target_date: {
-    message: (activity, showIssue) => {
+    message: (activity, showIssue, _workspaceSlug, currentLocale) => {
       if (!activity.new_value)
         return (
           <>
@@ -716,7 +722,7 @@ const activityDetails: {
           <>
             set the due date to{" "}
             <span className="font-medium whitespace-nowrap text-primary">
-              {renderFormattedDate(activity.new_value)}
+              {renderFormattedDate(activity.new_value, undefined, currentLocale)}
             </span>
             {showIssue && (
               <>
@@ -755,6 +761,7 @@ type ActivityMessageProps = {
 };
 
 export function ActivityMessage({ activity, showIssue = false }: ActivityMessageProps) {
+  const { currentLocale } = useTranslation();
   // router params
   const { workspaceSlug } = useParams();
   const activityField = activity.field ?? "issue";
@@ -764,7 +771,8 @@ export function ActivityMessage({ activity, showIssue = false }: ActivityMessage
       {activityDetails[activityField as keyof typeof activityDetails]?.message(
         activity,
         showIssue,
-        workspaceSlug ? workspaceSlug.toString() : (activity.workspace_detail?.slug ?? "")
+        workspaceSlug ? workspaceSlug.toString() : (activity.workspace_detail?.slug ?? ""),
+        currentLocale
       )}
     </>
   );

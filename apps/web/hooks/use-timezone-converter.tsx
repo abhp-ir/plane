@@ -5,12 +5,14 @@
  */
 
 import { useCallback } from "react";
-import { format } from "date-fns";
+import { useTranslation } from "@plane/i18n";
+import { formatDateForLocale } from "@plane/utils";
 import { useProject } from "@/hooks/store/use-project";
 import { useUser } from "@/hooks/store/user";
 
 export const useTimeZoneConverter = (projectId: string) => {
   const { data: user } = useUser();
+  const { currentLocale } = useTranslation();
   const { getProjectById } = useProject();
   const userTimezone = user?.user_timezone;
   const projectTimezone = getProjectById(projectId)?.timezone;
@@ -28,9 +30,9 @@ export const useTimeZoneConverter = (projectId: string) => {
       // convert the date to the user's timezone
       const convertedDate = new Date(date).toLocaleString("en-US", { timeZone: userTimezone });
       // return the formatted date
-      return format(convertedDate, formatToken);
+      return formatDateForLocale(new Date(convertedDate), formatToken, currentLocale);
     },
-    [userTimezone]
+    [userTimezone, currentLocale]
   );
 
   /**

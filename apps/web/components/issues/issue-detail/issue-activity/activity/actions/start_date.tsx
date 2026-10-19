@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { observer } from "mobx-react";
 import { CalendarOutline } from "@makeplane/propel/icons";
 // hooks
@@ -17,6 +18,7 @@ type TIssueStartDateActivity = { activityId: string; showIssue?: boolean; ends: 
 
 export const IssueStartDateActivity = observer(function IssueStartDateActivity(props: TIssueStartDateActivity) {
   const { activityId, showIssue = true, ends } = props;
+  const { currentLocale } = useTranslation();
   // hooks
   const {
     activity: { getActivityById },
@@ -35,7 +37,9 @@ export const IssueStartDateActivity = observer(function IssueStartDateActivity(p
         {activity.new_value ? `set the start date to ` : `removed the start date `}
         {activity.new_value && (
           <>
-            <span className="font-medium text-primary">{renderFormattedDate(activity.new_value)}</span>
+            <span className="font-medium text-primary">
+              {renderFormattedDate(activity.new_value, undefined, currentLocale)}
+            </span>
           </>
         )}
         {showIssue && (activity.new_value ? ` for ` : ` from `)}

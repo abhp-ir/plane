@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { CalendarOutline, DueDateOutline, StartDateOutline } from "@makeplane/propel/icons";
 // plane imports
 import type { TStateGroups } from "@plane/types";
@@ -17,6 +18,7 @@ type Props = {
 
 export function WorkItemPreviewCardDate(props: Props) {
   const { startDate, stateGroup, targetDate } = props;
+  const { currentLocale } = useTranslation();
   // derived values
   const isDateRangeEnabled = Boolean(startDate && targetDate);
   const shouldHighlightDate = shouldHighlightIssueDueDate(targetDate, stateGroup);
@@ -33,13 +35,14 @@ export function WorkItemPreviewCardDate(props: Props) {
         >
           <CalendarOutline className="size-3 shrink-0" />
           <span>
-            {renderFormattedDate(startDate)} - {renderFormattedDate(targetDate)}
+            {renderFormattedDate(startDate, undefined, currentLocale)} -{" "}
+            {renderFormattedDate(targetDate, undefined, currentLocale)}
           </span>
         </div>
       ) : startDate ? (
         <div className="flex h-full items-center gap-1">
           <StartDateOutline className="size-3 shrink-0" />
-          <span>{renderFormattedDate(startDate)}</span>
+          <span>{renderFormattedDate(startDate, undefined, currentLocale)}</span>
         </div>
       ) : (
         <div
@@ -48,7 +51,7 @@ export function WorkItemPreviewCardDate(props: Props) {
           })}
         >
           <DueDateOutline className="size-3 shrink-0" />
-          <span>{renderFormattedDate(targetDate)}</span>
+          <span>{renderFormattedDate(targetDate, undefined, currentLocale)}</span>
         </div>
       )}
     </div>
