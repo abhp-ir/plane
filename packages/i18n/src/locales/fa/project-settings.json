@@ -353,18 +353,18 @@
         "toggle_description": "اعضای پروژه می‌توانند صفحه ایجاد و ویرایش کنند."
       },
       "intake": {
-        "intake_responsibility": "مسئولیت Intake",
-        "intake_sources": "منابع Intake",
-        "title": "Intake",
-        "short_title": "Intake",
+        "intake_responsibility": "مسئولیت رسیدگی به درخواست‌ها",
+        "intake_sources": "منابع درخواست‌ها",
+        "title": "درخواست‌ها",
+        "short_title": "درخواست‌ها",
         "description": "به افراد غیرعضو اجازه دهید بدون اختلال در گردش کار شما، خطاها، بازخوردها و پیشنهادهایشان را ارسال کنند.",
-        "toggle_title": "فعال‌سازی Intake",
-        "toggle_description": "به اعضای پروژه اجازه دهید درخواست‌های Intake را درون برنامه ایجاد کنند.",
+        "toggle_title": "فعال‌سازی درخواست‌ها",
+        "toggle_description": "به اعضای پروژه اجازه دهید درخواست‌ها را درون برنامه ایجاد کنند.",
         "toggle_tooltip_on": "از مدیر پروژه بخواهید این گزینه را فعال کند.",
         "toggle_tooltip_off": "از مدیر پروژه بخواهید این گزینه را غیرفعال کند.",
         "notify_assignee": {
           "title": "اطلاع‌رسانی به مسئولان",
-          "description": "با ثبت درخواست جدید در Intake، مسئولان پیش‌فرض اعلان دریافت می‌کنند"
+          "description": "با ثبت درخواست جدید در بخش درخواست‌ها، مسئولان پیش‌فرض اعلان دریافت می‌کنند"
         },
         "in_app": {
           "title": "درون برنامه",
@@ -391,10 +391,10 @@
           "select_properties": "انتخاب ویژگی‌ها",
           "search_placeholder": "جست‌وجوی ویژگی‌ها",
           "toasts": {
-            "success_create": "فرم Intake با موفقیت ایجاد شد",
-            "success_update": "فرم Intake با موفقیت به‌روز شد",
-            "error_create": "ایجاد فرم Intake ناموفق بود",
-            "error_update": "به‌روزرسانی فرم Intake ناموفق بود"
+            "success_create": "فرم درخواست‌ها با موفقیت ایجاد شد",
+            "success_update": "فرم درخواست‌ها با موفقیت به‌روز شد",
+            "error_create": "ایجاد فرم درخواست‌ها ناموفق بود",
+            "error_update": "به‌روزرسانی فرم درخواست‌ها ناموفق بود"
           }
         },
         "toasts": {

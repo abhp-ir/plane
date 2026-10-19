@@ -148,7 +148,7 @@ for (const namespace of translatedNamespaces) {
       if (target === source && /[A-Za-z]/.test(source) && !Object.hasOwn(exactTechnicalValues, key)) {
         assert.match(
           source,
-          /^(Plane(?: AI| Pro| Runner)?|Intake|\{workspace\} - Intake|Stickies|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|ID|URL|CSV|Excel|JSON|plane\.so|name@company\.com|https:\/\/example\.com(?:\/(?:setup|webhook))?|https:\/\/example\.com https:\/\/example\.com\/)$/,
+          /^(Plane(?: AI| Pro| Runner)?|Pro|Business|Enterprise|SSO URL|SLO URL|IdP|ID|URL|CSV|Excel|JSON|plane\.so|name@company\.com|https:\/\/example\.com(?:\/(?:setup|webhook))?|https:\/\/example\.com https:\/\/example\.com\/)$/,
           `${key}: English filler`
         );
       }
@@ -167,9 +167,6 @@ for (const namespace of translatedNamespaces) {
         "Power K",
         "PQL",
         "Active Cycles",
-        "Sticky",
-        "Intake",
-        "Stickies",
         "Business",
         "Enterprise",
         "GitHub",
@@ -205,6 +202,10 @@ for (const namespace of translatedNamespaces) {
         if (brand === "Business" && key === "user_roles.sales_or_business_development") continue;
         if (new RegExp(`\\b${brand}\\b`).test(source)) assert.ok(target.includes(brand), `${key}: ${brand}`);
       }
+      // Explicit Persian terminology decision; other locales retain the DNT feature names.
+      assert.doesNotMatch(target, /\b(?:Sticky|Stickies|Intake)\b/, `${key}: approved Persian feature terms`);
+      if (/\bStick(?:y|ies)\b/i.test(source)) assert.ok(target.includes("یادداشت"), `${key}: Sticky terminology`);
+      if (/\bIntake\b/.test(source)) assert.ok(target.includes("درخواست"), `${key}: Intake terminology`);
     }
   });
 }

@@ -10,6 +10,7 @@ import { useParams } from "next/navigation";
 import useSWR from "swr";
 // plane hooks
 import { useOutsideClickDetector } from "@plane/hooks";
+import { useTranslation } from "@plane/i18n";
 // plane ui
 import { AddOutline, CloseOutline, MultipleStickyOutline, StickyNoteOutline } from "@makeplane/propel/icons";
 import { PreviewCard, PreviewCardContent, PreviewCardTrigger } from "@makeplane/propel/components/preview-card";
@@ -25,6 +26,7 @@ import { AllStickiesModal } from "./modal";
 import { StickyNote } from "./sticky";
 
 export const StickyActionBar = observer(function StickyActionBar() {
+  const { t } = useTranslation();
   // states
   const [isExpanded, setIsExpanded] = useState(false);
   const [newSticky, setNewSticky] = useState(false);
@@ -71,8 +73,10 @@ export const StickyActionBar = observer(function StickyActionBar() {
       <div
         className={`flex origin-bottom flex-col gap-2 transition-all duration-300 ease-in-out ${isExpanded ? "mb-2 scale-y-100 opacity-100 " : "h-0 scale-y-0 opacity-0"}`}
       >
-        <Tooltip label="All stickies" side="left">
+        <Tooltip label={t("stickies.all")} side="left">
           <button
+            type="button"
+            aria-label={t("stickies.all")}
             className="btn btn--icon shadow-sm flex h-10 w-10 items-center justify-center rounded-full bg-surface-1"
             onClick={() => toggleAllStickiesModal(true)}
           >
@@ -102,8 +106,10 @@ export const StickyActionBar = observer(function StickyActionBar() {
               </PreviewCardContent>
             </PreviewCard>
           ))}
-        <Tooltip label="Add sticky" side="left">
+        <Tooltip label={t("stickies.add")} side="left">
           <button
+            type="button"
+            aria-label={t("stickies.add")}
             className="btn btn--icon shadow-sm flex h-10 w-10 items-center justify-center rounded-full bg-surface-1"
             onClick={() => {
               updateActiveStickyId("");
@@ -117,6 +123,9 @@ export const StickyActionBar = observer(function StickyActionBar() {
       </div>
 
       <button
+        type="button"
+        aria-label={isExpanded ? t("close") : t("sidebar.stickies")}
+        aria-expanded={isExpanded}
         className={`btn btn--icon shadow-sm flex h-10 w-10 items-center justify-center rounded-full bg-surface-1 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
         onClick={() => setIsExpanded(!isExpanded)}
       >

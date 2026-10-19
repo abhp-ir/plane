@@ -44,20 +44,19 @@ export const useStickyOperations = (props: TProps) => {
     useSticky();
   const { t } = useTranslation();
 
-  const isValid = (data: Partial<TSticky>) => {
-    if (data.name && data.name.length > 100) {
-      setToast({
-        type: "error",
-        title: t("stickies.toasts.not_updated.title"),
-        message: t("stickies.toasts.errors.wrong_name"),
-      });
-      return false;
-    }
-    return true;
-  };
-
-  const stickyOperations: TOperations = useMemo(
-    () => ({
+  const stickyOperations: TOperations = useMemo(() => {
+    const isValid = (data: Partial<TSticky>) => {
+      if (data.name && data.name.length > 100) {
+        setToast({
+          type: "error",
+          title: t("stickies.toasts.not_updated.title"),
+          message: t("stickies.toasts.errors.wrong_name"),
+        });
+        return false;
+      }
+      return true;
+    };
+    return {
       create: async (data?: Partial<TSticky>) => {
         try {
           const payload: Partial<TSticky> = {
@@ -127,14 +126,14 @@ export const useStickyOperations = (props: TProps) => {
         }
       },
       updatePosition: async (
-        workspaceSlug: string,
+        positionWorkspaceSlug: string,
         sourceId: string,
         droppedId: string,
         instruction: InstructionType
       ) => {
         try {
-          if (!workspaceSlug) throw new Error("Missing required fields");
-          await updateStickyPosition(workspaceSlug, sourceId, droppedId, instruction);
+          if (!positionWorkspaceSlug) throw new Error("Missing required fields");
+          await updateStickyPosition(positionWorkspaceSlug, sourceId, droppedId, instruction);
         } catch (error) {
           console.error("Error in updating sticky position:", error);
           setToast({
@@ -144,9 +143,17 @@ export const useStickyOperations = (props: TProps) => {
           });
         }
       },
-    }),
-    [createSticky, deleteSticky, getWorkspaceStickyIds, stickies, updateSticky, updateStickyPosition, workspaceSlug]
-  );
+    };
+  }, [
+    createSticky,
+    deleteSticky,
+    getWorkspaceStickyIds,
+    stickies,
+    t,
+    updateSticky,
+    updateStickyPosition,
+    workspaceSlug,
+  ]);
 
   return {
     stickyOperations,

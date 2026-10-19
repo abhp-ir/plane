@@ -11,6 +11,7 @@ import { Button } from "@makeplane/propel/components/button";
 import { MultipleStickyOutline } from "@makeplane/propel/icons";
 import { Breadcrumbs } from "@plane/blocks/breadcrumb";
 import { Header } from "@plane/blocks/layout";
+import { useTranslation } from "@plane/i18n";
 // components
 import { BreadcrumbLink } from "@/components/common/breadcrumb-link";
 import { StickySearch } from "@/components/stickies/modal/search";
@@ -19,6 +20,7 @@ import { useStickyOperations } from "@/components/stickies/sticky/use-operations
 import { useSticky } from "@/hooks/use-stickies";
 
 export const WorkspaceStickyHeader = observer(function WorkspaceStickyHeader() {
+  const { t } = useTranslation();
   const { workspaceSlug } = useParams();
   // hooks
   const { creatingSticky, toggleShowNewSticky } = useSticky();
@@ -33,7 +35,7 @@ export const WorkspaceStickyHeader = observer(function WorkspaceStickyHeader() {
               <Breadcrumbs.Item
                 component={
                   <BreadcrumbLink
-                    label={`Stickies`}
+                    label={t("sidebar.stickies")}
                     icon={<MultipleStickyOutline className="size-5 rotate-90 text-secondary" />}
                   />
                 }
@@ -48,7 +50,7 @@ export const WorkspaceStickyHeader = observer(function WorkspaceStickyHeader() {
             variant="primary"
             size="md"
             stretch="auto"
-            label="Add sticky"
+            label={t("stickies.add")}
             onClick={() => {
               toggleShowNewSticky(true);
               stickyOperations.create();

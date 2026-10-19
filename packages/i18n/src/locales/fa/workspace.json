@@ -146,14 +146,14 @@
       },
       "intake_trends": {
         "title": "هنوز داده‌ای وجود ندارد",
-        "description": "تحلیل روندهای Intake در اینجا نمایش داده می‌شود. برای پیگیری روندها، آیتم‌های کاری را به Intake اضافه کنید."
+        "description": "تحلیل روندهای درخواست‌ها در اینجا نمایش داده می‌شود. برای پیگیری روندها، آیتم‌های کاری را به بخش درخواست‌ها اضافه کنید."
       }
     },
     "upgrade_to_plan": "برای دسترسی به {tab} به طرح {plan} ارتقا دهید",
     "workitem_resolved_vs_pending": "آیتم‌های کاری حل‌شده در برابر در انتظار",
     "projects_by_status": "پروژه‌ها بر اساس وضعیت",
     "active_users": "کاربران فعال",
-    "intake_trends": "روندهای Intake"
+    "intake_trends": "روندهای درخواست‌ها"
   },
   "workspace_projects": {
     "label": "{count, plural, one {پروژه} other {پروژه‌ها}}",

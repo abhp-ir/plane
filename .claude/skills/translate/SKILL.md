@@ -34,7 +34,7 @@ Skip only for trivial English-only typo fixes that don't change meaning or lengt
 
 ## The Two Iron Rules
 
-1. **Trademarks, brand marks, plan tier names, third-party product names, acronyms, and code tokens are never translated.** Plane's brand marks (Plane, Plane AI, Power K, PQL, Active Cycles, Sticky/Stickies, Intake), plan tiers (Pro, Business, Enterprise), third-party products (GitHub, Slack, Notion, etc.), and acronyms (API, OAuth, etc.) stay Latin in every locale.
+1. **Trademarks, brand marks, plan tier names, third-party product names, acronyms, and code tokens are never translated.** Plane's brand marks (Plane, Plane AI, Power K, PQL, Active Cycles, Sticky/Stickies, Intake), plan tiers (Pro, Business, Enterprise), third-party products (GitHub, Slack, Notion, etc.), and acronyms (API, OAuth, etc.) stay Latin. **User-approved fa-only exception:** Sticky → `یادداشت`, Stickies → `یادداشت‌ها`, Intake → `درخواست‌ها`. Other locales retain the Latin feature names; every unrelated DNT rule remains unchanged.
 2. **CLDR plural categories are mandatory.** Every target locale must include **every** plural keyword the language requires. Missing a form renders the wrong word at runtime and passes `sync-check` silently.
 
 Common feature nouns — Cycle, Module, Epic, Page — **are translated** into the target language using the canonical glossary further down. They are not brand marks; they are everyday words that belong in the user's language.
@@ -47,18 +47,18 @@ For each term: the source, the required rendering per script group, and **forbid
 
 ### Plane brand & features
 
-| Source term                        | Latin locales (fr, es, it, de, pt-BR, pl, cs, sk, ro, tr-TR, vi-VN, id) | ja (katakana-default) | ko (Hangul-default) | zh-CN / zh-TW                                 | ru                | ua                | bg                | **Forbidden** (never produce)                                                     | **fa**            |
-| ---------------------------------- | ----------------------------------------------------------------------- | --------------------- | ------------------- | --------------------------------------------- | ----------------- | ----------------- | ----------------- | --------------------------------------------------------------------------------- | ----------------- |
-| **Plane**                          | Plane                                                                   | Plane                 | Plane               | Plane                                         | Plane             | Plane             | Plane             | 飛行機, 飞机, 비행기, Самолёт, Літак, Avion, Avião, Aereo, Flugzeug               | Plane             |
-| **Plane AI** (formerly PI Chat)    | Plane AI                                                                | Plane AI              | Plane AI            | Plane AI                                      | Plane AI          | Plane AI          | Plane AI          | Чат ИИ, AI 聊天, AIチャット, AI 채팅, Chat IA, AI Çet, PI Chat (legacy)           | Plane AI          |
-| **Power K**                        | Power K                                                                 | Power K               | Power K             | Power K                                       | Power K           | Power K           | Power K           | Command K, Command Palette, コマンドパレット, 命令面板, Палитра команд            | Power K           |
-| **PQL**                            | PQL                                                                     | PQL                   | PQL                 | PQL                                           | PQL               | PQL               | PQL               | any expansion of the acronym into the target language                             | PQL               |
-| **Intake** (feature name)          | Intake                                                                  | Intake                | Intake              | Intake                                        | Intake            | Intake            | Intake            | Inbox, 受信箱, 收件箱, Входящие, Triage, Boîte de réception                       | Intake            |
-| **Active Cycles** (workspace view) | Active Cycles                                                           | Active Cycles         | Active Cycles       | Active Cycles                                 | Active Cycles     | Active Cycles     | Active Cycles     | Translate as a unit; never split into generic "active" + localized "cycles"       | Active Cycles     |
-| **Sticky** / **Stickies**          | Sticky / Stickies                                                       | Sticky / Stickies     | Sticky / Stickies   | Sticky / Stickies (Latin inside Chinese text) | Sticky / Stickies | Sticky / Stickies | Sticky / Stickies | 便签, 便利貼, メモ, 付箋, スティッキー, 메모, 스티키, заметка, Стикер, Note, Nota | Sticky / Stickies |
-| **Pro** (plan tier)                | Pro                                                                     | Pro                   | Pro                 | Pro                                           | Pro               | Pro               | Pro               | Профессиональный, プロフェッショナル, 专业版, 專業版, Profesional                 | Pro               |
-| **Business** (plan tier)           | Business                                                                | Business              | Business            | Business                                      | Business          | Business          | Business          | Бизнес, ビジネス, 商业版, 商務版, Negocios, Negócios                              | Business          |
-| **Enterprise** (plan tier)         | Enterprise                                                              | Enterprise            | Enterprise          | Enterprise                                    | Enterprise        | Enterprise        | Enterprise        | Корпоративный, エンタープライズ, 企业版, 企業版, Empresarial                      | Enterprise        |
+| Source term                        | Latin locales (fr, es, it, de, pt-BR, pl, cs, sk, ro, tr-TR, vi-VN, id) | ja (katakana-default) | ko (Hangul-default) | zh-CN / zh-TW                                 | ru                | ua                | bg                | **Forbidden** (never produce)                                                     | **fa**               |
+| ---------------------------------- | ----------------------------------------------------------------------- | --------------------- | ------------------- | --------------------------------------------- | ----------------- | ----------------- | ----------------- | --------------------------------------------------------------------------------- | -------------------- |
+| **Plane**                          | Plane                                                                   | Plane                 | Plane               | Plane                                         | Plane             | Plane             | Plane             | 飛行機, 飞机, 비행기, Самолёт, Літак, Avion, Avião, Aereo, Flugzeug               | Plane                |
+| **Plane AI** (formerly PI Chat)    | Plane AI                                                                | Plane AI              | Plane AI            | Plane AI                                      | Plane AI          | Plane AI          | Plane AI          | Чат ИИ, AI 聊天, AIチャット, AI 채팅, Chat IA, AI Çet, PI Chat (legacy)           | Plane AI             |
+| **Power K**                        | Power K                                                                 | Power K               | Power K             | Power K                                       | Power K           | Power K           | Power K           | Command K, Command Palette, コマンドパレット, 命令面板, Палитра команд            | Power K              |
+| **PQL**                            | PQL                                                                     | PQL                   | PQL                 | PQL                                           | PQL               | PQL               | PQL               | any expansion of the acronym into the target language                             | PQL                  |
+| **Intake** (feature name)          | Intake                                                                  | Intake                | Intake              | Intake                                        | Intake            | Intake            | Intake            | Inbox, 受信箱, 收件箱, Входящие, Triage, Boîte de réception                       | درخواست‌ها           |
+| **Active Cycles** (workspace view) | Active Cycles                                                           | Active Cycles         | Active Cycles       | Active Cycles                                 | Active Cycles     | Active Cycles     | Active Cycles     | Translate as a unit; never split into generic "active" + localized "cycles"       | Active Cycles        |
+| **Sticky** / **Stickies**          | Sticky / Stickies                                                       | Sticky / Stickies     | Sticky / Stickies   | Sticky / Stickies (Latin inside Chinese text) | Sticky / Stickies | Sticky / Stickies | Sticky / Stickies | 便签, 便利貼, メモ, 付箋, スティッキー, 메모, 스티키, заметка, Стикер, Note, Nota | یادداشت / یادداشت‌ها |
+| **Pro** (plan tier)                | Pro                                                                     | Pro                   | Pro                 | Pro                                           | Pro               | Pro               | Pro               | Профессиональный, プロフェッショナル, 专业版, 專業版, Profesional                 | Pro                  |
+| **Business** (plan tier)           | Business                                                                | Business              | Business            | Business                                      | Business          | Business          | Business          | Бизнес, ビジネス, 商业版, 商務版, Negocios, Negócios                              | Business             |
+| **Enterprise** (plan tier)         | Enterprise                                                              | Enterprise            | Enterprise          | Enterprise                                    | Enterprise        | Enterprise        | Enterprise        | Корпоративный, エンタープライズ, 企业版, 企業版, Empresarial                      | Enterprise           |
 
 ### Plane feature noun translation glossary (translate, do not preserve)
 
@@ -262,17 +262,23 @@ number remain uninflected: `۲ عضو`, not `۲ اعضا`. Emit both `one` and `
 ICU plural even when their text is identical. CLDR `one` includes **0**, 1, and fractions with
 integer part 0; `other` includes 1.1, 2, and larger integers. Ordinals use only `other`.
 
-| Source                             | Canonical fa                  |
-| ---------------------------------- | ----------------------------- |
-| Workspace / Project / Work item    | فضای کاری / پروژه / آیتم کاری |
-| Cycle / Module / Epic / Page       | چرخه / ماژول / اپیک / صفحه    |
-| Backlog / Assignee / Priority      | بک‌لاگ / مسئول / اولویت       |
-| Due date / Estimate / Label        | موعد انجام / برآورد / برچسب   |
-| Activity / Notification / Settings | فعالیت / اعلان / تنظیمات      |
-| Comment / View / Lead              | دیدگاه / نما / راهبر          |
+| Source                             | Canonical fa                      |
+| ---------------------------------- | --------------------------------- |
+| Workspace / Project / Work item    | فضای کاری / پروژه / آیتم کاری     |
+| Cycle / Module / Epic / Page       | چرخه / ماژول / اپیک / صفحه        |
+| Backlog / Assignee / Priority      | بک‌لاگ / مسئول / اولویت           |
+| Due date / Estimate / Label        | موعد انجام / برآورد / برچسب       |
+| Activity / Notification / Settings | فعالیت / اعلان / تنظیمات          |
+| Comment / View / Lead              | دیدگاه / نما / راهبر              |
+| Sticky / Stickies / Intake         | یادداشت / یادداشت‌ها / درخواست‌ها |
 
 All brand marks in the DNT table, third-party names, plan tiers, acronyms, and code tokens
-stay Latin. Forbidden: `Plane → هواپیما / پلین`, `Intake → ورودی`,
+stay Latin except the user-approved Persian feature terms `Sticky → یادداشت`,
+`Stickies → یادداشت‌ها`, and `Intake → درخواست‌ها`. Use natural contextual grammar.
+Keep personal Inbox `صندوق ورودی` distinct from Intake; Triage processing `بررسی اولیه`
+is a contextual engineering proposal awaiting human review, not another name for Intake.
+These fa-only choices do not rename source keys, routes, enums or stored user content.
+Forbidden: `Plane → هواپیما / پلین`, `Intake → ورودی`,
 `Sticky/Stickies → یادداشت چسبان`, `Pro → حرفه‌ای`, `Business → تجاری`,
 `Enterprise → سازمانی`. Feature nouns are translated per the fa glossary;
 `Epic → حماسه` is forbidden. Preserve `Active Cycles` as the named workspace view,
@@ -556,7 +562,7 @@ pnpm --filter @plane/i18n run check:sync
 | Question                                            | Answer                                                                                                                                                                 |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Translate "Plane" / "Plane AI" / "Power K" / "PQL"? | Never. Latin, every locale.                                                                                                                                            |
-| Translate "Sticky" / "Stickies" / "Intake"?         | Never. Plane brand marks. Latin, every locale.                                                                                                                         |
+| Translate "Sticky" / "Stickies" / "Intake"?         | Only in fa: `یادداشت` / `یادداشت‌ها` / `درخواست‌ها`, with contextual grammar. Other locales keep Latin.                                                                |
 | Translate "Active Cycles"?                          | Never as a unit (it's a feature page name). Lowercase generic "active cycles" in prose translates normally per the glossary.                                           |
 | Translate "Pro" / "Business" / "Enterprise"?        | Never. Plan tier names. Latin, every locale.                                                                                                                           |
 | Translate "Cycle" / "Module" / "Epic" / "Page"?     | **Yes** — use the per-locale form from the translation glossary (zh-CN 周期/模块/史诗/页面, ja サイクル/モジュール/エピック/ページ, de Zyklus/Modul/Epic/Seite, etc.). |
@@ -575,7 +581,7 @@ pnpm --filter @plane/i18n run check:sync
 
 ## Common Mistakes (revert on sight)
 
-- **Translating Plane brand marks** — `Plane → 飞机`, `Plane AI → AI 聊天`, `Power K → 命令面板`, `Sticky → 便签` (Sticky is a brand, even though "sticky note" generally translates), `Intake → 收件箱`. Brand marks stay Latin.
+- **Translating Plane brand marks** — `Plane → 飞机`, `Plane AI → AI 聊天`, `Power K → 命令面板`, `Sticky → 便签` (Sticky is a brand, even though "sticky note" generally translates), `Intake → 收件箱`. Brand marks stay Latin, except the approved fa-only Sticky/Stickies/Intake glossary entries.
 - **Leaving feature nouns in Latin in non-Latin locales** — `创建 Cycle` (zh-CN), `Создать Cycle` (ru), `エピックを作成` is fine but `Epicを作成` is not. Use the per-locale form from the glossary.
 - **Coining new feature-noun translations** — `Cycle → Cercle` (fr — invented; the natural cognate is the same `Cycle`), `Cycle → 循环` (zh-CN — non-glossary; use `周期`), `Epic → Saga` (es — non-glossary; use `Epic`). The glossary is the source of truth.
 - **Missing `few` / `many` in Slavic languages** — Russian/Polish/Czech/Slovak/Ukrainian strings with only `one / other` are grammatically wrong for counts 2–4 and 5+. Fix in the same PR.
@@ -600,7 +606,7 @@ pnpm --filter @plane/i18n run check:sync
 
 You see yourself about to do any of the following → stop, delete, restart this string:
 
-- Replacing `Plane`, `Plane AI`, `Power K`, `PQL`, `Active Cycles`, `Sticky`, `Stickies`, `Intake`, `Pro`, `Business`, `Enterprise`, or any third-party brand (`GitHub`, `Slack`, etc.) with a translated form.
+- Replacing `Plane`, `Plane AI`, `Power K`, `PQL`, `Active Cycles`, `Sticky`, `Stickies`, `Intake`, `Pro`, `Business`, `Enterprise`, or any third-party brand (`GitHub`, `Slack`, etc.) with a translated form, except the explicit fa-only Sticky/Stickies/Intake glossary entries. In fa, leaving these three UI feature names Latin or conflating Intake with Inbox is also a red flag.
 - Leaving `Cycle` / `Module` / `Epic` / `Page` in Latin in a non-Latin locale (zh-CN, zh-TW, ja, ko, ru, ua) — these are common nouns and must be translated per the glossary.
 - Coining a feature-noun translation that's not in the glossary (`Cycle → 循环`, `Cycle → Cercle`, `Epic → Saga`).
 - Using a vowel-form Korean particle (을/은/이/과 vs. 를/는/가/와) that doesn't agree with the noun's final character.
