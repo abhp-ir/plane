@@ -75,6 +75,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
               due_date={issue?.start_date}
               stateId={issue?.state_id ?? undefined}
               shouldHighLight={false}
+              dateLabel="start_date"
             />
           </div>
         </WithDisplayPropertiesHOC>

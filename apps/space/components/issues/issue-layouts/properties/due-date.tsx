@@ -7,9 +7,9 @@
 import { observer } from "mobx-react";
 import { DueDateOutline } from "@makeplane/propel/icons";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
-import { cn } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
+import { cn, renderFormattedDate } from "@plane/utils";
 // helpers
-import { renderFormattedDate } from "@/helpers/date-time.helper";
 import { shouldHighlightIssueDueDate } from "@/helpers/issue.helper";
 // hooks
 import { useStates } from "@/hooks/store/use-state";
@@ -19,18 +19,20 @@ type Props = {
   stateId: string | undefined;
   shouldHighLight?: boolean;
   shouldShowBorder?: boolean;
+  dateLabel?: "start_date" | "due_date";
 };
 
 export const IssueBlockDate = observer(function IssueBlockDate(props: Props) {
-  const { due_date, stateId, shouldHighLight = true, shouldShowBorder = true } = props;
+  const { due_date, stateId, shouldHighLight = true, shouldShowBorder = true, dateLabel = "due_date" } = props;
   const { getStateById } = useStates();
+  const { t, currentLocale } = useTranslation();
 
   const state = getStateById(stateId);
 
-  const formattedDate = renderFormattedDate(due_date);
+  const formattedDate = renderFormattedDate(due_date, undefined, currentLocale);
 
   return (
-    <Tooltip label={`Due Date: ${formattedDate ?? "No Date"}`}>
+    <Tooltip label={`${t(dateLabel)}: ${formattedDate ?? t("common.none")}`}>
       <div
         className={cn("flex h-full items-center gap-1 rounded-sm px-2.5 py-1 text-11 text-primary", {
           "text-danger-primary": shouldHighLight && due_date && shouldHighlightIssueDueDate(due_date, state?.group),
@@ -38,7 +40,7 @@ export const IssueBlockDate = observer(function IssueBlockDate(props: Props) {
         })}
       >
         <DueDateOutline className="size-3 flex-shrink-0" />
-        {formattedDate ? formattedDate : "No Date"}
+        {formattedDate ?? t("common.none")}
       </div>
     </Tooltip>
   );

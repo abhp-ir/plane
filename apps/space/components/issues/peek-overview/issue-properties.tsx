@@ -11,9 +11,8 @@ import { useTranslation } from "@plane/i18n";
 import { StateGroupIcon, PriorityIcon } from "@plane/blocks/icons";
 import { DueDateOutline, LinkOutline, PriorityOutline, StateOutline } from "@makeplane/propel/icons";
 import { setToast } from "@plane/blocks/toast";
-import { cn, getIssuePriorityFilters } from "@plane/utils";
+import { cn, getIssuePriorityFilters, renderFormattedDate } from "@plane/utils";
 // helpers
-import { renderFormattedDate } from "@/helpers/date-time.helper";
 import { shouldHighlightIssueDueDate } from "@/helpers/issue.helper";
 import { copyTextToClipboard, addSpaceIfCamelCase } from "@/helpers/string.helper";
 // hooks
@@ -32,7 +31,7 @@ export const PeekOverviewIssueProperties = observer(function PeekOverviewIssuePr
   mode,
 }: Props) {
   // hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const { getStateById } = useStates();
   const state = getStateById(issueDetails?.state_id ?? undefined);
 
@@ -45,13 +44,13 @@ export const PeekOverviewIssueProperties = observer(function PeekOverviewIssuePr
   const handleCopyLink = () => {
     const urlToCopy = window.location.href;
 
-    copyTextToClipboard(urlToCopy).then(() => {
+    copyTextToClipboard(urlToCopy).then(() =>
       setToast({
         type: "info",
-        title: "Link copied!",
-        message: "Work item link copied to clipboard",
-      });
-    });
+        title: t("common.link_copied"),
+        message: t("common.copied_to_clipboard"),
+      })
+    );
   };
 
   return (
@@ -62,7 +61,7 @@ export const PeekOverviewIssueProperties = observer(function PeekOverviewIssuePr
             {project_details?.identifier}-{issueDetails.sequence_id}
           </h6>
           <div className="flex items-center gap-2">
-            <button type="button" onClick={handleCopyLink} className="-rotate-45">
+            <button type="button" onClick={handleCopyLink} className="-rotate-45" aria-label={t("copy_link")}>
               <LinkOutline className="size-3.5 shrink-0" />
             </button>
           </div>
@@ -72,7 +71,7 @@ export const PeekOverviewIssueProperties = observer(function PeekOverviewIssuePr
         <div className="flex h-8 items-center gap-3">
           <div className="flex w-1/4 flex-shrink-0 items-center gap-1 text-13 text-tertiary">
             <StateOutline className="size-4 flex-shrink-0" />
-            <span>State</span>
+            <span>{t("state")}</span>
           </div>
           <div className="flex w-3/4 items-center gap-1.5 py-0.5 text-13">
             <StateGroupIcon stateGroup={state?.group ?? "backlog"} color={state?.color} />
@@ -83,7 +82,7 @@ export const PeekOverviewIssueProperties = observer(function PeekOverviewIssuePr
         <div className="flex h-8 items-center gap-3">
           <div className="flex w-1/4 flex-shrink-0 items-center gap-1 text-13 text-tertiary">
             <PriorityOutline className="size-4 flex-shrink-0" />
-            <span>Priority</span>
+            <span>{t("priority")}</span>
           </div>
           <div className="w-3/4">
             <div
@@ -108,7 +107,7 @@ export const PeekOverviewIssueProperties = observer(function PeekOverviewIssuePr
         <div className="flex h-8 items-center gap-3">
           <div className="flex w-1/4 flex-shrink-0 items-center gap-1 text-13 text-tertiary">
             <DueDateOutline className="size-4 flex-shrink-0" />
-            <span>Due date</span>
+            <span>{t("due_date")}</span>
           </div>
           <div>
             {issueDetails.target_date ? (
@@ -118,10 +117,10 @@ export const PeekOverviewIssueProperties = observer(function PeekOverviewIssuePr
                 })}
               >
                 <DueDateOutline className="size-3" />
-                {renderFormattedDate(issueDetails.target_date)}
+                {renderFormattedDate(issueDetails.target_date, undefined, currentLocale)}
               </div>
             ) : (
-              <span className="text-13 text-secondary">Empty</span>
+              <span className="text-13 text-secondary">{t("common.none")}</span>
             )}
           </div>
         </div>
