@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 // icons
 import { DATE_AFTER_FILTER_OPTIONS } from "@plane/constants";
 import { CloseOutline } from "@makeplane/propel/icons";
+import { useTranslation } from "@plane/i18n";
 import { renderFormattedDate, capitalizeFirstLetter } from "@plane/utils";
 // helpers
 // constants
@@ -20,6 +21,7 @@ type Props = {
 
 export const AppliedDateFilters = observer(function AppliedDateFilters(props: Props) {
   const { editable, handleRemove, values } = props;
+  const { t, currentLocale } = useTranslation();
 
   const getDateLabel = (value: string): string => {
     let dateLabel = "";
@@ -33,7 +35,7 @@ export const AppliedDateFilters = observer(function AppliedDateFilters(props: Pr
       if (dateParts.length === 2) {
         const [date, time] = dateParts;
 
-        dateLabel = `${capitalizeFirstLetter(time)} ${renderFormattedDate(date)}`;
+        dateLabel = `${capitalizeFirstLetter(time)} ${renderFormattedDate(date, undefined, currentLocale)}`;
       }
     }
 
@@ -48,6 +50,7 @@ export const AppliedDateFilters = observer(function AppliedDateFilters(props: Pr
           {editable && (
             <button
               type="button"
+              aria-label={`${t("aria_labels.common.remove")}: ${getDateLabel(date)}`}
               className="grid place-items-center text-tertiary hover:text-secondary"
               onClick={() => handleRemove(date)}
             >

@@ -10,7 +10,7 @@ import { EPastDurationFilters } from "@plane/constants";
 // local imports
 import { renderFormattedPayloadDate } from "./datetime";
 
-export const getCustomDates = (duration: EPastDurationFilters): string => {
+export const getCustomDates = (duration: string): string => {
   const today = new Date();
   let firstDay, lastDay;
 
@@ -36,5 +36,8 @@ export const getCustomDates = (duration: EPastDurationFilters): string => {
       lastDay = renderFormattedPayloadDate(today);
       return `${firstDay};after,${lastDay};before`;
     }
+    default:
+      // Custom bounds already contain a canonical day and comparison code.
+      return duration;
   }
 };
