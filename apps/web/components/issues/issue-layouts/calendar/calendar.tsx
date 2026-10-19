@@ -22,9 +22,9 @@ import type {
 import { EIssuesStoreType, EIssueLayoutTypes } from "@plane/types";
 // ui
 import { Spinner } from "@plane/blocks/spinner";
-import { renderFormattedPayloadDate, cn } from "@plane/utils";
+import { renderFormattedPayloadDate, cn, formatDateForLocale } from "@plane/utils";
 // constants
-import { MONTHS_LIST } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 // helpers
 // hooks
 import { useIssues } from "@/hooks/store/use-issues";
@@ -105,9 +105,8 @@ export const CalendarChart = observer(function CalendarChart(props: Props) {
 
   const { enableIssueCreation, enableQuickAdd } = viewFlags || {};
 
-  const calendarPayload = issueCalendarView.calendarPayload;
-
-  const allWeeksOfActiveMonth = issueCalendarView.allWeeksOfActiveMonth;
+  const { currentLocale } = useTranslation();
+  const allWeeksOfActiveMonth = issueCalendarView.allWeeksOfActiveMonth(currentLocale);
 
   const formattedDatePayload = renderFormattedPayloadDate(selectedDate) ?? undefined;
 
@@ -124,7 +123,7 @@ export const CalendarChart = observer(function CalendarChart(props: Props) {
     );
   }, []);
 
-  if (!calendarPayload || !formattedDatePayload)
+  if (!formattedDatePayload)
     return (
       <div className="grid h-full w-full place-items-center">
         <Spinner />
@@ -154,13 +153,13 @@ export const CalendarChart = observer(function CalendarChart(props: Props) {
               {layout === "month" && (
                 <div className="grid h-full w-full grid-cols-1 divide-y-[0.5px] divide-subtle-1">
                   {allWeeksOfActiveMonth &&
-                    Object.values(allWeeksOfActiveMonth).map((week: ICalendarWeek, weekIndex) => (
+                    Object.values(allWeeksOfActiveMonth).map((week: ICalendarWeek) => (
                       <CalendarWeekDays
                         selectedDate={selectedDate}
                         setSelectedDate={setSelectedDate}
                         handleDragAndDrop={handleDragAndDrop}
                         issuesFilterStore={issuesFilterStore}
-                        key={weekIndex}
+                        key={Object.keys(week)[0]}
                         week={week}
                         issues={issues}
                         groupedIssueIds={groupedIssueIds}
@@ -185,7 +184,7 @@ export const CalendarChart = observer(function CalendarChart(props: Props) {
                   setSelectedDate={setSelectedDate}
                   handleDragAndDrop={handleDragAndDrop}
                   issuesFilterStore={issuesFilterStore}
-                  week={issueCalendarView.allDaysOfActiveWeek}
+                  week={issueCalendarView.allDaysOfActiveWeek(currentLocale)}
                   issues={issues}
                   groupedIssueIds={groupedIssueIds}
                   loadMoreIssues={loadMoreIssues}
@@ -206,9 +205,7 @@ export const CalendarChart = observer(function CalendarChart(props: Props) {
             {/* mobile view */}
             <div className="md:hidden">
               <p className="p-4 text-18 font-semibold">
-                {`${selectedDate.getDate()} ${
-                  MONTHS_LIST[selectedDate.getMonth() + 1].title
-                }, ${selectedDate.getFullYear()}`}
+                {formatDateForLocale(selectedDate, "d MMMM, yyyy", currentLocale)}
               </p>
               <CalendarIssueBlocks
                 date={selectedDate}
@@ -230,32 +227,6 @@ export const CalendarChart = observer(function CalendarChart(props: Props) {
             </div>
           </div>
         </IssueLayoutHOC>
-
-        {/* mobile view */}
-        <div className="md:hidden">
-          <p className="p-4 text-18 font-semibold">
-            {`${selectedDate.getDate()} ${
-              MONTHS_LIST[selectedDate.getMonth() + 1].title
-            }, ${selectedDate.getFullYear()}`}
-          </p>
-          <CalendarIssueBlocks
-            date={selectedDate}
-            issueIdList={issueIdList}
-            quickActions={quickActions}
-            loadMoreIssues={loadMoreIssues}
-            getPaginationData={getPaginationData}
-            getGroupIssueCount={getGroupIssueCount}
-            enableQuickIssueCreate={enableQuickAdd}
-            disableIssueCreation={!enableIssueCreation}
-            quickAddCallback={quickAddCallback}
-            addIssuesToView={addIssuesToView}
-            readOnly={readOnly}
-            canEditProperties={canEditProperties}
-            isDragDisabled
-            isMobileView
-            isEpic={isEpic}
-          />
-        </div>
       </div>
     </>
   );

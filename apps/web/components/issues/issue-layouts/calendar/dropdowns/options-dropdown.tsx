@@ -23,7 +23,6 @@ import { CALENDAR_LAYOUTS, EIssueFilterType } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import type { TCalendarLayouts, TSupportedFilterForUpdate } from "@plane/types";
 // hooks
-import { useCalendarView } from "@/hooks/store/use-calendar-view";
 import useSize from "@/hooks/use-window-size";
 import type { ICycleIssuesFilter } from "@/store/issue/cycle";
 import type { IModuleIssuesFilter } from "@/store/issue/module";
@@ -46,7 +45,6 @@ export const CalendarOptionsDropdown = observer(function CalendarOptionsDropdown
 
   const { projectId } = useParams();
 
-  const issueCalendarView = useCalendarView();
   const [windowWidth] = useSize();
 
   // states
@@ -67,12 +65,6 @@ export const CalendarOptionsDropdown = observer(function CalendarOptionsDropdown
         layout,
       },
     });
-
-    issueCalendarView.updateCalendarPayload(
-      layout === "month"
-        ? issueCalendarView.calendarFilters.activeMonthDate
-        : issueCalendarView.calendarFilters.activeWeekDate
-    );
   };
 
   const handleToggleWeekends = () => {
@@ -120,8 +112,13 @@ export const CalendarOptionsDropdown = observer(function CalendarOptionsDropdown
           value={calendarLayout}
           onValueChange={(value) => handleLayoutChange(value as TCalendarLayouts)}
         >
-          {Object.entries(CALENDAR_LAYOUTS).map(([layout, layoutDetails]) => (
-            <MenuRadioItem key={layout} value={layout} label={layoutDetails.title} closeOnClick={isMobile} />
+          {Object.keys(CALENDAR_LAYOUTS).map((layout) => (
+            <MenuRadioItem
+              key={layout}
+              value={layout}
+              label={t(layout === "month" ? "common.month" : "common.week")}
+              closeOnClick={isMobile}
+            />
           ))}
         </MenuRadioGroup>
         <MenuSeparator />

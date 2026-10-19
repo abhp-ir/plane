@@ -101,6 +101,7 @@ export const CalendarIssueBlock = observer(
     return (
       <Popover>
         <PopoverTrigger
+          nativeButton={false}
           openOnHover
           delay={100}
           render={

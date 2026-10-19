@@ -10,6 +10,7 @@ import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // plane imports
 import { EIssueGroupByToServerOptions, EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 import { setToast } from "@plane/blocks/toast";
 import type { TGroupedIssues } from "@plane/types";
 import { EIssuesStoreType } from "@plane/types";
@@ -73,6 +74,7 @@ export const BaseCalendarRoot = observer(function BaseCalendarRoot(props: IBaseC
   } = useIssuesActions(storeType);
 
   const issueCalendarView = useCalendarView();
+  const { currentLocale } = useTranslation();
 
   const isEditingAllowed = allowPermissions(
     [EUserPermissions.ADMIN, EUserPermissions.MEMBER],
@@ -86,7 +88,7 @@ export const BaseCalendarRoot = observer(function BaseCalendarRoot(props: IBaseC
   const groupedIssueIds = (issues.groupedIssueIds ?? {}) as TGroupedIssues;
 
   const layout = displayFilters?.calendar?.layout ?? "month";
-  const { startDate, endDate } = issueCalendarView.getStartAndEndDate(layout) ?? {};
+  const { startDate, endDate } = issueCalendarView.getStartAndEndDate(layout, currentLocale) ?? {};
 
   useEffect(() => {
     if (startDate && endDate && layout) {
@@ -137,12 +139,12 @@ export const BaseCalendarRoot = observer(function BaseCalendarRoot(props: IBaseC
 
   const getPaginationData = useCallback(
     (groupId: string | undefined) => issues?.getPaginationData(groupId, undefined),
-    [issues?.getPaginationData]
+    [issues]
   );
 
   const getGroupIssueCount = useCallback(
     (groupId: string | undefined) => issues?.getGroupIssueCount(groupId, undefined, false),
-    [issues?.getGroupIssueCount]
+    [issues]
   );
 
   const canEditProperties = useCallback(

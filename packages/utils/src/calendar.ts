@@ -4,11 +4,48 @@
  * See the LICENSE file for details.
  */
 
+import {
+  addDays,
+  addMonths,
+  addYears,
+  getDate,
+  getDaysInMonth,
+  getMonth,
+  getYear,
+  setMonth,
+  startOfMonth,
+} from "date-fns";
+import {
+  addMonths as addJalaliMonths,
+  addYears as addJalaliYears,
+  getDate as getJalaliDate,
+  getDaysInMonth as getJalaliDaysInMonth,
+  getMonth as getJalaliMonth,
+  getYear as getJalaliYear,
+  setMonth as setJalaliMonth,
+  startOfMonth as startOfJalaliMonth,
+} from "date-fns-jalali";
 // plane imports
 import type { ICalendarDate, ICalendarPayload } from "@plane/types";
 import { EStartOfTheWeek } from "@plane/types";
 // local imports
 import { getWeekNumberOfDate, renderFormattedPayloadDate } from "./datetime";
+import { getDateCalendar } from "./localized-datetime";
+
+/** Calendar arithmetic changes presentation boundaries, never the underlying Date or timezone. */
+export const getCalendarDateLib = (locale: string = "en") =>
+  getDateCalendar(locale) === "persian"
+    ? {
+        addMonths: addJalaliMonths,
+        addYears: addJalaliYears,
+        getDate: getJalaliDate,
+        getDaysInMonth: getJalaliDaysInMonth,
+        getMonth: getJalaliMonth,
+        getYear: getJalaliYear,
+        setMonth: setJalaliMonth,
+        startOfMonth: startOfJalaliMonth,
+      }
+    : { addMonths, addYears, getDate, getDaysInMonth, getMonth, getYear, setMonth, startOfMonth };
 
 /**
  * @returns {ICalendarPayload} calendar payload to render the calendar
@@ -20,18 +57,17 @@ import { getWeekNumberOfDate, renderFormattedPayloadDate } from "./datetime";
 export const generateCalendarData = (
   currentStructure: ICalendarPayload | null,
   startDate: Date,
-  startOfWeek: EStartOfTheWeek = EStartOfTheWeek.SUNDAY
+  startOfWeek: EStartOfTheWeek = EStartOfTheWeek.SUNDAY,
+  locale: string = "en"
 ): ICalendarPayload => {
   const calendarData: ICalendarPayload = currentStructure ?? {};
 
-  const startMonth = startDate.getMonth();
-  const startYear = startDate.getFullYear();
-
-  const currentDate = new Date(startYear, startMonth, 1);
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDayOfMonthRaw = new Date(year, month, 1).getDay(); // Sunday is 0, Monday is 1, ..., Saturday is 6
+  const calendar = getCalendarDateLib(locale);
+  const currentDate = calendar.startOfMonth(startDate);
+  const year = calendar.getYear(currentDate);
+  const month = calendar.getMonth(currentDate);
+  const totalDaysInMonth = calendar.getDaysInMonth(currentDate);
+  const firstDayOfMonthRaw = currentDate.getDay(); // Sunday is 0, Monday is 1, ..., Saturday is 6
 
   // Adjust firstDayOfMonth based on startOfWeek preference
   // This calculates how many empty cells we need at the start of the calendar
@@ -46,12 +82,12 @@ export const generateCalendarData = (
   for (let week = 0; week < numWeeks; week++) {
     const currentWeekObject: { [date: string]: ICalendarDate } = {};
 
-    const weekNumber = getWeekNumberOfDate(new Date(year, month, week * 7 - firstDayOfMonth + 1));
+    const weekNumber = getWeekNumberOfDate(addDays(currentDate, week * 7 - firstDayOfMonth));
 
     for (let i = 0; i < 7; i++) {
       const dayNumber = week * 7 + i - firstDayOfMonth;
 
-      const date = new Date(year, month, dayNumber + 1);
+      const date = addDays(currentDate, dayNumber);
 
       const formattedDatePayload = renderFormattedPayloadDate(date);
       if (formattedDatePayload)
@@ -61,7 +97,7 @@ export const generateCalendarData = (
           month,
           day: dayNumber + 1,
           week: weekNumber,
-          is_current_month: date.getMonth() === month,
+          is_current_month: calendar.getMonth(date) === month && calendar.getYear(date) === year,
           is_current_week: getWeekNumberOfDate(date) === getWeekNumberOfDate(new Date()),
           is_today: date.toDateString() === new Date().toDateString(),
         };
@@ -86,7 +122,7 @@ export const getOrderedDays = <T>(
   getDayIndex: (item: T) => number,
   startOfWeek: EStartOfTheWeek = EStartOfTheWeek.SUNDAY
 ): T[] =>
-  [...items].sort((a, b) => {
+  items.toSorted((a, b) => {
     const dayA = (7 + getDayIndex(a) - startOfWeek) % 7;
     const dayB = (7 + getDayIndex(b) - startOfWeek) % 7;
     return dayA - dayB;

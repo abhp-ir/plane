@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { addDays, startOfDay } from "date-fns";
 import { observer } from "mobx-react";
 
 // components
@@ -12,6 +13,7 @@ import { useTranslation } from "@plane/i18n";
 import { ChevronLeftOutline, ChevronRightOutline } from "@makeplane/propel/icons";
 import type { TSupportedFilterForUpdate } from "@plane/types";
 import { Row } from "@plane/blocks/layout";
+import { getCalendarDateLib } from "@plane/utils";
 // icons
 import { useCalendarView } from "@/hooks/store/use-calendar-view";
 import type { ICycleIssuesFilter } from "@/store/issue/cycle";
@@ -33,7 +35,8 @@ interface ICalendarHeader {
 export const CalendarHeader = observer(function CalendarHeader(props: ICalendarHeader) {
   const { issuesFilterStore, updateFilters, setSelectedDate } = props;
 
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const calendar = getCalendarDateLib(currentLocale);
 
   const issueCalendarView = useCalendarView();
 
@@ -41,57 +44,21 @@ export const CalendarHeader = observer(function CalendarHeader(props: ICalendarH
 
   const { activeMonthDate, activeWeekDate } = issueCalendarView.calendarFilters;
 
-  const handlePrevious = () => {
+  const handleNavigate = (offset: number) => {
     if (calendarLayout === "month") {
-      const previousMonthYear =
-        activeMonthDate.getMonth() === 0 ? activeMonthDate.getFullYear() - 1 : activeMonthDate.getFullYear();
-      const previousMonthMonth = activeMonthDate.getMonth() === 0 ? 11 : activeMonthDate.getMonth() - 1;
-
-      const previousMonthFirstDate = new Date(previousMonthYear, previousMonthMonth, 1);
-
       issueCalendarView.updateCalendarFilters({
-        activeMonthDate: previousMonthFirstDate,
+        activeMonthDate: calendar.addMonths(calendar.startOfMonth(activeMonthDate), offset),
       });
     } else {
-      const previousWeekDate = new Date(
-        activeWeekDate.getFullYear(),
-        activeWeekDate.getMonth(),
-        activeWeekDate.getDate() - 7
-      );
-
       issueCalendarView.updateCalendarFilters({
-        activeWeekDate: previousWeekDate,
-      });
-    }
-  };
-
-  const handleNext = () => {
-    if (calendarLayout === "month") {
-      const nextMonthYear =
-        activeMonthDate.getMonth() === 11 ? activeMonthDate.getFullYear() + 1 : activeMonthDate.getFullYear();
-      const nextMonthMonth = (activeMonthDate.getMonth() + 1) % 12;
-
-      const nextMonthFirstDate = new Date(nextMonthYear, nextMonthMonth, 1);
-
-      issueCalendarView.updateCalendarFilters({
-        activeMonthDate: nextMonthFirstDate,
-      });
-    } else {
-      const nextWeekDate = new Date(
-        activeWeekDate.getFullYear(),
-        activeWeekDate.getMonth(),
-        activeWeekDate.getDate() + 7
-      );
-
-      issueCalendarView.updateCalendarFilters({
-        activeWeekDate: nextWeekDate,
+        activeWeekDate: startOfDay(addDays(activeWeekDate, offset * 7)),
       });
     }
   };
 
   const handleToday = () => {
     const today = new Date();
-    const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const firstDayOfCurrentMonth = calendar.startOfMonth(today);
 
     issueCalendarView.updateCalendarFilters({
       activeMonthDate: firstDayOfCurrentMonth,
@@ -103,18 +70,28 @@ export const CalendarHeader = observer(function CalendarHeader(props: ICalendarH
   return (
     <Row className="mb-4 flex items-center justify-between gap-2">
       <div className="flex items-center gap-1.5">
-        <button type="button" className="grid place-items-center" onClick={handlePrevious}>
-          <ChevronLeftOutline height={16} width={16} />
+        <button
+          type="button"
+          aria-label={t("prev")}
+          className="grid size-6 place-items-center rounded-sm focus-visible:outline-2 focus-visible:outline-accent-strong"
+          onClick={() => handleNavigate(-1)}
+        >
+          <ChevronLeftOutline height={16} width={16} className="rtl:rotate-180" />
         </button>
-        <button type="button" className="grid place-items-center" onClick={handleNext}>
-          <ChevronRightOutline height={16} width={16} />
+        <button
+          type="button"
+          aria-label={t("common.next")}
+          className="grid size-6 place-items-center rounded-sm focus-visible:outline-2 focus-visible:outline-accent-strong"
+          onClick={() => handleNavigate(1)}
+        >
+          <ChevronRightOutline height={16} width={16} className="rtl:rotate-180" />
         </button>
         <CalendarMonthsDropdown issuesFilterStore={issuesFilterStore} />
       </div>
       <div className="flex items-center gap-1.5">
         <button
           type="button"
-          className="rounded-sm bg-layer-transparent px-2.5 py-1 text-11 font-medium text-secondary hover:bg-layer-transparent-hover hover:text-primary"
+          className="rounded-sm bg-layer-transparent px-2.5 py-1 text-11 font-medium text-secondary hover:bg-layer-transparent-hover hover:text-primary focus-visible:outline-2 focus-visible:outline-accent-strong"
           onClick={handleToday}
         >
           {t("common.today")}

@@ -6,9 +6,9 @@
 
 import type { EStartOfTheWeek } from "@plane/types";
 
-export const getWeekdayLabel = (day: EStartOfTheWeek, locale: string): string =>
+export const getWeekdayLabel = (day: EStartOfTheWeek, locale: string, width: "long" | "short" = "long"): string =>
   new Intl.DateTimeFormat(locale === "fa" ? "fa-IR" : locale === "ua" ? "uk-UA" : locale, {
-    weekday: "long",
+    weekday: width,
     timeZone: "UTC",
   }).format(
     // 1 January 2023 is a Sunday, matching the stored weekday enum's zero.

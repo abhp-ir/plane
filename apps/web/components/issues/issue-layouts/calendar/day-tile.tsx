@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useEffect, useEffectEvent, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { differenceInCalendarDays } from "date-fns/differenceInCalendarDays";
@@ -14,10 +14,10 @@ import type { TGroupedIssues, TIssue, TIssueMap, TPaginationData, ICalendarDate 
 // types
 // ui
 // components
-import { cn, renderFormattedPayloadDate } from "@plane/utils";
+import { cn, formatDateForLocale, getCalendarDateLib, renderFormattedPayloadDate } from "@plane/utils";
 import { highlightIssueOnDrop } from "@/components/issues/issue-layouts/utils";
 // helpers
-import { MONTHS_LIST } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 // helpers
 // types
 import type { ICycleIssuesFilter } from "@/store/issue/cycle";
@@ -75,6 +75,9 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
     isEpic = false,
   } = props;
 
+  const { currentLocale } = useTranslation();
+  const calendar = getCalendarDateLib(currentLocale);
+
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   const calendarLayout = issuesFilterStore?.issueFilters?.displayFilters?.calendar?.layout ?? "month";
@@ -83,26 +86,28 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
 
   const dayTileRef = useRef<HTMLDivElement | null>(null);
 
-  // Reads the latest issues map and drop handler without re-registering the drop target
-  const handleDrop = useEffectEvent((sourceData: { id: string; date: string }, destinationDate: string) => {
-    const issueDetails = issues?.[sourceData?.id];
-    if (issueDetails?.start_date) {
-      const issueStartDate = new Date(issueDetails.start_date);
-      const targetDate = new Date(destinationDate);
-      const diffInDays = differenceInCalendarDays(targetDate, issueStartDate);
-      if (diffInDays < 0) {
-        setToast({
-          type: "error",
-          title: "Error!",
-          message: "Due date cannot be before the start date of the work item.",
-        });
-        return false;
+  const handleDrop = useCallback(
+    (sourceData: { id: string; date: string }, destinationDate: string) => {
+      const issueDetails = issues?.[sourceData?.id];
+      if (issueDetails?.start_date) {
+        const issueStartDate = new Date(issueDetails.start_date);
+        const targetDate = new Date(destinationDate);
+        const diffInDays = differenceInCalendarDays(targetDate, issueStartDate);
+        if (diffInDays < 0) {
+          setToast({
+            type: "error",
+            title: "Error!",
+            message: "Due date cannot be before the start date of the work item.",
+          });
+          return false;
+        }
       }
-    }
 
-    handleDragAndDrop(sourceData?.id, issueDetails?.project_id ?? undefined, sourceData?.date, destinationDate);
-    return true;
-  });
+      handleDragAndDrop(sourceData?.id, issueDetails?.project_id ?? undefined, sourceData?.date, destinationDate);
+      return true;
+    },
+    [issues, handleDragAndDrop]
+  );
 
   useEffect(() => {
     const element = dayTileRef.current;
@@ -130,7 +135,7 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
         },
       })
     );
-  }, [formattedDatePayload]);
+  }, [formattedDatePayload, handleDrop]);
 
   if (!formattedDatePayload) return null;
   const issueIds = groupedIssueIds?.[formattedDatePayload];
@@ -157,13 +162,15 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
               : "font-medium" // if week layout, highlight all days
           } ${isWeekend ? "bg-layer-1" : "bg-layer-transparent"} `}
         >
-          {date.date.getDate() === 1 && MONTHS_LIST[date.date.getMonth() + 1].shortTitle + " "}
+          {calendar.getDate(date.date) === 1 && formatDateForLocale(date.date, "MMM", currentLocale) + " "}
           {isToday ? (
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent-primary text-on-color">
-              {date.date.getDate()}
+              <time dateTime={formattedDatePayload}>{formatDateForLocale(date.date, "d", currentLocale)}</time>
             </span>
           ) : (
-            <>{date.date.getDate()}</>
+            <>
+              <time dateTime={formattedDatePayload}>{formatDateForLocale(date.date, "d", currentLocale)}</time>
+            </>
           )}
         </div>
 
@@ -200,6 +207,8 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
         <button
           type="button"
           onClick={() => setSelectedDate(date.date)}
+          aria-label={formatDateForLocale(date.date, "d MMMM yyyy", currentLocale)}
+          aria-pressed={isSelectedDate}
           className={cn(
             "mx-auto flex h-full w-full cursor-pointer flex-col items-center justify-start py-2.5 text-13 font-medium opacity-80 md:hidden",
             {
@@ -213,7 +222,7 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
               "bg-accent-primary/10 text-accent-primary": isToday && !isSelectedDate,
             })}
           >
-            {date.date.getDate()}
+            <time dateTime={formattedDatePayload}>{formatDateForLocale(date.date, "d", currentLocale)}</time>
           </span>
         </button>
       </div>
