@@ -254,6 +254,10 @@ and `فارسی` in the selector. Set root `lang="fa"` and `dir="rtl"`; keep Lat
 emails, URLs, code, hashes, and keyboard shortcuts LTR with semantic bidi isolation in the UI.
 Do not insert hidden bidi controls into technical values or translated placeholders.
 
+Persian UI dates use the Jalali (Persian Solar Hijri) calendar with Persian months and digits.
+Use the shared date helpers and calendar primitives; keep API/ISO/database dates, timezones,
+expiry durations and date-only semantics unchanged. Other locales retain their existing calendars.
+
 Use Persian **ی** (U+06CC) and **ک** (U+06A9), correct ZWNJs (`می‌شود`, `آیتم‌های کاری`),
 and natural professional Iranian wording. Address users with **شما** and plural polite verbs;
 prefer short action nouns for buttons (`ذخیره`, `افزودن`) and direct polite instructions

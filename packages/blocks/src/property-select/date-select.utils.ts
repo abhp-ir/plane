@@ -5,6 +5,9 @@
  */
 
 import type { TLanguage } from "@plane/i18n";
+import { getDateCalendar } from "@plane/utils";
+import { faIR, getDateLib } from "@daypicker/persian";
+import type { DayPickerProps } from "react-day-picker";
 import type { DayPickerLocale } from "react-day-picker/locale";
 import {
   bg,
@@ -12,7 +15,6 @@ import {
   de,
   enUS,
   es,
-  faIR,
   fr,
   id,
   it,
@@ -32,25 +34,9 @@ import {
   zhTW,
 } from "react-day-picker/locale";
 
-const PERSIAN_MONTH_FORMATTERS = {
-  narrow: new Intl.DateTimeFormat("fa-IR", { calendar: "gregory", month: "narrow" }),
-  abbreviated: new Intl.DateTimeFormat("fa-IR", { calendar: "gregory", month: "short" }),
-  wide: new Intl.DateTimeFormat("fa-IR", { calendar: "gregory", month: "long" }),
-};
-
 const DATE_LOCALES = {
   en: enUS,
-  fa: {
-    ...faIR,
-    localize: {
-      ...faIR.localize,
-      // date-fns uses non-Iranian month names (e.g. جون); Intl supplies Iranian Gregorian names.
-      month: (month, options) =>
-        PERSIAN_MONTH_FORMATTERS[
-          options?.width === "narrow" ? "narrow" : options?.width === "abbreviated" ? "abbreviated" : "wide"
-        ].format(new Date(2000, month, 1)),
-    },
-  },
+  fa: faIR,
   fr,
   es,
   ja,
@@ -74,12 +60,17 @@ const DATE_LOCALES = {
   bg,
 } satisfies Record<TLanguage, DayPickerLocale>;
 
+/** DayPicker focuses its selected day inside the open popover when its calendar system changes. */
 export const getDateSelectOptions = (
   language: TLanguage
-): { locale: DayPickerLocale; numerals: "arabext" | "latn" } => ({
-  locale: DATE_LOCALES[language],
-  numerals: language === "fa" ? "arabext" : "latn",
-});
+): { locale: DayPickerLocale; numerals: "arabext" | "latn"; dateLib?: DayPickerProps["dateLib"]; autoFocus: true } => {
+  const locale = DATE_LOCALES[language];
+  if (getDateCalendar(language) === "persian") {
+    // Keep Propel's DayPicker/Nav provider; raw overrides honor its week-start and formatting options.
+    return { locale, numerals: "arabext", dateLib: getDateLib().overrides, autoFocus: true };
+  }
+  return { locale, numerals: "latn", autoFocus: true };
+};
 
 /** The default trigger label format — a short, unambiguous day. Overridden by `formatToken`. */
 export const DEFAULT_DATE_FORMAT_TOKEN = "MMM dd, yyyy";

@@ -54,19 +54,19 @@ it.each(["single", "range"])("localizes the %s calendar and preserves RTL keyboa
         )}
       </TranslationProvider>
     );
-    const trigger = screen.getByRole("button", { name: /ژوئن/ });
-    expect(trigger.textContent).toContain("۱۵");
+    const trigger = screen.getByRole("button", { name: /خرد/ });
+    expect(trigger.textContent).toContain("۲۵");
     await user.click(trigger);
     expect(popup().getByRole("button", { name: "رفتن به ماه بعد" })).toBeDefined();
     const grid = popup().getByRole("grid");
-    expect(grid.querySelector("th")?.getAttribute("aria-label")).toBe("یکشنبه");
+    expect(grid.querySelector("th")?.getAttribute("aria-label")).toBe("یک‌شنبه");
     expect(grid.closest("[dir]")?.getAttribute("dir")).toBe("rtl");
-    expect(day("۱۴.*ژوئن.*۲۰۲۵").hasAttribute("disabled")).toBe(true);
-    expect(day("۱۸.*ژوئن.*۲۰۲۵").hasAttribute("disabled")).toBe(true);
-    const selectedDay = popup().getAllByRole("button", { name: /۱۵.*ژوئن.*۲۰۲۵/ })[0]!;
+    expect(day("۲۴.*خرداد.*۱۴۰۴").hasAttribute("disabled")).toBe(true);
+    expect(day("۲۸.*خرداد.*۱۴۰۴").hasAttribute("disabled")).toBe(true);
+    const selectedDay = popup().getAllByRole("button", { name: /۲۵.*خرداد.*۱۴۰۴/ })[0]!;
     selectedDay.focus();
     await user.keyboard("{ArrowLeft}");
-    expect(document.activeElement?.getAttribute("aria-label")).toMatch(/۱۶.*ژوئن.*۲۰۲۵/);
+    expect(document.activeElement?.getAttribute("aria-label")).toMatch(/۲۶.*خرداد.*۱۴۰۴/);
     if (mode === "single") {
       await user.keyboard("{Enter}");
       expect(onChange).toHaveBeenCalledWith(new Date(2025, 5, 16));
@@ -76,6 +76,127 @@ it.each(["single", "range"])("localizes the %s calendar and preserves RTL keyboa
     expect(popup().getByRole("button", { name: "Go to the Next Month" })).toBeDefined();
     expect(popup().getByRole("grid").closest("[dir]")?.getAttribute("dir")).toBe("ltr");
     expect(trigger.textContent).toContain("Jun");
+    expect(popup().getByRole("grid").getAttribute("aria-label")).toBe("June 2025");
+    expect(day("June 15th, 2025")).toBeDefined();
+    expect(popup().getByRole("grid").contains(document.activeElement)).toBe(true);
+    await act(() => setLanguage("fa"));
+    expect(trigger.textContent).toContain("۲۵");
+    expect(trigger.textContent).toContain("۱۴۰۴");
+    expect(popup().getByRole("grid").getAttribute("aria-label")).toBe("خرداد ۱۴۰۴");
+    expect(popup().getByRole("grid").contains(document.activeElement)).toBe(true);
+  } finally {
+    cleanup();
+    await setLanguage("en");
+  }
+});
+
+it.each([
+  [2024, 2, 20, "\\s۱-ام.*فروردین.*۱۴۰۳"],
+  [2025, 2, 20, "۳۰.*اسفند.*۱۴۰۳"],
+  [2025, 2, 21, "\\s۱-ام.*فروردین.*۱۴۰۴"],
+  [2026, 2, 21, "\\s۱-ام.*فروردین.*۱۴۰۵"],
+] as const)("selects the real Gregorian day %i/%i/%i through its Jalali grid", async (year, month, date, label) => {
+  await initPromise;
+  await setLanguage("fa");
+  const onChange = vi.fn();
+  const expected = new Date(year, month, date);
+  try {
+    render(<DateSelect value={null} onChange={onChange} variant="select-md" defaultMonth={expected} defaultOpen />);
+    await userEvent.setup().click(day(label));
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(expected);
+  } finally {
+    cleanup();
+    await setLanguage("en");
+  }
+});
+
+it("commits a Jalali range across Nowruz as the original canonical days", async () => {
+  await initPromise;
+  await setLanguage("fa");
+  const user = userEvent.setup();
+  const onChange = vi.fn();
+  try {
+    render(
+      <DateRangeSelect
+        value={{ from: null, to: null }}
+        onChange={onChange}
+        variant="select-md"
+        defaultMonth={new Date(2025, 2, 20)}
+        defaultOpen
+      />
+    );
+    await user.click(day("۳۰.*اسفند.*۱۴۰۳"));
+    expect(onChange).not.toHaveBeenCalled();
+    await user.click(popup().getByRole("button", { name: "رفتن به ماه بعد" }));
+    await user.click(day("\\s۱-ام.*فروردین.*۱۴۰۴"));
+    expect(onChange).toHaveBeenCalledExactlyOnceWith({ from: new Date(2025, 2, 20), to: new Date(2025, 2, 21) });
+  } finally {
+    cleanup();
+    await setLanguage("en");
+  }
+});
+
+it("preserves an uncommitted range when switching calendar systems", async () => {
+  await initPromise;
+  await setLanguage("fa");
+  const user = userEvent.setup();
+  const onChange = vi.fn();
+  try {
+    render(
+      <DateRangeSelect
+        value={{ from: null, to: null }}
+        onChange={onChange}
+        variant="select-md"
+        defaultMonth={new Date(2025, 2, 20)}
+        defaultOpen
+      />
+    );
+    await user.click(day("۳۰.*اسفند.*۱۴۰۳"));
+    expect(onChange).not.toHaveBeenCalled();
+    await act(() => setLanguage("en"));
+    expect(popup().getByRole("grid").getAttribute("aria-label")).toBe("March 2025");
+    expect(popup().getByRole("grid").contains(document.activeElement)).toBe(true);
+    await user.click(day("March 21st, 2025"));
+    expect(onChange).toHaveBeenCalledExactlyOnceWith({ from: new Date(2025, 2, 20), to: new Date(2025, 2, 21) });
+  } finally {
+    cleanup();
+    await setLanguage("en");
+  }
+});
+
+it("keeps both Jalali years in a merged range that crosses Nowruz", async () => {
+  await initPromise;
+  await setLanguage("fa");
+  try {
+    render(
+      <DateRangeSelect
+        value={{ from: new Date(2025, 2, 20), to: new Date(2025, 2, 21) }}
+        onChange={vi.fn()}
+        variant="select-md"
+        mergeDates
+      />
+    );
+    expect(screen.getByRole("button").textContent).toMatch(/۱۴۰۳.*۱۴۰۴/);
+  } finally {
+    cleanup();
+    await setLanguage("en");
+  }
+});
+
+it("navigates from leap Esfand into a non-leap year with the existing keyboard controls", async () => {
+  await initPromise;
+  await setLanguage("fa");
+  const user = userEvent.setup();
+  const onChange = vi.fn();
+  try {
+    render(<DateSelect value={new Date(2025, 2, 20)} onChange={onChange} variant="select-md" />);
+    await user.click(screen.getByRole("button", { name: /اسف/ }));
+    day("۳۰.*اسفند.*۱۴۰۳").focus();
+    await user.keyboard("{Shift>}{PageDown}{/Shift}");
+    expect(document.activeElement?.getAttribute("aria-label")).toMatch(/۲۹.*اسفند.*۱۴۰۴/);
+    expect(popup().queryByRole("button", { name: /۳۰.*اسفند.*۱۴۰۴/ })).toBeNull();
+    await user.keyboard("{Enter}");
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(new Date(2026, 2, 20));
   } finally {
     cleanup();
     await setLanguage("en");

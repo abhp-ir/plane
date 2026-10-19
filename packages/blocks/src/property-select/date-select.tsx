@@ -7,6 +7,7 @@
 import { useState } from "react";
 import { DateLib } from "react-day-picker";
 import { useTranslation } from "@plane/i18n";
+import { getDateCalendar } from "@plane/utils";
 import { Calendar } from "@makeplane/propel/components/calendar";
 import type { DateSelectCommonProps } from "./date-select-shell";
 import { DateSelectNav, DateSelectShell } from "./date-select-shell";
@@ -42,7 +43,7 @@ export function DateSelect(props: DateSelectProps) {
   const { currentLocale, direction } = useTranslation();
   // derived values
   const dateOptions = getDateSelectOptions(currentLocale);
-  const dateLib = new DateLib(dateOptions);
+  const dateLib = new DateLib(dateOptions, dateOptions.dateLib);
   const formatted = value ? dateLib.format(value, formatToken) : "";
   const disabledMatchers = buildDisabledMatchers(minDate, maxDate);
 
@@ -65,7 +66,9 @@ export function DateSelect(props: DateSelectProps) {
         handleOpenChange(false);
       }}
     >
+      {/* DayPicker's month-start anchor belongs to the calendar system that created it. */}
       <Calendar
+        key={getDateCalendar(currentLocale)}
         {...dateOptions}
         dir={direction}
         components={{ Nav: DateSelectNav }}

@@ -7,6 +7,7 @@
 import { useState } from "react";
 import { DateLib } from "react-day-picker";
 import { useTranslation } from "@plane/i18n";
+import { getDateCalendar } from "@plane/utils";
 import { Calendar } from "@makeplane/propel/components/calendar";
 import type { DateSelectCommonProps } from "./date-select-shell";
 import { DateSelectNav, DateSelectShell } from "./date-select-shell";
@@ -83,10 +84,10 @@ function mergeRangeLabel(
 ): string {
   const joined = from && to ? `${from} - ${to}` : from || to;
   if (!range.from || !range.to || !from || !to) return joined;
-  if (range.from.getFullYear() !== range.to.getFullYear()) return joined;
+  if (dateLib.getYear(range.from) !== dateLib.getYear(range.to)) return joined;
   const tokens = MERGE_TOKENS[formatToken];
   if (!tokens) return joined;
-  const pair = range.from.getMonth() === range.to.getMonth() ? tokens.sameMonth : tokens.sameYear;
+  const pair = dateLib.getMonth(range.from) === dateLib.getMonth(range.to) ? tokens.sameMonth : tokens.sameYear;
   return `${dateLib.format(range.from, pair.from)} - ${dateLib.format(range.to, pair.to)}`;
 }
 
@@ -119,7 +120,7 @@ export function DateRangeSelect(props: DateRangeSelectProps) {
   const { currentLocale, direction } = useTranslation();
   // derived values
   const dateOptions = getDateSelectOptions(currentLocale);
-  const dateLib = new DateLib(dateOptions);
+  const dateLib = new DateLib(dateOptions, dateOptions.dateLib);
   const from = value.from ? dateLib.format(value.from, formatToken) : "";
   const to = value.to ? dateLib.format(value.to, formatToken) : "";
   const joined = from && to ? `${from} - ${to}` : from || to;
@@ -153,13 +154,15 @@ export function DateRangeSelect(props: DateRangeSelectProps) {
         handleOpenChange(false);
       }}
     >
+      {/* Reset the calendar anchor while keeping the selected dates and pending range above it. */}
       <Calendar
+        key={getDateCalendar(currentLocale)}
         {...dateOptions}
         dir={direction}
         components={{ Nav: DateSelectNav }}
         mode="range"
         selected={shown.from ? { from: shown.from, to: shown.to ?? undefined } : undefined}
-        defaultMonth={value.from ?? defaultMonth}
+        defaultMonth={shown.from ?? defaultMonth}
         disabled={disabledMatchers}
         weekStartsOn={weekStartsOn}
         onSelect={(range) => {
