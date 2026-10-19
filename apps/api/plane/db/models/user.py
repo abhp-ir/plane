@@ -250,6 +250,7 @@ class Profile(TimeAuditModel):
     # language
     language = models.CharField(max_length=255, default="en")
     start_of_the_week = models.PositiveSmallIntegerField(choices=START_OF_THE_WEEK_CHOICES, default=SUNDAY)
+    working_days = models.JSONField(null=True, blank=True, default=None)
     goals = models.JSONField(default=dict)
     background_color = models.CharField(max_length=255, default=get_random_color)
 
@@ -260,6 +261,12 @@ class Profile(TimeAuditModel):
     has_marketing_email_consent = models.BooleanField(default=False)
     is_subscribed_to_changelog = models.BooleanField(default=False)
     product_tour = models.JSONField(default=get_default_product_tour)
+
+    def __init__(self, *args, **kwargs):
+        # Only a new Persian profile without an explicit weekday gets the Persian default.
+        if not args and kwargs.get("language") == "fa" and "start_of_the_week" not in kwargs:
+            kwargs["start_of_the_week"] = self.SATURDAY
+        super().__init__(*args, **kwargs)
 
     class Meta:
         verbose_name = "Profile"

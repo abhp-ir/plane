@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Primeiro dia da semana",
         "description": "Esta opção altera a aparência de todos os calendários no seu aplicativo."
+      },
+      "working_days": {
+        "title": "Dias úteis",
+        "description": "Escolha os dias exibidos como dias úteis nos seus calendários e linhas do tempo."
       }
     },
     "notifications": {

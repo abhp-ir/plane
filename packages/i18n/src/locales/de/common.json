@@ -633,7 +633,8 @@
       "disable": "Deaktivieren",
       "copy_markdown": "Markdown kopieren",
       "reply": "Antworten",
-      "add_reaction": "Reaktion hinzufügen"
+      "add_reaction": "Reaktion hinzufügen",
+      "show_non_working_days": "Arbeitsfreie Tage anzeigen"
     },
     "name": "Name",
     "discard": "Verwerfen",
@@ -898,5 +899,7 @@
     "drag_drop": "Bild hierher ziehen und ablegen",
     "formats": "Unterstützte Dateiformate:",
     "alt": "Bild"
-  }
+  },
+  "working_day": "Arbeitstag",
+  "non_working_day": "Arbeitsfreier Tag"
 }

@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Prvý deň týždňa",
         "description": "Toto nastavenie zmení zobrazenie všetkých kalendárov vo Vašej aplikácii."
+      },
+      "working_days": {
+        "title": "Pracovné dni",
+        "description": "Vyberte dni, ktoré sa majú v kalendároch a časových osiach zobrazovať ako pracovné."
       }
     },
     "notifications": {

@@ -24,6 +24,7 @@ const filters = observable({
   displayFilters: { calendar: { layout: "month" as "month" | "week", show_weekends: true } },
 });
 const issues = { viewFlags: { enableQuickAdd: true, enableIssueCreation: true }, groupedIssueIds: {} };
+const profile = observable({ start_of_the_week: 6, working_days: null as number[] | null });
 vi.mock("@/hooks/store/use-calendar-view", () => ({ useCalendarView: () => mocks.store }));
 vi.mock("@/hooks/store/use-issues", () => ({
   useIssues: () => ({ issues, issuesFilter: { issueFilters: filters }, issueMap: {} }),
@@ -32,7 +33,7 @@ vi.mock("@/hooks/use-issue-layout-store", () => ({ useIssueStoreType: () => "PRO
 vi.mock("@/hooks/use-issues-actions", () => ({ useIssuesActions: () => ({ fetchIssues: mocks.fetch }) }));
 vi.mock("@/hooks/store/user", () => ({
   useUserPermissions: () => ({ allowPermissions: () => true }),
-  useUserProfile: () => ({ data: { start_of_the_week: 6 } }),
+  useUserProfile: () => ({ data: profile }),
 }));
 vi.mock("next/navigation", () => ({ useParams: () => ({ workspaceSlug: "test", projectId: "project" }) }));
 vi.mock("@/hooks/use-window-size", () => ({ default: () => [1440, 1000] }));
@@ -56,7 +57,7 @@ it("updates actual mounted grid dates and fetch bounds together, and navigates t
   vi.useFakeTimers({ toFake: ["Date"] });
   vi.setSystemTime(new Date(2026, 2, 21, 12));
   const rootStore = {
-    rootStore: { user: { userProfile: { data: { start_of_the_week: 6 } } } },
+    rootStore: { user: { userProfile: { data: profile } } },
   } as unknown as IIssueRootStore;
   const store = new CalendarStore(rootStore);
   mocks.store = store;
@@ -89,6 +90,34 @@ it("updates actual mounted grid dates and fetch bounds together, and navigates t
     expect(button("اسفند ۱۴۰۳")).toBeTruthy();
     expect(days().find((time) => time.dateTime === "2025-03-20")?.textContent).toBe("۳۰");
     bounds("2025-02-15", "2025-03-21");
+    const headerForDay = (day: string) =>
+      days()
+        .find((time) => time.dateTime === day)!
+        .closest("div.group")!.firstElementChild!;
+    expect(headerForDay("2025-03-20").classList.contains("bg-layer-1")).toBe(true);
+    expect(headerForDay("2025-03-21").classList.contains("bg-layer-1")).toBe(true);
+    expect(headerForDay("2025-03-15").classList.contains("bg-layer-1")).toBe(false);
+    await act(async () => {
+      runInAction(() => {
+        filters.displayFilters.calendar.show_weekends = false;
+      });
+    });
+    expect(days().every((time) => [6, 0, 1, 2, 3].includes(new Date(time.dateTime + "T00:00:00").getDay()))).toBe(true);
+    expect(days()).toHaveLength(25);
+    await act(async () => {
+      runInAction(() => {
+        profile.working_days = [6, 0, 1, 2, 3, 4];
+      });
+    });
+    expect(days()).toHaveLength(30);
+    expect(days().some((time) => time.dateTime === "2025-03-20")).toBe(true);
+    expect(days().some((time) => time.dateTime === "2025-03-21")).toBe(false);
+    await act(async () => {
+      runInAction(() => {
+        filters.displayFilters.calendar.show_weekends = true;
+        profile.working_days = null;
+      });
+    });
     expect(mocks.quickDates.some((date) => renderFormattedPayloadDate(date) === "2025-03-20")).toBe(true);
     await act(async () => button("بعدی").click());
     expect(button("فروردین ۱۴۰۴")).toBeTruthy();
@@ -126,6 +155,10 @@ it("updates actual mounted grid dates and fetch bounds together, and navigates t
     expect(renderFormattedPayloadDate(store.calendarFilters.activeMonthDate)).toBe("2026-04-01");
     expect(button("April 2026")).toBeTruthy();
   } finally {
+    runInAction(() => {
+      filters.displayFilters.calendar.show_weekends = true;
+      profile.working_days = null;
+    });
     await act(async () => root.unmount());
     container.remove();
     environment.IS_REACT_ACT_ENVIRONMENT = previous;

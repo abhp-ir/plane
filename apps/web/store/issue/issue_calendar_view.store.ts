@@ -7,8 +7,12 @@
 import { observable, action, makeObservable } from "mobx";
 import { computedFn } from "mobx-utils";
 import type { ICalendarWeek } from "@plane/types";
-import { EStartOfTheWeek } from "@plane/types";
-import { generateCalendarData, getCalendarDateLib, renderFormattedPayloadDate } from "@plane/utils";
+import {
+  generateCalendarData,
+  getCalendarDateLib,
+  getCalendarPreferences,
+  renderFormattedPayloadDate,
+} from "@plane/utils";
 // types
 import type { IIssueRootStore } from "./root.store";
 
@@ -40,7 +44,7 @@ export class CalendarStore implements ICalendarStore {
 
   // Derive from the caller's current locale, so a mounted language switch cannot reuse the other calendar's cache.
   private weeksForDate = computedFn((date: Date, locale: string) => {
-    const startOfWeek = this.rootStore.rootStore.user.userProfile.data?.start_of_the_week ?? EStartOfTheWeek.SUNDAY;
+    const { startOfWeek } = getCalendarPreferences(this.rootStore.rootStore.user.userProfile.data, locale);
     const calendar = getCalendarDateLib(locale);
     return generateCalendarData(null, date, startOfWeek, locale)[`y-${calendar.getYear(date)}`][
       `m-${calendar.getMonth(date)}`

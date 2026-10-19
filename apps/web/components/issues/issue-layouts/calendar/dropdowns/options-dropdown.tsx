@@ -123,7 +123,7 @@ export const CalendarOptionsDropdown = observer(function CalendarOptionsDropdown
         </MenuRadioGroup>
         <MenuSeparator />
         <MenuCheckboxItem
-          label={t("common.actions.show_weekends")}
+          label={t("common.actions.show_non_working_days")}
           checked={showWeekends}
           onCheckedChange={handleToggleWeekends}
           closeOnClick={isMobile}

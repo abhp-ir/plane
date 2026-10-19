@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 // plane imports
 import { START_OF_THE_WEEK_OPTIONS } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
-import { getWeekdayLabel } from "@plane/utils";
+import { getCalendarPreferences, getWeekdayLabel } from "@plane/utils";
 import { Select, SelectDropdownPlacementContext } from "@plane/blocks/select";
 import { setToast } from "@plane/blocks/toast";
 // components
@@ -50,7 +50,8 @@ export const StartOfWeekPreference = observer(function StartOfWeekPreference(pro
     value,
     label: getWeekdayLabel(value, currentLocale),
   }));
-  const selectedOption = weekdayOptions.find((option) => option.value === userProfile.start_of_the_week) ?? null;
+  const { startOfWeek } = getCalendarPreferences(userProfile, currentLocale);
+  const selectedOption = weekdayOptions.find((option) => option.value === startOfWeek) ?? null;
 
   return (
     <SettingsControlItem

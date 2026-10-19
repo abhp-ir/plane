@@ -633,7 +633,8 @@
       "disable": "無効化",
       "copy_markdown": "マークダウンをコピー",
       "reply": "返信",
-      "add_reaction": "リアクションを追加"
+      "add_reaction": "リアクションを追加",
+      "show_non_working_days": "非稼働日を表示"
     },
     "name": "名前",
     "discard": "破棄",
@@ -898,5 +899,7 @@
     "drag_drop": "ここに画像をドラッグ＆ドロップ",
     "formats": "対応ファイル形式：",
     "alt": "画像"
-  }
+  },
+  "working_day": "稼働日",
+  "non_working_day": "非稼働日"
 }

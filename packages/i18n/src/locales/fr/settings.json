@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Premier jour de la semaine",
         "description": "Ce réglage modifie l’affichage de tous les calendriers de votre application."
+      },
+      "working_days": {
+        "title": "Jours travaillés",
+        "description": "Choisissez les jours affichés comme travaillés dans vos calendriers et chronologies."
       }
     },
     "notifications": {

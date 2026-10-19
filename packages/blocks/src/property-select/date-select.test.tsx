@@ -12,6 +12,7 @@ import { TranslationProvider, initPromise, setLanguage } from "@plane/i18n";
 import type { DateRangeValue } from "./date-range-select";
 import { DateRangeSelect } from "./date-range-select";
 import { DateSelect } from "./date-select";
+import { getDateSelectOptions } from "./date-select.utils";
 
 const JUNE_2025 = new Date(2025, 5, 1);
 
@@ -22,6 +23,45 @@ const FORM_TAB_INDEX = 4;
 const popup = () => within(document.body);
 /** react-day-picker names each day button by its full date ("Sunday, June 15th, 2025"). */
 const day = (name: string) => popup().getByRole("button", { name: new RegExp(name) });
+
+it.each([undefined, 0, 1, 6] as const)(
+  "uses real weekday columns for a Persian picker with week start %s",
+  async (weekStartsOn) => {
+    await initPromise;
+    await setLanguage("fa");
+    try {
+      render(
+        <DateSelect
+          value={null}
+          onChange={() => {}}
+          variant="select-md"
+          weekStartsOn={weekStartsOn}
+          defaultMonth={new Date(2025, 2, 20)}
+          defaultOpen
+        />
+      );
+      const grid = popup().getByRole("grid");
+      const expected = weekStartsOn === 0 ? "یک‌شنبه" : weekStartsOn === 1 ? "دوشنبه" : "شنبه";
+      expect(grid.querySelector("th")?.getAttribute("aria-label")).toBe(expected);
+      const firstDate = grid.querySelector("tbody td[data-day]")?.getAttribute("data-day");
+      expect(firstDate).toBeTruthy();
+      // DayPicker's data-day is a display-calendar key, not an ISO/API date.
+      expect(firstDate!.replace(/[۰-۹]/g, (digit) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))).toBe(
+        weekStartsOn === 0 ? "1403-11-28" : weekStartsOn === 1 ? "1403-11-29" : "1403-11-27"
+      );
+    } finally {
+      cleanup();
+      await setLanguage("en");
+    }
+  }
+);
+
+it("retains non-Persian picker locale defaults and explicit overrides", () => {
+  expect(getDateSelectOptions("en").weekStartsOn).toBe(0);
+  expect(getDateSelectOptions("de").weekStartsOn).toBe(1);
+  expect(getDateSelectOptions("de", 0).weekStartsOn).toBe(0);
+  expect(getDateSelectOptions("en", 6).weekStartsOn).toBe(6);
+});
 
 it.each(["single", "range"])("localizes the %s calendar and preserves RTL keyboard date semantics", async (mode) => {
   await initPromise;

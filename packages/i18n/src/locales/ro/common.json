@@ -633,7 +633,8 @@
       "disable": "Dezactivează",
       "copy_markdown": "Copiază markdown",
       "reply": "Răspunde",
-      "add_reaction": "Adaugă o reacție"
+      "add_reaction": "Adaugă o reacție",
+      "show_non_working_days": "Afișați zilele nelucrătoare"
     },
     "name": "Nume",
     "discard": "Renunță",
@@ -898,5 +899,7 @@
     "drag_drop": "Trageți și plasați imaginea aici",
     "formats": "Formate de fișiere acceptate:",
     "alt": "Imagine"
-  }
+  },
+  "working_day": "Zi lucrătoare",
+  "non_working_day": "Zi nelucrătoare"
 }

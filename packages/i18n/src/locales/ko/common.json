@@ -633,7 +633,8 @@
       "disable": "비활성화",
       "copy_markdown": "마크다운 복사",
       "reply": "답글",
-      "add_reaction": "반응 추가"
+      "add_reaction": "반응 추가",
+      "show_non_working_days": "비근무일 표시"
     },
     "name": "이름",
     "discard": "폐기",
@@ -898,5 +899,7 @@
     "drag_drop": "이미지를 여기에 끌어다 놓으세요",
     "formats": "지원되는 파일 형식:",
     "alt": "이미지"
-  }
+  },
+  "working_day": "근무일",
+  "non_working_day": "비근무일"
 }

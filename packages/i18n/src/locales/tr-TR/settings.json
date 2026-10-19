@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Haftanın ilk günü",
         "description": "Bu ayar, uygulamanızdaki tüm takvimlerin görünümünü değiştirir."
+      },
+      "working_days": {
+        "title": "Çalışma günleri",
+        "description": "Takvimlerinizde ve zaman çizelgelerinizde çalışma günü olarak gösterilecek günleri seçin."
       }
     },
     "notifications": {

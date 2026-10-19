@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Hari pertama dalam minggu",
         "description": "Pengaturan ini mengubah tampilan semua kalender di aplikasi Anda."
+      },
+      "working_days": {
+        "title": "Hari kerja",
+        "description": "Pilih hari yang ditampilkan sebagai hari kerja di kalender dan linimasa Anda."
       }
     },
     "notifications": {

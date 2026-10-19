@@ -633,7 +633,8 @@
       "disable": "Desabilitar",
       "copy_markdown": "Copiar markdown",
       "reply": "Responder",
-      "add_reaction": "Adicionar reação"
+      "add_reaction": "Adicionar reação",
+      "show_non_working_days": "Mostrar dias não úteis"
     },
     "name": "Nome",
     "discard": "Descartar",
@@ -898,5 +899,7 @@
     "drag_drop": "Arraste e solte a imagem aqui",
     "formats": "Formatos de arquivo compatíveis:",
     "alt": "Imagem"
-  }
+  },
+  "working_day": "Dia útil",
+  "non_working_day": "Dia não útil"
 }

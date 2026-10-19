@@ -204,6 +204,19 @@ class ResetPasswordSerializer(serializers.Serializer):
 
 
 class ProfileSerializer(BaseSerializer):
+    working_days = serializers.ListField(
+        child=serializers.IntegerField(min_value=0, max_value=6),
+        required=False,
+        allow_null=True,
+        allow_empty=False,
+        max_length=7,
+    )
+
+    def validate_working_days(self, value):
+        if value is not None and len(value) != len(set(value)):
+            raise serializers.ValidationError("Weekdays must be unique.", code="duplicate")
+        return value
+
     class Meta:
         model = Profile
         fields = "__all__"

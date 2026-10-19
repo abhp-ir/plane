@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "주의 시작 요일",
         "description": "앱에 있는 모든 캘린더의 표시 방식이 변경됩니다."
+      },
+      "working_days": {
+        "title": "근무일",
+        "description": "캘린더와 타임라인에서 근무일로 표시할 요일을 선택하세요."
       }
     },
     "notifications": {

@@ -633,7 +633,8 @@
       "disable": "Zakázať",
       "copy_markdown": "Kopírovať markdown",
       "reply": "Odpovedať",
-      "add_reaction": "Pridať reakciu"
+      "add_reaction": "Pridať reakciu",
+      "show_non_working_days": "Zobraziť nepracovné dni"
     },
     "name": "Názov",
     "discard": "Zahodiť",
@@ -898,5 +899,7 @@
     "drag_drop": "Presuňte a pustite obrázok sem",
     "formats": "Podporované formáty súborov:",
     "alt": "Obrázok"
-  }
+  },
+  "working_day": "Pracovný deň",
+  "non_working_day": "Nepracovný deň"
 }

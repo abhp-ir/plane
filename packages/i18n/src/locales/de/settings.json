@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Erster Tag der Woche",
         "description": "Diese Einstellung ändert die Darstellung aller Kalender in Ihrer App."
+      },
+      "working_days": {
+        "title": "Arbeitstage",
+        "description": "Wählen Sie die Tage, die in Ihren Kalendern und Zeitachsen als Arbeitstage angezeigt werden."
       }
     },
     "notifications": {

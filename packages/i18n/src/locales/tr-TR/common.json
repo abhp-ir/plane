@@ -633,7 +633,8 @@
       "disable": "Devre dışı bırak",
       "copy_markdown": "Markdown'ı kopyala",
       "reply": "Yanıtla",
-      "add_reaction": "Tepki ekle"
+      "add_reaction": "Tepki ekle",
+      "show_non_working_days": "Çalışılmayan günleri göster"
     },
     "name": "Ad",
     "discard": "Vazgeç",
@@ -898,5 +899,7 @@
     "drag_drop": "Görseli buraya sürükleyip bırakın",
     "formats": "Desteklenen dosya biçimleri:",
     "alt": "Görsel"
-  }
+  },
+  "working_day": "Çalışma günü",
+  "non_working_day": "Çalışılmayan gün"
 }

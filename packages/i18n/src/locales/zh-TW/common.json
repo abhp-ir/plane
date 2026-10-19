@@ -633,7 +633,8 @@
       "disable": "停用",
       "copy_markdown": "複製 Markdown",
       "reply": "回覆",
-      "add_reaction": "新增表情回應"
+      "add_reaction": "新增表情回應",
+      "show_non_working_days": "顯示非工作日"
     },
     "name": "名稱",
     "discard": "捨棄",
@@ -898,5 +899,7 @@
     "drag_drop": "將圖片拖放到此處",
     "formats": "支援的檔案格式：",
     "alt": "圖片"
-  }
+  },
+  "working_day": "工作日",
+  "non_working_day": "非工作日"
 }

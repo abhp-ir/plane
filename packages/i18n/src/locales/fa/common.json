@@ -633,7 +633,8 @@
       "disable": "غیرفعال‌سازی",
       "copy_markdown": "کپی Markdown",
       "reply": "پاسخ",
-      "add_reaction": "افزودن واکنش"
+      "add_reaction": "افزودن واکنش",
+      "show_non_working_days": "نمایش روزهای غیرکاری"
     },
     "name": "نام",
     "discard": "کنار گذاشتن",
@@ -898,5 +899,7 @@
     "drag_drop": "تصویر را بکشید و اینجا رها کنید",
     "formats": "قالب‌های پشتیبانی‌شده:",
     "alt": "تصویر"
-  }
+  },
+  "working_day": "روز کاری",
+  "non_working_day": "روز غیرکاری"
 }

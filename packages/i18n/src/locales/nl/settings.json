@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Eerste dag van de week",
         "description": "Dit wijzigt de weergave van alle agenda’s in uw app."
+      },
+      "working_days": {
+        "title": "Werkdagen",
+        "description": "Kies de dagen die in uw agenda’s en tijdlijnen als werkdagen worden weergegeven."
       }
     },
     "notifications": {

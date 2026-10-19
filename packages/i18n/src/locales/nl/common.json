@@ -633,7 +633,8 @@
       "disable": "Uitschakelen",
       "copy_markdown": "Markdown kopiëren",
       "reply": "Beantwoorden",
-      "add_reaction": "Emoji-reactie toevoegen"
+      "add_reaction": "Emoji-reactie toevoegen",
+      "show_non_working_days": "Niet-werkdagen tonen"
     },
     "name": "Naam",
     "discard": "Verwerpen",
@@ -898,5 +899,7 @@
     "drag_drop": "Sleep de afbeelding hierheen",
     "formats": "Ondersteunde bestandsindelingen:",
     "alt": "Afbeelding"
-  }
+  },
+  "working_day": "Werkdag",
+  "non_working_day": "Niet-werkdag"
 }

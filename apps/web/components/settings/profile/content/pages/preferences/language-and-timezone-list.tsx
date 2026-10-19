@@ -12,6 +12,7 @@ import { setToast } from "@plane/blocks/toast";
 // components
 import { TimezoneSelect } from "@/components/global";
 import { StartOfWeekPreference } from "@/components/profile/start-of-week-preference";
+import { WorkingDaysPreference } from "@/components/profile/working-days-preference";
 import { SettingsControlItem } from "@/components/settings/control-item";
 // hooks
 import { useUser, useUserProfile } from "@/hooks/store/user";
@@ -119,6 +120,7 @@ export const ProfileSettingsLanguageAndTimezonePreferencesList = observer(
             description: t("account_settings.preferences.start_of_week.description"),
           }}
         />
+        <WorkingDaysPreference />
       </div>
     );
   }

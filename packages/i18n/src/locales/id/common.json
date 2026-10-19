@@ -633,7 +633,8 @@
       "disable": "Nonaktifkan",
       "copy_markdown": "Salin markdown",
       "reply": "Balas",
-      "add_reaction": "Tambah reaksi"
+      "add_reaction": "Tambah reaksi",
+      "show_non_working_days": "Tampilkan hari nonkerja"
     },
     "name": "Nama",
     "discard": "Buang",
@@ -898,5 +899,7 @@
     "drag_drop": "Seret dan lepaskan gambar di sini",
     "formats": "Format berkas yang didukung:",
     "alt": "Gambar"
-  }
+  },
+  "working_day": "Hari kerja",
+  "non_working_day": "Hari nonkerja"
 }

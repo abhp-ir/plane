@@ -5,7 +5,7 @@
  */
 
 import type { TLanguage } from "@plane/i18n";
-import { getDateCalendar } from "@plane/utils";
+import { getCalendarPreferences, getDateCalendar } from "@plane/utils";
 import { faIR, getDateLib } from "@daypicker/persian";
 import type { DayPickerProps } from "react-day-picker";
 import type { DayPickerLocale } from "react-day-picker/locale";
@@ -62,14 +62,25 @@ const DATE_LOCALES = {
 
 /** DayPicker focuses its selected day inside the open popover when its calendar system changes. */
 export const getDateSelectOptions = (
-  language: TLanguage
-): { locale: DayPickerLocale; numerals: "arabext" | "latn"; dateLib?: DayPickerProps["dateLib"]; autoFocus: true } => {
+  language: TLanguage,
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6
+): {
+  locale: DayPickerLocale;
+  numerals: "arabext" | "latn";
+  dateLib?: DayPickerProps["dateLib"];
+  autoFocus: true;
+  weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+} => {
   const locale = DATE_LOCALES[language];
+  const start = getCalendarPreferences(
+    { start_of_the_week: weekStartsOn ?? locale.options?.weekStartsOn },
+    language
+  ).startOfWeek;
   if (getDateCalendar(language) === "persian") {
     // Keep Propel's DayPicker/Nav provider; raw overrides honor its week-start and formatting options.
-    return { locale, numerals: "arabext", dateLib: getDateLib().overrides, autoFocus: true };
+    return { locale, numerals: "arabext", dateLib: getDateLib().overrides, autoFocus: true, weekStartsOn: start };
   }
-  return { locale, numerals: "latn", autoFocus: true };
+  return { locale, numerals: "latn", autoFocus: true, weekStartsOn: start };
 };
 
 /** The default trigger label format — a short, unambiguous day. Overridden by `formatToken`. */

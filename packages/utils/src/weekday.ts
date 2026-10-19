@@ -5,6 +5,25 @@
  */
 
 import type { EStartOfTheWeek } from "@plane/types";
+import { getDateCalendar } from "./localized-datetime";
+
+/** Personal presentation preferences; no scheduling/business-day rules are inferred from them. */
+export const getCalendarPreferences = (
+  profile:
+    | {
+        start_of_the_week?: EStartOfTheWeek;
+        working_days?: readonly EStartOfTheWeek[] | null;
+      }
+    | null
+    | undefined,
+  locale: string = "en"
+): { startOfWeek: EStartOfTheWeek; workingDays: readonly EStartOfTheWeek[] } => {
+  const persian = getDateCalendar(locale) === "persian";
+  return {
+    startOfWeek: profile?.start_of_the_week ?? (persian ? 6 : 0),
+    workingDays: profile?.working_days ?? (persian ? [6, 0, 1, 2, 3] : [1, 2, 3, 4, 5]),
+  };
+};
 
 export const getWeekdayLabel = (day: EStartOfTheWeek, locale: string, width: "long" | "short" = "long"): string =>
   new Intl.DateTimeFormat(locale === "fa" ? "fa-IR" : locale === "ua" ? "uk-UA" : locale, {

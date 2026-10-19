@@ -7,7 +7,8 @@
 import { observer } from "mobx-react";
 // plane imports
 import type { TGroupedIssues, TIssue, TIssueMap, TPaginationData, ICalendarDate, ICalendarWeek } from "@plane/types";
-import { cn, getOrderedDays, renderFormattedPayloadDate } from "@plane/utils";
+import { cn, getCalendarPreferences, getOrderedDays, renderFormattedPayloadDate } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
 // hooks
 import { useUserProfile } from "@/hooks/store/user";
 // types
@@ -67,32 +68,26 @@ export const CalendarWeekDays = observer(function CalendarWeekDays(props: Props)
   } = props;
   // hooks
   const { data } = useUserProfile();
-  const startOfWeek = data?.start_of_the_week;
+  const { currentLocale } = useTranslation();
+  const { startOfWeek, workingDays } = getCalendarPreferences(data, currentLocale);
 
   const calendarLayout = issuesFilterStore?.issueFilters?.displayFilters?.calendar?.layout ?? "month";
   const showWeekends = issuesFilterStore?.issueFilters?.displayFilters?.calendar?.show_weekends ?? false;
 
   if (!week) return null;
 
-  const shouldShowDay = (dayDate: Date) => {
-    if (showWeekends) return true;
-    const day = dayDate.getDay();
-    return !(day === 0 || day === 6);
-  };
-
-  const sortedWeekDays = getOrderedDays(Object.values(week), (item) => item.date.getDay(), startOfWeek);
+  const sortedWeekDays = getOrderedDays(Object.values(week), (item) => item.date.getDay(), startOfWeek).filter(
+    (day) => showWeekends || workingDays.includes(day.date.getDay())
+  );
 
   return (
     <div
       className={cn("grid divide-subtle-1 md:divide-x-[0.5px]", {
-        "grid-cols-7": showWeekends,
-        "grid-cols-5": !showWeekends,
         "h-full": calendarLayout !== "month",
       })}
+      style={{ gridTemplateColumns: `repeat(${sortedWeekDays.length}, minmax(0, 1fr))` }}
     >
       {sortedWeekDays.map((date: ICalendarDate) => {
-        if (!shouldShowDay(date.date)) return null;
-
         return (
           <CalendarDayTile
             selectedDate={selectedDate}

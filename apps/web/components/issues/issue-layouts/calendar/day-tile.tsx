@@ -14,10 +14,18 @@ import type { TGroupedIssues, TIssue, TIssueMap, TPaginationData, ICalendarDate 
 // types
 // ui
 // components
-import { cn, formatDateForLocale, getCalendarDateLib, renderFormattedPayloadDate } from "@plane/utils";
+import {
+  cn,
+  formatDateForLocale,
+  getCalendarDateLib,
+  getCalendarPreferences,
+  getWeekdayLabel,
+  renderFormattedPayloadDate,
+} from "@plane/utils";
 import { highlightIssueOnDrop } from "@/components/issues/issue-layouts/utils";
 // helpers
 import { useTranslation } from "@plane/i18n";
+import { useUserProfile } from "@/hooks/store/user";
 // helpers
 // types
 import type { ICycleIssuesFilter } from "@/store/issue/cycle";
@@ -75,7 +83,9 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
     isEpic = false,
   } = props;
 
-  const { currentLocale } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const { data: profile } = useUserProfile();
+  const { workingDays } = getCalendarPreferences(profile, currentLocale);
   const calendar = getCalendarDateLib(currentLocale);
 
   const [isDraggingOver, setIsDraggingOver] = useState(false);
@@ -143,7 +153,8 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
   const isToday = date.date.toDateString() === new Date().toDateString();
   const isSelectedDate = date.date.toDateString() == selectedDate.toDateString();
 
-  const isWeekend = [0, 6].includes(date.date.getDay());
+  const isWeekend = !workingDays.includes(date.date.getDay());
+  const dayLabel = `${getWeekdayLabel(date.date.getDay(), currentLocale)} ${formatDateForLocale(date.date, "d MMMM yyyy", currentLocale)} — ${t(isWeekend ? "non_working_day" : "working_day")}`;
   const isMonthLayout = calendarLayout === "month";
 
   const normalBackground = isWeekend ? "bg-layer-1" : "bg-layer-transparent";
@@ -151,7 +162,7 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
 
   return (
     <>
-      <div ref={dayTileRef} className="group relative flex h-full w-full flex-col">
+      <div ref={dayTileRef} className="group relative flex h-full w-full flex-col" title={dayLabel}>
         {/* header */}
         <div
           className={`hidden flex-shrink-0 justify-end px-2 py-1.5 text-right text-11 md:flex ${
@@ -207,7 +218,7 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
         <button
           type="button"
           onClick={() => setSelectedDate(date.date)}
-          aria-label={formatDateForLocale(date.date, "d MMMM yyyy", currentLocale)}
+          aria-label={dayLabel}
           aria-pressed={isSelectedDate}
           className={cn(
             "mx-auto flex h-full w-full cursor-pointer flex-col items-center justify-start py-2.5 text-13 font-medium opacity-80 md:hidden",

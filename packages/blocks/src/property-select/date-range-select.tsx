@@ -119,7 +119,7 @@ export function DateRangeSelect(props: DateRangeSelectProps) {
   const [draft, setDraft] = useState<DateRangeValue | null>(null);
   const { currentLocale, direction } = useTranslation();
   // derived values
-  const dateOptions = getDateSelectOptions(currentLocale);
+  const dateOptions = getDateSelectOptions(currentLocale, weekStartsOn);
   const dateLib = new DateLib(dateOptions, dateOptions.dateLib);
   const from = value.from ? dateLib.format(value.from, formatToken) : "";
   const to = value.to ? dateLib.format(value.to, formatToken) : "";
@@ -164,7 +164,6 @@ export function DateRangeSelect(props: DateRangeSelectProps) {
         selected={shown.from ? { from: shown.from, to: shown.to ?? undefined } : undefined}
         defaultMonth={shown.from ?? defaultMonth}
         disabled={disabledMatchers}
-        weekStartsOn={weekStartsOn}
         onSelect={(range) => {
           const next = { from: range?.from ?? null, to: range?.to ?? null };
           // Deselecting the open end restarts the range without emitting.

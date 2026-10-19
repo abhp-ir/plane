@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Pierwszy dzień tygodnia",
         "description": "To ustawienie zmieni wygląd wszystkich kalendarzy w aplikacji."
+      },
+      "working_days": {
+        "title": "Dni robocze",
+        "description": "Proszę wybrać dni wyświetlane jako robocze w kalendarzach i na osiach czasu."
       }
     },
     "notifications": {

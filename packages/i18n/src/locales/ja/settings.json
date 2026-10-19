@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "週の開始曜日",
         "description": "アプリ内のすべてのカレンダーの表示が変わります。"
+      },
+      "working_days": {
+        "title": "稼働日",
+        "description": "カレンダーとタイムラインで稼働日として表示する曜日を選択してください。"
       }
     },
     "notifications": {

@@ -633,7 +633,8 @@
       "disable": "Tắt",
       "copy_markdown": "Sao chép markdown",
       "reply": "Trả lời",
-      "add_reaction": "Thêm biểu cảm"
+      "add_reaction": "Thêm biểu cảm",
+      "show_non_working_days": "Hiển thị ngày không làm việc"
     },
     "name": "Tên",
     "discard": "Hủy bỏ",
@@ -898,5 +899,7 @@
     "drag_drop": "Kéo và thả ảnh vào đây",
     "formats": "Định dạng tệp được hỗ trợ:",
     "alt": "Hình ảnh"
-  }
+  },
+  "working_day": "Ngày làm việc",
+  "non_working_day": "Ngày không làm việc"
 }

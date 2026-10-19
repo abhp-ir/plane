@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "每週的第一天",
         "description": "此設定會變更您應用程式中所有日曆的顯示方式。"
+      },
+      "working_days": {
+        "title": "工作日",
+        "description": "請選擇在您的行事曆和時間軸中將一週中的哪些天顯示為工作日。"
       }
     },
     "notifications": {

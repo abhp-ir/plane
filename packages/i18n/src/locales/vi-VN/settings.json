@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Ngày đầu tuần",
         "description": "Thiết lập này sẽ thay đổi cách hiển thị của tất cả lịch trong ứng dụng của bạn."
+      },
+      "working_days": {
+        "title": "Ngày làm việc",
+        "description": "Chọn các ngày được hiển thị là ngày làm việc trong lịch và dòng thời gian của bạn."
       }
     },
     "notifications": {

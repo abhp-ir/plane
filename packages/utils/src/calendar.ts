@@ -31,6 +31,7 @@ import { EStartOfTheWeek } from "@plane/types";
 // local imports
 import { getWeekNumberOfDate, renderFormattedPayloadDate } from "./datetime";
 import { getDateCalendar } from "./localized-datetime";
+import { getCalendarPreferences } from "./weekday";
 
 /** Calendar arithmetic changes presentation boundaries, never the underlying Date or timezone. */
 export const getCalendarDateLib = (locale: string = "en") =>
@@ -57,10 +58,11 @@ export const getCalendarDateLib = (locale: string = "en") =>
 export const generateCalendarData = (
   currentStructure: ICalendarPayload | null,
   startDate: Date,
-  startOfWeek: EStartOfTheWeek = EStartOfTheWeek.SUNDAY,
+  startOfWeek: EStartOfTheWeek | undefined = undefined,
   locale: string = "en"
 ): ICalendarPayload => {
   const calendarData: ICalendarPayload = currentStructure ?? {};
+  const weekStart = getCalendarPreferences({ start_of_the_week: startOfWeek }, locale).startOfWeek;
 
   const calendar = getCalendarDateLib(locale);
   const currentDate = calendar.startOfMonth(startDate);
@@ -71,7 +73,7 @@ export const generateCalendarData = (
 
   // Adjust firstDayOfMonth based on startOfWeek preference
   // This calculates how many empty cells we need at the start of the calendar
-  const firstDayOfMonth = (firstDayOfMonthRaw - startOfWeek + 7) % 7;
+  const firstDayOfMonth = (firstDayOfMonthRaw - weekStart + 7) % 7;
 
   calendarData[`y-${year}`] ||= {};
   // Always reset the month data to ensure clean regeneration with correct startOfWeek

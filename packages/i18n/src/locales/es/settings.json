@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Primer día de la semana",
         "description": "Esta opción cambiará la apariencia de todos los calendarios de su aplicación."
+      },
+      "working_days": {
+        "title": "Días laborables",
+        "description": "Seleccione los días que se muestran como laborables en sus calendarios y cronogramas."
       }
     },
     "notifications": {

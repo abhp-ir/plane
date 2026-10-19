@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "Primo giorno della settimana",
         "description": "Questa impostazione modifica l’aspetto di tutti i calendari nella Sua app."
+      },
+      "working_days": {
+        "title": "Giorni lavorativi",
+        "description": "Scelga i giorni da mostrare come lavorativi nei Suoi calendari e nelle Sue sequenze temporali."
       }
     },
     "notifications": {

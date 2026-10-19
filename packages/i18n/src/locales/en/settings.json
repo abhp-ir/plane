@@ -52,6 +52,10 @@
       "start_of_week": {
         "title": "First day of the week",
         "description": "This will change how all calendars in your app look."
+      },
+      "working_days": {
+        "title": "Working days",
+        "description": "Choose the days shown as working days in your calendars and timelines."
       }
     },
     "notifications": {

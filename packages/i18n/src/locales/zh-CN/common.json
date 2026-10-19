@@ -633,7 +633,8 @@
       "disable": "禁用",
       "copy_markdown": "复制Markdown",
       "reply": "回复",
-      "add_reaction": "添加表情回应"
+      "add_reaction": "添加表情回应",
+      "show_non_working_days": "显示非工作日"
     },
     "name": "名称",
     "discard": "放弃",
@@ -898,5 +899,7 @@
     "drag_drop": "将图片拖放到此处",
     "formats": "支持的文件格式：",
     "alt": "图片"
-  }
+  },
+  "working_day": "工作日",
+  "non_working_day": "非工作日"
 }
