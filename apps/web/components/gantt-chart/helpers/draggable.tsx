@@ -10,7 +10,7 @@ import { observer } from "mobx-react";
 // hooks
 import type { IGanttBlock } from "@plane/types";
 // helpers
-import { cn } from "@plane/utils";
+import { cn, getDate } from "@plane/utils";
 // components
 import { LeftResizable } from "./blockResizables/left-resizable";
 import { RightResizable } from "./blockResizables/right-resizable";
@@ -19,6 +19,7 @@ type Props = {
   block: IGanttBlock;
   blockToRender: (data: any) => React.ReactNode;
   handleBlockDrag: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, dragDirection: "left" | "right" | "move") => void;
+  handleBlockKeyDown: (event: React.KeyboardEvent<HTMLDivElement>, direction: "left" | "right") => void;
   isMoving: "left" | "right" | "move" | undefined;
   enableBlockLeftResize: boolean;
   enableBlockRightResize: boolean;
@@ -32,6 +33,7 @@ export const ChartDraggable = observer(function ChartDraggable(props: Props) {
     block,
     blockToRender,
     handleBlockDrag,
+    handleBlockKeyDown,
     enableBlockLeftResize,
     enableBlockRightResize,
     enableBlockMove,
@@ -42,7 +44,9 @@ export const ChartDraggable = observer(function ChartDraggable(props: Props) {
     <div className="group relative z-[5] inline-flex h-full w-full cursor-pointer items-center font-medium transition-all">
       <LeftResizable
         enableBlockLeftResize={enableBlockLeftResize}
+        maxDate={getDate(block.target_date)}
         handleBlockDrag={handleBlockDrag}
+        handleBlockKeyDown={handleBlockKeyDown}
         isMoving={isMoving}
         position={block.position}
       />
@@ -58,7 +62,9 @@ export const ChartDraggable = observer(function ChartDraggable(props: Props) {
       {/* right resize drag handle */}
       <RightResizable
         enableBlockRightResize={enableBlockRightResize}
+        minDate={getDate(block.start_date)}
         handleBlockDrag={handleBlockDrag}
+        handleBlockKeyDown={handleBlockKeyDown}
         isMoving={isMoving}
         position={block.position}
       />

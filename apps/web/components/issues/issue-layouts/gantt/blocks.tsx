@@ -10,9 +10,8 @@ import { useParams } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "@makeplane/propel/components/popover";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import { ControlLink } from "@plane/blocks/layout";
-import { findTotalDaysInRange, generateWorkItemLink } from "@plane/utils";
+import { generateWorkItemLink } from "@plane/utils";
 // components
-import { SIDEBAR_WIDTH } from "@/components/gantt-chart/constants";
 import { IssueIdentifier } from "@/components/issues/issue-detail/issue-identifier";
 // hooks
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
@@ -55,17 +54,16 @@ export const IssueGanttBlock = observer(function IssueGanttBlock(props: Props) {
 
   const handleIssuePeekOverview = () => handleRedirection(workspaceSlug, issueDetails, isMobile);
 
-  const duration = findTotalDaysInRange(issueDetails?.start_date, issueDetails?.target_date) || 0;
-
   return (
     <Popover>
       <PopoverTrigger
+        nativeButton={false}
         openOnHover
         delay={100}
         render={
           // oxlint-disable-next-line jsx_a11y/click-events-have-key-events oxlint-disable-next-line jsx_a11y/no-static-element-interactions
           <div
-            id={`issue-${issueId}`}
+            id={`gantt-issue-${issueId}`}
             className="space-between relative flex h-full w-full cursor-pointer items-center rounded-sm"
             style={blockStyle}
             onClick={handleIssuePeekOverview}
@@ -73,9 +71,9 @@ export const IssueGanttBlock = observer(function IssueGanttBlock(props: Props) {
             <div className="absolute top-0 left-0 h-full w-full bg-surface-1/50" />
             <div
               className="sticky w-auto flex-1 truncate overflow-hidden px-2.5 py-1 text-13 text-primary"
-              style={{ left: `${SIDEBAR_WIDTH}px` }}
+              style={{ left: "var(--gantt-sidebar-width)" }}
             >
-              {issueDetails?.name}
+              <bdi>{issueDetails?.name}</bdi>
             </div>
           </div>
         }
@@ -151,7 +149,7 @@ export const IssueGanttSidebarBlock = observer(function IssueGanttSidebarBlock(p
           />
         )}
         <Tooltip label={issueDetails?.name ?? ""} layout="stacked" disabled={isMobile}>
-          <span className="flex-grow truncate text-13 font-medium">{issueDetails?.name}</span>
+          <bdi className="flex-grow truncate text-13 font-medium">{issueDetails?.name}</bdi>
         </Tooltip>
       </div>
     </ControlLink>

@@ -25,7 +25,11 @@ export const getCalendarPreferences = (
   };
 };
 
-export const getWeekdayLabel = (day: EStartOfTheWeek, locale: string, width: "long" | "short" = "long"): string =>
+export const getWeekdayLabel = (
+  day: EStartOfTheWeek,
+  locale: string,
+  width: "long" | "short" | "narrow" = "long"
+): string =>
   new Intl.DateTimeFormat(locale === "fa" ? "fa-IR" : locale === "ua" ? "uk-UA" : locale, {
     weekday: width,
     timeZone: "UTC",

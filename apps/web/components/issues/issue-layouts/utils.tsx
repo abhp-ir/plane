@@ -49,7 +49,7 @@ import type {
 import { EIssuesStoreType } from "@plane/types";
 // plane ui
 
-import { renderFormattedDate, getFileURL } from "@plane/utils";
+import { getFileURL } from "@plane/utils";
 // store
 import { store } from "@/lib/store-context";
 import { ISSUE_FILTER_DEFAULT_DATA } from "@/store/issue/helpers/base-issues.store";
@@ -732,25 +732,19 @@ export const getBlockViewDetails = (
   const isBlockVisibleOnChart = block?.start_date || block?.target_date;
   const isBlockComplete = block?.start_date && block?.target_date;
 
-  let message;
   const blockStyle: CSSProperties = {
     backgroundColor,
   };
 
   if (isBlockVisibleOnChart && !isBlockComplete) {
     if (block?.start_date) {
-      message = `From ${renderFormattedDate(block.start_date)}`;
       blockStyle.maskImage = `linear-gradient(to right, ${backgroundColor} 50%, transparent 95%)`;
     } else if (block?.target_date) {
-      message = `Till ${renderFormattedDate(block.target_date)}`;
       blockStyle.maskImage = `linear-gradient(to left, ${backgroundColor} 50%, transparent 95%)`;
     }
-  } else if (isBlockComplete) {
-    message = `${renderFormattedDate(block?.start_date)} to ${renderFormattedDate(block?.target_date)}`;
   }
 
   return {
-    message,
     blockStyle,
   };
 };

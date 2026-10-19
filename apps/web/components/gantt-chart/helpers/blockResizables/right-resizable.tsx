@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // plane utils
 import { cn, renderFormattedDate } from "@plane/utils";
 //helpers
@@ -16,6 +17,8 @@ import { useTimeLineChartStore } from "@/hooks/use-timeline-chart";
 type RightResizableProps = {
   enableBlockRightResize: boolean;
   handleBlockDrag: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, dragDirection: "left" | "right" | "move") => void;
+  handleBlockKeyDown: (event: React.KeyboardEvent<HTMLDivElement>, direction: "left" | "right") => void;
+  minDate?: Date;
   isMoving: "left" | "right" | "move" | undefined;
   position?: {
     marginLeft: number;
@@ -23,13 +26,16 @@ type RightResizableProps = {
   };
 };
 export const RightResizable = observer(function RightResizable(props: RightResizableProps) {
-  const { enableBlockRightResize, handleBlockDrag, isMoving, position } = props;
+  const { enableBlockRightResize, handleBlockDrag, handleBlockKeyDown, isMoving, position, minDate } = props;
+  const { currentLocale, t } = useTranslation();
   const [isHovering, setIsHovering] = useState(false);
 
   const { getDateFromPositionOnGantt } = useTimeLineChartStore();
 
   const date = position ? getDateFromPositionOnGantt(position.marginLeft + position.width, -1) : undefined;
-  const dateString = date ? renderFormattedDate(date) : undefined;
+  const dateString = date
+    ? renderFormattedDate(date, currentLocale === "fa" ? "d MMMM yyyy" : undefined, currentLocale)
+    : undefined;
 
   const isRightResizing = isMoving === "right" || isMoving === "move";
 
@@ -43,6 +49,15 @@ export const RightResizable = observer(function RightResizable(props: RightResiz
         </div>
       )}
       <div
+        role="spinbutton"
+        tabIndex={0}
+        aria-label={t("end_date")}
+        aria-valuenow={date?.getTime()}
+        aria-valuetext={dateString}
+        aria-valuemin={minDate?.getTime()}
+        onKeyDown={(event) => handleBlockKeyDown(event, "right")}
+        onFocus={() => setIsHovering(true)}
+        onBlur={() => setIsHovering(false)}
         onMouseDown={(e) => handleBlockDrag(e, "right")}
         onMouseOver={() => {
           setIsHovering(true);
@@ -50,11 +65,11 @@ export const RightResizable = observer(function RightResizable(props: RightResiz
         onMouseOut={() => {
           setIsHovering(false);
         }}
-        className="absolute top-1/2 -right-1.5 z-[6] h-full w-3 -translate-y-1/2 cursor-col-resize rounded-md"
+        className="absolute top-1/2 -right-1.5 z-[6] h-full w-3 -translate-y-1/2 cursor-col-resize rounded-md focus-visible:outline-2 focus-visible:outline-accent-strong"
       />
       <div
         className={cn(
-          "absolute top-1/2 right-1 z-[5] h-7 w-1 -translate-y-1/2 rounded-xs bg-surface-1 opacity-0 transition-all duration-300 group-hover:opacity-100",
+          "absolute top-1/2 right-1 z-[5] h-7 w-1 -translate-y-1/2 rounded-xs bg-surface-1 opacity-0 transition-all duration-300 group-focus-within:opacity-100 group-hover:opacity-100",
           {
             "-right-1.5 opacity-100": isRightResizing,
           }

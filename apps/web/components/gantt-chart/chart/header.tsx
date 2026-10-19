@@ -11,7 +11,8 @@ import { useTranslation } from "@plane/i18n";
 import type { TGanttViews } from "@plane/types";
 import { Row } from "@plane/blocks/layout";
 // components
-import { cn } from "@plane/utils";
+import { cn, getCalendarPreferences, getOrderedDays, getWeekdayLabel } from "@plane/utils";
+import { useUserProfile } from "@/hooks/store/user";
 import { VIEWS_LIST } from "@/components/gantt-chart/data";
 // helpers
 // hooks
@@ -30,7 +31,18 @@ type Props = {
 };
 
 export const GanttChartHeader = observer(function GanttChartHeader(props: Props) {
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const { data } = useUserProfile();
+  const { startOfWeek, workingDays } = getCalendarPreferences(data, currentLocale);
+  const nonWorkingDays = getOrderedDays(
+    Array.from({ length: 7 }, (_, day) => day).filter((day) => !workingDays.includes(day)),
+    (day) => day,
+    startOfWeek
+  );
+  const list = new Intl.ListFormat(currentLocale === "ua" ? "uk-UA" : currentLocale, {
+    style: "short",
+    type: "conjunction",
+  });
   const { blockIds, fullScreenMode, handleChartView, handleToday, loaderTitle, toggleFullScreenMode, showToday } =
     props;
   // chart hook
@@ -39,14 +51,26 @@ export const GanttChartHeader = observer(function GanttChartHeader(props: Props)
   return (
     <Row
       className="relative flex w-full flex-shrink-0 flex-wrap items-center gap-2 bg-surface-1 py-2 whitespace-nowrap"
-      style={{ height: `${GANTT_BREADCRUMBS_HEIGHT}px` }}
+      style={{ minHeight: `${GANTT_BREADCRUMBS_HEIGHT}px` }}
     >
-      <div className="ml-auto">
-        <div className="ml-auto text-11 font-medium text-tertiary">
-          {blockIds ? `${blockIds.length} ${loaderTitle}` : t("common.loading")}
+      <div className="me-auto">
+        <div className="text-11 font-medium text-tertiary">
+          {blockIds
+            ? `${new Intl.NumberFormat(currentLocale).format(blockIds.length)} ${loaderTitle}`
+            : t("common.loading")}
         </div>
       </div>
 
+      {nonWorkingDays.length > 0 && (
+        <span
+          className="flex items-center gap-1 text-11 text-tertiary"
+          title={`${t("non_working_day")}: ${list.format(nonWorkingDays.map((day) => getWeekdayLabel(day, currentLocale)))}`}
+        >
+          <span className="size-2 rounded-xs bg-surface-2 outline outline-subtle" aria-hidden="true" />
+          {t("non_working_day")}:{" "}
+          {list.format(nonWorkingDays.map((day) => getWeekdayLabel(day, currentLocale, "short")))}
+        </span>
+      )}
       <div className="flex flex-wrap items-center gap-2">
         {VIEWS_LIST.map((chartView: any) => (
           <button

@@ -7,9 +7,11 @@
 import { useEffect, useRef, useState } from "react";
 import { addDays } from "date-fns";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import { AddOutline } from "@makeplane/propel/icons";
 // ui
 import { Tooltip } from "@makeplane/propel/components/tooltip";
+import { setToast } from "@plane/blocks/toast";
 import type { IBlockUpdateData, IGanttBlock } from "@plane/types";
 // helpers
 import { renderFormattedDate, renderFormattedPayloadDate } from "@plane/utils";
@@ -25,6 +27,7 @@ type Props = {
 
 export const ChartAddBlock = observer(function ChartAddBlock(props: Props) {
   const { block, blockUpdateHandler } = props;
+  const { t, currentLocale } = useTranslation();
   // states
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [buttonXPosition, setButtonXPosition] = useState(0);
@@ -36,11 +39,11 @@ export const ChartAddBlock = observer(function ChartAddBlock(props: Props) {
   // chart hook
   const { currentViewData, currentView } = useTimeLineChartStore();
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     if (!currentViewData) return;
 
     const { startDate: chartStartDate, dayWidth } = currentViewData.data;
-    const columnNumber = buttonXPosition / dayWidth;
+    const columnNumber = Math.floor(buttonXPosition / dayWidth);
 
     let numberOfDays = 1;
 
@@ -49,11 +52,19 @@ export const ChartAddBlock = observer(function ChartAddBlock(props: Props) {
     const startDate = addDays(chartStartDate, columnNumber);
     const endDate = addDays(startDate, numberOfDays);
 
-    blockUpdateHandler(block.data, {
-      start_date: renderFormattedPayloadDate(startDate) ?? undefined,
-      target_date: renderFormattedPayloadDate(endDate) ?? undefined,
-      meta: block.meta,
-    });
+    try {
+      await blockUpdateHandler(block.data, {
+        start_date: renderFormattedPayloadDate(startDate) ?? undefined,
+        target_date: renderFormattedPayloadDate(endDate) ?? undefined,
+        meta: block.meta,
+      });
+    } catch {
+      setToast({
+        type: "error",
+        title: t("toast.error"),
+        message: t("entity.update.failed", { entity: t("common.dates") }),
+      });
+    }
   };
 
   useEffect(() => {
@@ -67,7 +78,7 @@ export const ChartAddBlock = observer(function ChartAddBlock(props: Props) {
       setButtonXPosition(e.offsetX);
 
       const { startDate: chartStartDate, dayWidth } = currentViewData.data;
-      const columnNumber = buttonXPosition / dayWidth;
+      const columnNumber = Math.floor(e.offsetX / dayWidth);
 
       const startDate = addDays(chartStartDate, columnNumber);
       setButtonStartDate(startDate);
@@ -78,7 +89,7 @@ export const ChartAddBlock = observer(function ChartAddBlock(props: Props) {
     return () => {
       container?.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [buttonXPosition, currentViewData]);
+  }, [currentViewData]);
 
   return (
     <div
@@ -88,9 +99,16 @@ export const ChartAddBlock = observer(function ChartAddBlock(props: Props) {
     >
       <div ref={containerRef} className="h-full w-full" />
       {isButtonVisible && (
-        <Tooltip label={renderFormattedDate(buttonStartDate) ?? ""} disabled={isMobile}>
+        <Tooltip
+          label={
+            renderFormattedDate(buttonStartDate, currentLocale === "fa" ? "d MMMM yyyy" : undefined, currentLocale) ??
+            ""
+          }
+          disabled={isMobile}
+        >
           <button
             type="button"
+            aria-label={`${t("common.add")}: ${t("common.dates")} ${renderFormattedDate(buttonStartDate, currentLocale === "fa" ? "d MMMM yyyy" : undefined, currentLocale) ?? ""}`}
             className="absolute top-1/2 grid h-8 w-8 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-sm border border-strong bg-layer-1 p-1.5 text-secondary hover:text-primary"
             style={{
               marginLeft: `${buttonXPosition}px`,

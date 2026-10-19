@@ -8,6 +8,16 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import * as utils from "../dist/index.js";
 
+test("narrow Gantt weekday labels retain all seven identities with full accessible names available", () => {
+  assert.deepEqual(
+    Array.from({ length: 7 }, (_, day) => utils.getWeekdayLabel(day, "fa", "narrow")),
+    ["ی", "د", "س", "چ", "پ", "ج", "ش"]
+  );
+  assert.equal(utils.getWeekdayLabel(6, "fa"), "شنبه");
+  assert.equal(utils.getWeekdayLabel(0, "en", "narrow"), "S");
+  assert.equal(utils.getWeekdayLabel(4, "ua"), "четвер");
+});
+
 test("Persian defaults are Saturday-first with Thursday/Friday off; other locales retain Sunday and Monday–Friday", () => {
   assert.deepEqual(utils.getCalendarPreferences(undefined, "fa"), { startOfWeek: 6, workingDays: [6, 0, 1, 2, 3] });
   for (const locale of ["en", "de", "ua", "ar"]) {

@@ -42,7 +42,7 @@ export const IssuesHeader = observer(function IssuesHeader() {
     issues: { getGroupIssueCount },
   } = useIssues(EIssuesStoreType.PROJECT);
   // i18n
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   const { currentProjectDetails, loader } = useProject();
 
@@ -74,7 +74,7 @@ export const IssuesHeader = observer(function IssuesHeader() {
             <Breadcrumbs.Item
               component={
                 <BreadcrumbLink
-                  label="Work Items"
+                  label={t("issue.label", { count: 2 })}
                   href={`/${workspaceSlug}/projects/${projectId}/issues/`}
                   icon={<WorkItemsOutline className="h-4 w-4 text-tertiary" />}
                   isLast
@@ -85,7 +85,7 @@ export const IssuesHeader = observer(function IssuesHeader() {
           </Breadcrumbs>
           {issuesCount && issuesCount > 0 ? (
             <Tooltip
-              label={`There are ${issuesCount} ${issuesCount > 1 ? "work items" : "work item"} in this project`}
+              label={`${new Intl.NumberFormat(currentLocale).format(issuesCount)} ${t("issue.label", { count: issuesCount })}`}
               layout="stacked"
               side="bottom"
               disabled={isMobile}

@@ -53,7 +53,12 @@ export const GanttChartBlock = observer(function GanttChartBlock(props: Props) {
 
   const isCurrentDependencyDragging = getIsCurrentDependencyDragging(blockId);
 
-  const { isMoving, handleBlockDrag } = useGanttResizable(block, resizableRef, ganttContainerRef, updateBlockDates);
+  const { isMoving, handleBlockDrag, handleBlockKeyDown } = useGanttResizable(
+    block,
+    resizableRef,
+    ganttContainerRef,
+    updateBlockDates
+  );
 
   const isBlockVisibleOnChart = block?.start_date || block?.target_date;
   const isBlockComplete = block?.start_date && block?.target_date;
@@ -96,6 +101,7 @@ export const GanttChartBlock = observer(function GanttChartBlock(props: Props) {
               block={block}
               blockToRender={blockToRender}
               handleBlockDrag={handleBlockDrag}
+              handleBlockKeyDown={handleBlockKeyDown}
               enableBlockLeftResize={enableBlockLeftResize}
               enableBlockRightResize={enableBlockRightResize}
               enableBlockMove={enableBlockMove && !!isBlockComplete}

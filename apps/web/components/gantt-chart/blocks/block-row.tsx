@@ -6,6 +6,7 @@
 
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import { ArrowNarrowRightOutline } from "@makeplane/propel/icons";
 // helpers
 import type { IBlockUpdateData, IGanttBlock } from "@plane/types";
@@ -15,7 +16,7 @@ import { useIssueDetail } from "@/hooks/store/use-issue-detail";
 import type { TSelectionHelper } from "@/hooks/use-multiple-select";
 import { useTimeLineChartStore } from "@/hooks/use-timeline-chart";
 //
-import { BLOCK_HEIGHT, SIDEBAR_WIDTH } from "../constants";
+import { BLOCK_HEIGHT, getGanttSidebarWidth } from "../constants";
 import { ChartAddBlock } from "../helpers";
 
 type Props = {
@@ -30,6 +31,7 @@ type Props = {
 
 export const BlockRow = observer(function BlockRow(props: Props) {
   const { blockId, showAllBlocks, blockUpdateHandler, handleScrollToBlock, enableAddBlock, selectionHelpers } = props;
+  const { t } = useTranslation();
   // states
   const [isHidden, setIsHidden] = useState(false);
   const [isBlockHiddenOnLeft, setIsBlockHiddenOnLeft] = useState(false);
@@ -50,24 +52,30 @@ export const BlockRow = observer(function BlockRow(props: Props) {
         intersectionRoot.scrollLeft > block.position.marginLeft + block.position.width
     );
 
-    // Observe if the block is visible on the chart
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsHidden(!entry.isIntersecting);
-          setIsBlockHiddenOnLeft(entry.boundingClientRect.right < (entry.rootBounds?.left ?? 0));
-        });
-      },
-      {
-        root: intersectionRoot,
-        rootMargin: `0px 0px 0px -${SIDEBAR_WIDTH}px`,
-      }
-    );
-
-    observer.observe(timelineBlock);
+    let intersectionObserver: IntersectionObserver | undefined;
+    const observeBlock = () => {
+      intersectionObserver?.disconnect();
+      intersectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            setIsHidden(!entry.isIntersecting);
+            setIsBlockHiddenOnLeft(entry.boundingClientRect.right < (entry.rootBounds?.left ?? 0));
+          });
+        },
+        {
+          root: intersectionRoot,
+          rootMargin: `0px 0px 0px -${getGanttSidebarWidth(intersectionRoot)}px`,
+        }
+      );
+      intersectionObserver.observe(timelineBlock);
+    };
+    const resizeObserver = new ResizeObserver(observeBlock);
+    resizeObserver.observe(intersectionRoot.querySelector("#gantt-sidebar") ?? intersectionRoot);
+    observeBlock();
 
     return () => {
-      observer.unobserve(timelineBlock);
+      resizeObserver.disconnect();
+      intersectionObserver?.disconnect();
     };
   }, [block]);
 
@@ -101,9 +109,10 @@ export const BlockRow = observer(function BlockRow(props: Props) {
           ? isHidden && (
               <button
                 type="button"
+                aria-label={`${t("common.view")}: ${block.name}`}
                 className="sticky z-[5] grid h-8 w-8 translate-y-1.5 cursor-pointer place-items-center rounded-sm border border-strong bg-layer-1 text-secondary hover:text-primary"
                 style={{
-                  left: `${SIDEBAR_WIDTH + 4}px`,
+                  left: "calc(var(--gantt-sidebar-width) + 4px)",
                 }}
                 onClick={() => handleScrollToBlock(block)}
               >

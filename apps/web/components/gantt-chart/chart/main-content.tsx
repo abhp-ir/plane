@@ -8,6 +8,7 @@ import { useEffect, useRef } from "react";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { autoScrollForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import type {
   ChartDataType,
   IBlockUpdateData,
@@ -83,6 +84,7 @@ export const GanttChartMainContent = observer(function GanttChartMainContent(pro
     updateBlockDates,
     isEpic = false,
   } = props;
+  const { t } = useTranslation();
   // refs
   const ganttContainerRef = useRef<HTMLDivElement>(null);
   // chart hook
@@ -170,6 +172,11 @@ export const GanttChartMainContent = observer(function GanttChartMainContent(pro
             <div
               // DO NOT REMOVE THE ID
               id="gantt-container"
+              // Time increases to the right: scroll, hit testing and resize handles share this physical axis.
+              dir="ltr"
+              role="region"
+              aria-label={t("common.timeline")}
+              tabIndex={0}
               className={cn(
                 "vertical-scrollbar horizontal-scrollbar scrollbar-lg flex h-full w-full overflow-auto border-t-[0.5px] border-subtle",
                 {

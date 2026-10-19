@@ -6,21 +6,33 @@
 
 import { observer } from "mobx-react";
 // plane utils
-import { cn } from "@plane/utils";
+import {
+  cn,
+  formatDateForLocale,
+  getCalendarPreferences,
+  getWeekdayLabel,
+  renderFormattedPayloadDate,
+} from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
+import { useUserProfile } from "@/hooks/store/user";
+import { GanttDayColumns } from "./day-columns";
 // hooks
 import { useTimeLineChartStore } from "@/hooks/use-timeline-chart";
 //
-import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "../../constants";
+import { HEADER_HEIGHT } from "../../constants";
 import type { IWeekBlock } from "../../views";
 
 export const WeekChartView = observer(function WeekChartView(_props: any) {
   const { currentViewData, renderView } = useTimeLineChartStore();
   const weekBlocks: IWeekBlock[] = renderView;
+  const { currentLocale, t } = useTranslation();
+  const { data } = useUserProfile();
+  const { workingDays } = getCalendarPreferences(data, currentLocale);
 
   return (
     <div className={`absolute top-0 left-0 flex h-max min-h-full w-max`}>
       {currentViewData &&
-        weekBlocks?.map((block, rootIndex) => (
+        weekBlocks?.map((block) => (
           <div
             key={`month-${block?.startDate.toString()}-${block?.endDate.toString()}`}
             className="relative flex flex-col outline-[0.25px] outline-subtle-1"
@@ -37,20 +49,21 @@ export const WeekChartView = observer(function WeekChartView(_props: any) {
                 <div
                   className="sticky z-[1] m-1 flex items-center bg-surface-1 px-3 py-1 text-13 font-regular whitespace-nowrap text-secondary capitalize"
                   style={{
-                    left: `${SIDEBAR_WIDTH}px`,
+                    left: "var(--gantt-sidebar-width)",
                   }}
                 >
-                  {block?.title}
+                  <bdi>{block?.title}</bdi>
                 </div>
                 <div className="sticky px-3 py-2 text-11 whitespace-nowrap text-placeholder capitalize">
-                  {block?.weekData?.title}
+                  {t("common.week")} {new Intl.NumberFormat(currentLocale).format(block.weekNumber)}
                 </div>
               </div>
               {/** Days Sub title */}
               <div className="flex h-5 w-full">
-                {block?.children?.map((weekDay, index) => (
+                {block?.children?.map((weekDay) => (
                   <div
-                    key={`sub-title-${rootIndex}-${index}`}
+                    key={weekDay.date.getTime()}
+                    title={`${formatDateForLocale(weekDay.date, "EEEE d MMMM yyyy", currentLocale)} — ${t(workingDays.includes(weekDay.day) ? "working_day" : "non_working_day")}`}
                     className={cn(
                       "flex flex-shrink-0 justify-between p-1 text-center capitalize outline-[0.25px] outline-subtle-1",
                       {
@@ -59,14 +72,24 @@ export const WeekChartView = observer(function WeekChartView(_props: any) {
                     )}
                     style={{ width: `${currentViewData?.data.dayWidth}px` }}
                   >
-                    <div className="space-x-1 text-11 font-medium text-placeholder">{weekDay.dayData.abbreviation}</div>
+                    <div className="space-x-1 text-11 font-medium text-placeholder">
+                      <abbr
+                        aria-label={getWeekdayLabel(weekDay.day, currentLocale)}
+                        title={getWeekdayLabel(weekDay.day, currentLocale)}
+                        className="no-underline"
+                      >
+                        {getWeekdayLabel(weekDay.day, currentLocale, "narrow")}
+                      </abbr>
+                    </div>
                     <div className="space-x-1 text-11 font-medium">
                       <span
                         className={cn({
                           "rounded-sm bg-accent-primary px-1 text-on-color": weekDay.today,
                         })}
                       >
-                        {weekDay.date.getDate()}
+                        <time dateTime={renderFormattedPayloadDate(weekDay.date)}>
+                          {formatDateForLocale(weekDay.date, "d", currentLocale)}
+                        </time>
                       </span>
                     </div>
                   </div>
@@ -74,21 +97,7 @@ export const WeekChartView = observer(function WeekChartView(_props: any) {
               </div>
             </div>
             {/** Day Columns */}
-            <div className="flex h-full w-full flex-grow bg-surface-1">
-              {block?.children?.map((weekDay, index) => (
-                <div
-                  key={`column-${rootIndex}-${index}`}
-                  className={cn("h-full overflow-hidden outline-[0.25px] outline-subtle", {
-                    "bg-accent-primary/20": weekDay.today,
-                  })}
-                  style={{ width: `${currentViewData?.data.dayWidth}px` }}
-                >
-                  {["sat", "sun"].includes(weekDay?.dayData?.shortTitle) && (
-                    <div className="h-full bg-surface-2 outline-[0.25px] outline-strong" />
-                  )}
-                </div>
-              ))}
-            </div>
+            <GanttDayColumns startDate={block.startDate} endDate={block.endDate} />
           </div>
         ))}
     </div>

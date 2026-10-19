@@ -16,7 +16,7 @@ import { MultipleSelectGroupAction } from "@/components/core/multiple-select";
 // hooks
 import type { TSelectionHelper } from "@/hooks/use-multiple-select";
 // constants
-import { GANTT_SELECT_GROUP, HEADER_HEIGHT, SIDEBAR_WIDTH } from "../constants";
+import { GANTT_SELECT_GROUP, HEADER_HEIGHT } from "../constants";
 
 type Props = {
   blockIds: string[];
@@ -34,7 +34,7 @@ type Props = {
 };
 
 export const GanttChartSidebar = observer(function GanttChartSidebar(props: Props) {
-  const { t } = useTranslation();
+  const { t, direction } = useTranslation();
   const {
     blockIds,
     blockUpdateHandler,
@@ -56,9 +56,10 @@ export const GanttChartSidebar = observer(function GanttChartSidebar(props: Prop
     <Row
       // DO NOT REMOVE THE ID
       id="gantt-sidebar"
+      dir={direction}
       className="sticky left-0 z-10 h-max min-h-full flex-shrink-0 border-r-[0.5px] border-subtle-1 bg-surface-1"
       style={{
-        width: `${SIDEBAR_WIDTH}px`,
+        width: "var(--gantt-sidebar-width)",
       }}
       variant={ERowVariant.HUGGING}
     >
@@ -83,7 +84,7 @@ export const GanttChartSidebar = observer(function GanttChartSidebar(props: Prop
               />
             </div>
           )}
-          <h6>{title}</h6>
+          <h6 dir="auto">{title}</h6>
         </div>
         <h6>{t("common.duration")}</h6>
       </Row>
