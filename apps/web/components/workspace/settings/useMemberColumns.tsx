@@ -29,7 +29,7 @@ export const useMemberColumns = () => {
       filtersStore: { filters, updateFilters },
     },
   } = useMember();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   // derived values
   const isAdmin = allowPermissions([EUserPermissions.ADMIN], EUserPermissionsLevel.WORKSPACE);
@@ -123,7 +123,9 @@ export const useMemberColumns = () => {
       key: "Joining date",
       content: t("workspace_settings.settings.members.details.joining_date"),
       tdRender: (rowData: RowData) =>
-        isSuspended(rowData) ? null : <div>{renderFormattedDate(rowData?.member?.joining_date)}</div>,
+        isSuspended(rowData) ? null : (
+          <div>{renderFormattedDate(rowData?.member?.joining_date, undefined, currentLocale)}</div>
+        ),
       thRender: () => (
         <MemberHeaderColumn
           property="joining_date"

@@ -45,7 +45,7 @@ const projectService = new ProjectService();
 
 export function ProjectDetailsForm(props: IProjectDetailsForm) {
   const { project, workspaceSlug, projectId, isAdmin } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // states
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -100,6 +100,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
           title: t("toast.success"),
           message: t("project_settings.general.toast.success"),
         });
+        return undefined;
       })
       .catch((err) => {
         try {
@@ -195,6 +196,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
         .then(async (res) => {
           if (res.exists) setError("identifier", { message: t("common.identifier_already_exists") });
           else await handleUpdateChange(payload);
+          return undefined;
         });
     else await handleUpdateChange(payload);
     setTimeout(() => {
@@ -449,8 +451,8 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                 <>
                   <TimezoneSelect
                     value={value}
-                    onChange={(value: string) => {
-                      onChange(value);
+                    onChange={(timeZone: string) => {
+                      onChange(timeZone);
                     }}
                     error={Boolean(errors.timezone)}
                     buttonClassName="!border-subtle !shadow-none font-medium rounded-md"
@@ -474,7 +476,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
               disabled={!isAdmin}
             />
             <span className="text-13 text-placeholder italic">
-              {t("common.created_on")} {renderFormattedDate(project?.created_at)}
+              {t("common.created_on")} {renderFormattedDate(project?.created_at, undefined, currentLocale)}
             </span>
           </>
         </div>

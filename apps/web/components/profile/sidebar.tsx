@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useEffectEvent, useRef } from "react";
 import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // plane imports
@@ -47,7 +47,7 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
   const { getProjectById } = useProject();
   const { toggleProfileSettingsModal } = useCommandPalette();
   const { isMobile } = usePlatformOS();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // derived values
   const userData = userProjectsData?.user_data;
 
@@ -62,7 +62,7 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
   const userDetails = [
     {
       i18n_label: "profile.details.joined_on",
-      value: renderFormattedDate(userData?.date_joined ?? ""),
+      value: renderFormattedDate(userData?.date_joined ?? "", undefined, currentLocale),
     },
     {
       i18n_label: "profile.details.time_zone",
@@ -70,16 +70,16 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
     },
   ];
 
-  useEffect(() => {
-    const handleToggleProfileSidebar = () => {
-      if (window && window.innerWidth < 768) {
-        toggleProfileSidebar(true);
-      }
-      if (window && profileSidebarCollapsed && window.innerWidth >= 768) {
-        toggleProfileSidebar(false);
-      }
-    };
+  const handleToggleProfileSidebar = useEffectEvent(() => {
+    if (window && window.innerWidth < 768) {
+      toggleProfileSidebar(true);
+    }
+    if (window && profileSidebarCollapsed && window.innerWidth >= 768) {
+      toggleProfileSidebar(false);
+    }
+  });
 
+  useEffect(() => {
     window.addEventListener("resize", handleToggleProfileSidebar);
     handleToggleProfileSidebar();
     return () => window.removeEventListener("resize", handleToggleProfileSidebar);
