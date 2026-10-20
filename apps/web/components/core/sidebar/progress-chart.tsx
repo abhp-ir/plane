@@ -6,6 +6,7 @@
 
 import React from "react";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import { AreaChart } from "@plane/blocks/charts/area-chart";
 import type { TChartData, TModuleCompletionChartDistribution } from "@plane/types";
 import { renderFormattedDateWithoutYear } from "@plane/utils";
@@ -18,8 +19,9 @@ type Props = {
 };
 
 function ProgressChart({ distribution, totalIssues, className = "", plotTitle = "work items" }: Props) {
+  const { currentLocale } = useTranslation();
   const chartData: TChartData<string, string>[] = Object.keys(distribution ?? []).map((key, index) => ({
-    name: renderFormattedDateWithoutYear(key),
+    name: renderFormattedDateWithoutYear(key, currentLocale),
     current: distribution[key] ?? 0,
     ideal: totalIssues * (1 - index / (Object.keys(distribution ?? []).length - 1)),
   }));
