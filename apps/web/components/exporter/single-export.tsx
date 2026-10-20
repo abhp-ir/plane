@@ -5,6 +5,7 @@
  */
 
 import { useState } from "react";
+import { useTranslation } from "@plane/i18n";
 // ui
 import { Button } from "@makeplane/propel/components/button";
 import type { IExportData } from "@plane/types";
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export function SingleExport({ service, refreshing }: Props) {
+  const { currentLocale } = useTranslation();
   const provider = service.provider;
 
   const [isLoading] = useState(false);
@@ -58,7 +60,7 @@ export function SingleExport({ service, refreshing }: Props) {
           </span>
         </h4>
         <div className="mt-2 flex items-center gap-2 text-11 text-secondary">
-          <span>{renderFormattedDate(service.created_at)}</span>|
+          <span>{renderFormattedDate(service.created_at, undefined, currentLocale)}</span>|
           <span>Exported by {service?.initiated_by_detail?.display_name}</span>
         </div>
       </div>

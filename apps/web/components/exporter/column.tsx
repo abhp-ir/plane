@@ -6,6 +6,7 @@
 
 import { DownloadOutline } from "@makeplane/propel/icons";
 import type { IExportData } from "@plane/types";
+import { useTranslation } from "@plane/i18n";
 import { getDate, getFileURL, renderFormattedDate } from "@plane/utils";
 
 type RowData = IExportData;
@@ -17,6 +18,7 @@ const checkExpiry = (inputDateString: string) => {
   return expiryDate > currentDate;
 };
 export const useExportColumns = () => {
+  const { currentLocale } = useTranslation();
   const columns = [
     {
       key: "Exported By",
@@ -48,7 +50,7 @@ export const useExportColumns = () => {
     {
       key: "Exported On",
       content: "Exported On",
-      tdRender: (rowData: RowData) => <span>{renderFormattedDate(rowData.created_at)}</span>,
+      tdRender: (rowData: RowData) => <span>{renderFormattedDate(rowData.created_at, undefined, currentLocale)}</span>,
     },
 
     {
