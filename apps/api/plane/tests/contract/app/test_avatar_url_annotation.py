@@ -148,6 +148,30 @@ class TestAvatarUrlAnnotation:
         ]
 
     @pytest.mark.django_db
+    @pytest.mark.parametrize("endpoint", ["list", "retrieve"])
+    def test_removed_cycle_membership_excludes_assignee(
+        self, session_client, workspace, project, cycle, assigned_issue, user_with_avatar_asset, endpoint
+    ):
+        root = f"/api/workspaces/{workspace.slug}/projects/{project.id}/cycles/"
+        url = root if endpoint == "list" else f"{root}{cycle.id}/"
+
+        def row():
+            response = session_client.get(url)
+            assert response.status_code == status.HTTP_200_OK
+            if endpoint == "list":
+                return next(item for item in response.data if str(item["id"]) == str(cycle.id))
+            return response.data
+
+        assert [str(value) for value in row()["assignee_ids"]] == [str(user_with_avatar_asset.id)]
+        response = session_client.delete(f"{root}{cycle.id}/cycle-issues/{assigned_issue.id}/")
+        assert response.status_code == status.HTTP_204_NO_CONTENT
+        assert CycleIssue.all_objects.filter(cycle=cycle, issue=assigned_issue, deleted_at__isnull=False).exists()
+        removed = row()
+        assert removed["total_issues"] == 0
+        assert removed["assignee_ids"] == []
+        assert IssueAssignee.objects.filter(issue=assigned_issue, assignee=user_with_avatar_asset).exists()
+
+    @pytest.mark.django_db
     def test_archived_module_retrieve(self, session_client, workspace, project, archived_module):
         response = session_client.get(
             f"/api/workspaces/{workspace.slug}/projects/{project.id}/archived-modules/{archived_module.id}/"

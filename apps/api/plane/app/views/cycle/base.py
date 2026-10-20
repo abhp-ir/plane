@@ -171,6 +171,7 @@ class CycleViewSet(BaseViewSet):
                         "issue_cycle__issue__assignees__id",
                         distinct=True,
                         filter=~Q(issue_cycle__issue__assignees__id__isnull=True)
+                        & Q(issue_cycle__deleted_at__isnull=True)
                         & (Q(issue_cycle__issue__issue_assignee__deleted_at__isnull=True)),
                     ),
                     Value([], output_field=ArrayField(UUIDField())),
