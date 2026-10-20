@@ -191,24 +191,31 @@ export class CycleIssues extends BaseIssuesStore implements ICycleIssues {
     cycleId: string,
     isExistingPaginationOptions: boolean = false
   ) => {
+    let requestSignal: AbortSignal | undefined;
+    let responseReceived = false;
     try {
       // set loader and clear store
       runInAction(() => {
         this.setLoader(loadType);
         this.clear(!isExistingPaginationOptions); // clear while fetching from server.
       });
+      requestSignal = this.controller.signal;
 
       // get params from pagination options
       const params = this.issueFilterStore?.getFilterParams(options, cycleId, undefined, undefined, undefined);
       // call the fetch issues API with the params
       const response = await this.issueService.getIssues(workspaceSlug, projectId, params, {
-        signal: this.controller.signal,
+        signal: requestSignal,
       });
+      responseReceived = true;
+      if (requestSignal.aborted) return;
 
       // after fetching issues, call the base method to process the response further
       this.onfetchIssues(response, options, workspaceSlug, projectId, cycleId, !isExistingPaginationOptions);
       return response;
     } catch (error) {
+      // An obsolete fetch must not reject or clear the next fetch's loader. Processing errors still propagate.
+      if (!responseReceived && requestSignal?.aborted) return;
       // set loader to undefined once errored out
       this.setLoader(undefined);
       throw error;
