@@ -31,7 +31,7 @@ export const PageNavigationPaneInfoTabActorsInfo = observer(function PageNavigat
   const editorInformation = updated_by ? getUserDetails(updated_by) : undefined;
   const creatorInformation = owned_by ? getUserDetails(owned_by) : undefined;
   // translation
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   return (
     <div className="mt-4 space-y-3">
@@ -64,7 +64,9 @@ export const PageNavigationPaneInfoTabActorsInfo = observer(function PageNavigat
             />
             <span>{creatorInformation?.display_name ?? t("common.deactivated_user")}</span>
           </Link>
-          <span className="flex-shrink-0 text-tertiary">{renderFormattedDate(page.created_at)}</span>
+          <span className="flex-shrink-0 text-tertiary">
+            {renderFormattedDate(page.created_at, undefined, currentLocale)}
+          </span>
         </div>
       </div>
     </div>

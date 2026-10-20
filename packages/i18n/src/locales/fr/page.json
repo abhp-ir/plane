@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "Limite de contenu atteinte et la synchronisation en direct est désactivée. Créez une nouvelle page ou utilisez des pages imbriquées pour continuer la synchronisation."
+  },
+  "page_metadata": {
+    "archive_date": "Date d’archivage"
   }
 }

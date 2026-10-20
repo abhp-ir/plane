@@ -42,7 +42,7 @@ const VersionHistoryItem = observer(function VersionHistoryItem(props: VersionHi
   // derived values
   const versionCreator = getUserDetails(version.owned_by);
   // translation
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   return (
     <li className="relative flex items-center gap-x-4 text-11 font-medium">
@@ -58,7 +58,8 @@ const VersionHistoryItem = observer(function VersionHistoryItem(props: VersionHi
         })}
       >
         <p className="text-tertiary">
-          {renderFormattedDate(version.last_saved_at)}, {renderFormattedTime(version.last_saved_at)}
+          {renderFormattedDate(version.last_saved_at, undefined, currentLocale)},{" "}
+          {renderFormattedTime(version.last_saved_at)}
         </p>
         <p className="mt-1 flex items-center gap-1">
           <Avatar

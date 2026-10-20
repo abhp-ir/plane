@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "Osiągnięto limit treści, a synchronizacja na żywo jest wyłączona. Utwórz nową stronę lub użyj zagnieżdżonych stron, aby kontynuować synchronizację."
+  },
+  "page_metadata": {
+    "archive_date": "Data archiwizacji"
   }
 }

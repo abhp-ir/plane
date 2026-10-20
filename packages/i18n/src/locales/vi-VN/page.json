@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "Đã đạt giới hạn nội dung và đồng bộ trực tiếp đã tắt. Tạo trang mới hoặc dùng trang lồng nhau để tiếp tục đồng bộ."
+  },
+  "page_metadata": {
+    "archive_date": "Ngày lưu trữ"
   }
 }

@@ -10,6 +10,7 @@ import { GlobeOutline, InfoOutline, LockOutline, MinusOutline } from "@makeplane
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import { FavoriteStar } from "@plane/blocks/common";
+import { useTranslation } from "@plane/i18n";
 import { renderFormattedDate, getFileURL } from "@plane/utils";
 // hooks
 import { useMember } from "@/hooks/store/use-member";
@@ -29,6 +30,7 @@ type Props = {
 
 export const BlockItemAction = observer(function BlockItemAction(props: Props) {
   const { page, parentRef, storeType } = props;
+  const { t, currentLocale } = useTranslation();
   // store hooks
   const { getUserDetails } = useMember();
   // page operations
@@ -61,7 +63,10 @@ export const BlockItemAction = observer(function BlockItemAction(props: Props) {
       <MinusOutline className="-mx-3 h-5 w-5 rotate-90 text-placeholder" />
 
       {/* page info */}
-      <Tooltip label={`Created on ${renderFormattedDate(created_at)}`} layout="stacked">
+      <Tooltip
+        label={`${t("common.created_on")} ${renderFormattedDate(created_at, undefined, currentLocale)}`}
+        layout="stacked"
+      >
         <span className="grid h-4 w-4 cursor-default place-items-center">
           <InfoOutline className="h-4 w-4 text-tertiary" />
         </span>

@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "已达到内容上限，实时同步已关闭。请创建新页面或使用嵌套页面以继续同步。"
+  },
+  "page_metadata": {
+    "archive_date": "归档日期"
   }
 }

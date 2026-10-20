@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "已達到內容上限，即時同步已關閉。請建立新頁面或使用巢狀頁面以繼續同步。"
+  },
+  "page_metadata": {
+    "archive_date": "封存日期"
   }
 }

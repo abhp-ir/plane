@@ -11,6 +11,7 @@ import { ShowOutline, WarningTriangleOutline } from "@makeplane/propel/icons";
 // plane imports
 import { Button } from "@makeplane/propel/components/button";
 import { setToast } from "@plane/blocks/toast";
+import { useTranslation } from "@plane/i18n";
 import type { TPageVersion } from "@plane/types";
 import { renderFormattedDate, renderFormattedTime } from "@plane/utils";
 // helpers
@@ -40,6 +41,7 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
     restoreEnabled,
     storeType,
   } = props;
+  const { currentLocale } = useTranslation();
   // states
   const [isRestoring, setIsRestoring] = useState(false);
   const [isRetrying, setIsRetrying] = useState(false);
@@ -63,6 +65,7 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
           title: "Page version restored.",
         });
         handleClose();
+        return undefined;
       })
       .catch(() =>
         setToast({
@@ -109,7 +112,7 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
             <div className="flex items-center gap-4">
               <h6 className="text-14 font-medium">
                 {versionDetails
-                  ? `${renderFormattedDate(versionDetails.last_saved_at)} ${renderFormattedTime(versionDetails.last_saved_at)}`
+                  ? `${renderFormattedDate(versionDetails.last_saved_at, undefined, currentLocale)} ${renderFormattedTime(versionDetails.last_saved_at)}`
                   : "Loading version details"}
               </h6>
               <span className="flex flex-shrink-0 items-center gap-1 rounded-sm bg-accent-primary/20 px-1.5 py-1 text-11 font-medium text-accent-primary">

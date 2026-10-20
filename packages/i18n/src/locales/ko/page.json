@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "콘텐츠 한도에 도달하여 실시간 동기화가 꺼졌습니다. 동기화를 계속하려면 새 페이지를 만들거나 중첩 페이지를 사용하세요."
+  },
+  "page_metadata": {
+    "archive_date": "보관 날짜"
   }
 }

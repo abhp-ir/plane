@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "Limita de conținut a fost atinsă, iar sincronizarea live este dezactivată. Creează o pagină nouă sau folosește pagini imbricate pentru a continua sincronizarea."
+  },
+  "page_metadata": {
+    "archive_date": "Data arhivării"
   }
 }

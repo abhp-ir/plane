@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "Batas konten tercapai dan sinkronisasi langsung nonaktif. Buat halaman baru atau gunakan halaman bertingkat untuk melanjutkan sinkronisasi."
+  },
+  "page_metadata": {
+    "archive_date": "Tanggal pengarsipan"
   }
 }

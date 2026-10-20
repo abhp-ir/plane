@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "Byl dosažen limit obsahu a živá synchronizace je vypnutá. Vytvořte novou stránku nebo použijte vnořené stránky a pokračujte v synchronizaci."
+  },
+  "page_metadata": {
+    "archive_date": "Datum archivace"
   }
 }

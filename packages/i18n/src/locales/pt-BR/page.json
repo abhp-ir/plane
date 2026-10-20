@@ -114,5 +114,8 @@
   },
   "page_content_limit_banner": {
     "message": "Limite de conteúdo atingido e a sincronização em tempo real está desativada. Crie uma nova página ou use páginas aninhadas para continuar sincronizando."
+  },
+  "page_metadata": {
+    "archive_date": "Data de arquivamento"
   }
 }
