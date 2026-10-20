@@ -428,5 +428,9 @@
       "label": "Tiêu đề sử thi",
       "required": "Tiêu đề sử thi là bắt buộc"
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Lưu bản nháp này?",
+    "description": "Bạn có thể lưu mục công việc này vào Bản nháp để quay lại sau."
   }
 }

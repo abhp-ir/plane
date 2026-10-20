@@ -428,5 +428,9 @@
       "label": "Título do Épico",
       "required": "O título do épico é obrigatório."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Salvar este rascunho?",
+    "description": "Você pode salvar este item de trabalho em Rascunhos para voltar a ele mais tarde."
   }
 }

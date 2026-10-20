@@ -24,7 +24,7 @@
 /* Placeholder only for the first line in an empty editor. */
 .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
-  float: left;
+  float: inline-start;
   color: var(--color-placeholder);
   pointer-events: none;
   height: 0;
@@ -33,10 +33,15 @@
 /* Display Placeholders on every new line. */
 .ProseMirror p.is-empty::before {
   content: attr(data-placeholder);
-  float: left;
+  float: inline-start;
   color: var(--color-placeholder);
   pointer-events: none;
   height: 0;
+}
+
+/* Empty dir=auto blocks resolve LTR; their UI placeholder follows the editor container. */
+.editor-container:dir(rtl) .ProseMirror p:is(.is-editor-empty:first-child, .is-empty)::before {
+  float: right;
 }
 
 .ProseMirror li blockquote {

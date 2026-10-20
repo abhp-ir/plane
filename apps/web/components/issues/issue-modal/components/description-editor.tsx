@@ -98,8 +98,8 @@ export const IssueDescriptionEditor = observer(function IssueDescriptionEditor(p
     } else {
       setToast({
         type: "error",
-        title: "Error!",
-        message: "Editor is still processing changes. Please wait before proceeding.",
+        title: t("common.errors.default.title"),
+        message: t("editor_is_not_ready_to_discard_changes"),
       });
       event.preventDefault(); // Prevent default action if editor is not ready to discard
     }
@@ -133,6 +133,7 @@ export const IssueDescriptionEditor = observer(function IssueDescriptionEditor(p
               "Work item title isn't informative enough to generate the description. Please try with a different title.",
           });
         else handleAiAssistance(res.response_html);
+        return undefined;
       })
       .catch((err) => {
         const error = err?.data?.error;
@@ -203,7 +204,7 @@ export const IssueDescriptionEditor = observer(function IssueDescriptionEditor(p
                     project_id: projectId?.toString() ?? "",
                   })
                 }
-                containerClassName="pt-3 min-h-[120px]"
+                containerClassName="px-3.5 pt-3 min-h-[120px]"
                 uploadFile={async (blockId, file) => {
                   try {
                     const { asset_id } = await uploadEditorAsset({

@@ -61,5 +61,89 @@
       "use_this": "Użyj tego",
       "refine": "Udoskonal"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Tekst",
+      "description": "Proszę zacząć pisać zwykły tekst."
+    },
+    "h1": {
+      "title": "Nagłówek 1",
+      "description": "Duży nagłówek sekcji."
+    },
+    "h2": {
+      "title": "Nagłówek 2",
+      "description": "Średni nagłówek sekcji."
+    },
+    "h3": {
+      "title": "Nagłówek 3",
+      "description": "Mały nagłówek sekcji."
+    },
+    "h4": {
+      "title": "Nagłówek 4"
+    },
+    "h5": {
+      "title": "Nagłówek 5"
+    },
+    "h6": {
+      "title": "Nagłówek 6"
+    },
+    "numbered-list": {
+      "title": "Lista numerowana",
+      "description": "Proszę utworzyć listę numerowaną."
+    },
+    "bulleted-list": {
+      "title": "Lista punktowana",
+      "description": "Proszę utworzyć listę punktowaną."
+    },
+    "to-do-list": {
+      "title": "Lista zadań",
+      "description": "Proszę utworzyć listę zadań."
+    },
+    "table": {
+      "title": "Tabela",
+      "description": "Proszę utworzyć tabelę"
+    },
+    "quote": {
+      "title": "Cytat",
+      "description": "Proszę dodać cytat."
+    },
+    "code": {
+      "title": "Kod",
+      "description": "Proszę dodać fragment kodu."
+    },
+    "callout": {
+      "title": "Wyróżniony blok",
+      "description": "Proszę wstawić wyróżniony blok"
+    },
+    "divider": {
+      "title": "Separator",
+      "description": "Proszę wizualnie oddzielić bloki."
+    },
+    "emoji": {
+      "description": "Proszę wstawić emoji"
+    },
+    "image": {
+      "description": "Proszę wstawić obraz"
+    },
+    "text-color": {
+      "title": "Kolory",
+      "description": "Proszę zmienić kolor tekstu"
+    },
+    "background-color": {
+      "title": "Kolory tła",
+      "description": "Proszę zmienić kolor tła",
+      "default": "Domyślne tło"
+    }
+  },
+  "editor_colors": {
+    "gray": "Szary",
+    "peach": "Brzoskwiniowy",
+    "pink": "Różowy",
+    "orange": "Pomarańczowy",
+    "green": "Zielony",
+    "light-blue": "Jasnoniebieski",
+    "dark-blue": "Ciemnoniebieski",
+    "purple": "Fioletowy"
   }
 }

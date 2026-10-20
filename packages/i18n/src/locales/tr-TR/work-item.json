@@ -428,5 +428,9 @@
       "label": "Epik Başlığı",
       "required": "Epik başlığı gereklidir."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Bu taslak kaydedilsin mi?",
+    "description": "Bu iş öğesini daha sonra geri dönmek üzere Taslaklar'a kaydedebilirsiniz."
   }
 }

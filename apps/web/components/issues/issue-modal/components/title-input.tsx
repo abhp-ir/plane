@@ -69,6 +69,7 @@ export const IssueTitleInput = observer(function IssueTitleInput(props: TIssueTi
                 id="name"
                 name="name"
                 type="text"
+                dir={value ? "auto" : undefined}
                 value={value}
                 onChange={(e) => {
                   onChange(e.target.value);
@@ -76,6 +77,7 @@ export const IssueTitleInput = observer(function IssueTitleInput(props: TIssueTi
                 }}
                 ref={issueTitleRef || ref}
                 placeholder={t("title")}
+                // oxlint-disable-next-line jsx-a11y/no-autofocus -- this creation dialog opens on its title field
                 autoFocus
                 tabIndex={getIndex("name")}
               />

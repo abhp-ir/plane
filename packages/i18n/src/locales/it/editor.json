@@ -61,5 +61,89 @@
       "use_this": "Usa questo",
       "refine": "Affina"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Testo",
+      "description": "Inizi a scrivere con testo semplice."
+    },
+    "h1": {
+      "title": "Titolo 1",
+      "description": "Titolo di sezione grande."
+    },
+    "h2": {
+      "title": "Titolo 2",
+      "description": "Titolo di sezione medio."
+    },
+    "h3": {
+      "title": "Titolo 3",
+      "description": "Titolo di sezione piccolo."
+    },
+    "h4": {
+      "title": "Titolo 4"
+    },
+    "h5": {
+      "title": "Titolo 5"
+    },
+    "h6": {
+      "title": "Titolo 6"
+    },
+    "numbered-list": {
+      "title": "Elenco numerato",
+      "description": "Crei un elenco numerato."
+    },
+    "bulleted-list": {
+      "title": "Elenco puntato",
+      "description": "Crei un elenco puntato."
+    },
+    "to-do-list": {
+      "title": "Elenco di attività",
+      "description": "Crei un elenco di attività."
+    },
+    "table": {
+      "title": "Tabella",
+      "description": "Crei una tabella"
+    },
+    "quote": {
+      "title": "Citazione",
+      "description": "Aggiunga una citazione."
+    },
+    "code": {
+      "title": "Codice",
+      "description": "Aggiunga un frammento di codice."
+    },
+    "callout": {
+      "title": "Riquadro informativo",
+      "description": "Inserisca un riquadro informativo"
+    },
+    "divider": {
+      "title": "Separatore",
+      "description": "Separi visivamente i blocchi."
+    },
+    "emoji": {
+      "description": "Inserisca un’emoji"
+    },
+    "image": {
+      "description": "Inserisca un’immagine"
+    },
+    "text-color": {
+      "title": "Colori",
+      "description": "Modifichi il colore del testo"
+    },
+    "background-color": {
+      "title": "Colori di sfondo",
+      "description": "Modifichi il colore di sfondo",
+      "default": "Sfondo predefinito"
+    }
+  },
+  "editor_colors": {
+    "gray": "Grigio",
+    "peach": "Pesca",
+    "pink": "Rosa",
+    "orange": "Arancione",
+    "green": "Verde",
+    "light-blue": "Azzurro",
+    "dark-blue": "Blu scuro",
+    "purple": "Viola"
   }
 }

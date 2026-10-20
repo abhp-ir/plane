@@ -428,5 +428,9 @@
       "label": "Titlu sarcină majoră",
       "required": "Titlul sarcinii majore este obligatoriu."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Salvați această schiță?",
+    "description": "Puteți salva acest element de lucru în Schițe pentru a reveni la el mai târziu."
   }
 }

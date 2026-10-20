@@ -12,7 +12,7 @@ import { SUPPORTED_LANGUAGES, getRegisteredLanguage } from "../src/constants/lan
 import { initPromise, i18nInstance } from "../src/core/instance";
 import { setLanguage } from "../src/core/set-language";
 
-test("every registered locale loads navigation and Page metadata through the public setter", async () => {
+test("every registered locale loads navigation, Page metadata and editor commands through the public setter", async () => {
   await initPromise;
   try {
     for (const { value: language } of SUPPORTED_LANGUAGES) {
@@ -40,6 +40,25 @@ test("every registered locale loads navigation and Page metadata through the pub
         `${language}: archive date label`
       );
       assert.equal(i18nInstance.hasResourceBundle(i18nInstance.language, "page"), true, `${language}: Page bundle`);
+      const editor = JSON.parse(
+        readFileSync(path.resolve(__dirname, `../src/locales/${language}/editor.json`), "utf8")
+      );
+      const workItem = JSON.parse(
+        readFileSync(path.resolve(__dirname, `../src/locales/${language}/work-item.json`), "utf8")
+      );
+      assert.equal(i18nInstance.t("editor_commands.text.title"), editor.editor_commands.text.title);
+      assert.equal(i18nInstance.t("editor_commands.table.description"), editor.editor_commands.table.description);
+      assert.equal(
+        i18nInstance.t("editor_commands.background-color.default"),
+        editor.editor_commands["background-color"].default
+      );
+      assert.equal(i18nInstance.t("editor_colors.gray"), editor.editor_colors.gray);
+      assert.equal(i18nInstance.t("work_item_draft_confirmation.title"), workItem.work_item_draft_confirmation.title);
+      assert.equal(
+        i18nInstance.t("work_item_draft_confirmation.description"),
+        workItem.work_item_draft_confirmation.description
+      );
+      assert.equal(i18nInstance.hasResourceBundle(i18nInstance.language, "editor"), true, `${language}: editor bundle`);
     }
   } finally {
     await setLanguage("en");

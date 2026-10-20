@@ -61,5 +61,89 @@
       "use_this": "이것 사용",
       "refine": "정제"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "텍스트",
+      "description": "일반 텍스트로 작성을 시작합니다."
+    },
+    "h1": {
+      "title": "제목 1",
+      "description": "큰 섹션 제목입니다."
+    },
+    "h2": {
+      "title": "제목 2",
+      "description": "중간 크기 섹션 제목입니다."
+    },
+    "h3": {
+      "title": "제목 3",
+      "description": "작은 섹션 제목입니다."
+    },
+    "h4": {
+      "title": "제목 4"
+    },
+    "h5": {
+      "title": "제목 5"
+    },
+    "h6": {
+      "title": "제목 6"
+    },
+    "numbered-list": {
+      "title": "번호 매기기 목록",
+      "description": "번호 매기기 목록을 만듭니다."
+    },
+    "bulleted-list": {
+      "title": "글머리 기호 목록",
+      "description": "글머리 기호 목록을 만듭니다."
+    },
+    "to-do-list": {
+      "title": "할 일 목록",
+      "description": "할 일 목록을 만듭니다."
+    },
+    "table": {
+      "title": "표",
+      "description": "표를 만듭니다"
+    },
+    "quote": {
+      "title": "인용문",
+      "description": "인용문을 추가합니다."
+    },
+    "code": {
+      "title": "코드",
+      "description": "코드 조각을 추가합니다."
+    },
+    "callout": {
+      "title": "설명 상자",
+      "description": "설명 상자를 삽입합니다"
+    },
+    "divider": {
+      "title": "구분선",
+      "description": "블록을 시각적으로 구분합니다."
+    },
+    "emoji": {
+      "description": "이모지를 삽입합니다"
+    },
+    "image": {
+      "description": "이미지를 삽입합니다"
+    },
+    "text-color": {
+      "title": "색상",
+      "description": "텍스트 색상을 변경합니다"
+    },
+    "background-color": {
+      "title": "배경색",
+      "description": "배경색을 변경합니다",
+      "default": "기본 배경"
+    }
+  },
+  "editor_colors": {
+    "gray": "회색",
+    "peach": "복숭아색",
+    "pink": "분홍색",
+    "orange": "주황색",
+    "green": "초록색",
+    "light-blue": "연한 파랑",
+    "dark-blue": "진한 파랑",
+    "purple": "보라색"
   }
 }

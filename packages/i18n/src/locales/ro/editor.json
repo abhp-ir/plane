@@ -61,5 +61,89 @@
       "use_this": "Folosește aceasta",
       "refine": "Rafinează"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Text",
+      "description": "Începeți să scrieți text simplu."
+    },
+    "h1": {
+      "title": "Titlu 1",
+      "description": "Titlu de secțiune mare."
+    },
+    "h2": {
+      "title": "Titlu 2",
+      "description": "Titlu de secțiune mediu."
+    },
+    "h3": {
+      "title": "Titlu 3",
+      "description": "Titlu de secțiune mic."
+    },
+    "h4": {
+      "title": "Titlu 4"
+    },
+    "h5": {
+      "title": "Titlu 5"
+    },
+    "h6": {
+      "title": "Titlu 6"
+    },
+    "numbered-list": {
+      "title": "Listă numerotată",
+      "description": "Creați o listă numerotată."
+    },
+    "bulleted-list": {
+      "title": "Listă cu marcatori",
+      "description": "Creați o listă cu marcatori."
+    },
+    "to-do-list": {
+      "title": "Listă de sarcini",
+      "description": "Creați o listă de sarcini."
+    },
+    "table": {
+      "title": "Tabel",
+      "description": "Creați un tabel"
+    },
+    "quote": {
+      "title": "Citat",
+      "description": "Adăugați un citat."
+    },
+    "code": {
+      "title": "Cod",
+      "description": "Adăugați un fragment de cod."
+    },
+    "callout": {
+      "title": "Casetă explicativă",
+      "description": "Inserați o casetă explicativă"
+    },
+    "divider": {
+      "title": "Separator",
+      "description": "Separați vizual blocurile."
+    },
+    "emoji": {
+      "description": "Inserați un emoji"
+    },
+    "image": {
+      "description": "Inserați o imagine"
+    },
+    "text-color": {
+      "title": "Culori",
+      "description": "Schimbați culoarea textului"
+    },
+    "background-color": {
+      "title": "Culori de fundal",
+      "description": "Schimbați culoarea de fundal",
+      "default": "Fundal implicit"
+    }
+  },
+  "editor_colors": {
+    "gray": "Gri",
+    "peach": "Piersică",
+    "pink": "Roz",
+    "orange": "Portocaliu",
+    "green": "Verde",
+    "light-blue": "Albastru deschis",
+    "dark-blue": "Albastru închis",
+    "purple": "Violet"
   }
 }

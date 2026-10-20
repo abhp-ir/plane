@@ -428,5 +428,9 @@
       "label": "Judul Epik",
       "required": "Judul epik wajib diisi."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Simpan draf ini?",
+    "description": "Anda dapat menyimpan item pekerjaan ini ke Draf agar dapat kembali mengerjakannya nanti."
   }
 }

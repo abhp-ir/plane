@@ -353,8 +353,7 @@ export const IssueFormRoot = observer(function IssueFormRoot(props: IssueFormPro
 
   return (
     <FormProvider {...methods}>
-      {/* The form relays DialogContent's max-height into Main/Body: the description scrolls in
-          DialogBody, default properties stay pinned in Main and buttons live in DialogActions. */}
+      {/* Both fields share DialogBody's scrollbar gutter; properties and actions stay pinned. */}
       <div className="flex min-h-0 flex-1 gap-2 bg-transparent">
         <form
           ref={formRef}
@@ -366,31 +365,36 @@ export const IssueFormRoot = observer(function IssueFormRoot(props: IssueFormPro
               <DialogHeading>
                 <DialogTitle>{modalTitle}</DialogTitle>
               </DialogHeading>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-x-1">
-                  <IssueProjectSelect
-                    control={control}
-                    disabled={!!data?.id || !!data?.sourceIssueId || isProjectSelectionDisabled}
-                    handleFormChange={handleFormChange}
-                  />
-                </div>
-              </div>
-              {watch("parent_id") && selectedParentIssue && (
-                <IssueParentTag
-                  control={control}
-                  selectedParentIssue={selectedParentIssue}
-                  handleFormChange={handleFormChange}
-                  setSelectedParentIssue={setSelectedParentIssue}
-                />
-              )}
-              <IssueTitleInput
-                control={control}
-                issueTitleRef={issueTitleRef}
-                formState={formState}
-                handleFormChange={handleFormChange}
-              />
             </DialogHeader>
-            <DialogBody tabIndex={0} render={<div className="vertical-scrollbar scrollbar-sm" />}>
+            <DialogBody
+              tabIndex={0}
+              render={<div className="vertical-scrollbar -m-0.5 scrollbar-sm space-y-4 p-0.5" />}
+            >
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-x-1">
+                    <IssueProjectSelect
+                      control={control}
+                      disabled={!!data?.id || !!data?.sourceIssueId || isProjectSelectionDisabled}
+                      handleFormChange={handleFormChange}
+                    />
+                  </div>
+                </div>
+                {watch("parent_id") && selectedParentIssue && (
+                  <IssueParentTag
+                    control={control}
+                    selectedParentIssue={selectedParentIssue}
+                    handleFormChange={handleFormChange}
+                    setSelectedParentIssue={setSelectedParentIssue}
+                  />
+                )}
+                <IssueTitleInput
+                  control={control}
+                  issueTitleRef={issueTitleRef}
+                  formState={formState}
+                  handleFormChange={handleFormChange}
+                />
+              </div>
               <IssueDescriptionEditor
                 control={control}
                 isDraft={isDraft}
@@ -452,8 +456,8 @@ export const IssueFormRoot = observer(function IssueFormRoot(props: IssueFormPro
                     } else {
                       setToast({
                         type: "error",
-                        title: "Error!",
-                        message: "Editor is still processing changes. Please wait before proceeding.",
+                        title: t("common.errors.default.title"),
+                        message: t("editor_is_not_ready_to_discard_changes"),
                       });
                     }
                   }}

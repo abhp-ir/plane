@@ -61,5 +61,89 @@
       "use_this": "Utiliser ceci",
       "refine": "Affiner"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Texte",
+      "description": "Commencez à écrire du texte brut."
+    },
+    "h1": {
+      "title": "Titre 1",
+      "description": "Grand titre de section."
+    },
+    "h2": {
+      "title": "Titre 2",
+      "description": "Titre de section moyen."
+    },
+    "h3": {
+      "title": "Titre 3",
+      "description": "Petit titre de section."
+    },
+    "h4": {
+      "title": "Titre 4"
+    },
+    "h5": {
+      "title": "Titre 5"
+    },
+    "h6": {
+      "title": "Titre 6"
+    },
+    "numbered-list": {
+      "title": "Liste numérotée",
+      "description": "Créez une liste numérotée."
+    },
+    "bulleted-list": {
+      "title": "Liste à puces",
+      "description": "Créez une liste à puces."
+    },
+    "to-do-list": {
+      "title": "Liste de tâches",
+      "description": "Créez une liste de tâches."
+    },
+    "table": {
+      "title": "Tableau",
+      "description": "Créez un tableau"
+    },
+    "quote": {
+      "title": "Citation",
+      "description": "Ajoutez une citation."
+    },
+    "code": {
+      "title": "Code",
+      "description": "Ajoutez un extrait de code."
+    },
+    "callout": {
+      "title": "Encadré",
+      "description": "Insérez un encadré"
+    },
+    "divider": {
+      "title": "Séparateur",
+      "description": "Séparez visuellement les blocs."
+    },
+    "emoji": {
+      "description": "Insérez un emoji"
+    },
+    "image": {
+      "description": "Insérez une image"
+    },
+    "text-color": {
+      "title": "Couleurs",
+      "description": "Modifiez la couleur du texte"
+    },
+    "background-color": {
+      "title": "Couleurs d’arrière-plan",
+      "description": "Modifiez la couleur d’arrière-plan",
+      "default": "Arrière-plan par défaut"
+    }
+  },
+  "editor_colors": {
+    "gray": "Gris",
+    "peach": "Pêche",
+    "pink": "Rose",
+    "orange": "Orange",
+    "green": "Vert",
+    "light-blue": "Bleu clair",
+    "dark-blue": "Bleu foncé",
+    "purple": "Violet"
   }
 }

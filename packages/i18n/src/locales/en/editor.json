@@ -61,5 +61,89 @@
       "use_this": "Use this",
       "refine": "Refine"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Text",
+      "description": "Just start typing with plain text."
+    },
+    "h1": {
+      "title": "Heading 1",
+      "description": "Big section heading."
+    },
+    "h2": {
+      "title": "Heading 2",
+      "description": "Medium section heading."
+    },
+    "h3": {
+      "title": "Heading 3",
+      "description": "Small section heading."
+    },
+    "h4": {
+      "title": "Heading 4"
+    },
+    "h5": {
+      "title": "Heading 5"
+    },
+    "h6": {
+      "title": "Heading 6"
+    },
+    "numbered-list": {
+      "title": "Numbered list",
+      "description": "Create a numbered list."
+    },
+    "bulleted-list": {
+      "title": "Bulleted list",
+      "description": "Create a bulleted list."
+    },
+    "to-do-list": {
+      "title": "To-do list",
+      "description": "Create a to-do list."
+    },
+    "table": {
+      "title": "Table",
+      "description": "Create a table"
+    },
+    "quote": {
+      "title": "Quote",
+      "description": "Capture a quote."
+    },
+    "code": {
+      "title": "Code",
+      "description": "Capture a code snippet."
+    },
+    "callout": {
+      "title": "Callout",
+      "description": "Insert callout"
+    },
+    "divider": {
+      "title": "Divider",
+      "description": "Visually divide blocks."
+    },
+    "emoji": {
+      "description": "Insert an emoji"
+    },
+    "image": {
+      "description": "Insert an image"
+    },
+    "text-color": {
+      "title": "Colors",
+      "description": "Change text color"
+    },
+    "background-color": {
+      "title": "Background colors",
+      "description": "Change background color",
+      "default": "Default background"
+    }
+  },
+  "editor_colors": {
+    "gray": "Gray",
+    "peach": "Peach",
+    "pink": "Pink",
+    "orange": "Orange",
+    "green": "Green",
+    "light-blue": "Light blue",
+    "dark-blue": "Dark blue",
+    "purple": "Purple"
   }
 }

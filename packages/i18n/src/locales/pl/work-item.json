@@ -428,5 +428,9 @@
       "label": "Tytuł epiku",
       "required": "Tytuł epiku jest wymagany."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Zapisać ten szkic?",
+    "description": "Można zapisać ten element pracy w Szkicach i wrócić do niego później."
   }
 }

@@ -428,5 +428,9 @@
       "label": "Epic-Titel",
       "required": "Ein Titel für das Epic ist erforderlich."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Diesen Entwurf speichern?",
+    "description": "Sie können dieses Arbeitselement unter Entwürfe speichern, um später darauf zurückzukommen."
   }
 }

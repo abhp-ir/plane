@@ -428,5 +428,9 @@
       "label": "Epic 標題",
       "required": "Epic 標題為必填。"
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "儲存此草稿？",
+    "description": "您可以將此工作項目儲存至草稿，以便稍後繼續。"
   }
 }

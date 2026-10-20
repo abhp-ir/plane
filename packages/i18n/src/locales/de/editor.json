@@ -61,5 +61,89 @@
       "use_this": "Übernehmen",
       "refine": "Verfeinern"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Text",
+      "description": "Einfach mit normalem Text losschreiben."
+    },
+    "h1": {
+      "title": "Überschrift 1",
+      "description": "Große Abschnittsüberschrift."
+    },
+    "h2": {
+      "title": "Überschrift 2",
+      "description": "Mittlere Abschnittsüberschrift."
+    },
+    "h3": {
+      "title": "Überschrift 3",
+      "description": "Kleine Abschnittsüberschrift."
+    },
+    "h4": {
+      "title": "Überschrift 4"
+    },
+    "h5": {
+      "title": "Überschrift 5"
+    },
+    "h6": {
+      "title": "Überschrift 6"
+    },
+    "numbered-list": {
+      "title": "Nummerierte Liste",
+      "description": "Eine nummerierte Liste erstellen."
+    },
+    "bulleted-list": {
+      "title": "Aufzählungsliste",
+      "description": "Eine Aufzählungsliste erstellen."
+    },
+    "to-do-list": {
+      "title": "Aufgabenliste",
+      "description": "Eine Aufgabenliste erstellen."
+    },
+    "table": {
+      "title": "Tabelle",
+      "description": "Eine Tabelle erstellen"
+    },
+    "quote": {
+      "title": "Zitat",
+      "description": "Ein Zitat festhalten."
+    },
+    "code": {
+      "title": "Code",
+      "description": "Einen Codeausschnitt festhalten."
+    },
+    "callout": {
+      "title": "Hinweiskasten",
+      "description": "Einen Hinweiskasten einfügen"
+    },
+    "divider": {
+      "title": "Trennlinie",
+      "description": "Blöcke optisch trennen."
+    },
+    "emoji": {
+      "description": "Ein Emoji einfügen"
+    },
+    "image": {
+      "description": "Ein Bild einfügen"
+    },
+    "text-color": {
+      "title": "Farben",
+      "description": "Textfarbe ändern"
+    },
+    "background-color": {
+      "title": "Hintergrundfarben",
+      "description": "Hintergrundfarbe ändern",
+      "default": "Standardhintergrund"
+    }
+  },
+  "editor_colors": {
+    "gray": "Grau",
+    "peach": "Pfirsich",
+    "pink": "Rosa",
+    "orange": "Orange",
+    "green": "Grün",
+    "light-blue": "Hellblau",
+    "dark-blue": "Dunkelblau",
+    "purple": "Violett"
   }
 }

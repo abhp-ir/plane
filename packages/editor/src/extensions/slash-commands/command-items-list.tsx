@@ -5,6 +5,8 @@
  */
 
 import { Smile } from "lucide-react";
+import { i18nInstance } from "@plane/i18n";
+import { normalizeSlashCommandQuery } from "@/helpers/slash-command-search";
 import {
   ChatOutline,
   CodeOutline,
@@ -57,6 +59,15 @@ export const getSlashCommandFilteredSections =
   (args: TExtensionProps) =>
   ({ query }: { query: string }): TSlashCommandSection[] => {
     const { additionalOptions: externalAdditionalOptions, disabledExtensions, flaggedExtensions } = args;
+    if (typeof query !== "string") return [];
+    const normalizedQuery = normalizeSlashCommandQuery(query);
+    const english = i18nInstance.getFixedT("en");
+    const localizeItem = (item: ISlashCommandItem): ISlashCommandItem => ({
+      ...item,
+      title: i18nInstance.t(item.title),
+      description: i18nInstance.t(item.description),
+      searchTerms: [english(item.title), english(item.description), item.commandKey, ...item.searchTerms],
+    });
     const SLASH_COMMAND_SECTIONS: TSlashCommandSection[] = [
       {
         key: "general",
@@ -64,8 +75,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "text",
             key: "text",
-            title: "Text",
-            description: "Just start typing with plain text.",
+            title: "editor_commands.text.title",
+            description: "editor_commands.text.description",
             searchTerms: ["p", "paragraph"],
             icon: <TextOutline className="size-3.5" />,
             command: ({ editor, range }) => setText(editor, range),
@@ -73,8 +84,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "h1",
             key: "h1",
-            title: "Heading 1",
-            description: "Big section heading.",
+            title: "editor_commands.h1.title",
+            description: "editor_commands.h1.description",
             searchTerms: ["title", "big", "large"],
             icon: <H1Outline className="size-3.5" />,
             command: ({ editor, range }) => toggleHeading(editor, 1, range),
@@ -82,8 +93,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "h2",
             key: "h2",
-            title: "Heading 2",
-            description: "Medium section heading.",
+            title: "editor_commands.h2.title",
+            description: "editor_commands.h2.description",
             searchTerms: ["subtitle", "medium"],
             icon: <H2Outline className="size-3.5" />,
             command: ({ editor, range }) => toggleHeading(editor, 2, range),
@@ -91,8 +102,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "h3",
             key: "h3",
-            title: "Heading 3",
-            description: "Small section heading.",
+            title: "editor_commands.h3.title",
+            description: "editor_commands.h3.description",
             searchTerms: ["subtitle", "small"],
             icon: <H3Outline className="size-3.5" />,
             command: ({ editor, range }) => toggleHeading(editor, 3, range),
@@ -100,8 +111,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "h4",
             key: "h4",
-            title: "Heading 4",
-            description: "Small section heading.",
+            title: "editor_commands.h4.title",
+            description: "editor_commands.h3.description",
             searchTerms: ["subtitle", "small"],
             icon: <H4Outline className="size-3.5" />,
             command: ({ editor, range }) => toggleHeading(editor, 4, range),
@@ -109,8 +120,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "h5",
             key: "h5",
-            title: "Heading 5",
-            description: "Small section heading.",
+            title: "editor_commands.h5.title",
+            description: "editor_commands.h3.description",
             searchTerms: ["subtitle", "small"],
             icon: <H5Outline className="size-3.5" />,
             command: ({ editor, range }) => toggleHeading(editor, 5, range),
@@ -118,8 +129,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "h6",
             key: "h6",
-            title: "Heading 6",
-            description: "Small section heading.",
+            title: "editor_commands.h6.title",
+            description: "editor_commands.h3.description",
             searchTerms: ["subtitle", "small"],
             icon: <H6Outline className="size-3.5" />,
             command: ({ editor, range }) => toggleHeading(editor, 6, range),
@@ -128,8 +139,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "numbered-list",
             key: "numbered-list",
-            title: "Numbered list",
-            description: "Create a numbered list.",
+            title: "editor_commands.numbered-list.title",
+            description: "editor_commands.numbered-list.description",
             searchTerms: ["ordered"],
             icon: <NumberedListOutline className="size-3.5" />,
             command: ({ editor, range }) => toggleOrderedList(editor, range),
@@ -137,8 +148,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "bulleted-list",
             key: "bulleted-list",
-            title: "Bulleted list",
-            description: "Create a bulleted list.",
+            title: "editor_commands.bulleted-list.title",
+            description: "editor_commands.bulleted-list.description",
             searchTerms: ["unordered", "point"],
             icon: <ListOutline className="size-3.5" />,
             command: ({ editor, range }) => toggleBulletList(editor, range),
@@ -146,8 +157,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "to-do-list",
             key: "to-do-list",
-            title: "To-do list",
-            description: "Create a to-do list.",
+            title: "editor_commands.to-do-list.title",
+            description: "editor_commands.to-do-list.description",
             searchTerms: ["todo", "task", "list", "check", "checkbox"],
             icon: <ToDoOutline className="size-3.5" />,
             command: ({ editor, range }) => toggleTaskList(editor, range),
@@ -155,8 +166,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "table",
             key: "table",
-            title: "Table",
-            description: "Create a table",
+            title: "editor_commands.table.title",
+            description: "editor_commands.table.description",
             searchTerms: ["table", "cell", "db", "data", "tabular"],
             icon: <TableEditorOutline className="size-3.5" />,
             command: ({ editor, range }) => insertTableCommand(editor, range),
@@ -164,8 +175,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "quote",
             key: "quote",
-            title: "Quote",
-            description: "Capture a quote.",
+            title: "editor_commands.quote.title",
+            description: "editor_commands.quote.description",
             searchTerms: ["blockquote"],
             icon: <QuoteOutline className="size-3.5" />,
             command: ({ editor, range }) => toggleBlockquote(editor, range),
@@ -173,8 +184,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "code",
             key: "code",
-            title: "Code",
-            description: "Capture a code snippet.",
+            title: "editor_commands.code.title",
+            description: "editor_commands.code.description",
             searchTerms: ["codeblock"],
             icon: <CodeOutline className="size-3.5" />,
             command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
@@ -182,17 +193,17 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "callout",
             key: "callout",
-            title: "Callout",
+            title: "editor_commands.callout.title",
             icon: <ChatOutline className="size-3.5" />,
-            description: "Insert callout",
+            description: "editor_commands.callout.description",
             searchTerms: ["callout", "comment", "message", "info", "alert"],
             command: ({ editor, range }: CommandProps) => insertCallout(editor, range),
           },
           {
             commandKey: "divider",
             key: "divider",
-            title: "Divider",
-            description: "Visually divide blocks.",
+            title: "editor_commands.divider.title",
+            description: "editor_commands.divider.description",
             searchTerms: ["line", "divider", "horizontal", "rule", "separate"],
             icon: <MinusSquareOutline className="size-3.5" />,
             command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHorizontalRule().run(),
@@ -200,8 +211,8 @@ export const getSlashCommandFilteredSections =
           {
             commandKey: "emoji",
             key: "emoji",
-            title: "Emoji",
-            description: "Insert an emoji",
+            title: "common.emoji.label",
+            description: "editor_commands.emoji.description",
             searchTerms: ["emoji", "icons", "reaction", "emoticon", "emotags"],
             icon: <Smile className="size-3.5" />,
             command: ({ editor, range }) => {
@@ -212,13 +223,13 @@ export const getSlashCommandFilteredSections =
       },
       {
         key: "text-colors",
-        title: "Colors",
+        title: "editor_commands.text-color.title",
         items: [
           {
             commandKey: "text-color",
             key: "text-color-default",
-            title: "Default",
-            description: "Change text color",
+            title: "common.default",
+            description: "editor_commands.text-color.description",
             searchTerms: ["color", "text", "default"],
             icon: <TextOutline className="size-3.5 text-primary" />,
             command: ({ editor, range }) => toggleTextColor(undefined, editor, range),
@@ -228,8 +239,8 @@ export const getSlashCommandFilteredSections =
               ({
                 commandKey: "text-color",
                 key: `text-color-${color.key}`,
-                title: color.label,
-                description: "Change text color",
+                title: `editor_colors.${color.key}`,
+                description: "editor_commands.text-color.description",
                 searchTerms: ["color", "text", color.label],
 
                 icon: (
@@ -248,13 +259,13 @@ export const getSlashCommandFilteredSections =
       },
       {
         key: "background-colors",
-        title: "Background colors",
+        title: "editor_commands.background-color.title",
         items: [
           {
             commandKey: "background-color",
             key: "background-color-default",
-            title: "Default background",
-            description: "Change background color",
+            title: "editor_commands.background-color.default",
+            description: "editor_commands.background-color.description",
             searchTerms: ["color", "bg", "background", "default"],
             icon: <TextOutline className="size-3.5" />,
             iconContainerStyle: {
@@ -262,15 +273,15 @@ export const getSlashCommandFilteredSections =
               backgroundColor: "var(--background-color-surface-1)",
               border: "1px solid var(--border-color-strong)",
             },
-            command: ({ editor, range }) => toggleTextColor(undefined, editor, range),
+            command: ({ editor, range }) => toggleBackgroundColor(undefined, editor, range),
           },
           ...COLORS_LIST.map(
             (color) =>
               ({
                 commandKey: "background-color",
                 key: `background-color-${color.key}`,
-                title: color.label,
-                description: "Change background color",
+                title: `editor_colors.${color.key}`,
+                description: "editor_commands.background-color.description",
                 searchTerms: ["color", "bg", "background", color.label],
                 icon: <TextOutline className="size-3.5" />,
 
@@ -286,16 +297,23 @@ export const getSlashCommandFilteredSections =
       },
     ];
 
+    for (const section of SLASH_COMMAND_SECTIONS) {
+      if (section.title) section.title = i18nInstance.t(section.title);
+      section.items = section.items.map(localizeItem);
+    }
+
     const internalAdditionalOptions: TSlashCommandAdditionalOption[] = [];
     if (!disabledExtensions?.includes("image")) {
       internalAdditionalOptions.push({
-        commandKey: "image",
-        key: "image",
-        title: "Image",
-        icon: <ImageOutline className="size-3.5" />,
-        description: "Insert an image",
-        searchTerms: ["img", "photo", "picture", "media", "upload"],
-        command: ({ editor, range }: CommandProps) => insertImage({ editor, event: "insert", range }),
+        ...localizeItem({
+          commandKey: "image",
+          key: "image",
+          title: "image_upload.alt",
+          icon: <ImageOutline className="size-3.5" />,
+          description: "editor_commands.image.description",
+          searchTerms: ["img", "photo", "picture", "media", "upload"],
+          command: ({ editor, range }: CommandProps) => insertImage({ editor, event: "insert", range }),
+        }),
         section: "general",
         pushAfter: "code",
       });
@@ -318,19 +336,13 @@ export const getSlashCommandFilteredSections =
       }
     });
 
-    const filteredSlashSections = SLASH_COMMAND_SECTIONS.map((section) => ({
-      ...section,
-      items: section.items.filter((item) => {
-        if (typeof query !== "string") return;
-
-        const lowercaseQuery = query.toLowerCase();
-        return (
-          item.title.toLowerCase().includes(lowercaseQuery) ||
-          item.description.toLowerCase().includes(lowercaseQuery) ||
-          item.searchTerms.some((t) => t.includes(lowercaseQuery))
+    for (const section of SLASH_COMMAND_SECTIONS) {
+      section.items = section.items.filter((item) => {
+        return [item.title, item.description, section.title ?? "", ...item.searchTerms].some((value) =>
+          normalizeSlashCommandQuery(value).includes(normalizedQuery)
         );
-      }),
-    }));
+      });
+    }
 
-    return filteredSlashSections.filter((s) => s.items.length !== 0);
+    return SLASH_COMMAND_SECTIONS.filter((s) => s.items.length !== 0);
   };

@@ -61,5 +61,89 @@
       "use_this": "Usar este",
       "refine": "Refinar"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Texto",
+      "description": "Comece a escrever com texto simples."
+    },
+    "h1": {
+      "title": "Título 1",
+      "description": "Título de seção grande."
+    },
+    "h2": {
+      "title": "Título 2",
+      "description": "Título de seção médio."
+    },
+    "h3": {
+      "title": "Título 3",
+      "description": "Título de seção pequeno."
+    },
+    "h4": {
+      "title": "Título 4"
+    },
+    "h5": {
+      "title": "Título 5"
+    },
+    "h6": {
+      "title": "Título 6"
+    },
+    "numbered-list": {
+      "title": "Lista numerada",
+      "description": "Crie uma lista numerada."
+    },
+    "bulleted-list": {
+      "title": "Lista com marcadores",
+      "description": "Crie uma lista com marcadores."
+    },
+    "to-do-list": {
+      "title": "Lista de tarefas",
+      "description": "Crie uma lista de tarefas."
+    },
+    "table": {
+      "title": "Tabela",
+      "description": "Crie uma tabela"
+    },
+    "quote": {
+      "title": "Citação",
+      "description": "Adicione uma citação."
+    },
+    "code": {
+      "title": "Código",
+      "description": "Adicione um trecho de código."
+    },
+    "callout": {
+      "title": "Caixa de destaque",
+      "description": "Insira uma caixa de destaque"
+    },
+    "divider": {
+      "title": "Divisor",
+      "description": "Separe os blocos visualmente."
+    },
+    "emoji": {
+      "description": "Insira um emoji"
+    },
+    "image": {
+      "description": "Insira uma imagem"
+    },
+    "text-color": {
+      "title": "Cores",
+      "description": "Altere a cor do texto"
+    },
+    "background-color": {
+      "title": "Cores de fundo",
+      "description": "Altere a cor de fundo",
+      "default": "Fundo padrão"
+    }
+  },
+  "editor_colors": {
+    "gray": "Cinza",
+    "peach": "Pêssego",
+    "pink": "Rosa",
+    "orange": "Laranja",
+    "green": "Verde",
+    "light-blue": "Azul-claro",
+    "dark-blue": "Azul-escuro",
+    "purple": "Roxo"
   }
 }

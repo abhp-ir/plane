@@ -61,5 +61,89 @@
       "use_this": "استفاده از این",
       "refine": "بهبود"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "متن",
+      "description": "نوشتن متن ساده را شروع کنید."
+    },
+    "h1": {
+      "title": "سرتیتر ۱",
+      "description": "سرتیتر بزرگ بخش."
+    },
+    "h2": {
+      "title": "سرتیتر ۲",
+      "description": "سرتیتر متوسط بخش."
+    },
+    "h3": {
+      "title": "سرتیتر ۳",
+      "description": "سرتیتر کوچک بخش."
+    },
+    "h4": {
+      "title": "سرتیتر ۴"
+    },
+    "h5": {
+      "title": "سرتیتر ۵"
+    },
+    "h6": {
+      "title": "سرتیتر ۶"
+    },
+    "numbered-list": {
+      "title": "فهرست شماره‌دار",
+      "description": "یک فهرست شماره‌دار ایجاد کنید."
+    },
+    "bulleted-list": {
+      "title": "فهرست نشانه‌دار",
+      "description": "یک فهرست نشانه‌دار ایجاد کنید."
+    },
+    "to-do-list": {
+      "title": "فهرست کارها",
+      "description": "یک فهرست کارها ایجاد کنید."
+    },
+    "table": {
+      "title": "جدول",
+      "description": "یک جدول ایجاد کنید"
+    },
+    "quote": {
+      "title": "نقل‌قول",
+      "description": "یک نقل‌قول ثبت کنید."
+    },
+    "code": {
+      "title": "کد",
+      "description": "یک قطعه کد ثبت کنید."
+    },
+    "callout": {
+      "title": "کادر توضیح",
+      "description": "یک کادر توضیح درج کنید"
+    },
+    "divider": {
+      "title": "جداکننده",
+      "description": "بلوک‌ها را از هم جدا کنید."
+    },
+    "emoji": {
+      "description": "یک شکلک درج کنید"
+    },
+    "image": {
+      "description": "یک تصویر درج کنید"
+    },
+    "text-color": {
+      "title": "رنگ‌ها",
+      "description": "تغییر رنگ متن"
+    },
+    "background-color": {
+      "title": "رنگ‌های پس‌زمینه",
+      "description": "تغییر رنگ پس‌زمینه",
+      "default": "پس‌زمینهٔ پیش‌فرض"
+    }
+  },
+  "editor_colors": {
+    "gray": "خاکستری",
+    "peach": "هلویی",
+    "pink": "صورتی",
+    "orange": "نارنجی",
+    "green": "سبز",
+    "light-blue": "آبی روشن",
+    "dark-blue": "آبی تیره",
+    "purple": "بنفش"
   }
 }

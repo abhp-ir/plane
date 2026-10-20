@@ -428,5 +428,9 @@
       "label": "Título del Epic",
       "required": "El título del epic es obligatorio."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "¿Guardar este borrador?",
+    "description": "Puede guardar este elemento de trabajo en Borradores para volver a él más adelante."
   }
 }

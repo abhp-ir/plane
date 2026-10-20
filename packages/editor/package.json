@@ -25,6 +25,7 @@
   "scripts": {
     "build": "tsc && tsdown",
     "dev": "tsdown --watch --no-clean",
+    "test": "vitest run",
     "check:lint": "oxlint --max-warnings=416 .",
     "check:types": "tsc --noEmit",
     "check:format": "oxfmt --check .",
@@ -40,6 +41,7 @@
     "@plane/blocks": "workspace:*",
     "@plane/constants": "workspace:*",
     "@plane/hooks": "workspace:*",
+    "@plane/i18n": "workspace:*",
     "@plane/types": "workspace:*",
     "@plane/utils": "workspace:*",
     "@tiptap/core": "catalog:",
@@ -89,9 +91,11 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "jsdom": "catalog:",
     "postcss": "catalog:",
     "tsdown": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.0.0",

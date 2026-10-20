@@ -428,5 +428,9 @@
       "label": "エピックのタイトル",
       "required": "エピックのタイトルは必須です。"
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "この下書きを保存しますか？",
+    "description": "この作業項目を下書きに保存して、後で作業を再開できます。"
   }
 }

@@ -61,5 +61,89 @@
       "use_this": "Use this",
       "refine": "Refine"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "ტექსტი",
+      "description": "დაიწყეთ წერა ჩვეულებრივი ტექსტით."
+    },
+    "h1": {
+      "title": "სათაური 1",
+      "description": "სექციის დიდი სათაური."
+    },
+    "h2": {
+      "title": "სათაური 2",
+      "description": "სექციის საშუალო სათაური."
+    },
+    "h3": {
+      "title": "სათაური 3",
+      "description": "სექციის პატარა სათაური."
+    },
+    "h4": {
+      "title": "სათაური 4"
+    },
+    "h5": {
+      "title": "სათაური 5"
+    },
+    "h6": {
+      "title": "სათაური 6"
+    },
+    "numbered-list": {
+      "title": "დანომრილი სია",
+      "description": "შექმენით დანომრილი სია."
+    },
+    "bulleted-list": {
+      "title": "მარკირებული სია",
+      "description": "შექმენით მარკირებული სია."
+    },
+    "to-do-list": {
+      "title": "დავალებების სია",
+      "description": "შექმენით დავალებების სია."
+    },
+    "table": {
+      "title": "ცხრილი",
+      "description": "შექმენით ცხრილი"
+    },
+    "quote": {
+      "title": "ციტატა",
+      "description": "დაამატეთ ციტატა."
+    },
+    "code": {
+      "title": "კოდი",
+      "description": "დაამატეთ კოდის ფრაგმენტი."
+    },
+    "callout": {
+      "title": "შენიშვნის ბლოკი",
+      "description": "ჩასვით შენიშვნის ბლოკი"
+    },
+    "divider": {
+      "title": "გამყოფი",
+      "description": "ვიზუალურად გამოყავით ბლოკები."
+    },
+    "emoji": {
+      "description": "ჩასვით ემოჯი"
+    },
+    "image": {
+      "description": "ჩასვით სურათი"
+    },
+    "text-color": {
+      "title": "ფერები",
+      "description": "შეცვალეთ ტექსტის ფერი"
+    },
+    "background-color": {
+      "title": "ფონის ფერები",
+      "description": "შეცვალეთ ფონის ფერი",
+      "default": "ნაგულისხმევი ფონი"
+    }
+  },
+  "editor_colors": {
+    "gray": "ნაცრისფერი",
+    "peach": "ატმისფერი",
+    "pink": "ვარდისფერი",
+    "orange": "ნარინჯისფერი",
+    "green": "მწვანე",
+    "light-blue": "ღია ლურჯი",
+    "dark-blue": "მუქი ლურჯი",
+    "purple": "იისფერი"
   }
 }

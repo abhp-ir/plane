@@ -61,5 +61,89 @@
       "use_this": "使用此項",
       "refine": "精煉"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "文字",
+      "description": "開始輸入純文字。"
+    },
+    "h1": {
+      "title": "標題 1",
+      "description": "大型章節標題。"
+    },
+    "h2": {
+      "title": "標題 2",
+      "description": "中型章節標題。"
+    },
+    "h3": {
+      "title": "標題 3",
+      "description": "小型章節標題。"
+    },
+    "h4": {
+      "title": "標題 4"
+    },
+    "h5": {
+      "title": "標題 5"
+    },
+    "h6": {
+      "title": "標題 6"
+    },
+    "numbered-list": {
+      "title": "編號清單",
+      "description": "建立編號清單。"
+    },
+    "bulleted-list": {
+      "title": "項目符號清單",
+      "description": "建立項目符號清單。"
+    },
+    "to-do-list": {
+      "title": "待辦清單",
+      "description": "建立待辦清單。"
+    },
+    "table": {
+      "title": "表格",
+      "description": "建立表格"
+    },
+    "quote": {
+      "title": "引文",
+      "description": "新增引文。"
+    },
+    "code": {
+      "title": "程式碼",
+      "description": "新增程式碼片段。"
+    },
+    "callout": {
+      "title": "提示框",
+      "description": "插入提示框"
+    },
+    "divider": {
+      "title": "分隔線",
+      "description": "以視覺方式分隔區塊。"
+    },
+    "emoji": {
+      "description": "插入表情符號"
+    },
+    "image": {
+      "description": "插入圖片"
+    },
+    "text-color": {
+      "title": "色彩",
+      "description": "變更文字色彩"
+    },
+    "background-color": {
+      "title": "背景色彩",
+      "description": "變更背景色彩",
+      "default": "預設背景"
+    }
+  },
+  "editor_colors": {
+    "gray": "灰色",
+    "peach": "桃色",
+    "pink": "粉紅色",
+    "orange": "橘色",
+    "green": "綠色",
+    "light-blue": "淺藍色",
+    "dark-blue": "深藍色",
+    "purple": "紫色"
   }
 }

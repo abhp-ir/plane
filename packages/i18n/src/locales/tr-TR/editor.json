@@ -61,5 +61,89 @@
       "use_this": "Bunu kullan",
       "refine": "İyileştir"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Metin",
+      "description": "Düz metinle yazmaya başlayın."
+    },
+    "h1": {
+      "title": "Başlık 1",
+      "description": "Büyük bölüm başlığı."
+    },
+    "h2": {
+      "title": "Başlık 2",
+      "description": "Orta boy bölüm başlığı."
+    },
+    "h3": {
+      "title": "Başlık 3",
+      "description": "Küçük bölüm başlığı."
+    },
+    "h4": {
+      "title": "Başlık 4"
+    },
+    "h5": {
+      "title": "Başlık 5"
+    },
+    "h6": {
+      "title": "Başlık 6"
+    },
+    "numbered-list": {
+      "title": "Numaralı liste",
+      "description": "Numaralı bir liste oluşturun."
+    },
+    "bulleted-list": {
+      "title": "Madde işaretli liste",
+      "description": "Madde işaretli bir liste oluşturun."
+    },
+    "to-do-list": {
+      "title": "Yapılacaklar listesi",
+      "description": "Yapılacaklar listesi oluşturun."
+    },
+    "table": {
+      "title": "Tablo",
+      "description": "Bir tablo oluşturun"
+    },
+    "quote": {
+      "title": "Alıntı",
+      "description": "Bir alıntı ekleyin."
+    },
+    "code": {
+      "title": "Kod",
+      "description": "Bir kod parçacığı ekleyin."
+    },
+    "callout": {
+      "title": "Açıklama kutusu",
+      "description": "Açıklama kutusu ekleyin"
+    },
+    "divider": {
+      "title": "Ayırıcı",
+      "description": "Blokları görsel olarak ayırın."
+    },
+    "emoji": {
+      "description": "Bir emoji ekleyin"
+    },
+    "image": {
+      "description": "Bir görsel ekleyin"
+    },
+    "text-color": {
+      "title": "Renkler",
+      "description": "Metin rengini değiştirin"
+    },
+    "background-color": {
+      "title": "Arka plan renkleri",
+      "description": "Arka plan rengini değiştirin",
+      "default": "Varsayılan arka plan"
+    }
+  },
+  "editor_colors": {
+    "gray": "Gri",
+    "peach": "Şeftali",
+    "pink": "Pembe",
+    "orange": "Turuncu",
+    "green": "Yeşil",
+    "light-blue": "Açık mavi",
+    "dark-blue": "Koyu mavi",
+    "purple": "Mor"
   }
 }

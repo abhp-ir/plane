@@ -61,5 +61,89 @@
       "use_this": "これを使用",
       "refine": "改良"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "テキスト",
+      "description": "通常のテキストで書き始めます。"
+    },
+    "h1": {
+      "title": "見出し1",
+      "description": "大きなセクション見出しです。"
+    },
+    "h2": {
+      "title": "見出し2",
+      "description": "中くらいのセクション見出しです。"
+    },
+    "h3": {
+      "title": "見出し3",
+      "description": "小さなセクション見出しです。"
+    },
+    "h4": {
+      "title": "見出し4"
+    },
+    "h5": {
+      "title": "見出し5"
+    },
+    "h6": {
+      "title": "見出し6"
+    },
+    "numbered-list": {
+      "title": "番号付きリスト",
+      "description": "番号付きリストを作成します。"
+    },
+    "bulleted-list": {
+      "title": "箇条書きリスト",
+      "description": "箇条書きリストを作成します。"
+    },
+    "to-do-list": {
+      "title": "チェックリスト",
+      "description": "チェックリストを作成します。"
+    },
+    "table": {
+      "title": "表",
+      "description": "表を作成します"
+    },
+    "quote": {
+      "title": "引用",
+      "description": "引用を追加します。"
+    },
+    "code": {
+      "title": "コード",
+      "description": "コードスニペットを追加します。"
+    },
+    "callout": {
+      "title": "コールアウト",
+      "description": "コールアウトを挿入します"
+    },
+    "divider": {
+      "title": "区切り線",
+      "description": "ブロックを視覚的に区切ります。"
+    },
+    "emoji": {
+      "description": "絵文字を挿入します"
+    },
+    "image": {
+      "description": "画像を挿入します"
+    },
+    "text-color": {
+      "title": "色",
+      "description": "文字色を変更します"
+    },
+    "background-color": {
+      "title": "背景色",
+      "description": "背景色を変更します",
+      "default": "既定の背景"
+    }
+  },
+  "editor_colors": {
+    "gray": "グレー",
+    "peach": "ピーチ",
+    "pink": "ピンク",
+    "orange": "オレンジ",
+    "green": "グリーン",
+    "light-blue": "ライトブルー",
+    "dark-blue": "ダークブルー",
+    "purple": "パープル"
   }
 }

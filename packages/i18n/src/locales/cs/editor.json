@@ -61,5 +61,89 @@
       "use_this": "Použít toto",
       "refine": "Upřesnit"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Text",
+      "description": "Začněte psát prostý text."
+    },
+    "h1": {
+      "title": "Nadpis 1",
+      "description": "Velký nadpis oddílu."
+    },
+    "h2": {
+      "title": "Nadpis 2",
+      "description": "Střední nadpis oddílu."
+    },
+    "h3": {
+      "title": "Nadpis 3",
+      "description": "Malý nadpis oddílu."
+    },
+    "h4": {
+      "title": "Nadpis 4"
+    },
+    "h5": {
+      "title": "Nadpis 5"
+    },
+    "h6": {
+      "title": "Nadpis 6"
+    },
+    "numbered-list": {
+      "title": "Číslovaný seznam",
+      "description": "Vytvořte číslovaný seznam."
+    },
+    "bulleted-list": {
+      "title": "Odrážkový seznam",
+      "description": "Vytvořte odrážkový seznam."
+    },
+    "to-do-list": {
+      "title": "Seznam úkolů",
+      "description": "Vytvořte seznam úkolů."
+    },
+    "table": {
+      "title": "Tabulka",
+      "description": "Vytvořte tabulku"
+    },
+    "quote": {
+      "title": "Citace",
+      "description": "Přidejte citaci."
+    },
+    "code": {
+      "title": "Kód",
+      "description": "Přidejte úryvek kódu."
+    },
+    "callout": {
+      "title": "Rámeček s poznámkou",
+      "description": "Vložte rámeček s poznámkou"
+    },
+    "divider": {
+      "title": "Oddělovač",
+      "description": "Vizuálně oddělte bloky."
+    },
+    "emoji": {
+      "description": "Vložte emoji"
+    },
+    "image": {
+      "description": "Vložte obrázek"
+    },
+    "text-color": {
+      "title": "Barvy",
+      "description": "Změňte barvu textu"
+    },
+    "background-color": {
+      "title": "Barvy pozadí",
+      "description": "Změňte barvu pozadí",
+      "default": "Výchozí pozadí"
+    }
+  },
+  "editor_colors": {
+    "gray": "Šedá",
+    "peach": "Broskvová",
+    "pink": "Růžová",
+    "orange": "Oranžová",
+    "green": "Zelená",
+    "light-blue": "Světle modrá",
+    "dark-blue": "Tmavě modrá",
+    "purple": "Fialová"
   }
 }

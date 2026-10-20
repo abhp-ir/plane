@@ -428,5 +428,9 @@
       "label": "Název epiku",
       "required": "Název epiku je povinný."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Uložit tento koncept?",
+    "description": "Tuto pracovní položku můžete uložit do konceptů a vrátit se k ní později."
   }
 }

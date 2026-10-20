@@ -428,5 +428,9 @@
       "label": "Titolo Epic",
       "required": "Il titolo dell'Epic è obbligatorio."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Salvare questa bozza?",
+    "description": "Può salvare questo elemento di lavoro nelle bozze per riprenderlo in seguito."
   }
 }

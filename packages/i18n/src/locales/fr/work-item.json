@@ -428,5 +428,9 @@
       "label": "Titre de l’Epic",
       "required": "Le titre de l’Epic est requis."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Enregistrer ce brouillon ?",
+    "description": "Vous pouvez enregistrer cet élément de travail dans les brouillons pour y revenir plus tard."
   }
 }

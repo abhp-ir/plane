@@ -61,5 +61,89 @@
       "use_this": "Usar esto",
       "refine": "Refinar"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Texto",
+      "description": "Empiece a escribir texto sin formato."
+    },
+    "h1": {
+      "title": "Encabezado 1",
+      "description": "Encabezado de sección grande."
+    },
+    "h2": {
+      "title": "Encabezado 2",
+      "description": "Encabezado de sección mediano."
+    },
+    "h3": {
+      "title": "Encabezado 3",
+      "description": "Encabezado de sección pequeño."
+    },
+    "h4": {
+      "title": "Encabezado 4"
+    },
+    "h5": {
+      "title": "Encabezado 5"
+    },
+    "h6": {
+      "title": "Encabezado 6"
+    },
+    "numbered-list": {
+      "title": "Lista numerada",
+      "description": "Cree una lista numerada."
+    },
+    "bulleted-list": {
+      "title": "Lista con viñetas",
+      "description": "Cree una lista con viñetas."
+    },
+    "to-do-list": {
+      "title": "Lista de tareas",
+      "description": "Cree una lista de tareas."
+    },
+    "table": {
+      "title": "Tabla",
+      "description": "Cree una tabla"
+    },
+    "quote": {
+      "title": "Cita",
+      "description": "Añada una cita."
+    },
+    "code": {
+      "title": "Código",
+      "description": "Añada un fragmento de código."
+    },
+    "callout": {
+      "title": "Recuadro destacado",
+      "description": "Inserte un recuadro destacado"
+    },
+    "divider": {
+      "title": "Separador",
+      "description": "Separe los bloques visualmente."
+    },
+    "emoji": {
+      "description": "Inserte un emoji"
+    },
+    "image": {
+      "description": "Inserte una imagen"
+    },
+    "text-color": {
+      "title": "Colores",
+      "description": "Cambie el color del texto"
+    },
+    "background-color": {
+      "title": "Colores de fondo",
+      "description": "Cambie el color de fondo",
+      "default": "Fondo predeterminado"
+    }
+  },
+  "editor_colors": {
+    "gray": "Gris",
+    "peach": "Melocotón",
+    "pink": "Rosa",
+    "orange": "Naranja",
+    "green": "Verde",
+    "light-blue": "Azul claro",
+    "dark-blue": "Azul oscuro",
+    "purple": "Morado"
   }
 }

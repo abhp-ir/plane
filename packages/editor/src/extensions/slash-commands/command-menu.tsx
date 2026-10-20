@@ -9,6 +9,7 @@ import type { SuggestionProps } from "@tiptap/suggestion";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from "react";
 // plane imports
 import { useOutsideClickDetector } from "@plane/hooks";
+import { useTranslation } from "@plane/i18n";
 // helpers
 import { DROPDOWN_NAVIGATION_KEYS, getNextValidIndex } from "@/helpers/tippy";
 // types
@@ -23,6 +24,7 @@ export type SlashCommandsMenuProps = SuggestionProps<TSlashCommandSection, ISlas
 
 export const SlashCommandsMenu = forwardRef(function SlashCommandsMenu(props: SlashCommandsMenuProps, ref) {
   const { items: sections, command, query, onClose } = props;
+  const { direction } = useTranslation();
   // states
   const [selectedIndex, setSelectedIndex] = useState({
     section: 0,
@@ -38,46 +40,6 @@ export const SlashCommandsMenu = forwardRef(function SlashCommandsMenu(props: Sl
     },
     [command, sections]
   );
-  // handle arrow key navigation
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (DROPDOWN_NAVIGATION_KEYS.includes(e.key)) {
-        e.preventDefault();
-        const currentSection = selectedIndex.section;
-        const currentItem = selectedIndex.item;
-        let nextSection = currentSection;
-        let nextItem = currentItem;
-
-        if (e.key === "ArrowUp") {
-          nextItem = currentItem - 1;
-          if (nextItem < 0) {
-            nextSection = currentSection - 1;
-            if (nextSection < 0) nextSection = sections.length - 1;
-            nextItem = sections[nextSection]?.items?.length - 1;
-          }
-        }
-        if (e.key === "ArrowDown") {
-          nextItem = currentItem + 1;
-          if (nextItem >= sections[currentSection]?.items?.length) {
-            nextSection = currentSection + 1;
-            if (nextSection >= sections.length) nextSection = 0;
-            nextItem = 0;
-          }
-        }
-        if (e.key === "Enter") {
-          selectItem(currentSection, currentItem);
-        }
-        setSelectedIndex({
-          section: nextSection,
-          item: nextItem,
-        });
-      }
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [sections, selectedIndex, setSelectedIndex, selectItem]);
   // initialize the select index to 0 by default
   useEffect(() => {
     setSelectedIndex({
@@ -98,6 +60,7 @@ export const SlashCommandsMenu = forwardRef(function SlashCommandsMenu(props: Sl
 
   useImperativeHandle(ref, () => ({
     onKeyDown: ({ event }: { event: KeyboardEvent }) => {
+      if (event.isComposing || event.keyCode === 229) return false;
       if (!DROPDOWN_NAVIGATION_KEYS.includes(event.key)) return false;
 
       if (event.key === "Enter") {
@@ -136,8 +99,10 @@ export const SlashCommandsMenu = forwardRef(function SlashCommandsMenu(props: Sl
       />
       <div
         id="slash-command"
+        role="presentation"
+        dir={direction}
         ref={commandListContainer}
-        className="relative max-h-80 min-w-[12rem] space-y-2 overflow-y-auto rounded-md border-[0.5px] border-strong bg-surface-1 px-2 py-2.5 shadow-raised-200"
+        className="relative max-h-80 max-w-[calc(100vw-1rem)] min-w-[12rem] space-y-2 overflow-y-auto rounded-md border-[0.5px] border-strong bg-surface-1 px-2 py-2.5 shadow-raised-200"
         style={{
           zIndex: 100,
         }}

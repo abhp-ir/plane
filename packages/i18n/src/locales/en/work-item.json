@@ -428,5 +428,9 @@
       "label": "Epic Title",
       "required": "Epic title is required."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Save this draft?",
+    "description": "You can save this work item to Drafts so you can come back to it later."
   }
 }

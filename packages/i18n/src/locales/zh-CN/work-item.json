@@ -428,5 +428,9 @@
       "label": "史诗标题",
       "required": "史诗标题为必填项"
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "保存此草稿？",
+    "description": "您可以将此工作项保存到草稿，以便稍后继续。"
   }
 }

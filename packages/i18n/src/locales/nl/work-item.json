@@ -428,5 +428,9 @@
       "label": "Epic-titel",
       "required": "Epic-titel is verplicht."
     }
+  },
+  "work_item_draft_confirmation": {
+    "title": "Dit concept opslaan?",
+    "description": "U kunt dit werkitem opslaan in Concepten om er later mee verder te gaan."
   }
 }

@@ -61,5 +61,89 @@
       "use_this": "Deze gebruiken",
       "refine": "Verfijnen"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Tekst",
+      "description": "Begin met schrijven in gewone tekst."
+    },
+    "h1": {
+      "title": "Kop 1",
+      "description": "Grote sectiekop."
+    },
+    "h2": {
+      "title": "Kop 2",
+      "description": "Middelgrote sectiekop."
+    },
+    "h3": {
+      "title": "Kop 3",
+      "description": "Kleine sectiekop."
+    },
+    "h4": {
+      "title": "Kop 4"
+    },
+    "h5": {
+      "title": "Kop 5"
+    },
+    "h6": {
+      "title": "Kop 6"
+    },
+    "numbered-list": {
+      "title": "Genummerde lijst",
+      "description": "Maak een genummerde lijst."
+    },
+    "bulleted-list": {
+      "title": "Opsommingslijst",
+      "description": "Maak een opsommingslijst."
+    },
+    "to-do-list": {
+      "title": "Takenlijst",
+      "description": "Maak een takenlijst."
+    },
+    "table": {
+      "title": "Tabel",
+      "description": "Maak een tabel"
+    },
+    "quote": {
+      "title": "Citaat",
+      "description": "Voeg een citaat toe."
+    },
+    "code": {
+      "title": "Code",
+      "description": "Voeg een codefragment toe."
+    },
+    "callout": {
+      "title": "Infoblok",
+      "description": "Voeg een infoblok in"
+    },
+    "divider": {
+      "title": "Scheidingslijn",
+      "description": "Scheid blokken visueel."
+    },
+    "emoji": {
+      "description": "Voeg een emoji in"
+    },
+    "image": {
+      "description": "Voeg een afbeelding in"
+    },
+    "text-color": {
+      "title": "Kleuren",
+      "description": "Wijzig de tekstkleur"
+    },
+    "background-color": {
+      "title": "Achtergrondkleuren",
+      "description": "Wijzig de achtergrondkleur",
+      "default": "Standaardachtergrond"
+    }
+  },
+  "editor_colors": {
+    "gray": "Grijs",
+    "peach": "Perzik",
+    "pink": "Roze",
+    "orange": "Oranje",
+    "green": "Groen",
+    "light-blue": "Lichtblauw",
+    "dark-blue": "Donkerblauw",
+    "purple": "Paars"
   }
 }

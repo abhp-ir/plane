@@ -61,5 +61,89 @@
       "use_this": "Sử dụng cái này",
       "refine": "Tinh chỉnh"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Văn bản",
+      "description": "Bắt đầu nhập văn bản thuần túy."
+    },
+    "h1": {
+      "title": "Tiêu đề 1",
+      "description": "Tiêu đề phần lớn."
+    },
+    "h2": {
+      "title": "Tiêu đề 2",
+      "description": "Tiêu đề phần vừa."
+    },
+    "h3": {
+      "title": "Tiêu đề 3",
+      "description": "Tiêu đề phần nhỏ."
+    },
+    "h4": {
+      "title": "Tiêu đề 4"
+    },
+    "h5": {
+      "title": "Tiêu đề 5"
+    },
+    "h6": {
+      "title": "Tiêu đề 6"
+    },
+    "numbered-list": {
+      "title": "Danh sách đánh số",
+      "description": "Tạo danh sách đánh số."
+    },
+    "bulleted-list": {
+      "title": "Danh sách dấu đầu dòng",
+      "description": "Tạo danh sách dấu đầu dòng."
+    },
+    "to-do-list": {
+      "title": "Danh sách việc cần làm",
+      "description": "Tạo danh sách việc cần làm."
+    },
+    "table": {
+      "title": "Bảng",
+      "description": "Tạo bảng"
+    },
+    "quote": {
+      "title": "Trích dẫn",
+      "description": "Thêm trích dẫn."
+    },
+    "code": {
+      "title": "Mã",
+      "description": "Thêm đoạn mã."
+    },
+    "callout": {
+      "title": "Khung chú thích",
+      "description": "Chèn khung chú thích"
+    },
+    "divider": {
+      "title": "Đường phân cách",
+      "description": "Phân tách các khối bằng đường hiển thị."
+    },
+    "emoji": {
+      "description": "Chèn biểu tượng cảm xúc"
+    },
+    "image": {
+      "description": "Chèn hình ảnh"
+    },
+    "text-color": {
+      "title": "Màu sắc",
+      "description": "Thay đổi màu văn bản"
+    },
+    "background-color": {
+      "title": "Màu nền",
+      "description": "Thay đổi màu nền",
+      "default": "Nền mặc định"
+    }
+  },
+  "editor_colors": {
+    "gray": "Xám",
+    "peach": "Hồng đào",
+    "pink": "Hồng",
+    "orange": "Cam",
+    "green": "Xanh lá",
+    "light-blue": "Xanh dương nhạt",
+    "dark-blue": "Xanh dương đậm",
+    "purple": "Tím"
   }
 }

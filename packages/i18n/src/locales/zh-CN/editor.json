@@ -61,5 +61,89 @@
       "use_this": "使用此",
       "refine": "优化"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "文本",
+      "description": "开始输入纯文本。"
+    },
+    "h1": {
+      "title": "标题 1",
+      "description": "大号章节标题。"
+    },
+    "h2": {
+      "title": "标题 2",
+      "description": "中号章节标题。"
+    },
+    "h3": {
+      "title": "标题 3",
+      "description": "小号章节标题。"
+    },
+    "h4": {
+      "title": "标题 4"
+    },
+    "h5": {
+      "title": "标题 5"
+    },
+    "h6": {
+      "title": "标题 6"
+    },
+    "numbered-list": {
+      "title": "编号列表",
+      "description": "创建编号列表。"
+    },
+    "bulleted-list": {
+      "title": "项目符号列表",
+      "description": "创建项目符号列表。"
+    },
+    "to-do-list": {
+      "title": "待办列表",
+      "description": "创建待办列表。"
+    },
+    "table": {
+      "title": "表格",
+      "description": "创建表格"
+    },
+    "quote": {
+      "title": "引用",
+      "description": "添加引用。"
+    },
+    "code": {
+      "title": "代码",
+      "description": "添加代码片段。"
+    },
+    "callout": {
+      "title": "提示框",
+      "description": "插入提示框"
+    },
+    "divider": {
+      "title": "分隔线",
+      "description": "在视觉上分隔区块。"
+    },
+    "emoji": {
+      "description": "插入表情符号"
+    },
+    "image": {
+      "description": "插入图片"
+    },
+    "text-color": {
+      "title": "颜色",
+      "description": "更改文本颜色"
+    },
+    "background-color": {
+      "title": "背景颜色",
+      "description": "更改背景颜色",
+      "default": "默认背景"
+    }
+  },
+  "editor_colors": {
+    "gray": "灰色",
+    "peach": "桃色",
+    "pink": "粉色",
+    "orange": "橙色",
+    "green": "绿色",
+    "light-blue": "浅蓝色",
+    "dark-blue": "深蓝色",
+    "purple": "紫色"
   }
 }

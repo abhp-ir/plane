@@ -6,6 +6,7 @@
 
 // plane utils
 import { cn } from "@plane/utils";
+import { findSlashCommandMatch } from "@/helpers/slash-command-search";
 // types
 import type { ISlashCommandItem } from "@/types";
 
@@ -21,17 +22,11 @@ type Props = {
 
 // Utility to highlight matched text in a string
 const highlightMatch = (text: string, query: string): React.ReactNode => {
-  if (!query || query.trim() === "") return text;
-
-  const queryLower = query.toLowerCase().trim();
-  const textLower = text.toLowerCase();
-
-  // Check for direct substring match
-  const index = textLower.indexOf(queryLower);
-  if (index >= 0) {
-    const before = text.substring(0, index);
-    const match = text.substring(index, index + queryLower.length);
-    const after = text.substring(index + queryLower.length);
+  const range = findSlashCommandMatch(text, query);
+  if (range) {
+    const before = text.substring(0, range.from);
+    const match = text.substring(range.from, range.to);
+    const after = text.substring(range.to);
 
     return (
       <>
@@ -54,19 +49,20 @@ export function CommandMenuItem(props: Props) {
       type="button"
       id={`item-${sectionIndex}-${itemIndex}`}
       className={cn(
-        "flex w-full items-center gap-2 truncate rounded-sm px-1 py-1.5 text-left text-13 text-secondary hover:bg-layer-1-hover",
+        "flex w-full items-center gap-2 truncate rounded-sm px-1 py-1.5 text-start text-13 text-secondary hover:bg-layer-1-hover",
         {
           "bg-layer-1-hover": isSelected,
         }
       )}
       onClick={onClick}
+      onMouseDown={(event) => event.preventDefault()}
       onMouseEnter={onMouseEnter}
     >
-      <span className="grid size-5 flex-shrink-0 place-items-center" style={item.iconContainerStyle}>
+      <span aria-hidden="true" className="grid size-5 flex-shrink-0 place-items-center" style={item.iconContainerStyle}>
         {item.icon}
       </span>
       <p className="flex-grow truncate text-12">{query ? highlightMatch(item.title, query) : item.title}</p>
-      {item.badge}
+      {item.badge && <bdi className="shrink-0">{item.badge}</bdi>}
     </button>
   );
 }

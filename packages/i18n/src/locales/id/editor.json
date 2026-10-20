@@ -61,5 +61,89 @@
       "use_this": "Gunakan ini",
       "refine": "Perbaiki"
     }
+  },
+  "editor_commands": {
+    "text": {
+      "title": "Teks",
+      "description": "Mulai menulis dengan teks biasa."
+    },
+    "h1": {
+      "title": "Judul 1",
+      "description": "Judul bagian besar."
+    },
+    "h2": {
+      "title": "Judul 2",
+      "description": "Judul bagian sedang."
+    },
+    "h3": {
+      "title": "Judul 3",
+      "description": "Judul bagian kecil."
+    },
+    "h4": {
+      "title": "Judul 4"
+    },
+    "h5": {
+      "title": "Judul 5"
+    },
+    "h6": {
+      "title": "Judul 6"
+    },
+    "numbered-list": {
+      "title": "Daftar bernomor",
+      "description": "Buat daftar bernomor."
+    },
+    "bulleted-list": {
+      "title": "Daftar berpoin",
+      "description": "Buat daftar berpoin."
+    },
+    "to-do-list": {
+      "title": "Daftar tugas",
+      "description": "Buat daftar tugas."
+    },
+    "table": {
+      "title": "Tabel",
+      "description": "Buat tabel"
+    },
+    "quote": {
+      "title": "Kutipan",
+      "description": "Tambahkan kutipan."
+    },
+    "code": {
+      "title": "Kode",
+      "description": "Tambahkan cuplikan kode."
+    },
+    "callout": {
+      "title": "Kotak keterangan",
+      "description": "Sisipkan kotak keterangan"
+    },
+    "divider": {
+      "title": "Pemisah",
+      "description": "Pisahkan blok secara visual."
+    },
+    "emoji": {
+      "description": "Sisipkan emoji"
+    },
+    "image": {
+      "description": "Sisipkan gambar"
+    },
+    "text-color": {
+      "title": "Warna",
+      "description": "Ubah warna teks"
+    },
+    "background-color": {
+      "title": "Warna latar belakang",
+      "description": "Ubah warna latar belakang",
+      "default": "Latar belakang bawaan"
+    }
+  },
+  "editor_colors": {
+    "gray": "Abu-abu",
+    "peach": "Persik",
+    "pink": "Merah muda",
+    "orange": "Oranye",
+    "green": "Hijau",
+    "light-blue": "Biru muda",
+    "dark-blue": "Biru tua",
+    "purple": "Ungu"
   }
 }
