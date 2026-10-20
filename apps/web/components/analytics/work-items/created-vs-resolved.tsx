@@ -5,6 +5,7 @@
  */
 
 import { useMemo } from "react";
+import { endOfMonth } from "date-fns";
 import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
@@ -13,7 +14,7 @@ import { useTranslation } from "@plane/i18n";
 import { AreaChart } from "@plane/blocks/charts/area-chart";
 import { EmptyStateCompact } from "@plane/blocks/empty-state";
 import type { IChartResponse, TChartData } from "@plane/types";
-import { renderFormattedDate } from "@plane/utils";
+import { formatDateRange, getDate, getDateCalendar, renderFormattedDate } from "@plane/utils";
 // hooks
 import { useAnalytics } from "@/hooks/store/use-analytics";
 // services
@@ -34,7 +35,7 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
     isEpic,
   } = useAnalytics();
   const params = useParams();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const workspaceSlug = params.workspaceSlug.toString();
   const { data: createdVsResolvedData, isLoading: isCreatedVsResolvedLoading } = useSWR(
     `created-vs-resolved-${workspaceSlug}-${selectedDuration}-${selectedProjects}-${selectedCycle}-${selectedModule}-${isPeekView}-${isEpic}`,
@@ -52,14 +53,22 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
         isPeekView
       )
   );
+  const isDaily = isPeekView && !!(selectedCycle || selectedModule);
   const parsedData: TChartData<string, string>[] = useMemo(() => {
     if (!createdVsResolvedData?.data) return [];
-    return createdVsResolvedData.data.map((datum) => ({
-      ...datum,
-      [datum.key]: datum.count,
-      name: renderFormattedDate(datum.key) ?? datum.key,
-    }));
-  }, [createdVsResolvedData]);
+    return createdVsResolvedData.data.map((datum) => {
+      // The API aggregates Gregorian months; show their actual Jalali date intervals.
+      const start = !isDaily && getDateCalendar(currentLocale) === "persian" ? getDate(datum.key) : undefined;
+      return {
+        ...datum,
+        [datum.key]: datum.count,
+        name:
+          start?.getDate() === 1
+            ? formatDateRange(start, endOfMonth(start), currentLocale)
+            : (renderFormattedDate(datum.key, undefined, currentLocale) ?? datum.key),
+      };
+    });
+  }, [createdVsResolvedData, currentLocale, isDaily]);
 
   const areas = useMemo(
     () => [
