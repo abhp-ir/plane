@@ -7,6 +7,7 @@
 import type { ReactNode } from "react";
 // plane imports
 import type { TNotification } from "@plane/types";
+import { useTranslation } from "@plane/i18n";
 import {
   convertMinutesToHoursMinutesString,
   renderFormattedDate,
@@ -28,6 +29,7 @@ export type TNotificationFieldData = {
   newValue: string | undefined;
   oldValue: string | undefined;
   verb: string | undefined;
+  currentLocale?: string;
 };
 
 export type TNotificationContentDetails = {
@@ -57,14 +59,14 @@ export const BASE_NOTIFICATION_CONTENT_MAP: TNotificationContentMap = {
     value: newValue !== "" ? newValue : oldValue,
     showConnector: false,
   }),
-  start_date: ({ newValue }) => ({
+  start_date: ({ newValue, currentLocale }) => ({
     action: newValue !== "" ? "set start date" : "removed the start date",
-    value: renderFormattedDate(newValue),
+    value: renderFormattedDate(newValue, undefined, currentLocale),
     showConnector: false,
   }),
-  target_date: ({ newValue }) => ({
+  target_date: ({ newValue, currentLocale }) => ({
     action: newValue !== "" ? "set due date" : "removed the due date",
-    value: renderFormattedDate(newValue),
+    value: renderFormattedDate(newValue, undefined, currentLocale),
     showConnector: false,
   }),
   labels: ({ newValue, oldValue }) => ({
@@ -159,6 +161,7 @@ export function NotificationContent({
   projectId: string;
   renderCommentBox?: boolean;
 }) {
+  const { currentLocale } = useTranslation();
   const { data, triggered_by_details: triggeredBy } = notification;
   const notificationField = data?.issue_activity.field;
   const newValue = data?.issue_activity.new_value;
@@ -170,6 +173,7 @@ export function NotificationContent({
     newValue,
     oldValue,
     verb,
+    currentLocale,
   };
 
   const renderTriggerName = () => (

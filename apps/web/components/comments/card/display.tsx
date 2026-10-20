@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { EditorRefApi } from "@plane/editor";
+import { useTranslation } from "@plane/i18n";
 import { useHashScroll } from "@plane/hooks";
 import { GlobeOutline, LockOutline } from "@makeplane/propel/icons";
 import { EIssueCommentAccessSpecifier } from "@plane/types";
@@ -56,6 +57,7 @@ export const CommentCardDisplay = observer(function CommentCardDisplay(props: TC
     renderFooter,
     renderQuickActions,
   } = props;
+  const { currentLocale } = useTranslation();
   // states
   const [highlightClassName, setHighlightClassName] = useState("");
   // state
@@ -124,7 +126,7 @@ export const CommentCardDisplay = observer(function CommentCardDisplay(props: TC
           <div className="text-caption-sm-regular text-tertiary">
             commented{" "}
             <Tooltip
-              label={`${renderFormattedDate(comment.created_at)} at ${renderFormattedTime(comment.created_at)}`}
+              label={`${renderFormattedDate(comment.created_at, undefined, currentLocale)} at ${renderFormattedTime(comment.created_at)}`}
               side="bottom"
               layout="single"
               delay={200}

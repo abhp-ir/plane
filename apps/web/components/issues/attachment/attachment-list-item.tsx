@@ -33,7 +33,7 @@ type TIssueAttachmentsListItem = {
 };
 
 export const IssueAttachmentsListItem = observer(function IssueAttachmentsListItem(props: TIssueAttachmentsListItem) {
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // props
   const { attachmentId, disabled, issueServiceType = EIssueServiceType.ISSUES } = props;
   // store hooks
@@ -84,7 +84,7 @@ export const IssueAttachmentsListItem = observer(function IssueAttachmentsListIt
               <Tooltip
                 label={`${
                   getUserDetails(attachment?.created_by)?.display_name ?? ""
-                } uploaded on ${renderFormattedDate(attachment.updated_at)}`}
+                } uploaded on ${renderFormattedDate(attachment.updated_at, undefined, currentLocale)}`}
                 layout="stacked"
                 disabled={isMobile}
               >

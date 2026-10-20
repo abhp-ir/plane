@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import Link from "next/link";
 import { CloseOutline, WarningCircleOutline } from "@makeplane/propel/icons";
 // ui
@@ -40,6 +41,7 @@ type TIssueAttachmentsDetail = {
 };
 
 export const IssueAttachmentsDetail = observer(function IssueAttachmentsDetail(props: TIssueAttachmentsDetail) {
+  const { currentLocale } = useTranslation();
   // props
   const { attachmentId, attachmentHelpers, disabled } = props;
   // store hooks
@@ -82,7 +84,7 @@ export const IssueAttachmentsDetail = observer(function IssueAttachmentsDetail(p
                 <Tooltip
                   label={`${
                     getUserDetails(attachment.updated_by)?.display_name ?? ""
-                  } uploaded on ${renderFormattedDate(attachment.updated_at)}`}
+                  } uploaded on ${renderFormattedDate(attachment.updated_at, undefined, currentLocale)}`}
                   layout="stacked"
                   disabled={isMobile}
                 >

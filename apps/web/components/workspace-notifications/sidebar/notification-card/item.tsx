@@ -10,6 +10,7 @@ import { ClockOutline } from "@makeplane/propel/icons";
 // plane imports
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Row } from "@plane/blocks/layout";
+import { useTranslation } from "@plane/i18n";
 import { cn, calculateTimeAgo, renderFormattedDate, renderFormattedTime, getFileURL } from "@plane/utils";
 // hooks
 import { useWorkspaceNotifications } from "@/hooks/store/notifications";
@@ -27,6 +28,7 @@ type TNotificationItem = {
 
 export const NotificationItem = observer(function NotificationItem(props: TNotificationItem) {
   const { workspaceSlug, notificationId } = props;
+  const { currentLocale } = useTranslation();
   // hooks
   const { currentSelectedNotificationId, setCurrentSelectedNotificationId } = useWorkspaceNotifications();
   const { asJson: notification, markNotificationAsRead } = useNotification(notificationId);
@@ -127,7 +129,7 @@ export const NotificationItem = observer(function NotificationItem(props: TNotif
                 <p className="flex flex-shrink-0 items-center justify-end gap-x-1 text-tertiary">
                   <ClockOutline className="h-4 w-4" />
                   <span>
-                    Till {renderFormattedDate(notification.snoozed_till)},&nbsp;
+                    Till {renderFormattedDate(notification.snoozed_till, undefined, currentLocale)},&nbsp;
                     {renderFormattedTime(notification.snoozed_till, "12-hour")}
                   </span>
                 </p>
