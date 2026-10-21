@@ -6,13 +6,14 @@
 
 import React from "react";
 import type { NameType, Payload, ValueType } from "recharts/types/component/DefaultTooltipContent";
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 import { Card } from "../../card/card";
 
 type Props = {
   active: boolean | undefined;
   activeKey?: string | null;
-  label: string | undefined;
+  label: string | number | undefined;
   payload: Payload<ValueType, NameType>[] | undefined;
   itemKeys: string[];
   itemLabels: Record<string, string>;
@@ -21,6 +22,8 @@ type Props = {
 
 export const CustomTooltip = React.memo(function CustomTooltip(props: Props) {
   const { active, activeKey, label, payload, itemKeys, itemLabels, itemDotColors } = props;
+  const { currentLocale } = useTranslation();
+  const numberFormat = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale);
   // derived values
   const filteredPayload = payload?.filter((item) => item.dataKey && itemKeys.includes(`${item.dataKey}`));
 
@@ -31,7 +34,9 @@ export const CustomTooltip = React.memo(function CustomTooltip(props: Props) {
       className="vertical-scrollbar scrollbar-sm flex max-h-[40vh] w-[12rem] flex-col overflow-y-scroll"
       spacing="sm"
     >
-      <p className="flex-shrink-0 truncate border-b border-subtle pb-2 text-11 font-medium text-primary">{label}</p>
+      <p className="flex-shrink-0 truncate border-b border-subtle pb-2 text-11 font-medium text-primary">
+        {typeof label === "number" ? numberFormat.format(label) : label}
+      </p>
       {filteredPayload.map((item) => {
         if (!item.dataKey) return null;
 
@@ -53,7 +58,9 @@ export const CustomTooltip = React.memo(function CustomTooltip(props: Props) {
               )}
               <span className="truncate text-tertiary">{itemLabels[item?.dataKey]}:</span>
             </div>
-            <span className="flex-shrink-0 font-medium text-secondary">{item?.value}</span>
+            <span className="flex-shrink-0 font-medium text-secondary">
+              {typeof item?.value === "number" ? numberFormat.format(item.value) : item?.value}
+            </span>
           </div>
         );
       })}

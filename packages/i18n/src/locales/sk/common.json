@@ -612,6 +612,8 @@
     "at_risk": "V ohrození",
     "timeline": "Časová os",
     "completion": "Dokončenie",
+    "count": "Počet",
+    "completion_percentage": "Percento dokončenia",
     "upcoming": "Nadchádzajúce",
     "completed": "Dokončené",
     "in_progress": "Prebieha",

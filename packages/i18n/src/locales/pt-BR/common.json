@@ -612,6 +612,8 @@
     "at_risk": "Em risco",
     "timeline": "Linha do tempo",
     "completion": "Conclusão",
+    "count": "Quantidade",
+    "completion_percentage": "Porcentagem de conclusão",
     "upcoming": "Próximo",
     "completed": "Concluído",
     "in_progress": "Em andamento",

@@ -612,6 +612,8 @@
     "at_risk": "În pericol",
     "timeline": "Cronologie",
     "completion": "Finalizare",
+    "count": "Număr",
+    "completion_percentage": "Procent de finalizare",
     "upcoming": "Viitor",
     "completed": "Finalizat",
     "in_progress": "În desfășurare",

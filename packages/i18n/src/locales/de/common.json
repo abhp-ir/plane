@@ -612,6 +612,8 @@
     "at_risk": "Gefährdet",
     "timeline": "Zeitleiste",
     "completion": "Fertigstellung",
+    "count": "Anzahl",
+    "completion_percentage": "Fortschritt in Prozent",
     "upcoming": "Bevorstehend",
     "completed": "Abgeschlossen",
     "in_progress": "In Bearbeitung",

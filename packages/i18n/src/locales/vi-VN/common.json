@@ -612,6 +612,8 @@
     "at_risk": "Có nguy cơ",
     "timeline": "Dòng thời gian",
     "completion": "Hoàn thành",
+    "count": "Số lượng",
+    "completion_percentage": "Tỷ lệ hoàn thành",
     "upcoming": "Sắp tới",
     "completed": "Đã hoàn thành",
     "in_progress": "Đang tiến hành",

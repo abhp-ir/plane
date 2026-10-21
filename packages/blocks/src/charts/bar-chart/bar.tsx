@@ -7,6 +7,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import type { TBarChartShapeVariant, TBarItem, TChartData } from "@plane/types";
 import { cn } from "@plane/utils";
 
@@ -72,9 +73,13 @@ function PercentageText({
   percentage: number;
   className?: string;
 }) {
+  const { currentLocale } = useTranslation();
   return (
     <text x={x} y={y} textAnchor="middle" className={cn("text-xs font-medium", className)} fill="currentColor">
-      {percentage}%
+      {new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale, {
+        style: "percent",
+        maximumFractionDigits: 0,
+      }).format(percentage / 100)}
     </text>
   );
 }

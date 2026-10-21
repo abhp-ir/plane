@@ -612,6 +612,8 @@
     "at_risk": "有風險",
     "timeline": "時間軸",
     "completion": "完成",
+    "count": "數量",
+    "completion_percentage": "完成百分比",
     "upcoming": "即將發生",
     "completed": "已完成",
     "in_progress": "進行中",

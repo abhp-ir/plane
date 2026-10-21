@@ -612,6 +612,8 @@
     "at_risk": "リスクあり",
     "timeline": "タイムライン",
     "completion": "完了",
+    "count": "件数",
+    "completion_percentage": "完了率",
     "upcoming": "今後の予定",
     "completed": "完了",
     "in_progress": "進行中",

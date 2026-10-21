@@ -6,15 +6,21 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+import { useTranslation } from "@plane/i18n";
 
 // Common classnames
 const AXIS_TICK_CLASSNAME = "fill-tertiary text-13";
 
 export const CustomXAxisTick = React.memo(function CustomXAxisTick({ x, y, payload, getLabel }: any) {
+  const { currentLocale } = useTranslation();
   return (
     <g transform={`translate(${x},${y})`}>
       <text y={0} dy={16} textAnchor="middle" className={AXIS_TICK_CLASSNAME}>
-        {getLabel ? getLabel(payload.value) : payload.value}
+        {getLabel
+          ? getLabel(payload.value)
+          : typeof payload.value === "number"
+            ? new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(payload.value)
+            : payload.value}
       </text>
     </g>
   );
@@ -22,10 +28,13 @@ export const CustomXAxisTick = React.memo(function CustomXAxisTick({ x, y, paylo
 CustomXAxisTick.displayName = "CustomXAxisTick";
 
 export const CustomYAxisTick = React.memo(function CustomYAxisTick({ x, y, payload }: any) {
+  const { currentLocale } = useTranslation();
   return (
     <g transform={`translate(${x},${y})`}>
       <text dx={-10} textAnchor="middle" className={AXIS_TICK_CLASSNAME}>
-        {payload.value}
+        {typeof payload.value === "number"
+          ? new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(payload.value)
+          : payload.value}
       </text>
     </g>
   );
@@ -42,6 +51,7 @@ export const CustomRadarAxisTick = React.memo(function CustomRadarAxisTick({
   cy,
   offset = 16,
 }: any) {
+  const { currentLocale } = useTranslation();
   // Calculate direction vector from center to tick
   const dx = x - cx;
   const dy = y - cy;
@@ -55,7 +65,11 @@ export const CustomRadarAxisTick = React.memo(function CustomRadarAxisTick({
   return (
     <g transform={`translate(${labelX},${labelY})`}>
       <text y={0} textAnchor="middle" className={AXIS_TICK_CLASSNAME}>
-        {getLabel ? getLabel(payload.value) : payload.value}
+        {getLabel
+          ? getLabel(payload.value)
+          : typeof payload.value === "number"
+            ? new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(payload.value)
+            : payload.value}
       </text>
     </g>
   );

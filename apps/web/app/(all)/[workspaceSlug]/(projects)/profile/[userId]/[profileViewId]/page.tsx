@@ -5,22 +5,24 @@
  */
 
 import React from "react";
+import { useTranslation } from "@plane/i18n";
 // components
 import { PageHead } from "@/components/core/page-title";
 import { ProfileIssuesPage } from "@/components/profile/profile-issues";
 import type { Route } from "./+types/page";
 
 const ProfilePageHeader = {
-  assigned: "Profile - Assigned",
-  created: "Profile - Created",
-  subscribed: "Profile - Subscribed",
-};
+  assigned: "profile.tabs.assigned",
+  created: "profile.tabs.created",
+  subscribed: "profile.tabs.subscribed",
+} as const;
 
 function isValidProfileViewId(viewId: string): viewId is keyof typeof ProfilePageHeader {
-  return viewId in ProfilePageHeader;
+  return Object.hasOwn(ProfilePageHeader, viewId);
 }
 
 function ProfileIssuesTypePage({ params }: Route.ComponentProps) {
+  const { t } = useTranslation();
   const { profileViewId } = params;
 
   if (!isValidProfileViewId(profileViewId)) return null;
@@ -29,7 +31,7 @@ function ProfileIssuesTypePage({ params }: Route.ComponentProps) {
 
   return (
     <>
-      <PageHead title={header} />
+      <PageHead title={`${t("profile.label")} - ${t(header)}`} />
       <ProfileIssuesPage type={profileViewId} />
     </>
   );

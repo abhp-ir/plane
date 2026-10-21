@@ -612,6 +612,8 @@
     "at_risk": "Risk altında",
     "timeline": "Zaman çizelgesi",
     "completion": "Tamamlama",
+    "count": "Sayı",
+    "completion_percentage": "Tamamlanma yüzdesi",
     "upcoming": "Yaklaşan",
     "completed": "Tamamlandı",
     "in_progress": "Devam ediyor",

@@ -612,6 +612,8 @@
     "at_risk": "Risico",
     "timeline": "Tijdlijn",
     "completion": "Voltooiing",
+    "count": "Aantal",
+    "completion_percentage": "Voltooiingspercentage",
     "upcoming": "Aankomend",
     "completed": "Voltooid",
     "in_progress": "Bezig",

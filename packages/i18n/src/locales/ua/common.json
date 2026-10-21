@@ -612,6 +612,8 @@
     "at_risk": "Під загрозою",
     "timeline": "Хронологія",
     "completion": "Завершення",
+    "count": "Кількість",
+    "completion_percentage": "Відсоток виконання",
     "upcoming": "Майбутнє",
     "completed": "Завершено",
     "in_progress": "В процесі",

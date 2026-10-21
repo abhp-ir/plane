@@ -612,6 +612,8 @@
     "at_risk": "რისკის ქვეშ",
     "timeline": "დროის ხაზი",
     "completion": "დასრულება",
+    "count": "რაოდენობა",
+    "completion_percentage": "დასრულების პროცენტი",
     "upcoming": "მომავალი",
     "completed": "დასრულებული",
     "in_progress": "მიმდინარე",

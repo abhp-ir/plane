@@ -612,6 +612,8 @@
     "at_risk": "В риск",
     "timeline": "Времева линия",
     "completion": "Завършеност",
+    "count": "Брой",
+    "completion_percentage": "Процент на завършване",
     "upcoming": "Предстоящи",
     "completed": "Завършено",
     "in_progress": "В процес",

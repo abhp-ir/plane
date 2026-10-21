@@ -23,7 +23,8 @@ type Props = {
 export function ProfileStats({ userProfile }: Props) {
   const { workspaceSlug, userId } = useParams();
 
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const numberFormat = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale);
 
   const overviewCards = [
     {
@@ -59,7 +60,9 @@ export function ProfileStats({ userProfile }: Props) {
                 </div>
                 <div className="space-y-1">
                   <p className="text-13 text-placeholder">{t(card.i18n_title)}</p>
-                  <p className="text-18 font-semibold">{card.value}</p>
+                  <p className="text-18 font-semibold">
+                    {typeof card.value === "number" ? numberFormat.format(card.value) : card.value}
+                  </p>
                 </div>
               </Card>
             </Link>

@@ -18,7 +18,7 @@ import { EditOutline } from "@makeplane/propel/icons";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { IUserProfileProjectSegregation } from "@plane/types";
 import { Loader } from "@plane/blocks/skeleton";
-import { cn, renderFormattedDate, getFileURL } from "@plane/utils";
+import { cn, renderLocalizedDateTime, getFileURL } from "@plane/utils";
 // components
 import { CoverImage } from "@/components/common/cover-image";
 // hooks
@@ -48,12 +48,17 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
   const { toggleProfileSettingsModal } = useCommandPalette();
   const { isMobile } = usePlatformOS();
   const { t, currentLocale } = useTranslation();
+  const numberFormat = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale);
+  const percentFormat = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale, {
+    style: "percent",
+    maximumFractionDigits: 0,
+  });
   // derived values
   const userData = userProjectsData?.user_data;
 
   useOutsideClickDetector(ref, () => {
     if (profileSidebarCollapsed === false) {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 1024) {
         toggleProfileSidebar();
       }
     }
@@ -62,7 +67,7 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
   const userDetails = [
     {
       i18n_label: "profile.details.joined_on",
-      value: renderFormattedDate(userData?.date_joined ?? "", undefined, currentLocale),
+      value: renderLocalizedDateTime(userData?.date_joined ?? "", currentLocale).date,
     },
     {
       i18n_label: "profile.details.time_zone",
@@ -71,10 +76,10 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
   ];
 
   const handleToggleProfileSidebar = useEffectEvent(() => {
-    if (window && window.innerWidth < 768) {
+    if (window && window.innerWidth < 1024) {
       toggleProfileSidebar(true);
     }
-    if (window && profileSidebarCollapsed && window.innerWidth >= 768) {
+    if (window && profileSidebarCollapsed && window.innerWidth >= 1024) {
       toggleProfileSidebar(false);
     }
   });
@@ -88,7 +93,7 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
   return (
     <div
       className={cn(
-        `vertical-scrollbar absolute inset-y-0 end-0 z-5 scrollbar-md h-full w-full shrink-0 overflow-hidden overflow-y-auto border-s border-subtle bg-surface-1 shadow-raised-200 transition-all motion-reduce:transition-none md:relative md:inset-auto md:w-[300px]`,
+        `vertical-scrollbar absolute inset-y-0 end-0 z-5 scrollbar-md h-full w-full shrink-0 overflow-hidden overflow-y-auto border-s border-subtle bg-surface-1 shadow-raised-200 transition-all motion-reduce:transition-none lg:relative lg:inset-auto lg:w-[300px]`,
         className
       )}
       style={profileSidebarCollapsed ? { insetInlineEnd: "-100vw" } : {}}
@@ -99,7 +104,7 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
         <>
           <div className="relative h-[110px]">
             {currentUser?.id === userId && (
-              <div className="absolute top-3.5 right-3.5">
+              <div className="absolute end-3.5 top-3.5">
                 <IconButton
                   variant="secondary"
                   size="sm"
@@ -120,7 +125,7 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
               className="h-[110px] w-full"
               showDefaultWhenEmpty
             />
-            <div className="absolute -bottom-[26px] left-5 h-[52px] w-[52px] rounded-sm">
+            <div className="absolute start-5 -bottom-[26px] h-[52px] w-[52px] rounded-sm">
               {userData?.avatar_url && userData?.avatar_url !== "" ? (
                 <img
                   src={getFileURL(userData?.avatar_url)}
@@ -137,9 +142,13 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
           <div className="px-5">
             <div className="mt-[38px]">
               <h4 className="text-16 font-semibold">
-                {userData?.first_name} {userData?.last_name}
+                <bdi>
+                  {userData?.first_name} {userData?.last_name}
+                </bdi>
               </h4>
-              <h6 className="text-13 text-secondary">({userData?.display_name})</h6>
+              <h6 className="text-13 text-secondary">
+                (<bdi>{userData?.display_name}</bdi>)
+              </h6>
             </div>
             <div className="mt-6 space-y-5">
               {userDetails.map((detail) => (
@@ -171,10 +180,14 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
                           <Logo logo={projectDetails.logo_props} />
                         </span>
                       }
-                      trigger={<span className="truncate text-13 font-medium break-words">{projectDetails.name}</span>}
+                      trigger={
+                        <span className="truncate text-13 font-medium break-words">
+                          <bdi>{projectDetails.name}</bdi>
+                        </span>
+                      }
                       trailing={
                         project.assigned_issues > 0 ? (
-                          <Tooltip label="Completion percentage" side="left" disabled={isMobile}>
+                          <Tooltip label={t("common.completion_percentage")} side="left" disabled={isMobile}>
                             <div
                               className={`rounded-sm px-1 py-0.5 text-11 font-medium ${
                                 completedIssuePercentage <= 35
@@ -184,13 +197,13 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
                                     : "bg-success-subtle text-success-primary"
                               }`}
                             >
-                              {completedIssuePercentage}%
+                              {percentFormat.format(completedIssuePercentage / 100)}
                             </div>
                           </Tooltip>
                         ) : undefined
                       }
                     >
-                      <div className="mt-5 pl-9">
+                      <div className="mt-5 ps-9">
                         {totalIssues > 0 && (
                           <div className="flex items-center gap-0.5">
                             <div
@@ -227,37 +240,41 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2">
                               <div className="h-2.5 w-2.5 rounded-xs bg-[#203b80]" />
-                              Created
+                              {t("created")}
                             </div>
                             <div className="font-medium">
-                              {project.created_issues} {t("issues")}
+                              {numberFormat.format(project.created_issues)}{" "}
+                              {t("issue.label", { count: project.created_issues })}
                             </div>
                           </div>
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2">
                               <div className="h-2.5 w-2.5 rounded-xs bg-[#3f76ff]" />
-                              Assigned
+                              {t("assigned")}
                             </div>
                             <div className="font-medium">
-                              {project.assigned_issues} {t("issues")}
+                              {numberFormat.format(project.assigned_issues)}{" "}
+                              {t("issue.label", { count: project.assigned_issues })}
                             </div>
                           </div>
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2">
                               <div className="h-2.5 w-2.5 rounded-xs bg-[#f59e0b]" />
-                              Due
+                              {t("common.pending")}
                             </div>
                             <div className="font-medium">
-                              {project.pending_issues} {t("issues")}
+                              {numberFormat.format(project.pending_issues)}{" "}
+                              {t("issue.label", { count: project.pending_issues })}
                             </div>
                           </div>
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2">
                               <div className="h-2.5 w-2.5 rounded-xs bg-[#16a34a]" />
-                              Completed
+                              {t("common.completed")}
                             </div>
                             <div className="font-medium">
-                              {project.completed_issues} {t("issues")}
+                              {numberFormat.format(project.completed_issues)}{" "}
+                              {t("issue.label", { count: project.completed_issues })}
                             </div>
                           </div>
                         </div>

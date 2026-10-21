@@ -612,6 +612,8 @@
     "at_risk": "در معرض خطر",
     "timeline": "خط زمانی",
     "completion": "تکمیل",
+    "count": "تعداد",
+    "completion_percentage": "درصد تکمیل",
     "upcoming": "پیش رو",
     "completed": "تکمیل‌شده",
     "in_progress": "در حال انجام",

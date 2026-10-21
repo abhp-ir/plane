@@ -5,6 +5,7 @@
  */
 
 // hooks
+import { useTranslation } from "@plane/i18n";
 import { useCurrentTime } from "@/hooks/use-current-time";
 
 type Props = {
@@ -13,13 +14,14 @@ type Props = {
 
 export function ProfileSidebarTime(props: Props) {
   const { timeZone } = props;
+  const { currentLocale } = useTranslation();
   // current time hook
   const { currentTime } = useCurrentTime();
 
   // Create a date object for the current time in the specified timezone
-  const formatter = new Intl.DateTimeFormat("en-US", {
+  const formatter = new Intl.DateTimeFormat(currentLocale === "ua" ? "uk-UA" : currentLocale, {
     timeZone: timeZone,
-    hour12: false, // Use 24-hour format
+    hourCycle: "h23",
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -27,7 +29,10 @@ export function ProfileSidebarTime(props: Props) {
 
   return (
     <span>
-      {timeString} <span className="text-secondary">{timeZone}</span>
+      <bdi>{timeString}</bdi>{" "}
+      <bdi dir="ltr" className="text-secondary">
+        {timeZone}
+      </bdi>
     </span>
   );
 }

@@ -612,6 +612,8 @@
     "at_risk": "Dalam risiko",
     "timeline": "Linimasa",
     "completion": "Penyelesaian",
+    "count": "Jumlah",
+    "completion_percentage": "Persentase penyelesaian",
     "upcoming": "Mendatang",
     "completed": "Selesai",
     "in_progress": "Sedang berlangsung",

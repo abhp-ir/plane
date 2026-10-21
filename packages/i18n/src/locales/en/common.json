@@ -612,6 +612,8 @@
     "at_risk": "At risk",
     "timeline": "Timeline",
     "completion": "Completion",
+    "count": "Count",
+    "completion_percentage": "Completion percentage",
     "upcoming": "Upcoming",
     "completed": "Completed",
     "in_progress": "In progress",

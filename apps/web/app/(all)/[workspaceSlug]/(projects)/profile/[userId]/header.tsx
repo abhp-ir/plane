@@ -73,13 +73,13 @@ export const UserProfileHeader = observer(function UserProfileHeader(props: TUse
       </Header.LeftItem>
       <Header.RightItem>
         <div className="hidden md:flex md:items-center">{showProfileIssuesFilter && <ProfileIssuesFilter />}</div>
-        <div className="flex gap-4 md:hidden">
+        <div className="flex gap-4 lg:hidden">
           <Menu>
             <MenuTrigger
               render={
                 <button
                   type="button"
-                  className="flex grow items-center justify-center gap-2 rounded-md border border-subtle px-2 py-1.5 text-13 text-secondary"
+                  className="flex grow items-center justify-center gap-2 rounded-md border border-subtle px-2 py-1.5 text-13 text-secondary md:hidden"
                 />
               }
             >
@@ -96,7 +96,7 @@ export const UserProfileHeader = observer(function UserProfileHeader(props: TUse
               ))}
             </MenuContent>
           </Menu>
-          <div className="shrink-0 md:hidden">
+          <div className="shrink-0">
             <IconButton
               variant="ghost"
               size="md"

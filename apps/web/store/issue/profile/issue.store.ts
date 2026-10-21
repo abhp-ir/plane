@@ -127,12 +127,15 @@ export class ProfileIssues extends BaseIssuesStore implements IProfileIssues {
     view: TProfileViews,
     isExistingPaginationOptions: boolean = false
   ) => {
+    let requestSignal: AbortSignal | undefined;
+    let responseReceived = false;
     try {
       // set loader and clear store
       runInAction(() => {
         this.setLoader(loadType);
       });
       this.clear(!isExistingPaginationOptions);
+      requestSignal = this.controller.signal;
 
       // set ViewId
       this.setViewId(view);
@@ -152,13 +155,17 @@ export class ProfileIssues extends BaseIssuesStore implements IProfileIssues {
 
       // call the fetch issues API with the params
       const response = await this.userService.getUserProfileIssues(workspaceSlug, userId, params, {
-        signal: this.controller.signal,
+        signal: requestSignal,
       });
+      responseReceived = true;
+      if (requestSignal.aborted) return;
 
       // after fetching issues, call the base method to process the response further
       this.onfetchIssues(response, options, workspaceSlug, undefined, undefined, !isExistingPaginationOptions);
       return response;
     } catch (error) {
+      // An obsolete fetch must not reject or clear the next fetch's loader. Processing errors still propagate.
+      if (!responseReceived && requestSignal?.aborted) return;
       // set loader to undefined if errored out
       this.setLoader(undefined);
       throw error;

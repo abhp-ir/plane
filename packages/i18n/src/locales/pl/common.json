@@ -612,6 +612,8 @@
     "at_risk": "W zagrożeniu",
     "timeline": "Oś czasu",
     "completion": "Zakończenie",
+    "count": "Liczba",
+    "completion_percentage": "Procent ukończenia",
     "upcoming": "Nadchodzące",
     "completed": "Zakończone",
     "in_progress": "W trakcie",
