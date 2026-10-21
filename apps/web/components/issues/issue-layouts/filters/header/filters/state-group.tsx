@@ -7,8 +7,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 // plane imports
-import { STATE_GROUPS } from "@plane/constants";
+import { GROUP_CHOICES, STATE_GROUPS } from "@plane/constants";
 import { StateGroupIcon } from "@plane/blocks/icons";
+import { useTranslation } from "@plane/i18n";
+import { normalizeSearchQuery } from "@plane/utils";
 // components
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
 
@@ -20,13 +22,19 @@ type Props = {
 
 export const FilterStateGroup = observer(function FilterStateGroup(props: Props) {
   const { appliedFilters, handleUpdate, searchQuery } = props;
+  const { t, currentLocale } = useTranslation();
 
   const [itemsToRender, setItemsToRender] = useState(5);
   const [previewEnabled, setPreviewEnabled] = useState(true);
 
   const appliedFiltersCount = appliedFilters?.length ?? 0;
 
-  const filteredOptions = Object.values(STATE_GROUPS).filter((s) => s.key.includes(searchQuery.toLowerCase()));
+  const query = normalizeSearchQuery(searchQuery);
+  const filteredOptions = Object.values(STATE_GROUPS).filter((state) =>
+    [state.key, state.label, t(GROUP_CHOICES[state.key].i18n_label)].some((value) =>
+      normalizeSearchQuery(value).includes(query)
+    )
+  );
 
   const handleViewToggle = () => {
     if (!filteredOptions) return;
@@ -38,7 +46,7 @@ export const FilterStateGroup = observer(function FilterStateGroup(props: Props)
   return (
     <>
       <FilterHeader
-        title={`State group${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("common.state_group")}${appliedFiltersCount > 0 ? ` (${new Intl.NumberFormat(currentLocale).format(appliedFiltersCount)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
@@ -49,24 +57,24 @@ export const FilterStateGroup = observer(function FilterStateGroup(props: Props)
               {filteredOptions.slice(0, itemsToRender).map((stateGroup) => (
                 <FilterOption
                   key={stateGroup.key}
-                  isChecked={appliedFilters?.includes(stateGroup.key) ? true : false}
+                  isChecked={!!appliedFilters?.includes(stateGroup.key)}
                   onClick={() => handleUpdate(stateGroup.key)}
                   icon={<StateGroupIcon stateGroup={stateGroup.key} />}
-                  title={stateGroup.label}
+                  title={t(GROUP_CHOICES[stateGroup.key].i18n_label)}
                 />
               ))}
               {filteredOptions.length > 5 && (
                 <button
                   type="button"
-                  className="ml-8 text-11 font-medium text-accent-primary"
+                  className="ms-8 text-11 font-medium text-accent-primary"
                   onClick={handleViewToggle}
                 >
-                  {itemsToRender === filteredOptions.length ? "View less" : "View all"}
+                  {t(itemsToRender === filteredOptions.length ? "show_less" : "show_all")}
                 </button>
               )}
             </>
           ) : (
-            <p className="text-11 text-placeholder italic">No matches found</p>
+            <p className="text-11 text-placeholder italic">{t("common.search.no_matches_found")}</p>
           )}
         </div>
       )}

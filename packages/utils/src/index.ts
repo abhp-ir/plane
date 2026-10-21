@@ -31,6 +31,7 @@ export * from "./project-views";
 export * from "./project";
 export * from "./rich-filters";
 export * from "./router";
+export * from "./search";
 export * from "./string";
 export * from "./subscription";
 export * from "./tab-indices";

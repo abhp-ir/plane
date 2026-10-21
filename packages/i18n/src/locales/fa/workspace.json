@@ -179,8 +179,8 @@
     },
     "state": {
       "backlog": "بک‌لاگ",
-      "unstarted": "آغازنشده",
-      "started": "آغازشده",
+      "unstarted": "شروع‌نشده",
+      "started": "در حال انجام",
       "completed": "تکمیل‌شده",
       "cancelled": "لغوشده"
     },

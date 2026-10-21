@@ -4,13 +4,9 @@
  * See the LICENSE file for details.
  */
 
-// Comparison only: preserve the original document, query and display strings.
-export const normalizeSlashCommandQuery = (value: string): string =>
-  value
-    .toLowerCase()
-    .replace(/ي/g, "ی")
-    .replace(/ك/g, "ک")
-    .replace(/[\s\u200c]+/gu, "");
+import { normalizeSearchQuery } from "@plane/utils";
+
+export const normalizeSlashCommandQuery = normalizeSearchQuery;
 
 export function findSlashCommandMatch(text: string, query: string): { from: number; to: number } | undefined {
   const normalizedQuery = normalizeSlashCommandQuery(query);

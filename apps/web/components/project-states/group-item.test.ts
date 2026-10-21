@@ -13,7 +13,7 @@ import { GroupItem } from "./group-item";
 vi.mock("@/components/project-states", () => ({ StateList: () => null, StateCreate: () => null }));
 
 it.each([
-  ["fa", "آغازنشده"],
+  ["fa", "شروع‌نشده"],
   ["en", "Unstarted"],
 ] as const)("renders the fixed state group in %s while retaining its semantic code", async (language, label) => {
   await initPromise;

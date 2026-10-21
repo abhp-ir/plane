@@ -112,6 +112,30 @@ test("sidebar and checklist labels resolve after switching languages", async () 
   }
 });
 
+test("fixed state-group vocabulary follows live Persian and English language selection", async () => {
+  await initPromise;
+  const persian = {
+    backlog: "بک‌لاگ",
+    unstarted: "شروع‌نشده",
+    started: "در حال انجام",
+    completed: "تکمیل‌شده",
+    cancelled: "لغوشده",
+  };
+  try {
+    for (const language of ["fa", "en", "fa"]) {
+      // eslint-disable-next-line no-await-in-loop -- One shared locale instance.
+      await setLanguage(language);
+      const resources = load(language, "workspace");
+      for (const [group, label] of Object.entries(persian)) {
+        const key = `workspace_projects.state.${group}`;
+        assert.equal(i18nInstance.t(key), language === "fa" ? label : resources[key]);
+      }
+    }
+  } finally {
+    await setLanguage("en");
+  }
+});
+
 // Keep native Node on the ICU package's CJS export; browser integration is tested in Vite.
 const translatedNamespaces = [
   "common",

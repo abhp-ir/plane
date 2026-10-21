@@ -27,7 +27,7 @@ import {
 } from "@makeplane/propel/icons";
 // plane types
 import { Avatar } from "@makeplane/propel/components/avatar";
-import { EIconSize, ISSUE_PRIORITIES, STATE_GROUPS } from "@plane/constants";
+import { EIconSize, GROUP_CHOICES, ISSUE_PRIORITIES, STATE_GROUPS } from "@plane/constants";
 import { Logo } from "@plane/blocks/emoji-icon-picker";
 import type { ISvgIcons } from "@plane/blocks/icons";
 import { CycleGroupIcon, PriorityIcon, StateGroupIcon } from "@plane/blocks/icons";
@@ -106,6 +106,7 @@ export const isWorkspaceLevel = (type: EIssuesStoreType) =>
     : false;
 
 type TGetGroupByColumns = {
+  t: (key: string) => string;
   groupBy: GroupByColumnTypes | null;
   includeNone: boolean;
   isWorkspaceLevel: boolean;
@@ -117,6 +118,7 @@ type TGetGroupByColumns = {
 // We are using `as` to typecast it to the expected type.
 // It can break the includeNone logic if not handled properly.
 export const getGroupByColumns = ({
+  t,
   groupBy,
   includeNone,
   isWorkspaceLevel,
@@ -147,7 +149,7 @@ export const getGroupByColumns = ({
     cycle: getCycleColumns,
     module: getModuleColumns,
     state: getStateColumns,
-    "state_detail.group": getStateGroupColumns,
+    "state_detail.group": () => getStateGroupColumns(t),
     priority: getPriorityColumns,
     labels: getLabelsColumns,
     assignees: getAssigneeColumns,
@@ -256,12 +258,12 @@ const getStateColumns = ({ projectId }: TGetColumns): IGroupByColumn[] | undefin
   }));
 };
 
-const getStateGroupColumns = (): IGroupByColumn[] => {
+const getStateGroupColumns = (t: (key: string) => string): IGroupByColumn[] => {
   const stateGroups = STATE_GROUPS;
   // map state groups to group by columns
   return Object.values(stateGroups).map((stateGroup) => ({
     id: stateGroup.key,
-    name: stateGroup.label,
+    name: t(GROUP_CHOICES[stateGroup.key].i18n_label),
     icon: (
       <div className="size-4 rounded-full">
         <StateGroupIcon stateGroup={stateGroup.key} size={EIconSize.LG} />
@@ -754,10 +756,10 @@ export const getBlockViewDetails = (
  * @param iconKey
  */
 export function SpreadSheetPropertyIcon(props: ISvgIcons & { iconKey: string }) {
-  const { iconKey } = props;
+  const { iconKey, ...iconProps } = props;
   const Icon = SpreadSheetPropertyIconMap[iconKey];
   if (!Icon) return null;
-  return <Icon {...props} />;
+  return <Icon {...iconProps} />;
 }
 
 /**

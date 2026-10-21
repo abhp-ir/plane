@@ -5,7 +5,7 @@
  */
 
 // plane imports
-import { STATE_GROUPS } from "@plane/constants";
+import { GROUP_CHOICES, STATE_GROUPS } from "@plane/constants";
 // types
 import { useTranslation } from "@plane/i18n";
 import type { IUserStateDistribution } from "@plane/types";
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export function ProfileWorkload({ stateDistribution }: Props) {
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   return (
     <div className="space-y-2">
@@ -25,26 +25,20 @@ export function ProfileWorkload({ stateDistribution }: Props) {
       <div className="grid grid-cols-1 justify-stretch gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {stateDistribution.map((group) => (
           <div key={group.state_group}>
-            <a>
-              <Card direction="row" spacing="sm">
-                <div
-                  className="my-2 h-3 w-3 rounded-xs"
-                  style={{
-                    backgroundColor: STATE_GROUPS[group.state_group].color,
-                  }}
-                />
-                <div className="flex-col space-y-1">
-                  <span className="text-13 text-placeholder">
-                    {group.state_group === "unstarted"
-                      ? "Not started"
-                      : group.state_group === "started"
-                        ? "Working on"
-                        : STATE_GROUPS[group.state_group].label}
-                  </span>
-                  <p className="text-18 font-semibold">{group.state_count}</p>
-                </div>
-              </Card>
-            </a>
+            <Card direction="row" spacing="sm">
+              <div
+                className="my-2 h-3 w-3 rounded-xs"
+                style={{
+                  backgroundColor: STATE_GROUPS[group.state_group].color,
+                }}
+              />
+              <div className="flex-col space-y-1">
+                <span className="text-13 text-placeholder">{t(GROUP_CHOICES[group.state_group].i18n_label)}</span>
+                <p className="text-18 font-semibold">
+                  {new Intl.NumberFormat(currentLocale).format(group.state_count)}
+                </p>
+              </div>
+            </Card>
           </div>
         ))}
       </div>

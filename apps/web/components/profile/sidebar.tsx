@@ -88,10 +88,12 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
   return (
     <div
       className={cn(
-        `vertical-scrollbar fixed z-5 scrollbar-md h-full w-full shrink-0 overflow-hidden overflow-y-auto border-l border-subtle bg-surface-1 shadow-raised-200 transition-all md:relative md:w-[300px]`,
+        `vertical-scrollbar absolute inset-y-0 end-0 z-5 scrollbar-md h-full w-full shrink-0 overflow-hidden overflow-y-auto border-s border-subtle bg-surface-1 shadow-raised-200 transition-all motion-reduce:transition-none md:relative md:inset-auto md:w-[300px]`,
         className
       )}
-      style={profileSidebarCollapsed ? { marginLeft: "100vw" } : {}}
+      style={profileSidebarCollapsed ? { insetInlineEnd: "-100vw" } : {}}
+      aria-hidden={profileSidebarCollapsed}
+      inert={profileSidebarCollapsed}
     >
       {userProjectsData ? (
         <>

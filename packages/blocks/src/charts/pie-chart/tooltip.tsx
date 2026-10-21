@@ -6,6 +6,7 @@
 
 import React from "react";
 import type { NameType, Payload, ValueType } from "recharts/types/component/DefaultTooltipContent";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import { Card } from "../../card/card";
 
@@ -17,6 +18,7 @@ type Props = {
 
 export const CustomPieChartTooltip = React.memo(function CustomPieChartTooltip(props: Props) {
   const { dotColor, label, payload } = props;
+  const { currentLocale } = useTranslation();
 
   return (
     <Card
@@ -35,7 +37,9 @@ export const CustomPieChartTooltip = React.memo(function CustomPieChartTooltip(p
             />
             <span className="truncate text-tertiary">{item?.name}:</span>
           </div>
-          <span className="flex-shrink-0 font-medium text-secondary">{item?.value}</span>
+          <span className="flex-shrink-0 font-medium text-secondary">
+            {typeof item?.value === "number" ? new Intl.NumberFormat(currentLocale).format(item.value) : item?.value}
+          </span>
         </div>
       ))}
     </Card>

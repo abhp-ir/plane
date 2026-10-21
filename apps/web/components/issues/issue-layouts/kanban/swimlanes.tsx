@@ -6,6 +6,7 @@
 
 import type { MutableRefObject } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import type {
   GroupByColumnTypes,
@@ -290,13 +291,16 @@ export const KanBanSwimLanes = observer(function KanBanSwimLanes(props: IKanBanS
   // store hooks
   const storeType = useIssueStoreType();
   // derived values
+  const { t } = useTranslation();
   const groupByList = getGroupByColumns({
+    t,
     groupBy: group_by as GroupByColumnTypes,
     includeNone: true,
     isWorkspaceLevel: isWorkspaceLevel(storeType),
     isEpic: isEpic,
   });
   const subGroupByList = getGroupByColumns({
+    t,
     groupBy: sub_group_by as GroupByColumnTypes,
     includeNone: true,
     isWorkspaceLevel: isWorkspaceLevel(storeType),

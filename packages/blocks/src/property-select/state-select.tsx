@@ -5,6 +5,7 @@
  */
 
 import { StateGroupIcon } from "../icons/state/state-group-icon";
+import { useTranslation } from "@plane/i18n";
 import type { TPaginatedResponse, TStateGroups } from "@plane/types";
 import { Select } from "../select/select";
 import type { SelectPaginationParams, SelectTooltip, SelectVariant } from "../select/types";
@@ -57,13 +58,14 @@ export type StateSelectProps = {
  * an `onChange` that persists the chosen id — this block owns only the state-specific markup.
  */
 export function StateSelect(props: StateSelectProps) {
+  const { t } = useTranslation();
   const {
     getValues,
     value,
     onChange,
     disabled = false,
     placeholder = "",
-    searchPlaceholder = "Search states...",
+    searchPlaceholder = t("search"),
     onClose,
     className,
     allowedStateIds = null,

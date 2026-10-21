@@ -5,13 +5,12 @@
  */
 
 // plane imports
-import { STATE_GROUPS } from "@plane/constants";
+import { GROUP_CHOICES, STATE_GROUPS } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { PieChart } from "@plane/blocks/charts/pie-chart";
 import { EmptyStateCompact } from "@plane/blocks/empty-state";
 import type { IUserProfileData, IUserStateDistribution } from "@plane/types";
 import { Card } from "@plane/blocks/card";
-import { capitalizeFirstLetter } from "@plane/utils";
 
 type Props = {
   stateDistribution: IUserStateDistribution[];
@@ -19,7 +18,7 @@ type Props = {
 };
 
 export function ProfileStateDistribution({ stateDistribution, userProfile }: Props) {
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   if (!userProfile) return null;
 
   return (
@@ -42,7 +41,7 @@ export function ProfileStateDistribution({ stateDistribution, userProfile }: Pro
                   id: group.state_group,
                   key: group.state_group,
                   value: group.state_count,
-                  name: capitalizeFirstLetter(group.state_group),
+                  name: t(GROUP_CHOICES[group.state_group].i18n_label),
                   color: STATE_GROUPS[group.state_group]?.color,
                 })) ?? []
               }
@@ -51,7 +50,7 @@ export function ProfileStateDistribution({ stateDistribution, userProfile }: Pro
                 fill: STATE_GROUPS[group.state_group]?.color,
               }))}
               showTooltip
-              tooltipLabel="Count"
+              tooltipLabel={t("issue.label", { count: 2 })}
               paddingAngle={5}
               cornerRadius={4}
               innerRadius="50%"
@@ -69,9 +68,9 @@ export function ProfileStateDistribution({ stateDistribution, userProfile }: Pro
                             STATE_GROUPS[group.state_group]?.color ?? "var(--background-color-accent-primary)",
                         }}
                       />
-                      <div className="whitespace-nowrap">{STATE_GROUPS[group.state_group].label}</div>
+                      <div className="whitespace-nowrap">{t(GROUP_CHOICES[group.state_group].i18n_label)}</div>
                     </div>
-                    <div>{group.state_count}</div>
+                    <div>{new Intl.NumberFormat(currentLocale).format(group.state_count)}</div>
                   </div>
                 ))}
               </div>
