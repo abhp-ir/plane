@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> добави {showIssue, select, true {<issue/>} other {работния елемент}} към {kind, select, cycles {цикъл} modules {модул} other {колекция}} <value/>.",
+    "collection_removed": "<actor/> премахна {showIssue, select, true {<issue/>} other {работния елемент}} от {kind, select, cycles {цикъл} modules {модул} other {колекция}} <value/>.",
     "property_set": "<actor/> промени „{property}“{showIssue, select, true { в <issue/>} other {}} на <value/>.",
     "property_removed": "<actor/> премахна „{property}“{showIssue, select, true { от <issue/>} other {}}.",
     "description_edited": "<actor/> редактира описанието{showIssue, select, true { на <issue/>} other {}}.",

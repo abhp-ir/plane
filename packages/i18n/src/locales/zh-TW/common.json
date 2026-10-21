@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/>將{showIssue, select, true {<issue/>} other {工作項目}}指派至{kind, select, cycles {週期} modules {模組} other {集合}}<value/>。",
+    "collection_removed": "<actor/>從{kind, select, cycles {週期} modules {模組} other {集合}}<value/>中移除了{showIssue, select, true {<issue/>} other {工作項目}}。",
     "property_set": "<actor/>將{showIssue, select, true {<issue/>的} other {}}「{property}」變更為<value/>。",
     "property_removed": "<actor/>移除了{showIssue, select, true {<issue/>的} other {}}「{property}」。",
     "description_edited": "<actor/>編輯了{showIssue, select, true {<issue/>的} other {}}描述。",

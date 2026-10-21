@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を{kind, select, cycles {サイクル} modules {モジュール} other {コレクション}}<value/>に割り当てました。",
+    "collection_removed": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を{kind, select, cycles {サイクル} modules {モジュール} other {コレクション}}<value/>から削除しました。",
     "property_set": "<actor/>が{showIssue, select, true {<issue/>の} other {}}「{property}」を<value/>に変更しました。",
     "property_removed": "<actor/>が{showIssue, select, true {<issue/>から} other {}}「{property}」を削除しました。",
     "description_edited": "<actor/>が{showIssue, select, true {<issue/>の} other {}}説明を編集しました。",

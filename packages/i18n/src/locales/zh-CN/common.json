@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/>将{showIssue, select, true {<issue/>} other {工作项}}分配到了{kind, select, cycles {周期} modules {模块} other {集合}}<value/>。",
+    "collection_removed": "<actor/>从{kind, select, cycles {周期} modules {模块} other {集合}}<value/>中移除了{showIssue, select, true {<issue/>} other {工作项}}。",
     "property_set": "<actor/>将{showIssue, select, true {<issue/>的} other {}}“{property}”更改为<value/>。",
     "property_removed": "<actor/>移除了{showIssue, select, true {<issue/>的} other {}}“{property}”。",
     "description_edited": "<actor/>编辑了{showIssue, select, true {<issue/>的} other {}}描述。",

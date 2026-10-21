@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "Użytkownik <actor/> przypisał {showIssue, select, true {<issue/>} other {element pracy}} do {kind, select, cycles {cyklu} modules {modułu} other {kolekcji}} <value/>.",
+    "collection_removed": "Użytkownik <actor/> usunął {showIssue, select, true {<issue/>} other {element pracy}} z {kind, select, cycles {cyklu} modules {modułu} other {kolekcji}} <value/>.",
     "property_set": "Użytkownik <actor/> zmienił „{property}”{showIssue, select, true { w <issue/>} other {}} na <value/>.",
     "property_removed": "Użytkownik <actor/> usunął „{property}”{showIssue, select, true { z <issue/>} other {}}.",
     "description_edited": "Użytkownik <actor/> zmodyfikował opis{showIssue, select, true { w <issue/>} other {}}.",

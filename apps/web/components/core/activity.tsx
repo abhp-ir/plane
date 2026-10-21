@@ -6,6 +6,7 @@
 
 import { useEffect } from "react";
 import type { ReactElement } from "react";
+import { useTranslation } from "@plane/i18n";
 import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // store hooks
@@ -38,9 +39,11 @@ import { usePlatformOS } from "@/hooks/use-platform-os";
 import { ACTIVITY_PROPERTY_LABELS, ActivityPropertyChange } from "@/components/common/activity/property-change";
 import { ActivitySentence } from "@/components/common/activity/sentence";
 import { WorkItemActivityChange } from "@/components/common/activity/work-item-change";
+import { ActivityCollectionChange } from "@/components/common/activity/collection-change";
 // types
 
 export function IssueLink({ activity }: { activity: IIssueActivity }) {
+  const { t } = useTranslation();
   // router params
   const { workspaceSlug } = useParams();
   const { isMobile } = usePlatformOS();
@@ -55,7 +58,7 @@ export function IssueLink({ activity }: { activity: IIssueActivity }) {
 
   return (
     <Tooltip
-      label={activity?.issue_detail ? activity.issue_detail.name : "This work item has been deleted"}
+      label={activity?.issue_detail ? activity.issue_detail.name : t("issue.empty_state.issue_detail.description")}
       layout="stacked"
       disabled={isMobile}
     >
@@ -67,12 +70,15 @@ export function IssueLink({ activity }: { activity: IIssueActivity }) {
           rel={activity.issue === null ? "" : "noopener noreferrer"}
           className="inline items-center gap-1 font-medium text-primary hover:underline"
         >
-          <span className="whitespace-nowrap">{`${activity.project_detail.identifier}-${activity.issue_detail.sequence_id}`}</span>{" "}
-          <span className="font-regular break-all">{activity.issue_detail?.name}</span>
+          <bdi
+            dir="ltr"
+            className="whitespace-nowrap"
+          >{`${activity.project_detail.identifier}-${activity.issue_detail.sequence_id}`}</bdi>{" "}
+          <bdi className="font-regular break-all">{activity.issue_detail?.name}</bdi>
         </a>
       ) : (
         <span className="inline-flex items-center gap-1 font-medium whitespace-nowrap text-primary">
-          {" a work item"}{" "}
+          {t("issue.label", { count: 1 })}
         </span>
       )}
     </Tooltip>
@@ -412,100 +418,9 @@ const activityDetails: {
     icon: <LinkOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   cycles: {
-    message: (activity, showIssue, workspaceSlug) => {
-      if (activity.verb === "created")
-        return (
-          <>
-            <span className="flex-shrink-0">
-              added {showIssue ? <IssueLink activity={activity} /> : "this work item"}{" "}
-              <span className="whitespace-nowrap">to the cycle</span>{" "}
-            </span>
-            <a
-              href={`/${workspaceSlug}/projects/${activity.project}/cycles/${activity.new_identifier}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline items-center gap-1 font-medium text-primary hover:underline"
-            >
-              <span className="break-all">{activity.new_value}</span>
-            </a>
-          </>
-        );
-      else if (activity.verb === "updated")
-        return (
-          <>
-            <span className="flex-shrink-0 whitespace-nowrap">set the cycle to </span>
-            <a
-              href={`/${workspaceSlug}/projects/${activity.project}/cycles/${activity.new_identifier}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline items-center gap-1 font-medium text-primary hover:underline"
-            >
-              <span className="break-all">{activity.new_value}</span>
-            </a>
-          </>
-        );
-      else
-        return (
-          <>
-            removed <IssueLink activity={activity} /> from the cycle{" "}
-            <a
-              href={`/${workspaceSlug}/projects/${activity.project}/cycles/${activity.old_identifier}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline items-center gap-1 font-medium text-primary hover:underline"
-            >
-              <span className="break-all">{activity.old_value}</span>
-            </a>
-          </>
-        );
-    },
     icon: <CyclesOutline height={12} width={12} className="text-secondary" aria-hidden="true" />,
   },
   modules: {
-    message: (activity, showIssue, workspaceSlug) => {
-      if (activity.verb === "created")
-        return (
-          <>
-            added {showIssue ? <IssueLink activity={activity} /> : "this work item"} to the module{" "}
-            <a
-              href={`/${workspaceSlug}/projects/${activity.project}/modules/${activity.new_identifier}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline items-center gap-1 font-medium text-primary hover:underline"
-            >
-              <span className="break-all">{activity.new_value}</span>
-            </a>
-          </>
-        );
-      else if (activity.verb === "updated")
-        return (
-          <>
-            set the module to{" "}
-            <a
-              href={`/${workspaceSlug}/projects/${activity.project}/modules/${activity.new_identifier}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline items-center gap-1 font-medium text-primary hover:underline"
-            >
-              <span className="break-all">{activity.new_value}</span>
-            </a>
-          </>
-        );
-      else
-        return (
-          <>
-            removed <IssueLink activity={activity} /> from the module{" "}
-            <a
-              href={`/${workspaceSlug}/projects/${activity.project}/modules/${activity.old_identifier}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline items-center gap-1 font-medium text-primary hover:underline"
-            >
-              <span className="break-all">{activity.old_value}</span>
-            </a>
-          </>
-        );
-    },
     icon: <ModuleOutline className="h-3 w-3 !text-secondary" aria-hidden="true" />,
   },
   name: {
@@ -662,6 +577,9 @@ export function ActivityMessage({ activity, showIssue = false, actor }: Activity
   const issue = showIssue ? <IssueLink activity={activity} /> : undefined;
   if (Object.hasOwn(ACTIVITY_PROPERTY_LABELS, activityField)) {
     return <ActivityPropertyChange activity={activity} actor={actor} issue={issue} />;
+  }
+  if (activityField === "cycles" || activityField === "modules") {
+    return <ActivityCollectionChange activity={activity} actor={actor} issue={issue} />;
   }
   if (activityField === "description") {
     return <ActivitySentence actor={actor} message="description_edited" issue={issue} />;

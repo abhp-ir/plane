@@ -6,6 +6,7 @@
 
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { test } from "node:test";
 import { createInstance } from "i18next";
@@ -29,12 +30,27 @@ function load(language: string, namespace: string): Record<string, string> {
     JSON.parse(readFileSync(path.resolve(__dirname, `../src/locales/${language}/${namespace}.json`), "utf8"))
   );
 }
-function variables(message: string): string[] {
-  return [...message.matchAll(/\{(\w+)(?=[,}])/g)]
-    .filter((match) => !/(?:\b(?:one|other|zero|two|few|many)|=\d+)\s*$/.test(message.slice(0, match.index)))
-    .map((match) => match[1])
-    .toSorted();
+const { IntlMessageFormat } = createRequire(require.resolve("i18next-icu"))("intl-messageformat");
+type MessageElement = {
+  type: number;
+  value?: string;
+  options?: Record<string, { value: MessageElement[] }>;
+};
+function argumentNames(elements: MessageElement[]): string[] {
+  return elements.flatMap((element) => [
+    ...(element.type >= 1 && element.type <= 6 && element.value ? [element.value] : []),
+    ...Object.values(element.options ?? {}).flatMap((option) => argumentNames(option.value)),
+  ]);
 }
+function variables(message: string): string[] {
+  return argumentNames(new IntlMessageFormat(message, "en", undefined, { ignoreTag: true }).getAst()).toSorted();
+}
+
+test("ICU argument validation distinguishes select text and rejects malformed messages", () => {
+  assert.deepEqual(variables("{kind, select, cycles {cycle} modules {module} other {{name}}}"), ["kind", "name"]);
+  assert.deepEqual(variables("{count, plural, one {{name}} other {{name}}}"), ["count", "name", "name"]);
+  assert.throws(() => variables("{kind, select, cycles {cycle}}"));
+});
 
 test("Persian is registered once as fa / فارسی", () => {
   assert.deepEqual(
@@ -192,6 +208,37 @@ test("activity templates preserve rich slots and resolve every contextual branch
             assert.equal(text.includes("<value/>"), message === "property_set", `${language}: value slot`);
             assert.equal(text.includes("{showIssue"), false, `${language}: ICU resolved`);
             if (message.startsWith("property_")) assert.ok(text.includes("ABC-42 <custom>"));
+          }
+      }
+    }
+  } finally {
+    await setLanguage("en");
+  }
+});
+
+test("collection sentences preserve enum selectors, glossary terms and rich slots in every locale", async () => {
+  await initPromise;
+  const keys = ["activity_messages.collection_assigned", "activity_messages.collection_removed"];
+  const english = load("en", "common");
+  try {
+    for (const { value: language } of SUPPORTED_LANGUAGES) {
+      // eslint-disable-next-line no-await-in-loop -- One shared locale instance.
+      await setLanguage(language);
+      const messages = load(language, "common");
+      for (const key of keys) {
+        const selectors = [...messages[key].matchAll(/\{(\w+),\s*select,/g)].map((match) => match[1]).toSorted();
+        assert.deepEqual(selectors, ["kind", "showIssue"]);
+        assert.deepEqual(activitySlots(messages[key]), activitySlots(english[key]));
+        for (const kind of ["cycles", "modules", "other"])
+          for (const showIssue of [true, false]) {
+            const output = String(i18nInstance.t(key, { kind, showIssue }));
+            assert.doesNotMatch(output, /[{}]/, `${language}: selectors resolve`);
+            assert.ok(output.includes("<actor/>") && output.includes("<value/>"));
+            assert.equal(output.includes("<issue/>"), showIssue);
+            if (language === "zh-CN" && kind !== "other")
+              assert.ok(output.includes(kind === "cycles" ? "周期" : "模块"));
+            if (language === "ko" && kind !== "other")
+              assert.ok(output.includes(kind === "cycles" ? "사이클" : "모듈"));
           }
       }
     }

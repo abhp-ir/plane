@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/>: {showIssue, select, true {<issue/>} other {작업 항목}}을(를) {kind, select, cycles {사이클} modules {모듈} other {컬렉션}} <value/>에 할당했습니다.",
+    "collection_removed": "<actor/>: {kind, select, cycles {사이클} modules {모듈} other {컬렉션}} <value/>에서 {showIssue, select, true {<issue/>} other {작업 항목}}을(를) 제거했습니다.",
     "property_set": "<actor/>: {showIssue, select, true {<issue/>의 } other {}}“{property}” 항목을 <value/>(으)로 변경했습니다.",
     "property_removed": "<actor/>: {showIssue, select, true {<issue/>에서 } other {}}“{property}” 항목을 제거했습니다.",
     "description_edited": "<actor/>: {showIssue, select, true {<issue/>의 } other {}}설명을 수정했습니다.",

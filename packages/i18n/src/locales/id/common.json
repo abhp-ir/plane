@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> menetapkan {showIssue, select, true {<issue/>} other {item pekerjaan}} ke {kind, select, cycles {siklus} modules {modul} other {koleksi}} <value/>.",
+    "collection_removed": "<actor/> menghapus {showIssue, select, true {<issue/>} other {item pekerjaan}} dari {kind, select, cycles {siklus} modules {modul} other {koleksi}} <value/>.",
     "property_set": "<actor/> mengubah “{property}”{showIssue, select, true { pada <issue/>} other {}} menjadi <value/>.",
     "property_removed": "<actor/> menghapus “{property}”{showIssue, select, true { dari <issue/>} other {}}.",
     "description_edited": "<actor/> mengedit deskripsi{showIssue, select, true { pada <issue/>} other {}}.",

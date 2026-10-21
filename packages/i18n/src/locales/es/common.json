@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> asignó {showIssue, select, true {<issue/>} other {el elemento de trabajo}} {kind, select, cycles {al ciclo} modules {al módulo} other {a la colección}} <value/>.",
+    "collection_removed": "<actor/> quitó {showIssue, select, true {<issue/>} other {el elemento de trabajo}} {kind, select, cycles {del ciclo} modules {del módulo} other {de la colección}} <value/>.",
     "property_set": "<actor/> cambió «{property}»{showIssue, select, true { en <issue/>} other {}} a <value/>.",
     "property_removed": "<actor/> eliminó «{property}»{showIssue, select, true { de <issue/>} other {}}.",
     "description_edited": "<actor/> editó la descripción{showIssue, select, true { de <issue/>} other {}}.",

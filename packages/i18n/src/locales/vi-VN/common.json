@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> đã gán {showIssue, select, true {<issue/>} other {mục công việc}} vào {kind, select, cycles {chu kỳ} modules {mô-đun} other {bộ sưu tập}} <value/>.",
+    "collection_removed": "<actor/> đã xóa {showIssue, select, true {<issue/>} other {mục công việc}} khỏi {kind, select, cycles {chu kỳ} modules {mô-đun} other {bộ sưu tập}} <value/>.",
     "property_set": "<actor/> đã đổi “{property}”{showIssue, select, true { trong <issue/>} other {}} thành <value/>.",
     "property_removed": "<actor/> đã xóa “{property}”{showIssue, select, true { khỏi <issue/>} other {}}.",
     "description_edited": "<actor/> đã chỉnh sửa mô tả{showIssue, select, true { của <issue/>} other {}}.",

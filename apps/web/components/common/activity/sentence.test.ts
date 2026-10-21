@@ -12,6 +12,9 @@ import { EInboxIssueSource } from "@plane/types";
 import { ActivitySentence } from "./sentence";
 import { ActivityPropertyChange } from "./property-change";
 import { WorkItemActivityChange } from "./work-item-change";
+import { ActivityCollectionChange } from "./collection-change";
+
+vi.mock("next/navigation", () => ({ useParams: () => ({ workspaceSlug: "owned" }) }));
 
 vi.mock("@plane/i18n", async () => {
   const { createRequire } = await import("node:module");
@@ -164,6 +167,41 @@ it.each([undefined, null, "custom", "toString"])("ignores an unrecognized proper
       createElement(ActivityPropertyChange, {
         actor,
         activity: { field, new_value: "Unchanged" },
+      })
+    )
+  ).toBe("");
+});
+
+it.each(["cycles", "modules"])("preserves recorded %s names and IDs for assignment, update and removal", (field) => {
+  const activity = {
+    field,
+    project: "project-id",
+    verb: "created",
+    old_identifier: "old-id",
+    new_identifier: "new-id",
+    old_value: "Old English نامِ قدیمی <code>",
+    new_value: "New English نامِ جدید",
+  };
+  for (const verb of ["created", "updated", "deleted"]) {
+    const input = { ...activity, verb };
+    const before = { ...input };
+    const markup = renderToStaticMarkup(createElement(ActivityCollectionChange, { actor, issue, activity: input }));
+    const removed = verb === "deleted";
+    expect(markup).toContain(`href="/owned/projects/project-id/${field}/${removed ? "old-id" : "new-id"}"`);
+    expect(text(markup)).toContain(removed ? "Old English نامِ قدیمی &lt;code&gt;" : activity.new_value);
+    expect(text(markup)).not.toContain(removed ? activity.new_value : "Old English");
+    expect(text(markup)).toContain(field === "cycles" ? "چرخهٔ" : "ماژولِ");
+    expect(text(markup)).toContain(removed ? "حذف کرد." : "اختصاص داد.");
+    expect(input).toEqual(before);
+  }
+});
+
+it("ignores a non-collection field instead of treating its editable name as a collection", () => {
+  expect(
+    renderToStaticMarkup(
+      createElement(ActivityCollectionChange, {
+        actor,
+        activity: { field: "state", verb: "created", project: "project-id", new_value: "cycles" },
       })
     )
   ).toBe("");

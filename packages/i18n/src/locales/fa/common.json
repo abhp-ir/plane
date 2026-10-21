@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را به {kind, select, cycles {چرخهٔ} modules {ماژولِ} other {مجموعهٔ}} <value/> اختصاص داد.",
+    "collection_removed": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را از {kind, select, cycles {چرخهٔ} modules {ماژولِ} other {مجموعهٔ}} <value/> حذف کرد.",
     "property_set": "<actor/>{showIssue, select, true { در <issue/>،} other {}} {property} را به <value/> تغییر داد.",
     "property_removed": "<actor/>{showIssue, select, true { در <issue/>،} other {}} {property} را حذف کرد.",
     "description_edited": "<actor/> توضیحات{showIssue, select, true {ِ <issue/>} other {}} را ویرایش کرد.",

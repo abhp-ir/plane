@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}} toegewezen aan {kind, select, cycles {cyclus} modules {module} other {verzameling}} <value/>.",
+    "collection_removed": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}} verwijderd uit {kind, select, cycles {cyclus} modules {module} other {verzameling}} <value/>.",
     "property_set": "<actor/> heeft ‘{property}’{showIssue, select, true { van <issue/>} other {}} gewijzigd in <value/>.",
     "property_removed": "<actor/> heeft ‘{property}’{showIssue, select, true { uit <issue/>} other {}} verwijderd.",
     "description_edited": "<actor/> heeft de beschrijving{showIssue, select, true { van <issue/>} other {}} bewerkt.",

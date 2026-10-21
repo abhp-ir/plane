@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> a asociat {showIssue, select, true {<issue/>} other {elementul de lucru}} cu {kind, select, cycles {ciclul} modules {modulul} other {colecția}} <value/>.",
+    "collection_removed": "<actor/> a eliminat {showIssue, select, true {<issue/>} other {elementul de lucru}} din {kind, select, cycles {ciclul} modules {modulul} other {colecția}} <value/>.",
     "property_set": "<actor/> a schimbat „{property}”{showIssue, select, true { în <issue/>} other {}} în <value/>.",
     "property_removed": "<actor/> a eliminat „{property}”{showIssue, select, true { din <issue/>} other {}}.",
     "description_edited": "<actor/> a editat descrierea{showIssue, select, true { pentru <issue/>} other {}}.",

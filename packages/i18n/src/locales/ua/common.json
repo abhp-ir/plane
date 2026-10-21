@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "Користувач <actor/> додав {showIssue, select, true {<issue/>} other {робочий елемент}} до {kind, select, cycles {циклу} modules {модуля} other {колекції}} <value/>.",
+    "collection_removed": "Користувач <actor/> видалив {showIssue, select, true {<issue/>} other {робочий елемент}} із {kind, select, cycles {циклу} modules {модуля} other {колекції}} <value/>.",
     "property_set": "Користувач <actor/> змінив «{property}»{showIssue, select, true { у <issue/>} other {}} на <value/>.",
     "property_removed": "Користувач <actor/> видалив «{property}»{showIssue, select, true { з <issue/>} other {}}.",
     "description_edited": "Користувач <actor/> відредагував опис{showIssue, select, true { у <issue/>} other {}}.",

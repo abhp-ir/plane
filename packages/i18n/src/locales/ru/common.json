@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "Пользователь <actor/> привязал {showIssue, select, true {<issue/>} other {рабочий элемент}} к {kind, select, cycles {циклу} modules {модулю} other {коллекции}} <value/>.",
+    "collection_removed": "Пользователь <actor/> удалил {showIssue, select, true {<issue/>} other {рабочий элемент}} из {kind, select, cycles {цикла} modules {модуля} other {коллекции}} <value/>.",
     "property_set": "Пользователь <actor/> изменил «{property}»{showIssue, select, true { в <issue/>} other {}} на <value/>.",
     "property_removed": "Пользователь <actor/> удалил «{property}»{showIssue, select, true { из <issue/>} other {}}.",
     "description_edited": "Пользователь <actor/> отредактировал описание{showIssue, select, true { в <issue/>} other {}}.",

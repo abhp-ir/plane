@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}} <value/> {kind, select, cycles {döngüsüne} modules {modülüne} other {koleksiyonuna}} atadı.",
+    "collection_removed": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}} <value/> {kind, select, cycles {döngüsünden} modules {modülünden} other {koleksiyonundan}} kaldırdı.",
     "property_set": "<actor/>{showIssue, select, true {, <issue/> üzerinde} other {}}, “{property}” değerini <value/> olarak değiştirdi.",
     "property_removed": "<actor/>{showIssue, select, true {, <issue/> üzerinden} other {}}, “{property}” değerini kaldırdı.",
     "description_edited": "<actor/>{showIssue, select, true {, <issue/> için} other {}}, açıklamayı düzenledi.",

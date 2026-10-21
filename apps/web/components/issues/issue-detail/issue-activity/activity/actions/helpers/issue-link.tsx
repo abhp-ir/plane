@@ -6,6 +6,7 @@
 
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import { generateWorkItemLink } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
 // hooks
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
 import { usePlatformOS } from "@/hooks/use-platform-os";
@@ -16,6 +17,7 @@ type TIssueLink = {
 
 export function IssueLink(props: TIssueLink) {
   const { activityId } = props;
+  const { t } = useTranslation();
   // hooks
   const {
     activity: { getActivityById },
@@ -30,11 +32,11 @@ export function IssueLink(props: TIssueLink) {
     projectId: activity.project,
     issueId: activity.issue,
     projectIdentifier: activity.project_detail.identifier,
-    sequenceId: activity.issue_detail.sequence_id,
+    sequenceId: activity.issue_detail?.sequence_id,
   });
   return (
     <Tooltip
-      label={activity.issue_detail ? activity.issue_detail.name : "This work item has been deleted"}
+      label={activity.issue_detail ? activity.issue_detail.name : t("issue.empty_state.issue_detail.description")}
       layout="stacked"
       disabled={isMobile}
     >
@@ -45,10 +47,12 @@ export function IssueLink(props: TIssueLink) {
         rel={activity.issue === null ? "" : "noopener noreferrer"}
         className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
       >
-        {activity.issue_detail
-          ? `${activity.project_detail.identifier}-${activity.issue_detail.sequence_id}`
-          : "Work items"}{" "}
-        <span className="font-regular">{activity.issue_detail?.name}</span>
+        {activity.issue_detail ? (
+          <bdi dir="ltr">{`${activity.project_detail.identifier}-${activity.issue_detail.sequence_id}`}</bdi>
+        ) : (
+          t("issue.label", { count: 1 })
+        )}{" "}
+        <bdi className="font-regular">{activity.issue_detail?.name}</bdi>
       </a>
     </Tooltip>
   );

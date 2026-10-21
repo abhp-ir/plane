@@ -1,5 +1,7 @@
 {
   "activity_messages": {
+    "collection_assigned": "<actor/> hat {showIssue, select, true {<issue/>} other {das Arbeitselement}} {kind, select, cycles {dem Zyklus} modules {dem Modul} other {der Sammlung}} <value/> zugewiesen.",
+    "collection_removed": "<actor/> hat {showIssue, select, true {<issue/>} other {das Arbeitselement}} aus {kind, select, cycles {dem Zyklus} modules {dem Modul} other {der Sammlung}} <value/> entfernt.",
     "property_set": "<actor/> hat „{property}“{showIssue, select, true { für <issue/>} other {}} auf <value/> geändert.",
     "property_removed": "<actor/> hat „{property}“{showIssue, select, true { aus <issue/>} other {}} entfernt.",
     "description_edited": "<actor/> hat die Beschreibung{showIssue, select, true { von <issue/>} other {}} bearbeitet.",
