@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "タスクのチェックボックス：{text}",
+    "empty_task": "空のタスク",
     "text": {
       "title": "テキスト",
       "description": "通常のテキストで書き始めます。"

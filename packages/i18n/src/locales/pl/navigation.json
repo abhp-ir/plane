@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Więcej",
+    "hide": "Ukryj",
+    "main_sidebar": "Główny panel boczny",
+    "resize_sidebar": "Zmień rozmiar panelu bocznego",
+    "peek_view": "Podgląd panelu bocznego",
     "stickies": "Karteczki",
     "your_work": "Twoja praca",
     "projects": "Projekty",

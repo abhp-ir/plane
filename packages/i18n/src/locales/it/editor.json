@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Casella di controllo dell’attività: {text}",
+    "empty_task": "Attività vuota",
     "text": {
       "title": "Testo",
       "description": "Inizi a scrivere con testo semplice."

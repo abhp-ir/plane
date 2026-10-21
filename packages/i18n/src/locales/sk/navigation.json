@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Viac",
+    "hide": "Skryť",
+    "main_sidebar": "Hlavný bočný panel",
+    "resize_sidebar": "Zmeniť veľkosť bočného panela",
+    "peek_view": "Náhľad bočného panela",
     "stickies": "Poznámky",
     "your_work": "Vaša práca",
     "projects": "Projekty",

@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Mai multe",
+    "hide": "Ascunde",
+    "main_sidebar": "Bară laterală principală",
+    "resize_sidebar": "Redimensionează bara laterală",
+    "peek_view": "Previzualizarea barei laterale",
     "stickies": "Notițe",
     "your_work": "Munca ta",
     "projects": "Proiecte",

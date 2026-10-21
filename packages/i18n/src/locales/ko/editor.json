@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "작업 확인란: {text}",
+    "empty_task": "빈 작업",
     "text": {
       "title": "텍스트",
       "description": "일반 텍스트로 작성을 시작합니다."

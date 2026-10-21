@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Ô chọn công việc: {text}",
+    "empty_task": "Công việc trống",
     "text": {
       "title": "Văn bản",
       "description": "Bắt đầu nhập văn bản thuần túy."

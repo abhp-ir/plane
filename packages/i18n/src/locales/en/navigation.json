@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "More",
+    "hide": "Hide",
+    "main_sidebar": "Main sidebar",
+    "resize_sidebar": "Resize sidebar",
+    "peek_view": "Sidebar peek view",
     "stickies": "Stickies",
     "your_work": "Your work",
     "projects": "Projects",

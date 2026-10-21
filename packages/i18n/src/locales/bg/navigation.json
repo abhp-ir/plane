@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Още",
+    "hide": "Скрий",
+    "main_sidebar": "Основна странична лента",
+    "resize_sidebar": "Преоразмеряване на страничната лента",
+    "peek_view": "Преглед на страничната лента",
     "stickies": "Stickies",
     "your_work": "Вашата работа",
     "projects": "Проекти",

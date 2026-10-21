@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Görev onay kutusu: {text}",
+    "empty_task": "Boş görev",
     "text": {
       "title": "Metin",
       "description": "Düz metinle yazmaya başlayın."

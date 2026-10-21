@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Kotak centang tugas: {text}",
+    "empty_task": "Tugas kosong",
     "text": {
       "title": "Teks",
       "description": "Mulai menulis dengan teks biasa."

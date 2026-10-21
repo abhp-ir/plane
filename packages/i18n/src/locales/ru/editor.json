@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Флажок задачи: {text}",
+    "empty_task": "Пустая задача",
     "text": {
       "title": "Текст",
       "description": "Начните вводить обычный текст."

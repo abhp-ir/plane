@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // plane imports
@@ -30,6 +30,7 @@ import { ExtendedSidebarWrapper } from "./extended-sidebar-wrapper";
 export const ExtendedProjectSidebar = observer(function ExtendedProjectSidebar() {
   // refs
   const extendedProjectSidebarRef = useRef<HTMLDivElement | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   // states
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
@@ -40,6 +41,10 @@ export const ExtendedProjectSidebar = observer(function ExtendedProjectSidebar()
   const { isExtendedProjectSidebarOpened, toggleExtendedProjectSidebar } = useAppTheme();
   const { getPartialProjectById, joinedProjectIds: joinedProjects, updateProjectView } = useProject();
   const { allowPermissions } = useUserPermissions();
+
+  useEffect(() => {
+    if (isExtendedProjectSidebarOpened) searchInputRef.current?.focus();
+  }, [isExtendedProjectSidebarOpened]);
 
   const handleOnProjectDrop = (
     sourceId: string | undefined,
@@ -87,13 +92,13 @@ export const ExtendedProjectSidebar = observer(function ExtendedProjectSidebar()
   const handleClose = useCallback(() => toggleExtendedProjectSidebar(false), [toggleExtendedProjectSidebar]);
 
   const handleCopyText = (projectId: string) => {
-    copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
+    copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() =>
       setToast({
         type: "success",
         title: t("link_copied"),
         message: t("project_link_copied_to_clipboard"),
-      });
-    });
+      })
+    );
   };
   return (
     <>
@@ -114,7 +119,7 @@ export const ExtendedProjectSidebar = observer(function ExtendedProjectSidebar()
       >
         <div className="sticky top-4 flex w-full flex-col gap-1 px-4">
           <div className="flex items-center justify-between">
-            <span className="py-1.5 text-13 font-semibold text-tertiary">Projects</span>
+            <span className="py-1.5 text-13 font-semibold text-tertiary">{t("sidebar.projects")}</span>
             {isAuthorizedUser && (
               <Tooltip label={t("create_project")}>
                 <button
@@ -138,7 +143,7 @@ export const ExtendedProjectSidebar = observer(function ExtendedProjectSidebar()
                 type="text"
                 placeholder={t("search")}
                 value={searchQuery}
-                autoFocus
+                ref={searchInputRef}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </InputGroup>

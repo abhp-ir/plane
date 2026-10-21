@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Mais",
+    "hide": "Ocultar",
+    "main_sidebar": "Barra lateral principal",
+    "resize_sidebar": "Redimensionar barra lateral",
+    "peek_view": "Prévia da barra lateral",
     "stickies": "Notas adesivas",
     "your_work": "Seu trabalho",
     "projects": "Projetos",

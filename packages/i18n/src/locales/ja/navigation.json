@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "その他",
+    "hide": "非表示",
+    "main_sidebar": "メインサイドバー",
+    "resize_sidebar": "サイドバーのサイズを変更",
+    "peek_view": "サイドバーのプレビュー",
     "stickies": "付箋",
     "your_work": "あなたの作業",
     "projects": "プロジェクト",

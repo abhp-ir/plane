@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "დავალების მოსანიშნი ველი: {text}",
+    "empty_task": "ცარიელი დავალება",
     "text": {
       "title": "ტექსტი",
       "description": "დაიწყეთ წერა ჩვეულებრივი ტექსტით."

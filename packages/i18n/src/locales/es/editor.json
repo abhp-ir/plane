@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Casilla de tarea: {text}",
+    "empty_task": "Tarea vacía",
     "text": {
       "title": "Texto",
       "description": "Empiece a escribir texto sin formato."

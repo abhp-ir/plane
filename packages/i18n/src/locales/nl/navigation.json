@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Meer",
+    "hide": "Verbergen",
+    "main_sidebar": "Hoofdzijbalk",
+    "resize_sidebar": "Formaat van zijbalk wijzigen",
+    "peek_view": "Voorbeeld van zijbalk",
     "stickies": "Stickies",
     "your_work": "Jouw werk",
     "projects": "Projecten",

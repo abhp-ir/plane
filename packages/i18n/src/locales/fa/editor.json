@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "کادر انتخاب کار: {text}",
+    "empty_task": "کار خالی",
     "text": {
       "title": "متن",
       "description": "نوشتن متن ساده را شروع کنید."

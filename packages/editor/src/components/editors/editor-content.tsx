@@ -22,7 +22,9 @@ export function EditorContentWrapper(props: Props) {
   return (
     <div
       tabIndex={tabIndex}
-      onFocus={() => editor?.chain().focus(undefined, { scrollIntoView: false }).run()}
+      onFocus={(event) => {
+        if (event.target === event.currentTarget) editor?.chain().focus(undefined, { scrollIntoView: false }).run();
+      }}
       className={className}
     >
       <EditorContent editor={editor} id={id} />

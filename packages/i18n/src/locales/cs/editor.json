@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Zaškrtávací políčko úkolu: {text}",
+    "empty_task": "Prázdný úkol",
     "text": {
       "title": "Text",
       "description": "Začněte psát prostý text."

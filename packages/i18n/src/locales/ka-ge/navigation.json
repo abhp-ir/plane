@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "მეტი",
+    "hide": "დამალვა",
+    "main_sidebar": "მთავარი გვერდითი პანელი",
+    "resize_sidebar": "გვერდითი პანელის ზომის შეცვლა",
+    "peek_view": "გვერდითი პანელის წინასწარი ხედი",
     "stickies": "Stickies",
     "your_work": "შენი სამუშაო",
     "projects": "პროექტები",

@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Case à cocher de la tâche : {text}",
+    "empty_task": "Tâche vide",
     "text": {
       "title": "Texte",
       "description": "Commencez à écrire du texte brut."

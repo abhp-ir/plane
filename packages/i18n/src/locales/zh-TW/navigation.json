@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "更多",
+    "hide": "隱藏",
+    "main_sidebar": "主側邊欄",
+    "resize_sidebar": "調整側邊欄大小",
+    "peek_view": "側邊欄預覽",
     "stickies": "便利貼",
     "your_work": "你的工作",
     "projects": "專案",

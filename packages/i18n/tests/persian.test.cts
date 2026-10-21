@@ -76,6 +76,42 @@ test("every registered namespace has a loadable Persian resource", () => {
   for (const namespace of NAMESPACES) load("fa", namespace);
 });
 
+test("sidebar and checklist labels resolve after switching languages", async () => {
+  await initPromise;
+  const sidebarKeys = [
+    "sidebar.more",
+    "sidebar.hide",
+    "sidebar.main_sidebar",
+    "sidebar.resize_sidebar",
+    "sidebar.peek_view",
+  ];
+  try {
+    for (const { value: language } of SUPPORTED_LANGUAGES) {
+      // eslint-disable-next-line no-await-in-loop -- One shared locale instance.
+      await setLanguage(language);
+      const navigation = load(language, "navigation");
+      const editor = load(language, "editor");
+      for (const key of sidebarKeys) assert.equal(i18nInstance.t(key), navigation[key], `${language}: ${key}`);
+      assert.equal(
+        i18nInstance.t("editor_commands.task_checkbox", { text: "ABC-42" }),
+        editor["editor_commands.task_checkbox"].replace("{text}", "ABC-42")
+      );
+    }
+    for (const language of ["fa", "en", "fa"]) {
+      // eslint-disable-next-line no-await-in-loop -- Verify live resource reactivity.
+      await setLanguage(language);
+      assert.equal(i18nInstance.t("sidebar.projects"), language === "fa" ? "پروژه‌ها" : "Projects");
+      assert.equal(i18nInstance.t("sidebar.more"), language === "fa" ? "بیشتر" : "More");
+      assert.equal(
+        i18nInstance.t("editor_commands.task_checkbox", { text: "می‌رود ABC-42" }),
+        language === "fa" ? "کادر انتخاب کار: می‌رود ABC-42" : "Task checkbox: می‌رود ABC-42"
+      );
+    }
+  } finally {
+    await setLanguage("en");
+  }
+});
+
 // Keep native Node on the ICU package's CJS export; browser integration is tested in Vite.
 const translatedNamespaces = [
   "common",

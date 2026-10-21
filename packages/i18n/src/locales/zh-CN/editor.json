@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "任务复选框：{text}",
+    "empty_task": "空任务",
     "text": {
       "title": "文本",
       "description": "开始输入纯文本。"

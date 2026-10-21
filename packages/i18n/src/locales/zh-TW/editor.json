@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "任務核取方塊：{text}",
+    "empty_task": "空白任務",
     "text": {
       "title": "文字",
       "description": "開始輸入純文字。"

@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Pole wyboru zadania: {text}",
+    "empty_task": "Puste zadanie",
     "text": {
       "title": "Tekst",
       "description": "Proszę zacząć pisać zwykły tekst."

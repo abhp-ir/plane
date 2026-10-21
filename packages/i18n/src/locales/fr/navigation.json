@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Plus",
+    "hide": "Masquer",
+    "main_sidebar": "Barre latérale principale",
+    "resize_sidebar": "Redimensionner la barre latérale",
+    "peek_view": "Aperçu de la barre latérale",
     "stickies": "Stickies",
     "your_work": "Votre travail",
     "projects": "Projets",

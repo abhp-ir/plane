@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Kontrollkästchen für Aufgabe: {text}",
+    "empty_task": "Leere Aufgabe",
     "text": {
       "title": "Text",
       "description": "Einfach mit normalem Text losschreiben."

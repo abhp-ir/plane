@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Task checkbox: {text}",
+    "empty_task": "Empty task",
     "text": {
       "title": "Text",
       "description": "Just start typing with plain text."

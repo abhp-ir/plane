@@ -63,6 +63,8 @@
     }
   },
   "editor_commands": {
+    "task_checkbox": "Caixa de seleção da tarefa: {text}",
+    "empty_task": "Tarefa vazia",
     "text": {
       "title": "Texto",
       "description": "Comece a escrever com texto simples."

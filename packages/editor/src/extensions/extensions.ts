@@ -7,8 +7,7 @@
 import type { HocuspocusProvider } from "@hocuspocus/provider";
 import type { Extensions } from "@tiptap/core";
 import { CharacterCount } from "@tiptap/extension-character-count";
-import TaskItem from "@tiptap/extension-task-item";
-import TaskList from "@tiptap/extension-task-list";
+import { TaskList } from "@tiptap/extension-task-list";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { Underline } from "@tiptap/extension-underline";
 import { Markdown } from "tiptap-markdown";
@@ -43,6 +42,7 @@ import { EmojiExtension } from "./emoji/extension";
 import { CustomPlaceholderExtension } from "./placeholder";
 import { CustomStarterKitExtension } from "./starter-kit";
 import { UniqueID } from "./unique-id/extension";
+import { LocalizedTaskItem } from "./task-item";
 
 type TArguments = Pick<
   IEditorProps,
@@ -94,15 +94,10 @@ export const CoreEditorExtensions = (args: TArguments): Extensions => {
     TextStyle,
     TaskList.configure({
       HTMLAttributes: {
-        class: "not-prose pl-2 space-y-2",
+        class: "not-prose ps-2 space-y-2",
       },
     }),
-    TaskItem.configure({
-      HTMLAttributes: {
-        class: "relative",
-      },
-      nested: true,
-    }),
+    LocalizedTaskItem,
     CustomCodeBlockExtension,
     CustomCodeInlineExtension,
     Markdown.configure({

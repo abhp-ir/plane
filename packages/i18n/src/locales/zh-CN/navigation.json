@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "更多",
+    "hide": "隐藏",
+    "main_sidebar": "主侧边栏",
+    "resize_sidebar": "调整侧边栏大小",
+    "peek_view": "侧边栏预览",
     "stickies": "便签",
     "your_work": "我的工作",
     "projects": "项目",

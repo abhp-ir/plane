@@ -7,6 +7,11 @@
     }
   },
   "sidebar": {
+    "more": "Mehr",
+    "hide": "Ausblenden",
+    "main_sidebar": "Hauptseitenleiste",
+    "resize_sidebar": "Größe der Seitenleiste ändern",
+    "peek_view": "Vorschau der Seitenleiste",
     "stickies": "Notizen",
     "your_work": "Ihre Arbeit",
     "projects": "Projekte",

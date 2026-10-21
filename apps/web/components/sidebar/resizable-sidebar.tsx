@@ -9,6 +9,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 // helpers
 import { useOutsideClickDetector, usePlatformOS } from "@plane/hooks";
 import { cn } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
 // hooks
 import useSize from "@/hooks/use-window-size";
 
@@ -51,6 +52,7 @@ export function ResizableSidebar({
   isAnyExtendedSidebarExpanded = false,
   isAnySidebarDropdownOpen = false,
 }: ResizableSidebarProps) {
+  const { t } = useTranslation();
   // states
   const [isResizing, setIsResizing] = useState(false);
   const [isHoveringTrigger, setIsHoveringTrigger] = useState(false);
@@ -208,7 +210,7 @@ export function ResizableSidebar({
           maxWidth: `${isCollapsed ? 0 : width}px`,
         }}
         role="complementary"
-        aria-label="Main sidebar"
+        aria-label={t("sidebar.main_sidebar")}
         aria-hidden={isCollapsed}
         inert={isCollapsed}
         data-prevent-outside-click={isMobile}
@@ -233,7 +235,7 @@ export function ResizableSidebar({
             onDoubleClick={() => toggleCollapsed()}
             onMouseDown={(e) => startResizing(e)}
             role="separator"
-            aria-label="Resize sidebar"
+            aria-label={t("sidebar.resize_sidebar")}
           />
         </aside>
       </div>
@@ -253,7 +255,7 @@ export function ResizableSidebar({
         onMouseEnter={handlePeekEnter}
         onMouseLeave={handlePeekLeave}
         role="complementary"
-        aria-label="Sidebar peek view"
+        aria-label={t("sidebar.peek_view")}
         aria-hidden={!isCollapsed || !showPeek}
         inert={!isCollapsed || !showPeek}
       >
@@ -277,7 +279,7 @@ export function ResizableSidebar({
             onDoubleClick={() => toggleCollapsed()}
             onMouseDown={(e) => startResizing(e)}
             role="separator"
-            aria-label="Resize sidebar"
+            aria-label={t("sidebar.resize_sidebar")}
           />
         </aside>
       </div>
