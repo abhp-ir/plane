@@ -26,7 +26,7 @@ export const DescriptionVersionsDropdownItem = observer(function DescriptionVers
   // derived values
   const versionCreator = version.owned_by ? getUserDetails(version.owned_by) : null;
   // translation
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   return (
     <MenuItem
@@ -39,7 +39,7 @@ export const DescriptionVersionsDropdownItem = observer(function DescriptionVers
         />
       }
       label={versionCreator?.display_name ?? t("common.deactivated_user")}
-      secondaryText={calculateTimeAgo(version.last_saved_at)}
+      secondaryText={calculateTimeAgo(version.last_saved_at, currentLocale)}
       onClick={() => onClick(version.id)}
     />
   );

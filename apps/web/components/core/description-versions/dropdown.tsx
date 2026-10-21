@@ -35,7 +35,7 @@ export const DescriptionVersionsDropdown = observer(function DescriptionVersions
     ? getUserDetails(latestVersion?.owned_by)?.display_name
     : entityInformation.createdByDisplayName;
   // translation
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   return (
     <Menu>
@@ -58,7 +58,7 @@ export const DescriptionVersionsDropdown = observer(function DescriptionVersions
           <p className="text-11 wrap-anywhere">
             {t("description_versions.last_edited_by")}{" "}
             <span className="font-medium">{lastUpdatedByUserDisplayName ?? t("common.deactivated_user")}</span>{" "}
-            {calculateTimeAgo(lastUpdatedAt)}
+            {calculateTimeAgo(lastUpdatedAt, currentLocale)}
           </p>
         </div>
         {!disabled && <ChevronDownOutline className="size-3.5 shrink-0" />}

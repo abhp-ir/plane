@@ -26,7 +26,7 @@ export function LinkItemBlock(props: TLinkItemBlockProps) {
   // props
   const { title, url, createdAt, menuItems, onClick } = props;
   // plane hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // icons
   const Icon = getIconForLink(url);
   return (
@@ -43,7 +43,9 @@ export function LinkItemBlock(props: TLinkItemBlockProps) {
         <span className="block flex-1 truncate">
           <span className="block truncate text-13 font-medium">{title}</span>
           {createdAt && (
-            <span className="block text-11 font-medium text-placeholder">{calculateTimeAgo(createdAt)}</span>
+            <span className="block text-11 font-medium text-placeholder">
+              {calculateTimeAgo(createdAt, currentLocale)}
+            </span>
           )}
         </span>
       </button>

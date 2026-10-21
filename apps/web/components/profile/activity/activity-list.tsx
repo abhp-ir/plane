@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ChatOutline, HistoryOutline } from "@makeplane/propel/icons";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import type { IUserActivityResponse } from "@plane/types";
 import { calculateTimeAgo, getFileURL } from "@plane/utils";
 // components
@@ -25,6 +26,7 @@ type Props = {
 
 export const ActivityList = observer(function ActivityList(props: Props) {
   const { activity } = props;
+  const { currentLocale } = useTranslation();
   // params
   const { workspaceSlug } = useParams();
   // store hooks
@@ -74,7 +76,7 @@ export const ActivityList = observer(function ActivityList(props: Props) {
                             : activityItem.actor_detail.display_name}
                         </div>
                         <p className="mt-0.5 text-11 text-secondary">
-                          Commented {calculateTimeAgo(activityItem.created_at)}
+                          Commented {calculateTimeAgo(activityItem.created_at, currentLocale)}
                         </p>
                       </div>
                       <div className="issue-comments-section p-0">
@@ -165,7 +167,7 @@ export const ActivityList = observer(function ActivityList(props: Props) {
                             <div className="inline gap-1">
                               {message}{" "}
                               <span className="flex-shrink-0 whitespace-nowrap">
-                                {calculateTimeAgo(activityItem.created_at)}
+                                {calculateTimeAgo(activityItem.created_at, currentLocale)}
                               </span>
                             </div>
                           </div>

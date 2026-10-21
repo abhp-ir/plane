@@ -57,7 +57,10 @@ export function IssueActivityBlockComponent(props: TIssueActivityBlockComponent)
             label={`${renderFormattedDate(activity.created_at, undefined, currentLocale)}, ${renderFormattedTime(activity.created_at)}`}
             disabled={isMobile}
           >
-            <span className="whitespace-nowrap text-tertiary"> {calculateTimeAgo(activity.created_at)}</span>
+            <span className="whitespace-nowrap text-tertiary">
+              {" "}
+              {calculateTimeAgo(activity.created_at, currentLocale)}
+            </span>
           </Tooltip>
         </span>
       </div>

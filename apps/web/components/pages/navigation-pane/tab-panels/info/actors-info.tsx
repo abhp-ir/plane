@@ -10,7 +10,13 @@ import { useParams } from "next/navigation";
 // plane imports
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { useTranslation } from "@plane/i18n";
-import { calculateTimeAgoShort, getFileURL, renderFormattedDate } from "@plane/utils";
+import {
+  calculateTimeAgo,
+  calculateTimeAgoShort,
+  getDateCalendar,
+  getFileURL,
+  renderFormattedDate,
+} from "@plane/utils";
 // hooks
 import { useMember } from "@/hooks/store/use-member";
 // store
@@ -47,7 +53,11 @@ export const PageNavigationPaneInfoTabActorsInfo = observer(function PageNavigat
             />
             <span>{editorInformation?.display_name ?? t("common.deactivated_user")}</span>
           </Link>
-          <span className="flex-shrink-0 text-tertiary">{calculateTimeAgoShort(page.updated_at ?? "")} ago</span>
+          <span className="flex-shrink-0 text-tertiary">
+            {getDateCalendar(currentLocale) === "persian"
+              ? calculateTimeAgo(page.updated_at ?? "", currentLocale)
+              : `${calculateTimeAgoShort(page.updated_at ?? "")} ago`}
+          </span>
         </div>
       </div>
       <div>

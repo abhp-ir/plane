@@ -7,6 +7,7 @@
 import { useRouter } from "next/navigation";
 // plane types
 import { Logo } from "@plane/blocks/emoji-icon-picker";
+import { useTranslation } from "@plane/i18n";
 import type { TActivityEntityData, TProjectEntityData } from "@plane/types";
 import { calculateTimeAgo } from "@plane/utils";
 // components
@@ -21,6 +22,7 @@ type BlockProps = {
 };
 export function RecentProject(props: BlockProps) {
   const { activity, ref, workspaceSlug } = props;
+  const { currentLocale } = useTranslation();
   // router
   const router = useRouter();
   // derived values
@@ -45,7 +47,7 @@ export function RecentProject(props: BlockProps) {
       }
       appendTitleElement={
         <div className="flex-shrink-0 text-11 font-medium text-placeholder">
-          {calculateTimeAgo(activity.visited_at)}
+          {calculateTimeAgo(activity.visited_at, currentLocale)}
         </div>
       }
       quickActionElement={

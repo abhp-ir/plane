@@ -4,7 +4,16 @@
  * See the LICENSE file for details.
  */
 
-import { differenceInDays, format, formatDistanceToNow, isAfter, isEqual, isValid, parseISO } from "date-fns";
+import {
+  differenceInDays,
+  format,
+  formatDistanceToNow,
+  intlFormatDistance,
+  isAfter,
+  isEqual,
+  isValid,
+  parseISO,
+} from "date-fns";
 import { getMonth as getJalaliMonth, getYear as getJalaliYear } from "date-fns-jalali";
 import { isNumber } from "lodash-es";
 import { formatDateForLocale, getDateCalendar } from "./localized-datetime";
@@ -171,15 +180,14 @@ export const findHowManyDaysLeft = (
  * @param {string | Date} time
  * @example calculateTimeAgo("2023-01-01") // 1 year ago
  */
-export const calculateTimeAgo = (time: string | number | Date | null): string => {
-  if (!time) return "";
-  // Parse the time to check if it is valid
-  const parsedTime = typeof time === "string" || typeof time === "number" ? parseISO(String(time)) : time;
-  // return if undefined
-  if (!parsedTime) return ""; // Return empty string for invalid dates
-  // Format the time in the form of amount of time passed since the event happened
-  const distance = formatDistanceToNow(parsedTime, { addSuffix: true });
-  return distance;
+export const calculateTimeAgo = (time: string | number | Date | null, locale: string = "en"): string => {
+  if (time === null || time === "") return "";
+  const parsedTime = typeof time === "string" ? parseISO(time) : new Date(time);
+  if (!isValid(parsedTime)) return "";
+  if (getDateCalendar(locale) === "persian") {
+    return intlFormatDistance(parsedTime, new Date(), { locale: "fa" });
+  }
+  return formatDistanceToNow(parsedTime, { addSuffix: true });
 };
 
 export function calculateTimeAgoShort(date: string | number | Date | null): string {

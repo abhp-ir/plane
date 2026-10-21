@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Logo } from "@plane/blocks/emoji-icon-picker";
 import { PagesOutline } from "@makeplane/propel/icons";
+import { useTranslation } from "@plane/i18n";
 // plane import
 import type { TActivityEntityData, TPageEntityData } from "@plane/types";
 import { calculateTimeAgo, getFileURL, getPageName } from "@plane/utils";
@@ -23,6 +24,7 @@ type BlockProps = {
 
 export function RecentPage(props: BlockProps) {
   const { activity, ref, workspaceSlug } = props;
+  const { currentLocale } = useTranslation();
   // router
   const router = useRouter();
   // store hooks
@@ -60,7 +62,7 @@ export function RecentPage(props: BlockProps) {
       }
       appendTitleElement={
         <div className="flex-shrink-0 text-11 font-medium text-placeholder">
-          {calculateTimeAgo(activity.visited_at)}
+          {calculateTimeAgo(activity.visited_at, currentLocale)}
         </div>
       }
       quickActionElement={

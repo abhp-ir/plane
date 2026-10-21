@@ -135,7 +135,7 @@ export const NotificationItem = observer(function NotificationItem(props: TNotif
                 </p>
               ) : (
                 <p className="mt-auto flex-shrink-0 text-tertiary">
-                  {notification.created_at && calculateTimeAgo(notification.created_at)}
+                  {notification.created_at && calculateTimeAgo(notification.created_at, currentLocale)}
                 </p>
               )}
             </div>

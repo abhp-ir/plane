@@ -52,7 +52,7 @@ export function ActivityBlockComponent(props: TActivityBlockComponent) {
             disabled={isMobile}
           >
             <span className="cursor-help font-medium whitespace-nowrap text-tertiary">
-              {calculateTimeAgo(activity.created_at)}
+              {calculateTimeAgo(activity.created_at, currentLocale)}
             </span>
           </Tooltip>
         </div>

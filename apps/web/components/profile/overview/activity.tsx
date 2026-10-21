@@ -30,7 +30,7 @@ export const ProfileActivity = observer(function ProfileActivity() {
   const { workspaceSlug, userId } = useParams();
   // store hooks
   const { data: currentUser } = useUser();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   const { data: userProfileActivity } = useSWR(
     workspaceSlug && userId ? USER_PROFILE_ACTIVITY(workspaceSlug.toString(), userId.toString(), {}) : null,
@@ -77,7 +77,9 @@ export const ProfileActivity = observer(function ProfileActivity() {
                       </span>
                     )}
                   </p>
-                  <p className="text-11 whitespace-nowrap text-secondary">{calculateTimeAgo(activity.created_at)}</p>
+                  <p className="text-11 whitespace-nowrap text-secondary">
+                    {calculateTimeAgo(activity.created_at, currentLocale)}
+                  </p>
                 </div>
               </div>
             ))}

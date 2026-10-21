@@ -132,7 +132,7 @@ export const CommentCardDisplay = observer(function CommentCardDisplay(props: TC
               delay={200}
             >
               <span className="text-tertiary">
-                {calculateTimeAgo(comment.created_at)}
+                {calculateTimeAgo(comment.created_at, currentLocale)}
                 {comment.edited_at && " (edited)"}
               </span>
             </Tooltip>
