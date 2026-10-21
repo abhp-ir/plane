@@ -47,11 +47,13 @@ export function PowerKModalHeader(props: Props) {
           value={searchTerm}
           onValueChange={onSearchChange}
           placeholder={placeholder}
+          aria-label={placeholder}
           className="flex-1 bg-transparent text-13 text-primary placeholder-(--text-color-placeholder) outline-none"
-          autoFocus
         />
         {searchTerm && (
           <button
+            type="button"
+            aria-label={t("power_k.search_menu.clear_search")}
             onClick={() => onSearchChange("")}
             className="flex-shrink-0 rounded-sm p-1 text-placeholder hover:bg-layer-1 hover:text-secondary"
           >

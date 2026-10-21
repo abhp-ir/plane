@@ -9,6 +9,8 @@ import { useState, useEffect, useCallback } from "react";
 import { Command } from "cmdk";
 import { observer } from "mobx-react";
 import { Dialog, DialogContent } from "@makeplane/propel/components/dialog";
+import { useTranslation } from "@plane/i18n";
+import { filterPowerKCommand } from "../../core/search";
 // hooks
 import { usePowerK } from "@/hooks/store/use-power-k";
 // local imports
@@ -16,6 +18,7 @@ import type { TPowerKCommandConfig, TPowerKContext } from "../../core/types";
 import type { TPowerKCommandsListProps } from "./commands-list";
 import { PowerKModalFooter } from "./footer";
 import { PowerKModalHeader } from "./header";
+import { POWER_K_MODAL_PAGE_DETAILS } from "./constants";
 
 type Props = {
   commandsListComponent: React.FC<TPowerKCommandsListProps>;
@@ -27,11 +30,15 @@ type Props = {
 
 export const ProjectsAppPowerKModalWrapper = observer(function ProjectsAppPowerKModalWrapper(props: Props) {
   const { commandsListComponent: CommandsListComponent, context, hideFooter = false, isOpen, onClose } = props;
+  const { t } = useTranslation();
   // states
   const [searchTerm, setSearchTerm] = useState("");
   const [isWorkspaceLevel, setIsWorkspaceLevel] = useState(false);
   // store hooks
   const { activePage, setActivePage } = usePowerK();
+  const commandLabel = activePage
+    ? t(POWER_K_MODAL_PAGE_DETAILS[activePage].i18n_placeholder)
+    : t("power_k.page_placeholders.default");
 
   // Handle command selection
   const handleCommandSelect = useCallback(
@@ -131,13 +138,10 @@ export const ProjectsAppPowerKModalWrapper = observer(function ProjectsAppPowerK
       }}
     >
       {/* legacy panel was `max-w-2xl` (672px) = `md` */}
-      <DialogContent size="md">
+      <DialogContent size="md" aria-label={commandLabel}>
         <Command
-          filter={(i18nValue: string, search: string) => {
-            if (i18nValue === "no-results") return 1;
-            if (i18nValue.toLowerCase().includes(search.toLowerCase())) return 1;
-            return 0;
-          }}
+          label={commandLabel}
+          filter={filterPowerKCommand}
           shouldFilter={searchTerm.length > 0}
           onKeyDown={handleKeyDown}
           className="flex min-h-0 w-full flex-1 flex-col"
@@ -148,7 +152,10 @@ export const ProjectsAppPowerKModalWrapper = observer(function ProjectsAppPowerK
             onSearchChange={setSearchTerm}
             searchTerm={searchTerm}
           />
-          <Command.List className="vertical-scrollbar scrollbar-sm max-h-96 min-h-0 flex-1 overflow-scroll outline-none">
+          <Command.List
+            label={commandLabel}
+            className="vertical-scrollbar scrollbar-sm max-h-96 min-h-0 flex-1 overflow-scroll outline-none"
+          >
             <CommandsListComponent
               activePage={activePage}
               context={context}

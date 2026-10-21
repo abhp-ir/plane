@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 // plane imports
 import { WORKSPACE_DEFAULT_SEARCH_RESULT } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 import type { IWorkspaceSearchResults } from "@plane/types";
 import { cn } from "@plane/utils";
 // hooks
@@ -32,6 +33,7 @@ type Props = {
 
 export function PowerKModalSearchMenu(props: Props) {
   const { activePage, context, isWorkspaceLevel, searchTerm, updateSearchTerm, handleSearchMenuClose } = props;
+  const { t } = useTranslation();
   // states
   const [resultsCount, setResultsCount] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
@@ -41,6 +43,7 @@ export function PowerKModalSearchMenu(props: Props) {
   const { workspaceSlug, projectId } = useParams();
   // store hooks
   const { togglePowerKModal } = usePowerK();
+  const isWorkspaceSearch = !projectId || isWorkspaceLevel;
 
   useEffect(() => {
     if (activePage || !workspaceSlug) return;
@@ -51,7 +54,7 @@ export function PowerKModalSearchMenu(props: Props) {
         .searchWorkspace(workspaceSlug.toString(), {
           ...(projectId ? { project_id: projectId.toString() } : {}),
           search: debouncedSearchTerm,
-          workspace_search: !projectId ? true : isWorkspaceLevel,
+          workspace_search: isWorkspaceSearch,
         })
         // oxlint-disable-next-line no-shadow oxlint-disable-next-line promise/always-return
         .then((results) => {
@@ -71,7 +74,7 @@ export function PowerKModalSearchMenu(props: Props) {
       setResults(WORKSPACE_DEFAULT_SEARCH_RESULT);
       setIsSearching(false);
     }
-  }, [debouncedSearchTerm, isWorkspaceLevel, projectId, workspaceSlug, activePage]);
+  }, [debouncedSearchTerm, isWorkspaceSearch, projectId, workspaceSlug, activePage]);
 
   if (activePage) return null;
 
@@ -89,13 +92,12 @@ export function PowerKModalSearchMenu(props: Props) {
               "animate-pulse": isSearching,
             })}
           >
-            Search results for{" "}
-            <span className="font-medium">
-              {'"'}
-              {searchTerm}
-              {'"'}
-            </span>{" "}
-            in {isWorkspaceLevel ? "workspace" : "project"}:
+            {t(
+              isWorkspaceSearch ? "power_k.search_menu.results_in_workspace" : "power_k.search_menu.results_in_project",
+              {
+                query: `\u2068${searchTerm}\u2069`,
+              }
+            )}
           </h5>
         </div>
       )}

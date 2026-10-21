@@ -48,16 +48,19 @@ export const TopNavigationRoot = observer(function TopNavigationRoot() {
 
   return (
     <div
-      className={cn("z-[27] flex min-h-10 w-full items-center bg-canvas px-3.5 transition-all duration-300", {
-        "px-2": !showLabel,
-      })}
+      className={cn(
+        "z-[27] flex min-h-10 w-full flex-wrap items-center gap-y-1 bg-canvas px-3.5 py-1 transition-all duration-300 motion-reduce:transition-none md:flex-nowrap md:py-0",
+        {
+          "px-2": !showLabel,
+        }
+      )}
     >
       {/* Workspace Menu */}
-      <div className="flex-1 shrink-0">
+      <div className="min-w-0 flex-1">
         <WorkspaceMenuRoot variant="top-navigation" />
       </div>
       {/* Power K Search */}
-      <div className="shrink-0">
+      <div className="order-last w-full shrink-0 md:order-none md:w-auto">
         <TopNavPowerK />
       </div>
       {/* Additional Actions */}

@@ -171,7 +171,10 @@
     "search_menu": {
       "no_results": "Keine Ergebnisse gefunden",
       "clear_search": "Suche löschen",
-      "go_to_advanced_search": "Zur erweiterten Suche"
+      "go_to_advanced_search": "Zur erweiterten Suche",
+      "results_in_workspace": "Suchergebnisse für „{query}“ im Arbeitsbereich:",
+      "results_in_project": "Suchergebnisse für „{query}“ im Projekt:",
+      "clear_context": "Kontext löschen ({shortcut})"
     },
     "footer": {
       "workspace_level": "Arbeitsbereich-Ebene"

@@ -171,7 +171,10 @@
     "search_menu": {
       "no_results": "找不到結果",
       "clear_search": "清除搜尋",
-      "go_to_advanced_search": "前往進階搜尋"
+      "go_to_advanced_search": "前往進階搜尋",
+      "results_in_workspace": "工作區中「{query}」的搜尋結果：",
+      "results_in_project": "專案中「{query}」的搜尋結果：",
+      "clear_context": "清除情境（{shortcut}）"
     },
     "footer": {
       "workspace_level": "工作區層級"

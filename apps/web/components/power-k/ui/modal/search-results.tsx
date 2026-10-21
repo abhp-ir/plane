@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // plane imports
 import type { IWorkspaceSearchResults } from "@plane/types";
+import { useTranslation } from "@plane/i18n";
 // hooks
 import { useAppRouter } from "@/hooks/use-app-router";
 // helpers
@@ -22,6 +23,7 @@ type Props = {
 
 export const PowerKModalSearchResults = observer(function PowerKModalSearchResults(props: Props) {
   const { closePalette, results } = props;
+  const { t } = useTranslation();
   // router
   const router = useAppRouter();
   const { projectId: routerProjectId } = useParams();
@@ -38,7 +40,7 @@ export const PowerKModalSearchResults = observer(function PowerKModalSearchResul
         if (section.length <= 0) return null;
 
         return (
-          <Command.Group key={key} heading={currentSection.title}>
+          <Command.Group key={key} heading={t(currentSection.i18n_title, { count: 2 })}>
             {section.map((item) => {
               let value = `${key}-${item?.id}-${item.name}`;
 

@@ -15,6 +15,8 @@ import { useTranslation } from "@plane/i18n";
 // power-k
 import type { TPowerKCommandConfig, TPowerKContext } from "@/components/power-k/core/types";
 import { ProjectsAppPowerKCommandsList } from "@/components/power-k/ui/modal/commands-list";
+import { filterPowerKCommand } from "@/components/power-k/core/search";
+import { POWER_K_MODAL_PAGE_DETAILS } from "@/components/power-k/ui/modal/constants";
 import { PowerKModalFooter } from "@/components/power-k/ui/modal/footer";
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
 import { usePowerK } from "@/hooks/store/use-power-k";
@@ -37,6 +39,9 @@ export const TopNavPowerK = observer(() => {
 
   // store hooks
   const { activeContext, setActivePage, activePage, setTopNavInputRef } = usePowerK();
+  const commandLabel = activePage
+    ? t(POWER_K_MODAL_PAGE_DETAILS[activePage].i18n_placeholder)
+    : t("power_k.page_placeholders.default");
   const { data: currentUser } = useUser();
 
   const handleOnClose = useCallback(() => {
@@ -209,11 +214,14 @@ export const TopNavPowerK = observer(() => {
   );
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative w-full md:w-auto">
       <div
-        className={cn("relative z-30 flex w-[364px] items-center transition-all duration-300 ease-in-out", {
-          "w-[554px]": isOpen,
-        })}
+        className={cn(
+          "relative z-30 flex w-full items-center transition-all duration-300 ease-in-out motion-reduce:transition-none md:w-[364px]",
+          {
+            "md:w-[554px]": isOpen,
+          }
+        )}
       >
         <label
           className={cn(
@@ -237,8 +245,8 @@ export const TopNavPowerK = observer(() => {
             onMouseDown={handleMouseDown}
             onFocus={handleFocus}
             onKeyDown={handleKeyDown}
-            placeholder={t("power_k.page_placeholders.default")}
-            aria-label={t("power_k.page_placeholders.default")}
+            placeholder={commandLabel}
+            aria-label={commandLabel}
             className="placeholder-text-placeholder min-w-0 flex-1 bg-transparent text-13 text-primary outline-none"
           />
           {searchTerm && (
@@ -255,20 +263,17 @@ export const TopNavPowerK = observer(() => {
       </div>
       <div
         className={cn(
-          "shadow-lg absolute -top-[6px] left-1/2 z-20 flex -translate-x-1/2 flex-col overflow-hidden rounded-md border border-subtle bg-surface-1 px-0 pt-10 transition-all duration-300 ease-in-out",
+          "shadow-lg absolute -top-[6px] left-1/2 z-20 flex -translate-x-1/2 flex-col overflow-hidden rounded-md border border-subtle bg-surface-1 px-0 pt-10 transition-all duration-300 ease-in-out motion-reduce:transition-none",
           {
-            "max-h-[80vh] w-[574px] opacity-100": isOpen,
+            "max-h-[80vh] w-full opacity-100 md:w-[574px]": isOpen,
             "h-0 w-0 opacity-0": !isOpen,
           }
         )}
       >
         {isOpen && (
           <Command
-            filter={(i18nValue: string, search: string) => {
-              if (i18nValue === "no-results") return 1;
-              if (i18nValue.toLowerCase().includes(search.toLowerCase())) return 1;
-              return 0;
-            }}
+            label={commandLabel}
+            filter={filterPowerKCommand}
             shouldFilter={searchTerm.length > 0}
             className="flex h-full w-full flex-col"
           >
@@ -277,7 +282,10 @@ export const TopNavPowerK = observer(() => {
                      but we might need the context indicator if we want that feature.
                      For now, let's just render the list. */}
 
-            <Command.List className="vertical-scrollbar scrollbar-sm max-h-[60vh] overflow-y-auto px-2 pb-4 outline-none">
+            <Command.List
+              label={commandLabel}
+              className="vertical-scrollbar scrollbar-sm max-h-[60vh] overflow-y-auto px-2 pb-4 outline-none"
+            >
               <ProjectsAppPowerKCommandsList
                 activePage={activePage}
                 context={context}

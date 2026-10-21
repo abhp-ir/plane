@@ -136,6 +136,34 @@ test("fixed state-group vocabulary follows live Persian and English language sel
   }
 });
 
+test("command result sentences and context shortcuts preserve values across every locale", async () => {
+  await initPromise;
+  const query = "می‌رود ABC-42 <code>";
+  try {
+    for (const { value: language } of SUPPORTED_LANGUAGES) {
+      // eslint-disable-next-line no-await-in-loop -- One shared locale instance.
+      await setLanguage(language);
+      const resources = load(language, "power-k");
+      for (const scope of ["workspace", "project"]) {
+        const key = `power_k.search_menu.results_in_${scope}`;
+        assert.equal(i18nInstance.t(key, { query }), resources[key].replace("{query}", query), language);
+      }
+      const shortcut = "power_k.search_menu.clear_context";
+      assert.equal(
+        i18nInstance.t(shortcut, { shortcut: "Backspace" }),
+        resources[shortcut].replace("{shortcut}", "Backspace")
+      );
+    }
+    for (const language of ["fa", "en", "fa"]) {
+      // eslint-disable-next-line no-await-in-loop -- Verify live display-language changes.
+      await setLanguage(language);
+      assert.equal(i18nInstance.t("active_cycles"), language === "fa" ? "چرخه‌های فعال" : "Active cycles");
+    }
+  } finally {
+    await setLanguage("en");
+  }
+});
+
 // Keep native Node on the ICU package's CJS export; browser integration is tested in Vite.
 const translatedNamespaces = [
   "common",

@@ -171,7 +171,10 @@
     "search_menu": {
       "no_results": "Tidak ada hasil yang ditemukan",
       "clear_search": "Hapus pencarian",
-      "go_to_advanced_search": "Ke pencarian lanjutan"
+      "go_to_advanced_search": "Ke pencarian lanjutan",
+      "results_in_workspace": "Hasil pencarian “{query}” di ruang kerja:",
+      "results_in_project": "Hasil pencarian “{query}” di proyek:",
+      "clear_context": "Hapus konteks ({shortcut})"
     },
     "footer": {
       "workspace_level": "Tingkat ruang kerja"

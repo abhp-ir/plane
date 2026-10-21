@@ -30,7 +30,7 @@ export function PowerKModalContextIndicator(props: Props) {
 
   return (
     <div className="w-full px-4 pt-3 pb-2">
-      <div className="inline-flex max-w-full items-center gap-1 truncate rounded-sm bg-layer-1 py-0.5 pr-1 pl-2">
+      <div className="inline-flex max-w-full items-center gap-1 truncate rounded-sm bg-layer-1 py-0.5 ps-2 pe-1">
         <div className="flex items-center gap-1.5 truncate text-11 font-medium">
           <span className="shrink-0 text-secondary">{t(contextEntity.i18n_indicator)}</span>
           <span className="size-1 shrink-0 rounded-full bg-layer-1" />
@@ -40,8 +40,8 @@ export function PowerKModalContextIndicator(props: Props) {
           type="button"
           onClick={handleClearContext}
           className="grid shrink-0 place-items-center p-1 text-secondary transition-colors hover:text-primary"
-          title="Clear context (Backspace)"
-          aria-label="Clear context (Backspace)"
+          title={t("power_k.search_menu.clear_context", { shortcut: "Backspace" })}
+          aria-label={t("power_k.search_menu.clear_context", { shortcut: "Backspace" })}
           tabIndex={-1}
         >
           <CloseOutline className="size-2.5" />

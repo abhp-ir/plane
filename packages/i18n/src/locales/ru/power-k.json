@@ -171,7 +171,10 @@
     "search_menu": {
       "no_results": "Ничего не найдено",
       "clear_search": "Очистить поиск",
-      "go_to_advanced_search": "Перейти к расширенному поиску"
+      "go_to_advanced_search": "Перейти к расширенному поиску",
+      "results_in_workspace": "Результаты поиска «{query}» в рабочем пространстве:",
+      "results_in_project": "Результаты поиска «{query}» в проекте:",
+      "clear_context": "Очистить контекст ({shortcut})"
     },
     "footer": {
       "workspace_level": "Уровень рабочего пространства"

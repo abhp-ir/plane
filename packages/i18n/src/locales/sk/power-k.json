@@ -171,7 +171,10 @@
     "search_menu": {
       "no_results": "Nenašli sa žiadne výsledky",
       "clear_search": "Vymazať vyhľadávanie",
-      "go_to_advanced_search": "Prejsť na pokročilé vyhľadávanie"
+      "go_to_advanced_search": "Prejsť na pokročilé vyhľadávanie",
+      "results_in_workspace": "Výsledky vyhľadávania „{query}“ v pracovnom priestore:",
+      "results_in_project": "Výsledky vyhľadávania „{query}“ v projekte:",
+      "clear_context": "Vymazať kontext ({shortcut})"
     },
     "footer": {
       "workspace_level": "Úroveň pracovného priestoru"

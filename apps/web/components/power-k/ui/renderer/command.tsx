@@ -7,7 +7,7 @@
 import React from "react";
 import { Command } from "cmdk";
 // plane imports
-import { useTranslation } from "@plane/i18n";
+import { i18nInstance, useTranslation } from "@plane/i18n";
 // local imports
 import type { TPowerKCommandConfig, TPowerKCommandGroup, TPowerKContext } from "../../core/types";
 import { PowerKModalCommandItem } from "../modal/command-item";
@@ -65,6 +65,14 @@ export function CommandRenderer(props: Props) {
                 icon={command.icon}
                 iconNode={command.iconNode}
                 label={t(command.i18n_title)}
+                value={command.id}
+                keywords={[
+                  i18nInstance.t(command.i18n_title, { lng: "en" }),
+                  ...(command.keywords ?? []),
+                  ...(command.i18n_description
+                    ? [t(command.i18n_description), i18nInstance.t(command.i18n_description, { lng: "en" })]
+                    : []),
+                ]}
                 keySequence={command.keySequence}
                 keySequenceSeparator={keySequenceSeparator}
                 shortcut={command.shortcut || command.modifierShortcut}

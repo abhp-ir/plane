@@ -21,6 +21,7 @@ type Props = {
   keySequence?: string;
   /** Translated connector rendered between the keys of `keySequence` */
   keySequenceSeparator?: string;
+  keywords?: string[];
   label: string | React.ReactNode;
   onSelect: () => void;
   shortcut?: string;
@@ -35,6 +36,7 @@ export function PowerKModalCommandItem(props: Props) {
     isSelected,
     keySequence,
     keySequenceSeparator = "",
+    keywords,
     label,
     onSelect,
     shortcut,
@@ -42,7 +44,13 @@ export function PowerKModalCommandItem(props: Props) {
   } = props;
 
   return (
-    <Command.Item value={value} onSelect={onSelect} className="focus:outline-none" disabled={isDisabled}>
+    <Command.Item
+      value={value}
+      keywords={typeof label === "string" ? [label, ...(keywords ?? [])] : keywords}
+      onSelect={onSelect}
+      className="focus:outline-none"
+      disabled={isDisabled}
+    >
       <div
         className={cn("flex items-center gap-2 text-secondary", {
           "opacity-70": isDisabled,
