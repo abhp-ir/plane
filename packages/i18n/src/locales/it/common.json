@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/> ha commentato{showIssue, select, true { su <issue/>} other {}}.",
+    "attachment_uploaded": "<actor/> ha caricato un allegato{showIssue, select, true { su <issue/>} other {}}.",
+    "attachment_removed": "<actor/> ha rimosso un allegato{showIssue, select, true { da <issue/>} other {}}.",
+    "assignee_added": "<actor/> ha assegnato <value/> a {showIssue, select, true {<issue/>} other {l’elemento di lavoro}}.",
+    "assignee_removed": "<actor/> ha rimosso <value/> dai responsabili di {showIssue, select, true {<issue/>} other {l’elemento di lavoro}}.",
     "collection_assigned": "<actor/> ha assegnato {showIssue, select, true {<issue/>} other {l’elemento di lavoro}} {kind, select, cycles {al ciclo} modules {al modulo} other {alla raccolta}} <value/>.",
     "collection_removed": "<actor/> ha rimosso {showIssue, select, true {<issue/>} other {l’elemento di lavoro}} {kind, select, cycles {dal ciclo} modules {dal modulo} other {dalla raccolta}} <value/>.",
     "property_set": "<actor/> ha cambiato «{property}»{showIssue, select, true { in <issue/>} other {}} in <value/>.",

@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/> comentou{showIssue, select, true { em <issue/>} other {}}.",
+    "attachment_uploaded": "<actor/> enviou um anexo{showIssue, select, true { para <issue/>} other {}}.",
+    "attachment_removed": "<actor/> removeu um anexo{showIssue, select, true { de <issue/>} other {}}.",
+    "assignee_added": "<actor/> atribuiu <value/> a {showIssue, select, true {<issue/>} other {o item de trabalho}}.",
+    "assignee_removed": "<actor/> removeu <value/> dos responsáveis por {showIssue, select, true {<issue/>} other {o item de trabalho}}.",
     "collection_assigned": "<actor/> atribuiu {showIssue, select, true {<issue/>} other {o item de trabalho}} {kind, select, cycles {ao ciclo} modules {ao módulo} other {à coleção}} <value/>.",
     "collection_removed": "<actor/> removeu {showIssue, select, true {<issue/>} other {o item de trabalho}} {kind, select, cycles {do ciclo} modules {do módulo} other {da coleção}} <value/>.",
     "property_set": "<actor/> alterou “{property}”{showIssue, select, true { em <issue/>} other {}} para <value/>.",

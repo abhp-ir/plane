@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/>が{showIssue, select, true {<issue/>に} other {}}コメントしました。",
+    "attachment_uploaded": "<actor/>が{showIssue, select, true {<issue/>に} other {}}添付ファイルをアップロードしました。",
+    "attachment_removed": "<actor/>が{showIssue, select, true {<issue/>から} other {}}添付ファイルを削除しました。",
+    "assignee_added": "<actor/>が<value/>を{showIssue, select, true {<issue/>の} other {作業項目の}}担当者に指定しました。",
+    "assignee_removed": "<actor/>が<value/>を{showIssue, select, true {<issue/>の} other {作業項目の}}担当者から外しました。",
     "collection_assigned": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を{kind, select, cycles {サイクル} modules {モジュール} other {コレクション}}<value/>に割り当てました。",
     "collection_removed": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を{kind, select, cycles {サイクル} modules {モジュール} other {コレクション}}<value/>から削除しました。",
     "property_set": "<actor/>が{showIssue, select, true {<issue/>の} other {}}「{property}」を<value/>に変更しました。",

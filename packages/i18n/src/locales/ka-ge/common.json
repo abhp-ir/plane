@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/>: კომენტარი დაემატა{showIssue, select, true { ჩანაწერს <issue/>} other {}}.",
+    "attachment_uploaded": "<actor/>: დანართი აიტვირთა{showIssue, select, true { ჩანაწერში <issue/>} other {}}.",
+    "attachment_removed": "<actor/>: დანართი წაიშალა{showIssue, select, true { ჩანაწერიდან <issue/>} other {}}.",
+    "assignee_added": "<actor/>: <value/> დაინიშნა {showIssue, select, true {<issue/>} other {სამუშაო ელემენტის}} პასუხისმგებლად.",
+    "assignee_removed": "<actor/>: <value/> მოიხსნა {showIssue, select, true {<issue/>} other {სამუშაო ელემენტის}} პასუხისმგებლის როლიდან.",
     "collection_assigned": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}} მიენიჭა {kind, select, cycles {ციკლს} modules {მოდულს} other {კოლექციას}} <value/>.",
     "collection_removed": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}} ამოიშალა {kind, select, cycles {ციკლიდან} modules {მოდულიდან} other {კოლექციიდან}} <value/>.",
     "property_set": "<actor/>: „{property}“{showIssue, select, true { ჩანაწერში <issue/>} other {}} შეიცვალა მნიშვნელობით <value/>.",

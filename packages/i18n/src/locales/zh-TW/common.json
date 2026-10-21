@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/>{showIssue, select, true {在<issue/>中} other {}}發表了留言。",
+    "attachment_uploaded": "<actor/>{showIssue, select, true {向<issue/>} other {}}上傳了附件。",
+    "attachment_removed": "<actor/>{showIssue, select, true {從<issue/>中} other {}}移除了附件。",
+    "assignee_added": "<actor/>將<value/>設為{showIssue, select, true {<issue/>的} other {工作項目的}}負責人。",
+    "assignee_removed": "<actor/>取消了<value/>作為{showIssue, select, true {<issue/>的} other {工作項目的}}負責人的指派。",
     "collection_assigned": "<actor/>將{showIssue, select, true {<issue/>} other {工作項目}}指派至{kind, select, cycles {週期} modules {模組} other {集合}}<value/>。",
     "collection_removed": "<actor/>從{kind, select, cycles {週期} modules {模組} other {集合}}<value/>中移除了{showIssue, select, true {<issue/>} other {工作項目}}。",
     "property_set": "<actor/>將{showIssue, select, true {<issue/>的} other {}}「{property}」變更為<value/>。",

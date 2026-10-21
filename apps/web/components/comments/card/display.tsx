@@ -17,9 +17,10 @@ import { useHashScroll } from "@plane/hooks";
 import { GlobeOutline, LockOutline } from "@makeplane/propel/icons";
 import { EIssueCommentAccessSpecifier } from "@plane/types";
 import type { TCommentsOperations, TIssueComment } from "@plane/types";
-import { calculateTimeAgo, cn, getFileURL, renderFormattedDate, renderFormattedTime } from "@plane/utils";
+import { calculateTimeAgo, cn, getFileURL, renderLocalizedDateTime } from "@plane/utils";
 // components
 import { LiteTextEditor } from "@/components/editor/lite-text";
+import { ActivitySentence } from "@/components/common/activity/sentence";
 // local imports
 import { CommentReactions } from "../comment-reaction";
 import { CommentCardEditForm } from "./edit-form";
@@ -57,7 +58,7 @@ export const CommentCardDisplay = observer(function CommentCardDisplay(props: TC
     renderFooter,
     renderQuickActions,
   } = props;
-  const { currentLocale } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // states
   const [highlightClassName, setHighlightClassName] = useState("");
   // state
@@ -67,9 +68,10 @@ export const CommentCardDisplay = observer(function CommentCardDisplay(props: TC
   // derived values
   const userDetails = getUserDetails(comment?.actor);
   const displayName = comment?.actor_detail?.is_bot
-    ? comment?.actor_detail?.first_name + `Bot`
+    ? `${comment?.actor_detail?.first_name} ${t("bot")}`
     : (userDetails?.display_name ?? comment?.actor_detail?.display_name);
   const avatarUrl = userDetails?.avatar_url ?? comment?.actor_detail?.avatar_url;
+  const timestamp = renderLocalizedDateTime(comment.created_at, currentLocale);
 
   const userReactions = activityOperations.userReactions(comment.id);
 
@@ -121,19 +123,21 @@ export const CommentCardDisplay = observer(function CommentCardDisplay(props: TC
       )}
       <div className="relative mb-3 flex w-full items-center gap-2">
         <Avatar alt={displayName} fallback={displayName?.[0]?.toUpperCase()} size="2xs" src={getFileURL(avatarUrl)} />
-        <div className="flex flex-1 flex-wrap items-center gap-1">
-          <div className="text-caption-sm-medium">{displayName}</div>
-          <div className="text-caption-sm-regular text-tertiary">
-            commented{" "}
+        <div className="min-w-0 flex-1">
+          <div className="text-caption-sm-regular break-words text-tertiary">
+            <ActivitySentence
+              actor={<bdi className="text-caption-sm-medium text-primary">{displayName}</bdi>}
+              message="comment_posted"
+            />{" "}
             <Tooltip
-              label={`${renderFormattedDate(comment.created_at, undefined, currentLocale)} at ${renderFormattedTime(comment.created_at)}`}
+              label={`${timestamp.date}${currentLocale === "fa" ? "،" : ","} ${timestamp.time}`}
               side="bottom"
               layout="single"
               delay={200}
             >
               <span className="text-tertiary">
                 {calculateTimeAgo(comment.created_at, currentLocale)}
-                {comment.edited_at && " (edited)"}
+                {comment.edited_at && ` (${t("edited")})`}
               </span>
             </Tooltip>
           </div>

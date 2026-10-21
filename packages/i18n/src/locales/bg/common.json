@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/> добави коментар{showIssue, select, true { към <issue/>} other {}}.",
+    "attachment_uploaded": "<actor/> качи прикачен файл{showIssue, select, true { към <issue/>} other {}}.",
+    "attachment_removed": "<actor/> премахна прикачен файл{showIssue, select, true { от <issue/>} other {}}.",
+    "assignee_added": "<actor/> възложи {showIssue, select, true {<issue/>} other {работния елемент}} на <value/>.",
+    "assignee_removed": "<actor/> премахна възлагането на <value/> за {showIssue, select, true {<issue/>} other {работния елемент}}.",
     "collection_assigned": "<actor/> добави {showIssue, select, true {<issue/>} other {работния елемент}} към {kind, select, cycles {цикъл} modules {модул} other {колекция}} <value/>.",
     "collection_removed": "<actor/> премахна {showIssue, select, true {<issue/>} other {работния елемент}} от {kind, select, cycles {цикъл} modules {модул} other {колекция}} <value/>.",
     "property_set": "<actor/> промени „{property}“{showIssue, select, true { в <issue/>} other {}} на <value/>.",

@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import type { EditorRefApi } from "@plane/editor";
 import { CloseOutline, TickOutline } from "@makeplane/propel/icons";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import type { TCommentsOperations, TIssueComment } from "@plane/types";
 import { cn, isCommentEmpty } from "@plane/utils";
 // components
@@ -27,6 +28,7 @@ type Props = {
 };
 
 export const CommentCardEditForm = observer(function CommentCardEditForm(props: Props) {
+  const { t } = useTranslation();
   const {
     activityOperations,
     comment,
@@ -76,6 +78,8 @@ export const CommentCardEditForm = observer(function CommentCardEditForm(props: 
   return (
     <form className="flex flex-col gap-2">
       <div
+        role="group"
+        aria-label={t("comments")}
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.metaKey && !isEmpty) handleSubmit(onEnter)(e);
         }}
@@ -114,6 +118,7 @@ export const CommentCardEditForm = observer(function CommentCardEditForm(props: 
         {!isEmpty && (
           <button
             type="button"
+            aria-label={t("common.save_changes")}
             onClick={handleSubmit(onEnter)}
             disabled={isDisabled}
             className={cn(
@@ -126,6 +131,7 @@ export const CommentCardEditForm = observer(function CommentCardEditForm(props: 
         )}
         <button
           type="button"
+          aria-label={t("common.cancel")}
           disabled={isSubmitting}
           className={cn(
             "group grid size-7 place-items-center rounded-lg border border-danger-subtle bg-danger-subtle shadow-raised-100 duration-300",

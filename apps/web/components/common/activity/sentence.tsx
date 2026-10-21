@@ -15,7 +15,12 @@ type Props = {
     | "work_item_created"
     | "work_item_deleted"
     | "collection_assigned"
-    | "collection_removed";
+    | "collection_removed"
+    | "comment_posted"
+    | "attachment_uploaded"
+    | "attachment_removed"
+    | "assignee_added"
+    | "assignee_removed";
   actor: ReactElement;
   property?: string;
   value?: ReactElement;

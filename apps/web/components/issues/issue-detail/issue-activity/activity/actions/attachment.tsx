@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 import { AttachOutline } from "@makeplane/propel/icons";
 // hooks
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { ActivitySentence } from "@/components/common/activity/sentence";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
@@ -29,11 +30,13 @@ export const IssueAttachmentActivity = observer(function IssueAttachmentActivity
       activityId={activityId}
       ends={ends}
     >
-      <>
-        {activity.verb === "created" ? `uploaded a new attachment` : `removed an attachment`}
-        {showIssue && (activity.verb === "created" ? ` to ` : ` from `)}
-        {showIssue && <IssueLink activityId={activityId} />}.
-      </>
+      {(actor) => (
+        <ActivitySentence
+          actor={actor}
+          message={activity.verb === "created" ? "attachment_uploaded" : "attachment_removed"}
+          issue={showIssue ? <IssueLink activityId={activityId} /> : undefined}
+        />
+      )}
     </IssueActivityBlockComponent>
   );
 });

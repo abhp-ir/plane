@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/> hat einen Kommentar{showIssue, select, true { zu <issue/>} other {}} verfasst.",
+    "attachment_uploaded": "<actor/> hat einen Anhang{showIssue, select, true { zu <issue/>} other {}} hochgeladen.",
+    "attachment_removed": "<actor/> hat einen Anhang{showIssue, select, true { aus <issue/>} other {}} entfernt.",
+    "assignee_added": "<actor/> hat {showIssue, select, true {<issue/>} other {das Arbeitselement}} <value/> zugewiesen.",
+    "assignee_removed": "<actor/> hat die Zuweisung an <value/> für {showIssue, select, true {<issue/>} other {das Arbeitselement}} entfernt.",
     "collection_assigned": "<actor/> hat {showIssue, select, true {<issue/>} other {das Arbeitselement}} {kind, select, cycles {dem Zyklus} modules {dem Modul} other {der Sammlung}} <value/> zugewiesen.",
     "collection_removed": "<actor/> hat {showIssue, select, true {<issue/>} other {das Arbeitselement}} aus {kind, select, cycles {dem Zyklus} modules {dem Modul} other {der Sammlung}} <value/> entfernt.",
     "property_set": "<actor/> hat „{property}“{showIssue, select, true { für <issue/>} other {}} auf <value/> geändert.",

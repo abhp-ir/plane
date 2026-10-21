@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/> a adăugat un comentariu{showIssue, select, true { la <issue/>} other {}}.",
+    "attachment_uploaded": "<actor/> a încărcat un atașament{showIssue, select, true { la <issue/>} other {}}.",
+    "attachment_removed": "<actor/> a eliminat un atașament{showIssue, select, true { din <issue/>} other {}}.",
+    "assignee_added": "<actor/> a atribuit <value/> la {showIssue, select, true {<issue/>} other {elementul de lucru}}.",
+    "assignee_removed": "<actor/> a eliminat atribuirea lui <value/> la {showIssue, select, true {<issue/>} other {elementul de lucru}}.",
     "collection_assigned": "<actor/> a asociat {showIssue, select, true {<issue/>} other {elementul de lucru}} cu {kind, select, cycles {ciclul} modules {modulul} other {colecția}} <value/>.",
     "collection_removed": "<actor/> a eliminat {showIssue, select, true {<issue/>} other {elementul de lucru}} din {kind, select, cycles {ciclul} modules {modulul} other {colecția}} <value/>.",
     "property_set": "<actor/> a schimbat „{property}”{showIssue, select, true { în <issue/>} other {}} în <value/>.",

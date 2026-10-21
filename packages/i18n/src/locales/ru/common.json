@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "Пользователь <actor/> оставил комментарий{showIssue, select, true { к <issue/>} other {}}.",
+    "attachment_uploaded": "Пользователь <actor/> загрузил вложение{showIssue, select, true { в <issue/>} other {}}.",
+    "attachment_removed": "Пользователь <actor/> удалил вложение{showIssue, select, true { из <issue/>} other {}}.",
+    "assignee_added": "Пользователь <actor/> назначил <value/> ответственным за {showIssue, select, true {<issue/>} other {рабочий элемент}}.",
+    "assignee_removed": "Пользователь <actor/> отменил назначение <value/> ответственным за {showIssue, select, true {<issue/>} other {рабочий элемент}}.",
     "collection_assigned": "Пользователь <actor/> привязал {showIssue, select, true {<issue/>} other {рабочий элемент}} к {kind, select, cycles {циклу} modules {модулю} other {коллекции}} <value/>.",
     "collection_removed": "Пользователь <actor/> удалил {showIssue, select, true {<issue/>} other {рабочий элемент}} из {kind, select, cycles {цикла} modules {модуля} other {коллекции}} <value/>.",
     "property_set": "Пользователь <actor/> изменил «{property}»{showIssue, select, true { в <issue/>} other {}} на <value/>.",

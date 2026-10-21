@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "Používateľ <actor/> pridal komentár{showIssue, select, true { k <issue/>} other {}}.",
+    "attachment_uploaded": "Používateľ <actor/> nahral prílohu{showIssue, select, true { k <issue/>} other {}}.",
+    "attachment_removed": "Používateľ <actor/> odstránil prílohu{showIssue, select, true { z <issue/>} other {}}.",
+    "assignee_added": "Používateľ <actor/> priradil <value/> k {showIssue, select, true {<issue/>} other {pracovnej položke}}.",
+    "assignee_removed": "Používateľ <actor/> zrušil priradenie <value/> k {showIssue, select, true {<issue/>} other {pracovnej položke}}.",
     "collection_assigned": "Používateľ <actor/> priradil {showIssue, select, true {<issue/>} other {pracovnú položku}} do {kind, select, cycles {cyklu} modules {modulu} other {kolekcie}} <value/>.",
     "collection_removed": "Používateľ <actor/> odstránil {showIssue, select, true {<issue/>} other {pracovnú položku}} z {kind, select, cycles {cyklu} modules {modulu} other {kolekcie}} <value/>.",
     "property_set": "Používateľ <actor/> zmenil „{property}“{showIssue, select, true { v <issue/>} other {}} na <value/>.",

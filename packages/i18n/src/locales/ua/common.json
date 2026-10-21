@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "Користувач <actor/> додав коментар{showIssue, select, true { до <issue/>} other {}}.",
+    "attachment_uploaded": "Користувач <actor/> завантажив вкладення{showIssue, select, true { до <issue/>} other {}}.",
+    "attachment_removed": "Користувач <actor/> видалив вкладення{showIssue, select, true { з <issue/>} other {}}.",
+    "assignee_added": "Користувач <actor/> призначив <value/> відповідальним за {showIssue, select, true {<issue/>} other {робочий елемент}}.",
+    "assignee_removed": "Користувач <actor/> скасував призначення <value/> відповідальним за {showIssue, select, true {<issue/>} other {робочий елемент}}.",
     "collection_assigned": "Користувач <actor/> додав {showIssue, select, true {<issue/>} other {робочий елемент}} до {kind, select, cycles {циклу} modules {модуля} other {колекції}} <value/>.",
     "collection_removed": "Користувач <actor/> видалив {showIssue, select, true {<issue/>} other {робочий елемент}} із {kind, select, cycles {циклу} modules {модуля} other {колекції}} <value/>.",
     "property_set": "Користувач <actor/> змінив «{property}»{showIssue, select, true { у <issue/>} other {}} на <value/>.",

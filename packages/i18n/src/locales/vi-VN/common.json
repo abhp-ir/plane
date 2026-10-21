@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/> đã bình luận{showIssue, select, true { về <issue/>} other {}}.",
+    "attachment_uploaded": "<actor/> đã tải lên tệp đính kèm{showIssue, select, true { cho <issue/>} other {}}.",
+    "attachment_removed": "<actor/> đã xóa tệp đính kèm{showIssue, select, true { khỏi <issue/>} other {}}.",
+    "assignee_added": "<actor/> đã giao {showIssue, select, true {<issue/>} other {mục công việc}} cho <value/>.",
+    "assignee_removed": "<actor/> đã hủy phân công <value/> cho {showIssue, select, true {<issue/>} other {mục công việc}}.",
     "collection_assigned": "<actor/> đã gán {showIssue, select, true {<issue/>} other {mục công việc}} vào {kind, select, cycles {chu kỳ} modules {mô-đun} other {bộ sưu tập}} <value/>.",
     "collection_removed": "<actor/> đã xóa {showIssue, select, true {<issue/>} other {mục công việc}} khỏi {kind, select, cycles {chu kỳ} modules {mô-đun} other {bộ sưu tập}} <value/>.",
     "property_set": "<actor/> đã đổi “{property}”{showIssue, select, true { trong <issue/>} other {}} thành <value/>.",

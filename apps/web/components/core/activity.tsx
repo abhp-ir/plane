@@ -40,6 +40,7 @@ import { ACTIVITY_PROPERTY_LABELS, ActivityPropertyChange } from "@/components/c
 import { ActivitySentence } from "@/components/common/activity/sentence";
 import { WorkItemActivityChange } from "@/components/common/activity/work-item-change";
 import { ActivityCollectionChange } from "@/components/common/activity/collection-change";
+import { ActivityMemberChange } from "@/components/common/activity/member-change";
 // types
 
 export function IssueLink({ activity }: { activity: IIssueActivity }) {
@@ -82,24 +83,6 @@ export function IssueLink({ activity }: { activity: IIssueActivity }) {
         </span>
       )}
     </Tooltip>
-  );
-}
-
-function UserLink({ activity }: { activity: IIssueActivity }) {
-  // router params
-  const { workspaceSlug } = useParams();
-
-  return (
-    <a
-      href={`/${workspaceSlug ?? activity.workspace_detail?.slug}/profile/${
-        activity.new_identifier ?? activity.old_identifier
-      }`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center font-medium text-primary hover:underline"
-    >
-      {activity.new_value && activity.new_value !== "" ? activity.new_value : activity.old_value}
-    </a>
   );
 }
 
@@ -163,32 +146,6 @@ const activityDetails: {
   };
 } = {
   assignees: {
-    message: (activity, showIssue) => {
-      if (activity.old_value === "")
-        return (
-          <>
-            added a new assignee <UserLink activity={activity} />
-            {showIssue && (
-              <>
-                {" "}
-                to <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-      else
-        return (
-          <>
-            removed the assignee <UserLink activity={activity} />
-            {showIssue && (
-              <>
-                {" "}
-                from <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-    },
     icon: <MembersOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   archived_at: {
@@ -209,32 +166,6 @@ const activityDetails: {
     icon: <ArchiveOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   attachment: {
-    message: (activity, showIssue) => {
-      if (activity.verb === "created")
-        return (
-          <>
-            uploaded a new attachment
-            {showIssue && (
-              <>
-                {" "}
-                to <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-      else
-        return (
-          <>
-            removed an attachment
-            {showIssue && (
-              <>
-                {" "}
-                from <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-    },
     icon: <AttachOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   description: {
@@ -581,6 +512,17 @@ export function ActivityMessage({ activity, showIssue = false, actor }: Activity
   if (activityField === "cycles" || activityField === "modules") {
     return <ActivityCollectionChange activity={activity} actor={actor} issue={issue} />;
   }
+  if (activityField === "assignees") return <ActivityMemberChange activity={activity} actor={actor} issue={issue} />;
+  if (activityField === "attachment") {
+    return (
+      <ActivitySentence
+        actor={actor}
+        issue={issue}
+        message={activity.verb === "created" ? "attachment_uploaded" : "attachment_removed"}
+      />
+    );
+  }
+  if (activityField === "comment") return <ActivitySentence actor={actor} issue={issue} message="comment_posted" />;
   if (activityField === "description") {
     return <ActivitySentence actor={actor} message="description_edited" issue={issue} />;
   }

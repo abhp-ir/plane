@@ -31,7 +31,7 @@ export const CommentBlock = observer(function CommentBlock(props: TCommentBlock)
       ref={commentBlockRef}
     >
       <div
-        className="transition-border absolute top-0 bottom-0 left-[13px] w-px bg-layer-3 duration-1000"
+        className="transition-border inset-s-[13px] absolute top-0 bottom-0 w-px bg-layer-3 duration-1000"
         aria-hidden
       />
       <div
@@ -41,7 +41,7 @@ export const CommentBlock = observer(function CommentBlock(props: TCommentBlock)
       >
         <ReplyOutline width={14} height={14} className="text-secondary" aria-hidden="true" />
       </div>
-      <div className="flex flex-grow flex-col gap-3 truncate">
+      <div className="flex min-w-0 flex-1 flex-col gap-3 break-words">
         <div className="mb-2 rounded-lg border border-subtle bg-layer-2 p-3 text-body-sm-regular shadow-raised-100">
           {children}
         </div>

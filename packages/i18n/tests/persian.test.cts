@@ -184,7 +184,18 @@ const activitySlots = (text: string) => [...text.matchAll(/<(\w+)\s*\/>/g)].map(
 
 test("activity templates preserve rich slots and resolve every contextual branch in all locales", async () => {
   await initPromise;
-  const keys = ["property_set", "property_removed", "description_edited", "work_item_created", "work_item_deleted"];
+  const keys = [
+    "property_set",
+    "property_removed",
+    "description_edited",
+    "work_item_created",
+    "work_item_deleted",
+    "comment_posted",
+    "attachment_uploaded",
+    "attachment_removed",
+    "assignee_added",
+    "assignee_removed",
+  ];
   const english = load("en", "common");
   try {
     for (const { value: language } of SUPPORTED_LANGUAGES) {
@@ -205,7 +216,11 @@ test("activity templates preserve rich slots and resolve every contextual branch
               message === "work_item_created" && hasSource,
               `${language}: source branch`
             );
-            assert.equal(text.includes("<value/>"), message === "property_set", `${language}: value slot`);
+            assert.equal(
+              text.includes("<value/>"),
+              ["property_set", "assignee_added", "assignee_removed"].includes(message),
+              `${language}: value slot`
+            );
             assert.equal(text.includes("{showIssue"), false, `${language}: ICU resolved`);
             if (message.startsWith("property_")) assert.ok(text.includes("ABC-42 <custom>"));
           }

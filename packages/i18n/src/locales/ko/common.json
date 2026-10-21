@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "<actor/>: {showIssue, select, true {<issue/>에 } other {}}댓글을 작성했습니다.",
+    "attachment_uploaded": "<actor/>: {showIssue, select, true {<issue/>에 } other {}}첨부 파일을 업로드했습니다.",
+    "attachment_removed": "<actor/>: {showIssue, select, true {<issue/>에서 } other {}}첨부 파일을 삭제했습니다.",
+    "assignee_added": "<actor/>: <value/>을(를) {showIssue, select, true {<issue/>의} other {작업 항목의}} 담당자로 지정했습니다.",
+    "assignee_removed": "<actor/>: <value/>을(를) {showIssue, select, true {<issue/>의} other {작업 항목의}} 담당자에서 제외했습니다.",
     "collection_assigned": "<actor/>: {showIssue, select, true {<issue/>} other {작업 항목}}을(를) {kind, select, cycles {사이클} modules {모듈} other {컬렉션}} <value/>에 할당했습니다.",
     "collection_removed": "<actor/>: {kind, select, cycles {사이클} modules {모듈} other {컬렉션}} <value/>에서 {showIssue, select, true {<issue/>} other {작업 항목}}을(를) 제거했습니다.",
     "property_set": "<actor/>: {showIssue, select, true {<issue/>의 } other {}}“{property}” 항목을 <value/>(으)로 변경했습니다.",

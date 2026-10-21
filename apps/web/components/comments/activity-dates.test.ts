@@ -8,6 +8,7 @@
 import { act, createElement, createRef } from "react";
 import type { ComponentProps, ReactNode } from "react";
 import { createRoot } from "react-dom/client";
+import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter } from "react-router";
 import { expect, it, vi } from "vitest";
 import type { EditorRefApi } from "@plane/editor";
@@ -90,8 +91,45 @@ const operations = {
   userReactions: () => [],
   reactionIds: () => undefined,
   react: mocks.mutate,
+  updateComment: mocks.mutate,
 } as unknown as TCommentsOperations;
 let notification: TNotification;
+
+it.each([
+  ["fa", "ذخیرهٔ تغییرات", "انصراف", "دیدگاه‌ها"],
+  ["en", "Save changes", "Cancel", "Comments"],
+] as const)("names %s comment edit actions without changing saved content", async (language, save, cancel, label) => {
+  const { CommentCardEditForm } = await vi.importActual<typeof import("./card/edit-form")>("./card/edit-form");
+  await initPromise;
+  mocks.mutate.mockClear();
+  const before = JSON.stringify(comment);
+  try {
+    await setLanguage(language);
+    const markup = renderToStaticMarkup(
+      createElement(
+        TranslationProvider,
+        null,
+        createElement(CommentCardEditForm, {
+          activityOperations: operations,
+          comment,
+          isEditing: true,
+          readOnlyEditorRef: null,
+          setIsEditing: mocks.mutate,
+          workspaceId: "workspace",
+          workspaceSlug: "owned",
+        })
+      )
+    );
+    expect(markup).toContain(`aria-label="${save}"`);
+    expect(markup).toContain(`aria-label="${cancel}"`);
+    expect(markup).toContain(`role="group" aria-label="${label}"`);
+    expect(markup).toContain('data-content="&lt;p&gt;می‌رود ABC-42&lt;/p&gt;"');
+    expect(JSON.stringify(comment)).toBe(before);
+    expect(mocks.mutate).not.toHaveBeenCalled();
+  } finally {
+    await setLanguage("en");
+  }
+});
 
 it.each([
   "comment",
@@ -193,20 +231,24 @@ it.each([
       container.textContent,
       ...Array.from(container.querySelectorAll("[data-tooltip]"), (n) => n.getAttribute("data-tooltip")),
     ].join(" ");
+  // Comment timestamps use the local day of the instant; date-only properties retain their saved day.
+  const nextLocalDay = surface === "comment" && new Date(date).getDate() === 21;
+  const englishDate = nextLocalDay ? "Mar 21, 2025" : "Mar 20, 2025";
+  const persianDate = surface === "comment" ? (nextLocalDay ? "۱ فروردین ۱۴۰۴" : "۳۰ اسفند ۱۴۰۳") : "اسف ۳۰, ۱۴۰۳";
   try {
     await act(async () =>
       root.render(createElement(MemoryRouter, null, createElement(TranslationProvider, null, components[surface])))
     );
-    expect(displayed()).toContain("Mar 20, 2025");
+    expect(displayed()).toContain(englishDate);
     const originalHref = container.querySelector("a")?.getAttribute("href");
     await act(async () => setLanguage("fa"));
-    expect(displayed()).toContain("اسف ۳۰, ۱۴۰۳");
-    expect(displayed()).not.toContain("Mar 20, 2025");
+    expect(displayed()).toContain(persianDate);
+    expect(displayed()).not.toContain(englishDate);
     if (surface === "comment")
       expect(container.querySelector("[data-content]")?.getAttribute("data-content")).toBe(comment.comment_html);
     if (surface.startsWith("attachment")) expect(container.querySelector("a")?.getAttribute("href")).toBe(originalHref);
     await act(async () => setLanguage("en"));
-    expect(displayed()).toContain("Mar 20, 2025");
+    expect(displayed()).toContain(englishDate);
     expect(JSON.stringify({ comment, attachment, notification })).toBe(before);
     expect(mocks.mutate).not.toHaveBeenCalled();
     expect(mocks.read).not.toHaveBeenCalled();

@@ -13,6 +13,7 @@ import { ActivitySentence } from "./sentence";
 import { ActivityPropertyChange } from "./property-change";
 import { WorkItemActivityChange } from "./work-item-change";
 import { ActivityCollectionChange } from "./collection-change";
+import { ActivityMemberChange } from "./member-change";
 
 vi.mock("next/navigation", () => ({ useParams: () => ({ workspaceSlug: "owned" }) }));
 
@@ -205,4 +206,44 @@ it("ignores a non-collection field instead of treating its editable name as a co
       })
     )
   ).toBe("");
+});
+
+it("preserves assignee names, profile IDs and data for addition and removal", () => {
+  for (const added of [true, false]) {
+    const activity = added
+      ? {
+          old_value: "",
+          new_value: "english نامِ شخص <code>",
+          old_identifier: null,
+          new_identifier: "added-id",
+        }
+      : {
+          old_value: "english نامِ شخص <code>",
+          new_value: "",
+          old_identifier: "removed-id",
+          new_identifier: null,
+        };
+    const before = { ...activity };
+    const markup = renderToStaticMarkup(createElement(ActivityMemberChange, { activity, actor, issue }));
+    expect(markup).toContain(`href="/owned/profile/${added ? "added-id" : "removed-id"}"`);
+    expect(markup).toContain("<bdi>english نامِ شخص &lt;code&gt;</bdi>");
+    expect(text(markup)).toContain(added ? "به‌عنوان مسئولِ FA1405-1 تعیین کرد." : "از مسئولانِ FA1405-1 حذف کرد.");
+    expect(activity).toEqual(before);
+  }
+});
+
+it("renders complete Persian comment/upload/removal clauses with optional issue links", () => {
+  const messages = [
+    ["comment_posted", "نگار ABC-42 در FA1405-1 دیدگاهی ثبت کرد."],
+    ["attachment_uploaded", "نگار ABC-42 برای FA1405-1 پیوستی بارگذاری کرد."],
+    ["attachment_removed", "نگار ABC-42 پیوستی را از FA1405-1 حذف کرد."],
+  ] as const;
+  for (const [message, expected] of messages) {
+    const markup = renderToStaticMarkup(createElement(ActivitySentence, { actor, issue, message }));
+    expect(text(markup)).toBe(expected);
+    expect(markup).toContain('href="/owned/browse/FA1405-1"');
+  }
+  expect(text(renderToStaticMarkup(createElement(ActivitySentence, { actor, message: "comment_posted" })))).toBe(
+    "نگار ABC-42 دیدگاهی ثبت کرد."
+  );
 });

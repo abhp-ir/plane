@@ -14,6 +14,7 @@ import type { IUserActivityResponse } from "@plane/types";
 import { calculateTimeAgo, getFileURL } from "@plane/utils";
 // components
 import { ActivityIcon, ActivityMessage } from "@/components/core/activity";
+import { ActivitySentence } from "@/components/common/activity/sentence";
 import { RichTextEditor } from "@/components/editor/rich-text";
 import { ActivitySettingsLoader } from "@/components/ui/loader/settings/activity";
 // hooks
@@ -68,13 +69,18 @@ export const ActivityList = observer(function ActivityList(props: Props) {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div>
-                        <div className="text-11">
-                          {activityItem.actor_detail.is_bot
-                            ? activityItem.actor_detail.first_name + " Bot"
-                            : activityItem.actor_detail.display_name}
-                        </div>
                         <p className="mt-0.5 text-11 text-secondary">
-                          Commented {calculateTimeAgo(activityItem.created_at, currentLocale)}
+                          <ActivitySentence
+                            actor={
+                              <bdi>
+                                {activityItem.actor_detail.is_bot
+                                  ? `${activityItem.actor_detail.first_name} ${t("bot")}`
+                                  : activityItem.actor_detail.display_name}
+                              </bdi>
+                            }
+                            message="comment_posted"
+                          />{" "}
+                          {calculateTimeAgo(activityItem.created_at, currentLocale)}
                         </p>
                       </div>
                       <div className="issue-comments-section p-0">

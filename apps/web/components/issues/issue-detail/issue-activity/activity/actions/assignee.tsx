@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import { MembersOutline } from "@makeplane/propel/icons";
 // hooks;
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { ActivityMemberChange } from "@/components/common/activity/member-change";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
@@ -30,19 +31,13 @@ export const IssueAssigneeActivity = observer(function IssueAssigneeActivity(pro
       activityId={activityId}
       ends={ends}
     >
-      <>
-        {activity.old_value === "" ? `added a new assignee ` : `removed the assignee `}
-        <a
-          href={`/${activity.workspace_detail?.slug}/profile/${activity.new_identifier ?? activity.old_identifier}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center font-medium text-primary capitalize hover:underline"
-        >
-          {activity.new_value && activity.new_value !== "" ? activity.new_value : activity.old_value}
-        </a>
-        {showIssue && (activity.old_value === "" ? ` to ` : ` from `)}
-        {showIssue && <IssueLink activityId={activityId} />}.
-      </>
+      {(actor) => (
+        <ActivityMemberChange
+          activity={activity}
+          actor={actor}
+          issue={showIssue ? <IssueLink activityId={activityId} /> : undefined}
+        />
+      )}
     </IssueActivityBlockComponent>
   );
 });

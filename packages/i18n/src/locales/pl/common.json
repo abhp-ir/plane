@@ -1,5 +1,10 @@
 {
   "activity_messages": {
+    "comment_posted": "Użytkownik <actor/> dodał komentarz{showIssue, select, true { do <issue/>} other {}}.",
+    "attachment_uploaded": "Użytkownik <actor/> przesłał załącznik{showIssue, select, true { do <issue/>} other {}}.",
+    "attachment_removed": "Użytkownik <actor/> usunął załącznik{showIssue, select, true { z <issue/>} other {}}.",
+    "assignee_added": "Użytkownik <actor/> przypisał <value/> do {showIssue, select, true {<issue/>} other {elementu pracy}}.",
+    "assignee_removed": "Użytkownik <actor/> usunął przypisanie <value/> do {showIssue, select, true {<issue/>} other {elementu pracy}}.",
     "collection_assigned": "Użytkownik <actor/> przypisał {showIssue, select, true {<issue/>} other {element pracy}} do {kind, select, cycles {cyklu} modules {modułu} other {kolekcji}} <value/>.",
     "collection_removed": "Użytkownik <actor/> usunął {showIssue, select, true {<issue/>} other {element pracy}} z {kind, select, cycles {cyklu} modules {modułu} other {kolekcji}} <value/>.",
     "property_set": "Użytkownik <actor/> zmienił „{property}”{showIssue, select, true { w <issue/>} other {}} na <value/>.",
