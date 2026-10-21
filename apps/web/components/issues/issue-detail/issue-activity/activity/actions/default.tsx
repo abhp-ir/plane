@@ -7,10 +7,9 @@
 import { observer } from "mobx-react";
 // plane imports
 import { WorkItemsOutline } from "@makeplane/propel/icons";
-import { EInboxIssueSource } from "@plane/types";
 // hooks
-import { capitalizeFirstLetter } from "@plane/utils";
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { WorkItemActivityChange } from "@/components/common/activity/work-item-change";
 // local imports
 import { IssueActivityBlockComponent } from "./";
 
@@ -26,7 +25,6 @@ export const IssueDefaultActivity = observer(function IssueDefaultActivity(props
   const activity = getActivityById(activityId);
 
   if (!activity) return <></>;
-  const source = activity.source_data?.source;
 
   return (
     <IssueActivityBlockComponent
@@ -34,20 +32,7 @@ export const IssueDefaultActivity = observer(function IssueDefaultActivity(props
       icon={<WorkItemsOutline width={14} height={14} className="text-secondary" aria-hidden="true" />}
       ends={ends}
     >
-      <>
-        {activity.verb === "created" ? (
-          source && source !== EInboxIssueSource.IN_APP ? (
-            <span>
-              created the work item via{" "}
-              <span className="font-medium">{capitalizeFirstLetter(source.toLowerCase() || "")}</span>.
-            </span>
-          ) : (
-            <span> created the work item.</span>
-          )
-        ) : (
-          <span> deleted a work item.</span>
-        )}
-      </>
+      {(actor) => <WorkItemActivityChange activity={activity} actor={actor} />}
     </IssueActivityBlockComponent>
   );
 });

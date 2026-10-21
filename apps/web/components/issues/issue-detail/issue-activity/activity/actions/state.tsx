@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 // hooks
 import { StateOutline } from "@makeplane/propel/icons";
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { ActivityPropertyChange } from "@/components/common/activity/property-change";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
 // icons
@@ -30,11 +31,13 @@ export const IssueStateActivity = observer(function IssueStateActivity(props: TI
       activityId={activityId}
       ends={ends}
     >
-      <>
-        set the state to <span className="font-medium text-primary">{activity.new_value}</span>
-        {showIssue ? ` for ` : ``}
-        {showIssue && <IssueLink activityId={activityId} />}.
-      </>
+      {(actor) => (
+        <ActivityPropertyChange
+          activity={activity}
+          actor={actor}
+          issue={showIssue ? <IssueLink activityId={activityId} /> : undefined}
+        />
+      )}
     </IssueActivityBlockComponent>
   );
 });

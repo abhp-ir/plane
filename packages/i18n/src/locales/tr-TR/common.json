@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/>{showIssue, select, true {, <issue/> üzerinde} other {}}, “{property}” değerini <value/> olarak değiştirdi.",
+    "property_removed": "<actor/>{showIssue, select, true {, <issue/> üzerinden} other {}}, “{property}” değerini kaldırdı.",
+    "description_edited": "<actor/>{showIssue, select, true {, <issue/> için} other {}}, açıklamayı düzenledi.",
+    "work_item_created": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}}{hasSource, select, true { <origin/> aracılığıyla} other {}} oluşturdu.",
+    "work_item_deleted": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}} sildi."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Bu konuda çalışıyoruz. Acil yardıma ihtiyacınız varsa,",
     "reach_out_to_us": "bize ulaşın",

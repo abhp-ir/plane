@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/> đã đổi “{property}”{showIssue, select, true { trong <issue/>} other {}} thành <value/>.",
+    "property_removed": "<actor/> đã xóa “{property}”{showIssue, select, true { khỏi <issue/>} other {}}.",
+    "description_edited": "<actor/> đã chỉnh sửa mô tả{showIssue, select, true { của <issue/>} other {}}.",
+    "work_item_created": "<actor/> đã tạo {showIssue, select, true {<issue/>} other {mục công việc}}{hasSource, select, true { qua <origin/>} other {}}.",
+    "work_item_deleted": "<actor/> đã xóa {showIssue, select, true {<issue/>} other {mục công việc}}."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Chúng tôi đang xử lý vấn đề này. Nếu bạn cần hỗ trợ ngay lập tức,",
     "reach_out_to_us": "hãy liên hệ với chúng tôi",

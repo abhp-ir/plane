@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/> промени „{property}“{showIssue, select, true { в <issue/>} other {}} на <value/>.",
+    "property_removed": "<actor/> премахна „{property}“{showIssue, select, true { от <issue/>} other {}}.",
+    "description_edited": "<actor/> редактира описанието{showIssue, select, true { на <issue/>} other {}}.",
+    "work_item_created": "<actor/> създаде {showIssue, select, true {<issue/>} other {работния елемент}}{hasSource, select, true { чрез <origin/>} other {}}.",
+    "work_item_deleted": "<actor/> изтри {showIssue, select, true {<issue/>} other {работния елемент}}."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Работим по проблема. Ако се нуждаете от незабавна помощ,",
     "reach_out_to_us": "свържете се с нас",

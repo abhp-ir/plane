@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "Uživatel <actor/> změnil „{property}“{showIssue, select, true { u <issue/>} other {}} na <value/>.",
+    "property_removed": "Uživatel <actor/> odstranil „{property}“{showIssue, select, true { z <issue/>} other {}}.",
+    "description_edited": "Uživatel <actor/> upravil popis{showIssue, select, true { u <issue/>} other {}}.",
+    "work_item_created": "Uživatel <actor/> vytvořil {showIssue, select, true {<issue/>} other {pracovní položku}}{hasSource, select, true { přes <origin/>} other {}}.",
+    "work_item_deleted": "Uživatel <actor/> smazal {showIssue, select, true {<issue/>} other {pracovní položku}}."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Pracujeme na tom. Pokud potřebujete okamžitou pomoc,",
     "reach_out_to_us": "kontaktujte nás",

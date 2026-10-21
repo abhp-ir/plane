@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/>: „{property}“{showIssue, select, true { ჩანაწერში <issue/>} other {}} შეიცვალა მნიშვნელობით <value/>.",
+    "property_removed": "<actor/>: „{property}“{showIssue, select, true { ჩანაწერიდან <issue/>} other {}} წაიშალა.",
+    "description_edited": "<actor/>: აღწერა{showIssue, select, true { ჩანაწერში <issue/>} other {}} ჩასწორდა.",
+    "work_item_created": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}}{hasSource, select, true { <origin/>-ის მეშვეობით} other {}} შეიქმნა.",
+    "work_item_deleted": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}} წაიშალა."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "We're working on this. If you need immediate assistance,",
     "reach_out_to_us": "reach out to us",

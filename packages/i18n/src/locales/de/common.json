@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/> hat „{property}“{showIssue, select, true { für <issue/>} other {}} auf <value/> geändert.",
+    "property_removed": "<actor/> hat „{property}“{showIssue, select, true { aus <issue/>} other {}} entfernt.",
+    "description_edited": "<actor/> hat die Beschreibung{showIssue, select, true { von <issue/>} other {}} bearbeitet.",
+    "work_item_created": "<actor/> hat {showIssue, select, true {<issue/>} other {das Arbeitselement}}{hasSource, select, true { über <origin/>} other {}} erstellt.",
+    "work_item_deleted": "<actor/> hat {showIssue, select, true {<issue/>} other {das Arbeitselement}} gelöscht."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Wir arbeiten daran. Wenn Sie sofortige Hilfe benötigen,",
     "reach_out_to_us": "kontaktieren Sie uns",

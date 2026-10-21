@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/>{showIssue, select, true { در <issue/>،} other {}} {property} را به <value/> تغییر داد.",
+    "property_removed": "<actor/>{showIssue, select, true { در <issue/>،} other {}} {property} را حذف کرد.",
+    "description_edited": "<actor/> توضیحات{showIssue, select, true {ِ <issue/>} other {}} را ویرایش کرد.",
+    "work_item_created": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را{hasSource, select, true { از طریق <origin/>} other {}} ایجاد کرد.",
+    "work_item_deleted": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را حذف کرد."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "در حال رفع این مشکل هستیم. اگر به کمک فوری نیاز دارید،",
     "reach_out_to_us": "با ما تماس بگیرید",

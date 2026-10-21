@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/>將{showIssue, select, true {<issue/>的} other {}}「{property}」變更為<value/>。",
+    "property_removed": "<actor/>移除了{showIssue, select, true {<issue/>的} other {}}「{property}」。",
+    "description_edited": "<actor/>編輯了{showIssue, select, true {<issue/>的} other {}}描述。",
+    "work_item_created": "<actor/>{hasSource, select, true {透過<origin/>} other {}}建立了{showIssue, select, true {<issue/>} other {工作項目}}。",
+    "work_item_deleted": "<actor/>刪除了{showIssue, select, true {<issue/>} other {工作項目}}。"
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "我們正在處理此問題。如果您需要緊急協助，",
     "reach_out_to_us": "請聯絡我們",

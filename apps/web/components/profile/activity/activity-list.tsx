@@ -13,12 +13,11 @@ import { useTranslation } from "@plane/i18n";
 import type { IUserActivityResponse } from "@plane/types";
 import { calculateTimeAgo, getFileURL } from "@plane/utils";
 // components
-import { ActivityIcon, ActivityMessage, IssueLink } from "@/components/core/activity";
+import { ActivityIcon, ActivityMessage } from "@/components/core/activity";
 import { RichTextEditor } from "@/components/editor/rich-text";
 import { ActivitySettingsLoader } from "@/components/ui/loader/settings/activity";
 // hooks
 import { useWorkspace } from "@/hooks/store/use-workspace";
-import { useUser } from "@/hooks/store/user";
 
 type Props = {
   activity: IUserActivityResponse | undefined;
@@ -26,11 +25,10 @@ type Props = {
 
 export const ActivityList = observer(function ActivityList(props: Props) {
   const { activity } = props;
-  const { currentLocale } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // params
   const { workspaceSlug } = useParams();
   // store hooks
-  const { data: currentUser } = useUser();
   const { getWorkspaceBySlug } = useWorkspace();
   // derived values
   const workspaceId = getWorkspaceBySlug(workspaceSlug?.toString() ?? "")?.id ?? "";
@@ -99,18 +97,22 @@ export const ActivityList = observer(function ActivityList(props: Props) {
                 </div>
               );
 
-            const message =
-              activityItem.verb === "created" &&
-              !["cycles", "modules", "attachment", "link", "estimate"].includes(
-                activityItem.field?.toString() as string
-              ) &&
-              !activityItem.field ? (
-                <span>
-                  created <IssueLink activity={activityItem} />
+            const actor =
+              activityItem.field === "archived_at" && activityItem.new_value !== "restore" ? (
+                <bdi className="text-gray font-medium">Plane</bdi>
+              ) : activityItem.actor_detail.is_bot ? (
+                <span className="text-gray font-medium">
+                  <bdi>{activityItem.actor_detail.first_name}</bdi> {t("bot")}
                 </span>
               ) : (
-                <ActivityMessage activity={activityItem} showIssue />
+                <Link
+                  href={`/${activityItem.workspace_detail?.slug}/profile/${activityItem.actor_detail.id}`}
+                  className="inline"
+                >
+                  <bdi className="text-gray font-medium">{activityItem.actor_detail.display_name}</bdi>
+                </Link>
               );
+            const message = <ActivityMessage activity={activityItem} actor={actor} showIssue />;
 
             if ("field" in activityItem && activityItem.field !== "updated_by")
               return (
@@ -148,22 +150,6 @@ export const ActivityList = observer(function ActivityList(props: Props) {
                         </div>
                         <div className="min-w-0 flex-1 border-b border-subtle py-4">
                           <div className="text-13 break-words text-secondary">
-                            {activityItem.field === "archived_at" && activityItem.new_value !== "restore" ? (
-                              <span className="text-gray font-medium">Plane</span>
-                            ) : activityItem.actor_detail.is_bot ? (
-                              <span className="text-gray font-medium">{activityItem.actor_detail.first_name} Bot</span>
-                            ) : (
-                              <Link
-                                href={`/${activityItem.workspace_detail?.slug}/profile/${activityItem.actor_detail.id}`}
-                                className="inline"
-                              >
-                                <span className="text-gray font-medium">
-                                  {currentUser?.id === activityItem.actor_detail.id
-                                    ? "You"
-                                    : activityItem.actor_detail.display_name}
-                                </span>
-                              </Link>
-                            )}{" "}
                             <div className="inline gap-1">
                               {message}{" "}
                               <span className="flex-shrink-0 whitespace-nowrap">

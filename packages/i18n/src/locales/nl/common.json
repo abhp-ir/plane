@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/> heeft ‘{property}’{showIssue, select, true { van <issue/>} other {}} gewijzigd in <value/>.",
+    "property_removed": "<actor/> heeft ‘{property}’{showIssue, select, true { uit <issue/>} other {}} verwijderd.",
+    "description_edited": "<actor/> heeft de beschrijving{showIssue, select, true { van <issue/>} other {}} bewerkt.",
+    "work_item_created": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}}{hasSource, select, true { via <origin/>} other {}} aangemaakt.",
+    "work_item_deleted": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}} verwijderd."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "We werken hieraan. Als je direct hulp nodig hebt,",
     "reach_out_to_us": "neem contact met ons op",

@@ -164,6 +164,42 @@ test("command result sentences and context shortcuts preserve values across ever
   }
 });
 
+const activitySlots = (text: string) => [...text.matchAll(/<(\w+)\s*\/>/g)].map((match) => match[1]).sort();
+
+test("activity templates preserve rich slots and resolve every contextual branch in all locales", async () => {
+  await initPromise;
+  const keys = ["property_set", "property_removed", "description_edited", "work_item_created", "work_item_deleted"];
+  const english = load("en", "common");
+  try {
+    for (const { value: language } of SUPPORTED_LANGUAGES) {
+      // eslint-disable-next-line no-await-in-loop -- One shared locale instance.
+      await setLanguage(language);
+      const messages = load(language, "common");
+      for (const message of keys) {
+        const key = `activity_messages.${message}`;
+        assert.deepEqual(variables(messages[key]), variables(english[key]), `${language}: ${key} arguments`);
+        assert.deepEqual(activitySlots(messages[key]), activitySlots(english[key]), `${language}: ${key} rich slots`);
+        for (const showIssue of [false, true])
+          for (const hasSource of [false, true]) {
+            const text = String(i18nInstance.t(key, { property: "ABC-42 <custom>", showIssue, hasSource }));
+            assert.ok(text.includes("<actor/>"), `${language}: actor retained`);
+            assert.equal(text.includes("<issue/>"), showIssue, `${language}: issue branch`);
+            assert.equal(
+              text.includes("<origin/>"),
+              message === "work_item_created" && hasSource,
+              `${language}: source branch`
+            );
+            assert.equal(text.includes("<value/>"), message === "property_set", `${language}: value slot`);
+            assert.equal(text.includes("{showIssue"), false, `${language}: ICU resolved`);
+            if (message.startsWith("property_")) assert.ok(text.includes("ABC-42 <custom>"));
+          }
+      }
+    }
+  } finally {
+    await setLanguage("en");
+  }
+});
+
 // Keep native Node on the ICU package's CJS export; browser integration is tested in Vite.
 const translatedNamespaces = [
   "common",

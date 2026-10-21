@@ -5,7 +5,7 @@
  */
 
 import { useEffect } from "react";
-import { useTranslation } from "@plane/i18n";
+import type { ReactElement } from "react";
 import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // store hooks
@@ -31,10 +31,13 @@ import {
 import { BlockedIcon, BlockerIcon } from "@plane/blocks/icons";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { IIssueActivity } from "@plane/types";
-import { renderFormattedDate, generateWorkItemLink, capitalizeFirstLetter } from "@plane/utils";
+import { generateWorkItemLink } from "@plane/utils";
 // helpers
 import { useLabel } from "@/hooks/store/use-label";
 import { usePlatformOS } from "@/hooks/use-platform-os";
+import { ACTIVITY_PROPERTY_LABELS, ActivityPropertyChange } from "@/components/common/activity/property-change";
+import { ActivitySentence } from "@/components/common/activity/sentence";
+import { WorkItemActivityChange } from "@/components/common/activity/work-item-change";
 // types
 
 export function IssueLink({ activity }: { activity: IIssueActivity }) {
@@ -149,12 +152,7 @@ const getInboxUserActivityMessage = (activity: IIssueActivity, showIssue: boolea
 
 const activityDetails: {
   [key: string]: {
-    message: (
-      activity: IIssueActivity,
-      showIssue: boolean,
-      workspaceSlug: string,
-      currentLocale: string
-    ) => React.ReactNode;
+    message?: (activity: IIssueActivity, showIssue: boolean, workspaceSlug: string) => React.ReactNode;
     icon: React.ReactNode;
   };
 } = {
@@ -234,17 +232,6 @@ const activityDetails: {
     icon: <AttachOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   description: {
-    message: (activity, showIssue) => (
-      <>
-        updated the description
-        {showIssue && (
-          <>
-            {" "}
-            of <IssueLink activity={activity} />
-          </>
-        )}
-      </>
-    ),
     icon: <ChatOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   estimate_point: {
@@ -522,17 +509,6 @@ const activityDetails: {
     icon: <ModuleOutline className="h-3 w-3 !text-secondary" aria-hidden="true" />,
   },
   name: {
-    message: (activity, showIssue) => (
-      <>
-        set the title to <span className="break-all">{activity.new_value}</span>
-        {showIssue && (
-          <>
-            {" "}
-            of <IssueLink activity={activity} />
-          </>
-        )}
-      </>
-    ),
     icon: <ChatOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   parent: {
@@ -565,20 +541,6 @@ const activityDetails: {
     icon: <MembersOutline className="h-3 w-3 !text-secondary" aria-hidden="true" />,
   },
   priority: {
-    message: (activity, showIssue) => (
-      <>
-        set the priority to{" "}
-        <span className="font-medium text-primary">
-          {activity.new_value ? capitalizeFirstLetter(activity.new_value) : "None"}
-        </span>
-        {showIssue && (
-          <>
-            {" "}
-            for <IssueLink activity={activity} />
-          </>
-        )}
-      </>
-    ),
     icon: <SignalMediumIcon size={12} className="text-secondary" aria-hidden="true" />,
   },
   relates_to: {
@@ -658,80 +620,12 @@ const activityDetails: {
     icon: <DuplicateOfOutline width={12} height={12} className="text-secondary" />,
   },
   state: {
-    message: (activity, showIssue) => (
-      <>
-        set the state to <span className="font-medium break-all text-primary">{activity.new_value}</span>
-        {showIssue && (
-          <>
-            {" "}
-            for <IssueLink activity={activity} />
-          </>
-        )}
-      </>
-    ),
     icon: <GridOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   start_date: {
-    message: (activity, showIssue, _workspaceSlug, currentLocale) => {
-      if (!activity.new_value)
-        return (
-          <>
-            removed the start date
-            {showIssue && (
-              <>
-                {" "}
-                from <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-      else
-        return (
-          <>
-            set the start date to{" "}
-            <span className="font-medium whitespace-nowrap text-primary">
-              {renderFormattedDate(activity.new_value, undefined, currentLocale)}
-            </span>
-            {showIssue && (
-              <>
-                {" "}
-                for <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-    },
     icon: <CalendarOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   target_date: {
-    message: (activity, showIssue, _workspaceSlug, currentLocale) => {
-      if (!activity.new_value)
-        return (
-          <>
-            removed the due date
-            {showIssue && (
-              <>
-                {" "}
-                from <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-      else
-        return (
-          <>
-            set the due date to{" "}
-            <span className="font-medium whitespace-nowrap text-primary">
-              {renderFormattedDate(activity.new_value, undefined, currentLocale)}
-            </span>
-            {showIssue && (
-              <>
-                <IssueLink activity={activity} />
-              </>
-            )}
-          </>
-        );
-    },
     icon: <CalendarOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   inbox: {
@@ -758,21 +652,31 @@ export function ActivityIcon({ activity }: { activity: IIssueActivity }) {
 type ActivityMessageProps = {
   activity: IIssueActivity;
   showIssue?: boolean;
+  actor: ReactElement;
 };
 
-export function ActivityMessage({ activity, showIssue = false }: ActivityMessageProps) {
-  const { currentLocale } = useTranslation();
+export function ActivityMessage({ activity, showIssue = false, actor }: ActivityMessageProps) {
   // router params
   const { workspaceSlug } = useParams();
   const activityField = activity.field ?? "issue";
+  const issue = showIssue ? <IssueLink activity={activity} /> : undefined;
+  if (Object.hasOwn(ACTIVITY_PROPERTY_LABELS, activityField)) {
+    return <ActivityPropertyChange activity={activity} actor={actor} issue={issue} />;
+  }
+  if (activityField === "description") {
+    return <ActivitySentence actor={actor} message="description_edited" issue={issue} />;
+  }
+  if (activityField === "issue" && (activity.verb === "created" || activity.verb === "deleted")) {
+    return <WorkItemActivityChange activity={activity} actor={actor} issue={issue} />;
+  }
 
   return (
     <>
-      {activityDetails[activityField as keyof typeof activityDetails]?.message(
+      {actor}{" "}
+      {activityDetails[activityField as keyof typeof activityDetails]?.message?.(
         activity,
         showIssue,
-        workspaceSlug ? workspaceSlug.toString() : (activity.workspace_detail?.slug ?? ""),
-        currentLocale
+        workspaceSlug ? workspaceSlug.toString() : (activity.workspace_detail?.slug ?? "")
       )}
     </>
   );

@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 import { PriorityOutline } from "@makeplane/propel/icons";
 // hooks
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { ActivityPropertyChange } from "@/components/common/activity/property-change";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
@@ -29,11 +30,13 @@ export const IssuePriorityActivity = observer(function IssuePriorityActivity(pro
       activityId={activityId}
       ends={ends}
     >
-      <>
-        set the priority to <span className="font-medium text-primary">{activity.new_value}</span>
-        {showIssue ? ` for ` : ``}
-        {showIssue && <IssueLink activityId={activityId} />}.
-      </>
+      {(actor) => (
+        <ActivityPropertyChange
+          activity={activity}
+          actor={actor}
+          issue={showIssue ? <IssueLink activityId={activityId} /> : undefined}
+        />
+      )}
     </IssueActivityBlockComponent>
   );
 });

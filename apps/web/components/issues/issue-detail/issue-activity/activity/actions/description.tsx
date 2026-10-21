@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 import { AlignLeftOutline } from "@makeplane/propel/icons";
 // hooks
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { ActivitySentence } from "@/components/common/activity/sentence";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
@@ -29,11 +30,13 @@ export const IssueDescriptionActivity = observer(function IssueDescriptionActivi
       activityId={activityId}
       ends={ends}
     >
-      <>
-        updated the description
-        {showIssue ? ` of ` : ``}
-        {showIssue && <IssueLink activityId={activityId} />}.
-      </>
+      {(actor) => (
+        <ActivitySentence
+          actor={actor}
+          message="description_edited"
+          issue={showIssue ? <IssueLink activityId={activityId} /> : undefined}
+        />
+      )}
     </IssueActivityBlockComponent>
   );
 });

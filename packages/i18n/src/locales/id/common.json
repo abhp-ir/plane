@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/> mengubah “{property}”{showIssue, select, true { pada <issue/>} other {}} menjadi <value/>.",
+    "property_removed": "<actor/> menghapus “{property}”{showIssue, select, true { dari <issue/>} other {}}.",
+    "description_edited": "<actor/> mengedit deskripsi{showIssue, select, true { pada <issue/>} other {}}.",
+    "work_item_created": "<actor/> membuat {showIssue, select, true {<issue/>} other {item pekerjaan}}{hasSource, select, true { melalui <origin/>} other {}}.",
+    "work_item_deleted": "<actor/> menghapus {showIssue, select, true {<issue/>} other {item pekerjaan}}."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Kami sedang mengerjakan ini. Jika Anda memerlukan bantuan segera,",
     "reach_out_to_us": "hubungi kami",

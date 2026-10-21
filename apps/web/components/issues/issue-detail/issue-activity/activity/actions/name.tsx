@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 import { TextOutline } from "@makeplane/propel/icons";
 // hooks
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { ActivityPropertyChange } from "@/components/common/activity/property-change";
 // components
 import { IssueActivityBlockComponent } from "./";
 
@@ -29,7 +30,7 @@ export const IssueNameActivity = observer(function IssueNameActivity(props: TIss
       activityId={activityId}
       ends={ends}
     >
-      <>set the name to {activity.new_value}.</>
+      {(actor) => <ActivityPropertyChange activity={activity} actor={actor} />}
     </IssueActivityBlockComponent>
   );
 });

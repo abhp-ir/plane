@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "Пользователь <actor/> изменил «{property}»{showIssue, select, true { в <issue/>} other {}} на <value/>.",
+    "property_removed": "Пользователь <actor/> удалил «{property}»{showIssue, select, true { из <issue/>} other {}}.",
+    "description_edited": "Пользователь <actor/> отредактировал описание{showIssue, select, true { в <issue/>} other {}}.",
+    "work_item_created": "Пользователь <actor/> создал {showIssue, select, true {<issue/>} other {рабочий элемент}}{hasSource, select, true { через <origin/>} other {}}.",
+    "work_item_deleted": "Пользователь <actor/> удалил {showIssue, select, true {<issue/>} other {рабочий элемент}}."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Мы работаем над этим. Если вам нужна немедленная помощь,",
     "reach_out_to_us": "свяжитесь с нами",

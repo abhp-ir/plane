@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/> a schimbat „{property}”{showIssue, select, true { în <issue/>} other {}} în <value/>.",
+    "property_removed": "<actor/> a eliminat „{property}”{showIssue, select, true { din <issue/>} other {}}.",
+    "description_edited": "<actor/> a editat descrierea{showIssue, select, true { pentru <issue/>} other {}}.",
+    "work_item_created": "<actor/> a creat {showIssue, select, true {<issue/>} other {elementul de lucru}}{hasSource, select, true { prin <origin/>} other {}}.",
+    "work_item_deleted": "<actor/> a șters {showIssue, select, true {<issue/>} other {elementul de lucru}}."
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Lucrăm la asta. Dacă aveți nevoie de asistență imediată,",
     "reach_out_to_us": "contactați-ne",

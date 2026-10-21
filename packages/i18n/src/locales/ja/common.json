@@ -1,4 +1,11 @@
 {
+  "activity_messages": {
+    "property_set": "<actor/>が{showIssue, select, true {<issue/>の} other {}}「{property}」を<value/>に変更しました。",
+    "property_removed": "<actor/>が{showIssue, select, true {<issue/>から} other {}}「{property}」を削除しました。",
+    "description_edited": "<actor/>が{showIssue, select, true {<issue/>の} other {}}説明を編集しました。",
+    "work_item_created": "<actor/>が{hasSource, select, true {<origin/>経由で} other {}}{showIssue, select, true {<issue/>} other {作業項目}}を作成しました。",
+    "work_item_deleted": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を削除しました。"
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "現在この問題に取り組んでいます。緊急のサポートが必要な場合は、",
     "reach_out_to_us": "お問い合わせください",
