@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "Sigur doriți să vă alăturați proiectului <project/>?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Creat la",

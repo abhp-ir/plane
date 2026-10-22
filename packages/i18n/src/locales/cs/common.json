@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Uloženo",
+    "joined": "Připojeno",
     "icon": {
       "label": "Ikona",
       "add": "Přidat ikonu",

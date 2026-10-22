@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "プロジェクト<project/>に参加しますか？"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "作成日時",

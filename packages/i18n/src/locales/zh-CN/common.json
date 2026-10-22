@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "已保存",
+    "joined": "已加入",
     "icon": {
       "label": "图标",
       "add": "添加图标",

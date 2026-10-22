@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Guardado",
+    "joined": "Te has unido",
     "icon": {
       "label": "Icono",
       "add": "Agregar icono",

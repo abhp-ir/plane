@@ -8,6 +8,7 @@ import { useState } from "react";
 // types
 import { Button } from "@makeplane/propel/components/button";
 import type { IProject } from "@plane/types";
+import { i18nInstance, Trans, useTranslation } from "@plane/i18n";
 // ui
 import {
   Dialog,
@@ -33,6 +34,7 @@ type TJoinProjectModalProps = {
 
 export function JoinProjectModal(props: TJoinProjectModalProps) {
   const { handleClose, isOpen, project, workspaceSlug } = props;
+  const { t, currentLocale } = useTranslation();
   // states
   const [isJoiningLoading, setIsJoiningLoading] = useState(false);
   // store hooks
@@ -68,24 +70,31 @@ export function JoinProjectModal(props: TJoinProjectModalProps) {
         <DialogMain>
           <DialogHeader>
             <DialogHeading>
-              <DialogTitle>Join Project?</DialogTitle>
+              <DialogTitle>{t("project_empty_state.no_access.cta_primary")}</DialogTitle>
             </DialogHeading>
           </DialogHeader>
           <DialogBody>
             <p>
-              Are you sure you want to join the project{" "}
-              <span className="font-semibold break-words">{project?.name}</span>? Please click the &apos;Join
-              Project&apos; button below to continue.
+              <Trans
+                i18n={i18nInstance}
+                t={i18nInstance.getFixedT(currentLocale)}
+                i18nKey="project_join.confirmation"
+                components={{ project: <bdi className="font-semibold break-words">{project.name}</bdi> }}
+              />
             </p>
           </DialogBody>
         </DialogMain>
         <DialogActions>
-          <Button variant="secondary" size="md" stretch="auto" label="Cancel" onClick={handleClose} />
+          <Button variant="secondary" size="md" stretch="auto" label={t("cancel")} onClick={handleClose} />
           <Button
             variant="primary"
             size="md"
             stretch="auto"
-            label={isJoiningLoading ? "Joining..." : "Join Project"}
+            label={t(
+              isJoiningLoading
+                ? "project_empty_state.no_access.cta_loading"
+                : "project_empty_state.no_access.cta_primary"
+            )}
             onClick={handleJoin}
             loading={isJoiningLoading}
           />

@@ -96,10 +96,10 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
 
     const addToFavoritePromise = addProjectToFavorites(workspaceSlug.toString(), project.id);
     setPromiseToast(addToFavoritePromise, {
-      loading: "Adding project to favorites...",
+      loading: t("adding_project_to_favorites"),
       success: {
-        title: "Success!",
-        message: () => "Project added to favorites.",
+        title: t("common.success"),
+        message: () => t("project_added_to_favorites"),
         // propel: the callback exists for its side effect; a toast action is data, and there is
         // none here, so it returns an empty list rather than an empty fragment.
         actionItems: () => {
@@ -108,8 +108,8 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
         },
       },
       error: {
-        title: "Error!",
-        message: () => "Couldn't add the project to favorites. Please try again.",
+        title: t("common.error.label"),
+        message: () => t("couldnt_add_the_project_to_favorites"),
       },
     });
   };
@@ -119,14 +119,14 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
 
     const removeFromFavoritePromise = removeProjectFromFavorites(workspaceSlug.toString(), project.id);
     setPromiseToast(removeFromFavoritePromise, {
-      loading: "Removing project from favorites...",
+      loading: t("removing_project_from_favorites"),
       success: {
-        title: "Success!",
-        message: () => "Project removed from favorites.",
+        title: t("common.success"),
+        message: () => t("project_removed_from_favorites"),
       },
       error: {
-        title: "Error!",
-        message: () => "Couldn't remove the project from favorites. Please try again.",
+        title: t("common.error.label"),
+        message: () => t("couldnt_remove_the_project_from_favorites"),
       },
     });
   };
@@ -136,8 +136,8 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
     copyUrlToClipboard(projectLink).then(() =>
       setToast({
         type: "info",
-        title: "Link Copied!",
-        message: "Project link copied to clipboard.",
+        title: t("link_copied"),
+        message: t("project_link_copied_to_clipboard"),
       })
     );
   const handleOpenInNewTab = () => window.open(`/${projectLink}`, "_blank");
@@ -146,42 +146,42 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
     {
       key: "settings",
       action: () => router.push(`/${workspaceSlug}/settings/projects/${project.id}`),
-      title: "Settings",
+      title: t("settings"),
       icon: SettingsOutline,
       shouldRender: !isArchived && (hasAdminRole || hasMemberRole),
     },
     {
       key: "join",
       action: () => setJoinProjectModal(true),
-      title: "Join",
+      title: t("common.join"),
       icon: UserPlusOutline,
       shouldRender: !isMemberOfProject && !isArchived,
     },
     {
       key: "open-new-tab",
       action: handleOpenInNewTab,
-      title: "Open in new tab",
+      title: t("open_in_new_tab"),
       icon: NewTabOutline,
       shouldRender: !isMemberOfProject && !isArchived,
     },
     {
       key: "copy-link",
       action: () => void handleCopyText(),
-      title: "Copy link",
+      title: t("copy_link"),
       icon: LinkOutline,
       shouldRender: !isArchived,
     },
     {
       key: "restore",
       action: () => setRestoreProject(true),
-      title: "Restore",
+      title: t("restore"),
       icon: RestoreOutline,
       shouldRender: isArchived && hasAdminRole,
     },
     {
       key: "delete",
       action: () => setDeleteProjectModal(true),
-      title: "Delete",
+      title: t("delete"),
       icon: DeleteOutline,
       shouldRender: isArchived && hasAdminRole,
     },
@@ -250,9 +250,13 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
                 </div>
 
                 <div className="flex w-full flex-col justify-between gap-0.5 truncate">
-                  <h3 className="truncate font-semibold text-on-color">{project.name}</h3>
+                  <h3 className="truncate font-semibold text-on-color">
+                    <bdi>{project.name}</bdi>
+                  </h3>
                   <span className="flex items-center gap-1.5">
-                    <p className="text-11 font-medium text-on-color">{project.identifier} </p>
+                    <p className="text-11 font-medium text-on-color">
+                      <bdi dir="ltr">{project.identifier}</bdi>
+                    </p>
                     {project.network === 0 && <LockOutline className="h-2.5 w-2.5 text-on-color" />}
                   </span>
                 </div>
@@ -277,7 +281,7 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
             <div className="item-center flex justify-between">
               <div className="flex items-center justify-center gap-2">
                 <Tooltip
-                  label={project.members?.length ? `Members: ${project.members.length}` : "No members"}
+                  label={t("member", { count: project.members?.length ?? 0 })}
                   layout="stacked"
                   disabled={isMobile}
                 >
@@ -295,10 +299,16 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
                       </AvatarGroup>
                     </div>
                   ) : (
-                    <span className="text-13 text-placeholder italic">No Member Yet</span>
+                    <span className="text-13 text-placeholder italic">
+                      {t("member", { count: project.members?.length ?? 0 })}
+                    </span>
                   )}
                 </Tooltip>
-                {isArchived && <div className="text-11 font-medium text-placeholder">Archived</div>}
+                {isArchived && (
+                  <div className="text-11 font-medium text-placeholder">
+                    {t("workspace_projects.scope.archived_projects")}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -307,7 +317,7 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
           <div data-prevent-progress className="absolute end-4 top-[62px] z-[2] flex h-10 items-center gap-2">
             <button
               type="button"
-              aria-label="Copy link"
+              aria-label={t("copy_link")}
               className="flex h-6 w-6 items-center justify-center rounded-sm bg-white/10"
               onClick={(e) => {
                 e.stopPropagation();
@@ -319,6 +329,7 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
             </button>
             {shouldRenderFavorite && (
               <FavoriteStar
+                aria-label={t(project.is_favorite ? "remove_from_favorites" : "add_to_favorites")}
                 buttonClassName="h-6 w-6 bg-white/10 rounded-sm"
                 iconClassName={cn("h-3 w-3", {
                   "text-on-color": !project.is_favorite,
@@ -346,7 +357,7 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
                   variant="ghost"
                   size="xs"
                   stretch="auto"
-                  label="Restore"
+                  label={t("restore")}
                   icon={<Icon icon={RestoreOutline} />}
                   onClick={(e) => {
                     e.preventDefault();
@@ -357,7 +368,7 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
                 <IconButton
                   variant="ghost"
                   size="xs"
-                  aria-label="Delete"
+                  aria-label={t("delete")}
                   icon={<Icon icon={DeleteOutline} />}
                   onClick={(e) => {
                     e.preventDefault();
@@ -384,7 +395,7 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
                 ) : (
                   <span className="flex items-center gap-1 text-13 text-placeholder">
                     <TickOutline className="h-3.5 w-3.5" />
-                    Joined
+                    {t("common.joined")}
                   </span>
                 ))}
               {!isMemberOfProject && (
@@ -393,7 +404,7 @@ export const ProjectCard = observer(function ProjectCard(props: Props) {
                     variant="ghost"
                     size="sm"
                     stretch="auto"
-                    label="Join"
+                    label={t("common.join")}
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();

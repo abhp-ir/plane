@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Gespeichert",
+    "joined": "Beigetreten",
     "icon": {
       "label": "Symbol",
       "add": "Symbol hinzufügen",

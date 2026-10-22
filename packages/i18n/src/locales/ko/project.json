@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "프로젝트 <project/>에 참여하시겠습니까?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "생성일",

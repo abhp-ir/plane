@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "Vuoi davvero unirti al progetto <project/>?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Creato il",

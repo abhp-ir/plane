@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Enregistré",
+    "joined": "Vous avez rejoint le projet",
     "icon": {
       "label": "Icône",
       "add": "Ajouter une icône",

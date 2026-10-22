@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "Opravdu se chcete připojit k projektu <project/>?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Vytvořeno dne",

@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Salvat",
+    "joined": "V-ați alăturat",
     "icon": {
       "label": "Pictogramă",
       "add": "Adăugați o pictogramă",

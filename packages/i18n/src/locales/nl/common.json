@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Opgeslagen",
+    "joined": "Deelgenomen",
     "icon": {
       "label": "Pictogram",
       "add": "Pictogram toevoegen",

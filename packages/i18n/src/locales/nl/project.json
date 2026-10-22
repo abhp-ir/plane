@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "Weet je zeker dat je wilt deelnemen aan het project <project/>?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Aangemaakt op",

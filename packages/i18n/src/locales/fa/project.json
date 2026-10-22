@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "آیا می‌خواهید به پروژهٔ <project/> بپیوندید؟"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "زمان ایجاد",

@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "Ви впевнені, що хочете приєднатися до проєкту <project/>?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Створено",

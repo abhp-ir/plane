@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "<project/> projesine katılmak istediğinizden emin misiniz?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Oluşturulma tarihi",

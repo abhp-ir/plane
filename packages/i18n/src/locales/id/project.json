@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "Yakin ingin bergabung dengan proyek <project/>?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Dibuat pada",

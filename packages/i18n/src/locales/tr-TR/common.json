@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Kaydedildi",
+    "joined": "Katıldınız",
     "icon": {
       "label": "Simge",
       "add": "Simge ekle",

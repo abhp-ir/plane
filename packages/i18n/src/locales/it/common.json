@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Salvato",
+    "joined": "Partecipazione confermata",
     "icon": {
       "label": "Icona",
       "add": "Aggiungi icona",

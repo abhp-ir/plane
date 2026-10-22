@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "確定要加入專案<project/>嗎？"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "建立時間",

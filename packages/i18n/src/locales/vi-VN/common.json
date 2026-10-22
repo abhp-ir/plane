@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Đã lưu",
+    "joined": "Đã tham gia",
     "icon": {
       "label": "Biểu tượng",
       "add": "Thêm biểu tượng",

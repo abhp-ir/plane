@@ -1,4 +1,7 @@
 {
+  "project_join": {
+    "confirmation": "Bạn có chắc muốn tham gia dự án <project/> không?"
+  },
   "project_view": {
     "sort_by": {
       "created_at": "Thời gian tạo",

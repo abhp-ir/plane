@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "saved": "Saved",
+    "joined": "Joined",
     "icon": {
       "label": "Icon",
       "add": "Add icon",
