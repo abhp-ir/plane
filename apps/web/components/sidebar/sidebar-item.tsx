@@ -22,6 +22,7 @@ interface AppSidebarItemData {
 }
 
 interface AppSidebarItemProps {
+  "aria-label"?: string;
   variant?: "link" | "button";
   item?: AppSidebarItemData;
 }
@@ -37,12 +38,14 @@ interface AppSidebarItemIconProps {
 }
 
 interface AppSidebarLinkItemProps {
+  "aria-label"?: string;
   href?: string;
   children: React.ReactNode;
   className?: string;
 }
 
 interface AppSidebarButtonItemProps {
+  "aria-label"?: string;
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
@@ -97,19 +100,31 @@ function AppSidebarItemIcon({ icon, highlight }: AppSidebarItemIconProps) {
   );
 }
 
-function AppSidebarLinkItem({ href, children, className }: AppSidebarLinkItemProps) {
+function AppSidebarLinkItem({ href, children, className, "aria-label": ariaLabel }: AppSidebarLinkItemProps) {
   if (!href) return null;
 
   return (
-    <Link href={href} className={cn(styles.base, className)}>
+    <Link href={href} aria-label={ariaLabel} className={cn(styles.base, className)}>
       {children}
     </Link>
   );
 }
 
-function AppSidebarButtonItem({ children, onClick, disabled = false, className }: AppSidebarButtonItemProps) {
+function AppSidebarButtonItem({
+  children,
+  onClick,
+  disabled = false,
+  className,
+  "aria-label": ariaLabel,
+}: AppSidebarButtonItemProps) {
   return (
-    <button className={cn(styles.base, className)} onClick={onClick} disabled={disabled} type="button">
+    <button
+      aria-label={ariaLabel}
+      className={cn(styles.base, className)}
+      onClick={onClick}
+      disabled={disabled}
+      type="button"
+    >
       {children}
     </button>
   );
@@ -126,7 +141,7 @@ export type AppSidebarItemComponent = React.FC<AppSidebarItemProps> & {
   Button: React.FC<AppSidebarButtonItemProps>;
 };
 
-function AppSidebarItem({ variant = "link", item }: AppSidebarItemProps) {
+function AppSidebarItem({ variant = "link", item, "aria-label": ariaLabel }: AppSidebarItemProps) {
   if (!item) return null;
 
   const { icon, isActive, label, href, onClick, disabled, showLabel = true } = item;
@@ -139,11 +154,15 @@ function AppSidebarItem({ variant = "link", item }: AppSidebarItemProps) {
   );
 
   if (variant === "link") {
-    return <AppSidebarLinkItem href={href}>{commonItems}</AppSidebarLinkItem>;
+    return (
+      <AppSidebarLinkItem href={href} aria-label={ariaLabel}>
+        {commonItems}
+      </AppSidebarLinkItem>
+    );
   }
 
   return (
-    <AppSidebarButtonItem onClick={onClick} disabled={disabled}>
+    <AppSidebarButtonItem onClick={onClick} disabled={disabled} aria-label={ariaLabel}>
       {commonItems}
     </AppSidebarButtonItem>
   );

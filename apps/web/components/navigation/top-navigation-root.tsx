@@ -49,7 +49,7 @@ export const TopNavigationRoot = observer(function TopNavigationRoot() {
   return (
     <div
       className={cn(
-        "z-[27] flex min-h-10 w-full flex-wrap items-center gap-y-1 bg-canvas px-3.5 py-1 transition-all duration-300 motion-reduce:transition-none md:flex-nowrap md:py-0",
+        "z-[27] flex min-h-10 w-full shrink-0 flex-wrap items-center gap-y-1 bg-canvas px-3.5 py-1 transition-all duration-300 motion-reduce:transition-none xl:flex-nowrap xl:py-0",
         {
           "px-2": !showLabel,
         }
@@ -60,13 +60,14 @@ export const TopNavigationRoot = observer(function TopNavigationRoot() {
         <WorkspaceMenuRoot variant="top-navigation" />
       </div>
       {/* Power K Search */}
-      <div className="order-last w-full shrink-0 md:order-none md:w-auto">
+      <div className="order-last w-full shrink-0 xl:order-none xl:w-auto">
         <TopNavPowerK />
       </div>
       {/* Additional Actions */}
       <div className="flex flex-1 shrink-0 items-center justify-end gap-1">
         <Tooltip label={t("sidebar.inbox")} side="bottom">
           <AppSidebarItem
+            aria-label={t("sidebar.inbox")}
             variant="link"
             item={{
               href: `/${workspaceSlug?.toString()}/notifications/`,

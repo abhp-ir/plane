@@ -214,12 +214,12 @@ export const TopNavPowerK = observer(() => {
   );
 
   return (
-    <div ref={containerRef} className="relative w-full md:w-auto">
+    <div ref={containerRef} className="relative w-full xl:w-auto">
       <div
         className={cn(
-          "relative z-30 flex w-full items-center transition-all duration-300 ease-in-out motion-reduce:transition-none md:w-[364px]",
+          "relative z-30 flex w-full items-center transition-all duration-300 ease-in-out motion-reduce:transition-none xl:w-[364px]",
           {
-            "md:w-[554px]": isOpen,
+            "xl:w-[554px]": isOpen,
           }
         )}
       >
@@ -265,7 +265,7 @@ export const TopNavPowerK = observer(() => {
         className={cn(
           "shadow-lg absolute -top-[6px] left-1/2 z-20 flex -translate-x-1/2 flex-col overflow-hidden rounded-md border border-subtle bg-surface-1 px-0 pt-10 transition-all duration-300 ease-in-out motion-reduce:transition-none",
           {
-            "max-h-[80vh] w-full opacity-100 md:w-[574px]": isOpen,
+            "max-h-[80vh] w-full opacity-100 xl:w-[574px]": isOpen,
             "h-0 w-0 opacity-0": !isOpen,
           }
         )}
