@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} a téléversé ce fichier le {date}.",
+    "delete_confirmation": "Voulez-vous vraiment supprimer la pièce jointe <file/> ? Cette pièce jointe sera supprimée définitivement. Cette action est irréversible.",
     "error": "Le fichier n’a pas pu être joint. Essayez de le télécharger à nouveau.",
     "only_one_file_allowed": "Un seul fichier peut être téléchargé à la fois.",
     "file_size_limit": "Le fichier doit faire {size}MB ou moins.",

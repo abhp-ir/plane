@@ -23,6 +23,48 @@ import {
 import { NotificationItem } from "../workspace-notifications/sidebar/notification-card/item";
 import { CommentCardDisplay } from "./card/display";
 
+vi.mock("@plane/i18n", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@plane/i18n")>();
+  await actual.initPromise;
+  await actual.i18nInstance.loadLanguages("fa");
+  const { createRequire } = await import("node:module");
+  // The established CJS ICU boundary keeps real resources usable in Vitest; Vite output has browser proof.
+  const webRequire = createRequire(`${process.cwd()}/package.json`);
+  const require = createRequire(webRequire.resolve("@plane/i18n"));
+  const { createInstance } = require("i18next");
+  const ICU = require("i18next-icu").default;
+  const reactI18next = require("react-i18next");
+  const instance = createInstance();
+  const ready = instance
+    .use(ICU)
+    .use(reactI18next.initReactI18next)
+    .init({
+      lng: "en",
+      fallbackLng: "en",
+      ns: actual.i18nInstance.options.ns,
+      defaultNS: actual.i18nInstance.options.defaultNS,
+      fallbackNS: actual.i18nInstance.options.fallbackNS,
+      resources: {
+        en: actual.i18nInstance.getDataByLanguage("en"),
+        fa: actual.i18nInstance.getDataByLanguage("fa"),
+      },
+      interpolation: { escapeValue: false },
+    });
+  return {
+    ...actual,
+    initPromise: ready,
+    i18nInstance: instance,
+    Trans: reactI18next.Trans,
+    setLanguage: (language: string) => instance.changeLanguage(language),
+    TranslationProvider: ({ children }: { children: ReactNode }) =>
+      createElement(reactI18next.I18nextProvider, { i18n: instance }, children),
+    useTranslation: () => {
+      const { t, i18n } = reactI18next.useTranslation();
+      return { t, currentLocale: i18n.language };
+    },
+  };
+});
+
 const mocks = vi.hoisted(() => ({ mutate: vi.fn(), read: vi.fn() }));
 vi.mock("next/navigation", () => ({ usePathname: () => "/owned/issue" }));
 vi.mock("@plane/hooks", async (importOriginal) => ({
@@ -76,6 +118,7 @@ const attachment = {
   attributes: { name: "گزارش ABC-42.png", size: 68 },
   created_by: "creator",
   updated_by: "updater",
+  created_at: date,
   updated_at: date,
 };
 // Only metadata is exercised; editor/store/network implementations are fixture boundaries.

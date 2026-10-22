@@ -25,14 +25,13 @@ export const getFileName = (fileName: string) => {
   return nameWithoutExtension;
 };
 
-export const convertBytesToSize = (bytes: number) => {
-  let size;
-
-  if (bytes < 1024 * 1024) {
-    size = Math.round(bytes / 1024) + " KB";
-  } else {
-    size = Math.round(bytes / (1024 * 1024)) + " MB";
-  }
-
-  return size;
+export const convertBytesToSize = (bytes: number, locale = "en") => {
+  const divisor = bytes < 1024 ? 1 : bytes < 1024 * 1024 ? 1024 : 1024 * 1024;
+  const unit = divisor === 1 ? "byte" : divisor === 1024 ? "kilobyte" : "megabyte";
+  return new Intl.NumberFormat(locale === "ua" ? "uk-UA" : locale, {
+    style: "unit",
+    unit,
+    unitDisplay: "long",
+    maximumFractionDigits: 1,
+  }).format(bytes / divisor);
 };

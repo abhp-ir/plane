@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} bu dosyayı {date} tarihinde yükledi.",
+    "delete_confirmation": "<file/> ekini silmek istediğinizden emin misiniz? Bu ek kalıcı olarak kaldırılacak. Bu işlem geri alınamaz.",
     "error": "Dosya eklenemedi. Tekrar yüklemeyi deneyin.",
     "only_one_file_allowed": "Aynı anda yalnızca bir dosya yüklenebilir.",
     "file_size_limit": "Dosya boyutu {size}MB veya daha az olmalıdır.",

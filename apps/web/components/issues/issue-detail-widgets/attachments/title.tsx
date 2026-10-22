@@ -19,7 +19,7 @@ type Props = {
 
 export const IssueAttachmentsCollapsibleTitle = observer(function IssueAttachmentsCollapsibleTitle(props: Props) {
   const { issueId, issueServiceType = EIssueServiceType.ISSUES } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // store hooks
   const {
     issue: { getIssueById },
@@ -33,7 +33,9 @@ export const IssueAttachmentsCollapsibleTitle = observer(function IssueAttachmen
     <span className="inline-flex items-center gap-2">
       {t("common.attachments")}
       <span className="flex items-center justify-center">
-        <p className="text-14 leading-3! text-tertiary">{attachmentCount}</p>
+        <p className="text-14 leading-3! text-tertiary">
+          {new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(attachmentCount)}
+        </p>
       </span>
     </span>
   );

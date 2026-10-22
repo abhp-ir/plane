@@ -7,7 +7,6 @@
 import { useState } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "@plane/i18n";
-import Link from "next/link";
 import { CloseOutline, WarningCircleOutline } from "@makeplane/propel/icons";
 // ui
 import { Tooltip } from "@makeplane/propel/components/tooltip";
@@ -41,7 +40,7 @@ type TIssueAttachmentsDetail = {
 };
 
 export const IssueAttachmentsDetail = observer(function IssueAttachmentsDetail(props: TIssueAttachmentsDetail) {
-  const { currentLocale } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // props
   const { attachmentId, attachmentHelpers, disabled } = props;
   // store hooks
@@ -54,7 +53,7 @@ export const IssueAttachmentsDetail = observer(function IssueAttachmentsDetail(p
   // derived values
   const attachment = attachmentId ? getAttachmentById(attachmentId) : undefined;
   const fileName = getFileName(attachment?.attributes.name ?? "");
-  const fileExtension = getFileExtension(attachment?.asset_url ?? "");
+  const fileExtension = getFileExtension(attachment?.attributes.name ?? "");
   const fileIcon = getFileIcon(fileExtension, 28);
   const fileURL = getFileURL(attachment?.asset_url ?? "");
   // hooks
@@ -73,18 +72,21 @@ export const IssueAttachmentsDetail = observer(function IssueAttachmentsDetail(p
         />
       )}
       <div className="flex h-[60px] items-center justify-between gap-1 rounded-md border-[2px] border-subtle bg-surface-1 px-4 py-2 text-13">
-        <Link href={fileURL ?? ""} target="_blank" rel="noopener noreferrer">
+        <a href={fileURL ?? ""} target="_blank" rel="noopener noreferrer">
           <div className="flex items-center gap-3">
             <div className="h-7 w-7">{fileIcon}</div>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
-                <Tooltip label={fileName} layout="stacked" disabled={isMobile}>
-                  <span className="text-13">{truncateText(`${fileName}`, 10)}</span>
+                <Tooltip label={attachment.attributes.name} layout="stacked" disabled={isMobile}>
+                  <span className="text-13">
+                    <bdi>{truncateText(`${fileName}`, 10)}</bdi>
+                  </span>
                 </Tooltip>
                 <Tooltip
-                  label={`${
-                    getUserDetails(attachment.updated_by)?.display_name ?? ""
-                  } uploaded on ${renderFormattedDate(attachment.updated_at, undefined, currentLocale)}`}
+                  label={t("attachment.uploaded_by_on", {
+                    actor: `\u2068${getUserDetails(attachment.created_by)?.display_name ?? t("unknown_user")}\u2069`,
+                    date: `\u2068${renderFormattedDate(attachment.created_at, undefined, currentLocale)}\u2069`,
+                  })}
                   layout="stacked"
                   disabled={isMobile}
                 >
@@ -96,14 +98,18 @@ export const IssueAttachmentsDetail = observer(function IssueAttachmentsDetail(p
 
               <div className="flex items-center gap-3 text-11 text-secondary">
                 <span>{fileExtension.toUpperCase()}</span>
-                <span>{convertBytesToSize(attachment.attributes.size)}</span>
+                <span>{convertBytesToSize(attachment.attributes.size, currentLocale)}</span>
               </div>
             </div>
           </div>
-        </Link>
+        </a>
 
         {!disabled && (
-          <button type="button" onClick={() => setIsDeleteIssueAttachmentModalOpen(true)}>
+          <button
+            type="button"
+            aria-label={t("attachment.delete")}
+            onClick={() => setIsDeleteIssueAttachmentModalOpen(true)}
+          >
             <CloseOutline className="h-4 w-4 text-secondary hover:text-primary" />
           </button>
         )}

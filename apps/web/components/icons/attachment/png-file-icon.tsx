@@ -11,5 +11,5 @@ import PngFileIcon from "@/app/assets/attachment/png-icon.png?url";
 import type { ImageIconPros } from "../types";
 
 export function PngIcon({ width, height }: ImageIconPros) {
-  return <img src={PngFileIcon} width={width} height={height} alt="PngFileIcon" />;
+  return <img src={PngFileIcon} width={width} height={height} alt="PNG" />;
 }

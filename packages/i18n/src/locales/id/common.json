@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} mengunggah berkas ini pada {date}.",
+    "delete_confirmation": "Yakin ingin menghapus lampiran <file/>? Lampiran ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.",
     "error": "File tidak dapat dilampirkan. Coba unggah lagi.",
     "only_one_file_allowed": "Hanya satu file yang dapat diunggah pada satu waktu.",
     "file_size_limit": "File harus berukuran {size}MB atau lebih kecil.",

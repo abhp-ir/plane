@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor}於{date}上傳了此檔案。",
+    "delete_confirmation": "確定要刪除附件<file/>嗎？此附件將被永久移除。此操作無法復原。",
     "error": "無法附加檔案。請重新上傳。",
     "only_one_file_allowed": "一次只能上傳一個檔案。",
     "file_size_limit": "檔案大小必須小於或等於 {size}MB。",

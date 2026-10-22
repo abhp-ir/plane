@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} heeft dit bestand op {date} geüpload.",
+    "delete_confirmation": "Weet je zeker dat je de bijlage <file/> wilt verwijderen? Deze bijlage wordt definitief verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
     "error": "Bestand kon niet worden bijgevoegd. Probeer opnieuw te uploaden.",
     "only_one_file_allowed": "Er kan maar één bestand tegelijk worden geüpload.",
     "file_size_limit": "Bestand moet {size}MB of kleiner zijn.",

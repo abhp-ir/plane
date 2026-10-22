@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} đã tải tệp này lên vào {date}.",
+    "delete_confirmation": "Bạn có chắc chắn muốn xóa tệp đính kèm <file/> không? Tệp đính kèm này sẽ bị xóa vĩnh viễn. Không thể hoàn tác thao tác này.",
     "error": "Không thể đính kèm tệp. Vui lòng tải lên lại.",
     "only_one_file_allowed": "Chỉ có thể tải lên một tệp mỗi lần.",
     "file_size_limit": "Kích thước tệp phải nhỏ hơn hoặc bằng {size}MB.",

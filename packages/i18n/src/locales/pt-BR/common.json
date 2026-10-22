@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} enviou este arquivo em {date}.",
+    "delete_confirmation": "Tem certeza de que deseja excluir o anexo <file/>? Este anexo será removido permanentemente. Esta ação não pode ser desfeita.",
     "error": "Não foi possível anexar o arquivo. Tente enviar novamente.",
     "only_one_file_allowed": "Apenas um arquivo pode ser enviado por vez.",
     "file_size_limit": "O arquivo deve ter {size}MB ou menos.",

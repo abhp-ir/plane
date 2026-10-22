@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "Ten plik został przesłany przez {actor} dnia {date}.",
+    "delete_confirmation": "Czy na pewno chcesz usunąć załącznik <file/>? Ten załącznik zostanie trwale usunięty. Tej operacji nie można cofnąć.",
     "error": "Nie udało się dodać pliku. Spróbuj ponownie.",
     "only_one_file_allowed": "Możesz przesłać tylko jeden plik naraz.",
     "file_size_limit": "Plik musi być mniejszy niż {size}MB.",

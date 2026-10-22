@@ -72,24 +72,29 @@ export const IssueAttachmentsListItem = observer(function IssueAttachmentsListIt
         >
           <div className="flex items-center gap-3">{fileIcon}</div>
           <Tooltip label={`${fileName}.${fileExtension}`} layout="stacked" disabled={isMobile}>
-            <p className="truncate font-medium text-secondary">{`${fileName}.${fileExtension}`}</p>
+            <p className="truncate font-medium text-secondary">
+              <bdi>{`${fileName}.${fileExtension}`}</bdi>
+            </p>
           </Tooltip>
           <span className="flex size-1.5 rounded-full bg-layer-1" />
-          <span className="shrink-0 text-placeholder">{convertBytesToSize(attachment.attributes.size)}</span>
+          <span className="shrink-0 text-placeholder">
+            {convertBytesToSize(attachment.attributes.size, currentLocale)}
+          </span>
         </a>
 
         <div className="flex items-center gap-3">
           {attachment?.created_by && (
             <>
               <Tooltip
-                label={`${
-                  getUserDetails(attachment?.created_by)?.display_name ?? ""
-                } uploaded on ${renderFormattedDate(attachment.updated_at, undefined, currentLocale)}`}
+                label={t("attachment.uploaded_by_on", {
+                  actor: `\u2068${getUserDetails(attachment.created_by)?.display_name ?? t("unknown_user")}\u2069`,
+                  date: `\u2068${renderFormattedDate(attachment.created_at, undefined, currentLocale)}\u2069`,
+                })}
                 layout="stacked"
                 disabled={isMobile}
               >
                 <div className="flex items-center justify-center">
-                  <ButtonAvatars showTooltip userIds={attachment?.created_by} />
+                  <ButtonAvatars userIds={attachment?.created_by} showTooltip />
                 </div>
               </Tooltip>
             </>

@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} uploaded this file on {date}.",
+    "delete_confirmation": "Are you sure you want to delete <file/>? This attachment will be permanently removed. This action cannot be undone.",
     "error": "File could not be attached. Try uploading again.",
     "only_one_file_allowed": "Only one file can be uploaded at a time.",
     "file_size_limit": "File must be of {size}MB or less in size.",

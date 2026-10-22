@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} a încărcat acest fișier pe {date}.",
+    "delete_confirmation": "Sigur doriți să ștergeți atașamentul <file/>? Acest atașament va fi eliminat definitiv. Această acțiune nu poate fi anulată.",
     "error": "Fișierul nu a putut fi atașat. Încearcă să încarci din nou.",
     "only_one_file_allowed": "Se poate încărca doar un fișier o dată.",
     "file_size_limit": "Fișierul trebuie să aibă {size}MB sau mai puțin.",

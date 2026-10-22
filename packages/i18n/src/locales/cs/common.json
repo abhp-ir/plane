@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "Tento soubor byl nahrán uživatelem {actor} dne {date}.",
+    "delete_confirmation": "Opravdu chcete smazat přílohu <file/>? Tato příloha bude trvale odstraněna. Tuto akci nelze vrátit zpět.",
     "error": "Soubor nelze připojit. Zkuste to prosím znovu.",
     "only_one_file_allowed": "Je možné nahrát pouze jeden soubor najednou.",
     "file_size_limit": "Soubor musí být menší než {size}MB.",

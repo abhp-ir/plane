@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} subió este archivo el {date}.",
+    "delete_confirmation": "¿Seguro que quieres eliminar el archivo adjunto <file/>? Este archivo adjunto se eliminará permanentemente. Esta acción no se puede deshacer.",
     "error": "No se pudo adjuntar el archivo. Intenta subirlo de nuevo.",
     "only_one_file_allowed": "Solo se puede subir un archivo a la vez.",
     "file_size_limit": "El archivo debe tener {size}MB o menos de tamaño.",

@@ -15,6 +15,7 @@ export type TIssueAttachment = {
   asset_url: string;
   issue_id: string;
   // required
+  created_at: string;
   updated_at: string;
   updated_by: string;
   created_by: string;

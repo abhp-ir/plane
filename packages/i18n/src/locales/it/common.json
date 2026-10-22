@@ -791,6 +791,8 @@
     }
   },
   "attachment": {
+    "uploaded_by_on": "{actor} ha caricato questo file il {date}.",
+    "delete_confirmation": "Vuoi davvero eliminare l’allegato <file/>? Questo allegato verrà rimosso definitivamente. Questa azione non può essere annullata.",
     "error": "Impossibile allegare il file. Riprova a caricarlo.",
     "only_one_file_allowed": "È possibile caricare un solo file alla volta.",
     "file_size_limit": "Il file deve essere di {size}MB o meno.",
