@@ -56,13 +56,15 @@ export const PlanCheckoutButton = observer(function PlanCheckoutButton(props: Pr
               <Loader.Item height="36px" width="4rem" />
             </Loader>
           ) : (
-            <DiscountInfo
-              currency={price.currency}
-              frequency={price.recurring}
-              price={price.price}
-              subscriptionType={planVariant}
-              className="mr-1.5"
-            />
+            <bdi dir="ltr">
+              <DiscountInfo
+                currency={price.currency}
+                frequency={price.recurring}
+                price={price.price}
+                subscriptionType={planVariant}
+                className="me-1.5"
+              />
+            </bdi>
           )}
         </div>
         <div className="text-caption-md-medium text-tertiary">per user per month</div>
@@ -73,7 +75,7 @@ export const PlanCheckoutButton = observer(function PlanCheckoutButton(props: Pr
         </Loader>
       ) : (
         <div className="flex w-full flex-col items-center justify-center space-y-4">
-          <div className="w-56">
+          <div className="w-full max-w-56">
             <Button
               variant="primary"
               size="md"

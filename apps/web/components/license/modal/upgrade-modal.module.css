@@ -1,0 +1,5 @@
+@media (width < 40rem) {
+  #popup {
+    inline-size: calc(100vi - 2rem);
+  }
+}

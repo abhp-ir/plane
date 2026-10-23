@@ -5,6 +5,7 @@
  */
 
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import { TALK_TO_SALES_URL } from "@plane/constants";
 import type { EProductSubscriptionEnum, IPaymentProduct, TSubscriptionPrice } from "@plane/types";
@@ -31,6 +32,8 @@ export type PlanUpgradeCardProps = {
 };
 
 export const PlanUpgradeCard = observer(function PlanUpgradeCard(props: PlanUpgradeCardProps) {
+  const { currentLocale } = useTranslation();
+  const percentFormat = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale, { style: "percent" });
   const {
     planVariant,
     features,
@@ -77,8 +80,8 @@ export const PlanUpgradeCard = observer(function PlanUpgradeCard(props: PlanUpgr
         <>
           Yearly
           {yearlyDiscount > 0 && (
-            <span className="text-caption-sm ml-1 rounded-full bg-accent-primary px-1.5 py-0.5 text-on-color">
-              -{yearlyDiscount}%
+            <span className="text-caption-sm ms-1 rounded-full bg-accent-primary px-1.5 py-0.5 text-on-color">
+              <bdi>{percentFormat.format(-yearlyDiscount / 100)}</bdi>
             </span>
           )}
         </>

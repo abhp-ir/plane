@@ -5,6 +5,7 @@
  */
 
 import { useTheme } from "next-themes";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import type { TBillingFrequency } from "@plane/types";
 import { EProductSubscriptionEnum } from "@plane/types";
@@ -34,6 +35,8 @@ const getActualPrice = (frequency: TBillingFrequency, subscriptionType: EProduct
 
 export function DiscountInfo({ className, currency, frequency, price, subscriptionType }: TDiscountInfoProps) {
   const { resolvedTheme } = useTheme();
+  const { currentLocale } = useTranslation();
+  const numberFormat = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale);
   // derived values
   const actualPrice = getActualPrice(frequency, subscriptionType);
 
@@ -41,26 +44,26 @@ export function DiscountInfo({ className, currency, frequency, price, subscripti
     return (
       <>
         {currency}
-        {price}
+        {numberFormat.format(price)}
       </>
     );
   }
 
   return (
     <>
-      {actualPrice != price && (
+      {actualPrice !== null && actualPrice !== price && (
         <span className={cn("relative", className)}>
           <img
             src={resolvedTheme === "dark" ? ScribbleWhite : ScribbleBlack}
-            alt="scribble"
+            alt=""
             className="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 scale-x-125"
           />
           {currency}
-          {actualPrice}
+          {numberFormat.format(actualPrice)}
         </span>
       )}
       {currency}
-      {price}
+      {numberFormat.format(price)}
     </>
   );
 }

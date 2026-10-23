@@ -21,9 +21,10 @@ import { cn } from "@plane/utils";
 // components
 import { FreePlanCard, PlanUpgradeCard } from "@/components/license";
 import type { TCheckoutParams } from "@/components/license/modal/card/checkout-button";
+import styles from "./upgrade-modal.module.css";
 
 // Constants
-const COMMON_CARD_CLASSNAME = "flex flex-col w-full h-full justify-end col-span-12 sm:col-span-6 xl:col-span-3";
+const COMMON_CARD_CLASSNAME = "flex min-w-0 flex-col w-full h-full justify-end col-span-12 sm:col-span-6 xl:col-span-3";
 const COMMON_EXTRA_FEATURES_CLASSNAME = "pt-2 text-center text-caption-md-medium text-accent-primary hover:underline";
 
 export type PaidPlanUpgradeModalProps = {
@@ -56,8 +57,8 @@ export const PaidPlanUpgradeModal = observer(function PaidPlanUpgradeModal(props
       }}
     >
       {/* The visible plan heading names the dialog; it keeps its display typography instead of `DialogTitle`. */}
-      <DialogContent size="full" aria-labelledby="paid-plan-upgrade-modal-title">
-        <DialogMain>
+      <DialogContent size="full" id={styles.popup} aria-labelledby="paid-plan-upgrade-modal-title">
+        <DialogMain render={<div className="max-sm:p-4" />}>
           <DialogBody tabIndex={0}>
             <div className="grid h-full grid-cols-12 gap-6">
               {/* Free Plan Section */}
@@ -66,7 +67,7 @@ export const PaidPlanUpgradeModal = observer(function PaidPlanUpgradeModal(props
                   Upgrade to a paid plan and unlock missing features.
                 </h2>
                 <div className="mt-4 mb-2">
-                  <p className="mb-4 pr-8 text-13 text-primary">
+                  <p className="mb-4 pe-8 text-13 text-primary">
                     Dashboards, Workflows, Approvals, Time Management, and other superpowers are just a click away.
                     Upgrade today to unlock features your teams need yesterday.
                   </p>

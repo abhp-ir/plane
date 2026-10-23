@@ -71,7 +71,7 @@ export const TalkToSalesCard = observer(function TalkToSalesCard(props: TalkToSa
         </Loader>
       ) : (
         <div className="flex w-full flex-col items-center justify-center">
-          <div className="w-56">
+          <div className="w-full max-w-56">
             <Button
               variant="primary"
               size="md"

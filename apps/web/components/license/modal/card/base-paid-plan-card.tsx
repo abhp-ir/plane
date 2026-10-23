@@ -51,7 +51,7 @@ export const BasePaidPlanCard = observer(function BasePaidPlanCard(props: TBaseP
         onValueChange={(value: TBillingFrequency) => setSelectedPlan(value)}
       >
         <div className="flex h-9 w-full justify-center">
-          <div className="w-60">
+          <div className="w-full max-w-60">
             <TabsList>
               {prices.map((price: TSubscriptionPrice) => (
                 // propel: the price label is a ReactNode (e.g. a discount pill), which the ready-made `Tab`
@@ -84,7 +84,7 @@ export const BasePaidPlanCard = observer(function BasePaidPlanCard(props: TBaseP
                     })}
                   >
                     <p className="line-clamp-1 flex w-full items-center text-caption-md-medium leading-5">
-                      <TickCircleOutline className="mr-2 size-4 flex-shrink-0 text-tertiary" />
+                      <TickCircleOutline className="me-2 size-4 flex-shrink-0 text-tertiary" />
                       <span className="truncate text-secondary">{feature}</span>
                     </p>
                   </li>
