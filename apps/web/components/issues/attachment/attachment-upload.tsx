@@ -7,6 +7,7 @@
 import { useCallback, useState } from "react";
 import { observer } from "mobx-react";
 import { useDropzone } from "react-dropzone";
+import { useTranslation } from "@plane/i18n";
 // plane web hooks
 import { useFileSize } from "@/hooks/use-file-size";
 // types
@@ -21,6 +22,7 @@ type Props = {
 };
 
 export const IssueAttachmentUpload = observer(function IssueAttachmentUpload(props: Props) {
+  const { t, currentLocale } = useTranslation();
   const { workspaceSlug, disabled = false, attachmentOperations } = props;
   // states
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +35,12 @@ export const IssueAttachmentUpload = observer(function IssueAttachmentUpload(pro
       if (!currentFile || !workspaceSlug) return;
 
       setIsLoading(true);
-      attachmentOperations.create(currentFile).finally(() => setIsLoading(false));
+      attachmentOperations
+        .create(currentFile)
+        .catch(() => {
+          // The shared attachment operation already reports upload failures.
+        })
+        .finally(() => setIsLoading(false));
     },
     [attachmentOperations, workspaceSlug]
   );
@@ -46,7 +53,15 @@ export const IssueAttachmentUpload = observer(function IssueAttachmentUpload(pro
   });
 
   const fileError =
-    fileRejections.length > 0 ? `Invalid file type or size (max ${maxFileSize / 1024 / 1024} MB)` : null;
+    fileRejections.length > 0
+      ? fileRejections.some(({ errors }) => errors.some(({ code }) => code === "too-many-files"))
+        ? t("attachment.only_one_file_allowed")
+        : t("attachment.file_size_limit", {
+            size: new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(
+              maxFileSize / 1024 / 1024
+            ),
+          })
+      : null;
 
   return (
     <div
@@ -55,16 +70,16 @@ export const IssueAttachmentUpload = observer(function IssueAttachmentUpload(pro
         isDragActive ? "border-accent-strong bg-accent-primary/10" : "border-subtle"
       } ${isDragReject ? "bg-danger-subtle" : ""} ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps({ "aria-label": t("common.attach") })} />
       <span className="flex items-center gap-2">
         {isDragActive ? (
-          <p>Drop here...</p>
+          <p>{t("attachment.drop_here")}</p>
         ) : fileError ? (
           <p className="text-center text-danger-primary">{fileError}</p>
         ) : isLoading ? (
-          <p className="text-center">Uploading...</p>
+          <p className="text-center">{t("attachment.uploading")}</p>
         ) : (
-          <p className="text-center">Click or drag a file here</p>
+          <p className="text-center">{t("attachment.click_or_drag")}</p>
         )}
       </span>
     </div>

@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Enviando anexo…",
+    "uploaded": "Anexo enviado",
+    "uploaded_message": "O anexo foi enviado com sucesso",
+    "not_uploaded": "Anexo não enviado",
+    "removed": "Anexo removido",
+    "removed_message": "O anexo foi removido com sucesso",
+    "not_removed": "Anexo não removido",
+    "not_removed_message": "Não foi possível remover o anexo",
+    "upload_progress": "Progresso do envio",
+    "progress_done": "{progress, number, percent} concluído",
+    "drop_here": "Solte aqui…",
+    "click_or_drag": "Clique ou arraste um arquivo aqui",
     "uploaded_by_on": "{actor} enviou este arquivo em {date}.",
     "delete_confirmation": "Tem certeza de que deseja excluir o anexo <file/>? Este anexo será removido permanentemente. Esta ação não pode ser desfeita.",
     "error": "Não foi possível anexar o arquivo. Tente enviar novamente.",

@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Téléversement de la pièce jointe…",
+    "uploaded": "Pièce jointe téléversée",
+    "uploaded_message": "La pièce jointe a été téléversée avec succès",
+    "not_uploaded": "Pièce jointe non téléversée",
+    "removed": "Pièce jointe supprimée",
+    "removed_message": "La pièce jointe a été supprimée avec succès",
+    "not_removed": "Pièce jointe non supprimée",
+    "not_removed_message": "La pièce jointe n’a pas pu être supprimée",
+    "upload_progress": "Progression du téléversement",
+    "progress_done": "{progress, number, percent} terminé",
+    "drop_here": "Déposez ici…",
+    "click_or_drag": "Cliquez ou faites glisser un fichier ici",
     "uploaded_by_on": "{actor} a téléversé ce fichier le {date}.",
     "delete_confirmation": "Voulez-vous vraiment supprimer la pièce jointe <file/> ? Cette pièce jointe sera supprimée définitivement. Cette action est irréversible.",
     "error": "Le fichier n’a pas pu être joint. Essayez de le télécharger à nouveau.",

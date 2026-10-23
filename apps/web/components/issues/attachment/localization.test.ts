@@ -11,6 +11,7 @@ import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter } from "react-router";
 import { expect, it, vi } from "vitest";
+import type { DropzoneOptions } from "react-dropzone";
 import { initPromise, setLanguage, TranslationProvider } from "@plane/i18n";
 import type { TIssueAttachment } from "@plane/types";
 import { getFileURL, renderFormattedDate } from "@plane/utils";
@@ -18,6 +19,14 @@ import { IssueAttachmentsCollapsibleTitle } from "../issue-detail-widgets/attach
 import { IssueAttachmentsDetail } from "./attachment-detail";
 import { IssueAttachmentsListItem } from "./attachment-list-item";
 import { IssueAttachmentDeleteModal } from "./delete-attachment-modal";
+import { IssueAttachmentsUploadItem } from "./attachment-list-upload-item";
+import { IssueAttachmentsUploadDetails } from "./attachment-upload-details";
+import { IssueAttachmentItemList } from "./attachment-item-list";
+import { IssueAttachmentUpload } from "./attachment-upload";
+import { IssueAttachmentActionButton } from "../issue-detail-widgets/attachments/quick-action-button";
+import { useAttachmentOperations } from "../issue-detail-widgets/attachments/helper";
+import type { TAttachmentHelpers } from "../issue-detail-widgets/attachments/helper";
+import { EIssueServiceType } from "@plane/types";
 
 vi.mock("@plane/i18n", async () => {
   const { createRequire } = await import("node:module");
@@ -59,11 +68,36 @@ const mocks = vi.hoisted(() => ({
   tooltip: vi.fn(),
   remove: vi.fn(),
   close: vi.fn(),
+  createAttachment: vi.fn(),
+  removeAttachment: vi.fn(),
+  promiseToast: vi.fn(),
+  toast: vi.fn(),
+  dropzones: [] as DropzoneOptions[],
+}));
+vi.mock("@plane/blocks/toast", () => ({ setPromiseToast: mocks.promiseToast, setToast: mocks.toast }));
+vi.mock("@/hooks/use-file-size", () => ({ useFileSize: () => ({ maxFileSize: 5 * 1024 * 1024 }) }));
+vi.mock("react-dropzone", () => ({
+  useDropzone: (options: DropzoneOptions) => {
+    mocks.dropzones.push(options);
+    return {
+      getRootProps: (props = {}) => props,
+      getInputProps: (props = {}) => ({ ...props, type: "file" }),
+      fileRejections: [],
+    };
+  },
 }));
 vi.mock("@/hooks/store/use-issue-detail", () => ({
   useIssueDetail: () => ({
     issue: { getIssueById: () => ({ attachment_count: 12 }) },
-    attachment: { getAttachmentById: () => mocks.asset },
+    attachment: {
+      getAttachmentById: () => mocks.asset,
+      getAttachmentsByIssueId: () => [],
+      getAttachmentsUploadStatusByIssueId: () => [],
+      createAttachment: mocks.createAttachment,
+      removeAttachment: mocks.removeAttachment,
+    },
+    fetchActivities: vi.fn(),
+    setLastWidgetAction: vi.fn(),
   }),
 }));
 vi.mock("@/hooks/store/use-member", () => ({
@@ -187,6 +221,131 @@ it("updates the mounted count and rich confirmation on fa→en→fa, preserves t
     expect(mocks.close).toHaveBeenCalledOnce();
     expect(mocks.remove).not.toHaveBeenCalled();
     expect(mocks.asset).toEqual(asset);
+  } finally {
+    await act(async () => root.unmount());
+    container.remove();
+    environment.IS_REACT_ACT_ENVIRONMENT = previous;
+    await setLanguage("en");
+  }
+});
+
+it.each([IssueAttachmentsUploadItem, IssueAttachmentsUploadDetails])(
+  "localizes progress and its accessible name while isolating the original filename (%s)",
+  async (Component) => {
+    await initPromise;
+    const uploadStatus = { id: "temporary", name: "فایل ABC-42.txt", progress: 42, size: 123, type: "text/plain" };
+    const checkLanguage = async (language: "fa" | "en") => {
+      await setLanguage(language);
+      const html = renderToStaticMarkup(
+        createElement(TranslationProvider, null, createElement(Component, { uploadStatus }))
+      );
+      expect(html).toContain(language === "fa" ? "۴۲٪ انجام شده" : "42% done");
+      expect(html).toContain(language === "fa" ? 'aria-label="پیشرفت بارگذاری"' : 'aria-label="Upload progress"');
+      expect(html).toContain("<bdi>");
+      expect(uploadStatus.progress).toBe(42);
+    };
+    await checkLanguage("fa");
+    await checkLanguage("en");
+    await checkLanguage("fa");
+    await setLanguage("en");
+  }
+);
+
+it("refreshes operation and drop callbacks on mounted fa→en→fa, preserves service arguments and reports failures", async () => {
+  await initPromise;
+  const environment = globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT?: boolean };
+  const previous = environment.IS_REACT_ACT_ENVIRONMENT;
+  environment.IS_REACT_ACT_ENVIRONMENT = true;
+  const container = document.createElement("div");
+  document.body.append(container);
+  const root = createRoot(container);
+  let helpers: TAttachmentHelpers;
+  const props = {
+    workspaceSlug: "fixture",
+    projectId: "project",
+    issueId: "issue",
+    issueServiceType: EIssueServiceType.ISSUES,
+  };
+  function Probe() {
+    helpers = useAttachmentOperations(props.workspaceSlug, props.projectId, props.issueId, props.issueServiceType);
+    return createElement(
+      "div",
+      null,
+      createElement(IssueAttachmentActionButton, props),
+      createElement(IssueAttachmentItemList, { ...props, attachmentHelpers: helpers }),
+      createElement(IssueAttachmentUpload, { ...props, attachmentOperations: helpers.operations })
+    );
+  }
+  const file = new File(["می‌رود ABC-42"], "فایل ABC-42.txt", { type: "text/plain" });
+  try {
+    await act(async () => root.render(createElement(TranslationProvider, null, createElement(Probe))));
+    const checkLanguage = async (language: "fa" | "en") => {
+      mocks.dropzones.length = 0;
+      await act(async () => setLanguage(language));
+      // A fresh render also covers the initial no-op language selection.
+      await act(async () => root.render(createElement(TranslationProvider, null, createElement(Probe))));
+      const inputs = container.querySelectorAll("input[type=file]");
+      expect(inputs).toHaveLength(3);
+      for (const input of inputs)
+        expect(input.getAttribute("aria-label")).toBe(language === "fa" ? "پیوست کردن" : "Attach");
+      mocks.createAttachment.mockResolvedValueOnce({ id: "disposable" });
+      await act(async () => helpers!.operations.create(file));
+      expect(mocks.createAttachment).toHaveBeenLastCalledWith("fixture", "project", "issue", file);
+      const options = mocks.promiseToast.mock.lastCall![1];
+      expect(options.loading).toBe(language === "fa" ? "در حال بارگذاری پیوست…" : "Uploading attachment...");
+      expect(options.success.title).toBe(language === "fa" ? "پیوست بارگذاری شد" : "Attachment uploaded");
+      expect(options.success.message()).toBe(
+        language === "fa" ? "پیوست با موفقیت بارگذاری شد" : "The attachment has been successfully uploaded"
+      );
+      expect(options.error.title).toBe(language === "fa" ? "پیوست بارگذاری نشد" : "Attachment not uploaded");
+      expect(options.error.message()).toBe(
+        language === "fa"
+          ? "پیوست کردن فایل انجام نشد. دوباره بارگذاری کنید."
+          : "File could not be attached. Try uploading again."
+      );
+      const toastDropzones = mocks.dropzones.filter(({ onDrop }) => onDrop?.length === 2).slice(-2);
+      expect(toastDropzones).toHaveLength(2);
+      await act(async () => {
+        for (const dropzone of toastDropzones) {
+          dropzone.onDrop!(
+            [],
+            [{ file, errors: [{ code: "file-too-large", message: "File is too large" }] }],
+            new Event("change")
+          );
+          expect(mocks.toast.mock.lastCall![0].message).toBe(
+            language === "fa" ? "حجم فایل باید ۵ مگابایت یا کمتر باشد." : "File must be of 5MB or less in size."
+          );
+          dropzone.onDrop!(
+            [],
+            [file, file].map((rejectedFile) => ({
+              file: rejectedFile,
+              errors: [{ code: "too-many-files", message: "Too many files" }],
+            })),
+            new Event("change")
+          );
+          expect(mocks.toast.mock.lastCall![0].message).toBe(
+            language === "fa" ? "هر بار فقط یک فایل می‌توان بارگذاری کرد." : "Only one file can be uploaded at a time."
+          );
+        }
+      });
+      mocks.removeAttachment.mockResolvedValueOnce(undefined);
+      await act(async () => helpers!.operations.remove("disposable"));
+      expect(mocks.removeAttachment).toHaveBeenLastCalledWith("fixture", "project", "issue", "disposable");
+      expect(mocks.toast.mock.lastCall![0].title).toBe(language === "fa" ? "پیوست حذف شد" : "Attachment removed");
+      mocks.removeAttachment.mockRejectedValueOnce(new Error("offline"));
+      await act(async () => helpers!.operations.remove("disposable"));
+      expect(mocks.toast.mock.lastCall![0].message).toBe(
+        language === "fa" ? "حذف پیوست انجام نشد" : "The attachment could not be removed"
+      );
+      const failure = new Error("offline");
+      mocks.createAttachment.mockRejectedValueOnce(failure);
+      await act(async () => {
+        await expect(helpers!.operations.create(file)).rejects.toBe(failure);
+      });
+    };
+    await checkLanguage("fa");
+    await checkLanguage("en");
+    await checkLanguage("fa");
   } finally {
     await act(async () => root.unmount());
     container.remove();

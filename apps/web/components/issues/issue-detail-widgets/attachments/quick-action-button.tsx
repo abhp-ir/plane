@@ -32,7 +32,7 @@ type Props = {
 
 export const IssueAttachmentActionButton = observer(function IssueAttachmentActionButton(props: Props) {
   const { workspaceSlug, projectId, issueId, customButton, disabled = false, issueServiceType } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // state
   const [isLoading, setIsLoading] = useState(false);
   // store hooks
@@ -65,8 +65,8 @@ export const IssueAttachmentActionButton = observer(function IssueAttachmentActi
           .catch(() => {
             setToast({
               type: "error",
-              title: "Error!",
-              message: "File could not be attached. Try uploading again.",
+              title: t("toast.error"),
+              message: t("attachment.error"),
             });
           })
           .finally(() => {
@@ -79,15 +79,27 @@ export const IssueAttachmentActionButton = observer(function IssueAttachmentActi
 
       setToast({
         type: "error",
-        title: "Error!",
+        title: t("toast.error"),
         message:
           totalAttachedFiles > 1
-            ? "Only one file can be uploaded at a time."
-            : `File must be of ${maxFileSize / 1024 / 1024}MB or less in size.`,
+            ? t("attachment.only_one_file_allowed")
+            : t("attachment.file_size_limit", {
+                size: new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(
+                  maxFileSize / 1024 / 1024
+                ),
+              }),
       });
       return;
     },
-    [attachmentOperations, maxFileSize, workspaceSlug, handleFetchPropertyActivities, setLastWidgetAction]
+    [
+      attachmentOperations,
+      maxFileSize,
+      workspaceSlug,
+      handleFetchPropertyActivities,
+      setLastWidgetAction,
+      t,
+      currentLocale,
+    ]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -113,7 +125,7 @@ export const IssueAttachmentActionButton = observer(function IssueAttachmentActi
         if (e.key === "Enter" || e.key === " ") e.stopPropagation();
       }}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps({ "aria-label": t("common.attach") })} />
       {customButton ? (
         React.cloneElement(customButton, buttonProps)
       ) : (

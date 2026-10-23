@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Đang tải tệp đính kèm lên…",
+    "uploaded": "Đã tải tệp đính kèm lên",
+    "uploaded_message": "Tệp đính kèm đã được tải lên thành công",
+    "not_uploaded": "Chưa tải tệp đính kèm lên",
+    "removed": "Đã xóa tệp đính kèm",
+    "removed_message": "Tệp đính kèm đã được xóa thành công",
+    "not_removed": "Chưa xóa tệp đính kèm",
+    "not_removed_message": "Không thể xóa tệp đính kèm",
+    "upload_progress": "Tiến độ tải lên",
+    "progress_done": "Đã hoàn tất {progress, number, percent}",
+    "drop_here": "Thả vào đây…",
+    "click_or_drag": "Nhấp hoặc kéo tệp vào đây",
     "uploaded_by_on": "{actor} đã tải tệp này lên vào {date}.",
     "delete_confirmation": "Bạn có chắc chắn muốn xóa tệp đính kèm <file/> không? Tệp đính kèm này sẽ bị xóa vĩnh viễn. Không thể hoàn tác thao tác này.",
     "error": "Không thể đính kèm tệp. Vui lòng tải lên lại.",

@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Anhang wird hochgeladen…",
+    "uploaded": "Anhang hochgeladen",
+    "uploaded_message": "Der Anhang wurde erfolgreich hochgeladen",
+    "not_uploaded": "Anhang nicht hochgeladen",
+    "removed": "Anhang entfernt",
+    "removed_message": "Der Anhang wurde erfolgreich entfernt",
+    "not_removed": "Anhang nicht entfernt",
+    "not_removed_message": "Der Anhang konnte nicht entfernt werden",
+    "upload_progress": "Uploadfortschritt",
+    "progress_done": "{progress, number, percent} abgeschlossen",
+    "drop_here": "Hier ablegen…",
+    "click_or_drag": "Klicken Sie hier oder ziehen Sie eine Datei hierher",
     "uploaded_by_on": "{actor} hat diese Datei am {date} hochgeladen.",
     "delete_confirmation": "Möchten Sie den Anhang <file/> wirklich löschen? Dieser Anhang wird dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
     "error": "Datei konnte nicht angehängt werden. Bitte versuchen Sie es erneut.",

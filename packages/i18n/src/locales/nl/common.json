@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Bijlage uploaden…",
+    "uploaded": "Bijlage geüpload",
+    "uploaded_message": "De bijlage is succesvol geüpload",
+    "not_uploaded": "Bijlage niet geüpload",
+    "removed": "Bijlage verwijderd",
+    "removed_message": "De bijlage is succesvol verwijderd",
+    "not_removed": "Bijlage niet verwijderd",
+    "not_removed_message": "De bijlage kon niet worden verwijderd",
+    "upload_progress": "Uploadvoortgang",
+    "progress_done": "{progress, number, percent} voltooid",
+    "drop_here": "Hier neerzetten…",
+    "click_or_drag": "Klik of sleep een bestand hierheen",
     "uploaded_by_on": "{actor} heeft dit bestand op {date} geüpload.",
     "delete_confirmation": "Weet je zeker dat je de bijlage <file/> wilt verwijderen? Deze bijlage wordt definitief verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
     "error": "Bestand kon niet worden bijgevoegd. Probeer opnieuw te uploaden.",

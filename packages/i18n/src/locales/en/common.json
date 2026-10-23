@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Uploading attachment...",
+    "uploaded": "Attachment uploaded",
+    "uploaded_message": "The attachment has been successfully uploaded",
+    "not_uploaded": "Attachment not uploaded",
+    "removed": "Attachment removed",
+    "removed_message": "The attachment has been successfully removed",
+    "not_removed": "Attachment not removed",
+    "not_removed_message": "The attachment could not be removed",
+    "upload_progress": "Upload progress",
+    "progress_done": "{progress, number, percent} done",
+    "drop_here": "Drop here...",
+    "click_or_drag": "Click or drag a file here",
     "uploaded_by_on": "{actor} uploaded this file on {date}.",
     "delete_confirmation": "Are you sure you want to delete <file/>? This attachment will be permanently removed. This action cannot be undone.",
     "error": "File could not be attached. Try uploading again.",

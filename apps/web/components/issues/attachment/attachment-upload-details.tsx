@@ -5,6 +5,7 @@
  */
 
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import { CircularProgress } from "@makeplane/propel/components/circular-progress";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import { getFileExtension, truncateText } from "@plane/utils";
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export const IssueAttachmentsUploadDetails = observer(function IssueAttachmentsUploadDetails(props: Props) {
+  const { t } = useTranslation();
   // props
   const { uploadStatus } = props;
   // derived values
@@ -38,7 +40,9 @@ export const IssueAttachmentsUploadDetails = observer(function IssueAttachmentsU
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <Tooltip label={fileName} layout="stacked" disabled={isMobile}>
-              <span className="text-13">{truncateText(`${fileName}`, 10)}</span>
+              <span className="text-13">
+                <bdi>{truncateText(`${fileName}`, 10)}</bdi>
+              </span>
             </Tooltip>
           </div>
 
@@ -49,9 +53,16 @@ export const IssueAttachmentsUploadDetails = observer(function IssueAttachmentsU
       </div>
       <div className="flex flex-shrink-0 items-center gap-2">
         <span className="flex-shrink-0">
-          <CircularProgress value={uploadStatus.progress} size="md" variant="brand" aria-label="Upload progress" />
+          <CircularProgress
+            value={uploadStatus.progress}
+            size="md"
+            variant="brand"
+            aria-label={t("attachment.upload_progress")}
+          />
         </span>
-        <div className="flex-shrink-0 text-13 font-medium">{uploadStatus.progress}% done</div>
+        <div className="flex-shrink-0 text-13 font-medium">
+          {t("attachment.progress_done", { progress: uploadStatus.progress / 100 })}
+        </div>
       </div>
     </div>
   );

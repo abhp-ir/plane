@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Nahrávanie prílohy…",
+    "uploaded": "Príloha nahraná",
+    "uploaded_message": "Príloha bola úspešne nahraná",
+    "not_uploaded": "Príloha nebola nahraná",
+    "removed": "Príloha odstránená",
+    "removed_message": "Príloha bola úspešne odstránená",
+    "not_removed": "Príloha nebola odstránená",
+    "not_removed_message": "Prílohu sa nepodarilo odstrániť",
+    "upload_progress": "Priebeh nahrávania",
+    "progress_done": "{progress, number, percent} dokončené",
+    "drop_here": "Presuňte sem…",
+    "click_or_drag": "Kliknite alebo sem presuňte súbor",
     "uploaded_by_on": "Tento súbor nahral používateľ {actor} dňa {date}.",
     "delete_confirmation": "Naozaj chcete odstrániť prílohu <file/>? Táto príloha bude natrvalo odstránená. Túto akciu nemožno vrátiť späť.",
     "error": "Súbor sa nedá pripojiť. Skúste to prosím znova.",

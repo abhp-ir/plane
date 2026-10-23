@@ -43,7 +43,7 @@ export const IssueAttachmentItemList = observer(function IssueAttachmentItemList
     disabled,
     issueServiceType = EIssueServiceType.ISSUES,
   } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // states
   const [isUploading, setIsUploading] = useState(false);
   // store hooks
@@ -96,11 +96,15 @@ export const IssueAttachmentItemList = observer(function IssueAttachmentItemList
         message:
           totalAttachedFiles > 1
             ? t("attachment.only_one_file_allowed")
-            : t("attachment.file_size_limit", { size: maxFileSize / 1024 / 1024 }),
+            : t("attachment.file_size_limit", {
+                size: new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(
+                  maxFileSize / 1024 / 1024
+                ),
+              }),
       });
       return;
     },
-    [createAttachment, maxFileSize, workspaceSlug, handleFetchPropertyActivities]
+    [createAttachment, maxFileSize, workspaceSlug, handleFetchPropertyActivities, t, currentLocale]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -112,8 +116,8 @@ export const IssueAttachmentItemList = observer(function IssueAttachmentItemList
 
   return (
     <>
-      {uploadStatus?.map((uploadStatus) => (
-        <IssueAttachmentsUploadItem key={uploadStatus.id} uploadStatus={uploadStatus} />
+      {uploadStatus?.map((status) => (
+        <IssueAttachmentsUploadItem key={status.id} uploadStatus={status} />
       ))}
       {issueAttachments && (
         <>
@@ -130,7 +134,7 @@ export const IssueAttachmentItemList = observer(function IssueAttachmentItemList
             {...getRootProps()}
             className={`relative flex flex-col ${isDragActive && issueAttachments.length < 3 ? "min-h-[200px]" : ""} ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
           >
-            <input {...getInputProps()} />
+            <input {...getInputProps({ "aria-label": t("common.attach") })} />
             {isDragActive && (
               <div className="absolute top-0 left-0 z-30 flex h-full w-full items-center justify-center bg-surface-2/75">
                 <div className="flex items-center justify-center rounded-md bg-surface-1 p-1">

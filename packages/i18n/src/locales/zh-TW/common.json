@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "正在上傳附件…",
+    "uploaded": "附件已上傳",
+    "uploaded_message": "附件已成功上傳",
+    "not_uploaded": "附件未上傳",
+    "removed": "附件已刪除",
+    "removed_message": "附件已成功刪除",
+    "not_removed": "附件未刪除",
+    "not_removed_message": "無法刪除附件",
+    "upload_progress": "上傳進度",
+    "progress_done": "已完成 {progress, number, percent}",
+    "drop_here": "拖放至此處…",
+    "click_or_drag": "點擊或將檔案拖曳至此處",
     "uploaded_by_on": "{actor}於{date}上傳了此檔案。",
     "delete_confirmation": "確定要刪除附件<file/>嗎？此附件將被永久移除。此操作無法復原。",
     "error": "無法附加檔案。請重新上傳。",

@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Subiendo archivo adjunto…",
+    "uploaded": "Archivo adjunto subido",
+    "uploaded_message": "El archivo adjunto se ha subido correctamente",
+    "not_uploaded": "Archivo adjunto no subido",
+    "removed": "Archivo adjunto eliminado",
+    "removed_message": "El archivo adjunto se ha eliminado correctamente",
+    "not_removed": "Archivo adjunto no eliminado",
+    "not_removed_message": "No se pudo eliminar el archivo adjunto",
+    "upload_progress": "Progreso de carga",
+    "progress_done": "{progress, number, percent} completado",
+    "drop_here": "Suelte aquí…",
+    "click_or_drag": "Haga clic o arrastre un archivo aquí",
     "uploaded_by_on": "{actor} subió este archivo el {date}.",
     "delete_confirmation": "¿Seguro que quieres eliminar el archivo adjunto <file/>? Este archivo adjunto se eliminará permanentemente. Esta acción no se puede deshacer.",
     "error": "No se pudo adjuntar el archivo. Intenta subirlo de nuevo.",

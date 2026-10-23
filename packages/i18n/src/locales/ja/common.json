@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "添付ファイルをアップロード中…",
+    "uploaded": "添付ファイルをアップロードしました",
+    "uploaded_message": "添付ファイルを正常にアップロードしました",
+    "not_uploaded": "添付ファイルをアップロードできませんでした",
+    "removed": "添付ファイルを削除しました",
+    "removed_message": "添付ファイルを正常に削除しました",
+    "not_removed": "添付ファイルを削除できませんでした",
+    "not_removed_message": "添付ファイルを削除できませんでした",
+    "upload_progress": "アップロードの進行状況",
+    "progress_done": "{progress, number, percent} 完了",
+    "drop_here": "ここにドロップしてください…",
+    "click_or_drag": "クリックするか、ここにファイルをドラッグしてください",
     "uploaded_by_on": "{actor}が{date}にこのファイルをアップロードしました。",
     "delete_confirmation": "添付ファイル<file/>を削除してもよろしいですか？この添付ファイルは完全に削除されます。この操作は元に戻せません。",
     "error": "ファイルを添付できませんでした。もう一度アップロードしてください。",

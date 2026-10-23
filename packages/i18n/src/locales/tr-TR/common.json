@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Ek yükleniyor…",
+    "uploaded": "Ek yüklendi",
+    "uploaded_message": "Ek başarıyla yüklendi",
+    "not_uploaded": "Ek yüklenemedi",
+    "removed": "Ek kaldırıldı",
+    "removed_message": "Ek başarıyla kaldırıldı",
+    "not_removed": "Ek kaldırılamadı",
+    "not_removed_message": "Ek kaldırılamadı",
+    "upload_progress": "Yükleme ilerlemesi",
+    "progress_done": "{progress, number, percent} tamamlandı",
+    "drop_here": "Buraya bırakın…",
+    "click_or_drag": "Tıklayın veya buraya bir dosya sürükleyin",
     "uploaded_by_on": "{actor} bu dosyayı {date} tarihinde yükledi.",
     "delete_confirmation": "<file/> ekini silmek istediğinizden emin misiniz? Bu ek kalıcı olarak kaldırılacak. Bu işlem geri alınamaz.",
     "error": "Dosya eklenemedi. Tekrar yüklemeyi deneyin.",

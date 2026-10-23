@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Mengunggah lampiran…",
+    "uploaded": "Lampiran diunggah",
+    "uploaded_message": "Lampiran berhasil diunggah",
+    "not_uploaded": "Lampiran tidak diunggah",
+    "removed": "Lampiran dihapus",
+    "removed_message": "Lampiran berhasil dihapus",
+    "not_removed": "Lampiran tidak dihapus",
+    "not_removed_message": "Lampiran tidak dapat dihapus",
+    "upload_progress": "Progres unggahan",
+    "progress_done": "{progress, number, percent} selesai",
+    "drop_here": "Letakkan di sini…",
+    "click_or_drag": "Klik atau seret file ke sini",
     "uploaded_by_on": "{actor} mengunggah berkas ini pada {date}.",
     "delete_confirmation": "Yakin ingin menghapus lampiran <file/>? Lampiran ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan.",
     "error": "File tidak dapat dilampirkan. Coba unggah lagi.",

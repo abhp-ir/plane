@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Przesyłanie załącznika…",
+    "uploaded": "Załącznik przesłany",
+    "uploaded_message": "Załącznik został pomyślnie przesłany",
+    "not_uploaded": "Załącznik nie został przesłany",
+    "removed": "Załącznik usunięty",
+    "removed_message": "Załącznik został pomyślnie usunięty",
+    "not_removed": "Załącznik nie został usunięty",
+    "not_removed_message": "Nie udało się usunąć załącznika",
+    "upload_progress": "Postęp przesyłania",
+    "progress_done": "{progress, number, percent} ukończono",
+    "drop_here": "Upuść tutaj…",
+    "click_or_drag": "Kliknij lub przeciągnij plik tutaj",
     "uploaded_by_on": "Ten plik został przesłany przez {actor} dnia {date}.",
     "delete_confirmation": "Czy na pewno chcesz usunąć załącznik <file/>? Ten załącznik zostanie trwale usunięty. Tej operacji nie można cofnąć.",
     "error": "Nie udało się dodać pliku. Spróbuj ponownie.",

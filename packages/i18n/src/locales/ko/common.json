@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "첨부 파일 업로드 중…",
+    "uploaded": "첨부 파일 업로드 완료",
+    "uploaded_message": "첨부 파일이 성공적으로 업로드되었습니다",
+    "not_uploaded": "첨부 파일 업로드 실패",
+    "removed": "첨부 파일 삭제 완료",
+    "removed_message": "첨부 파일이 성공적으로 삭제되었습니다",
+    "not_removed": "첨부 파일 삭제 실패",
+    "not_removed_message": "첨부 파일을 삭제할 수 없습니다",
+    "upload_progress": "업로드 진행률",
+    "progress_done": "{progress, number, percent} 완료",
+    "drop_here": "여기에 놓으세요…",
+    "click_or_drag": "클릭하거나 파일을 여기로 드래그하세요",
     "uploaded_by_on": "{actor}님이 {date}에 이 파일을 업로드했습니다.",
     "delete_confirmation": "첨부 파일 <file/> 삭제를 진행하시겠습니까? 이 첨부 파일은 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
     "error": "파일을 첨부할 수 없습니다. 다시 업로드하세요.",

@@ -791,6 +791,18 @@
     }
   },
   "attachment": {
+    "uploading": "Caricamento dell’allegato…",
+    "uploaded": "Allegato caricato",
+    "uploaded_message": "L’allegato è stato caricato correttamente",
+    "not_uploaded": "Allegato non caricato",
+    "removed": "Allegato rimosso",
+    "removed_message": "L’allegato è stato rimosso correttamente",
+    "not_removed": "Allegato non rimosso",
+    "not_removed_message": "Impossibile rimuovere l’allegato",
+    "upload_progress": "Avanzamento del caricamento",
+    "progress_done": "{progress, number, percent} completato",
+    "drop_here": "Rilascia qui…",
+    "click_or_drag": "Fai clic o trascina un file qui",
     "uploaded_by_on": "{actor} ha caricato questo file il {date}.",
     "delete_confirmation": "Vuoi davvero eliminare l’allegato <file/>? Questo allegato verrà rimosso definitivamente. Questa azione non può essere annullata.",
     "error": "Impossibile allegare il file. Riprova a caricarlo.",
