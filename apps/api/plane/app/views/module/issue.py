@@ -7,6 +7,7 @@ import copy
 import json
 
 from django.db.models import F, Func, OuterRef, Q, Subquery
+from django.shortcuts import get_object_or_404
 
 # Django Imports
 from django.utils import timezone
@@ -25,6 +26,7 @@ from plane.db.models import (
     FileAsset,
     IssueLink,
     ModuleIssue,
+    Module,
     Project,
     CycleIssue,
 )
@@ -212,6 +214,7 @@ class ModuleIssueViewSet(BaseViewSet):
         issues = request.data.get("issues", [])
         if not issues:
             return Response({"error": "Issues are required"}, status=status.HTTP_400_BAD_REQUEST)
+        get_object_or_404(Module, pk=module_id, project_id=project_id, workspace__slug=slug)
         project = Project.objects.get(pk=project_id)
         # Scope to workspace+project to prevent cross-tenant IDOR
         issues = list(
