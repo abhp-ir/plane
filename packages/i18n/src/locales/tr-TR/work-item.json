@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, number} bağlantı",
+      "attachments": "{count, number} ek",
+      "sub_work_items": "{count, number} alt iş öğesi"
+    },
     "label": "{count, plural, one {İş öğesi} other {İş öğeleri}}",
     "all": "Tüm İş Öğeleri",
     "edit": "İş öğesini düzenle",
@@ -8,6 +13,10 @@
       "required": "İş öğesi başlığı gereklidir."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {İş öğesi modüle başarıyla eklendi.} other {İş öğeleri modüle başarıyla eklendi.}}",
+        "failed": "Seçili iş öğeleri modüle eklenemedi. Lütfen tekrar deneyin."
+      },
       "press_enter": "Başka bir iş öğesi eklemek için 'Enter'a basın",
       "label": "İş öğesi ekle",
       "cycle": {

@@ -106,7 +106,7 @@ export const isWorkspaceLevel = (type: EIssuesStoreType) =>
     : false;
 
 type TGetGroupByColumns = {
-  t: (key: string) => string;
+  t: (key: string, params?: Record<string, unknown>) => string;
   groupBy: GroupByColumnTypes | null;
   includeNone: boolean;
   isWorkspaceLevel: boolean;
@@ -130,7 +130,7 @@ export const getGroupByColumns = ({
     return [
       {
         id: "All Issues",
-        name: `All ${isEpic ? "Epics" : "work items"}`,
+        name: isEpic ? t("entity.all", { entity: t("common.epics") }) : t("default_global_view.all_issues"),
         payload: {},
         icon: undefined,
       },

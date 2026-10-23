@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "링크 {count, number}개",
+      "attachments": "첨부 파일 {count, number}개",
+      "sub_work_items": "하위 작업 항목 {count, number}개"
+    },
     "label": "{count, plural, one {작업 항목} other {작업 항목}}",
     "all": "모든 작업 항목",
     "edit": "작업 항목 편집",
@@ -8,6 +13,10 @@
       "required": "작업 항목 제목이 필요합니다."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, other {작업 항목이 모듈에 성공적으로 추가되었습니다.}}",
+        "failed": "선택한 작업 항목을 모듈에 추가하지 못했습니다. 다시 시도해 주세요."
+      },
       "press_enter": "다른 작업 항목을 추가하려면 'Enter'를 누르세요",
       "label": "작업 항목 추가",
       "cycle": {

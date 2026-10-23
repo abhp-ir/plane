@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, plural, one {# link} few {# linkuri} other {# de linkuri}}",
+      "attachments": "{count, plural, one {# atașament} few {# atașamente} other {# de atașamente}}",
+      "sub_work_items": "{count, plural, one {# sub-activitate} few {# sub-activități} other {# de sub-activități}}"
+    },
     "label": "{count, plural, one {Activitate} other {Activități}}",
     "all": "Toate activitățile",
     "edit": "Editează activitatea",
@@ -8,6 +13,10 @@
       "required": "Titlul activității este obligatoriu."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {Activitatea a fost adăugată în modul cu succes.} few {Activitățile au fost adăugate în modul cu succes.} other {Activitățile au fost adăugate în modul cu succes.}}",
+        "failed": "Activitățile selectate nu au putut fi adăugate în modul. Încercați din nou."
+      },
       "press_enter": "Apasă 'Enter' pentru a adăuga o altă activitate",
       "label": "Adaugă activitate",
       "cycle": {

@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, plural, one {# link} other {# links}}",
+      "attachments": "{count, plural, one {# attachment} other {# attachments}}",
+      "sub_work_items": "{count, plural, one {# sub-work item} other {# sub-work items}}"
+    },
     "label": "{count, plural, one {Work item} other {Work items}}",
     "all": "All Work items",
     "edit": "Edit work item",
@@ -8,6 +13,10 @@
       "required": "Work item title is required."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {Work item} other {Work items}} added to the module successfully.",
+        "failed": "Selected work items could not be added to the module. Please try again."
+      },
       "press_enter": "Press 'Enter' to add another work item",
       "label": "Add work item",
       "cycle": {

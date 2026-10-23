@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useEffectEvent, useState, useRef } from "react";
 import { Combobox, ComboboxItem, ComboboxList, ComboboxSearch } from "@makeplane/propel/components/combobox";
 import {
   Dialog,
@@ -105,7 +105,7 @@ export function ExistingIssuesListModal(props: Props) {
     handleClose();
   };
 
-  const handleSearch = () => {
+  const handleSearch = useEffectEvent(() => {
     if (!isOpen || !workspaceSlug) return;
     setIsLoading(true);
     const searchService =
@@ -124,7 +124,7 @@ export function ExistingIssuesListModal(props: Props) {
         setIsSearching(false);
         setIsLoading(false);
       });
-  };
+  });
 
   const handleSelectIssues = () => {
     setSelectedIssues((prevData) => (prevData.length === filteredIssues.length ? [] : [...filteredIssues]));
@@ -191,7 +191,7 @@ export function ExistingIssuesListModal(props: Props) {
                   {selectedIssues.map((issue) => (
                     <div
                       key={issue.id}
-                      className="flex items-center gap-1 rounded-md border border-subtle bg-layer-1 py-1 pl-2 text-11 whitespace-nowrap text-primary"
+                      className="flex items-center gap-1 rounded-md border border-subtle bg-layer-1 py-1 ps-2 text-11 whitespace-nowrap text-primary"
                     >
                       <IssueIdentifier
                         projectId={issue.project_id}
@@ -203,6 +203,7 @@ export function ExistingIssuesListModal(props: Props) {
                       />
                       <button
                         type="button"
+                        aria-label={t("common.remove")}
                         className="group p-1"
                         onClick={() => setSelectedIssues((prevData) => prevData.filter((i) => i.id !== issue.id))}
                       >
@@ -217,7 +218,7 @@ export function ExistingIssuesListModal(props: Props) {
                 </div>
               )}
               {workspaceLevelToggle && (
-                <Tooltip label="Toggle workspace level search" disabled={isMobile}>
+                <Tooltip label={t("common.workspace_level")} disabled={isMobile}>
                   <div
                     className={`flex flex-shrink-0 cursor-pointer items-center gap-1 text-11 ${
                       isWorkspaceLevel ? "text-primary" : "text-secondary"
@@ -242,16 +243,14 @@ export function ExistingIssuesListModal(props: Props) {
             </div>
 
             <div className="vertical-scrollbar scrollbar-md max-h-80 min-h-0 scroll-py-2 overflow-x-hidden overflow-y-auto overscroll-contain">
-              {/* TODO: Translate here */}
               {searchTerm !== "" && (
                 <h5 className="text-13 text-secondary">
-                  Search results for{" "}
-                  <span className="text-primary">
-                    {'"'}
-                    {searchTerm}
-                    {'"'}
-                  </span>{" "}
-                  in project:
+                  {t(
+                    isWorkspaceLevel
+                      ? "power_k.search_menu.results_in_workspace"
+                      : "power_k.search_menu.results_in_project",
+                    { query: `\u2068${searchTerm}\u2069` }
+                  )}
                 </h5>
               )}
 

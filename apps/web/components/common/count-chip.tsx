@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-//
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 
 type TCountChip = {
@@ -14,6 +14,7 @@ type TCountChip = {
 
 export function CountChip(props: TCountChip) {
   const { count, className = "" } = props;
+  const { currentLocale } = useTranslation();
 
   return (
     <div
@@ -22,7 +23,9 @@ export function CountChip(props: TCountChip) {
         className
       )}
     >
-      {count}
+      {typeof count === "number"
+        ? new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(count)
+        : count}
     </div>
   );
 }

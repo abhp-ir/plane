@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, plural, one {# link} few {# linki} many {# linków} other {# linku}}",
+      "attachments": "{count, plural, one {# załącznik} few {# załączniki} many {# załączników} other {# załącznika}}",
+      "sub_work_items": "{count, plural, one {# podrzędny element pracy} few {# podrzędne elementy pracy} many {# podrzędnych elementów pracy} other {# podrzędnego elementu pracy}}"
+    },
     "label": "{count, plural, one {Element pracy} few {Elementy pracy} other {Elementów pracy}}",
     "all": "Wszystkie elementy pracy",
     "edit": "Edytuj element pracy",
@@ -8,6 +13,10 @@
       "required": "Tytuł elementu pracy jest wymagany."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {Element pracy został dodany do modułu.} few {Elementy pracy zostały dodane do modułu.} many {Elementy pracy zostały dodane do modułu.} other {Elementy pracy zostały dodane do modułu.}}",
+        "failed": "Nie udało się dodać wybranych elementów pracy do modułu. Spróbuj ponownie."
+      },
       "press_enter": "Naciśnij 'Enter', aby dodać kolejny element pracy",
       "label": "Dodaj element pracy",
       "cycle": {

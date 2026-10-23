@@ -52,7 +52,7 @@ export const HeaderGroupByCard = observer(function HeaderGroupByCard(props: IHea
     isEpic = false,
   } = props;
   // plane hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const verticalAlignPosition = sub_group_by ? false : collapsedGroups?.group_by.includes(column_id);
   // states
   const [isOpen, setIsOpen] = React.useState(false);
@@ -75,14 +75,14 @@ export const HeaderGroupByCard = observer(function HeaderGroupByCard(props: IHea
 
       setToast({
         type: "success",
-        title: "Success!",
-        message: "Work items added to the cycle successfully.",
+        title: t("toast.success"),
+        message: t(`issue.add.${moduleId ? "module" : "cycle"}.success`, { count: issues.length }),
       });
     } catch (_error) {
       setToast({
         type: "error",
-        title: "Error!",
-        message: "Selected work items could not be added to the cycle. Please try again.",
+        title: t("toast.error"),
+        message: t(`issue.add.${moduleId ? "module" : "cycle"}.failed`),
       });
     }
   };
@@ -132,9 +132,9 @@ export const HeaderGroupByCard = observer(function HeaderGroupByCard(props: IHea
             {title}
           </div>
           <div
-            className={`flex-shrink-0 text-13 font-medium text-tertiary ${verticalAlignPosition ? `pr-0.5` : `pl-2`}`}
+            className={`flex-shrink-0 text-13 font-medium text-tertiary ${verticalAlignPosition ? `pe-0.5` : `ps-2`}`}
           >
-            {count || 0}
+            {new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(count || 0)}
           </div>
         </div>
 
@@ -163,13 +163,13 @@ export const HeaderGroupByCard = observer(function HeaderGroupByCard(props: IHea
               />
               <MenuContent side="bottom" align="end">
                 <MenuItem
-                  label="Create work item"
+                  label={t("create_work_item")}
                   onClick={() => {
                     setIsOpen(true);
                   }}
                 />
                 <MenuItem
-                  label="Add an existing work item"
+                  label={t("issue.add.existing")}
                   onClick={() => {
                     setOpenExistingIssueListModal(true);
                   }}

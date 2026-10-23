@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, plural, one {# odkaz} few {# odkazy} many {# odkazu} other {# odkazů}}",
+      "attachments": "{count, plural, one {# příloha} few {# přílohy} many {# přílohy} other {# příloh}}",
+      "sub_work_items": "{count, plural, one {# podřízená pracovní položka} few {# podřízené pracovní položky} many {# podřízené pracovní položky} other {# podřízených pracovních položek}}"
+    },
     "label": "{count, plural, one {Pracovní položka} few {Pracovní položky} other {Pracovních položek}}",
     "all": "Všechny pracovní položky",
     "edit": "Upravit pracovní položku",
@@ -8,6 +13,10 @@
       "required": "Název pracovní položky je povinný."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {Pracovní položka byla úspěšně přidána do modulu.} few {Pracovní položky byly úspěšně přidány do modulu.} many {Pracovní položky byly úspěšně přidány do modulu.} other {Pracovní položky byly úspěšně přidány do modulu.}}",
+        "failed": "Vybrané pracovní položky se nepodařilo přidat do modulu. Zkuste to prosím znovu."
+      },
       "press_enter": "Stiskněte 'Enter' pro přidání další pracovní položky",
       "label": "Přidat pracovní položku",
       "cycle": {

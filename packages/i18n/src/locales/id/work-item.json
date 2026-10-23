@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, number} tautan",
+      "attachments": "{count, number} lampiran",
+      "sub_work_items": "{count, number} sub-item kerja"
+    },
     "label": "{count, plural, one {Item Kerja} other {Item Kerja}}",
     "all": "Semua Item Kerja",
     "edit": "Edit item kerja",
@@ -8,6 +13,10 @@
       "required": "Judul item kerja diperlukan."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, other {Item kerja berhasil ditambahkan ke modul.}}",
+        "failed": "Item kerja yang dipilih tidak dapat ditambahkan ke modul. Silakan coba lagi."
+      },
       "press_enter": "Tekan 'Enter' untuk menambahkan item kerja lainnya",
       "label": "Tambah item kerja",
       "cycle": {

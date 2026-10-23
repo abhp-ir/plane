@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, number} liên kết",
+      "attachments": "{count, number} tệp đính kèm",
+      "sub_work_items": "{count, number} mục công việc con"
+    },
     "label": "{count, plural, one {mục công việc} other {mục công việc}}",
     "all": "Tất cả mục công việc",
     "edit": "Chỉnh sửa mục công việc",
@@ -8,6 +13,10 @@
       "required": "Tiêu đề mục công việc là bắt buộc"
     },
     "add": {
+      "module": {
+        "success": "{count, plural, other {Mục công việc đã được thêm vào mô-đun thành công.}}",
+        "failed": "Không thể thêm các mục công việc đã chọn vào mô-đun. Vui lòng thử lại."
+      },
       "press_enter": "Nhấn 'Enter' để thêm mục công việc khác",
       "label": "Thêm mục công việc",
       "cycle": {

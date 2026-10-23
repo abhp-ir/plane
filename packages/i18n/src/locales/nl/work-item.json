@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, plural, one {# koppeling} other {# koppelingen}}",
+      "attachments": "{count, plural, one {# bijlage} other {# bijlagen}}",
+      "sub_work_items": "{count, plural, one {# subwerkitem} other {# subwerkitems}}"
+    },
     "label": "{count, plural, one {Werkitem} other {Werkitems}}",
     "all": "Alle werkitems",
     "edit": "Werkitem bewerken",
@@ -8,6 +13,10 @@
       "required": "Titel van het werkitem is verplicht."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {Het werkitem is toegevoegd aan de module.} other {De werkitems zijn toegevoegd aan de module.}}",
+        "failed": "De geselecteerde werkitems konden niet aan de module worden toegevoegd. Probeer het opnieuw."
+      },
       "press_enter": "Druk op 'Enter' om nog een werkitem toe te voegen",
       "label": "Werkitem toevoegen",
       "cycle": {

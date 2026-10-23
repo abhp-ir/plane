@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, number}件のリンク",
+      "attachments": "{count, number}件の添付ファイル",
+      "sub_work_items": "{count, number}件のサブ作業項目"
+    },
     "label": "{count, plural, one {作業項目} other {作業項目}}",
     "all": "すべての作業項目",
     "edit": "作業項目を編集",
@@ -8,6 +13,10 @@
       "required": "作業項目のタイトルは必須です。"
     },
     "add": {
+      "module": {
+        "success": "{count, plural, other {作業項目をモジュールに追加しました。}}",
+        "failed": "選択した作業項目をモジュールに追加できませんでした。もう一度お試しください。"
+      },
       "press_enter": "Enterを押して別の作業項目を追加",
       "label": "作業項目を追加",
       "cycle": {

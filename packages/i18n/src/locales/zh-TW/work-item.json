@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, number}個連結",
+      "attachments": "{count, number}個附件",
+      "sub_work_items": "{count, number}個子工作事項"
+    },
     "label": "{count, plural, one {工作事項} other {工作事項}}",
     "all": "所有工作事項",
     "edit": "編輯工作事項",
@@ -8,6 +13,10 @@
       "required": "工作事項標題為必填。"
     },
     "add": {
+      "module": {
+        "success": "{count, plural, other {工作事項已成功新增到模組。}}",
+        "failed": "無法將所選工作事項新增到模組。請再試一次。"
+      },
       "press_enter": "按 'Enter' 以新增另一個工作事項",
       "label": "新增工作事項",
       "cycle": {

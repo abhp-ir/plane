@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, plural, one {# enlace} many {# enlaces} other {# enlaces}}",
+      "attachments": "{count, plural, one {# archivo adjunto} many {# archivos adjuntos} other {# archivos adjuntos}}",
+      "sub_work_items": "{count, plural, one {# sub-elemento de trabajo} many {# sub-elementos de trabajo} other {# sub-elementos de trabajo}}"
+    },
     "label": "{count, plural, one {Elemento de trabajo} other {Elementos de trabajo}}",
     "all": "Todos los elementos de trabajo",
     "edit": "Editar elemento de trabajo",
@@ -8,6 +13,10 @@
       "required": "El título del elemento de trabajo es obligatorio."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {Elemento de trabajo agregado al módulo correctamente.} many {Elementos de trabajo agregados al módulo correctamente.} other {Elementos de trabajo agregados al módulo correctamente.}}",
+        "failed": "No se pudieron agregar los elementos de trabajo seleccionados al módulo. Inténtalo de nuevo."
+      },
       "press_enter": "Presiona 'Enter' para agregar otro elemento de trabajo",
       "label": "Agregar elemento de trabajo",
       "cycle": {

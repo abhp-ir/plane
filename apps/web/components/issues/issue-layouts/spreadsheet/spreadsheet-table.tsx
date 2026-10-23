@@ -7,6 +7,7 @@
 import type { MutableRefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssue } from "@plane/types";
 // components
@@ -60,7 +61,9 @@ export const SpreadsheetTable = observer(function SpreadsheetTable(props: Props)
   } = props;
 
   // states
+  const { direction } = useTranslation();
   const isScrolled = useRef(false);
+  const shadowDirection = useRef(direction);
   const [intersectionElement, setIntersectionElement] = useState<HTMLTableSectionElement | null>(null);
 
   const {
@@ -70,30 +73,36 @@ export const SpreadsheetTable = observer(function SpreadsheetTable(props: Props)
   const handleScroll = useCallback(() => {
     if (!containerRef.current) return;
     const scrollLeft = containerRef.current.scrollLeft;
+    const hasScrolled = Math.abs(scrollLeft) > 1;
 
-    const columnShadow = "8px 22px 22px 10px rgba(0, 0, 0, 0.05)"; // shadow for regular columns
-    const headerShadow = "8px -22px 22px 10px rgba(0, 0, 0, 0.05)"; // shadow for headers
+    const shadowOffset = direction === "rtl" ? -8 : 8;
+    const columnShadow = `${shadowOffset}px 22px 22px 10px rgba(0, 0, 0, 0.05)`; // shadow for regular columns
+    const headerShadow = `${shadowOffset}px -22px 22px 10px rgba(0, 0, 0, 0.05)`; // shadow for headers
 
     //The shadow styles are added this way to avoid re-render of all the rows of table, which could be costly
-    if (scrollLeft > 0 !== isScrolled.current) {
+    if (hasScrolled !== isScrolled.current || direction !== shadowDirection.current) {
       const firstColumns = containerRef.current.querySelectorAll("table tr td:first-child, th:first-child");
 
       for (let i = 0; i < firstColumns.length; i++) {
         const shadow = i === 0 ? headerShadow : columnShadow;
-        if (scrollLeft > 0) {
+        if (hasScrolled) {
           (firstColumns[i] as HTMLElement).style.boxShadow = shadow;
         } else {
           (firstColumns[i] as HTMLElement).style.boxShadow = "none";
         }
       }
-      isScrolled.current = scrollLeft > 0;
+      isScrolled.current = hasScrolled;
+      shadowDirection.current = direction;
     }
-  }, [containerRef]);
+  }, [containerRef, direction]);
 
   useEffect(() => {
     const currentContainerRef = containerRef.current;
 
-    if (currentContainerRef) currentContainerRef.addEventListener("scroll", handleScroll);
+    if (currentContainerRef) {
+      handleScroll();
+      currentContainerRef.addEventListener("scroll", handleScroll);
+    }
 
     return () => {
       if (currentContainerRef) currentContainerRef.removeEventListener("scroll", handleScroll);
@@ -144,8 +153,8 @@ export const SpreadsheetTable = observer(function SpreadsheetTable(props: Props)
       </tbody>
       {canLoadMoreIssues && (
         <tfoot ref={setIntersectionElement}>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <SpreadsheetIssueRowLoader key={index} columnCount={displayPropertiesCount} />
+          {[0, 1, 2].map((loaderId) => (
+            <SpreadsheetIssueRowLoader key={loaderId} columnCount={displayPropertiesCount} />
           ))}
         </tfoot>
       )}

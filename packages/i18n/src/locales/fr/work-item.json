@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, plural, one {# lien} many {# liens} other {# liens}}",
+      "attachments": "{count, plural, one {# pièce jointe} many {# pièces jointes} other {# pièces jointes}}",
+      "sub_work_items": "{count, plural, one {# sous-élément de travail} many {# sous-éléments de travail} other {# sous-éléments de travail}}"
+    },
     "label": "{count, plural, one {Élément de travail} other {Éléments de travail}}",
     "all": "Tous les éléments de travail",
     "edit": "Modifier l’élément de travail",
@@ -8,6 +13,10 @@
       "required": "Le titre de l’élément de travail est requis."
     },
     "add": {
+      "module": {
+        "success": "{count, plural, one {L’élément de travail a été ajouté au module avec succès.} many {Les éléments de travail ont été ajoutés au module avec succès.} other {Les éléments de travail ont été ajoutés au module avec succès.}}",
+        "failed": "Les éléments de travail sélectionnés n’ont pas pu être ajoutés au module. Veuillez réessayer."
+      },
       "press_enter": "Appuyez sur 'Entrée' pour ajouter un autre élément de travail",
       "label": "Ajouter un élément de travail",
       "cycle": {

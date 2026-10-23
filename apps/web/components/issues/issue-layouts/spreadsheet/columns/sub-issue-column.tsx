@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import type { TIssue } from "@plane/types";
 // helpers
 import { Row } from "@plane/blocks/layout";
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 // hooks
 import { useAppRouter } from "@/hooks/use-app-router";
@@ -25,6 +26,7 @@ export const SpreadsheetSubIssueColumn = observer(function SpreadsheetSubIssueCo
   const router = useAppRouter();
   // hooks
   const { workspaceSlug } = useParams();
+  const { t } = useTranslation();
   // derived values
   const isEpic = issue?.is_epic;
   const subIssueCount = issue?.sub_issues_count ?? 0;
@@ -35,7 +37,7 @@ export const SpreadsheetSubIssueColumn = observer(function SpreadsheetSubIssueCo
     );
   };
 
-  const label = `${subIssueCount} sub-work item${subIssueCount !== 1 ? "s" : ""}`;
+  const label = t("issue.counts.sub_work_items", { count: subIssueCount });
 
   return (
     <Row

@@ -22,6 +22,7 @@ import { IconButton } from "@makeplane/propel/components/icon-button";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@plane/types";
 import { EIssuesStoreType, EIssueLayoutTypes } from "@plane/types";
+import { useTranslation } from "@plane/i18n";
 import { Breadcrumbs } from "@plane/blocks/breadcrumb";
 import { Header } from "@plane/blocks/layout";
 // components
@@ -62,6 +63,7 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
   const moduleId = routerModuleId ? routerModuleId.toString() : undefined;
   // hooks
   const { isMobile } = usePlatformOS();
+  const { t, currentLocale } = useTranslation();
   // store hooks
   const {
     issuesFilter: { issueFilters },
@@ -132,7 +134,7 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
               <Breadcrumbs.Item
                 component={
                   <BreadcrumbLink
-                    label="Modules"
+                    label={t("common.modules")}
                     href={`/${workspaceSlug}/projects/${projectId}/modules/`}
                     icon={<ModuleOutline className="h-4 w-4 text-tertiary" />}
                     isLast
@@ -157,13 +159,13 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
             </Breadcrumbs>
             {workItemsCount && workItemsCount > 0 ? (
               <Tooltip
-                label={`There are ${workItemsCount} ${workItemsCount > 1 ? "work items" : "work item"} in this module`}
+                label={`${new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(workItemsCount)} ${t("issue.label", { count: workItemsCount })}`}
                 layout="stacked"
                 side="bottom"
                 disabled={isMobile}
               >
                 <span className="flex flex-shrink-0 cursor-default items-center justify-center rounded-xl bg-accent-primary/20 px-2 text-center text-11 font-semibold text-accent-primary">
-                  {workItemsCount}
+                  {new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(workItemsCount)}
                 </span>
               </Tooltip>
             ) : null}
@@ -199,7 +201,7 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
             </div>
             {moduleId && <WorkItemFiltersToggle entityType={EIssuesStoreType.MODULE} entityId={moduleId} />}
             <FiltersDropdown
-              title="Display"
+              title={t("common.display")}
               placement="bottom-end"
               miniIcon={<PreferencesOutline className="size-3.5" />}
             >
@@ -226,7 +228,7 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
                     variant="secondary"
                     size="md"
                     stretch="auto"
-                    label="Analytics"
+                    label={t("common.analytics")}
                     onClick={() => setAnalyticsModal(true)}
                   />
                 </span>
@@ -235,7 +237,7 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
                     variant="secondary"
                     size="md"
                     icon={<Icon icon={BarOutline} />}
-                    aria-label="Analytics"
+                    aria-label={t("common.analytics")}
                     onClick={() => setAnalyticsModal(true)}
                   />
                 </span>
@@ -245,7 +247,7 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
                   variant="primary"
                   size="md"
                   stretch="auto"
-                  label="Add work item"
+                  label={t("issue.add.label")}
                   onClick={() => {
                     toggleCreateIssueModal(true, EIssuesStoreType.MODULE);
                   }}
@@ -260,7 +262,11 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
             variant={isSidebarCollapsed ? "ghost" : "tertiary"}
             size="md"
             icon={<Icon icon={RightSidePaneOutline} />}
-            aria-label="Toggle sidebar"
+            aria-label={t(
+              isSidebarCollapsed
+                ? "aria_labels.projects_sidebar.expand_sidebar"
+                : "aria_labels.projects_sidebar.collapse_sidebar"
+            )}
             aria-pressed={!isSidebarCollapsed}
             onClick={toggleSidebar}
           />

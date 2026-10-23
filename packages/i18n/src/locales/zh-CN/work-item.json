@@ -1,5 +1,10 @@
 {
   "issue": {
+    "counts": {
+      "links": "{count, number}个链接",
+      "attachments": "{count, number}个附件",
+      "sub_work_items": "{count, number}个子工作项"
+    },
     "label": "{count, plural, one {工作项} other {工作项}}",
     "all": "所有工作项",
     "edit": "编辑工作项",
@@ -8,6 +13,10 @@
       "required": "工作项标题为必填项"
     },
     "add": {
+      "module": {
+        "success": "{count, plural, other {工作项已成功添加到模块。}}",
+        "failed": "无法将所选工作项添加到模块。请重试。"
+      },
       "press_enter": "按'Enter'添加另一个工作项",
       "label": "添加工作项",
       "cycle": {
