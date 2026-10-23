@@ -39,32 +39,30 @@ export const getLegendProps = (args: TChartLegend): LegendProps => {
 
 const CustomLegend = React.forwardRef(function CustomLegend(
   props: React.ComponentProps<"div"> &
-    Pick<LegendProps, "payload" | "formatter" | "onClick" | "onMouseEnter" | "onMouseLeave"> &
+    Pick<LegendProps, "payload" | "formatter" | "onMouseEnter" | "onMouseLeave"> &
     TChartLegend,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { formatter, layout, onClick, onMouseEnter, onMouseLeave, payload } = props;
+  const { formatter, layout, onMouseEnter, onMouseLeave, payload } = props;
 
   if (!payload?.length) return null;
 
   return (
     <div
       ref={ref}
-      className={cn("vertical-scrollbar scrollbar-sm flex items-center overflow-scroll px-4", {
-        "max-h-full flex-col items-start py-4": layout === "vertical",
+      className={cn("vertical-scrollbar scrollbar-sm flex items-center overflow-scroll", {
+        "max-h-full flex-col items-start px-4 py-4": layout === "vertical",
       })}
     >
       {payload.map((item, index) => (
         <div
           key={item.value}
           className={cn("flex items-center gap-1.5 text-13 font-medium whitespace-nowrap text-tertiary", {
-            "px-2": layout === "horizontal",
+            "px-1.5": layout === "horizontal",
             "py-2": layout === "vertical",
-            "pt-0 pl-0": index === 0,
-            "pr-0 pb-0": index === payload.length - 1,
-            "cursor-pointer": !!props.onClick,
+            "ps-0 pt-0": index === 0,
+            "pe-0 pb-0": index === payload.length - 1,
           })}
-          onClick={(e) => onClick?.(item, index, e)}
           onMouseEnter={(e) => onMouseEnter?.(item, index, e)}
           onMouseLeave={(e) => onMouseLeave?.(item, index, e)}
         >

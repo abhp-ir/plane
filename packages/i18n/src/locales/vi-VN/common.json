@@ -570,6 +570,11 @@
     "add_link": "Thêm liên kết",
     "links": "Liên kết",
     "go_to_workspace": "Đi đến không gian làm việc",
+    "charts": {
+      "current": "{unit, select, work_items {Mục công việc hiện tại} points {Điểm hiện tại} other {Hiện tại: {title}}}",
+      "ideal": "{unit, select, work_items {Mục công việc lý tưởng} points {Điểm lý tưởng} other {Lý tưởng: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} trên {total, number}"
+    },
     "progress": "Tiến độ",
     "optional": "Tùy chọn",
     "join": "Tham gia",

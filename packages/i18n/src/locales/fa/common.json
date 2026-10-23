@@ -570,6 +570,11 @@
     "add_link": "افزودن پیوند",
     "links": "پیوندها",
     "go_to_workspace": "رفتن به فضای کاری",
+    "charts": {
+      "current": "{unit, select, work_items {آیتم‌های کاری فعلی} points {امتیازهای فعلی} other {مقدار فعلی {title}}}",
+      "ideal": "{unit, select, work_items {آیتم‌های کاری ایده‌آل} points {امتیازهای ایده‌آل} other {مقدار ایده‌آل {title}}}",
+      "percentage_of_total": "{percentage, number, percent} از {total, number}"
+    },
     "progress": "پیشرفت",
     "optional": "اختیاری",
     "join": "عضویت",

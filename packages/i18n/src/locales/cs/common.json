@@ -570,6 +570,11 @@
     "add_link": "Přidat odkaz",
     "links": "Odkazy",
     "go_to_workspace": "Přejít do pracovního prostoru",
+    "charts": {
+      "current": "{unit, select, work_items {Aktuální pracovní položky} points {Aktuální body} other {Aktuálně: {title}}}",
+      "ideal": "{unit, select, work_items {Ideální pracovní položky} points {Ideální body} other {Ideálně: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} z {total, number}"
+    },
     "progress": "Pokrok",
     "optional": "Volitelné",
     "join": "Připojit se",

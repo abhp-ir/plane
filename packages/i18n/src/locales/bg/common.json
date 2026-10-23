@@ -570,6 +570,11 @@
     "add_link": "Добави връзка",
     "links": "Връзки",
     "go_to_workspace": "Към работното пространство",
+    "charts": {
+      "current": "{unit, select, work_items {Текущи работни елементи} points {Текущи точки} other {Текущо: {title}}}",
+      "ideal": "{unit, select, work_items {Идеални работни елементи} points {Идеални точки} other {Идеално: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} от {total, number}"
+    },
     "progress": "Напредък",
     "optional": "По избор",
     "join": "Присъедини се",

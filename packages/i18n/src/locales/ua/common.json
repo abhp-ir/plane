@@ -570,6 +570,11 @@
     "add_link": "Додати посилання",
     "links": "Посилання",
     "go_to_workspace": "Перейти до робочого простору",
+    "charts": {
+      "current": "{unit, select, work_items {Поточні робочі одиниці} points {Поточні бали} other {Поточне значення: {title}}}",
+      "ideal": "{unit, select, work_items {Ідеальні робочі одиниці} points {Ідеальні бали} other {Ідеальне значення: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} із {total, number}"
+    },
     "progress": "Прогрес",
     "optional": "Необов'язково",
     "join": "Приєднатися",

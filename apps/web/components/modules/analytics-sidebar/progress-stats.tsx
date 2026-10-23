@@ -115,7 +115,7 @@ export const ModuleProgressStats = observer(function ModuleProgressStats(props: 
       <Tabs
         variant="contained"
         stretch="full"
-        defaultValue={currentTab ?? "stat-assignees"}
+        value={currentTab ?? "stat-assignees"}
         onValueChange={(value) => setModuleTab(value)}
       >
         <TabsList>

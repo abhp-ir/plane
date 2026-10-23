@@ -147,7 +147,8 @@ export const ModuleAnalyticsSidebar = observer(function ModuleAnalyticsSidebar(p
   const { workspaceSlug, projectId } = useParams();
 
   // store hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   const { allowPermissions } = useUserPermissions();
   const { data: userProfile } = useUserProfile();
 
@@ -158,7 +159,7 @@ export const ModuleAnalyticsSidebar = observer(function ModuleAnalyticsSidebar(p
   const moduleDetails = getModuleById(moduleId);
   const areEstimateEnabled = projectId && areEstimateEnabledByProjectId(projectId.toString());
   const estimateType = areEstimateEnabled && currentActiveEstimateId && estimateById(currentActiveEstimateId);
-  const isEstimatePointValid = estimateType && estimateType?.type == EEstimateSystem.POINTS ? true : false;
+  const isEstimatePointValid = Boolean(estimateType && estimateType?.type == EEstimateSystem.POINTS);
 
   const { reset, control } = useForm({
     defaultValues,
@@ -245,13 +246,13 @@ export const ModuleAnalyticsSidebar = observer(function ModuleAnalyticsSidebar(p
 
   const issueCount =
     moduleDetails.total_issues === 0
-      ? "0 work items"
-      : `${moduleDetails.completed_issues}/${moduleDetails.total_issues}`;
+      ? formatNumber(0)
+      : `${formatNumber(moduleDetails.completed_issues)}/${formatNumber(moduleDetails.total_issues)}`;
 
   const issueEstimatePointCount =
-    moduleDetails.total_estimate_points === 0
-      ? "0 work items"
-      : `${moduleDetails.completed_estimate_points}/${moduleDetails.total_estimate_points}`;
+    (moduleDetails.total_estimate_points ?? 0) === 0
+      ? formatNumber(0)
+      : `${formatNumber(moduleDetails.completed_estimate_points ?? 0)}/${formatNumber(moduleDetails.total_estimate_points ?? 0)}`;
 
   const isEditingAllowed = allowPermissions(
     [EUserPermissions.ADMIN, EUserPermissions.MEMBER],
@@ -276,10 +277,12 @@ export const ModuleAnalyticsSidebar = observer(function ModuleAnalyticsSidebar(p
         <div className={`sticky top-0 z-10 flex items-center justify-between bg-surface-1 pt-5 pb-5`}>
           <div>
             <button
+              type="button"
+              aria-label={t("close")}
               className="flex h-5 w-5 items-center justify-center rounded-full bg-layer-3"
               onClick={() => handleClose()}
             >
-              <ChevronRightOutline className="h-3 w-3 text-on-color" />
+              <ChevronRightOutline className="h-3 w-3 text-secondary rtl:rotate-180" />
             </button>
           </div>
         </div>
@@ -428,7 +431,9 @@ export const ModuleAnalyticsSidebar = observer(function ModuleAnalyticsSidebar(p
               <span className="text-14">{t("issues")}</span>
             </div>
             <div className="flex h-7 w-3/5 items-center">
-              <span className="px-1.5 text-13 text-tertiary">{issueCount}</span>
+              <bdi dir="ltr" className="px-1.5 text-13 text-tertiary">
+                {issueCount}
+              </bdi>
             </div>
           </div>
 
@@ -442,7 +447,9 @@ export const ModuleAnalyticsSidebar = observer(function ModuleAnalyticsSidebar(p
                 <span className="text-14">{t("points")}</span>
               </div>
               <div className="flex h-7 w-3/5 items-center">
-                <span className="px-1.5 text-13 text-tertiary">{issueEstimatePointCount}</span>
+                <bdi dir="ltr" className="px-1.5 text-13 text-tertiary">
+                  {issueEstimatePointCount}
+                </bdi>
               </div>
             </div>
           )}

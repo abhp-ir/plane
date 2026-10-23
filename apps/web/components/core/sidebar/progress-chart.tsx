@@ -19,7 +19,11 @@ type Props = {
 };
 
 function ProgressChart({ distribution, totalIssues, className = "", plotTitle = "work items" }: Props) {
-  const { currentLocale } = useTranslation();
+  const { t, currentLocale, direction } = useTranslation();
+  const labelParams = {
+    unit: plotTitle === "points" ? "points" : plotTitle === "work items" ? "work_items" : "other",
+    title: direction === "rtl" ? `\u2068${plotTitle}\u2069` : plotTitle,
+  };
   const chartData: TChartData<string, string>[] = Object.keys(distribution ?? []).map((key, index) => ({
     name: renderFormattedDateWithoutYear(key, currentLocale),
     current: distribution[key] ?? 0,
@@ -33,7 +37,7 @@ function ProgressChart({ distribution, totalIssues, className = "", plotTitle = 
         areas={[
           {
             key: "current",
-            label: `Current ${plotTitle}`,
+            label: t("common.charts.current", labelParams),
             strokeColor: "#3F76FF",
             fill: "#3F76FF33",
             fillOpacity: 1,
@@ -44,7 +48,7 @@ function ProgressChart({ distribution, totalIssues, className = "", plotTitle = 
           },
           {
             key: "ideal",
-            label: `Ideal ${plotTitle}`,
+            label: t("common.charts.ideal", labelParams),
             strokeColor: "#A9BBD0",
             fill: "#A9BBD0",
             fillOpacity: 0,
@@ -58,8 +62,8 @@ function ProgressChart({ distribution, totalIssues, className = "", plotTitle = 
             },
           },
         ]}
-        xAxis={{ key: "name", label: "Date" }}
-        yAxis={{ key: "current", label: "Completion" }}
+        xAxis={{ key: "name", label: t("date") }}
+        yAxis={{ key: "current", label: t("common.completion") }}
         margin={{ bottom: 30 }}
         className="h-[370px] w-full"
         legend={{

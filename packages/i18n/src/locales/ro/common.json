@@ -570,6 +570,11 @@
     "add_link": "Adaugă link",
     "links": "Linkuri",
     "go_to_workspace": "Mergi la spațiul de lucru",
+    "charts": {
+      "current": "{unit, select, work_items {Activități curente} points {Puncte curente} other {Valoare curentă: {title}}}",
+      "ideal": "{unit, select, work_items {Activități ideale} points {Puncte ideale} other {Valoare ideală: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} din {total, number}"
+    },
     "progress": "Progres",
     "optional": "Opțional",
     "join": "Alătură-te",

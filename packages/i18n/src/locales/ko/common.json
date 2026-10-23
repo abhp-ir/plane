@@ -570,6 +570,11 @@
     "add_link": "링크 추가",
     "links": "링크",
     "go_to_workspace": "작업 공간으로 이동",
+    "charts": {
+      "current": "{unit, select, work_items {현재 작업 항목} points {현재 포인트} other {현재 {title}}}",
+      "ideal": "{unit, select, work_items {이상적인 작업 항목} points {이상적인 포인트} other {이상적인 {title}}}",
+      "percentage_of_total": "{total, number} 중 {percentage, number, percent}"
+    },
     "progress": "진행",
     "optional": "선택",
     "join": "참여",

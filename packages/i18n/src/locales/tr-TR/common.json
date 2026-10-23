@@ -570,6 +570,11 @@
     "add_link": "Bağlantı ekle",
     "links": "Bağlantılar",
     "go_to_workspace": "Çalışma Alanına Git",
+    "charts": {
+      "current": "{unit, select, work_items {Mevcut iş öğeleri} points {Mevcut puanlar} other {Mevcut: {title}}}",
+      "ideal": "{unit, select, work_items {İdeal iş öğeleri} points {İdeal puanlar} other {İdeal: {title}}}",
+      "percentage_of_total": "{total, number} üzerinden {percentage, number, percent}"
+    },
     "progress": "İlerleme",
     "optional": "İsteğe Bağlı",
     "join": "Katıl",

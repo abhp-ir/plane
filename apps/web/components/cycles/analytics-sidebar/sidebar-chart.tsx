@@ -7,7 +7,6 @@
 import { Fragment } from "react";
 import { observer } from "mobx-react";
 // plane imports
-import { useTranslation } from "@plane/i18n";
 import type { TCycleEstimateType } from "@plane/types";
 import { Loader } from "@plane/blocks/skeleton";
 import { getDate } from "@plane/utils";
@@ -29,7 +28,6 @@ export const SidebarChart = observer(function SidebarChart(props: ProgressChartP
   // hooks
   const { getEstimateTypeByCycleId, getCycleById, fetchCycleDetails, fetchArchivedCycleDetails, setEstimateType } =
     useCycle();
-  const { t } = useTranslation();
 
   // derived data
   const cycleDetails = validateCycleSnapshot(getCycleById(cycleId));
@@ -75,7 +73,7 @@ export const SidebarChart = observer(function SidebarChart(props: ProgressChartP
               <ProgressChart
                 distribution={completionChartDistributionData}
                 totalIssues={estimateType === "points" ? totalEstimatePoints : totalIssues}
-                plotTitle={estimateType === "points" ? t("points") : t("work_items")}
+                plotTitle={estimateType === "points" ? "points" : "work items"}
               />
             </Fragment>
           ) : (

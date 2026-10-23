@@ -570,6 +570,11 @@
     "add_link": "Link hinzufügen",
     "links": "Links",
     "go_to_workspace": "Zum Arbeitsbereich",
+    "charts": {
+      "current": "{unit, select, work_items {Aktuelle Arbeitselemente} points {Aktuelle Punkte} other {Aktuell: {title}}}",
+      "ideal": "{unit, select, work_items {Ideale Arbeitselemente} points {Ideale Punkte} other {Ideal: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} von {total, number}"
+    },
     "progress": "Fortschritt",
     "optional": "Optional",
     "join": "Beitreten",

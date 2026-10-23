@@ -8,6 +8,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import type { TCycleEstimateType } from "@plane/types";
 import { EEstimateSystem } from "@plane/types";
+import { useTranslation } from "@plane/i18n";
 import { Select } from "@plane/blocks/select";
 import { useProjectEstimates } from "@/hooks/store/estimates";
 import { useCycle } from "@/hooks/store/use-cycle";
@@ -24,6 +25,10 @@ type TProps = {
 
 export const EstimateTypeDropdown = observer(function EstimateTypeDropdown(props: TProps) {
   const { value, onChange, projectId, cycleId, showDefault = false } = props;
+  const { t } = useTranslation();
+  const getOptionLabel = (option: (typeof cycleEstimateOptions)[number]) =>
+    t(option.value === "points" ? "common.estimates" : "common.work_items");
+  const selectedOption = cycleEstimateOptions.find((option) => option.value === value);
   const { getIsPointsDataAvailable } = useCycle();
   const { areEstimateEnabledByProjectId, currentProjectEstimateType } = useProjectEstimates();
   const isCurrentProjectEstimateEnabled = Boolean(projectId && areEstimateEnabledByProjectId(projectId));
@@ -32,13 +37,13 @@ export const EstimateTypeDropdown = observer(function EstimateTypeDropdown(props
     <div className="relative flex items-center gap-2">
       <Select<(typeof cycleEstimateOptions)[number]>
         getValues={() => cycleEstimateOptions}
-        value={cycleEstimateOptions.find((v) => v.value === value) ?? null}
+        value={selectedOption ?? null}
         onChange={(next) => void onChange(next as TCycleEstimateType)}
         getOptionValue={(option) => option.value}
-        getOptionLabel={(option) => option.label}
+        getOptionLabel={getOptionLabel}
         showSearch={false}
         pinSelected={false}
-        placeholder="None"
+        placeholder={t("none")}
       >
         <Select.Trigger variant="select-md" className="rounded-sm border-none bg-surface-2 text-13 font-medium">
           <Select.Value />
@@ -46,6 +51,6 @@ export const EstimateTypeDropdown = observer(function EstimateTypeDropdown(props
       </Select>
     </div>
   ) : showDefault ? (
-    <span className="capitalize">{cycleEstimateOptions.find((v) => v.value === value)?.label ?? value}</span>
+    <span className="capitalize">{selectedOption ? getOptionLabel(selectedOption) : value}</span>
   ) : null;
 });

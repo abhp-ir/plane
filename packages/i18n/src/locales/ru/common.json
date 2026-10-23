@@ -570,6 +570,11 @@
     "add_link": "Добавить ссылку",
     "links": "Ссылки",
     "go_to_workspace": "Перейти в рабочее пространство",
+    "charts": {
+      "current": "{unit, select, work_items {Текущие рабочие элементы} points {Текущие очки} other {Текущее значение: {title}}}",
+      "ideal": "{unit, select, work_items {Идеальные рабочие элементы} points {Идеальные очки} other {Идеальное значение: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} из {total, number}"
+    },
     "progress": "Прогресс",
     "optional": "Опционально",
     "join": "Присоединиться",

@@ -84,7 +84,7 @@ export const ModuleIssuesMobileHeader = observer(function ModuleIssuesMobileHead
           <MenuTrigger
             render={<button type="button" className="flex flex-grow justify-center text-13 text-secondary" />}
           >
-            Layout
+            {t("common.layout")}
           </MenuTrigger>
           <MenuContent side="bottom" align="start">
             {SUPPORTED_LAYOUTS.map((layout, index) => (
@@ -99,14 +99,14 @@ export const ModuleIssuesMobileHeader = observer(function ModuleIssuesMobileHead
             ))}
           </MenuContent>
         </Menu>
-        <div className="flex flex-grow items-center justify-center border-l border-subtle text-13 text-secondary">
+        <div className="flex flex-grow items-center justify-center border-s border-subtle text-13 text-secondary">
           <FiltersDropdown
-            title="Display"
+            title={t("common.display")}
             placement="bottom-end"
             menuButton={
               <span className="flex items-center text-13 text-secondary">
-                Display
-                <ChevronDownOutline className="ml-2 h-4 w-4 text-secondary" />
+                {t("common.display")}
+                <ChevronDownOutline className="ms-2 h-4 w-4 text-secondary" />
               </span>
             }
           >
@@ -126,10 +126,11 @@ export const ModuleIssuesMobileHeader = observer(function ModuleIssuesMobileHead
         </div>
 
         <button
+          type="button"
           onClick={() => setAnalyticsModal(true)}
-          className="flex flex-grow justify-center border-l border-subtle text-13 text-secondary"
+          className="flex flex-grow justify-center border-s border-subtle text-13 text-secondary"
         >
-          Analytics
+          {t("common.analytics")}
         </button>
       </div>
     </div>

@@ -570,6 +570,11 @@
     "add_link": "Koppeling toevoegen",
     "links": "Koppelingen",
     "go_to_workspace": "Ga naar werkruimte",
+    "charts": {
+      "current": "{unit, select, work_items {Huidige werkitems} points {Huidige punten} other {Huidig: {title}}}",
+      "ideal": "{unit, select, work_items {Ideale werkitems} points {Ideale punten} other {Ideaal: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} van {total, number}"
+    },
     "progress": "Voortgang",
     "optional": "Optioneel",
     "join": "Deelnemen",

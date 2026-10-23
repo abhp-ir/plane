@@ -570,6 +570,11 @@
     "add_link": "ბმულის დამატება",
     "links": "ბმულები",
     "go_to_workspace": "სამუშაო სივრცეში გადასვლა",
+    "charts": {
+      "current": "{unit, select, work_items {მიმდინარე სამუშაო ელემენტები} points {მიმდინარე ქულები} other {მიმდინარე: {title}}}",
+      "ideal": "{unit, select, work_items {იდეალური სამუშაო ელემენტები} points {იდეალური ქულები} other {იდეალური: {title}}}",
+      "percentage_of_total": "{total, number}-დან {percentage, number, percent}"
+    },
     "progress": "პროგრესი",
     "optional": "არჩევითი",
     "join": "შეერთება",

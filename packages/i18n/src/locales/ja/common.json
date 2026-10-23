@@ -570,6 +570,11 @@
     "add_link": "リンクを追加",
     "links": "リンク",
     "go_to_workspace": "ワークスペースへ移動",
+    "charts": {
+      "current": "{unit, select, work_items {現在の作業項目} points {現在のポイント} other {現在の{title}}}",
+      "ideal": "{unit, select, work_items {理想の作業項目} points {理想のポイント} other {理想の{title}}}",
+      "percentage_of_total": "{total, number} の {percentage, number, percent}"
+    },
     "progress": "進捗",
     "optional": "任意",
     "join": "参加",

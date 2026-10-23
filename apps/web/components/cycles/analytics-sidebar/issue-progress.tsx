@@ -149,7 +149,7 @@ export const CycleAnalyticsProgress = observer(function CycleAnalyticsProgress(p
         <Collapsible.Root defaultOpen className="flex flex-col">
           <Collapsible.Trigger className="group relative flex w-full items-center justify-between gap-2">
             {progressTitle}
-            <span className="ml-auto">
+            <span className="ms-auto">
               <ChevronUpOutline className="hidden h-3.5 w-3.5 group-data-[panel-open]:block" aria-hidden="true" />
               <ChevronDownOutline className="h-3.5 w-3.5 group-data-[panel-open]:hidden" aria-hidden="true" />
             </span>

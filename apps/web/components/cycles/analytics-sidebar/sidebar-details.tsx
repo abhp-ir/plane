@@ -32,7 +32,8 @@ export const CycleSidebarDetails = observer(function CycleSidebarDetails(props: 
   // hooks
   const { getUserDetails } = useMember();
   const { areEstimateEnabledByProjectId, currentActiveEstimateId, estimateById } = useProjectEstimates();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
 
   const areEstimateEnabled = projectId && areEstimateEnabledByProjectId(projectId.toString());
   const cycleStatus = cycleDetails?.status?.toLocaleLowerCase();
@@ -41,30 +42,26 @@ export const CycleSidebarDetails = observer(function CycleSidebarDetails(props: 
   const issueCount =
     isCompleted && !isEmpty(cycleDetails?.progress_snapshot)
       ? cycleDetails?.progress_snapshot?.total_issues === 0
-        ? `0 ${t("common.work_item")}`
-        : `${cycleDetails?.progress_snapshot?.completed_issues}/${cycleDetails?.progress_snapshot?.total_issues}`
+        ? formatNumber(0)
+        : `${formatNumber(cycleDetails?.progress_snapshot?.completed_issues ?? 0)}/${formatNumber(cycleDetails?.progress_snapshot?.total_issues ?? 0)}`
       : cycleDetails?.total_issues === 0
-        ? `0 ${t("common.work_item")}`
-        : `${cycleDetails?.completed_issues}/${cycleDetails?.total_issues}`;
+        ? formatNumber(0)
+        : `${formatNumber(cycleDetails?.completed_issues ?? 0)}/${formatNumber(cycleDetails?.total_issues ?? 0)}`;
   const estimateType = areEstimateEnabled && currentActiveEstimateId && estimateById(currentActiveEstimateId);
   const cycleOwnerDetails = cycleDetails ? getUserDetails(cycleDetails.owned_by_id) : undefined;
 
   const isEstimatePointValid = isEmpty(cycleDetails?.progress_snapshot || {})
-    ? estimateType && estimateType?.type == EEstimateSystem.POINTS
-      ? true
-      : false
-    : isEmpty(cycleDetails?.progress_snapshot?.estimate_distribution || {})
-      ? false
-      : true;
+    ? Boolean(estimateType && estimateType?.type == EEstimateSystem.POINTS)
+    : !isEmpty(cycleDetails?.progress_snapshot?.estimate_distribution || {});
 
   const issueEstimatePointCount =
     isCompleted && !isEmpty(cycleDetails?.progress_snapshot)
       ? cycleDetails?.progress_snapshot.total_issues === 0
-        ? `0 ${t("common.work_item")}`
-        : `${cycleDetails?.progress_snapshot.completed_estimate_points}/${cycleDetails?.progress_snapshot.total_estimate_points}`
+        ? formatNumber(0)
+        : `${formatNumber(cycleDetails?.progress_snapshot.completed_estimate_points ?? 0)}/${formatNumber(cycleDetails?.progress_snapshot.total_estimate_points ?? 0)}`
       : cycleDetails?.total_issues === 0
-        ? `0 ${t("common.work_item")}`
-        : `${cycleDetails?.completed_estimate_points}/${cycleDetails?.total_estimate_points}`;
+        ? formatNumber(0)
+        : `${formatNumber(cycleDetails?.completed_estimate_points ?? 0)}/${formatNumber(cycleDetails?.total_estimate_points ?? 0)}`;
   return (
     <div className="flex w-full flex-col gap-5">
       {cycleDetails?.description && (
@@ -125,7 +122,9 @@ export const CycleSidebarDetails = observer(function CycleSidebarDetails(props: 
             <span className="text-14">{t("work_items")}</span>
           </div>
           <div className="flex w-3/5 items-center">
-            <span className="px-1.5 text-13 text-tertiary">{issueCount}</span>
+            <bdi dir="ltr" className="px-1.5 text-13 text-tertiary">
+              {issueCount}
+            </bdi>
           </div>
         </div>
 
@@ -139,7 +138,9 @@ export const CycleSidebarDetails = observer(function CycleSidebarDetails(props: 
               <span className="text-14">{t("points")}</span>
             </div>
             <div className="flex w-3/5 items-center">
-              <span className="px-1.5 text-13 text-tertiary">{issueEstimatePointCount}</span>
+              <bdi dir="ltr" className="px-1.5 text-13 text-tertiary">
+                {issueEstimatePointCount}
+              </bdi>
             </div>
           </div>
         )}

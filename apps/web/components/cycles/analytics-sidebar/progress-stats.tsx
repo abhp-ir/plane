@@ -117,7 +117,7 @@ export const CycleProgressStats = observer(function CycleProgressStats(props: TC
       <Tabs
         variant="contained"
         stretch="full"
-        defaultValue={currentTab ?? "stat-assignees"}
+        value={currentTab ?? "stat-assignees"}
         onValueChange={(value: string) => setCycleTab(value)}
       >
         <TabsList>

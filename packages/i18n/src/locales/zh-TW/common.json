@@ -570,6 +570,11 @@
     "add_link": "新增連結",
     "links": "連結",
     "go_to_workspace": "前往工作區",
+    "charts": {
+      "current": "{unit, select, work_items {目前工作事項} points {目前點數} other {目前{title}}}",
+      "ideal": "{unit, select, work_items {理想工作事項} points {理想點數} other {理想{title}}}",
+      "percentage_of_total": "{percentage, number, percent}，共 {total, number}"
+    },
     "progress": "進度",
     "optional": "選填",
     "join": "加入",

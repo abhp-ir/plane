@@ -570,6 +570,11 @@
     "add_link": "Tambah tautan",
     "links": "Tautan",
     "go_to_workspace": "Pergi ke ruang kerja",
+    "charts": {
+      "current": "{unit, select, work_items {Item kerja saat ini} points {Poin saat ini} other {Saat ini: {title}}}",
+      "ideal": "{unit, select, work_items {Item kerja ideal} points {Poin ideal} other {Ideal: {title}}}",
+      "percentage_of_total": "{percentage, number, percent} dari {total, number}"
+    },
     "progress": "Kemajuan",
     "optional": "Opsional",
     "join": "Bergabung",
