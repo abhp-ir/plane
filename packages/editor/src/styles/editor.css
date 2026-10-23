@@ -66,6 +66,19 @@
   direction: ltr;
 }
 
+.editor-container:dir(rtl)
+  .ProseMirror
+  li:has(
+    > :is(.editor-paragraph-block, .editor-heading-block):first-child:is(.is-empty, :empty),
+    > :is(.editor-paragraph-block, .editor-heading-block):first-child > br.ProseMirror-trailingBreak:only-child
+  ) {
+  direction: rtl;
+}
+
+.ProseMirror ol:lang(fa) {
+  list-style-type: persian;
+}
+
 /* block quotes */
 .ProseMirror blockquote {
   font-style: normal;
