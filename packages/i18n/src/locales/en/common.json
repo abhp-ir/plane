@@ -476,6 +476,13 @@
     "completed_at": "Completed at",
     "layout": "Layout",
     "filters": "Filters",
+    "filter_operators": {
+      "exact": "is",
+      "in": "is any of",
+      "range": "between"
+    },
+    "remove_filter": "Remove filter",
+    "subscriber": "Subscriber",
     "display": "Display",
     "load_more": "Load more",
     "activity": "Activity",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {View} other {Views}}",
+    "save": {
+      "label": "Save view"
+    },
     "create": {
       "label": "Create View"
     },

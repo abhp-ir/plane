@@ -476,6 +476,13 @@
     "completed_at": "Selesai pada",
     "layout": "Tata letak",
     "filters": "Filter",
+    "filter_operators": {
+      "exact": "adalah",
+      "in": "salah satu dari",
+      "range": "antara"
+    },
+    "remove_filter": "Hapus filter",
+    "subscriber": "Pelanggan",
     "display": "Tampilan",
     "load_more": "Muat lebih banyak",
     "activity": "Aktivitas",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {Tampilan} other {Tampilan}}",
+    "save": {
+      "label": "Simpan tampilan"
+    },
     "create": {
       "label": "Buat Tampilan"
     },

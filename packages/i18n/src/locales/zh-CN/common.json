@@ -476,6 +476,13 @@
     "completed_at": "完成于",
     "layout": "布局",
     "filters": "筛选",
+    "filter_operators": {
+      "exact": "等于",
+      "in": "是以下任意一项",
+      "range": "介于"
+    },
+    "remove_filter": "移除筛选条件",
+    "subscriber": "订阅者",
     "display": "显示",
     "load_more": "加载更多",
     "activity": "活动",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {视图} other {视图}}",
+    "save": {
+      "label": "保存视图"
+    },
     "create": {
       "label": "创建视图"
     },

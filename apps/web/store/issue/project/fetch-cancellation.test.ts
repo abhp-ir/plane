@@ -42,8 +42,38 @@ const setup = () => {
         pending.push({ signal: (config as { signal: AbortSignal }).signal, resolve, reject });
       })
   );
-  return { store, pending, addIssue, extractRelations, request };
+  return { store, filters, pending, addIssue, extractRelations, request };
 };
+
+it("refetches with the latest filters when they clear before the initial request finishes", async () => {
+  const { store, filters, pending, addIssue, request } = setup();
+  let expression = { priority__in: "low" } as Record<string, string>;
+  const getParams = vi
+    .spyOn(filters, "getFilterParams")
+    .mockImplementation(() => ({ filters: JSON.stringify(expression) }));
+  const initial = store.fetchIssues("workspace", "project", "init-loader", options);
+  expression = {};
+  const refreshed = store.fetchIssuesWithExistingPagination("workspace", "project", "mutation");
+  const requestCount = request.mock.calls.length;
+  const initialWasAborted = pending[0].signal.aborted;
+  pending[0].resolve(response);
+  await initial;
+  pending[1]?.resolve(response);
+  await refreshed;
+
+  expect(requestCount).toBe(2);
+  expect(initialWasAborted).toBe(true);
+  expect(request.mock.calls[1][2]).toEqual({ filters: "{}" });
+  expect(getParams).toHaveBeenLastCalledWith(options, "project", undefined, undefined, undefined);
+  expect(store.paginationOptions).toEqual(options);
+  expect(addIssue).toHaveBeenCalledTimes(1);
+});
+
+it("keeps refresh inactive until a layout has supplied pagination options", async () => {
+  const { store, request } = setup();
+  await store.fetchIssuesWithExistingPagination("workspace", "project", "mutation");
+  expect(request).not.toHaveBeenCalled();
+});
 
 it("resolves an aborted obsolete request without clearing its successor's loader", async () => {
   const { store, pending, addIssue } = setup();

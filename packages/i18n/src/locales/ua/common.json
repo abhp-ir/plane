@@ -476,6 +476,13 @@
     "completed_at": "Завершено",
     "layout": "Розташування",
     "filters": "Фільтри",
+    "filter_operators": {
+      "exact": "дорівнює",
+      "in": "одне з",
+      "range": "між"
+    },
+    "remove_filter": "Видалити фільтр",
+    "subscriber": "Підписник",
     "display": "Відображення",
     "load_more": "Завантажити ще",
     "activity": "Активність",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {Подання} few {Подання} other {Подань}}",
+    "save": {
+      "label": "Зберегти подання"
+    },
     "create": {
       "label": "Створити подання"
     },

@@ -32,6 +32,7 @@ export const createFilterConfig = <P extends TFilterProperty>(config: TFilterCon
  * - operator: The operator to use for the filter.
  */
 export type TCreateFilterConfigParams = Omit<TBaseFilterFieldConfig, "isOperatorEnabled"> & {
+  label?: string;
   isEnabled: boolean;
   allowedOperators: Set<TSupportedOperators>;
   rightContent?: React.ReactNode; // content to display on the right side of the filter option in the dropdown

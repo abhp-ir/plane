@@ -7,6 +7,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import type { IFilterInstance } from "@plane/shared-state";
 import type {
   SingleOrArray,
@@ -16,6 +17,7 @@ import type {
   TFilterConditionNodeForDisplay,
   TAllAvailableOperatorsForDisplay,
 } from "@plane/types";
+import { CORE_COLLECTION_OPERATOR, CORE_COMPARISON_OPERATOR, CORE_EQUALITY_OPERATOR } from "@plane/types";
 import { Select } from "@plane/blocks/select";
 import { cn, getOperatorForPayload } from "@plane/utils";
 // local imports
@@ -38,12 +40,29 @@ export const FilterItem = observer(function FilterItem<P extends TFilterProperty
   props: IFilterItemProps<P, E>
 ) {
   const { condition, filter, isDisabled = false, showTransition = true } = props;
+  const { t } = useTranslation();
   // derived values
   const filterConfig = condition?.property ? filter.configManager.getConfigByProperty(condition.property) : undefined;
+  const getDisplayLabel = (operator: TAllAvailableOperatorsForDisplay | undefined, fallback: string) => {
+    if (!operator || filterConfig?.getOperatorConfig(operator)?.operatorLabel) return fallback;
+    switch (operator) {
+      case CORE_EQUALITY_OPERATOR.EXACT:
+        return t("common.filter_operators.exact");
+      case CORE_COLLECTION_OPERATOR.IN:
+        return t("common.filter_operators.in");
+      case CORE_COMPARISON_OPERATOR.RANGE:
+        return t("common.filter_operators.range");
+      default:
+        return fallback;
+    }
+  };
   const operatorOptions =
     filterConfig?.getAllDisplayOperatorOptionsByValue(condition.value as TFilterValue)?.map((option) => ({
       value: option.value,
-      label: option.label,
+      label: getDisplayLabel(
+        filterConfig.getDisplayOperatorByValue(option.value, condition.value as TFilterValue),
+        option.label
+      ),
     })) ?? [];
   const selectedOperatorFieldConfig = filterConfig?.getOperatorConfig(condition.operator);
   const selectedOperatorOption = filterConfig?.getDisplayOperatorByValue(
@@ -108,7 +127,7 @@ export const FilterItem = observer(function FilterItem<P extends TFilterProperty
           {/* A flat segment of the filter chip: no chevron and no own radius, so it sits flush between
               the property and value segments like the legacy custom button did. */}
           <Select.Trigger variant="select-ghost-md" appendIcon={null} className="h-full min-h-0 rounded-none">
-            {filterConfig.getLabelForOperator(selectedOperatorOption)}
+            {getDisplayLabel(selectedOperatorOption, filterConfig.getLabelForOperator(selectedOperatorOption))}
           </Select.Trigger>
         </Select>
       </div>

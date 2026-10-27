@@ -476,6 +476,13 @@
     "completed_at": "Hoàn thành vào",
     "layout": "Bố cục",
     "filters": "Bộ lọc",
+    "filter_operators": {
+      "exact": "là",
+      "in": "là một trong",
+      "range": "trong khoảng"
+    },
+    "remove_filter": "Xóa bộ lọc",
+    "subscriber": "Người theo dõi",
     "display": "Hiển thị",
     "load_more": "Tải thêm",
     "activity": "Hoạt động",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {chế độ xem} other {chế độ xem}}",
+    "save": {
+      "label": "Lưu chế độ xem"
+    },
     "create": {
       "label": "Tạo chế độ xem"
     },

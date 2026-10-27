@@ -476,6 +476,13 @@
     "completed_at": "Completato il",
     "layout": "Layout",
     "filters": "Filtri",
+    "filter_operators": {
+      "exact": "è",
+      "in": "è uno di",
+      "range": "tra"
+    },
+    "remove_filter": "Rimuovi filtro",
+    "subscriber": "Iscritto",
     "display": "Visualizza",
     "load_more": "Carica di più",
     "activity": "Attività",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {Visualizzazione} other {Visualizzazioni}}",
+    "save": {
+      "label": "Salva vista"
+    },
     "create": {
       "label": "Crea visualizzazione"
     },

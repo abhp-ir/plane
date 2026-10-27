@@ -53,12 +53,13 @@ export const DateRangeFilterValueInput = observer(function DateRangeFilterValueI
       minDate={config.min}
       maxDate={config.max}
       mergeDates
+      showTooltip
       // The legacy `renderPlaceholder` boolean plus `placeholder.from` is one string here: the old
       // dropdown drew no arrow without a `placeholder.to`, so the whole empty state is "--".
       placeholder={EMPTY_FILTER_PLACEHOLDER_TEXT}
       weekStartsOn={userProfile?.start_of_the_week}
       // A flat segment of the filter chip, like the property and operator segments beside it.
-      className={cn("h-full max-w-none rounded-none border-0 bg-transparent text-body-xs-regular", {
+      className={cn("h-full max-w-full min-w-0 shrink rounded-none border-0 bg-transparent text-body-xs-regular", {
         [COMMON_FILTER_ITEM_BORDER_CLASSNAME]: !isDisabled,
         "text-danger-primary": isIncomplete,
       })}

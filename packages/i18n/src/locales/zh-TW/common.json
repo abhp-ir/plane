@@ -476,6 +476,13 @@
     "completed_at": "完成於",
     "layout": "版面配置",
     "filters": "篩選器",
+    "filter_operators": {
+      "exact": "等於",
+      "in": "為下列任一項",
+      "range": "介於"
+    },
+    "remove_filter": "移除篩選條件",
+    "subscriber": "訂閱者",
     "display": "顯示",
     "load_more": "載入更多",
     "activity": "活動",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {檢視} other {檢視}}",
+    "save": {
+      "label": "儲存檢視"
+    },
     "create": {
       "label": "建立檢視"
     },

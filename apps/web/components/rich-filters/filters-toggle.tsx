@@ -69,6 +69,7 @@ export const FiltersToggle = observer(function FiltersToggle<P extends TFilterPr
       variant={showFilterRowChangesPill ? "tertiary" : "secondary"}
       icon={<Icon icon={<FilterIcon className={iconClassName} />} />}
       onClick={handleToggleFilter}
+      disabled={!filter}
       aria-label={t("common.filters")}
       aria-pressed={isFilterRowVisible}
     />

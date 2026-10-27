@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import { AddFilterOutline } from "@makeplane/propel/icons";
 // plane imports
 import { Button } from "@makeplane/propel/components/button";
+import { useTranslation } from "@plane/i18n";
 import type { IFilterInstance } from "@plane/shared-state";
 import type { TExternalFilter, TFilterProperty } from "@plane/types";
 import { EHeaderVariant, Header } from "@plane/blocks/layout";
@@ -31,6 +32,7 @@ export const FiltersRow = observer(function FiltersRow<K extends TFilterProperty
   props: TFiltersRowProps<K, E>
 ) {
   const { buttonConfig, disabledAllOperations: disabledAllOperationsProp = false, filter, variant = "header" } = props;
+  const { t } = useTranslation();
   // states
   const [isUpdating, setIsUpdating] = useState(false);
   // derived values
@@ -44,7 +46,7 @@ export const FiltersRow = observer(function FiltersRow<K extends TFilterProperty
   };
 
   const modalButtonConfig: Partial<TAddFilterButtonProps<K, E>["buttonConfig"]> = {
-    label: !hasAnyConditions ? "Filters" : null,
+    label: !hasAnyConditions ? t("common.filters") : null,
   };
 
   const handleUpdate = useCallback(async () => {
@@ -85,7 +87,7 @@ export const FiltersRow = observer(function FiltersRow<K extends TFilterProperty
           variant="secondary"
           size="sm"
           stretch="auto"
-          label={filter.clearFilterOptions?.label ?? "Clear all"}
+          label={filter.clearFilterOptions?.label ?? t("common.clear_all")}
           onClick={filter.clearFilters}
         />
       </ElementTransition>
@@ -94,7 +96,7 @@ export const FiltersRow = observer(function FiltersRow<K extends TFilterProperty
           variant="secondary"
           size="sm"
           stretch="auto"
-          label={filter.saveViewOptions?.label ?? "Save view"}
+          label={filter.saveViewOptions?.label ?? t("view.save.label")}
           onClick={filter.saveView}
         />
       </ElementTransition>
@@ -103,7 +105,7 @@ export const FiltersRow = observer(function FiltersRow<K extends TFilterProperty
           variant="secondary"
           size="sm"
           stretch="auto"
-          label={isUpdating ? "Confirming" : (filter.updateViewOptions?.label ?? "Update view")}
+          label={isUpdating ? t("common.confirming") : (filter.updateViewOptions?.label ?? t("view.update.label"))}
           onClick={handleUpdate}
           loading={isUpdating}
           disabled={isUpdating}
@@ -113,11 +115,11 @@ export const FiltersRow = observer(function FiltersRow<K extends TFilterProperty
   );
 
   const mainContent = (
-    <div className="flex w-full items-start gap-2 rounded-lg bg-layer-1 px-4 py-2">
-      <div className="flex w-full flex-wrap items-center gap-2">{leftContent}</div>
+    <div className="flex w-full flex-col items-start gap-2 rounded-lg bg-layer-1 px-4 py-2 sm:flex-row">
+      <div className="flex w-full min-w-0 flex-wrap items-center gap-2">{leftContent}</div>
       <div
-        className={cn("flex items-center gap-2 border-l border-subtle pl-4", {
-          "border-l-transparent pl-0": !hasAvailableOperations,
+        className={cn("flex items-center gap-2 border-subtle sm:border-s sm:ps-4", {
+          "sm:border-s-transparent sm:ps-0": !hasAvailableOperations,
         })}
       >
         {rightContent}

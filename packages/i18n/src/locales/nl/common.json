@@ -476,6 +476,13 @@
     "completed_at": "Voltooid op",
     "layout": "Indeling",
     "filters": "Filters",
+    "filter_operators": {
+      "exact": "is",
+      "in": "is een van",
+      "range": "tussen"
+    },
+    "remove_filter": "Filter verwijderen",
+    "subscriber": "Abonnee",
     "display": "Weergave",
     "load_more": "Meer laden",
     "activity": "Activiteit",
@@ -827,6 +834,9 @@
   },
   "view": {
     "label": "{count, plural, one {Weergave} other {Weergaven}}",
+    "save": {
+      "label": "Weergave opslaan"
+    },
     "create": {
       "label": "Weergave aanmaken"
     },
