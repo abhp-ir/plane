@@ -482,6 +482,8 @@
       "range": "trong khoảng"
     },
     "remove_filter": "Xóa bộ lọc",
+    "selected_options": "Đã chọn: {count, number}",
+    "more_options": "Thêm +{count, number}",
     "subscriber": "Người theo dõi",
     "display": "Hiển thị",
     "load_more": "Tải thêm",

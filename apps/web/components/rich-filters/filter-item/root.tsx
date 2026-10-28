@@ -113,7 +113,7 @@ export const FilterItem = observer(function FilterItem<P extends TFilterProperty
       />
 
       {/* Operator section */}
-      <div className={cn("flex", COMMON_FILTER_ITEM_BORDER_CLASSNAME)}>
+      <div className={cn("flex shrink-0", COMMON_FILTER_ITEM_BORDER_CLASSNAME)}>
         <Select<(typeof operatorOptions)[number]>
           getValues={() => operatorOptions}
           value={operatorOptions.find((option) => option.value === condition.operator) ?? null}
@@ -126,7 +126,11 @@ export const FilterItem = observer(function FilterItem<P extends TFilterProperty
         >
           {/* A flat segment of the filter chip: no chevron and no own radius, so it sits flush between
               the property and value segments like the legacy custom button did. */}
-          <Select.Trigger variant="select-ghost-md" appendIcon={null} className="h-full min-h-0 rounded-none">
+          <Select.Trigger
+            variant="select-ghost-md"
+            appendIcon={null}
+            className="h-full min-h-0 rounded-none whitespace-nowrap"
+          >
             {getDisplayLabel(selectedOperatorOption, filterConfig.getLabelForOperator(selectedOperatorOption))}
           </Select.Trigger>
         </Select>

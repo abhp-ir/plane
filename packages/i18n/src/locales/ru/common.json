@@ -482,6 +482,8 @@
       "range": "между"
     },
     "remove_filter": "Удалить фильтр",
+    "selected_options": "Выбрано: {count, number}",
+    "more_options": "Ещё +{count, number}",
     "subscriber": "Подписчик",
     "display": "Отображение",
     "load_more": "Загрузить еще",

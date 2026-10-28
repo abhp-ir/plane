@@ -482,6 +482,8 @@
       "range": "次の範囲内"
     },
     "remove_filter": "フィルターを削除",
+    "selected_options": "{count, number}件選択中",
+    "more_options": "ほか+{count, number}件",
     "subscriber": "購読者",
     "display": "表示",
     "load_more": "もっと読み込む",

@@ -482,6 +482,8 @@
       "range": "arasında"
     },
     "remove_filter": "Filtreyi kaldır",
+    "selected_options": "{count, number} seçili",
+    "more_options": "+{count, number} daha",
     "subscriber": "Abone",
     "display": "Görüntüle",
     "load_more": "Daha fazla yükle",

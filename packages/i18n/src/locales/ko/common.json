@@ -482,6 +482,8 @@
       "range": "사이"
     },
     "remove_filter": "필터 제거",
+    "selected_options": "{count, number}개 선택됨",
+    "more_options": "+{count, number}개 더",
     "subscriber": "구독자",
     "display": "디스플레이",
     "load_more": "더 보기",

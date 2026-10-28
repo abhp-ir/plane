@@ -482,6 +482,8 @@
       "range": "zwischen"
     },
     "remove_filter": "Filter entfernen",
+    "selected_options": "{count, number} ausgewählt",
+    "more_options": "+{count, number} weitere",
     "subscriber": "Abonnent",
     "display": "Anzeigen",
     "load_more": "Mehr laden",

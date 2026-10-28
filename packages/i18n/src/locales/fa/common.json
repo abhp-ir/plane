@@ -482,6 +482,8 @@
       "range": "بین"
     },
     "remove_filter": "حذف فیلتر",
+    "selected_options": "{count, number} گزینهٔ انتخاب‌شده",
+    "more_options": "\u2066+{count, number}\u2069 مورد دیگر",
     "subscriber": "دنبال‌کننده",
     "display": "نمایش",
     "load_more": "بارگذاری بیشتر",

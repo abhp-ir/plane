@@ -27,6 +27,7 @@ import {
 import { getPriorityFilterConfig, getTargetDateFilterConfig } from "@plane/utils";
 import { useWorkItemFiltersConfig } from "@/hooks/work-item-filters/use-work-item-filters-config";
 import { FiltersToggle } from "../filters-toggle";
+import { SelectedOptionsDisplay } from "../filter-value-input/select/selected-options-display";
 import { FilterItem } from "./root";
 
 vi.mock("@plane/i18n", async () => {
@@ -65,8 +66,8 @@ vi.mock("@plane/i18n", async () => {
     TranslationProvider: ({ children }: { children: ReactNode }) =>
       createElement(reactI18next.I18nextProvider, { i18n: instance }, children),
     useTranslation: () => {
-      const { t } = reactI18next.useTranslation();
-      return { t };
+      const { t, i18n } = reactI18next.useTranslation();
+      return { t, currentLocale: i18n.language };
     },
   };
 });
@@ -299,6 +300,69 @@ it("disables the loading filter toggle until its instance exists", async () => {
     expect(ready.disabled).toBe(false);
     ready.click();
     expect(toggleVisibility).toHaveBeenCalledTimes(1);
+  } finally {
+    await view.close();
+  }
+});
+
+it("localizes selection separators and overflow on mounted language changes while preserving option labels and values", async () => {
+  const view = await mount();
+  const selectedValue = ["a", "b", "c"];
+  const options = [
+    { id: "a", value: "a", label: "Custom English ABC-42" },
+    { id: "b", value: "b", label: "گزینهٔ دلخواه" },
+    { id: "c", value: "c", label: "Third option" },
+  ];
+  const before = structuredClone({ selectedValue, options });
+  try {
+    await view.render(createElement(SelectedOptionsDisplay<string>, { selectedValue, options }));
+    expect(view.container.textContent).toContain("Custom English ABC-42،گزینهٔ دلخواه");
+    expect(view.container.querySelector("bdi")!.textContent).toBe("\u2066+۱\u2069 مورد دیگر");
+    await act(async () => setLanguage("en"));
+    expect(view.container.textContent).toContain("Custom English ABC-42,گزینهٔ دلخواه");
+    expect(view.container.querySelector("bdi")!.textContent).toBe("+1 more");
+    await act(async () => setLanguage("fa"));
+    expect(view.container.querySelector("bdi")!.textContent).toBe("\u2066+۱\u2069 مورد دیگر");
+    expect({ selectedValue, options }).toEqual(before);
+  } finally {
+    await view.close();
+  }
+});
+
+it.each([1, 2, 12])("localizes an unresolved selection count of %i", async (count) => {
+  const view = await mount();
+  try {
+    const selectedValue = Array.from({ length: count }, (_, index) => `id-${index}`);
+    await view.render(createElement(SelectedOptionsDisplay<string>, { selectedValue, options: [] }));
+    expect(view.container.textContent).toBe(`${new Intl.NumberFormat("fa").format(count)} گزینهٔ انتخاب‌شده`);
+  } finally {
+    await view.close();
+  }
+});
+
+it("updates an unresolved selection on language change and preserves explicit fallback and empty text", async () => {
+  const view = await mount();
+  try {
+    const selectedValue = Array.from({ length: 12 }, (_, index) => `id-${index}`);
+    await view.render(createElement(SelectedOptionsDisplay<string>, { selectedValue, options: [] }));
+    await act(async () => setLanguage("en"));
+    expect(view.container.textContent).toBe("12 selected");
+    await view.render(
+      createElement(SelectedOptionsDisplay<string>, {
+        selectedValue: ["retained"],
+        options: [],
+        fallbackText: "Custom fallback ABC-42",
+      })
+    );
+    expect(view.container.textContent).toBe("Custom fallback ABC-42");
+    await view.render(
+      createElement(SelectedOptionsDisplay<string>, {
+        selectedValue: [],
+        options: [],
+        emptyValue: "Custom empty ABC-42",
+      })
+    );
+    expect(view.container.textContent).toBe("Custom empty ABC-42");
   } finally {
     await view.close();
   }

@@ -482,6 +482,8 @@
       "range": "tussen"
     },
     "remove_filter": "Filter verwijderen",
+    "selected_options": "{count, number} geselecteerd",
+    "more_options": "+{count, number} meer",
     "subscriber": "Abonnee",
     "display": "Weergave",
     "load_more": "Meer laden",

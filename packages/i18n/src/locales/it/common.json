@@ -482,6 +482,8 @@
       "range": "tra"
     },
     "remove_filter": "Rimuovi filtro",
+    "selected_options": "Selezionate: {count, number}",
+    "more_options": "+{count, number} in più",
     "subscriber": "Iscritto",
     "display": "Visualizza",
     "load_more": "Carica di più",

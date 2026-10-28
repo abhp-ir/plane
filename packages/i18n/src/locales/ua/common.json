@@ -482,6 +482,8 @@
       "range": "між"
     },
     "remove_filter": "Видалити фільтр",
+    "selected_options": "Вибрано: {count, number}",
+    "more_options": "Ще +{count, number}",
     "subscriber": "Підписник",
     "display": "Відображення",
     "load_more": "Завантажити ще",

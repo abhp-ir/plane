@@ -482,6 +482,8 @@
       "range": "medzi"
     },
     "remove_filter": "Odstrániť filter",
+    "selected_options": "Vybraté: {count, number}",
+    "more_options": "+{count, number} navyše",
     "subscriber": "Odberateľ",
     "display": "Zobrazenie",
     "load_more": "Načítať viac",

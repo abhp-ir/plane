@@ -482,6 +482,8 @@
       "range": "介于"
     },
     "remove_filter": "移除筛选条件",
+    "selected_options": "已选择 {count, number} 项",
+    "more_options": "另有 +{count, number} 项",
     "subscriber": "订阅者",
     "display": "显示",
     "load_more": "加载更多",

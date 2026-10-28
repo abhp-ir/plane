@@ -59,7 +59,8 @@ export interface IIssueProperties {
 export const IssueProperties = observer(function IssueProperties(props: IIssueProperties) {
   const { issue, updateIssue, displayProperties, isReadOnly, className, isEpic = false } = props;
   // i18n
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   // store hooks
   const { getProjectById } = useProject();
   const { labelMap } = useLabel();
@@ -398,7 +399,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
           displayPropertyKey="sub_issue_count"
           shouldRenderProperty={(properties) => !!properties.sub_issue_count && !!subIssueCount}
         >
-          <Tooltip label={`${t("common.sub_work_items")}: ${subIssueCount}`} disabled={isMobile}>
+          <Tooltip label={t("issue.counts.sub_work_items", { count: subIssueCount })} disabled={isMobile}>
             {/* oxlint-disable-next-line jsx_a11y/click-events-have-key-events oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
             <div
               onFocus={handleEventPropagation}
@@ -415,7 +416,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
               )}
             >
               <ViewsOutline className="h-3 w-3 flex-shrink-0" />
-              <div className="text-caption-sm-regular">{subIssueCount}</div>
+              <div className="text-caption-sm-regular">{formatNumber(subIssueCount)}</div>
             </div>
           </Tooltip>
         </WithDisplayPropertiesHOC>
@@ -427,7 +428,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
         displayPropertyKey="attachment_count"
         shouldRenderProperty={(properties) => !!properties.attachment_count && !!issue.attachment_count}
       >
-        <Tooltip label={`${t("common.attachments")}: ${issue.attachment_count}`} disabled={isMobile}>
+        <Tooltip label={t("issue.counts.attachments", { count: issue.attachment_count ?? 0 })} disabled={isMobile}>
           {/* oxlint-disable-next-line jsx_a11y/click-events-have-key-events oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
           <div
             className="flex h-5 flex-shrink-0 items-center justify-center gap-2 overflow-hidden rounded-sm border-[0.5px] border-strong px-2.5 py-1"
@@ -435,7 +436,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
             onClick={handleEventPropagation}
           >
             <AttachOutline className="h-3 w-3 flex-shrink-0" />
-            <div className="text-caption-sm-regular">{issue.attachment_count}</div>
+            <div className="text-caption-sm-regular">{formatNumber(issue.attachment_count ?? 0)}</div>
           </div>
         </Tooltip>
       </WithDisplayPropertiesHOC>
@@ -446,7 +447,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
         displayPropertyKey="link"
         shouldRenderProperty={(properties) => !!properties.link && !!issue.link_count}
       >
-        <Tooltip label={`${t("common.links")}: ${issue.link_count}`} disabled={isMobile}>
+        <Tooltip label={t("issue.counts.links", { count: issue.link_count ?? 0 })} disabled={isMobile}>
           {/* oxlint-disable-next-line jsx_a11y/click-events-have-key-events oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
           <div
             className="flex h-5 flex-shrink-0 items-center justify-center gap-2 overflow-hidden rounded-sm border-[0.5px] border-strong px-2.5 py-1"
@@ -454,7 +455,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
             onClick={handleEventPropagation}
           >
             <LinkOutline className="h-3 w-3 flex-shrink-0" />
-            <div className="text-caption-sm-regular">{issue.link_count}</div>
+            <div className="text-caption-sm-regular">{formatNumber(issue.link_count ?? 0)}</div>
           </div>
         </Tooltip>
       </WithDisplayPropertiesHOC>

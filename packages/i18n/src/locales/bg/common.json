@@ -482,6 +482,8 @@
       "range": "между"
     },
     "remove_filter": "Премахване на филтъра",
+    "selected_options": "Избрани: {count, number}",
+    "more_options": "Още +{count, number}",
     "subscriber": "Абонат",
     "display": "Показване",
     "load_more": "Зареди още",

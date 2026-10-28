@@ -482,6 +482,8 @@
       "range": "介於"
     },
     "remove_filter": "移除篩選條件",
+    "selected_options": "已選取 {count, number} 項",
+    "more_options": "另有 +{count, number} 項",
     "subscriber": "訂閱者",
     "display": "顯示",
     "load_more": "載入更多",

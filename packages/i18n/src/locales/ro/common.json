@@ -482,6 +482,8 @@
       "range": "între"
     },
     "remove_filter": "Elimină filtrul",
+    "selected_options": "Selectate: {count, number}",
+    "more_options": "+{count, number} în plus",
     "subscriber": "Abonat",
     "display": "Afișare",
     "load_more": "Încarcă mai mult",

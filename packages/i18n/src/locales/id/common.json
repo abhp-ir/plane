@@ -482,6 +482,8 @@
       "range": "antara"
     },
     "remove_filter": "Hapus filter",
+    "selected_options": "{count, number} dipilih",
+    "more_options": "+{count, number} lainnya",
     "subscriber": "Pelanggan",
     "display": "Tampilan",
     "load_more": "Muat lebih banyak",

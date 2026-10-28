@@ -482,6 +482,8 @@
       "range": "mezi"
     },
     "remove_filter": "Odebrat filtr",
+    "selected_options": "Vybráno: {count, number}",
+    "more_options": "+{count, number} navíc",
     "subscriber": "Odběratel",
     "display": "Zobrazení",
     "load_more": "Načíst více",

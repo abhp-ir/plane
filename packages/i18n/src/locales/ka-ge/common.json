@@ -482,6 +482,8 @@
       "range": "შორის"
     },
     "remove_filter": "ფილტრის წაშლა",
+    "selected_options": "არჩეულია: {count, number}",
+    "more_options": "+{count, number} სხვა",
     "subscriber": "გამომწერი",
     "display": "ჩვენება",
     "load_more": "მეტის ჩატვირთვა",
