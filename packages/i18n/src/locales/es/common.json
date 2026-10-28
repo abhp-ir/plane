@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# etiqueta} other {# etiquetas}}",
   "validation": {
     "person_name": {
-      "max_length": "El nombre debe tener como máximo 50 caracteres",
+      "max_length": "El nombre debe tener como máximo {max, number} caracteres",
       "invalid": "Los nombres solo pueden contener letras, espacios, guiones y apóstrofos"
     },
     "display_name": {

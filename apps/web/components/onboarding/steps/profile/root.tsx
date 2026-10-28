@@ -15,7 +15,7 @@ import { Button } from "@makeplane/propel/components/button";
 import { setToast } from "@plane/blocks/toast";
 import type { IUser } from "@plane/types";
 import { EOnboardingSteps } from "@plane/types";
-import { cn, getFileURL, getPasswordStrength, validatePersonName } from "@plane/utils";
+import { cn, getFileURL, getPasswordStrength, PERSON_NAME_MAX_LENGTH, validatePersonName } from "@plane/utils";
 // components
 import { UserImageUploadModal } from "@/components/core/modals/user-image-upload-modal";
 // hooks
@@ -197,10 +197,6 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
             rules={{
               required: "name_is_required",
               validate: validatePersonName,
-              maxLength: {
-                value: 50,
-                message: "validation.person_name.max_length",
-              },
             }}
             render={({ field: { value, onChange, ref } }) => (
               <input
@@ -227,7 +223,7 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
           />
           {errors.first_name && (
             <span id="first_name_error" className="text-13 text-danger-primary">
-              {t(errors.first_name.message ?? "")}
+              {t(errors.first_name.message ?? "", { max: PERSON_NAME_MAX_LENGTH })}
             </span>
           )}
         </div>

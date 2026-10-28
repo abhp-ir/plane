@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# برچسب} other {# برچسب}}",
   "validation": {
     "person_name": {
-      "max_length": "نام باید حداکثر ۵۰ نویسه باشد",
+      "max_length": "نام باید حداکثر {max, number} نویسه باشد",
       "invalid": "نام فقط می‌تواند شامل حروف، فاصله، خط تیره و آپاستروف باشد"
     },
     "display_name": {

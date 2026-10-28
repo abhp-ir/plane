@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# etichetă} few {# etichete} other {# de etichete}}",
   "validation": {
     "person_name": {
-      "max_length": "Numele trebuie să aibă cel mult 50 de caractere",
+      "max_length": "Numele trebuie să aibă cel mult {max, number} de caractere",
       "invalid": "Numele pot conține doar litere, spații, cratime și apostrofuri"
     },
     "display_name": {

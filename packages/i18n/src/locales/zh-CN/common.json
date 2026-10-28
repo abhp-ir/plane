@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# 个标签} other {# 个标签}}",
   "validation": {
     "person_name": {
-      "max_length": "姓名不得超过 50 个字符",
+      "max_length": "姓名不得超过 {max, number} 个字符",
       "invalid": "姓名只能包含文字、空格、连字符和撇号"
     },
     "display_name": {

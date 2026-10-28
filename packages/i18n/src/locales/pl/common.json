@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# etykieta} few {# etykiety} many {# etykiet} other {# etykiety}}",
   "validation": {
     "person_name": {
-      "max_length": "Imię i nazwisko mogą zawierać maksymalnie 50 znaków",
+      "max_length": "Imię i nazwisko mogą zawierać maksymalnie {max, number} znaków",
       "invalid": "Imiona i nazwiska mogą zawierać tylko litery, spacje, łączniki i apostrofy"
     },
     "display_name": {

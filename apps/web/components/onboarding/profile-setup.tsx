@@ -20,7 +20,7 @@ import type { IUser, TUserProfile, TOnboardingSteps } from "@plane/types";
 import { PasswordStrengthIndicator } from "@plane/blocks/auth";
 import { Spinner } from "@plane/blocks/spinner";
 // components
-import { cn, getFileURL, getPasswordStrength, validatePersonName } from "@plane/utils";
+import { cn, getFileURL, getPasswordStrength, PERSON_NAME_MAX_LENGTH, validatePersonName } from "@plane/utils";
 import { UserImageUploadModal } from "@/components/core/modals/user-image-upload-modal";
 // hooks
 import { useUser, useUserProfile } from "@/hooks/store/user";
@@ -301,10 +301,6 @@ export const ProfileSetup = observer(function ProfileSetup(props: Props) {
                     rules={{
                       required: "First name is required",
                       validate: validatePersonName,
-                      maxLength: {
-                        value: 50,
-                        message: "First name must be within 50 characters.",
-                      },
                     }}
                     render={({ field: { value, onChange, ref } }) => (
                       <Field name="first_name" invalid={Boolean(errors.first_name)}>
@@ -325,7 +321,9 @@ export const ProfileSetup = observer(function ProfileSetup(props: Props) {
                     )}
                   />
                   {errors.first_name && (
-                    <span className="text-13 text-danger-primary">{t(errors.first_name.message ?? "")}</span>
+                    <span className="text-13 text-danger-primary">
+                      {t(errors.first_name.message ?? "", { max: PERSON_NAME_MAX_LENGTH })}
+                    </span>
                   )}
                 </div>
                 <div className="space-y-1">
@@ -341,10 +339,6 @@ export const ProfileSetup = observer(function ProfileSetup(props: Props) {
                     rules={{
                       required: "Last name is required",
                       validate: validatePersonName,
-                      maxLength: {
-                        value: 50,
-                        message: "Last name must be within 50 characters.",
-                      },
                     }}
                     render={({ field: { value, onChange, ref } }) => (
                       <Field name="last_name" invalid={Boolean(errors.last_name)}>
@@ -365,7 +359,9 @@ export const ProfileSetup = observer(function ProfileSetup(props: Props) {
                     )}
                   />
                   {errors.last_name && (
-                    <span className="text-13 text-danger-primary">{t(errors.last_name.message ?? "")}</span>
+                    <span className="text-13 text-danger-primary">
+                      {t(errors.last_name.message ?? "", { max: PERSON_NAME_MAX_LENGTH })}
+                    </span>
                   )}
                 </div>
               </div>

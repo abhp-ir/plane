@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# label} other {# labels}}",
   "validation": {
     "person_name": {
-      "max_length": "De naam mag maximaal 50 tekens bevatten",
+      "max_length": "De naam mag maximaal {max, number} tekens bevatten",
       "invalid": "Namen mogen alleen letters, spaties, koppeltekens en apostroffen bevatten"
     },
     "display_name": {

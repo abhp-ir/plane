@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# етикет} other {# етикета}}",
   "validation": {
     "person_name": {
-      "max_length": "Името трябва да е до 50 знака",
+      "max_length": "Името трябва да е до {max, number} знака",
       "invalid": "Имената могат да съдържат само букви, интервали, тирета и апострофи"
     },
     "display_name": {

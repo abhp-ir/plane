@@ -31,7 +31,7 @@ import { handleCoverImageChange } from "@/helpers/cover-image.helper";
 import { useInstance } from "@/hooks/store/use-instance";
 import { useUser, useUserProfile } from "@/hooks/store/user";
 // utils
-import { validatePersonName, validateDisplayName } from "@plane/utils";
+import { PERSON_NAME_MAX_LENGTH, validatePersonName, validateDisplayName } from "@plane/utils";
 
 type TUserProfileForm = {
   avatar_url: string;
@@ -261,9 +261,9 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
             </div>
           </div>
           <div className="item-center mt-6 flex justify-between">
-            <div className="flex flex-col">
+            <div className="flex min-w-0 flex-col">
               <div className="item-center flex text-16 font-medium text-secondary">
-                <bdi>{`${watch("first_name")} ${watch("last_name")}`}</bdi>
+                <bdi className="min-w-0 break-words">{`${watch("first_name")} ${watch("last_name")}`}</bdi>
               </div>
               <span dir="ltr" className="text-13 tracking-tight text-tertiary">
                 {watch("email")}
@@ -300,7 +300,6 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           aria-required="true"
                           aria-invalid={Boolean(errors.first_name)}
                           aria-describedby={errors.first_name ? "first_name_error" : undefined}
-                          maxLength={50}
                           autoComplete="on"
                         />
                       </InputGroup>
@@ -309,7 +308,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                 />
                 {errors.first_name && (
                   <span id="first_name_error" role="alert" className="text-11 text-danger-primary">
-                    {t(errors.first_name.message ?? "")}
+                    {t(errors.first_name.message ?? "", { max: PERSON_NAME_MAX_LENGTH })}
                   </span>
                 )}
               </div>
@@ -338,7 +337,6 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                           placeholder={t("account_settings.profile.placeholders.last_name")}
                           aria-invalid={Boolean(errors.last_name)}
                           aria-describedby={errors.last_name ? "last_name_error" : undefined}
-                          maxLength={50}
                           autoComplete="on"
                         />
                       </InputGroup>
@@ -347,7 +345,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                 />
                 {errors.last_name && (
                   <span id="last_name_error" role="alert" className="text-11 text-danger-primary">
-                    {t(errors.last_name.message ?? "")}
+                    {t(errors.last_name.message ?? "", { max: PERSON_NAME_MAX_LENGTH })}
                   </span>
                 )}
               </div>

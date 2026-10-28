@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# label} other {# label}}",
   "validation": {
     "person_name": {
-      "max_length": "Nama harus terdiri dari maksimal 50 karakter",
+      "max_length": "Nama harus terdiri dari maksimal {max, number} karakter",
       "invalid": "Nama hanya boleh berisi huruf, spasi, tanda hubung, dan apostrof"
     },
     "display_name": {

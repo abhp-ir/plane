@@ -23,6 +23,8 @@
  */
 // ZWNJ separates letters inside a name; other invisible controls are not names.
 export const PERSON_NAME_REGEX = /^(?:[\p{L}\p{M} '’-]|(?<=[\p{L}\p{M}])\u200C(?=\p{L}))+$/u;
+// Match the existing User first_name/last_name storage limit in Unicode code points.
+export const PERSON_NAME_MAX_LENGTH = 255;
 
 /**
  * Display Name Pattern (for display_name, usernames)
@@ -73,7 +75,7 @@ export const validatePersonName = (name: string): boolean | string => {
     return "name_is_required";
   }
 
-  if (name.length > 50) {
+  if ([...name].length > PERSON_NAME_MAX_LENGTH) {
     return "validation.person_name.max_length";
   }
 

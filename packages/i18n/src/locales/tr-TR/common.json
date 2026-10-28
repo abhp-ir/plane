@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# etiket} other {# etiket}}",
   "validation": {
     "person_name": {
-      "max_length": "Ad en fazla 50 karakter olmalıdır",
+      "max_length": "Ad en fazla {max, number} karakter olmalıdır",
       "invalid": "Adlar yalnızca harf, boşluk, kısa çizgi ve kesme işareti içerebilir"
     },
     "display_name": {

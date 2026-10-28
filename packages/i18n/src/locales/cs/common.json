@@ -935,7 +935,7 @@
   "labels_count": "{count, plural, one {# štítek} few {# štítky} many {# štítku} other {# štítků}}",
   "validation": {
     "person_name": {
-      "max_length": "Jméno může mít nejvýše 50 znaků",
+      "max_length": "Jméno může mít nejvýše {max, number} znaků",
       "invalid": "Jména mohou obsahovat pouze písmena, mezery, spojovníky a apostrofy"
     },
     "display_name": {

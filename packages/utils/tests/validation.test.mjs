@@ -6,7 +6,12 @@
 
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { validatePersonName, validateDisplayName, validateWorkspaceName } from "../dist/index.js";
+import {
+  PERSON_NAME_MAX_LENGTH,
+  validatePersonName,
+  validateDisplayName,
+  validateWorkspaceName,
+} from "../dist/index.js";
 
 test("person names preserve Unicode letters, combining marks, apostrophes and interior ZWNJ", () => {
   for (const name of [
@@ -51,12 +56,12 @@ test("display names retain their Unicode username policy and return translatable
 
 test("person names reject unsafe controls, markup, invalid ZWNJ boundaries and overlong input", () => {
   assert.equal(validatePersonName(""), "name_is_required");
-  assert.equal(validatePersonName("a".repeat(51)), "validation.person_name.max_length");
+  assert.equal(validatePersonName("a".repeat(256)), "validation.person_name.max_length");
   assert.equal(validatePersonName("<script>"), "validation.person_name.invalid");
   for (const name of [
     "",
     " ",
-    "a".repeat(51),
+    "a".repeat(256),
     "<script>alert(1)</script>",
     "{name}",
     "name@example.test",
@@ -80,4 +85,14 @@ test("person names reject unsafe controls, markup, invalid ZWNJ boundaries and o
   }
   // Person-name apostrophes must not relax the separate username policy.
   assert.notEqual(validateDisplayName("O'Brien"), true);
+});
+
+test("person names follow the API limit of 255 Unicode code points", () => {
+  assert.equal(PERSON_NAME_MAX_LENGTH, 255);
+  for (const name of ["س".repeat(51), "س".repeat(255), "𐐀".repeat(255), "سَ".repeat(127) + "س"]) {
+    assert.equal(validatePersonName(name), true);
+  }
+  for (const name of ["س".repeat(256), "𐐀".repeat(256)]) {
+    assert.equal(validatePersonName(name), "validation.person_name.max_length");
+  }
 });
