@@ -4,9 +4,10 @@
  * See the LICENSE file for details.
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { Tooltip } from "@base-ui/react/tooltip";
 // plane imports
-import { Tooltip } from "@makeplane/propel/components/tooltip";
+import { TooltipPopup } from "@makeplane/propel/elements/tooltip";
 import type { SingleOrArray, TFilterValue } from "@plane/types";
 import { hasValidValue, cn } from "@plane/utils";
 
@@ -22,6 +23,8 @@ export function FilterItemContainer(props: FilterItemContainerProps) {
   const { children, conditionValue, showTransition, variant = "default", tooltipContent } = props;
   // refs
   const itemRef = useRef<HTMLDivElement>(null);
+  const tooltipId = useId();
+  const [tooltipElement, setTooltipElement] = useState<HTMLDivElement | null>(null);
 
   // effects
   useEffect(() => {
@@ -54,16 +57,41 @@ export function FilterItemContainer(props: FilterItemContainerProps) {
   }, []);
 
   return (
-    <Tooltip label={tooltipContent ?? ""} layout="stacked" side="bottom" disabled={!tooltipContent}>
-      <div
-        ref={itemRef}
-        className={cn("flex h-7 items-stretch overflow-hidden rounded-sm border transition-all duration-200", {
-          "border-subtle bg-surface-1": variant === "default",
-          "border-danger-strong bg-surface-2": variant === "error",
-        })}
-      >
-        {children}
-      </div>
-    </Tooltip>
+    <Tooltip.Root disabled={!tooltipContent}>
+      <Tooltip.Trigger
+        aria-describedby={tooltipElement ? tooltipId : undefined}
+        render={
+          <div
+            ref={itemRef}
+            className={cn("flex h-7 items-stretch overflow-hidden rounded-sm border transition-all duration-200", {
+              "border-subtle bg-surface-1": variant === "default",
+              "border-danger-strong bg-surface-2": variant === "error",
+            })}
+          >
+            {children}
+          </div>
+        }
+      />
+      {tooltipContent && (
+        <Tooltip.Portal>
+          <Tooltip.Positioner
+            side="bottom"
+            sideOffset={8}
+            collisionPadding={8}
+            className="z-50 outline-none data-[anchor-hidden]:invisible"
+          >
+            <Tooltip.Popup
+              ref={setTooltipElement}
+              id={tooltipId}
+              role="tooltip"
+              render={<TooltipPopup layout="stacked" />}
+              style={{ maxWidth: "min(500px, calc(100vw - 1rem))" }}
+            >
+              {tooltipContent}
+            </Tooltip.Popup>
+          </Tooltip.Positioner>
+        </Tooltip.Portal>
+      )}
+    </Tooltip.Root>
   );
 }

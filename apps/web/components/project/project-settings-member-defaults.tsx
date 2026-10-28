@@ -114,6 +114,7 @@ export const ProjectSettingsMemberDefaults = observer(function ProjectSettingsMe
           type: "success",
           message: t("project_settings.general.toast.success"),
         });
+        return undefined;
       })
       .catch((err) => {
         console.error(err);
@@ -132,6 +133,7 @@ export const ProjectSettingsMemberDefaults = observer(function ProjectSettingsMe
           type: "success",
           message: t("project_settings.general.toast.success"),
         });
+        return undefined;
       })
       .catch((err) => {
         console.error(err);
@@ -140,7 +142,10 @@ export const ProjectSettingsMemberDefaults = observer(function ProjectSettingsMe
 
   return (
     <div className="my-6 flex flex-col gap-y-6">
-      <DefaultSettingItem title="Project Lead" description="Select the project lead for the project.">
+      <DefaultSettingItem
+        title={t("project_settings.members.project_lead")}
+        description={t("project_settings.members.project_lead_description")}
+      >
         {currentProjectDetails ? (
           <Controller
             control={control}
@@ -167,7 +172,10 @@ export const ProjectSettingsMemberDefaults = observer(function ProjectSettingsMe
           </Loader>
         )}
       </DefaultSettingItem>
-      <DefaultSettingItem title="Default Assignee" description="Select the default assignee for the project.">
+      <DefaultSettingItem
+        title={t("project_settings.members.default_assignee")}
+        description={t("project_settings.members.default_assignee_description")}
+      >
         {currentProjectDetails ? (
           <Controller
             control={control}
@@ -196,8 +204,8 @@ export const ProjectSettingsMemberDefaults = observer(function ProjectSettingsMe
       </DefaultSettingItem>
       {currentProjectDetails && (
         <DefaultSettingItem
-          title="Guest access"
-          description="This will allow guests to have view access to all the project work items."
+          title={t("project_settings.members.guest_super_permissions.title")}
+          description={t("project_settings.members.guest_super_permissions.sub_heading")}
         >
           <div className="flex items-center justify-end">
             <Switch
@@ -205,7 +213,7 @@ export const ProjectSettingsMemberDefaults = observer(function ProjectSettingsMe
               checked={!!currentProjectDetails?.guest_view_all_features}
               onCheckedChange={toggleGuestViewAllIssues}
               disabled={!isAdmin}
-              aria-label="Guest access"
+              aria-label={t("project_settings.members.guest_super_permissions.title")}
             />
           </div>
         </DefaultSettingItem>

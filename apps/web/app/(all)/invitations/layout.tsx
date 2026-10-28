@@ -5,10 +5,18 @@
  */
 
 import { Outlet } from "react-router";
+import { useTranslation } from "@plane/i18n";
+import { PageHead } from "@/components/core/page-title";
 import type { Route } from "./+types/layout";
 
 export default function InvitationsLayout() {
-  return <Outlet />;
+  const { t } = useTranslation();
+  return (
+    <>
+      <PageHead title={t("invitations")} />
+      <Outlet />
+    </>
+  );
 }
 
 export const meta: Route.MetaFunction = () => [{ title: "Invitations" }];

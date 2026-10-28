@@ -36,6 +36,7 @@ type TResetPasswordFormValues = {
 const defaultValues: TResetPasswordFormValues = {
   email: "",
   password: "",
+  confirm_password: "",
 };
 
 // services
@@ -77,11 +78,11 @@ export const ResetPasswordForm = observer(function ResetPasswordForm() {
 
   const isButtonDisabled = useMemo(
     () =>
-      !!resetFormData.password &&
-      getPasswordStrength(resetFormData.password) === E_PASSWORD_STRENGTH.STRENGTH_VALID &&
-      resetFormData.password === resetFormData.confirm_password
-        ? false
-        : true,
+      !(
+        resetFormData.password &&
+        getPasswordStrength(resetFormData.password) === E_PASSWORD_STRENGTH.STRENGTH_VALID &&
+        resetFormData.password === resetFormData.confirm_password
+      ),
     [resetFormData]
   );
 
@@ -100,7 +101,7 @@ export const ResetPasswordForm = observer(function ResetPasswordForm() {
 
   return (
     <FormContainer>
-      <AuthFormHeader title="Reset password" description="Create a new password." />
+      <AuthFormHeader title={t("auth.reset_password.title")} description={t("auth.reset_password.description")} />
 
       {errorInfo && errorInfo?.type === EErrorAlertType.BANNER_ALERT && (
         <Banner
@@ -117,7 +118,7 @@ export const ResetPasswordForm = observer(function ResetPasswordForm() {
         method="POST"
         action={`${API_BASE_URL}/auth/reset-password/${uidb64?.toString()}/${token?.toString()}/`}
       >
-        <input type="hidden" name="csrfmiddlewaretoken" value={csrfToken} />
+        <input type="hidden" name="csrfmiddlewaretoken" value={csrfToken ?? ""} />
         <div className="space-y-1">
           <label className="text-13 font-medium text-tertiary" htmlFor="email">
             {t("auth.common.email.label")}
@@ -153,10 +154,12 @@ export const ResetPasswordForm = observer(function ResetPasswordForm() {
               onFocus={() => setIsPasswordInputFocused(true)}
               onBlur={() => setIsPasswordInputFocused(false)}
               autoComplete="new-password"
-              autoFocus
             />
             <button
               type="button"
+              aria-label={t(
+                showPassword.password ? "aria_labels.auth_forms.hide_password" : "aria_labels.auth_forms.show_password"
+              )}
               onClick={() => handleShowPassword("password")}
               className="grid size-5 place-items-center"
             >
@@ -188,6 +191,11 @@ export const ResetPasswordForm = observer(function ResetPasswordForm() {
             />
             <button
               type="button"
+              aria-label={t(
+                showPassword.retypePassword
+                  ? "aria_labels.auth_forms.hide_password"
+                  : "aria_labels.auth_forms.show_password"
+              )}
               onClick={() => handleShowPassword("retypePassword")}
               className="grid size-5 place-items-center"
             >

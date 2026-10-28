@@ -7,6 +7,7 @@
 // plane types
 import { useTranslation } from "@plane/i18n";
 import type { IUser } from "@plane/types";
+import { getDateCalendar } from "@plane/utils";
 // plane ui
 // hooks
 import { useCurrentTime } from "@/hooks/use-current-time";
@@ -20,23 +21,25 @@ export function UserGreetingsView(props: IUserGreetingsView) {
   // current time hook
   const { currentTime } = useCurrentTime();
   // store hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const language = currentLocale === "ua" ? "uk-UA" : currentLocale;
 
   const hour = new Intl.DateTimeFormat("en-US", {
     hour12: false,
     hour: "numeric",
   }).format(currentTime);
 
-  const date = new Intl.DateTimeFormat("en-US", {
+  const date = new Intl.DateTimeFormat(language, {
+    calendar: getDateCalendar(currentLocale),
     month: "short",
     day: "numeric",
   }).format(currentTime);
 
-  const weekDay = new Intl.DateTimeFormat("en-US", {
+  const weekDay = new Intl.DateTimeFormat(language, {
     weekday: "long",
   }).format(currentTime);
 
-  const timeString = new Intl.DateTimeFormat("en-US", {
+  const timeString = new Intl.DateTimeFormat(language, {
     timeZone: user?.user_timezone,
     hour12: false, // Use 24-hour format
     hour: "2-digit",
@@ -48,12 +51,18 @@ export function UserGreetingsView(props: IUserGreetingsView) {
   return (
     <div className="my-6 flex flex-col items-center">
       <h2 className="text-center text-20 font-semibold">
-        {t("good")} {t(greeting)}, {user?.first_name} {user?.last_name}
+        {t("good")} {t(greeting)}
+        {currentLocale === "fa" ? "، " : ", "}
+        <bdi dir="auto">
+          {user?.first_name} {user?.last_name}
+        </bdi>
       </h2>
       <h5 className="flex items-center gap-2 font-medium text-placeholder">
         <div>{greeting === "morning" ? "🌤️" : greeting === "afternoon" ? "🌥️" : "🌙️"}</div>
         <div>
-          {weekDay}, {date} {timeString}
+          {weekDay}
+          {currentLocale === "fa" ? "، " : ", "}
+          {date} {timeString}
         </div>
       </h5>
     </div>
