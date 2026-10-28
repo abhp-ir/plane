@@ -199,7 +199,7 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
   const maxDate = getDate(issue.target_date);
 
   // oxlint-disable-next-line unicorn/consistent-function-scoping
-  const handleEventPropagation = (e: SyntheticEvent<HTMLDivElement>) => {
+  const handleEventPropagation = (e: SyntheticEvent<HTMLElement>) => {
     e.stopPropagation();
     e.preventDefault();
   };
@@ -400,8 +400,9 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
           shouldRenderProperty={(properties) => !!properties.sub_issue_count && !!subIssueCount}
         >
           <Tooltip label={t("issue.counts.sub_work_items", { count: subIssueCount })} disabled={isMobile}>
-            {/* oxlint-disable-next-line jsx_a11y/click-events-have-key-events oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
-            <div
+            <button
+              type="button"
+              aria-label={t("issue.counts.sub_work_items", { count: subIssueCount })}
               onFocus={handleEventPropagation}
               onClick={(e) => {
                 e.stopPropagation();
@@ -409,15 +410,17 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
                 if (subIssueCount) redirectToIssueDetail();
               }}
               className={cn(
-                "flex h-5 flex-shrink-0 items-center justify-center gap-2 overflow-hidden rounded-sm border-[0.5px] border-strong px-2.5 py-1",
+                "flex h-5 flex-shrink-0 items-center justify-center gap-2 overflow-hidden rounded-sm border-[0.5px] border-strong px-2.5 py-1 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent-strong focus-visible:outline-solid",
                 {
                   "cursor-pointer hover:bg-layer-1": subIssueCount,
                 }
               )}
             >
-              <ViewsOutline className="h-3 w-3 flex-shrink-0" />
-              <div className="text-caption-sm-regular">{formatNumber(subIssueCount)}</div>
-            </div>
+              <ViewsOutline aria-hidden="true" className="h-3 w-3 flex-shrink-0" />
+              <span aria-hidden="true" className="text-caption-sm-regular">
+                {formatNumber(subIssueCount)}
+              </span>
+            </button>
           </Tooltip>
         </WithDisplayPropertiesHOC>
       )}
@@ -431,12 +434,16 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
         <Tooltip label={t("issue.counts.attachments", { count: issue.attachment_count ?? 0 })} disabled={isMobile}>
           {/* oxlint-disable-next-line jsx_a11y/click-events-have-key-events oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
           <div
+            role="img"
+            aria-label={t("issue.counts.attachments", { count: issue.attachment_count ?? 0 })}
             className="flex h-5 flex-shrink-0 items-center justify-center gap-2 overflow-hidden rounded-sm border-[0.5px] border-strong px-2.5 py-1"
             onFocus={handleEventPropagation}
             onClick={handleEventPropagation}
           >
-            <AttachOutline className="h-3 w-3 flex-shrink-0" />
-            <div className="text-caption-sm-regular">{formatNumber(issue.attachment_count ?? 0)}</div>
+            <AttachOutline aria-hidden="true" className="h-3 w-3 flex-shrink-0" />
+            <span aria-hidden="true" className="text-caption-sm-regular">
+              {formatNumber(issue.attachment_count ?? 0)}
+            </span>
           </div>
         </Tooltip>
       </WithDisplayPropertiesHOC>
@@ -450,12 +457,16 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
         <Tooltip label={t("issue.counts.links", { count: issue.link_count ?? 0 })} disabled={isMobile}>
           {/* oxlint-disable-next-line jsx_a11y/click-events-have-key-events oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
           <div
+            role="img"
+            aria-label={t("issue.counts.links", { count: issue.link_count ?? 0 })}
             className="flex h-5 flex-shrink-0 items-center justify-center gap-2 overflow-hidden rounded-sm border-[0.5px] border-strong px-2.5 py-1"
             onFocus={handleEventPropagation}
             onClick={handleEventPropagation}
           >
-            <LinkOutline className="h-3 w-3 flex-shrink-0" />
-            <div className="text-caption-sm-regular">{formatNumber(issue.link_count ?? 0)}</div>
+            <LinkOutline aria-hidden="true" className="h-3 w-3 flex-shrink-0" />
+            <span aria-hidden="true" className="text-caption-sm-regular">
+              {formatNumber(issue.link_count ?? 0)}
+            </span>
           </div>
         </Tooltip>
       </WithDisplayPropertiesHOC>

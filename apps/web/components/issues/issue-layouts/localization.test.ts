@@ -9,7 +9,7 @@ import { act, createElement, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { expect, it, vi } from "vitest";
 import { initPromise, setLanguage, TranslationProvider } from "@plane/i18n";
-import type { ISearchIssueResponse, TIssue } from "@plane/types";
+import type { IIssueDisplayProperties, ISearchIssueResponse, TIssue } from "@plane/types";
 import type { TSelectionHelper } from "@/hooks/use-multiple-select";
 import { CountChip } from "@/components/common/count-chip";
 import { SpreadsheetLinkColumn } from "./spreadsheet/columns/link-column";
@@ -17,6 +17,7 @@ import { SpreadsheetAttachmentColumn } from "./spreadsheet/columns/attachment-co
 import { SpreadsheetSubIssueColumn } from "./spreadsheet/columns/sub-issue-column";
 import { HeaderGroupByCard as ListGroup } from "./list/headers/group-by-card";
 import { HeaderGroupByCard as BoardGroup } from "./kanban/headers/group-by-card";
+import { IssueProperties, type IIssueProperties } from "./properties/all-properties";
 
 vi.mock("@plane/i18n", async () => {
   const { createRequire } = await import("node:module");
@@ -72,9 +73,10 @@ const mocks = vi.hoisted(() => ({
   params: {} as Record<string, string>,
   submit: undefined as ((data: ISearchIssueResponse[]) => Promise<void>) | undefined,
   toast: vi.fn(),
+  push: vi.fn(),
 }));
 vi.mock("next/navigation", () => ({ useParams: () => mocks.params }));
-vi.mock("@/hooks/use-app-router", () => ({ useAppRouter: () => ({ push: vi.fn() }) }));
+vi.mock("@/hooks/use-app-router", () => ({ useAppRouter: () => ({ push: mocks.push }) }));
 vi.mock("@/hooks/use-issue-layout-store", () => ({ useIssueStoreType: () => "PROJECT" }));
 vi.mock("@plane/blocks/toast", () => ({ setToast: mocks.toast }));
 vi.mock("@/components/issues/issue-modal/modal", () => ({ CreateUpdateIssueModal: () => null }));
@@ -86,6 +88,24 @@ vi.mock("@/components/core/modals/existing-issues-list-modal", () => ({
     return null;
   },
 }));
+vi.mock("@/hooks/store/use-project", () => ({
+  useProject: () => ({ getProjectById: () => ({ identifier: "TEST" }) }),
+}));
+vi.mock("@/hooks/store/use-label", () => ({ useLabel: () => ({ labelMap: {} }) }));
+vi.mock("@/hooks/store/use-issues", () => ({ useIssues: () => ({ issues: {} }) }));
+vi.mock("@/hooks/store/estimates", () => ({
+  useProjectEstimates: () => ({ areEstimateEnabledByProjectId: () => false }),
+}));
+vi.mock("@/hooks/store/use-project-state", () => ({ useProjectState: () => ({ getStateById: () => undefined }) }));
+vi.mock("@/hooks/store/user", () => ({ useUserProfile: () => ({ data: {} }) }));
+vi.mock("@/hooks/use-platform-os", () => ({ usePlatformOS: () => ({ isMobile: false }) }));
+vi.mock("@/components/dropdowns/state/state-select", () => ({ StateSelect: () => null }));
+vi.mock("@/components/dropdowns/priority/priority-select", () => ({ PrioritySelect: () => null }));
+vi.mock("@/components/dropdowns/member/member-select", () => ({ MemberSelect: () => null }));
+vi.mock("@/components/dropdowns/module/module-select", () => ({ ModuleSelect: () => null }));
+vi.mock("@/components/dropdowns/cycle/cycle-select", () => ({ CycleSelect: () => null }));
+vi.mock("@/components/dropdowns/estimate/estimate-select", () => ({ EstimateSelect: () => null }));
+vi.mock("./properties/labels", () => ({ IssuePropertyLabels: () => null }));
 
 async function mount() {
   await initPromise;
@@ -235,6 +255,131 @@ it.each([
     expect(view.container.textContent).toBe("Mixed ABC-4212");
     await act(async () => setLanguage("fa"));
     expect(view.container.textContent).toBe("Mixed ABC-42۱۲");
+  } finally {
+    await view.close();
+  }
+});
+
+it.each([
+  [1, false],
+  [12, false],
+  [1, true],
+] as const)("names count badges and preserves navigation for count %s/read-only %s", async (count, isReadOnly) => {
+  const view = await mount();
+  mocks.params = { workspaceSlug: "workspace", projectId: "project" };
+  mocks.push.mockClear();
+  const parentClick = vi.fn();
+  const updateIssue = vi.fn();
+  const issue = {
+    id: "issue-id",
+    project_id: "project",
+    sequence_id: 42,
+    sub_issues_count: count,
+    link_count: count,
+    attachment_count: count,
+  } as TIssue;
+  const original = structuredClone(issue);
+  try {
+    await act(async () =>
+      view.root.render(
+        createElement(
+          TranslationProvider,
+          null,
+          createElement(
+            "div",
+            { onClick: parentClick },
+            createElement(IssueProperties, {
+              issue,
+              updateIssue,
+              isReadOnly,
+              displayProperties: {
+                sub_issue_count: true,
+                attachment_count: true,
+                link: true,
+              } as IIssueDisplayProperties,
+              className: "",
+              activeLayout: "List",
+            })
+          )
+        )
+      )
+    );
+    const check = async (language: "fa" | "en") => {
+      await act(async () => setLanguage(language));
+      const number = new Intl.NumberFormat(language).format(count);
+      const button = view.container.querySelector("button");
+      expect(button).not.toBeNull();
+      expect(button?.type).toBe("button");
+      expect(button?.tabIndex).toBe(0);
+      expect(button?.disabled).toBe(false);
+      expect(button?.getAttribute("aria-label")).toBe(
+        language === "fa" ? `${number} زیرآیتم کاری` : `${number} sub-work item${count === 1 ? "" : "s"}`
+      );
+      expect(button?.textContent).toBe(number);
+      const staticCounts = [...view.container.querySelectorAll('[role="img"]')];
+      expect(staticCounts.map((e) => e.getAttribute("aria-label"))).toEqual(
+        language === "fa"
+          ? [`${number} پیوست`, `${number} پیوند`]
+          : [`${number} attachment${count === 1 ? "" : "s"}`, `${number} link${count === 1 ? "" : "s"}`]
+      );
+      for (const badge of staticCounts) {
+        expect(badge.getAttribute("tabindex")).toBeNull();
+        expect(badge.textContent).toBe(number);
+        expect([...badge.children].every((e) => e.getAttribute("aria-hidden") === "true")).toBe(true);
+      }
+      await act(async () => {
+        for (const badge of staticCounts)
+          badge.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+        button?.click();
+      });
+      expect(mocks.push).toHaveBeenLastCalledWith("/workspace/browse/TEST-42/#sub-issues");
+      expect(parentClick).not.toHaveBeenCalled();
+      expect(updateIssue).not.toHaveBeenCalled();
+      expect(issue).toEqual(original);
+    };
+    await check("fa");
+    await check("en");
+    await check("fa");
+  } finally {
+    await view.close();
+  }
+});
+
+it("keeps zero, disabled-display and epic sub-item count guards", async () => {
+  const view = await mount();
+  const issue = {
+    id: "issue-id",
+    project_id: "project",
+    sub_issues_count: 0,
+    link_count: 0,
+    attachment_count: 0,
+  } as TIssue;
+  const displayProperties = { sub_issue_count: true, attachment_count: true, link: true } as IIssueDisplayProperties;
+  try {
+    const check = async (props: Pick<IIssueProperties, "issue" | "displayProperties" | "isEpic">) => {
+      await act(async () =>
+        view.root.render(
+          createElement(
+            TranslationProvider,
+            null,
+            createElement(IssueProperties, {
+              updateIssue: undefined,
+              isReadOnly: true,
+              className: "",
+              activeLayout: "Kanban",
+              ...props,
+            })
+          )
+        )
+      );
+      expect(view.container.querySelector("button, [role=img]")).toBeNull();
+    };
+    await check({ issue, displayProperties });
+    await check({
+      issue: { ...issue, sub_issues_count: 1, link_count: 1, attachment_count: 1 },
+      displayProperties: {} as IIssueDisplayProperties,
+    });
+    await check({ issue: { ...issue, sub_issues_count: 1 }, displayProperties, isEpic: true });
   } finally {
     await view.close();
   }
