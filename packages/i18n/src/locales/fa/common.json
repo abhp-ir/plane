@@ -476,6 +476,13 @@
     "completed_at": "زمان تکمیل",
     "layout": "چیدمان",
     "filters": "فیلترها",
+    "filter_feedback": {
+      "all_applied": "همهٔ فیلترها اعمال شده‌اند",
+      "invalid": "فیلتر نامعتبر",
+      "invalid_description": "این شرط فیلتر دیگر معتبر نیست. ممکن است ویژگی حذف شده باشد یا دسترسی شما به آن تغییر کرده باشد.",
+      "configuration_error": "خطا در پیکربندی فیلتر",
+      "configuration_error_description": "این فیلتر درست پیکربندی نشده است و نمی‌توان آن را اعمال کرد."
+    },
     "filter_operators": {
       "exact": "برابر با",
       "in": "یکی از",

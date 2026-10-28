@@ -476,6 +476,13 @@
     "completed_at": "Dokončeno dne",
     "layout": "Rozložení",
     "filters": "Filtry",
+    "filter_feedback": {
+      "all_applied": "Všechny filtry jsou použity",
+      "invalid": "Neplatný filtr",
+      "invalid_description": "Tato podmínka filtru již není platná. Vlastnost mohla být odstraněna nebo se změnil váš přístup k ní.",
+      "configuration_error": "Chyba konfigurace filtru",
+      "configuration_error_description": "Tento filtr není správně nakonfigurován a nelze jej použít."
+    },
     "filter_operators": {
       "exact": "je",
       "in": "patří mezi",

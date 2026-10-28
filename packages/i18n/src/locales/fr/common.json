@@ -476,6 +476,13 @@
     "completed_at": "Terminé le",
     "layout": "Disposition",
     "filters": "Filtres",
+    "filter_feedback": {
+      "all_applied": "Tous les filtres sont appliqués",
+      "invalid": "Filtre non valide",
+      "invalid_description": "Cette condition de filtre n’est plus valide. La propriété a peut-être été supprimée ou vos droits d’accès ont changé.",
+      "configuration_error": "Erreur de configuration du filtre",
+      "configuration_error_description": "Ce filtre n’est pas correctement configuré et ne peut pas être appliqué."
+    },
     "filter_operators": {
       "exact": "est",
       "in": "est l’un de",

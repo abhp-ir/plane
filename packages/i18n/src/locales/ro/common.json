@@ -476,6 +476,13 @@
     "completed_at": "Finalizat la",
     "layout": "Aspect",
     "filters": "Filtre",
+    "filter_feedback": {
+      "all_applied": "Toate filtrele sunt aplicate",
+      "invalid": "Filtru nevalid",
+      "invalid_description": "Această condiție de filtrare nu mai este validă. Este posibil ca proprietatea să fi fost ștearsă sau să se fi schimbat drepturile de acces la ea.",
+      "configuration_error": "Eroare de configurare a filtrului",
+      "configuration_error_description": "Acest filtru nu este configurat corect și nu poate fi aplicat."
+    },
     "filter_operators": {
       "exact": "este",
       "in": "este oricare dintre",

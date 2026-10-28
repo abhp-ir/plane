@@ -476,6 +476,13 @@
     "completed_at": "完成于",
     "layout": "布局",
     "filters": "筛选",
+    "filter_feedback": {
+      "all_applied": "已应用所有筛选条件",
+      "invalid": "无效的筛选条件",
+      "invalid_description": "此筛选条件已失效。该属性可能已被删除，或您的访问权限已更改。",
+      "configuration_error": "筛选配置错误",
+      "configuration_error_description": "此筛选条件配置不正确，无法应用。"
+    },
     "filter_operators": {
       "exact": "等于",
       "in": "是以下任意一项",

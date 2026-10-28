@@ -28,6 +28,7 @@ import { getPriorityFilterConfig, getTargetDateFilterConfig } from "@plane/utils
 import { useWorkItemFiltersConfig } from "@/hooks/work-item-filters/use-work-item-filters-config";
 import { FiltersToggle } from "../filters-toggle";
 import { SelectedOptionsDisplay } from "../filter-value-input/select/selected-options-display";
+import { AddFilterDropdown } from "../add-filters/dropdown";
 import { FilterItem } from "./root";
 
 vi.mock("@plane/i18n", async () => {
@@ -74,6 +75,8 @@ vi.mock("@plane/i18n", async () => {
 
 type OperatorOption = { value: TAllAvailableOperatorsForDisplay; label: string };
 const select = vi.hoisted(() => ({
+  onFilterSelect: undefined as ((value: string) => void) | undefined,
+  toast: vi.fn(),
   current: undefined as
     | { getValues: () => OperatorOption[]; onChange: (value: TAllAvailableOperatorsForDisplay) => void }
     | undefined,
@@ -91,7 +94,23 @@ vi.mock("@plane/blocks/select", () => {
 });
 vi.mock("../filter-value-input/root", () => ({ FilterValueInput: () => null }));
 vi.mock("./container", () => ({
-  FilterItemContainer: ({ children }: { children: ReactNode }) => createElement("div", null, children),
+  FilterItemContainer: ({ children, tooltipContent }: { children: ReactNode; tooltipContent?: string }) =>
+    createElement("div", { "data-tooltip": tooltipContent }, children),
+}));
+vi.mock("@plane/blocks/toast", () => ({ setToast: select.toast }));
+vi.mock("@base-ui/react/combobox", () => ({
+  Combobox: { Trigger: ({ children }: { children: ReactNode }) => createElement("button", null, children) },
+}));
+vi.mock("@makeplane/propel/components/combobox", () => ({
+  Combobox: ({ children, onValueChange }: { children: ReactNode; onValueChange: (value: string) => void }) => {
+    select.onFilterSelect = onValueChange;
+    return createElement("div", null, children);
+  },
+  ComboboxContent: ({ children }: { children: ReactNode }) => createElement("div", null, children),
+  ComboboxEmpty: ({ children }: { children: ReactNode }) => createElement("span", { role: "status" }, children),
+  ComboboxItem: ({ label }: { label: string }) => createElement("span", null, label),
+  ComboboxList: ({ children }: { children: ReactNode }) => createElement("div", null, children),
+  ComboboxSearch: () => null,
 }));
 vi.mock("./property", () => ({
   FilterItemProperty: ({ label }: { label: string }) => createElement("span", null, label),
@@ -159,6 +178,56 @@ function fixture(
   } as unknown as IFilterInstance<string, TExternalFilter>;
   return { condition, filter, updateConditionOperator, removeCondition };
 }
+
+it("localizes invalid filter context across mounted locale changes and preserves removal identity", async () => {
+  const view = await mount(),
+    data = fixture(getPriorityFilterConfig("priority")(params));
+  data.condition = { ...data.condition, property: "retired-property" };
+  try {
+    await view.render(createElement(FilterItem, data));
+    expect(view.container.textContent).toContain("فیلتر نامعتبر");
+    expect(view.container.firstElementChild?.getAttribute("data-tooltip")).toBe(
+      "این شرط فیلتر دیگر معتبر نیست. ممکن است ویژگی حذف شده باشد یا دسترسی شما به آن تغییر کرده باشد."
+    );
+    await act(async () => setLanguage("en"));
+    expect(view.container.textContent).toContain("Invalid filter");
+    await act(async () => setLanguage("fa"));
+    await act(async () => view.container.querySelector("button")?.click());
+    expect(data.removeCondition).toHaveBeenLastCalledWith("owned-condition");
+    expect(data.condition.property).toBe("retired-property");
+  } finally {
+    await view.close();
+  }
+});
+
+it("distinguishes all-applied copy and rejects an unconfigured selection without applying it", async () => {
+  const view = await mount();
+  const filter = new FilterInstance<string, TExternalFilter>({
+    adapter: { toInternal: () => null, toExternal: () => undefined },
+  });
+  const onSelect = vi.fn();
+  select.toast.mockClear();
+  try {
+    await view.render(
+      createElement(AddFilterDropdown, { filter, customButton: "filters", handleFilterSelect: onSelect })
+    );
+    expect(view.container.querySelector('[role="status"]')?.textContent).toBe("همهٔ فیلترها اعمال شده‌اند");
+    await act(async () => select.onFilterSelect?.("missing-config"));
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(select.toast).toHaveBeenLastCalledWith({
+      type: "error",
+      title: "خطا در پیکربندی فیلتر",
+      message: "این فیلتر درست پیکربندی نشده است و نمی‌توان آن را اعمال کرد.",
+    });
+    expect(filter.allConditions).toEqual([]);
+    await act(async () => setLanguage("en"));
+    expect(view.container.querySelector('[role="status"]')?.textContent).toBe("All filters applied");
+    await act(async () => setLanguage("fa"));
+    expect(view.container.querySelector('[role="status"]')?.textContent).toBe("همهٔ فیلترها اعمال شده‌اند");
+  } finally {
+    await view.close();
+  }
+});
 
 it("updates complete one/many filter operators on mounted fa/en/fa changes while retaining semantic values", async () => {
   const view = await mount(),

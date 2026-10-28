@@ -476,6 +476,13 @@
     "completed_at": "Concluído em",
     "layout": "Layout",
     "filters": "Filtros",
+    "filter_feedback": {
+      "all_applied": "Todos os filtros aplicados",
+      "invalid": "Filtro inválido",
+      "invalid_description": "Esta condição de filtro não é mais válida. A propriedade pode ter sido excluída ou seu acesso a ela pode ter mudado.",
+      "configuration_error": "Erro de configuração do filtro",
+      "configuration_error_description": "Este filtro não está configurado corretamente e não pode ser aplicado."
+    },
     "filter_operators": {
       "exact": "é",
       "in": "é um de",

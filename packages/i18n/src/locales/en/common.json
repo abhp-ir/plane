@@ -476,6 +476,13 @@
     "completed_at": "Completed at",
     "layout": "Layout",
     "filters": "Filters",
+    "filter_feedback": {
+      "all_applied": "All filters applied",
+      "invalid": "Invalid filter",
+      "invalid_description": "This filter condition is no longer valid. The property may have been deleted or your access to it may have changed.",
+      "configuration_error": "Filter configuration error",
+      "configuration_error_description": "This filter is not properly configured and cannot be applied"
+    },
     "filter_operators": {
       "exact": "is",
       "in": "is any of",

@@ -476,6 +476,13 @@
     "completed_at": "Hoàn thành vào",
     "layout": "Bố cục",
     "filters": "Bộ lọc",
+    "filter_feedback": {
+      "all_applied": "Đã áp dụng tất cả bộ lọc",
+      "invalid": "Bộ lọc không hợp lệ",
+      "invalid_description": "Điều kiện lọc này không còn hợp lệ. Thuộc tính có thể đã bị xóa hoặc quyền truy cập của bạn đã thay đổi.",
+      "configuration_error": "Lỗi cấu hình bộ lọc",
+      "configuration_error_description": "Bộ lọc này chưa được cấu hình đúng nên không thể áp dụng."
+    },
     "filter_operators": {
       "exact": "là",
       "in": "là một trong",

@@ -476,6 +476,13 @@
     "completed_at": "コンプリーテッド アット",
     "layout": "レイアウト",
     "filters": "フィルター",
+    "filter_feedback": {
+      "all_applied": "すべてのフィルターが適用されています",
+      "invalid": "無効なフィルター",
+      "invalid_description": "このフィルター条件は無効になりました。プロパティが削除されたか、アクセス権が変更された可能性があります。",
+      "configuration_error": "フィルターの設定エラー",
+      "configuration_error_description": "このフィルターは正しく設定されていないため、適用できません。"
+    },
     "filter_operators": {
       "exact": "次の値と等しい",
       "in": "次のいずれかに等しい",

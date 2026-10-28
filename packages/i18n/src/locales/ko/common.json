@@ -476,6 +476,13 @@
     "completed_at": "완료일",
     "layout": "레이아웃",
     "filters": "필터",
+    "filter_feedback": {
+      "all_applied": "모든 필터가 적용되었습니다",
+      "invalid": "유효하지 않은 필터",
+      "invalid_description": "이 필터 조건은 더 이상 유효하지 않습니다. 속성이 삭제되었거나 해당 속성에 대한 접근 권한이 변경되었을 수 있습니다.",
+      "configuration_error": "필터 구성 오류",
+      "configuration_error_description": "이 필터가 올바르게 구성되지 않아 적용할 수 없습니다."
+    },
     "filter_operators": {
       "exact": "같음",
       "in": "다음 중 하나",

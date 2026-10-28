@@ -476,6 +476,13 @@
     "completed_at": "Abgeschlossen am",
     "layout": "Layout",
     "filters": "Filter",
+    "filter_feedback": {
+      "all_applied": "Alle Filter angewendet",
+      "invalid": "Ungültiger Filter",
+      "invalid_description": "Diese Filterbedingung ist nicht mehr gültig. Die Eigenschaft wurde möglicherweise gelöscht oder Ihre Zugriffsrechte haben sich geändert.",
+      "configuration_error": "Fehler in der Filterkonfiguration",
+      "configuration_error_description": "Dieser Filter ist nicht richtig konfiguriert und kann nicht angewendet werden."
+    },
     "filter_operators": {
       "exact": "ist",
       "in": "ist einer von",

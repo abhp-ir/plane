@@ -476,6 +476,13 @@
     "completed_at": "Selesai pada",
     "layout": "Tata letak",
     "filters": "Filter",
+    "filter_feedback": {
+      "all_applied": "Semua filter telah diterapkan",
+      "invalid": "Filter tidak valid",
+      "invalid_description": "Kondisi filter ini tidak lagi valid. Properti mungkin telah dihapus atau akses Anda ke properti tersebut telah berubah.",
+      "configuration_error": "Kesalahan konfigurasi filter",
+      "configuration_error_description": "Filter ini tidak dikonfigurasi dengan benar dan tidak dapat diterapkan."
+    },
     "filter_operators": {
       "exact": "adalah",
       "in": "salah satu dari",

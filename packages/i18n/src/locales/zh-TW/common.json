@@ -476,6 +476,13 @@
     "completed_at": "完成於",
     "layout": "版面配置",
     "filters": "篩選器",
+    "filter_feedback": {
+      "all_applied": "已套用所有篩選條件",
+      "invalid": "無效的篩選條件",
+      "invalid_description": "此篩選條件已失效。該屬性可能已被刪除，或您的存取權限已變更。",
+      "configuration_error": "篩選設定錯誤",
+      "configuration_error_description": "此篩選條件設定不正確，無法套用。"
+    },
     "filter_operators": {
       "exact": "等於",
       "in": "為下列任一項",

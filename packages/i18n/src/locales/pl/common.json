@@ -476,6 +476,13 @@
     "completed_at": "Zakończono dnia",
     "layout": "Układ",
     "filters": "Filtry",
+    "filter_feedback": {
+      "all_applied": "Wszystkie filtry zastosowane",
+      "invalid": "Nieprawidłowy filtr",
+      "invalid_description": "Ten warunek filtra nie jest już prawidłowy. Właściwość mogła zostać usunięta lub mogły zmienić się uprawnienia dostępu do niej.",
+      "configuration_error": "Błąd konfiguracji filtra",
+      "configuration_error_description": "Ten filtr nie jest poprawnie skonfigurowany i nie można go zastosować."
+    },
     "filter_operators": {
       "exact": "jest",
       "in": "jest jednym z",

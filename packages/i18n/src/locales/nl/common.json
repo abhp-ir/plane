@@ -476,6 +476,13 @@
     "completed_at": "Voltooid op",
     "layout": "Indeling",
     "filters": "Filters",
+    "filter_feedback": {
+      "all_applied": "Alle filters toegepast",
+      "invalid": "Ongeldig filter",
+      "invalid_description": "Deze filtervoorwaarde is niet meer geldig. De eigenschap is mogelijk verwijderd of uw toegang ertoe is gewijzigd.",
+      "configuration_error": "Fout in filterconfiguratie",
+      "configuration_error_description": "Dit filter is niet correct geconfigureerd en kan niet worden toegepast."
+    },
     "filter_operators": {
       "exact": "is",
       "in": "is een van",

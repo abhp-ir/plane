@@ -476,6 +476,13 @@
     "completed_at": "Tamamlanma tarihi",
     "layout": "Düzen",
     "filters": "Filtreler",
+    "filter_feedback": {
+      "all_applied": "Tüm filtreler uygulandı",
+      "invalid": "Geçersiz filtre",
+      "invalid_description": "Bu filtre koşulu artık geçerli değil. Özellik silinmiş veya özelliğe erişim izniniz değişmiş olabilir.",
+      "configuration_error": "Filtre yapılandırma hatası",
+      "configuration_error_description": "Bu filtre doğru yapılandırılmadığı için uygulanamıyor."
+    },
     "filter_operators": {
       "exact": "eşittir",
       "in": "şunlardan biri",
