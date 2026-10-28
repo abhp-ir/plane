@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "جابه‌جایی آیتم کاری ممکن نیست",
+      "not_allowed": "اجازهٔ جابه‌جایی این آیتم کاری را ندارید.",
+      "disabled_grouping": "برای گروه‌بندی فعلی، کشیدن و رها کردن غیرفعال است.",
+      "drop_to_delete": "برای حذف آیتم کاری، آن را اینجا رها کنید."
+    },
+    "selection": {
+      "current_project_only": "فقط آیتم‌های کاری پروژهٔ فعلی را می‌توان انتخاب کرد."
+    },
     "counts": {
       "links": "{count, number} پیوند",
       "attachments": "{count, number} پیوست",
@@ -73,6 +82,7 @@
         "work_item_count": "تعداد آیتم‌های کاری"
       },
       "extra": {
+        "hide_sub_issues": "پنهان کردن زیرآیتم‌های کاری",
         "show_sub_issues": "نمایش زیرآیتم‌های کاری",
         "show_empty_groups": "نمایش گروه‌های خالی"
       }

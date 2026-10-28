@@ -48,7 +48,8 @@ type Props = {
   isEpic?: boolean;
 };
 
-export const IssueBlockRoot = observer(function IssueBlockRoot(props: Props) {
+// Keep recursive rows bound to the observer-wrapped export.
+export const IssueBlockRoot = observer(function IssueBlockRootComponent(props: Props) {
   const {
     issueId,
     issuesMap,

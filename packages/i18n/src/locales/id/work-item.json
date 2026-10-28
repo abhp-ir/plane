@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Item kerja tidak dapat dipindahkan",
+      "not_allowed": "Anda tidak diizinkan memindahkan item kerja ini.",
+      "disabled_grouping": "Seret dan lepas dinonaktifkan untuk pengelompokan saat ini.",
+      "drop_to_delete": "Lepaskan di sini untuk menghapus item kerja."
+    },
+    "selection": {
+      "current_project_only": "Hanya item kerja dalam proyek saat ini yang dapat dipilih."
+    },
     "counts": {
       "links": "{count, number} tautan",
       "attachments": "{count, number} lampiran",
@@ -73,6 +82,7 @@
         "work_item_count": "Jumlah item kerja"
       },
       "extra": {
+        "hide_sub_issues": "Sembunyikan sub-item kerja",
         "show_sub_issues": "Tampilkan sub-item kerja",
         "show_empty_groups": "Tampilkan grup kosong"
       }

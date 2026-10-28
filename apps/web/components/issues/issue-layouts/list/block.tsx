@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import { ChevronRightOutline } from "@makeplane/propel/icons";
 // types
 import { setToast } from "@plane/blocks/toast";
+import { useTranslation } from "@plane/i18n";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import type { TIssue, IIssueDisplayProperties, TIssueMap } from "@plane/types";
 import { EIssueServiceType } from "@plane/types";
@@ -71,6 +72,7 @@ export const IssueBlock = observer(function IssueBlock(props: IssueBlockProps) {
     canDrag,
     isEpic = false,
   } = props;
+  const { t } = useTranslation();
   // ref
   const issueRef = useRef<HTMLDivElement | null>(null);
   // router
@@ -137,8 +139,6 @@ export const IssueBlock = observer(function IssueBlock(props: IssueBlockProps) {
   const isSubIssue = nestingLevel !== 0;
   const canSelectIssues = canEditIssueProperties && !selectionHelpers.isSelectionDisabled;
 
-  const marginLeft = `${spacingLeft}px`;
-
   const handleToggleExpand = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
@@ -195,21 +195,22 @@ export const IssueBlock = observer(function IssueBlock(props: IssueBlockProps) {
           if (!isDraggingAllowed) {
             setToast({
               type: "warning",
-              title: "Cannot move work item",
-              message: !canEditIssueProperties
-                ? "You are not allowed to move this work item"
-                : "Drag and drop is disabled for the current grouping",
+              title: t("issue.drag.cannot_move"),
+              message: !canEditIssueProperties ? t("issue.drag.not_allowed") : t("issue.drag.disabled_grouping"),
             });
           }
         }}
       >
         <div className="flex w-full gap-2 truncate">
           <div className="flex flex-grow items-center gap-0.5 truncate">
-            <div className="flex items-center gap-1" style={isSubIssue ? { marginLeft } : {}}>
+            <div
+              className="flex items-center gap-1"
+              style={isSubIssue ? { marginInlineStart: `${spacingLeft}px` } : {}}
+            >
               {/* select checkbox */}
               {projectId && canSelectIssues && !isEpic && (
                 <Tooltip
-                  label="Only work items within the current project can be selected."
+                  label={t("issue.selection.current_project_only")}
                   layout="stacked"
                   disabled={issue.project_id === projectId}
                 >
@@ -248,12 +249,18 @@ export const IssueBlock = observer(function IssueBlock(props: IssueBlockProps) {
                 {subIssuesCount > 0 && !isEpic && (
                   <button
                     type="button"
-                    className="grid size-4 place-items-center rounded-xs text-placeholder hover:text-tertiary"
+                    aria-label={t(
+                      isExpanded ? "issue.display.extra.hide_sub_issues" : "issue.display.extra.show_sub_issues"
+                    )}
+                    aria-expanded={nestingLevel < 3 ? isExpanded : undefined}
+                    className="grid size-4 place-items-center rounded-xs text-placeholder hover:text-tertiary focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent-strong focus-visible:outline-solid"
                     onClick={handleToggleExpand}
                   >
                     <ChevronRightOutline
+                      aria-hidden="true"
                       className={cn("size-4", {
                         "rotate-90": isExpanded,
+                        "rtl:rotate-180": !isExpanded,
                       })}
                     />
                   </button>

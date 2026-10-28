@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Pracovnú položku nemožno presunúť",
+      "not_allowed": "Nemáte oprávnenie presunúť túto pracovnú položku.",
+      "disabled_grouping": "Presúvanie myšou je pre aktuálne zoskupenie vypnuté.",
+      "drop_to_delete": "Pracovnú položku odstránite presunutím sem."
+    },
+    "selection": {
+      "current_project_only": "Vybrať možno iba pracovné položky z aktuálneho projektu."
+    },
     "counts": {
       "links": "{count, plural, one {# odkaz} few {# odkazy} many {# odkazu} other {# odkazov}}",
       "attachments": "{count, plural, one {# príloha} few {# prílohy} many {# prílohy} other {# príloh}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Počet pracovných položiek"
       },
       "extra": {
+        "hide_sub_issues": "Skryť podriadené položky",
         "show_sub_issues": "Zobraziť podriadené položky",
         "show_empty_groups": "Zobraziť prázdne skupiny"
       }

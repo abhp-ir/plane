@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Arbeitselement kann nicht verschoben werden",
+      "not_allowed": "Sie dürfen dieses Arbeitselement nicht verschieben.",
+      "disabled_grouping": "Drag-and-drop ist für die aktuelle Gruppierung deaktiviert.",
+      "drop_to_delete": "Arbeitselement hier ablegen, um es zu löschen."
+    },
+    "selection": {
+      "current_project_only": "Es können nur Arbeitselemente aus dem aktuellen Projekt ausgewählt werden."
+    },
     "counts": {
       "links": "{count, plural, one {# Link} other {# Links}}",
       "attachments": "{count, plural, one {# Anhang} other {# Anhänge}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Anzahl Arbeitselemente"
       },
       "extra": {
+        "hide_sub_issues": "Untergeordnete Elemente ausblenden",
         "show_sub_issues": "Untergeordnete Elemente anzeigen",
         "show_empty_groups": "Leere Gruppen anzeigen"
       }

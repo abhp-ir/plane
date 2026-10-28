@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Pracovní položku nelze přesunout",
+      "not_allowed": "Tuto pracovní položku nemáte oprávnění přesunout.",
+      "disabled_grouping": "Přetahování je pro aktuální seskupení zakázáno.",
+      "drop_to_delete": "Pracovní položku odstraníte přetažením sem."
+    },
+    "selection": {
+      "current_project_only": "Vybrat lze pouze pracovní položky z aktuálního projektu."
+    },
     "counts": {
       "links": "{count, plural, one {# odkaz} few {# odkazy} many {# odkazu} other {# odkazů}}",
       "attachments": "{count, plural, one {# příloha} few {# přílohy} many {# přílohy} other {# příloh}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Počet pracovních položek"
       },
       "extra": {
+        "hide_sub_issues": "Skrýt podřízené položky",
         "show_sub_issues": "Zobrazit podřízené položky",
         "show_empty_groups": "Zobrazit prázdné skupiny"
       }

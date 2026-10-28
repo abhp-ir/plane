@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // hooks
 import { useKanbanView } from "@/hooks/store/use-kanban-view";
 // helpers
@@ -19,6 +20,7 @@ type Props = {
 
 // Isolated from BaseKanBanRoot so a drag start/end re-renders only this banner, not the whole board.
 export const KanbanDeleteDropZone = observer(function KanbanDeleteDropZone({ onRequestDelete }: Props) {
+  const { t } = useTranslation();
   // refs
   const deleteAreaRef = useRef<HTMLDivElement | null>(null);
   // states
@@ -48,6 +50,7 @@ export const KanbanDeleteDropZone = observer(function KanbanDeleteDropZone({ onR
 
   return (
     <div
+      aria-hidden={!isDragging}
       className={`fixed left-1/2 -translate-x-1/2 ${
         isDragging ? "z-40" : ""
       } top-3 mx-3 flex w-72 items-center justify-center`}
@@ -60,7 +63,7 @@ export const KanbanDeleteDropZone = observer(function KanbanDeleteDropZone({ onR
           isDragOverDelete ? "bg-danger-primary blur-2xl" : ""
         } transition duration-300`}
       >
-        Drop here to delete the work item.
+        {t("issue.drag.drop_to_delete")}
       </div>
     </div>
   );

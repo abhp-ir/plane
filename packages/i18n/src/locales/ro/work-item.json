@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Activitatea nu poate fi mutată",
+      "not_allowed": "Nu aveți permisiunea de a muta această activitate.",
+      "disabled_grouping": "Glisarea și fixarea sunt dezactivate pentru gruparea curentă.",
+      "drop_to_delete": "Glisați aici activitatea pentru a o șterge."
+    },
+    "selection": {
+      "current_project_only": "Pot fi selectate doar activitățile din proiectul curent."
+    },
     "counts": {
       "links": "{count, plural, one {# link} few {# linkuri} other {# de linkuri}}",
       "attachments": "{count, plural, one {# atașament} few {# atașamente} other {# de atașamente}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Număr de activități"
       },
       "extra": {
+        "hide_sub_issues": "Ascunde sub-activitățile",
         "show_sub_issues": "Afișează sub-activitățile",
         "show_empty_groups": "Afișează grupurile goale"
       }

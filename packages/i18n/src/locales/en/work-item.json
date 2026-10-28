@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Cannot move work item",
+      "not_allowed": "You are not allowed to move this work item",
+      "disabled_grouping": "Drag and drop is disabled for the current grouping",
+      "drop_to_delete": "Drop here to delete the work item."
+    },
+    "selection": {
+      "current_project_only": "Only work items within the current project can be selected."
+    },
     "counts": {
       "links": "{count, plural, one {# link} other {# links}}",
       "attachments": "{count, plural, one {# attachment} other {# attachments}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Work item count"
       },
       "extra": {
+        "hide_sub_issues": "Hide sub-work items",
         "show_sub_issues": "Show sub-work items",
         "show_empty_groups": "Show empty groups"
       }

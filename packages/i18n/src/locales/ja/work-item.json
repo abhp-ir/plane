@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "作業項目を移動できません",
+      "not_allowed": "この作業項目を移動する権限がありません。",
+      "disabled_grouping": "現在のグループ化ではドラッグアンドドロップが無効です。",
+      "drop_to_delete": "作業項目を削除するには、ここにドロップしてください。"
+    },
+    "selection": {
+      "current_project_only": "現在のプロジェクト内の作業項目のみ選択できます。"
+    },
     "counts": {
       "links": "{count, number}件のリンク",
       "attachments": "{count, number}件の添付ファイル",
@@ -73,6 +82,7 @@
         "work_item_count": "作業項目数"
       },
       "extra": {
+        "hide_sub_issues": "サブ作業項目を非表示",
         "show_sub_issues": "サブ作業項目を表示",
         "show_empty_groups": "空のグループを表示"
       }

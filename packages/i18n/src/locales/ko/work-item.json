@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "작업 항목을 이동할 수 없습니다",
+      "not_allowed": "이 작업 항목을 이동할 권한이 없습니다.",
+      "disabled_grouping": "현재 그룹화에서는 끌어서 놓기를 사용할 수 없습니다.",
+      "drop_to_delete": "작업 항목을 삭제하려면 여기에 놓으십시오."
+    },
+    "selection": {
+      "current_project_only": "현재 프로젝트의 작업 항목만 선택할 수 있습니다."
+    },
     "counts": {
       "links": "링크 {count, number}개",
       "attachments": "첨부 파일 {count, number}개",
@@ -73,6 +82,7 @@
         "work_item_count": "작업 항목 수"
       },
       "extra": {
+        "hide_sub_issues": "하위 작업 항목 숨기기",
         "show_sub_issues": "하위 작업 항목 표시",
         "show_empty_groups": "빈 그룹 표시"
       }

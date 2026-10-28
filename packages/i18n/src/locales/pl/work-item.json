@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Nie można przenieść elementu pracy",
+      "not_allowed": "Brak uprawnień do przeniesienia tego elementu pracy.",
+      "disabled_grouping": "Przeciąganie i upuszczanie jest wyłączone dla bieżącego grupowania.",
+      "drop_to_delete": "Upuść tutaj element pracy, aby go usunąć."
+    },
+    "selection": {
+      "current_project_only": "Można wybrać tylko elementy pracy z bieżącego projektu."
+    },
     "counts": {
       "links": "{count, plural, one {# link} few {# linki} many {# linków} other {# linku}}",
       "attachments": "{count, plural, one {# załącznik} few {# załączniki} many {# załączników} other {# załącznika}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Liczba elementów pracy"
       },
       "extra": {
+        "hide_sub_issues": "Ukryj elementy podrzędne",
         "show_sub_issues": "Pokaż elementy podrzędne",
         "show_empty_groups": "Pokaż puste grupy"
       }

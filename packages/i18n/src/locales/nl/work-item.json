@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Werkitem kan niet worden verplaatst",
+      "not_allowed": "U mag dit werkitem niet verplaatsen.",
+      "disabled_grouping": "Slepen en neerzetten is uitgeschakeld voor de huidige groepering.",
+      "drop_to_delete": "Sleep het werkitem hierheen om het te verwijderen."
+    },
+    "selection": {
+      "current_project_only": "Alleen werkitems uit het huidige project kunnen worden geselecteerd."
+    },
     "counts": {
       "links": "{count, plural, one {# koppeling} other {# koppelingen}}",
       "attachments": "{count, plural, one {# bijlage} other {# bijlagen}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Aantal werkitems"
       },
       "extra": {
+        "hide_sub_issues": "Subwerkitems verbergen",
         "show_sub_issues": "Subwerkitems tonen",
         "show_empty_groups": "Lege groepen tonen"
       }

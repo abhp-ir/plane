@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Không thể di chuyển mục công việc",
+      "not_allowed": "Bạn không có quyền di chuyển mục công việc này.",
+      "disabled_grouping": "Kéo và thả bị tắt cho cách nhóm hiện tại.",
+      "drop_to_delete": "Thả vào đây để xóa mục công việc."
+    },
+    "selection": {
+      "current_project_only": "Chỉ có thể chọn các mục công việc trong dự án hiện tại."
+    },
     "counts": {
       "links": "{count, number} liên kết",
       "attachments": "{count, number} tệp đính kèm",
@@ -73,6 +82,7 @@
         "work_item_count": "Số lượng mục công việc"
       },
       "extra": {
+        "hide_sub_issues": "Ẩn mục công việc con",
         "show_sub_issues": "Hiển thị mục công việc con",
         "show_empty_groups": "Hiển thị nhóm trống"
       }

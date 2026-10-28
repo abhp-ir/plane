@@ -5,9 +5,10 @@
  * See the LICENSE file for details.
  */
 
-import { act, createElement, type ReactNode } from "react";
+import { act, createElement, useState, type ComponentProps, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { expect, it, vi } from "vitest";
+import { observable, runInAction } from "mobx";
 import { initPromise, setLanguage, TranslationProvider } from "@plane/i18n";
 import type { IIssueDisplayProperties, ISearchIssueResponse, TIssue } from "@plane/types";
 import type { TSelectionHelper } from "@/hooks/use-multiple-select";
@@ -18,6 +19,9 @@ import { SpreadsheetSubIssueColumn } from "./spreadsheet/columns/sub-issue-colum
 import { HeaderGroupByCard as ListGroup } from "./list/headers/group-by-card";
 import { HeaderGroupByCard as BoardGroup } from "./kanban/headers/group-by-card";
 import { IssueProperties, type IIssueProperties } from "./properties/all-properties";
+import { IssueBlock as ListIssueBlock } from "./list/block";
+import { IssueBlockRoot } from "./list/block-root";
+import { KanbanDeleteDropZone } from "./kanban/kanban-delete-drop-zone";
 
 vi.mock("@plane/i18n", async () => {
   const { createRequire } = await import("node:module");
@@ -74,6 +78,10 @@ const mocks = vi.hoisted(() => ({
   submit: undefined as ((data: ISearchIssueResponse[]) => Promise<void>) | undefined,
   toast: vi.fn(),
   push: vi.fn(),
+  fetchSubIssues: vi.fn(),
+  peek: vi.fn(),
+  dragging: false,
+  subIssueIds: undefined as Record<string, string[]> | undefined,
 }));
 vi.mock("next/navigation", () => ({ useParams: () => mocks.params }));
 vi.mock("@/hooks/use-app-router", () => ({ useAppRouter: () => ({ push: mocks.push }) }));
@@ -81,7 +89,10 @@ vi.mock("@/hooks/use-issue-layout-store", () => ({ useIssueStoreType: () => "PRO
 vi.mock("@plane/blocks/toast", () => ({ setToast: mocks.toast }));
 vi.mock("@/components/issues/issue-modal/modal", () => ({ CreateUpdateIssueModal: () => null }));
 vi.mock("@/components/epic-modal", () => ({ CreateUpdateEpicModal: () => null }));
-vi.mock("@/components/core/multiple-select", () => ({ MultipleSelectGroupAction: () => null }));
+vi.mock("@/components/core/multiple-select", () => ({
+  MultipleSelectGroupAction: () => null,
+  MultipleSelectEntityAction: () => null,
+}));
 vi.mock("@/components/core/modals/existing-issues-list-modal", () => ({
   ExistingIssuesListModal: ({ handleOnSubmit }: { handleOnSubmit: typeof mocks.submit }) => {
     mocks.submit = handleOnSubmit;
@@ -89,7 +100,11 @@ vi.mock("@/components/core/modals/existing-issues-list-modal", () => ({
   },
 }));
 vi.mock("@/hooks/store/use-project", () => ({
-  useProject: () => ({ getProjectById: () => ({ identifier: "TEST" }) }),
+  useProject: () => ({
+    getProjectById: () => ({ identifier: "TEST" }),
+    getProjectIdentifierById: () => "TEST",
+    currentProjectNextSequenceId: 42,
+  }),
 }));
 vi.mock("@/hooks/store/use-label", () => ({ useLabel: () => ({ labelMap: {} }) }));
 vi.mock("@/hooks/store/use-issues", () => ({ useIssues: () => ({ issues: {} }) }));
@@ -106,6 +121,21 @@ vi.mock("@/components/dropdowns/module/module-select", () => ({ ModuleSelect: ()
 vi.mock("@/components/dropdowns/cycle/cycle-select", () => ({ CycleSelect: () => null }));
 vi.mock("@/components/dropdowns/estimate/estimate-select", () => ({ EstimateSelect: () => null }));
 vi.mock("./properties/labels", () => ({ IssuePropertyLabels: () => null }));
+vi.mock("@/hooks/store/use-app-theme", () => ({ useAppTheme: () => ({ sidebarCollapsed: true }) }));
+vi.mock("@/hooks/store/use-issue-detail", () => ({
+  useIssueDetail: () => ({
+    getIsIssuePeeked: () => false,
+    setPeekIssue: mocks.peek,
+    subIssues: {
+      fetchSubIssues: mocks.fetchSubIssues,
+      subIssuesByIssueId: (id: string) => mocks.subIssueIds?.[id],
+    },
+  }),
+}));
+vi.mock("@/hooks/store/use-kanban-view", () => ({ useKanbanView: () => ({ isDragging: mocks.dragging }) }));
+vi.mock("@/components/core/render-if-visible-HOC", () => ({
+  default: ({ children }: { children: ReactNode }) => children,
+}));
 
 async function mount() {
   await initPromise;
@@ -381,6 +411,212 @@ it("keeps zero, disabled-display and epic sub-item count guards", async () => {
     });
     await check({ issue: { ...issue, sub_issues_count: 1 }, displayProperties, isEpic: true });
   } finally {
+    await view.close();
+  }
+});
+
+function DisclosureList(props: Partial<ComponentProps<typeof ListIssueBlock>>) {
+  const [isExpanded, setExpanded] = useState(false);
+  const issue = {
+    id: "nested-id",
+    project_id: "project",
+    name: "Mixed ABC-42",
+    sequence_id: 42,
+    sub_issues_count: 1,
+  } as TIssue;
+  return createElement(ListIssueBlock, {
+    issueId: issue.id,
+    issuesMap: { [issue.id]: issue },
+    groupId: "state",
+    updateIssue: undefined,
+    quickActions: () => null,
+    displayProperties: {},
+    canEditProperties: () => false,
+    nestingLevel: 0,
+    spacingLeft: 12,
+    isExpanded,
+    setExpanded,
+    selectionHelpers: {
+      getIsEntitySelected: () => false,
+      getIsEntityActive: () => false,
+    } as unknown as TSelectionHelper,
+    isCurrentBlockDragging: false,
+    setIsCurrentBlockDragging: vi.fn(),
+    canDrag: false,
+    ...props,
+  });
+}
+
+it("names list disclosure, reports its state and preserves fetch, peek and logical indentation", async () => {
+  const view = await mount();
+  mocks.params = { workspaceSlug: "workspace", projectId: "project" };
+  mocks.fetchSubIssues.mockClear();
+  mocks.peek.mockClear();
+  try {
+    await act(async () =>
+      view.root.render(createElement(TranslationProvider, null, createElement(DisclosureList, { nestingLevel: 1 })))
+    );
+    const check = async (language: "fa" | "en", show: string, hide: string) => {
+      await act(async () => setLanguage(language));
+      const button = view.container.querySelector<HTMLButtonElement>("button.grid");
+      expect(button?.getAttribute("aria-label")).toBe(show);
+      expect(button?.getAttribute("aria-expanded")).toBe("false");
+      expect(button?.querySelector("svg")?.getAttribute("aria-hidden")).toBe("true");
+      const indent = view.container.querySelector<HTMLDivElement>('div[style*="margin-inline-start"]');
+      expect(indent?.style.marginInlineStart).toBe("12px");
+      expect(indent?.style.marginLeft).toBe("");
+      await act(async () => button?.click());
+      expect(button?.getAttribute("aria-label")).toBe(hide);
+      expect(button?.getAttribute("aria-expanded")).toBe("true");
+      expect(mocks.fetchSubIssues).toHaveBeenLastCalledWith("workspace", "project", "nested-id");
+      const fetches = mocks.fetchSubIssues.mock.calls.length;
+      await act(async () => button?.click());
+      expect(button?.getAttribute("aria-expanded")).toBe("false");
+      expect(mocks.fetchSubIssues).toHaveBeenCalledTimes(fetches);
+      expect(mocks.peek).not.toHaveBeenCalled();
+    };
+    await check("fa", "نمایش زیرآیتم‌های کاری", "پنهان کردن زیرآیتم‌های کاری");
+    await check("en", "Show sub-work items", "Hide sub-work items");
+    await check("fa", "نمایش زیرآیتم‌های کاری", "پنهان کردن زیرآیتم‌های کاری");
+  } finally {
+    await view.close();
+  }
+});
+
+it("keeps the nesting-depth limit as peek navigation without advertising expansion", async () => {
+  const view = await mount();
+  mocks.peek.mockClear();
+  mocks.fetchSubIssues.mockClear();
+  mocks.params = { workspaceSlug: "workspace", projectId: "project" };
+  try {
+    await act(async () =>
+      view.root.render(createElement(TranslationProvider, null, createElement(DisclosureList, { nestingLevel: 3 })))
+    );
+    const button = view.container.querySelector<HTMLButtonElement>("button.grid");
+    expect(button?.getAttribute("aria-expanded")).toBeNull();
+    await act(async () => button?.click());
+    expect(mocks.peek).toHaveBeenCalledWith(expect.objectContaining({ issueId: "nested-id", nestingLevel: 3 }));
+    expect(mocks.fetchSubIssues).not.toHaveBeenCalled();
+  } finally {
+    await view.close();
+  }
+});
+
+it.each([false, true])("localizes the existing blocked list drag message for edit permission %s", async (canEdit) => {
+  const view = await mount();
+  mocks.toast.mockClear();
+  try {
+    await act(async () => {
+      await setLanguage("fa");
+      view.root.render(
+        createElement(TranslationProvider, null, createElement(DisclosureList, { canEditProperties: () => canEdit }))
+      );
+    });
+    await act(async () => {
+      view.container
+        .querySelector(".group\\/list-block")
+        ?.dispatchEvent(new Event("dragstart", { bubbles: true, cancelable: true }));
+    });
+    expect(mocks.toast).toHaveBeenLastCalledWith({
+      type: "warning",
+      title: "جابه‌جایی آیتم کاری ممکن نیست",
+      message: canEdit
+        ? "برای گروه‌بندی فعلی، کشیدن و رها کردن غیرفعال است."
+        : "اجازهٔ جابه‌جایی این آیتم کاری را ندارید.",
+    });
+  } finally {
+    await view.close();
+  }
+});
+
+it("localizes the board delete hint and keeps it hidden from AT while idle", async () => {
+  const view = await mount();
+  try {
+    const render = async (dragging: boolean) => {
+      mocks.dragging = dragging;
+      await act(async () =>
+        view.root.render(
+          createElement(TranslationProvider, null, createElement(KanbanDeleteDropZone, { onRequestDelete: vi.fn() }))
+        )
+      );
+    };
+    await act(async () => setLanguage("fa"));
+    await render(false);
+    expect(view.container.textContent).toBe("برای حذف آیتم کاری، آن را اینجا رها کنید.");
+    expect(view.container.firstElementChild?.getAttribute("aria-hidden")).toBe("true");
+    await render(true);
+    expect(view.container.firstElementChild?.getAttribute("aria-hidden")).toBe("false");
+    await act(async () => setLanguage("en"));
+    expect(view.container.textContent).toBe("Drop here to delete the work item.");
+  } finally {
+    mocks.dragging = false;
+    await view.close();
+  }
+});
+
+it("reacts to delayed child data at each recursive list depth", async () => {
+  const view = await mount();
+  mocks.params = { workspaceSlug: "workspace", projectId: "project" };
+  mocks.subIssueIds = observable<Record<string, string[]>>({});
+  const issuesMap = Object.fromEntries(
+    ["parent", "child", "grandchild"].map((id, i) => [
+      id,
+      {
+        id,
+        project_id: "project",
+        name: id,
+        sequence_id: i + 1,
+        created_at: "2026-10-28T00:00:00Z",
+        sub_issues_count: i === 2 ? 0 : 1,
+      } as TIssue,
+    ])
+  );
+  try {
+    await act(async () =>
+      view.root.render(
+        createElement(
+          TranslationProvider,
+          null,
+          createElement(IssueBlockRoot, {
+            issueId: "parent",
+            issuesMap,
+            groupId: "state",
+            updateIssue: undefined,
+            quickActions: () => null,
+            displayProperties: {},
+            canEditProperties: () => false,
+            nestingLevel: 0,
+            spacingLeft: 0,
+            containerRef: { current: null },
+            isDragAllowed: false,
+            canDropOverIssue: false,
+            shouldRenderByDefault: true,
+            selectionHelpers: {
+              getIsEntitySelected: () => false,
+              getIsEntityActive: () => false,
+            } as unknown as TSelectionHelper,
+          })
+        )
+      )
+    );
+    await act(async () => view.container.querySelector<HTMLButtonElement>("#issue-parent button.grid")?.click());
+    expect(view.container.querySelector("#issue-child")).toBeNull();
+    await act(async () => {
+      runInAction(() => {
+        mocks.subIssueIds!.parent = ["child"];
+      });
+    });
+    expect(view.container.querySelector("#issue-child")).not.toBeNull();
+    await act(async () => view.container.querySelector<HTMLButtonElement>("#issue-child button.grid")?.click());
+    expect(view.container.querySelector("#issue-grandchild")).toBeNull();
+    await act(async () => {
+      runInAction(() => {
+        mocks.subIssueIds!.child = ["grandchild"];
+      });
+    });
+    expect(view.container.querySelector("#issue-grandchild")).not.toBeNull();
+  } finally {
+    mocks.subIssueIds = undefined;
     await view.close();
   }
 });

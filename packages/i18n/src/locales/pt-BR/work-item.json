@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Não é possível mover o item de trabalho",
+      "not_allowed": "Você não tem permissão para mover este item de trabalho.",
+      "disabled_grouping": "Arrastar e soltar está desativado para o agrupamento atual.",
+      "drop_to_delete": "Solte aqui para excluir o item de trabalho."
+    },
+    "selection": {
+      "current_project_only": "Só é possível selecionar itens de trabalho do projeto atual."
+    },
     "counts": {
       "links": "{count, plural, one {# link} many {# links} other {# links}}",
       "attachments": "{count, plural, one {# anexo} many {# anexos} other {# anexos}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Contagem de itens de trabalho"
       },
       "extra": {
+        "hide_sub_issues": "Ocultar sub-itens de trabalho",
         "show_sub_issues": "Mostrar sub-itens de trabalho",
         "show_empty_groups": "Mostrar grupos vazios"
       }

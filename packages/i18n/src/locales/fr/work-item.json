@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "Impossible de déplacer l’élément de travail",
+      "not_allowed": "Vous n’avez pas l’autorisation de déplacer cet élément de travail.",
+      "disabled_grouping": "Le glisser-déposer est désactivé pour le regroupement actuel.",
+      "drop_to_delete": "Déposez ici l’élément de travail pour le supprimer."
+    },
+    "selection": {
+      "current_project_only": "Seuls les éléments de travail du projet actuel peuvent être sélectionnés."
+    },
     "counts": {
       "links": "{count, plural, one {# lien} many {# liens} other {# liens}}",
       "attachments": "{count, plural, one {# pièce jointe} many {# pièces jointes} other {# pièces jointes}}",
@@ -73,6 +82,7 @@
         "work_item_count": "Nombre d’éléments de travail"
       },
       "extra": {
+        "hide_sub_issues": "Masquer les sous-éléments",
         "show_sub_issues": "Afficher les sous-éléments",
         "show_empty_groups": "Afficher les groupes vides"
       }

@@ -1,5 +1,14 @@
 {
   "issue": {
+    "drag": {
+      "cannot_move": "無法移動工作事項",
+      "not_allowed": "您沒有移動此工作事項的權限。",
+      "disabled_grouping": "目前的分組已停用拖放功能。",
+      "drop_to_delete": "將工作事項拖放到此處以刪除。"
+    },
+    "selection": {
+      "current_project_only": "只能選取目前專案中的工作事項。"
+    },
     "counts": {
       "links": "{count, number}個連結",
       "attachments": "{count, number}個附件",
@@ -73,6 +82,7 @@
         "work_item_count": "工作事項數量"
       },
       "extra": {
+        "hide_sub_issues": "隱藏子工作事項",
         "show_sub_issues": "顯示子工作事項",
         "show_empty_groups": "顯示空群組"
       }
