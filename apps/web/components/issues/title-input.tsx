@@ -40,7 +40,8 @@ export const IssueTitleInput = observer(function IssueTitleInput(props: IssueTit
     projectId,
     containerClassName,
   } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   // states
   const [title, setTitle] = useState(value || "");
   const [isLengthVisible, setIsLengthVisible] = useState(false);
@@ -108,7 +109,7 @@ export const IssueTitleInput = observer(function IssueTitleInput(props: IssueTit
         textarea.removeEventListener("blur", handleBlur);
       }
     };
-  }, [title, isSubmitting, setIsSubmitting]);
+  }, [title, value, isSubmitting, setIsSubmitting]);
 
   // Save on unmount if there are unsaved changes
   useEffect(
@@ -165,16 +166,18 @@ export const IssueTitleInput = observer(function IssueTitleInput(props: IssueTit
         </Field>
         <div
           className={cn(
-            "pointer-events-none absolute right-1 bottom-1 z-2 rounded-sm bg-surface-1 p-0.5 text-11 text-secondary opacity-0 transition-opacity",
+            "pointer-events-none absolute end-1 bottom-1 z-2 rounded-sm bg-surface-1 p-0.5 text-11 text-secondary opacity-0 transition-opacity",
             {
               "opacity-100": isLengthVisible,
             }
           )}
         >
-          <span className={`${title.length === 0 || title.length > 255 ? "text-danger-primary" : ""}`}>
-            {title.length}
-          </span>
-          /255
+          <bdi dir="ltr">
+            <span className={`${title.length === 0 || title.length > 255 ? "text-danger-primary" : ""}`}>
+              {formatNumber(title.length)}
+            </span>
+            /{formatNumber(255)}
+          </bdi>
         </div>
       </div>
       {title?.length === 0 && (

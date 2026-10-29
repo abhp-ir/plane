@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import { useTranslation } from "@plane/i18n";
 // helpers
 import { cn } from "@plane/utils";
 
@@ -14,9 +15,15 @@ type SkeletonProps = {
   ariaLabel?: string;
 };
 
-function SkeletonRoot({ children, className = "", ariaLabel = "Loading content" }: SkeletonProps) {
+function SkeletonRoot({ children, className = "", ariaLabel }: SkeletonProps) {
+  const { t } = useTranslation();
   return (
-    <div data-slot="skeleton" className={cn("animate-pulse", className)} role="status" aria-label={ariaLabel}>
+    <div
+      data-slot="skeleton"
+      className={cn("animate-pulse", className)}
+      role="status"
+      aria-label={ariaLabel ?? t("common.loading_content")}
+    >
       {children}
     </div>
   );

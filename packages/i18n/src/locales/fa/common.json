@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "در حال بارگذاری محتوا",
+    "loading_options": "در حال بارگذاری گزینه‌ها",
     "saved": "ذخیره شد",
     "joined": "عضو شده‌اید",
     "icon": {

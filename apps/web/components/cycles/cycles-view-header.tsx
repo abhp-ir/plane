@@ -33,7 +33,20 @@ export const CyclesViewHeader = observer(function CyclesViewHeader(props: Props)
   const { currentProjectFilters, searchQuery, updateFilters, updateSearchQuery } = useCycleFilter();
   const { t } = useTranslation();
   // states
-  const [isSearchOpen, setIsSearchOpen] = useState(searchQuery !== "" ? true : false);
+  const [isSearchOpen, setIsSearchOpen] = useState(searchQuery !== "");
+  const searchTriggerRef = useRef<HTMLButtonElement>(null);
+  const wasSearchOpen = useRef(isSearchOpen);
+  const restoreSearchFocus = useRef(false);
+  useEffect(() => {
+    if (isSearchOpen && !wasSearchOpen.current) inputRef.current?.focus();
+    else if (!isSearchOpen && restoreSearchFocus.current) searchTriggerRef.current?.focus();
+    wasSearchOpen.current = isSearchOpen;
+    restoreSearchFocus.current = false;
+  }, [isSearchOpen]);
+  const closeSearch = () => {
+    restoreSearchFocus.current = true;
+    setIsSearchOpen(false);
+  };
   // outside click detector hook
   useOutsideClickDetector(inputRef, () => {
     if (isSearchOpen && searchQuery.trim() === "") setIsSearchOpen(false);
@@ -63,8 +76,7 @@ export const CyclesViewHeader = observer(function CyclesViewHeader(props: Props)
     if (e.key === "Escape") {
       if (searchQuery && searchQuery.trim() !== "") updateSearchQuery("");
       else {
-        setIsSearchOpen(false);
-        inputRef.current?.blur();
+        closeSearch();
       }
     }
   };
@@ -79,11 +91,11 @@ export const CyclesViewHeader = observer(function CyclesViewHeader(props: Props)
     <div className="flex items-center gap-2">
       {!isSearchOpen ? (
         <IconButton
+          ref={searchTriggerRef}
           variant="ghost"
           size="md"
           onClick={() => {
             setIsSearchOpen(true);
-            inputRef.current?.focus();
           }}
           icon={<Icon icon={SearchOutline} />}
           aria-label={t("common.search.label")}
@@ -91,7 +103,7 @@ export const CyclesViewHeader = observer(function CyclesViewHeader(props: Props)
       ) : (
         <div
           className={cn(
-            "ml-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
+            "ms-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
             {
               "w-64 border-subtle px-2.5 py-1.5 opacity-100": isSearchOpen,
             }
@@ -101,7 +113,8 @@ export const CyclesViewHeader = observer(function CyclesViewHeader(props: Props)
           <input
             ref={inputRef}
             className="w-full max-w-[234px] border-none bg-transparent text-13 text-primary placeholder:text-placeholder focus:outline-none"
-            placeholder="Search"
+            placeholder={t("common.search.label")}
+            aria-label={t("common.search.label")}
             value={searchQuery}
             onChange={(e) => updateSearchQuery(e.target.value)}
             onKeyDown={handleInputKeyDown}
@@ -109,10 +122,11 @@ export const CyclesViewHeader = observer(function CyclesViewHeader(props: Props)
           {isSearchOpen && (
             <button
               type="button"
+              aria-label={t("close")}
               className="grid place-items-center"
               onClick={() => {
                 updateSearchQuery("");
-                setIsSearchOpen(false);
+                closeSearch();
               }}
             >
               <CloseOutline className="h-3 w-3" />

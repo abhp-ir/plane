@@ -4,8 +4,9 @@
  * See the LICENSE file for details.
  */
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import { useParams } from "next/navigation";
 // icons
 import { CloseOutline, FilterOutline, SearchOutline } from "@makeplane/propel/icons";
@@ -24,6 +25,7 @@ import { useMember } from "@/hooks/store/use-member";
 import { useModuleFilter } from "@/hooks/store/use-module-filter";
 
 export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
+  const { t } = useTranslation();
   // router
   const { projectId } = useParams();
   // refs
@@ -41,7 +43,20 @@ export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
     workspace: { workspaceMemberIds },
   } = useMember();
   // states
-  const [isSearchOpen, setIsSearchOpen] = useState(archivedModulesSearchQuery !== "" ? true : false);
+  const [isSearchOpen, setIsSearchOpen] = useState(archivedModulesSearchQuery !== "");
+  const searchTriggerRef = useRef<HTMLButtonElement>(null);
+  const wasSearchOpen = useRef(isSearchOpen);
+  const restoreSearchFocus = useRef(false);
+  useEffect(() => {
+    if (isSearchOpen && !wasSearchOpen.current) inputRef.current?.focus();
+    else if (!isSearchOpen && restoreSearchFocus.current) searchTriggerRef.current?.focus();
+    wasSearchOpen.current = isSearchOpen;
+    restoreSearchFocus.current = false;
+  }, [isSearchOpen]);
+  const closeSearch = () => {
+    restoreSearchFocus.current = true;
+    setIsSearchOpen(false);
+  };
   // outside click detector hook
   useOutsideClickDetector(inputRef, () => {
     if (isSearchOpen && archivedModulesSearchQuery.trim() === "") setIsSearchOpen(false);
@@ -71,8 +86,7 @@ export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
     if (e.key === "Escape") {
       if (archivedModulesSearchQuery && archivedModulesSearchQuery.trim() !== "") updateArchivedModulesSearchQuery("");
       else {
-        setIsSearchOpen(false);
-        inputRef.current?.blur();
+        closeSearch();
       }
     }
   };
@@ -89,10 +103,11 @@ export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
         {!isSearchOpen && (
           <button
             type="button"
-            className="-mr-5 grid place-items-center rounded-sm p-2 text-placeholder hover:bg-layer-1"
+            ref={searchTriggerRef}
+            aria-label={t("common.search.label")}
+            className="-me-5 grid place-items-center rounded-sm p-2 text-placeholder hover:bg-layer-1"
             onClick={() => {
               setIsSearchOpen(true);
-              inputRef.current?.focus();
             }}
           >
             <SearchOutline className="h-3.5 w-3.5" />
@@ -100,7 +115,7 @@ export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
         )}
         <div
           className={cn(
-            "ml-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
+            "ms-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
             {
               "w-64 border-subtle px-2.5 py-1.5 opacity-100": isSearchOpen,
             }
@@ -110,7 +125,9 @@ export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
           <input
             ref={inputRef}
             className="w-full max-w-[234px] border-none bg-transparent text-13 text-primary placeholder:text-placeholder focus:outline-none"
-            placeholder="Search"
+            placeholder={t("common.search.label")}
+            aria-label={t("common.search.label")}
+            tabIndex={isSearchOpen ? 0 : -1}
             value={archivedModulesSearchQuery}
             onChange={(e) => updateArchivedModulesSearchQuery(e.target.value)}
             onKeyDown={handleInputKeyDown}
@@ -118,10 +135,11 @@ export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
           {isSearchOpen && (
             <button
               type="button"
+              aria-label={t("close")}
               className="grid place-items-center"
               onClick={() => {
                 updateArchivedModulesSearchQuery("");
-                setIsSearchOpen(false);
+                closeSearch();
               }}
             >
               <CloseOutline className="h-3 w-3" />
@@ -139,7 +157,7 @@ export const ArchivedModulesHeader = observer(function ArchivedModulesHeader() {
         />
         <FiltersDropdown
           icon={<FilterOutline className="h-3 w-3" />}
-          title="Filters"
+          title={t("common.filters")}
           placement="bottom-end"
           isFiltersApplied={isFiltersApplied}
         >

@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Загрузка содержимого",
+    "loading_options": "Загрузка опций",
     "saved": "Сохранено",
     "joined": "Вы присоединились",
     "icon": {

@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "正在載入內容",
+    "loading_options": "正在載入選項",
     "saved": "已儲存",
     "joined": "已加入",
     "icon": {

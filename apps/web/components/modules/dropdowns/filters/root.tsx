@@ -4,8 +4,9 @@
  * See the LICENSE file for details.
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import type { TModuleStatus } from "@plane/blocks/icons";
 // plane imports
 import { CloseOutline, SearchOutline } from "@makeplane/propel/icons";
@@ -38,6 +39,11 @@ export const ModuleFiltersSelection = observer(function ModuleFiltersSelection(p
   const [filtersSearchQuery, setFiltersSearchQuery] = useState("");
   // store
   const { isMobile } = usePlatformOS();
+  const { t } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (!isMobile) inputRef.current?.focus();
+  }, [isMobile]);
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden">
@@ -47,13 +53,22 @@ export const ModuleFiltersSelection = observer(function ModuleFiltersSelection(p
           <input
             type="text"
             className="w-full bg-surface-2 outline-none placeholder:text-placeholder"
-            placeholder="Search"
+            ref={inputRef}
+            placeholder={t("common.search.label")}
+            aria-label={t("common.search.label")}
             value={filtersSearchQuery}
             onChange={(e) => setFiltersSearchQuery(e.target.value)}
-            autoFocus={!isMobile}
           />
           {filtersSearchQuery !== "" && (
-            <button type="button" className="grid place-items-center" onClick={() => setFiltersSearchQuery("")}>
+            <button
+              type="button"
+              aria-label={t("power_k.search_menu.clear_search")}
+              className="grid place-items-center"
+              onClick={() => {
+                setFiltersSearchQuery("");
+                inputRef.current?.focus();
+              }}
+            >
               <CloseOutline className="text-tertiary" height={12} width={12} />
             </button>
           )}
@@ -69,7 +84,7 @@ export const ModuleFiltersSelection = observer(function ModuleFiltersSelection(p
                   favorites: !displayFilters.favorites,
                 })
               }
-              title="Favorites"
+              title={t("favorites")}
             />
           </div>
         )}

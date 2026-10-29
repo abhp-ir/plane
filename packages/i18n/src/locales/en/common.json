@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Loading content",
+    "loading_options": "Loading options",
     "saved": "Saved",
     "joined": "Joined",
     "icon": {

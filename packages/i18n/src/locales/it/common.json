@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Caricamento del contenuto",
+    "loading_options": "Caricamento delle opzioni",
     "saved": "Salvato",
     "joined": "Partecipazione confermata",
     "icon": {

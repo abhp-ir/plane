@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Inhalte werden geladen",
+    "loading_options": "Optionen werden geladen",
     "saved": "Gespeichert",
     "joined": "Beigetreten",
     "icon": {

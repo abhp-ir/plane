@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "İçerik yükleniyor",
+    "loading_options": "Seçenekler yükleniyor",
     "saved": "Kaydedildi",
     "joined": "Katıldınız",
     "icon": {

@@ -4,8 +4,9 @@
  * See the LICENSE file for details.
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import { CloseOutline, SearchOutline } from "@makeplane/propel/icons";
 // hooks
 import { useLabel } from "@/hooks/store/use-label";
@@ -27,6 +28,11 @@ export const InboxIssueFilterSelection = observer(function InboxIssueFilterSelec
   const { projectLabels } = useLabel();
   // states
   const [filtersSearchQuery, setFiltersSearchQuery] = useState("");
+  const { t } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (!isMobile) inputRef.current?.focus();
+  }, [isMobile]);
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden">
@@ -36,13 +42,22 @@ export const InboxIssueFilterSelection = observer(function InboxIssueFilterSelec
           <input
             type="text"
             className="w-full bg-surface-2 outline-none placeholder:text-placeholder"
-            placeholder="Search"
+            ref={inputRef}
+            placeholder={t("common.search.label")}
+            aria-label={t("common.search.label")}
             value={filtersSearchQuery}
             onChange={(e) => setFiltersSearchQuery(e.target.value)}
-            autoFocus={!isMobile}
           />
           {filtersSearchQuery !== "" && (
-            <button type="button" className="grid place-items-center" onClick={() => setFiltersSearchQuery("")}>
+            <button
+              type="button"
+              aria-label={t("power_k.search_menu.clear_search")}
+              className="grid place-items-center"
+              onClick={() => {
+                setFiltersSearchQuery("");
+                inputRef.current?.focus();
+              }}
+            >
               <CloseOutline className="text-tertiary" height={12} width={12} />
             </button>
           )}
@@ -62,7 +77,7 @@ export const InboxIssueFilterSelection = observer(function InboxIssueFilterSelec
         <div className="py-2">
           <FilterMember
             filterKey="assignees"
-            label="Assignees"
+            label={t("common.assignees")}
             searchQuery={filtersSearchQuery}
             memberIds={projectMemberIds ?? []}
           />
@@ -71,7 +86,7 @@ export const InboxIssueFilterSelection = observer(function InboxIssueFilterSelec
         <div className="py-2">
           <FilterMember
             filterKey="created_by"
-            label="Created By"
+            label={t("common.created_by")}
             searchQuery={filtersSearchQuery}
             memberIds={projectMemberIds ?? []}
           />
@@ -82,11 +97,15 @@ export const InboxIssueFilterSelection = observer(function InboxIssueFilterSelec
         </div>
         {/* Created at */}
         <div className="py-2">
-          <FilterDate filterKey="created_at" label="Created date" searchQuery={filtersSearchQuery} />
+          <FilterDate
+            filterKey="created_at"
+            label={t("project_modules.order_by.created_at")}
+            searchQuery={filtersSearchQuery}
+          />
         </div>
         {/* Updated at */}
         <div className="py-2">
-          <FilterDate filterKey="updated_at" label="Last updated date" searchQuery={filtersSearchQuery} />
+          <FilterDate filterKey="updated_at" label={t("common.updated_at")} searchQuery={filtersSearchQuery} />
         </div>
       </div>
     </div>

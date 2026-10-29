@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Načítavanie obsahu",
+    "loading_options": "Načítavanie možností",
     "saved": "Uložené",
     "joined": "Pripojené",
     "icon": {

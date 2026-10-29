@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
 // plane imports
 import { EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
@@ -31,6 +31,10 @@ export const ProjectMemberList = observer(function ProjectMemberList(props: TPro
   // states
   const [inviteModal, setInviteModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
   const {
     project: { projectMemberIds, getFilteredProjectMemberDetails, filters },
   } = useMember();
@@ -88,9 +92,10 @@ export const ProjectMemberList = observer(function ProjectMemberList(props: TPro
             <SearchOutline className="h-3.5 w-3.5" />
             <input
               className="w-full max-w-[234px] border-none bg-transparent text-13 placeholder:text-placeholder focus:outline-none"
-              placeholder="Search"
+              ref={inputRef}
+              placeholder={t("common.search.label")}
+              aria-label={t("common.search.label")}
               value={searchQuery}
-              autoFocus
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>

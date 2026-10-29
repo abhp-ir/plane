@@ -29,6 +29,19 @@ export const ViewListHeader = observer(function ViewListHeader() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   // refs
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchTriggerRef = useRef<HTMLButtonElement>(null);
+  const wasSearchOpen = useRef(isSearchOpen);
+  const restoreSearchFocus = useRef(false);
+  useEffect(() => {
+    if (isSearchOpen && !wasSearchOpen.current) inputRef.current?.focus();
+    else if (!isSearchOpen && restoreSearchFocus.current) searchTriggerRef.current?.focus();
+    wasSearchOpen.current = isSearchOpen;
+    restoreSearchFocus.current = false;
+  }, [isSearchOpen]);
+  const closeSearch = () => {
+    restoreSearchFocus.current = true;
+    setIsSearchOpen(false);
+  };
   // store hooks
   const { filters, updateFilters } = useProjectView();
   const {
@@ -41,8 +54,7 @@ export const ViewListHeader = observer(function ViewListHeader() {
       if (filters?.searchQuery && filters?.searchQuery.trim() !== "") {
         updateFilters("searchQuery", "");
       } else {
-        setIsSearchOpen(false);
-        inputRef.current?.blur();
+        closeSearch();
       }
     }
   };
@@ -61,12 +73,12 @@ export const ViewListHeader = observer(function ViewListHeader() {
       <div className="flex items-center">
         {!isSearchOpen && (
           <IconButton
+            ref={searchTriggerRef}
             variant="ghost"
             size="md"
-            render={<button type="button" className="-mr-1" />}
+            render={<button type="button" className="-me-1" />}
             onClick={() => {
               setIsSearchOpen(true);
-              inputRef.current?.focus();
             }}
             icon={<Icon icon={SearchOutline} />}
             aria-label={t("common.search.label")}
@@ -74,7 +86,7 @@ export const ViewListHeader = observer(function ViewListHeader() {
         )}
         <div
           className={cn(
-            "ml-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
+            "ms-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
             {
               "w-64 border-subtle px-2.5 py-1.5 opacity-100": isSearchOpen,
             }
@@ -84,18 +96,21 @@ export const ViewListHeader = observer(function ViewListHeader() {
           <input
             ref={inputRef}
             className="w-full max-w-[234px] border-none bg-transparent text-13 text-primary placeholder:text-placeholder focus:outline-none"
-            placeholder="Search"
-            value={filters?.searchQuery}
+            placeholder={t("common.search.label")}
+            aria-label={t("common.search.label")}
+            tabIndex={isSearchOpen ? 0 : -1}
+            value={filters?.searchQuery ?? ""}
             onChange={(e) => updateFilters("searchQuery", e.target.value)}
             onKeyDown={handleInputKeyDown}
           />
           {isSearchOpen && (
             <button
               type="button"
+              aria-label={t("close")}
               className="grid place-items-center"
               onClick={() => {
                 updateFilters("searchQuery", "");
-                setIsSearchOpen(false);
+                closeSearch();
               }}
             >
               <CloseOutline className="h-3 w-3" />
@@ -114,7 +129,7 @@ export const ViewListHeader = observer(function ViewListHeader() {
         />
         <FiltersDropdown
           icon={<FilterOutline className="h-3 w-3" />}
-          title="Filters"
+          title={t("common.filters")}
           placement="bottom-end"
           isFiltersApplied={false}
         >

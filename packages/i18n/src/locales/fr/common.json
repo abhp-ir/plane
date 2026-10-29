@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Chargement du contenu",
+    "loading_options": "Chargement des options",
     "saved": "Enregistré",
     "joined": "Vous avez rejoint le projet",
     "icon": {

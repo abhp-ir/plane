@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Cargando contenido",
+    "loading_options": "Cargando opciones",
     "saved": "Guardado",
     "joined": "Te has unido",
     "icon": {

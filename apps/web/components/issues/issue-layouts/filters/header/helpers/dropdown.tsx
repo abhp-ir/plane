@@ -5,6 +5,7 @@
  */
 
 import type React from "react";
+import { useTranslation } from "@plane/i18n";
 // ui
 import { Button } from "@makeplane/propel/components/button";
 import { IconButton } from "@makeplane/propel/components/icon-button";
@@ -26,11 +27,12 @@ type Props = {
 };
 
 export function FiltersDropdown(props: Props) {
+  const { t } = useTranslation();
   const {
     children,
     miniIcon,
     icon,
-    title = "Dropdown",
+    title = t("common.filters"),
     placement,
     disabled = false,
     tabIndex,
@@ -42,7 +44,7 @@ export function FiltersDropdown(props: Props) {
     <div>
       <Popover>
         {menuButton ? (
-          <PopoverTrigger render={<button type="button" />}>{menuButton}</PopoverTrigger>
+          <PopoverTrigger render={<button type="button" aria-label={title} />}>{menuButton}</PopoverTrigger>
         ) : (
           <>
             {/* Base UI anchors the panel to whichever trigger opened it, so each breakpoint gets its own trigger. */}

@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Inhoud wordt geladen",
+    "loading_options": "Opties worden geladen",
     "saved": "Opgeslagen",
     "joined": "Deelgenomen",
     "icon": {

@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Memuat konten",
+    "loading_options": "Memuat opsi",
     "saved": "Tersimpan",
     "joined": "Sudah bergabung",
     "icon": {

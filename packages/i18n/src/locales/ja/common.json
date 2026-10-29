@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "コンテンツを読み込み中",
+    "loading_options": "オプションを読み込み中",
     "saved": "保存済み",
     "joined": "参加済み",
     "icon": {

@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Ładowanie treści",
+    "loading_options": "Ładowanie opcji",
     "saved": "Zapisano",
     "joined": "Dołączono",
     "icon": {

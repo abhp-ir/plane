@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "Đang tải nội dung",
+    "loading_options": "Đang tải các tùy chọn",
     "saved": "Đã lưu",
     "joined": "Đã tham gia",
     "icon": {

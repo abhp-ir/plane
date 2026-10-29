@@ -434,6 +434,8 @@
     }
   },
   "common": {
+    "loading_content": "콘텐츠를 불러오는 중",
+    "loading_options": "옵션을 불러오는 중",
     "saved": "저장됨",
     "joined": "참여 중",
     "icon": {
