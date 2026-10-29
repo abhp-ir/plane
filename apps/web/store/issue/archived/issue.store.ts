@@ -77,7 +77,7 @@ export class ArchivedIssues extends BaseIssuesStore implements IArchivedIssues {
    * @param projectId
    */
   fetchParentStats = async (workspaceSlug: string, projectId?: string) => {
-    projectId && this.rootIssueStore.rootStore.projectRoot.project.fetchProjectDetails(workspaceSlug, projectId);
+    if (projectId) this.rootIssueStore.rootStore.projectRoot.project.fetchProjectDetails(workspaceSlug, projectId);
   };
 
   /** */
@@ -98,24 +98,31 @@ export class ArchivedIssues extends BaseIssuesStore implements IArchivedIssues {
     options: IssuePaginationOptions,
     isExistingPaginationOptions: boolean = false
   ) => {
+    let requestSignal: AbortSignal | undefined;
+    let responseReceived = false;
     try {
       // set loader and clear store
       runInAction(() => {
         this.setLoader(loadType);
       });
       this.clear(!isExistingPaginationOptions);
+      requestSignal = this.controller.signal;
 
       // get params from pagination options
       const params = this.issueFilterStore?.getFilterParams(options, projectId, undefined, undefined, undefined);
       // call the fetch issues API with the params
       const response = await this.issueArchiveService.getArchivedIssues(workspaceSlug, projectId, params, {
-        signal: this.controller.signal,
+        signal: requestSignal,
       });
+      responseReceived = true;
+      if (requestSignal.aborted) return;
 
       // after fetching issues, call the base method to process the response further
       this.onfetchIssues(response, options, workspaceSlug, projectId, undefined, !isExistingPaginationOptions);
       return response;
     } catch (error) {
+      // Obsolete transport failures must not reject or clear a successor's loader; processing failures still propagate.
+      if (!responseReceived && requestSignal?.aborted) return;
       // set loader to undefined if errored out
       this.setLoader(undefined);
       throw error;
