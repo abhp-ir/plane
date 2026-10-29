@@ -52,7 +52,8 @@ interface Props {
 const analyticsService = new AnalyticsService();
 const PriorityChart = observer(function PriorityChart(props: Props) {
   const { x_axis, y_axis, group_by } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   // store hooks
   const { selectedDuration, selectedProjects, selectedCycle, selectedModule, isPeekView, isEpic } = useAnalytics();
   const { workspaceStates } = useProjectState();
@@ -81,8 +82,9 @@ const PriorityChart = observer(function PriorityChart(props: Props) {
   );
   const parsedData = useMemo(
     () =>
-      priorityChartData && parseChartData(priorityChartData, props.x_axis, props.group_by, props.x_axis_date_grouping),
-    [priorityChartData, props.x_axis, props.group_by, props.x_axis_date_grouping]
+      priorityChartData &&
+      parseChartData(priorityChartData, props.x_axis, props.group_by, props.x_axis_date_grouping, currentLocale, t),
+    [priorityChartData, props.x_axis, props.group_by, props.x_axis_date_grouping, currentLocale, t]
   );
   const chart_model = props.group_by ? EChartModels.STACKED : EChartModels.BASIC;
 
@@ -96,7 +98,7 @@ const PriorityChart = observer(function PriorityChart(props: Props) {
       parsedBars = [
         {
           key: "count",
-          label: "Count",
+          label: t("common.count"),
           stackId: "bar-one",
           fill: (payload) => generateBarColor(payload.key, { x_axis, y_axis, group_by }, baseColors, workspaceStates),
           textClassName: "",
@@ -138,16 +140,16 @@ const PriorityChart = observer(function PriorityChart(props: Props) {
       parsedBars = [];
     }
     return parsedBars;
-  }, [chart_model, group_by, parsedData, resolvedTheme, workspaceStates, x_axis, y_axis]);
+  }, [chart_model, group_by, parsedData, resolvedTheme, workspaceStates, x_axis, y_axis, t]);
 
-  const yAxisLabel = useMemo(
-    () => ANALYTICS_Y_AXIS_VALUES.find((item) => item.value === props.y_axis)?.label ?? props.y_axis,
-    [props.y_axis]
-  );
-  const xAxisLabel = useMemo(
-    () => ANALYTICS_X_AXIS_VALUES.find((item) => item.value === props.x_axis)?.label ?? props.x_axis,
-    [props.x_axis]
-  );
+  const yAxisLabel = useMemo(() => {
+    const option = ANALYTICS_Y_AXIS_VALUES.find((item) => item.value === props.y_axis);
+    return option ? t(option.i18nKey) : props.y_axis;
+  }, [props.y_axis, t]);
+  const xAxisLabel = useMemo(() => {
+    const option = ANALYTICS_X_AXIS_VALUES.find((item) => item.value === props.x_axis);
+    return option ? t(option.i18nKey) : props.x_axis;
+  }, [props.x_axis, t]);
 
   const defaultColumns: ColumnDef<TChartDatum>[] = useMemo(
     () => [
@@ -164,18 +166,18 @@ const PriorityChart = observer(function PriorityChart(props: Props) {
       },
       {
         accessorKey: "count",
-        header: () => <div className="text-right">Count</div>,
-        cell: ({ row }) => <div className="text-right">{row.original.count}</div>,
+        header: () => <div className="text-end">{t("common.count")}</div>,
+        cell: ({ row }) => <div className="text-end">{formatNumber(row.original.count)}</div>,
         meta: {
           export: {
             key: "Count",
             value: (row) => row.original.count,
-            label: "Count",
+            label: t("common.count"),
           },
         },
       },
     ],
-    [xAxisLabel]
+    [xAxisLabel, formatNumber, t]
   );
 
   const columns: ColumnDef<TChartDatum>[] = useMemo(
@@ -183,8 +185,11 @@ const PriorityChart = observer(function PriorityChart(props: Props) {
       parsedData
         ? Object.keys(parsedData?.schema ?? {}).map((key) => ({
             accessorKey: key,
-            header: () => <div className="text-right">{parsedData.schema[key]}</div>,
-            cell: ({ row }) => <div className="text-right">{row.original[key]}</div>,
+            header: () => <div className="text-end">{parsedData.schema[key]}</div>,
+            cell: ({ row }) => {
+              const value = row.original[key];
+              return <div className="text-end">{typeof value === "number" ? formatNumber(value) : value}</div>;
+            },
             meta: {
               export: {
                 key,
@@ -194,7 +199,7 @@ const PriorityChart = observer(function PriorityChart(props: Props) {
             },
           }))
         : [],
-    [parsedData]
+    [parsedData, formatNumber]
   );
 
   return (
@@ -225,7 +230,7 @@ const PriorityChart = observer(function PriorityChart(props: Props) {
           <DataTable
             data={parsedData.data}
             columns={[...defaultColumns, ...columns]}
-            searchPlaceholder={`${parsedData.data.length} ${xAxisLabel}`}
+            searchPlaceholder={`${xAxisLabel} (${formatNumber(parsedData.data.length)})`}
             actions={(table: Table<TChartDatum>) => (
               <Button
                 variant="secondary"

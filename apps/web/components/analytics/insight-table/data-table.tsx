@@ -45,7 +45,15 @@ export function DataTable<TData, TValue>({ columns, data, searchPlaceholder, act
   const [sorting, _setSorting] = React.useState<SortingState>([]);
   const { t } = useTranslation();
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const searchTriggerRef = React.useRef<HTMLButtonElement>(null);
+  const wasSearchOpen = React.useRef(false);
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isSearchOpen) inputRef.current?.focus();
+    else if (wasSearchOpen.current) searchTriggerRef.current?.focus();
+    wasSearchOpen.current = isSearchOpen;
+  }, [isSearchOpen]);
 
   const table = useReactTable({
     data,
@@ -65,9 +73,15 @@ export function DataTable<TData, TValue>({ columns, data, searchPlaceholder, act
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
+  const closeSearch = () => {
+    const columnId = table.getHeaderGroups()?.[0]?.headers?.[0]?.id;
+    if (columnId) table.getColumn(columnId)?.setFilterValue("");
+    setIsSearchOpen(false);
+  };
+
   return (
     <div className="space-y-4">
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full flex-wrap items-center justify-between gap-3">
         <div className="relative flex max-w-[300px] items-center gap-4">
           {table.getHeaderGroups()?.[0]?.headers?.[0]?.id && (
             <div className="flex items-center gap-2 text-13 whitespace-nowrap text-placeholder">
@@ -77,10 +91,11 @@ export function DataTable<TData, TValue>({ columns, data, searchPlaceholder, act
           {!isSearchOpen && (
             <button
               type="button"
-              className="-mr-5 grid place-items-center rounded-sm p-2 text-placeholder hover:bg-layer-1"
+              ref={searchTriggerRef}
+              aria-label={t("common.search.label")}
+              className="-me-5 grid place-items-center rounded-sm p-2 text-placeholder hover:bg-layer-1"
               onClick={() => {
                 setIsSearchOpen(true);
-                inputRef.current?.focus();
               }}
             >
               <SearchOutline className="h-3.5 w-3.5" />
@@ -88,7 +103,7 @@ export function DataTable<TData, TValue>({ columns, data, searchPlaceholder, act
           )}
           <div
             className={cn(
-              "mr-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
+              "me-auto flex w-0 items-center justify-start gap-1 overflow-hidden rounded-md border border-transparent bg-surface-1 text-placeholder opacity-0 transition-[width] ease-linear",
               {
                 "w-64 border-subtle px-2.5 py-1.5 opacity-100": isSearchOpen,
               }
@@ -98,8 +113,14 @@ export function DataTable<TData, TValue>({ columns, data, searchPlaceholder, act
             <input
               ref={inputRef}
               className="w-full max-w-[234px] border-none bg-transparent text-13 text-primary placeholder:text-placeholder focus:outline-none"
-              placeholder="Search"
-              value={table.getColumn(table.getHeaderGroups()?.[0]?.headers?.[0]?.id)?.getFilterValue() as string}
+              placeholder={t("common.search.label")}
+              aria-label={t("common.search.label")}
+              tabIndex={isSearchOpen ? 0 : -1}
+              value={
+                (table.getColumn(table.getHeaderGroups()?.[0]?.headers?.[0]?.id)?.getFilterValue() as
+                  | string
+                  | undefined) ?? ""
+              }
               onChange={(e) => {
                 const columnId = table.getHeaderGroups()?.[0]?.headers?.[0]?.id;
                 if (columnId) table.getColumn(columnId)?.setFilterValue(e.target.value);
@@ -108,20 +129,15 @@ export function DataTable<TData, TValue>({ columns, data, searchPlaceholder, act
                 if (e.key === "Enter") {
                   setIsSearchOpen(true);
                 }
+                if (e.key === "Escape") {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  closeSearch();
+                }
               }}
             />
             {isSearchOpen && (
-              <button
-                type="button"
-                className="grid place-items-center"
-                onClick={() => {
-                  const columnId = table.getHeaderGroups()?.[0]?.headers?.[0]?.id;
-                  if (columnId) {
-                    table.getColumn(columnId)?.setFilterValue("");
-                  }
-                  setIsSearchOpen(false);
-                }}
-              >
+              <button type="button" aria-label={t("close")} className="grid place-items-center" onClick={closeSearch}>
                 <CloseOutline className="h-3 w-3" />
               </button>
             )}

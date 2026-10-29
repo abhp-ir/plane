@@ -72,7 +72,12 @@ it("describes Gregorian monthly counts with Jalali intervals and updates daily/l
     expect(english.data).toEqual(data(["Feb 01, 2024", "Mar 01, 2025", "Apr 01, 2025", "Mar 20, 2025"]));
     await act(async () => setLanguage("fa"));
     expect(chart.mock.lastCall![0].data).toEqual(data(monthlyNames));
-    expect(chart.mock.lastCall![0].areas).toEqual(english.areas);
+    expect(chart.mock.lastCall![0].areas).toEqual(
+      english.areas.map((area: { key: string }) => ({
+        ...area,
+        label: area.key === "completed_issues" ? "حل‌شده" : "ایجادشده",
+      }))
+    );
     await act(async () =>
       runInAction(() => {
         selection.isPeekView = true;

@@ -19,8 +19,8 @@ import { getLegendProps } from "../components/legend";
 import { CustomRadarAxisTick } from "../components/tick";
 import { CustomTooltip } from "../components/tooltip";
 
-function RadarChart<T extends string, K extends string>(props: TRadarChartProps<T, K>) {
-  const { data, radars, margin, showTooltip, legend, className, angleAxis } = props;
+function RadarChart<T extends string, K extends string>(chartProps: TRadarChartProps<T, K>) {
+  const { data, radars, margin, showTooltip, legend, className, angleAxis } = chartProps;
 
   // states
   const [, setActiveIndex] = useState<number | null>(null);
@@ -58,7 +58,7 @@ function RadarChart<T extends string, K extends string>(props: TRadarChartProps<
                 <CustomTooltip
                   active={active}
                   activeKey={activeLegend}
-                  label={label}
+                  label={payload?.[0]?.payload?.[angleAxis.key] ?? label}
                   payload={payload}
                   itemKeys={itemKeys}
                   itemLabels={itemLabels}

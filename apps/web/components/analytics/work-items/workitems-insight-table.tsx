@@ -43,7 +43,8 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
   // router
   const params = useParams();
   const workspaceSlug = params.workspaceSlug.toString();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   // store hooks
   const { getProjectById } = useProject();
   const { selectedDuration, selectedProjects, selectedCycle, selectedModule, isPeekView, isEpic } = useAnalytics();
@@ -82,7 +83,7 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
       !isPeekView
         ? {
             accessorKey: "project__name",
-            header: () => <div className="text-left">{columnsLabels["project__name"]}</div>,
+            header: () => <div className="text-start">{columnsLabels["project__name"]}</div>,
             cell: ({ row }) => {
               const project = getProjectById(row.original.project_id);
               return (
@@ -92,7 +93,7 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
                   ) : (
                     <ProjectsOutline className="h-4 w-4" />
                   )}
-                  {project?.name}
+                  <bdi dir="auto">{project?.name}</bdi>
                 </div>
               );
             },
@@ -105,9 +106,9 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
           }
         : {
             accessorKey: "display_name",
-            header: () => <div className="text-left">{columnsLabels["display_name"]}</div>,
+            header: () => <div className="text-start">{columnsLabels["display_name"]}</div>,
             cell: ({ row }: { row: Row<WorkItemInsightColumns> }) => (
-              <div className="text-left">
+              <div className="text-start">
                 <div className="flex items-center gap-2">
                   {row.original.avatar_url && row.original.avatar_url !== "" ? (
                     <Avatar
@@ -125,7 +126,9 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
                       )}
                     </div>
                   )}
-                  <span className="break-words text-secondary">{row.original.display_name ?? t(`Unassigned`)}</span>
+                  <bdi dir="auto" className="break-words text-secondary">
+                    {row.original.display_name ?? t("unassigned")}
+                  </bdi>
                 </div>
               </div>
             ),
@@ -138,8 +141,8 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
           },
       {
         accessorKey: "backlog_work_items",
-        header: () => <div className="text-right">{columnsLabels["backlog_work_items"]}</div>,
-        cell: ({ row }) => <div className="text-right">{row.original.backlog_work_items}</div>,
+        header: () => <div className="text-end">{columnsLabels["backlog_work_items"]}</div>,
+        cell: ({ row }) => <div className="text-end">{formatNumber(row.original.backlog_work_items)}</div>,
         meta: {
           export: {
             key: columnsLabels["backlog_work_items"],
@@ -149,8 +152,8 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
       },
       {
         accessorKey: "started_work_items",
-        header: () => <div className="text-right">{columnsLabels["started_work_items"]}</div>,
-        cell: ({ row }) => <div className="text-right">{row.original.started_work_items}</div>,
+        header: () => <div className="text-end">{columnsLabels["started_work_items"]}</div>,
+        cell: ({ row }) => <div className="text-end">{formatNumber(row.original.started_work_items)}</div>,
         meta: {
           export: {
             key: columnsLabels["started_work_items"],
@@ -160,8 +163,8 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
       },
       {
         accessorKey: "un_started_work_items",
-        header: () => <div className="text-right">{columnsLabels["un_started_work_items"]}</div>,
-        cell: ({ row }) => <div className="text-right">{row.original.un_started_work_items}</div>,
+        header: () => <div className="text-end">{columnsLabels["un_started_work_items"]}</div>,
+        cell: ({ row }) => <div className="text-end">{formatNumber(row.original.un_started_work_items)}</div>,
         meta: {
           export: {
             key: columnsLabels["un_started_work_items"],
@@ -171,8 +174,8 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
       },
       {
         accessorKey: "completed_work_items",
-        header: () => <div className="text-right">{columnsLabels["completed_work_items"]}</div>,
-        cell: ({ row }) => <div className="text-right">{row.original.completed_work_items}</div>,
+        header: () => <div className="text-end">{columnsLabels["completed_work_items"]}</div>,
+        cell: ({ row }) => <div className="text-end">{formatNumber(row.original.completed_work_items)}</div>,
         meta: {
           export: {
             key: columnsLabels["completed_work_items"],
@@ -182,8 +185,8 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
       },
       {
         accessorKey: "cancelled_work_items",
-        header: () => <div className="text-right">{columnsLabels["cancelled_work_items"]}</div>,
-        cell: ({ row }) => <div className="text-right">{row.original.cancelled_work_items}</div>,
+        header: () => <div className="text-end">{columnsLabels["cancelled_work_items"]}</div>,
+        cell: ({ row }) => <div className="text-end">{formatNumber(row.original.cancelled_work_items)}</div>,
         meta: {
           export: {
             key: columnsLabels["cancelled_work_items"],
@@ -192,7 +195,7 @@ const WorkItemsInsightTable = observer(function WorkItemsInsightTable() {
         },
       },
     ],
-    [columnsLabels, getProjectById, isPeekView, t]
+    [columnsLabels, getProjectById, isPeekView, t, formatNumber]
   );
   return (
     <InsightTable<"work-items">

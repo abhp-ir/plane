@@ -43,7 +43,7 @@ const CustomizedInsights = observer(function CustomizedInsights({
     <AnalyticsSectionWrapper
       title={t("workspace_analytics.customized_insights")}
       className="col-span-1"
-      headerClassName={cn(peekView ? "flex-col items-start" : "")}
+      headerClassName={cn("max-md:flex-col max-md:items-start", peekView && "flex-col items-start")}
       actions={
         <AnalyticsSelectParams
           control={control}

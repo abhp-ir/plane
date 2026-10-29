@@ -26,7 +26,8 @@ export function InsightTable<T extends Exclude<TAnalyticsTabsBase, "overview">>(
   props: InsightTableProps<T>
 ): React.ReactElement {
   const { data, isLoading, columns, headerText, onExport } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   if (isLoading) {
     return <TableLoader columns={columns} rows={5} />;
   }
@@ -36,7 +37,7 @@ export function InsightTable<T extends Exclude<TAnalyticsTabsBase, "overview">>(
       <DataTable
         columns={columns}
         data={data || []}
-        searchPlaceholder={`${data?.length || 0} ${headerText}`}
+        searchPlaceholder={`${headerText} (${formatNumber(data?.length || 0)})`}
         actions={(table: Table<AnalyticsTableDataMap[T]>) => (
           <Button
             variant="secondary"

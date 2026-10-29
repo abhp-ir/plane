@@ -6,6 +6,7 @@
 
 // plane package imports
 import React from "react";
+import { useTranslation } from "@plane/i18n";
 import type { IAnalyticsResponseFields } from "@plane/types";
 import { Loader } from "@plane/blocks/skeleton";
 
@@ -17,6 +18,8 @@ export type InsightCardProps = {
 
 function InsightCard(props: InsightCardProps) {
   const { data, label, isLoading = false } = props;
+  const { currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   const count = data?.count ?? 0;
 
   return (
@@ -24,7 +27,7 @@ function InsightCard(props: InsightCardProps) {
       <div className="text-13 text-tertiary">{label}</div>
       {!isLoading ? (
         <div className="flex flex-col gap-1">
-          <div className="text-20 font-bold text-primary">{count}</div>
+          <div className="text-20 font-bold text-primary">{formatNumber(count)}</div>
         </div>
       ) : (
         <Loader.Item height="50px" width="100%" />

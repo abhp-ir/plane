@@ -30,7 +30,8 @@ const analyticsService = new AnalyticsService();
 
 const ProjectInsights = observer(function ProjectInsights() {
   const params = useParams();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const formatNumber = new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format;
   const workspaceSlug = params.workspaceSlug.toString();
   const { selectedDuration, selectedDurationLabel, selectedProjects, selectedCycle, selectedModule, isPeekView } =
     useAnalytics();
@@ -50,6 +51,20 @@ const ProjectInsights = observer(function ProjectInsights() {
         isPeekView
       )
   );
+
+  const metricLabels: Record<string, string> = {
+    work_items: t("common.work_items"),
+    cycles: t("common.cycles"),
+    modules: t("common.modules"),
+    intake: t("sidebar.intake"),
+    members: t("common.members"),
+    pages: t("common.pages"),
+    views: t("common.views"),
+  };
+  const radarData: TChartData<string, string>[] | undefined = projectInsightsData?.map((item) => ({
+    ...item,
+    name: metricLabels[item.key] ?? item.name,
+  }));
 
   return (
     <AnalyticsSectionWrapper
@@ -72,12 +87,12 @@ const ProjectInsights = observer(function ProjectInsights() {
             <Suspense fallback={<ProjectInsightsLoader />}>
               <RadarChart
                 className="h-[350px] w-full text-accent-primary lg:w-3/5"
-                data={projectInsightsData}
+                data={radarData ?? []}
                 dataKey="key"
                 radars={[
                   {
                     key: "count",
-                    name: "Count",
+                    name: t("common.count"),
                     fill: "var(--text-color-accent-primary)",
                     stroke: "var(--text-color-accent-primary)",
                     fillOpacity: 0.6,
@@ -103,12 +118,12 @@ const ProjectInsights = observer(function ProjectInsights() {
                 <div>{t("workspace_analytics.trend_on_charts")}</div>
                 <div>{t("common.work_items")}</div>
               </div>
-              {projectInsightsData?.map((item) => (
+              {radarData?.map((item) => (
                 <div key={item.key} className="flex items-center justify-between text-13 text-primary">
                   <div>{item.name}</div>
                   <div className="flex items-center gap-1">
                     {/* <TrendPiece key={item.key} size='xs' /> */}
-                    <div className="text-secondary">{item.count}</div>
+                    <div className="text-secondary">{formatNumber(item.count)}</div>
                   </div>
                 </div>
               ))}

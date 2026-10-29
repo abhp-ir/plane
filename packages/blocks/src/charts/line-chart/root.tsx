@@ -24,7 +24,7 @@ import { CustomXAxisTick, CustomYAxisTick } from "../components/tick";
 import { CustomTooltip } from "../components/tooltip";
 
 export const LineChart = React.memo(function LineChart<K extends string, T extends string>(
-  props: TLineChartProps<K, T>
+  chartProps: TLineChartProps<K, T>
 ) {
   const {
     data,
@@ -41,7 +41,7 @@ export const LineChart = React.memo(function LineChart<K extends string, T exten
     legend,
     showTooltip = true,
     customTooltipContent,
-  } = props;
+  } = chartProps;
   // states
   const [activeLine, setActiveLine] = useState<string | null>(null);
   const [activeLegend, setActiveLegend] = useState<string | null>(null);
@@ -162,12 +162,13 @@ export const LineChart = React.memo(function LineChart<K extends string, T exten
                 pointerEvents: "auto",
               }}
               content={({ active, label, payload }) => {
-                if (customTooltipContent) return customTooltipContent({ active, label, payload });
+                const currentLabel = payload?.[0]?.payload?.[xAxis.key] ?? label;
+                if (customTooltipContent) return customTooltipContent({ active, label: currentLabel, payload });
                 return (
                   <CustomTooltip
                     active={active}
                     activeKey={activeLine}
-                    label={label}
+                    label={currentLabel}
                     payload={payload}
                     itemKeys={itemKeys}
                     itemLabels={itemLabels}

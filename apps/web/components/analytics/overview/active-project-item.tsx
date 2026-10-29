@@ -9,6 +9,7 @@ import { Logo } from "@plane/blocks/emoji-icon-picker";
 import { ProjectsOutline } from "@makeplane/propel/icons";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 import { cn } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
 // plane web hooks
 import { useProject } from "@/hooks/store/use-project";
 
@@ -22,11 +23,16 @@ type Props = {
 };
 
 function CompletionPercentage({ percentage }: { percentage: number }) {
+  const { currentLocale } = useTranslation();
   const percentageColor =
     percentage > 50 ? "bg-success-subtle text-success-primary" : "bg-danger-subtle text-danger-primary";
   return (
     <div className={cn("flex items-center gap-2 rounded-sm p-1 text-11", percentageColor)}>
-      <span>{percentage}%</span>
+      <span>
+        {new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale, { style: "percent" }).format(
+          percentage / 100
+        )}
+      </span>
     </div>
   );
 }

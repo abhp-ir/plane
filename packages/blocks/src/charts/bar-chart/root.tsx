@@ -25,7 +25,9 @@ import { CustomXAxisTick, CustomYAxisTick } from "../components/tick";
 import { CustomTooltip } from "../components/tooltip";
 import { barShapeVariants, DEFAULT_BAR_FILL_COLOR } from "./bar";
 
-export const BarChart = React.memo(function BarChart<K extends string, T extends string>(props: TBarChartProps<K, T>) {
+export const BarChart = React.memo(function BarChart<K extends string, T extends string>(
+  chartProps: TBarChartProps<K, T>
+) {
   const {
     data,
     bars,
@@ -42,7 +44,7 @@ export const BarChart = React.memo(function BarChart<K extends string, T extends
     customTicks,
     showTooltip = true,
     customTooltipContent,
-  } = props;
+  } = chartProps;
   // states
   const [activeBar, setActiveBar] = useState<string | null>(null);
   const [activeLegend, setActiveLegend] = useState<string | null>(null);
@@ -187,11 +189,12 @@ export const BarChart = React.memo(function BarChart<K extends string, T extends
                 pointerEvents: "auto",
               }}
               content={({ active, label, payload }) => {
-                if (customTooltipContent) return customTooltipContent({ active, label, payload });
+                const currentLabel = payload?.[0]?.payload?.[xAxis.key] ?? label;
+                if (customTooltipContent) return customTooltipContent({ active, label: currentLabel, payload });
                 return (
                   <CustomTooltip
                     active={active}
-                    label={label}
+                    label={currentLabel}
                     payload={payload}
                     activeKey={activeBar}
                     itemKeys={stackKeys}

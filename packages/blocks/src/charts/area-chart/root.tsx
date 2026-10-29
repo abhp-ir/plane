@@ -15,7 +15,7 @@ import { CustomXAxisTick, CustomYAxisTick } from "../components/tick";
 import { CustomTooltip } from "../components/tooltip";
 
 export const AreaChart = React.memo(function AreaChart<K extends string, T extends string>(
-  props: TAreaChartProps<K, T>
+  chartProps: TAreaChartProps<K, T>
 ) {
   const {
     data,
@@ -32,7 +32,7 @@ export const AreaChart = React.memo(function AreaChart<K extends string, T exten
     customTicks,
     showTooltip = true,
     comparisonLine,
-  } = props;
+  } = chartProps;
   // states
   const [activeArea, setActiveArea] = useState<string | null>(null);
   const [activeLegend, setActiveLegend] = useState<string | null>(null);
@@ -179,7 +179,7 @@ export const AreaChart = React.memo(function AreaChart<K extends string, T exten
                 <CustomTooltip
                   active={active}
                   activeKey={activeArea}
-                  label={label}
+                  label={payload?.[0]?.payload?.[xAxis.key] ?? label}
                   payload={payload}
                   itemKeys={itemKeys}
                   itemLabels={itemLabels}

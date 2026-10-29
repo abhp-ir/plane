@@ -4,10 +4,11 @@
  * See the LICENSE file for details.
  */
 
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { observer } from "mobx-react";
 // plane package imports
 import { Select } from "@plane/blocks/select";
+import { useTranslation } from "@plane/i18n";
 import { Logo } from "@plane/blocks/emoji-icon-picker";
 import { ProjectsOutline } from "@makeplane/propel/icons";
 import type { TLogoProps } from "@plane/types";
@@ -30,6 +31,7 @@ type Props = {
 
 export const ProjectSelect = observer(function ProjectSelect(props: Props) {
   const { value, onChange, projectIds } = props;
+  const { t, currentLocale } = useTranslation();
   const { getProjectById } = useProject();
 
   // derived values
@@ -66,6 +68,7 @@ export const ProjectSelect = observer(function ProjectSelect(props: Props) {
       getOptionValue={(option) => option.id}
       getOptionLabel={(option) => option.name}
       getOptionSearchText={(option) => option.query}
+      placeholder={t("common.projects")}
       getOptionIcon={(option) =>
         option.logo_props ? (
           <Logo logo={option.logo_props} size={16} />
@@ -82,10 +85,15 @@ export const ProjectSelect = observer(function ProjectSelect(props: Props) {
         {(selectedOptions) => (
           <span className="truncate">
             {selectedOptions.length > 3
-              ? `3+ projects`
+              ? t("common.selected_options", { count: selectedOptions.length })
               : selectedOptions.length > 0
-                ? selectedOptions.map((option) => option.name).join(", ")
-                : "All projects"}
+                ? selectedOptions.map((option, index) => (
+                    <Fragment key={option.id}>
+                      {index > 0 ? (currentLocale === "fa" ? "، " : ", ") : ""}
+                      <bdi dir="auto">{option.name}</bdi>
+                    </Fragment>
+                  ))
+                : t("workspace_analytics.all_projects")}
           </span>
         )}
       </Select.Trigger>
