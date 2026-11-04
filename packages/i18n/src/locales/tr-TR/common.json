@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Görünen ad en fazla 50 karakter olabilir",
-      "invalid": "Görünen ad yalnızca harf, rakam, nokta, kısa çizgi ve alt çizgi içerebilir"
+      "invalid": "Görünen ad geçersiz karakterler içeriyor."
     }
   },
   "image_upload": {

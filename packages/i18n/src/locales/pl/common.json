@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Nazwa wyświetlana może mieć maksymalnie 50 znaków",
-      "invalid": "Nazwa wyświetlana może zawierać tylko litery, cyfry, kropki, łączniki i podkreślenia"
+      "invalid": "Nazwa wyświetlana zawiera niedozwolone znaki."
     }
   },
   "image_upload": {

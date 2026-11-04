@@ -27,12 +27,12 @@ export const PERSON_NAME_REGEX = /^(?:[\p{L}\p{M} '’-]|(?<=[\p{L}\p{M}])\u200C
 export const PERSON_NAME_MAX_LENGTH = 255;
 
 /**
- * Display Name Pattern (for display_name, usernames)
- * Allows: Unicode letters (\p{L}), numbers (\p{N}), underscore, period, hyphen
- * Use case: International usernames like "josé_123", "李明.dev", "müller-2024"
- * Blocks: Spaces and injection-risk characters
+ * Display Name Pattern (for human-facing display_name)
+ * Allows: Unicode letters/marks/numbers, spaces, underscore, period, hyphen and interior ZWNJ
+ * Use case: Persian names like "محمدامین اسکندری" and "علی‌رضا", plus existing handles
+ * Blocks: Markup, other controls and invalid ZWNJ boundaries
  */
-export const DISPLAY_NAME_REGEX = /^[\p{L}\p{N}_.-]+$/u;
+export const DISPLAY_NAME_REGEX = /^(?:[\p{L}\p{M}\p{N} _.-]|(?<=[\p{L}\p{M}])\u200C(?=\p{L}))+$/u;
 
 /**
  * Company/Organization Name Pattern (for company_name, workspace names)
@@ -87,17 +87,18 @@ export const validatePersonName = (name: string): boolean | string => {
 };
 
 /**
- * @description Validates display names and usernames
+ * @description Validates human-facing display names without changing their contents
  * @param {string} displayName - Display name to validate
  * @returns {boolean | string} true if valid, translation key if invalid
  * @example
  * validateDisplayName("john_doe") // returns true
  * validateDisplayName("john.doe-123") // returns true
- * validateDisplayName("john doe") // returns error message (spaces not allowed)
+ * validateDisplayName("محمدامین اسکندری") // returns true
+ * validateDisplayName("علی‌رضا") // returns true
  * validateDisplayName("john<>doe") // returns error message
  */
 export const validateDisplayName = (displayName: string): boolean | string => {
-  if (!displayName || displayName.trim() === "") {
+  if (!displayName) {
     return true; // Display name is optional in most cases
   }
 
@@ -105,7 +106,7 @@ export const validateDisplayName = (displayName: string): boolean | string => {
     return "validation.display_name.max_length";
   }
 
-  if (hasInjectionRiskChars(displayName) || !DISPLAY_NAME_REGEX.test(displayName)) {
+  if (displayName.trim() === "" || hasInjectionRiskChars(displayName) || !DISPLAY_NAME_REGEX.test(displayName)) {
     return "validation.display_name.invalid";
   }
 

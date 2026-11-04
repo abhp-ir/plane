@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "顯示名稱不得超過50個字元",
-      "invalid": "顯示名稱只能包含字母、數字、句點、連字號和底線"
+      "invalid": "顯示名稱包含無效字元。"
     }
   },
   "image_upload": {

@@ -8,12 +8,17 @@ from rest_framework import serializers
 # Module import
 from plane.db.models import Account, Profile, User, Workspace, WorkspaceMemberInvite
 from plane.utils.url import contains_url
-from plane.utils.validation import is_valid_person_name
+from plane.utils.validation import is_valid_display_name, is_valid_person_name
 
 from .base import BaseSerializer
 
 
 class UserSerializer(BaseSerializer):
+    def validate_display_name(self, value):
+        if not is_valid_display_name(value):
+            raise serializers.ValidationError("Display name contains invalid characters.")
+        return value
+
     def validate_first_name(self, value):
         if contains_url(value):
             raise serializers.ValidationError("First name cannot contain a URL.")
@@ -32,6 +37,7 @@ class UserSerializer(BaseSerializer):
         model = User
         # Exclude password field from the serializer
         fields = [field.name for field in User._meta.fields if field.name != "password"]
+        extra_kwargs = {"display_name": {"trim_whitespace": False}}
         # Make all system fields and email read only
         read_only_fields = [
             "id",

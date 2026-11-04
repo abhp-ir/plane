@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Numele afișat trebuie să aibă cel mult 50 de caractere",
-      "invalid": "Numele afișat poate conține doar litere, cifre, puncte, cratime și linii de subliniere"
+      "invalid": "Numele afișat conține caractere nevalide."
     }
   },
   "image_upload": {

@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Il nome visualizzato deve contenere al massimo 50 caratteri",
-      "invalid": "Il nome visualizzato può contenere solo lettere, numeri, punti, trattini e trattini bassi"
+      "invalid": "Il nome visualizzato contiene caratteri non validi."
     }
   },
   "image_upload": {

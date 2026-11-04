@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Nama tampilan tidak boleh lebih dari 50 karakter",
-      "invalid": "Nama tampilan hanya boleh berisi huruf, angka, titik, tanda hubung, dan garis bawah"
+      "invalid": "Nama tampilan mengandung karakter yang tidak valid."
     }
   },
   "image_upload": {

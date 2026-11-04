@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Zobrazované meno môže mať najviac 50 znakov",
-      "invalid": "Zobrazované meno môže obsahovať iba písmená, číslice, bodky, spojovníky a podčiarkovníky"
+      "invalid": "Zobrazované meno obsahuje neplatné znaky."
     }
   },
   "image_upload": {

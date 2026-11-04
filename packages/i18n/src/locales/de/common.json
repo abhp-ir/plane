@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Der Anzeigename darf höchstens 50 Zeichen lang sein",
-      "invalid": "Der Anzeigename darf nur Buchstaben, Zahlen, Punkte, Bindestriche und Unterstriche enthalten"
+      "invalid": "Der Anzeigename enthält ungültige Zeichen."
     }
   },
   "image_upload": {

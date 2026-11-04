@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "De weergavenaam mag maximaal 50 tekens bevatten",
-      "invalid": "De weergavenaam mag alleen letters, cijfers, punten, koppeltekens en onderstrepingstekens bevatten"
+      "invalid": "De weergavenaam bevat ongeldige tekens."
     }
   },
   "image_upload": {

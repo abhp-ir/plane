@@ -44,12 +44,51 @@ test("workspace name validation retains its policy and returns translatable erro
   assert.equal(validateWorkspaceName("---"), "workspace_creation.errors.validation.name_contains_letter_number");
 });
 
-test("display names retain their Unicode username policy and return translatable errors", () => {
-  for (const name of ["", " ", "سارا_۱۲۳", "李明.dev", "john.doe-123", "a".repeat(50)]) {
+test("display names preserve natural Persian names, marks, interior ZWNJ and existing handles", () => {
+  for (const name of [
+    "",
+    "محمدامین",
+    "محمدامین اسکندری",
+    "علی‌رضا",
+    "علی Reza-123",
+    "john.doe-123",
+    "سارا_۱۲۳",
+    "سَارا",
+    "Jose\u0301",
+    "李明.dev",
+    " علی ",
+    "a".repeat(50),
+  ]) {
     assert.equal(validateDisplayName(name), true, name);
   }
   assert.equal(validateDisplayName("a".repeat(51)), "validation.display_name.max_length");
-  for (const name of ["<script>", "O'Brien", "john doe", "سارا‌احمدی", "name\u202e", "name\n"]) {
+});
+
+test("display names retain their punctuation and 50 UTF-16-unit limit while rejecting markup and controls", () => {
+  assert.equal(validateDisplayName("𐐀".repeat(25)), true);
+  assert.equal(validateDisplayName("𐐀".repeat(26)), "validation.display_name.max_length");
+  for (const name of [
+    " ",
+    "<script>",
+    "O'Brien",
+    "name@example.test",
+    "name\u202e",
+    "name\n",
+    "\nname",
+    "name\t",
+    "\tname",
+    "name\r",
+    "name\u0000",
+    "name\u007f",
+    "name\u200b",
+    "name\u200d",
+    "name\u2066",
+    "‌علی",
+    "علی‌",
+    "علی‌‌رضا",
+    "علی‌ رضا",
+    "علی ‌رضا",
+  ]) {
     assert.equal(validateDisplayName(name), "validation.display_name.invalid", name);
   }
 });
@@ -83,7 +122,7 @@ test("person names reject unsafe controls, markup, invalid ZWNJ boundaries and o
   ]) {
     assert.notEqual(validatePersonName(name), true, JSON.stringify(name));
   }
-  // Person-name apostrophes must not relax the separate username policy.
+  // Person-name apostrophes do not change display-name punctuation rules.
   assert.notEqual(validateDisplayName("O'Brien"), true);
 });
 

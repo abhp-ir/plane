@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "El nombre para mostrar debe tener como máximo 50 caracteres",
-      "invalid": "El nombre para mostrar solo puede contener letras, números, puntos, guiones y guiones bajos"
+      "invalid": "El nombre para mostrar contiene caracteres no válidos."
     }
   },
   "image_upload": {

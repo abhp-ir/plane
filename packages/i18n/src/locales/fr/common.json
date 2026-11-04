@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Le nom d’affichage doit comporter au maximum 50 caractères",
-      "invalid": "Le nom d’affichage ne peut contenir que des lettres, des chiffres, des points, des traits d’union et des tirets bas"
+      "invalid": "Le nom d’affichage contient des caractères non valides."
     }
   },
   "image_upload": {

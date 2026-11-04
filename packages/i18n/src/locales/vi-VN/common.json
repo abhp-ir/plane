@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Tên hiển thị không được dài quá 50 ký tự",
-      "invalid": "Tên hiển thị chỉ được chứa chữ cái, chữ số, dấu chấm, dấu gạch nối và dấu gạch dưới"
+      "invalid": "Tên hiển thị chứa ký tự không hợp lệ."
     }
   },
   "image_upload": {

@@ -103,8 +103,8 @@ export const UserMenuRoot = observer(function UserMenuRoot() {
                     />
                   </div>
                   <div className="text-center">
-                    <p className="text-body-sm-medium">
-                      {currentUser?.first_name} {currentUser?.last_name}
+                    <p className="text-body-sm-medium" dir="auto">
+                      {currentUser?.display_name || `${currentUser?.first_name ?? ""} ${currentUser?.last_name ?? ""}`}
                     </p>
                     <p className="text-caption-md-regular">{currentUser?.email}</p>
                   </div>

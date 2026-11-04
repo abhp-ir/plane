@@ -949,7 +949,7 @@
     },
     "display_name": {
       "max_length": "Zobrazované jméno může mít nejvýše 50 znaků",
-      "invalid": "Zobrazované jméno může obsahovat pouze písmena, číslice, tečky, pomlčky a podtržítka"
+      "invalid": "Zobrazované jméno obsahuje neplatné znaky."
     }
   },
   "image_upload": {
