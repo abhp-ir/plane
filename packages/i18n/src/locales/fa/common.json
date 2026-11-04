@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "پیش از {date}",
+    "after_date": "پس از {date}",
+    "before_field": "{field} پیش از",
+    "after_field": "{field} پس از",
+    "range_field": "بازهٔ {field}",
+    "custom": "سفارشی",
+    "last_days": "{count, plural, one {# روز گذشته} other {# روز گذشته}}"
+  },
   "common": {
+    "access_label": "دسترسی",
+    "status": "وضعیت",
+    "cycle_status": "وضعیت چرخه",
     "loading_content": "در حال بارگذاری محتوا",
     "loading_options": "در حال بارگذاری گزینه‌ها",
     "saved": "ذخیره شد",

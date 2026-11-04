@@ -10,7 +10,7 @@ import { useTranslation } from "@plane/i18n";
 import { DATE_BEFORE_FILTER_OPTIONS } from "@plane/constants";
 import { CloseOutline } from "@makeplane/propel/icons";
 // plane constants
-import { renderFormattedDate, capitalizeFirstLetter } from "@plane/utils";
+import { getAppliedDateFilterLabel } from "@/helpers/filter-labels";
 // helpers
 type Props = {
   editable: boolean | undefined;
@@ -20,26 +20,9 @@ type Props = {
 
 export const AppliedDateFilters = observer(function AppliedDateFilters(props: Props) {
   const { editable, handleRemove, values } = props;
-  const { currentLocale } = useTranslation();
-
-  const getDateLabel = (value: string): string => {
-    let dateLabel = "";
-
-    const dateDetails = DATE_BEFORE_FILTER_OPTIONS.find((d) => d.value === value);
-
-    if (dateDetails) dateLabel = dateDetails.name;
-    else {
-      const dateParts = value.split(";");
-
-      if (dateParts.length === 2) {
-        const [date, time] = dateParts;
-
-        dateLabel = `${capitalizeFirstLetter(time)} ${renderFormattedDate(date, undefined, currentLocale)}`;
-      }
-    }
-
-    return dateLabel;
-  };
+  const { t, currentLocale } = useTranslation();
+  const getDateLabel = (value: string) =>
+    getAppliedDateFilterLabel(value, DATE_BEFORE_FILTER_OPTIONS, currentLocale, t);
 
   return (
     <>
@@ -49,6 +32,7 @@ export const AppliedDateFilters = observer(function AppliedDateFilters(props: Pr
           {editable && (
             <button
               type="button"
+              aria-label={`${t("aria_labels.common.remove")}: ${getDateLabel(date)}`}
               className="grid place-items-center text-tertiary hover:text-secondary"
               onClick={() => handleRemove(date)}
             >

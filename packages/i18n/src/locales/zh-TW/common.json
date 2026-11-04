@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "{date}之前",
+    "after_date": "{date}之後",
+    "before_field": "{field}之前",
+    "after_field": "{field}之後",
+    "range_field": "{field}範圍",
+    "custom": "自訂",
+    "last_days": "{count, plural, other {過去 # 天}}"
+  },
   "common": {
+    "access_label": "存取權限",
+    "status": "狀態",
+    "cycle_status": "週期狀態",
     "loading_content": "正在載入內容",
     "loading_options": "正在載入選項",
     "saved": "已儲存",

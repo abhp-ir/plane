@@ -6,10 +6,12 @@
 
 import { useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import type { IIssueLabel } from "@plane/types";
 import { Loader } from "@plane/blocks/skeleton";
 // components
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
+import { formatFilterCount } from "@/helpers/filter-labels";
 // hooks
 import { useProjectInbox } from "@/hooks/store/use-project-inbox";
 
@@ -24,6 +26,7 @@ type Props = {
 
 export const FilterLabels = observer(function FilterLabels(props: Props) {
   const { labels, searchQuery } = props;
+  const { t, currentLocale } = useTranslation();
 
   const [itemsToRender, setItemsToRender] = useState(5);
   const [previewEnabled, setPreviewEnabled] = useState(true);
@@ -49,7 +52,7 @@ export const FilterLabels = observer(function FilterLabels(props: Props) {
   return (
     <>
       <FilterHeader
-        title={`Label${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("common.labels")}${appliedFiltersCount > 0 ? ` (${formatFilterCount(appliedFiltersCount, currentLocale)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
@@ -61,7 +64,7 @@ export const FilterLabels = observer(function FilterLabels(props: Props) {
                 {filteredOptions.slice(0, itemsToRender).map((label) => (
                   <FilterOption
                     key={label?.id}
-                    isChecked={filterValue?.includes(label?.id) ? true : false}
+                    isChecked={filterValue?.includes(label?.id) ?? false}
                     onClick={() => handleInboxIssueFilters("labels", handleFilterValue(label.id))}
                     icon={<LabelIcons color={label.color} />}
                     title={label.name}
@@ -70,15 +73,15 @@ export const FilterLabels = observer(function FilterLabels(props: Props) {
                 {filteredOptions.length > 5 && (
                   <button
                     type="button"
-                    className="ml-8 text-11 font-medium text-accent-primary"
+                    className="ms-8 text-11 font-medium text-accent-primary"
                     onClick={handleViewToggle}
                   >
-                    {itemsToRender === filteredOptions.length ? "View less" : "View all"}
+                    {itemsToRender === filteredOptions.length ? t("show_less") : t("show_all")}
                   </button>
                 )}
               </>
             ) : (
-              <p className="text-11 text-placeholder italic">No matches found</p>
+              <p className="text-11 text-placeholder italic">{t("common.search.no_matches_found")}</p>
             )
           ) : (
             <Loader className="space-y-2">

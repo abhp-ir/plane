@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "Vor {date}",
+    "after_date": "Nach {date}",
+    "before_field": "{field} vor",
+    "after_field": "{field} nach",
+    "range_field": "{field} im Zeitraum",
+    "custom": "Benutzerdefiniert",
+    "last_days": "{count, plural, one {Letzter # Tag} other {Letzte # Tage}}"
+  },
   "common": {
+    "access_label": "Zugriff",
+    "status": "Status",
+    "cycle_status": "Status des Zyklus",
     "loading_content": "Inhalte werden geladen",
     "loading_options": "Optionen werden geladen",
     "saved": "Gespeichert",

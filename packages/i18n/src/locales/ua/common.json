@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "До {date}",
+    "after_date": "Після {date}",
+    "before_field": "{field} до",
+    "after_field": "{field} після",
+    "range_field": "Діапазон: {field}",
+    "custom": "Власний",
+    "last_days": "{count, plural, one {Останній # день} few {Останні # дні} many {Останні # днів} other {Останні # дня}}"
+  },
   "common": {
+    "access_label": "Доступ",
+    "status": "Статус",
+    "cycle_status": "Статус циклу",
     "loading_content": "Завантаження вмісту",
     "loading_options": "Завантаження параметрів",
     "saved": "Збережено",

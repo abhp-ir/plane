@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "{date} 이전",
+    "after_date": "{date} 이후",
+    "before_field": "{field} 이전",
+    "after_field": "{field} 이후",
+    "range_field": "{field} 범위",
+    "custom": "사용자 지정",
+    "last_days": "{count, plural, other {최근 #일}}"
+  },
   "common": {
+    "access_label": "접근 권한",
+    "status": "상태",
+    "cycle_status": "사이클 상태",
     "loading_content": "콘텐츠를 불러오는 중",
     "loading_options": "옵션을 불러오는 중",
     "saved": "저장됨",

@@ -12,6 +12,7 @@ import { ModuleStatusIcon } from "@plane/blocks/icons";
 import type { TModuleStatus } from "@plane/types";
 // components
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
+import { formatFilterCount } from "@/helpers/filter-labels";
 
 type Props = {
   appliedFilters: TModuleStatus[] | null;
@@ -23,15 +24,17 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
   const { appliedFilters, handleUpdate, searchQuery } = props;
   // states
   const [previewEnabled, setPreviewEnabled] = useState(true);
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
-  const filteredOptions = MODULE_STATUS.filter((p) => p.value.includes(searchQuery.toLowerCase()));
+  const filteredOptions = MODULE_STATUS.filter((status) =>
+    [t(status.i18n_label), status.value].some((label) => label.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
   const appliedFiltersCount = appliedFilters?.length ?? 0;
 
   return (
     <>
       <FilterHeader
-        title={`Status${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("common.status")}${appliedFiltersCount > 0 ? ` (${formatFilterCount(appliedFiltersCount, currentLocale)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
@@ -41,14 +44,14 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
             filteredOptions.map((status) => (
               <FilterOption
                 key={status.value}
-                isChecked={appliedFilters?.includes(status.value) ? true : false}
+                isChecked={appliedFilters?.includes(status.value) ?? false}
                 onClick={() => handleUpdate(status.value)}
                 icon={<ModuleStatusIcon status={status.value} />}
                 title={t(status.i18n_label)}
               />
             ))
           ) : (
-            <p className="text-11 text-placeholder italic">No matches found</p>
+            <p className="text-11 text-placeholder italic">{t("common.search.no_matches_found")}</p>
           )}
         </div>
       )}

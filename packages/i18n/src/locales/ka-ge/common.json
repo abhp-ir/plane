@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "{date}-მდე",
+    "after_date": "{date}-ის შემდეგ",
+    "before_field": "{field}: მანამდე",
+    "after_field": "{field}: შემდეგ",
+    "range_field": "{field}: დიაპაზონი",
+    "custom": "მორგებული",
+    "last_days": "{count, plural, one {ბოლო # დღე} other {ბოლო # დღე}}"
+  },
   "common": {
+    "access_label": "წვდომა",
+    "status": "სტატუსი",
+    "cycle_status": "ციკლის სტატუსი",
     "loading_content": "შიგთავსის ჩატვირთვა",
     "loading_options": "ვარიანტების ჩატვირთვა",
     "saved": "შენახულია",

@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "До {date}",
+    "after_date": "После {date}",
+    "before_field": "{field} до",
+    "after_field": "{field} после",
+    "range_field": "Диапазон: {field}",
+    "custom": "Произвольный",
+    "last_days": "{count, plural, one {Последний # день} few {Последние # дня} many {Последние # дней} other {Последние # дня}}"
+  },
   "common": {
+    "access_label": "Доступ",
+    "status": "Статус",
+    "cycle_status": "Статус цикла",
     "loading_content": "Загрузка содержимого",
     "loading_options": "Загрузка опций",
     "saved": "Сохранено",

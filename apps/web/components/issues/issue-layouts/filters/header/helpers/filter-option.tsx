@@ -21,6 +21,7 @@ export function FilterOption(props: Props) {
   return (
     <button
       type="button"
+      aria-pressed={isChecked}
       className="flex w-full items-center gap-2 rounded-sm p-1.5 hover:bg-layer-transparent-hover"
       onClick={onClick}
     >
@@ -33,10 +34,12 @@ export function FilterOption(props: Props) {
       </div>
       <div className="flex items-center gap-2 truncate">
         {icon && <div className="grid w-5 flex-shrink-0 place-items-center">{icon}</div>}
-        <div className="flex-grow truncate text-caption-sm-regular text-secondary">{title}</div>
+        <div className="flex-grow truncate text-caption-sm-regular text-secondary" dir="auto">
+          {title}
+        </div>
       </div>
       {activePulse && (
-        <div className="ml-auto h-2 w-2 flex-shrink-0 animate-pulse rounded-full bg-accent-primary text-caption-sm-regular" />
+        <div className="ms-auto h-2 w-2 flex-shrink-0 animate-pulse rounded-full bg-accent-primary text-caption-sm-regular" />
       )}
     </button>
   );

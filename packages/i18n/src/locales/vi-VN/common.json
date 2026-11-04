@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "Trước {date}",
+    "after_date": "Sau {date}",
+    "before_field": "{field} trước",
+    "after_field": "{field} sau",
+    "range_field": "Khoảng {field}",
+    "custom": "Tùy chỉnh",
+    "last_days": "{count, plural, other {# ngày qua}}"
+  },
   "common": {
+    "access_label": "Quyền truy cập",
+    "status": "Trạng thái",
+    "cycle_status": "Trạng thái chu kỳ",
     "loading_content": "Đang tải nội dung",
     "loading_options": "Đang tải các tùy chọn",
     "saved": "Đã lưu",

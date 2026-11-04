@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "Pred {date}",
+    "after_date": "Po {date}",
+    "before_field": "{field} pred",
+    "after_field": "{field} po",
+    "range_field": "Rozsah pre {field}",
+    "custom": "Vlastné",
+    "last_days": "{count, plural, one {Posledný # deň} few {Posledné # dni} many {Posledných # dňa} other {Posledných # dní}}"
+  },
   "common": {
+    "access_label": "Prístup",
+    "status": "Stav",
+    "cycle_status": "Stav cyklu",
     "loading_content": "Načítavanie obsahu",
     "loading_options": "Načítavanie možností",
     "saved": "Uložené",

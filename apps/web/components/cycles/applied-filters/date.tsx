@@ -9,7 +9,7 @@ import { observer } from "mobx-react";
 import { DATE_AFTER_FILTER_OPTIONS } from "@plane/constants";
 import { CloseOutline } from "@makeplane/propel/icons";
 import { useTranslation } from "@plane/i18n";
-import { renderFormattedDate, capitalizeFirstLetter } from "@plane/utils";
+import { getAppliedDateFilterLabel } from "@/helpers/filter-labels";
 // constants
 
 type Props = {
@@ -22,24 +22,7 @@ export const AppliedDateFilters = observer(function AppliedDateFilters(props: Pr
   const { editable, handleRemove, values } = props;
   const { t, currentLocale } = useTranslation();
 
-  const getDateLabel = (value: string): string => {
-    let dateLabel = "";
-
-    const dateDetails = DATE_AFTER_FILTER_OPTIONS.find((d) => d.value === value);
-
-    if (dateDetails) dateLabel = dateDetails.name;
-    else {
-      const dateParts = value.split(";");
-
-      if (dateParts.length === 2) {
-        const [date, time] = dateParts;
-
-        dateLabel = `${capitalizeFirstLetter(time)} ${renderFormattedDate(date, undefined, currentLocale)}`;
-      }
-    }
-
-    return dateLabel;
-  };
+  const getDateLabel = (value: string) => getAppliedDateFilterLabel(value, DATE_AFTER_FILTER_OPTIONS, currentLocale, t);
 
   return (
     <>

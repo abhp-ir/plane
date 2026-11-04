@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "{date} öncesi",
+    "after_date": "{date} sonrası",
+    "before_field": "{field} öncesi",
+    "after_field": "{field} sonrası",
+    "range_field": "{field} aralığı",
+    "custom": "Özel",
+    "last_days": "{count, plural, one {Son # gün} other {Son # gün}}"
+  },
   "common": {
+    "access_label": "Erişim",
+    "status": "Durum",
+    "cycle_status": "Döngü durumu",
     "loading_content": "İçerik yükleniyor",
     "loading_options": "Seçenekler yükleniyor",
     "saved": "Kaydedildi",

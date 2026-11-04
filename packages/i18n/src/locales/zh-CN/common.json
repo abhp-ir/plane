@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "{date}之前",
+    "after_date": "{date}之后",
+    "before_field": "{field}之前",
+    "after_field": "{field}之后",
+    "range_field": "{field}范围",
+    "custom": "自定义",
+    "last_days": "{count, plural, other {过去 # 天}}"
+  },
   "common": {
+    "access_label": "访问权限",
+    "status": "状态",
+    "cycle_status": "周期状态",
     "loading_content": "正在加载内容",
     "loading_options": "正在加载选项",
     "saved": "已保存",

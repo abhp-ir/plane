@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "{date} より前",
+    "after_date": "{date} より後",
+    "before_field": "{field} より前",
+    "after_field": "{field} より後",
+    "range_field": "{field} の範囲",
+    "custom": "カスタム",
+    "last_days": "{count, plural, other {過去 # 日間}}"
+  },
   "common": {
+    "access_label": "アクセス",
+    "status": "ステータス",
+    "cycle_status": "サイクルのステータス",
     "loading_content": "コンテンツを読み込み中",
     "loading_options": "オプションを読み込み中",
     "saved": "保存済み",

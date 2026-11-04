@@ -13,6 +13,7 @@ import type { TIssuePriorities } from "@plane/types";
 // plane constants
 // components
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
+import { formatFilterCount } from "@/helpers/filter-labels";
 // hooks
 import { useProjectInbox } from "@/hooks/store/use-project-inbox";
 
@@ -23,14 +24,19 @@ type Props = {
 export const FilterPriority = observer(function FilterPriority(props: Props) {
   const { searchQuery } = props;
   // hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const { inboxFilters, handleInboxIssueFilters } = useProjectInbox();
   // states
   const [previewEnabled, setPreviewEnabled] = useState(true);
   // derived values
   const filterValue = inboxFilters?.priority || [];
   const appliedFiltersCount = filterValue?.length ?? 0;
-  const filteredOptions = ISSUE_PRIORITIES.filter((p) => p.key.includes(searchQuery.toLowerCase()));
+  const priorityLabel = (key: TIssuePriorities) => t(key === "none" ? "common.none" : `issue.priority.${key}`);
+  const filteredOptions = ISSUE_PRIORITIES.filter((priority) =>
+    [priorityLabel(priority.key), priority.title].some((label) =>
+      label.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  );
 
   const handleFilterValue = (value: TIssuePriorities): TIssuePriorities[] =>
     filterValue?.includes(value) ? filterValue.filter((v) => v !== value) : [...filterValue, value];
@@ -38,7 +44,7 @@ export const FilterPriority = observer(function FilterPriority(props: Props) {
   return (
     <>
       <FilterHeader
-        title={`${t("common.priority")}${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("common.priority")}${appliedFiltersCount > 0 ? ` (${formatFilterCount(appliedFiltersCount, currentLocale)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
@@ -48,10 +54,10 @@ export const FilterPriority = observer(function FilterPriority(props: Props) {
             filteredOptions.map((priority) => (
               <FilterOption
                 key={priority.key}
-                isChecked={filterValue?.includes(priority.key) ? true : false}
+                isChecked={filterValue?.includes(priority.key) ?? false}
                 onClick={() => handleInboxIssueFilters("priority", handleFilterValue(priority.key))}
                 icon={<PriorityIcon priority={priority.key} className="h-3.5 w-3.5" />}
-                title={priority.title}
+                title={priorityLabel(priority.key)}
               />
             ))
           ) : (

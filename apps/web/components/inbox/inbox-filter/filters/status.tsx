@@ -12,6 +12,7 @@ import { useTranslation } from "@plane/i18n";
 import type { TInboxIssueStatus } from "@plane/types";
 // components
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
+import { formatFilterCount } from "@/helpers/filter-labels";
 // constants
 // hooks
 import { useProjectInbox } from "@/hooks/store/use-project-inbox";
@@ -25,7 +26,7 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
   const { searchQuery } = props;
   // hooks
   const { currentTab, inboxFilters, handleInboxIssueFilters } = useProjectInbox();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // states
   const [previewEnabled, setPreviewEnabled] = useState(true);
   // derived values
@@ -35,7 +36,7 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
     (s) =>
       ((currentTab === "open" && [-2, 0].includes(s.status)) ||
         (currentTab === "closed" && [-1, 1, 2].includes(s.status))) &&
-      s.key.includes(searchQuery.toLowerCase())
+      [t(s.i18n_title), s.key].some((label) => label.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   const handleFilterValue = (value: TInboxIssueStatus): TInboxIssueStatus[] =>
@@ -49,7 +50,7 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
   return (
     <>
       <FilterHeader
-        title={`Work item Status ${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("common.status")}${appliedFiltersCount > 0 ? ` (${formatFilterCount(appliedFiltersCount, currentLocale)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
@@ -59,14 +60,14 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
             filteredOptions.map((status) => (
               <FilterOption
                 key={status.key}
-                isChecked={filterValue?.includes(status.status) ? true : false}
+                isChecked={filterValue?.includes(status.status) ?? false}
                 onClick={() => handleStatusFilterSelect(status.status)}
                 icon={<InboxStatusIcon type={status.status} className={`h-3.5 w-3.5`} />}
                 title={t(status.i18n_title)}
               />
             ))
           ) : (
-            <p className="text-11 text-placeholder italic">No matches found</p>
+            <p className="text-11 text-placeholder italic">{t("common.search.no_matches_found")}</p>
           )}
         </div>
       )}

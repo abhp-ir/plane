@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "Sebelum {date}",
+    "after_date": "Setelah {date}",
+    "before_field": "{field} sebelum",
+    "after_field": "{field} setelah",
+    "range_field": "Rentang {field}",
+    "custom": "Kustom",
+    "last_days": "{count, plural, other {# hari terakhir}}"
+  },
   "common": {
+    "access_label": "Akses",
+    "status": "Status",
+    "cycle_status": "Status siklus",
     "loading_content": "Memuat konten",
     "loading_options": "Memuat opsi",
     "saved": "Tersimpan",

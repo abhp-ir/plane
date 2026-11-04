@@ -7,12 +7,14 @@
 import { useMemo, useState } from "react";
 import { sortBy } from "lodash-es";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // plane ui
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Loader } from "@plane/blocks/skeleton";
 // components
 import { getFileURL } from "@plane/utils";
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
+import { formatFilterCount } from "@/helpers/filter-labels";
 // helpers
 // hooks
 import { useMember } from "@/hooks/store/use-member";
@@ -33,12 +35,16 @@ export const FilterLead = observer(function FilterLead(props: Props) {
   // store hooks
   const { getUserDetails } = useMember();
   const { data: currentUser } = useUser();
+  const { t, currentLocale } = useTranslation();
+  const youLabel = t("common.you");
 
   const appliedFiltersCount = appliedFilters?.length ?? 0;
 
   const sortedOptions = useMemo(() => {
     const filteredOptions = (memberIds || []).filter((memberId) =>
-      getUserDetails(memberId)?.display_name.toLowerCase().includes(searchQuery.toLowerCase())
+      [getUserDetails(memberId)?.display_name, ...(memberId === currentUser?.id ? [youLabel, "You"] : [])].some(
+        (label) => label?.toLowerCase().includes(searchQuery.toLowerCase())
+      )
     );
 
     return sortBy(filteredOptions, [
@@ -46,8 +52,7 @@ export const FilterLead = observer(function FilterLead(props: Props) {
       (memberId) => memberId !== currentUser?.id,
       (memberId) => getUserDetails(memberId)?.display_name.toLowerCase(),
     ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery]);
+  }, [searchQuery, memberIds, appliedFilters, currentUser?.id, getUserDetails, youLabel]);
 
   const handleViewToggle = () => {
     if (!sortedOptions) return;
@@ -59,7 +64,7 @@ export const FilterLead = observer(function FilterLead(props: Props) {
   return (
     <>
       <FilterHeader
-        title={`Lead${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("lead")}${appliedFiltersCount > 0 ? ` (${formatFilterCount(appliedFiltersCount, currentLocale)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
@@ -75,7 +80,7 @@ export const FilterLead = observer(function FilterLead(props: Props) {
                   return (
                     <FilterOption
                       key={`lead-${member.id}`}
-                      isChecked={appliedFilters?.includes(member.id) ? true : false}
+                      isChecked={appliedFilters?.includes(member.id) ?? false}
                       onClick={() => handleUpdate(member.id)}
                       icon={
                         <Avatar
@@ -85,22 +90,22 @@ export const FilterLead = observer(function FilterLead(props: Props) {
                           size="xs"
                         />
                       }
-                      title={currentUser?.id === member.id ? "You" : member?.display_name}
+                      title={currentUser?.id === member.id ? youLabel : member?.display_name}
                     />
                   );
                 })}
                 {sortedOptions.length > 5 && (
                   <button
                     type="button"
-                    className="ml-8 text-11 font-medium text-accent-primary"
+                    className="ms-8 text-11 font-medium text-accent-primary"
                     onClick={handleViewToggle}
                   >
-                    {itemsToRender === sortedOptions.length ? "View less" : "View all"}
+                    {itemsToRender === sortedOptions.length ? t("show_less") : t("show_all")}
                   </button>
                 )}
               </>
             ) : (
-              <p className="text-11 text-placeholder italic">No matches found</p>
+              <p className="text-11 text-placeholder italic">{t("common.search.no_matches_found")}</p>
             )
           ) : (
             <Loader className="space-y-2">

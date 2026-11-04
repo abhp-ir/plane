@@ -5,6 +5,7 @@
  */
 
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 
 // plane types
 import { Avatar } from "@makeplane/propel/components/avatar";
@@ -16,15 +17,14 @@ import { getFileURL } from "@plane/utils";
 import { useMember } from "@/hooks/store/use-member";
 import { useProjectInbox } from "@/hooks/store/use-project-inbox";
 
-type InboxIssueAppliedFiltersMember = {
+type Props = {
   filterKey: TInboxIssueFilterMemberKeys;
   label: string;
 };
 
-export const InboxIssueAppliedFiltersMember = observer(function InboxIssueAppliedFiltersMember(
-  props: InboxIssueAppliedFiltersMember
-) {
+export const InboxIssueAppliedFiltersMember = observer(function InboxIssueAppliedFiltersMember(props: Props) {
   const { filterKey, label } = props;
+  const { t } = useTranslation();
   // hooks
   const { inboxFilters, handleInboxIssueFilters } = useProjectInbox();
   const { getUserDetails } = useMember();
@@ -54,23 +54,29 @@ export const InboxIssueAppliedFiltersMember = observer(function InboxIssueApplie
                 size="2xs"
               />
             </div>
-            <div className="truncate text-11">{optionDetail?.display_name}</div>
-            <div
+            <div className="truncate text-11" dir="auto">
+              {optionDetail?.display_name}
+            </div>
+            <button
+              type="button"
+              aria-label={`${t("aria_labels.common.remove")}: ${optionDetail.display_name}`}
               className="relative flex h-3 w-3 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden text-tertiary transition-all hover:text-secondary"
               onClick={() => handleInboxIssueFilters(filterKey, handleFilterValue(value))}
             >
               <CloseOutline className={`h-3 w-3`} />
-            </div>
+            </button>
           </div>
         );
       })}
 
-      <div
+      <button
+        type="button"
+        aria-label={t("common.clear_all")}
         className="relative flex h-3 w-3 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden text-tertiary transition-all hover:text-secondary"
         onClick={clearFilter}
       >
         <CloseOutline className={`h-3 w-3`} />
-      </div>
+      </button>
     </div>
   );
 });

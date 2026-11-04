@@ -17,6 +17,10 @@ import { AppliedDateFilters as ModuleDateFilters } from "@/components/modules/ap
 import { AppliedDateFilters as ProjectDateFilters } from "@/components/project/applied-filters/date";
 
 const { updateIntake } = vi.hoisted(() => ({ updateIntake: vi.fn() }));
+vi.mock("@plane/i18n", async (importOriginal) => {
+  const { createTestTranslation } = await import("@/helpers/__tests__/translation");
+  return createTestTranslation(await importOriginal<typeof import("@plane/i18n")>());
+});
 const values = ["2025-03-20;after", "2025-03-21;before"];
 vi.mock("@/hooks/store/use-project-inbox", () => ({
   useProjectInbox: () => ({ inboxFilters: { created_at: values }, handleInboxIssueFilters: updateIntake }),
@@ -78,8 +82,9 @@ it("updates mounted filter date labels without changing canonical removal values
     const english = container.textContent;
     expect(english?.match(/After Mar 20, 2025/g)).toHaveLength(6);
     await act(async () => setLanguage("fa"));
-    expect(container.textContent?.match(/After اسف ۳۰, ۱۴۰۳/g)).toHaveLength(6);
-    expect(container.textContent?.match(/Before فرو ۰۱, ۱۴۰۴/g)).toHaveLength(6);
+    expect(container.textContent?.match(/پس از اسف ۳۰, ۱۴۰۳/g)).toHaveLength(6);
+    expect(container.textContent?.match(/پیش از فرو ۰۱, ۱۴۰۴/g)).toHaveLength(6);
+    expect(container.textContent).not.toMatch(/After|Before/);
     expect(container.textContent).not.toContain("2025");
     await act(async () => {
       container.querySelector<HTMLButtonElement>("#cycle button")!.click();
@@ -100,7 +105,7 @@ it("updates mounted filter date labels without changing canonical removal values
     await act(async () => setLanguage("en"));
     expect(container.textContent).toBe(english);
     await act(async () => setLanguage("fa"));
-    expect(container.textContent?.match(/After اسف ۳۰, ۱۴۰۳/g)).toHaveLength(6);
+    expect(container.textContent?.match(/پس از اسف ۳۰, ۱۴۰۳/g)).toHaveLength(6);
   } finally {
     await act(async () => root.unmount());
     container.remove();

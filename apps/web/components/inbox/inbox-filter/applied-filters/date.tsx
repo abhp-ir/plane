@@ -9,7 +9,7 @@ import { PAST_DURATION_FILTER_OPTIONS } from "@plane/constants";
 import { CloseOutline } from "@makeplane/propel/icons";
 import { useTranslation } from "@plane/i18n";
 import type { TInboxIssueFilterDateKeys } from "@plane/types";
-import { renderFormattedDate } from "@plane/utils";
+import { getAppliedDateFilterLabel } from "@/helpers/filter-labels";
 import { useProjectInbox } from "@/hooks/store/use-project-inbox";
 
 type InboxIssueAppliedFiltersDateProps = {
@@ -26,15 +26,10 @@ export const InboxIssueAppliedFiltersDate = observer(function InboxIssueAppliedF
   const { t, currentLocale } = useTranslation();
   // derived values
   const filteredValues = inboxFilters?.[filterKey] || [];
-  const currentOptionDetail = (date: string) => {
-    const currentDate = PAST_DURATION_FILTER_OPTIONS.find((d) => d.value === date);
-    if (currentDate) return currentDate;
-    const dateSplit = date.split(";");
-    return {
-      name: `${dateSplit[1].charAt(0).toUpperCase() + dateSplit[1].slice(1)} ${renderFormattedDate(dateSplit[0], undefined, currentLocale)}`,
-      value: date,
-    };
-  };
+  const currentOptionDetail = (date: string) => ({
+    name: getAppliedDateFilterLabel(date, PAST_DURATION_FILTER_OPTIONS, currentLocale, t),
+    value: date,
+  });
 
   const handleFilterValue = (value: string): string[] =>
     filteredValues?.includes(value) ? filteredValues.filter((v) => v !== value) : [...filteredValues, value];

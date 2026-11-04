@@ -11,6 +11,7 @@ import { useTranslation } from "@plane/i18n";
 import type { TCycleGroups } from "@plane/types";
 // components
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
+import { formatFilterCount } from "@/helpers/filter-labels";
 // types
 // constants
 
@@ -25,14 +26,16 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
   // states
   const [previewEnabled, setPreviewEnabled] = useState(true);
   //hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const appliedFiltersCount = appliedFilters?.length ?? 0;
-  const filteredOptions = CYCLE_STATUS.filter((p) => p.value.includes(searchQuery.toLowerCase()));
+  const filteredOptions = CYCLE_STATUS.filter((status) =>
+    [t(status.i18n_title), status.value].some((label) => label.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
   return (
     <>
       <FilterHeader
-        title={`Status of the cycle${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("common.cycle_status")}${appliedFiltersCount > 0 ? ` (${formatFilterCount(appliedFiltersCount, currentLocale)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
@@ -42,13 +45,13 @@ export const FilterStatus = observer(function FilterStatus(props: Props) {
             filteredOptions.map((status) => (
               <FilterOption
                 key={status.value}
-                isChecked={appliedFilters?.includes(status.value) ? true : false}
+                isChecked={appliedFilters?.includes(status.value) ?? false}
                 onClick={() => handleUpdate(status.value)}
                 title={t(status.i18n_title)}
               />
             ))
           ) : (
-            <p className="text-11 text-placeholder italic">No matches found</p>
+            <p className="text-11 text-placeholder italic">{t("common.search.no_matches_found")}</p>
           )}
         </div>
       )}

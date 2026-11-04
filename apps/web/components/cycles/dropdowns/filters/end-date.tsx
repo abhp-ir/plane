@@ -6,12 +6,14 @@
 
 import React, { useState } from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import { DATE_AFTER_FILTER_OPTIONS } from "@plane/constants";
 import { isInDateFormat } from "@plane/utils";
 // components
 import { DateFilterModal } from "@/components/core/filters/date-filter-modal";
 import { FilterHeader, FilterOption } from "@/components/issues/issue-layouts/filters";
+import { formatFilterCount, getDateFilterOptionLabel } from "@/helpers/filter-labels";
 
 type Props = {
   appliedFilters: string[] | null;
@@ -25,15 +27,21 @@ export const FilterEndDate = observer(function FilterEndDate(props: Props) {
   const [previewEnabled, setPreviewEnabled] = useState(true);
   const [isDateFilterModalOpen, setIsDateFilterModalOpen] = useState(false);
 
+  const { t, currentLocale } = useTranslation();
   const appliedFiltersCount = appliedFilters?.length ?? 0;
+  const showCustom = [t("date_filters.custom"), "Custom"].some((label) =>
+    label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const filteredOptions = DATE_AFTER_FILTER_OPTIONS.filter((d) =>
-    d.name.toLowerCase().includes(searchQuery.toLowerCase())
+    [d.name, getDateFilterOptionLabel(d, currentLocale, t)].some((name) =>
+      name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
   );
 
   const isCustomDateSelected = () => {
     const isValidDateSelected = appliedFilters?.filter((f) => isInDateFormat(f.split(";")[0])) || [];
-    return isValidDateSelected.length > 0 ? true : false;
+    return isValidDateSelected.length > 0;
   };
   const handleCustomDate = () => {
     if (isCustomDateSelected()) {
@@ -49,31 +57,38 @@ export const FilterEndDate = observer(function FilterEndDate(props: Props) {
           handleClose={() => setIsDateFilterModalOpen(false)}
           isOpen={isDateFilterModalOpen}
           onSelect={(val) => handleUpdate(val)}
-          title="Due date"
+          title={t("due_date")}
         />
       )}
       <FilterHeader
-        title={`Due date${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+        title={`${t("due_date")}${appliedFiltersCount > 0 ? ` (${formatFilterCount(appliedFiltersCount, currentLocale)})` : ""}`}
         isPreviewEnabled={previewEnabled}
         handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
       />
       {previewEnabled && (
         <div>
-          {filteredOptions.length > 0 ? (
+          {filteredOptions.length > 0 || showCustom ? (
             <>
               {filteredOptions.map((option) => (
                 <FilterOption
                   key={option.value}
-                  isChecked={appliedFilters?.includes(option.value) ? true : false}
+                  isChecked={appliedFilters?.includes(option.value) ?? false}
                   onClick={() => handleUpdate(option.value)}
-                  title={option.name}
+                  title={getDateFilterOptionLabel(option, currentLocale, t)}
                   multiple
                 />
               ))}
-              <FilterOption isChecked={isCustomDateSelected()} onClick={handleCustomDate} title="Custom" multiple />
+              {showCustom && (
+                <FilterOption
+                  isChecked={isCustomDateSelected()}
+                  onClick={handleCustomDate}
+                  title={t("date_filters.custom")}
+                  multiple
+                />
+              )}
             </>
           ) : (
-            <p className="text-11 text-placeholder italic">No matches found</p>
+            <p className="text-11 text-placeholder italic">{t("common.search.no_matches_found")}</p>
           )}
         </div>
       )}

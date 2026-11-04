@@ -26,6 +26,7 @@ export const InboxIssueAppliedFiltersPriority = observer(function InboxIssueAppl
     filteredValues?.includes(value) ? filteredValues.filter((v) => v !== value) : [...filteredValues, value];
 
   const clearFilter = () => handleInboxIssueFilters("priority", undefined);
+  const priorityLabel = (key: TIssuePriorities) => t(key === "none" ? "common.none" : `issue.priority.${key}`);
 
   if (filteredValues.length === 0) return <></>;
   return (
@@ -39,23 +40,27 @@ export const InboxIssueAppliedFiltersPriority = observer(function InboxIssueAppl
             <div className="relative flex h-3 w-3 flex-shrink-0 items-center justify-center overflow-hidden">
               <PriorityIcon priority={optionDetail.key} className="h-3 w-3" />
             </div>
-            <div className="truncate text-11">{optionDetail?.title}</div>
-            <div
+            <div className="truncate text-11">{priorityLabel(optionDetail.key)}</div>
+            <button
+              type="button"
+              aria-label={`${t("aria_labels.common.remove")}: ${priorityLabel(optionDetail.key)}`}
               className="relative flex h-3 w-3 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden text-tertiary transition-all hover:text-secondary"
               onClick={() => handleInboxIssueFilters("priority", handleFilterValue(optionDetail?.key))}
             >
               <CloseOutline className={`h-3 w-3`} />
-            </div>
+            </button>
           </div>
         );
       })}
 
-      <div
+      <button
+        type="button"
+        aria-label={t("common.clear_all")}
         className="relative flex h-3 w-3 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden text-tertiary transition-all hover:text-secondary"
         onClick={clearFilter}
       >
         <CloseOutline className={`h-3 w-3`} />
-      </div>
+      </button>
     </div>
   );
 });

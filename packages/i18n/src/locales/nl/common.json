@@ -433,7 +433,19 @@
       }
     }
   },
+  "date_filters": {
+    "before_date": "Vóór {date}",
+    "after_date": "Na {date}",
+    "before_field": "{field} vóór",
+    "after_field": "{field} na",
+    "range_field": "Periode voor {field}",
+    "custom": "Aangepast",
+    "last_days": "{count, plural, one {Afgelopen # dag} other {Afgelopen # dagen}}"
+  },
   "common": {
+    "access_label": "Toegang",
+    "status": "Status",
+    "cycle_status": "Status van de cyclus",
     "loading_content": "Inhoud wordt geladen",
     "loading_options": "Opties worden geladen",
     "saved": "Opgeslagen",
