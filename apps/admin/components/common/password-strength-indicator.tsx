@@ -6,72 +6,10 @@
 
 import { TickCircleOutline } from "@makeplane/propel/icons";
 // plane internal packages
-import { E_PASSWORD_STRENGTH } from "@plane/constants";
+import { E_PASSWORD_STRENGTH, PASSWORD_MIN_LENGTH } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
+import { getStrengthInfo, getFragmentColor } from "@plane/blocks/auth";
 import { cn, getPasswordCriteria, getPasswordStrength } from "@plane/utils";
-
-interface StrengthInfo {
-  message: string;
-  textColor: string;
-  activeFragments: number;
-}
-
-/**
- * Get strength information including message, color, and active fragments
- */
-const getStrengthInfo = (strength: E_PASSWORD_STRENGTH): StrengthInfo => {
-  switch (strength) {
-    case E_PASSWORD_STRENGTH.EMPTY:
-      return {
-        message: "Please enter your password",
-        textColor: "text-primary",
-        activeFragments: 0,
-      };
-    case E_PASSWORD_STRENGTH.LENGTH_NOT_VALID:
-      return {
-        message: "Password is too short",
-        textColor: "text-danger-primary",
-        activeFragments: 1,
-      };
-    case E_PASSWORD_STRENGTH.STRENGTH_NOT_VALID:
-      return {
-        message: "Password is weak",
-        textColor: "text-orange-500",
-        activeFragments: 2,
-      };
-    case E_PASSWORD_STRENGTH.STRENGTH_VALID:
-      return {
-        message: "Password is strong",
-        textColor: "text-success-primary",
-        activeFragments: 3,
-      };
-    default:
-      return {
-        message: "Please enter your password",
-        textColor: "text-primary",
-        activeFragments: 0,
-      };
-  }
-};
-
-/**
- * Get fragment color based on position and active state
- */
-const getFragmentColor = (fragmentIndex: number, activeFragments: number): string => {
-  if (fragmentIndex >= activeFragments) {
-    return "bg-layer-1";
-  }
-
-  switch (activeFragments) {
-    case 1:
-      return "bg-danger-primary";
-    case 2:
-      return "bg-orange-500";
-    case 3:
-      return "bg-success-primary";
-    default:
-      return "bg-layer-1";
-  }
-};
 
 export interface PasswordStrengthIndicatorProps {
   password: string;
@@ -84,11 +22,12 @@ export function PasswordStrengthIndicator({
   showCriteria = true,
   isFocused = false,
 }: PasswordStrengthIndicatorProps) {
+  const { t } = useTranslation();
   const strength = getPasswordStrength(password);
   const criteria = getPasswordCriteria(password);
-  const strengthInfo = getStrengthInfo(strength);
+  const strengthInfo = getStrengthInfo(strength, t);
 
-  const isPasswordMeterVisible = isFocused ? true : strength === E_PASSWORD_STRENGTH.STRENGTH_VALID ? false : true;
+  const isPasswordMeterVisible = isFocused || strength !== E_PASSWORD_STRENGTH.STRENGTH_VALID;
 
   if ((!password && !showCriteria) || !isPasswordMeterVisible) {
     return null;
@@ -133,7 +72,9 @@ export function PasswordStrengthIndicator({
                   "text-primary": !criterion.isValid,
                 })}
               >
-                {criterion.label}
+                {t(`auth.common.password.criteria.${criterion.key}`, {
+                  count: criterion.key === "length" ? PASSWORD_MIN_LENGTH : 1,
+                })}
               </span>
             </div>
           ))}

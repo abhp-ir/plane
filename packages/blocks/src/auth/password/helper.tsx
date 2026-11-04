@@ -15,35 +15,35 @@ export interface StrengthInfo {
 /**
  * Get strength information including message, color, and active fragments
  */
-export const getStrengthInfo = (strength: E_PASSWORD_STRENGTH): StrengthInfo => {
+export const getStrengthInfo = (strength: E_PASSWORD_STRENGTH, t?: (key: string) => string): StrengthInfo => {
   switch (strength) {
     case E_PASSWORD_STRENGTH.EMPTY:
       return {
-        message: "Please enter your password",
+        message: t?.("auth.common.password.errors.empty") ?? "Please enter your password",
         textColor: "text-primary",
         activeFragments: 0,
       };
     case E_PASSWORD_STRENGTH.LENGTH_NOT_VALID:
       return {
-        message: "Password is too short",
+        message: t?.("auth.common.password.errors.too_short") ?? "Password is too short",
         textColor: "text-danger-primary",
         activeFragments: 1,
       };
     case E_PASSWORD_STRENGTH.STRENGTH_NOT_VALID:
       return {
-        message: "Password is weak",
+        message: t?.("auth.common.password.errors.strength.weak") ?? "Password is weak",
         textColor: "text-orange-500",
         activeFragments: 2,
       };
     case E_PASSWORD_STRENGTH.STRENGTH_VALID:
       return {
-        message: "Password is strong",
+        message: t?.("auth.common.password.errors.strength.strong") ?? "Password is strong",
         textColor: "text-success-primary",
         activeFragments: 3,
       };
     default:
       return {
-        message: "Please enter your password",
+        message: t?.("auth.common.password.errors.empty") ?? "Please enter your password",
         textColor: "text-primary",
         activeFragments: 0,
       };

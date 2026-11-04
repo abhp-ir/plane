@@ -5,7 +5,8 @@
  */
 
 import React from "react";
-import { E_PASSWORD_STRENGTH } from "@plane/constants";
+import { E_PASSWORD_STRENGTH, PASSWORD_MIN_LENGTH } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 import { cn, getPasswordStrength, getPasswordCriteria } from "@plane/utils";
 import { getStrengthInfo, getFragmentColor } from "./helper";
 import { TickCircleOutline } from "@makeplane/propel/icons";
@@ -21,9 +22,10 @@ export function PasswordStrengthIndicator({
   showCriteria = true,
   isFocused = false,
 }: PasswordStrengthIndicatorProps) {
+  const { t } = useTranslation();
   const strength = getPasswordStrength(password);
   const criteria = getPasswordCriteria(password);
-  const strengthInfo = getStrengthInfo(strength);
+  const strengthInfo = getStrengthInfo(strength, t);
 
   const isPasswordMeterVisible = isFocused || strength !== E_PASSWORD_STRENGTH.STRENGTH_VALID;
 
@@ -72,7 +74,9 @@ export function PasswordStrengthIndicator({
                   "text-primary": !criterion.isValid,
                 })}
               >
-                {criterion.label}
+                {t(`auth.common.password.criteria.${criterion.key}`, {
+                  count: criterion.key === "length" ? PASSWORD_MIN_LENGTH : 1,
+                })}
               </span>
             </div>
           ))}
