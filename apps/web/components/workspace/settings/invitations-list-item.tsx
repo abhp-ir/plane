@@ -8,7 +8,7 @@ import { useState } from "react";
 import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 // plane imports
-import { ROLE, EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
+import { ROLE, ROLE_DETAILS, EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { ChevronDownOutline, DeleteOutline, LinkOutline, MoreHorizontalOutline } from "@makeplane/propel/icons";
 import { Icon } from "@makeplane/propel/components/icon";
@@ -76,15 +76,15 @@ export const WorkspaceInvitationsListItem = observer(function WorkspaceInvitatio
       await deleteMemberInvitation(workspaceSlug.toString(), invitationDetails.id);
       setToast({
         type: "success",
-        title: "Success!",
-        message: "Invitation removed successfully.",
+        title: t("toast.success"),
+        message: t("member_settings.invitation_removed"),
       });
     } catch (err: unknown) {
       const error = err as { error?: string };
       setToast({
         type: "error",
-        title: "Error!",
-        message: error?.error || "Something went wrong. Please try again.",
+        title: t("toast.error"),
+        message: error?.error || t("something_went_wrong_please_try_again"),
       });
     }
   };
@@ -162,14 +162,14 @@ export const WorkspaceInvitationsListItem = observer(function WorkspaceInvitatio
                   const error = err as { error?: string };
                   setToast({
                     type: "error",
-                    title: "Error!",
-                    message: error?.error || "An error occurred while updating member role. Please try again.",
+                    title: t("toast.error"),
+                    message: error?.error || t("member_settings.role_update_failed"),
                   });
                 });
               }}
               getValues={() => roleOptions}
               getOptionValue={(role) => String(role.key)}
-              getOptionLabel={(role) => role.label}
+              getOptionLabel={(role) => t(ROLE_DETAILS[role.key as EUserPermissions].i18n_title)}
               disabled={!hasRoleChangeAccess}
               showSearch={false}
               pinSelected={false}
@@ -178,7 +178,7 @@ export const WorkspaceInvitationsListItem = observer(function WorkspaceInvitatio
                 variant="pill-sm"
                 appendIcon={hasRoleChangeAccess ? <ChevronDownOutline /> : undefined}
               >
-                <span className="min-w-0 truncate">{ROLE[invitationDetails.role]}</span>
+                <span className="min-w-0 truncate">{t(ROLE_DETAILS[invitationDetails.role].i18n_title)}</span>
               </Select.Trigger>
             </Select>
           </SelectDropdownPlacementContext.Provider>

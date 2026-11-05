@@ -4,11 +4,10 @@
  * See the LICENSE file for details.
  */
 
-import { useEffect } from "react";
 import { observer } from "mobx-react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 // plane imports
-import { ROLE, EUserPermissions } from "@plane/constants";
+import { ROLE, ROLE_DETAILS, EUserPermissions } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { Button } from "@makeplane/propel/components/button";
 import { AddOutline, ChevronDownOutline, CloseOutline } from "@makeplane/propel/icons";
@@ -80,7 +79,7 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
     reset,
     handleSubmit,
     control,
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({ defaultValues });
   const { fields, append, remove } = useFieldArray({
     control,
     name: "members",
@@ -105,9 +104,9 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
         if (onSuccess) onSuccess();
         onClose();
         setToast({
-          title: "Success!",
+          title: t("toast.success"),
           type: "success",
-          message: "Members added successfully.",
+          message: t("member_settings.members_added"),
         });
         return undefined;
       })
@@ -134,17 +133,6 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
       member_id: "",
     });
   };
-
-  useEffect(() => {
-    if (fields.length === 0) {
-      append([
-        {
-          role: 5,
-          member_id: "",
-        },
-      ]);
-    }
-  }, [fields, append]);
 
   const checkCurrentOptionWorkspaceRole = (value: string) => {
     const currentMemberWorkspaceRole = getWorkspaceMemberDetails(value)?.role;
@@ -197,7 +185,7 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                       <Controller
                         control={control}
                         name={`members.${index}.member_id`}
-                        rules={{ required: "Please select a member" }}
+                        rules={{ required: t("member_settings.select_member") }}
                         render={({ field: { value, onChange } }) => (
                           <MemberSelect
                             value={value || null}
@@ -210,7 +198,9 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                       />
                       {errors.members && errors.members[index]?.member_id && (
                         <span className="px-1 text-13 text-danger-primary">
-                          {errors.members[index]?.member_id?.message}
+                          {errors.members[index]?.member_id?.type === "required"
+                            ? t("member_settings.select_member")
+                            : errors.members[index]?.member_id?.message}
                         </span>
                       )}
                     </div>
@@ -220,7 +210,7 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                         <Controller
                           name={`members.${index}.role`}
                           control={control}
-                          rules={{ required: "Select Role" }}
+                          rules={{ required: t("member_settings.select_role") }}
                           render={({ field: { value, onChange } }) => {
                             const roleOptions = getRoleOptions(watch(`members.${index}.member_id`));
                             return (
@@ -230,18 +220,18 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                                   value={roleOptions.find((role) => role.key === value) ?? null}
                                   onChange={(key) => onChange(parseInt(key))}
                                   getOptionValue={(role) => String(role.key)}
-                                  getOptionLabel={(role) => role.label}
-                                  placeholder="Select role"
+                                  getOptionLabel={(role) => t(ROLE_DETAILS[role.key].i18n_title)}
+                                  placeholder={t("member_settings.select_role")}
                                   showSearch={false}
                                   pinSelected={false}
                                 >
                                   <Select.Trigger<TRoleOption>
                                     variant="pill-md"
                                     appendIcon={<ChevronDownOutline />}
-                                    tooltip={{ emptyContent: "Select role" }}
+                                    tooltip={{ emptyContent: t("member_settings.select_role") }}
                                   >
-                                    <span className="min-w-0 grow truncate text-left capitalize">
-                                      {value ? ROLE[value] : "Select role"}
+                                    <span className="min-w-0 grow truncate text-start capitalize">
+                                      {value ? t(ROLE_DETAILS[value].i18n_title) : t("member_settings.select_role")}
                                     </span>
                                   </Select.Trigger>
                                 </Select>
@@ -251,7 +241,9 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                         />
                         {errors.members && errors.members[index]?.role && (
                           <span className="px-1 text-13 text-danger-primary">
-                            {errors.members[index]?.role?.message}
+                            {errors.members[index]?.role?.type === "required"
+                              ? t("member_settings.select_role")
+                              : errors.members[index]?.role?.message}
                           </span>
                         )}
                       </div>
@@ -278,7 +270,7 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
             <div className="flex w-full items-center justify-between gap-2">
               <button
                 type="button"
-                className="flex items-center gap-2 bg-transparent py-2 pr-3 text-13 font-medium text-accent-primary outline-accent-strong"
+                className="flex items-center gap-2 bg-transparent py-2 pe-3 text-13 font-medium text-accent-primary outline-accent-strong"
                 onClick={appendField}
               >
                 <AddOutline className="h-4 w-4" />

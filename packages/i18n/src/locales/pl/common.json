@@ -687,7 +687,10 @@
       "copy_markdown": "Kopiuj markdown",
       "reply": "Odpowiedz",
       "add_reaction": "Dodaj reakcję",
-      "show_non_working_days": "Pokaż dni wolne od pracy"
+      "show_non_working_days": "Pokaż dni wolne od pracy",
+      "edit_label": "Edytowanie etykiety",
+      "delete_label": "Usuwanie etykiety",
+      "remove_from_group": "Usuwanie z grupy"
     },
     "name": "Nazwa",
     "discard": "Odrzuć",
@@ -971,5 +974,18 @@
     "alt": "Obraz"
   },
   "working_day": "Dzień roboczy",
-  "non_working_day": "Dzień wolny od pracy"
+  "non_working_day": "Dzień wolny od pracy",
+  "member_settings": {
+    "roles": "Role",
+    "suspended": "Zawieszony",
+    "role_required": "Wybór roli jest wymagany.",
+    "role_update_failed": "Wystąpił błąd podczas aktualizowania roli członka. Proszę spróbować ponownie.",
+    "cannot_change_role_yet": "Nie można jeszcze zmienić tej roli.",
+    "invitation_removed": "Zaproszenie zostało usunięte.",
+    "old": "Starsi",
+    "new": "Nowsi",
+    "select_role": "Proszę wybrać rolę",
+    "select_member": "Proszę wybrać członka",
+    "members_added": "Członkowie zostali dodani."
+  }
 }

@@ -115,7 +115,15 @@ export const useMemberColumns = () => {
         if (isSuspended(rowData)) return null;
         const loginMedium = rowData.member.last_login_medium;
         if (!loginMedium) return null;
-        return <div>{LOGIN_MEDIUM_LABELS[loginMedium]}</div>;
+        return (
+          <div>
+            {loginMedium === "email"
+              ? t("email")
+              : loginMedium === "magic-code"
+                ? t("auth.common.unique_code.label")
+                : LOGIN_MEDIUM_LABELS[loginMedium]}
+          </div>
+        );
       },
     },
 

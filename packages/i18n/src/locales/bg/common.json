@@ -687,7 +687,10 @@
       "copy_markdown": "Копирай като Markdown",
       "reply": "Отговори",
       "add_reaction": "Добави реакция",
-      "show_non_working_days": "Показвай неработните дни"
+      "show_non_working_days": "Показвай неработните дни",
+      "edit_label": "Редактиране на етикет",
+      "delete_label": "Изтриване на етикет",
+      "remove_from_group": "Премахване от групата"
     },
     "name": "Име",
     "discard": "Отхвърли",
@@ -971,5 +974,18 @@
     "alt": "Изображение"
   },
   "working_day": "Работен ден",
-  "non_working_day": "Неработен ден"
+  "non_working_day": "Неработен ден",
+  "member_settings": {
+    "roles": "Роли",
+    "suspended": "Временно спрян",
+    "role_required": "Изборът на роля е задължителен.",
+    "role_update_failed": "Възникна грешка при актуализирането на ролята на члена. Опитайте отново.",
+    "cannot_change_role_yet": "Все още не можете да промените тази роля.",
+    "invitation_removed": "Поканата е премахната успешно.",
+    "old": "Стари",
+    "new": "Нови",
+    "select_role": "Изберете роля",
+    "select_member": "Моля, изберете член",
+    "members_added": "Членовете са добавени успешно."
+  }
 }

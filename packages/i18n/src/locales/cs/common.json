@@ -687,7 +687,10 @@
       "copy_markdown": "Kopírovat markdown",
       "reply": "Odpovědět",
       "add_reaction": "Přidat reakci",
-      "show_non_working_days": "Zobrazit nepracovní dny"
+      "show_non_working_days": "Zobrazit nepracovní dny",
+      "edit_label": "Upravit štítek",
+      "delete_label": "Smazat štítek",
+      "remove_from_group": "Odebrat ze skupiny"
     },
     "name": "Název",
     "discard": "Zahodit",
@@ -971,5 +974,18 @@
     "alt": "Obrázek"
   },
   "working_day": "Pracovní den",
-  "non_working_day": "Nepracovní den"
+  "non_working_day": "Nepracovní den",
+  "member_settings": {
+    "roles": "Role",
+    "suspended": "Pozastaveno",
+    "role_required": "Výběr role je povinný.",
+    "role_update_failed": "Při aktualizaci role člena došlo k chybě. Zkuste to znovu.",
+    "cannot_change_role_yet": "Tuto roli zatím nemůžete změnit.",
+    "invitation_removed": "Pozvánka byla úspěšně odebrána.",
+    "old": "Starší",
+    "new": "Novější",
+    "select_role": "Vyberte roli",
+    "select_member": "Vyberte prosím člena",
+    "members_added": "Členové byli úspěšně přidáni."
+  }
 }

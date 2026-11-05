@@ -16,7 +16,7 @@ import {
 } from "@makeplane/propel/icons";
 // constants
 import type { IProjectMemberDisplayProperties, TMemberOrderByOptions } from "@plane/constants";
-import { MEMBER_PROPERTY_DETAILS } from "@plane/constants";
+import { EUserPermissions, MEMBER_PROPERTY_DETAILS, ROLE_DETAILS } from "@plane/constants";
 // i18n
 import { useTranslation } from "@plane/i18n";
 // types
@@ -31,7 +31,7 @@ interface Props {
 export const MemberHeaderColumn = observer(function MemberHeaderColumn(props: Props) {
   const { displayFilters, handleDisplayFilterUpdate, property } = props;
   // i18n
-  const { t } = useTranslation();
+  const { t, direction } = useTranslation();
 
   const propertyDetails = MEMBER_PROPERTY_DETAILS[property];
 
@@ -47,10 +47,18 @@ export const MemberHeaderColumn = observer(function MemberHeaderColumn(props: Pr
 
   if (!propertyDetails) return null;
 
+  const [ascendingOrderTitle, descendingOrderTitle] =
+    property === "joining_date"
+      ? [t("member_settings.old"), t("member_settings.new")]
+      : property === "role"
+        ? [t(ROLE_DETAILS[EUserPermissions.GUEST].i18n_title), t(ROLE_DETAILS[EUserPermissions.ADMIN].i18n_title)]
+        : [propertyDetails.ascendingOrderTitle, propertyDetails.descendingOrderTitle];
+  const orderArrow = direction === "rtl" ? "←" : "→";
+  const useLocalizedOrder = direction === "rtl" && property !== "joining_date" && property !== "role";
+
   return (
     <Menu>
       <MenuTrigger
-        tabIndex={-1}
         render={
           <button
             type="button"
@@ -59,7 +67,7 @@ export const MemberHeaderColumn = observer(function MemberHeaderColumn(props: Pr
         }
       >
         <span>{t(propertyDetails.i18n_title)}</span>
-        <div className="ml-3 flex">
+        <div className="ms-3 flex">
           {(activeSortingProperty === propertyDetails.ascendingOrderKey ||
             activeSortingProperty === propertyDetails.descendingOrderKey) && (
             <div className="flex h-3.5 w-3.5 items-center justify-center rounded-full">
@@ -78,13 +86,21 @@ export const MemberHeaderColumn = observer(function MemberHeaderColumn(props: Pr
           <>
             <MenuItem
               icon={<Icon icon={SortDescendingOutline} />}
-              label={`${propertyDetails.ascendingOrderTitle} \u2192 ${propertyDetails.descendingOrderTitle}`}
+              label={
+                useLocalizedOrder
+                  ? t("common.order_by.asc")
+                  : `${ascendingOrderTitle} ${orderArrow} ${descendingOrderTitle}`
+              }
               selected={activeSortingProperty === propertyDetails.ascendingOrderKey}
               onClick={() => handleOrderBy(propertyDetails.ascendingOrderKey, property)}
             />
             <MenuItem
               icon={<Icon icon={SortAscendingOutline} />}
-              label={`${propertyDetails.descendingOrderTitle} \u2192 ${propertyDetails.ascendingOrderTitle}`}
+              label={
+                useLocalizedOrder
+                  ? t("common.order_by.desc")
+                  : `${descendingOrderTitle} ${orderArrow} ${ascendingOrderTitle}`
+              }
               selected={activeSortingProperty === propertyDetails.descendingOrderKey}
               onClick={() => handleOrderBy(propertyDetails.descendingOrderKey, property)}
             />

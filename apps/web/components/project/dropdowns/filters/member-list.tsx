@@ -17,8 +17,11 @@ import {
   MenuTrigger,
 } from "@makeplane/propel/components/menu";
 import { ChevronDownOutline } from "@makeplane/propel/icons";
+import { ROLE_DETAILS } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { EUserProjectRoles, EUserWorkspaceRoles } from "@plane/types";
+
+import { formatFilterCount } from "@/helpers/filter-labels";
 
 interface IRoleOption {
   value: string;
@@ -48,7 +51,7 @@ const WORKSPACE_ROLE_OPTIONS: IRoleOption[] = [
 export const MemberListFiltersDropdown = observer(function MemberListFiltersDropdown(props: Props) {
   const { appliedFilters, handleUpdate, memberType } = props;
   // plane hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // derived values
   const roleOptions = memberType === "project" ? PROJECT_ROLE_OPTIONS : WORKSPACE_ROLE_OPTIONS;
   const appliedFiltersCount = appliedFilters?.length ?? 0;
@@ -69,15 +72,21 @@ export const MemberListFiltersDropdown = observer(function MemberListFiltersDrop
             />
           }
         />
-        {appliedFiltersCount > 0 && <div className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-accent-primary" />}
+        {appliedFiltersCount > 0 && <div className="absolute -end-1 -top-1 h-2 w-2 rounded-full bg-accent-primary" />}
       </div>
       <MenuContent side="bottom" align="start">
         <MenuGroup>
-          <MenuLabel meta={appliedFiltersCount > 0 ? String(appliedFiltersCount) : undefined}>Roles</MenuLabel>
+          <MenuLabel meta={appliedFiltersCount > 0 ? formatFilterCount(appliedFiltersCount, currentLocale) : undefined}>
+            {t("member_settings.roles")}
+          </MenuLabel>
           {roleOptions.map((role) => (
             <MenuCheckboxItem
               key={`role-${role.value}`}
-              label={role.label}
+              label={
+                role.value === "suspended"
+                  ? t("member_settings.suspended")
+                  : t(ROLE_DETAILS[Number(role.value) as EUserWorkspaceRoles].i18n_title)
+              }
               checked={appliedFilterSet.has(role.value)}
               onCheckedChange={() => handleUpdate(role.value)}
             />

@@ -687,7 +687,10 @@
       "copy_markdown": "Markdown-ის კოპირება",
       "reply": "Reply",
       "add_reaction": "რეაქციის დამატება",
-      "show_non_working_days": "არასამუშაო დღეების ჩვენება"
+      "show_non_working_days": "არასამუშაო დღეების ჩვენება",
+      "edit_label": "იარლიყის რედაქტირება",
+      "delete_label": "იარლიყის წაშლა",
+      "remove_from_group": "ჯგუფიდან ამოშლა"
     },
     "name": "სახელი",
     "discard": "გაუქმება",
@@ -971,5 +974,18 @@
     "alt": "სურათი"
   },
   "working_day": "სამუშაო დღე",
-  "non_working_day": "არასამუშაო დღე"
+  "non_working_day": "არასამუშაო დღე",
+  "member_settings": {
+    "roles": "როლები",
+    "suspended": "შეჩერებულია",
+    "role_required": "როლის არჩევა სავალდებულოა.",
+    "role_update_failed": "წევრის როლის განახლებისას შეცდომა მოხდა. სცადეთ ხელახლა.",
+    "cannot_change_role_yet": "ამ როლის შეცვლა ჯერ არ შეგიძლიათ.",
+    "invitation_removed": "მოწვევა წარმატებით წაიშალა.",
+    "old": "ძველი",
+    "new": "ახალი",
+    "select_role": "აირჩიეთ როლი",
+    "select_member": "გთხოვთ, აირჩიოთ წევრი",
+    "members_added": "წევრები წარმატებით დაემატა."
+  }
 }

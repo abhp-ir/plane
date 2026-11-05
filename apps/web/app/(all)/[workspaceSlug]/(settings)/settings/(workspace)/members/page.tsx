@@ -59,7 +59,7 @@ const WorkspaceMembersSettingsPage = observer(function WorkspaceMembersSettingsP
 
       setToast({
         type: "success",
-        title: "Success!",
+        title: t("toast.success"),
         message: t("workspace_settings.settings.members.invitations_sent_successfully"),
       });
     } catch (error: unknown) {
@@ -70,7 +70,7 @@ const WorkspaceMembersSettingsPage = observer(function WorkspaceMembersSettingsP
       }
       setToast({
         type: "error",
-        title: "Error!",
+        title: t("toast.error"),
         message: `${message ?? t("something_went_wrong_please_try_again")}`,
       });
 
@@ -124,6 +124,7 @@ const WorkspaceMembersSettingsPage = observer(function WorkspaceMembersSettingsP
               <input
                 className="w-full max-w-[234px] border-none bg-transparent text-body-xs-regular outline-none placeholder:text-placeholder"
                 placeholder={`${t("search")}...`}
+                aria-label={t("common.search.label")}
                 value={searchQuery}
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus

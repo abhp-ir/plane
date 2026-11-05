@@ -687,7 +687,10 @@
       "copy_markdown": "کپی Markdown",
       "reply": "پاسخ",
       "add_reaction": "افزودن واکنش",
-      "show_non_working_days": "نمایش روزهای غیرکاری"
+      "show_non_working_days": "نمایش روزهای غیرکاری",
+      "edit_label": "ویرایش برچسب",
+      "delete_label": "حذف برچسب",
+      "remove_from_group": "خارج کردن از گروه"
     },
     "name": "نام",
     "discard": "کنار گذاشتن",
@@ -971,5 +974,18 @@
     "alt": "تصویر"
   },
   "working_day": "روز کاری",
-  "non_working_day": "روز غیرکاری"
+  "non_working_day": "روز غیرکاری",
+  "member_settings": {
+    "roles": "نقش‌ها",
+    "suspended": "تعلیق‌شده",
+    "role_required": "انتخاب نقش الزامی است.",
+    "role_update_failed": "هنگام به‌روزرسانی نقش عضو خطایی رخ داد. دوباره تلاش کنید.",
+    "cannot_change_role_yet": "هنوز نمی‌توانید این نقش را تغییر دهید.",
+    "invitation_removed": "دعوت‌نامه با موفقیت حذف شد.",
+    "old": "قدیمی",
+    "new": "جدید",
+    "select_role": "انتخاب نقش",
+    "select_member": "لطفاً یک عضو را انتخاب کنید",
+    "members_added": "اعضا با موفقیت اضافه شدند."
+  }
 }

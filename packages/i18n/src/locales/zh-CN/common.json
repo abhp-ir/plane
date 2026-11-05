@@ -687,7 +687,10 @@
       "copy_markdown": "复制Markdown",
       "reply": "回复",
       "add_reaction": "添加表情回应",
-      "show_non_working_days": "显示非工作日"
+      "show_non_working_days": "显示非工作日",
+      "edit_label": "编辑标签",
+      "delete_label": "删除标签",
+      "remove_from_group": "从分组中移除"
     },
     "name": "名称",
     "discard": "放弃",
@@ -971,5 +974,18 @@
     "alt": "图片"
   },
   "working_day": "工作日",
-  "non_working_day": "非工作日"
+  "non_working_day": "非工作日",
+  "member_settings": {
+    "roles": "角色",
+    "suspended": "已暂停",
+    "role_required": "必须选择角色。",
+    "role_update_failed": "更新成员角色时出错。请重试。",
+    "cannot_change_role_yet": "暂时无法更改此角色。",
+    "invitation_removed": "邀请已成功删除。",
+    "old": "旧",
+    "new": "新",
+    "select_role": "选择角色",
+    "select_member": "请选择成员",
+    "members_added": "成员已成功添加。"
+  }
 }

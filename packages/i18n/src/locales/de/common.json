@@ -687,7 +687,10 @@
       "copy_markdown": "Markdown kopieren",
       "reply": "Antworten",
       "add_reaction": "Reaktion hinzufügen",
-      "show_non_working_days": "Arbeitsfreie Tage anzeigen"
+      "show_non_working_days": "Arbeitsfreie Tage anzeigen",
+      "edit_label": "Label bearbeiten",
+      "delete_label": "Label löschen",
+      "remove_from_group": "Aus Gruppe entfernen"
     },
     "name": "Name",
     "discard": "Verwerfen",
@@ -971,5 +974,18 @@
     "alt": "Bild"
   },
   "working_day": "Arbeitstag",
-  "non_working_day": "Arbeitsfreier Tag"
+  "non_working_day": "Arbeitsfreier Tag",
+  "member_settings": {
+    "roles": "Rollen",
+    "suspended": "Gesperrt",
+    "role_required": "Die Auswahl einer Rolle ist erforderlich.",
+    "role_update_failed": "Beim Aktualisieren der Mitgliedsrolle ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "cannot_change_role_yet": "Sie können diese Rolle noch nicht ändern.",
+    "invitation_removed": "Einladung erfolgreich entfernt.",
+    "old": "Alt",
+    "new": "Neu",
+    "select_role": "Rolle auswählen",
+    "select_member": "Bitte wählen Sie ein Mitglied aus",
+    "members_added": "Mitglieder erfolgreich hinzugefügt."
+  }
 }

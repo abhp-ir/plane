@@ -8,6 +8,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { CloseOutline, EditOutline } from "@makeplane/propel/icons";
+import { useTranslation } from "@plane/i18n";
 // types
 import type { IIssueLabel } from "@plane/types";
 // hooks
@@ -37,6 +38,7 @@ type Props = {
 };
 
 export function ProjectSettingLabelItem(props: Props) {
+  const { t } = useTranslation();
   const {
     label,
     setIsUpdating,
@@ -55,10 +57,10 @@ export function ProjectSettingLabelItem(props: Props) {
   // store hooks
   const { updateLabel } = useLabel();
 
-  const removeFromGroup = (label: IIssueLabel) => {
+  const removeFromGroup = (labelToRemove: IIssueLabel) => {
     if (!workspaceSlug || !projectId) return;
 
-    updateLabel(workspaceSlug.toString(), projectId.toString(), label.id, {
+    updateLabel(workspaceSlug.toString(), projectId.toString(), labelToRemove.id, {
       parent: null,
     });
   };
@@ -68,7 +70,7 @@ export function ProjectSettingLabelItem(props: Props) {
       CustomIcon: CloseOutline,
       onClick: removeFromGroup,
       isVisible: !!label.parent,
-      text: "Remove from group",
+      text: t("common.actions.remove_from_group"),
       key: "remove_from_group",
     },
     {
@@ -78,7 +80,7 @@ export function ProjectSettingLabelItem(props: Props) {
         setIsUpdating(true);
       },
       isVisible: true,
-      text: "Edit label",
+      text: t("common.actions.edit_label"),
       key: "edit_label",
     },
   ];

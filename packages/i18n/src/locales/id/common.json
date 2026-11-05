@@ -687,7 +687,10 @@
       "copy_markdown": "Salin markdown",
       "reply": "Balas",
       "add_reaction": "Tambah reaksi",
-      "show_non_working_days": "Tampilkan hari nonkerja"
+      "show_non_working_days": "Tampilkan hari nonkerja",
+      "edit_label": "Ubah label",
+      "delete_label": "Hapus label",
+      "remove_from_group": "Keluarkan dari grup"
     },
     "name": "Nama",
     "discard": "Buang",
@@ -971,5 +974,18 @@
     "alt": "Gambar"
   },
   "working_day": "Hari kerja",
-  "non_working_day": "Hari nonkerja"
+  "non_working_day": "Hari nonkerja",
+  "member_settings": {
+    "roles": "Peran",
+    "suspended": "Ditangguhkan",
+    "role_required": "Peran wajib dipilih.",
+    "role_update_failed": "Terjadi kesalahan saat memperbarui peran anggota. Silakan coba lagi.",
+    "cannot_change_role_yet": "Anda belum dapat mengubah peran ini.",
+    "invitation_removed": "Undangan berhasil dihapus.",
+    "old": "Lama",
+    "new": "Baru",
+    "select_role": "Pilih peran",
+    "select_member": "Silakan pilih anggota",
+    "members_added": "Anggota berhasil ditambahkan."
+  }
 }

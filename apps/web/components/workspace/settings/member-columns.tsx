@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 // plane imports
-import { ROLE, EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
+import { ROLE, ROLE_DETAILS, EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { DeactivatedUserOutline, DeleteOutline, MoreHorizontalOutline } from "@makeplane/propel/icons";
 import { Badge } from "@makeplane/propel/components/badge";
@@ -119,6 +119,7 @@ export function NameColumn(props: NameProps) {
 
 export const AccountTypeColumn = observer(function AccountTypeColumn(props: AccountTypeProps) {
   const { rowData, workspaceSlug } = props;
+  const { t } = useTranslation();
   // form info
   const { control } = useForm();
   // store hooks
@@ -139,17 +140,17 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
     <>
       {isSuspended ? (
         <div className="flex w-32">
-          <Badge variant="neutral" size="sm" label="Suspended" />
+          <Badge variant="neutral" size="sm" label={t("member_settings.suspended")} />
         </div>
       ) : isRoleNonEditable ? (
         <div className="flex w-32">
-          <span>{ROLE[rowData.role]}</span>
+          <span>{t(ROLE_DETAILS[rowData.role].i18n_title)}</span>
         </div>
       ) : (
         <Controller
           name="role"
           control={control}
-          rules={{ required: "Role is required." }}
+          rules={{ required: t("member_settings.role_required") }}
           render={() => (
             <div className="w-32">
               <Select<TRoleOption>
@@ -164,19 +165,19 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
 
                     setToast({
                       type: "error",
-                      title: "Error!",
-                      message: errorString ?? "An error occurred while updating member role. Please try again.",
+                      title: t("toast.error"),
+                      message: errorString ?? t("member_settings.role_update_failed"),
                     });
                   });
                 }}
                 getValues={() => ROLE_OPTIONS}
                 getOptionValue={(role) => String(role.key)}
-                getOptionLabel={(role) => role.label}
+                getOptionLabel={(role) => t(ROLE_DETAILS[role.key].i18n_title)}
                 showSearch={false}
                 pinSelected={false}
               >
                 <Select.Trigger<TRoleOption> variant="select-ghost-md">
-                  <span className="min-w-0 flex-1 truncate text-left">{ROLE[rowData.role]}</span>
+                  <span className="min-w-0 flex-1 truncate text-start">{t(ROLE_DETAILS[rowData.role].i18n_title)}</span>
                 </Select.Trigger>
               </Select>
             </div>

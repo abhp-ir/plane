@@ -687,7 +687,10 @@
       "copy_markdown": "Копировать markdown",
       "reply": "Ответить",
       "add_reaction": "Добавить реакцию",
-      "show_non_working_days": "Показывать нерабочие дни"
+      "show_non_working_days": "Показывать нерабочие дни",
+      "edit_label": "Изменить метку",
+      "delete_label": "Удалить метку",
+      "remove_from_group": "Удалить из группы"
     },
     "name": "Название",
     "discard": "Отменить",
@@ -971,5 +974,18 @@
     "alt": "Изображение"
   },
   "working_day": "Рабочий день",
-  "non_working_day": "Нерабочий день"
+  "non_working_day": "Нерабочий день",
+  "member_settings": {
+    "roles": "Роли",
+    "suspended": "Приостановлен",
+    "role_required": "Необходимо выбрать роль.",
+    "role_update_failed": "При обновлении роли участника произошла ошибка. Повторите попытку.",
+    "cannot_change_role_yet": "Пока нельзя изменить эту роль.",
+    "invitation_removed": "Приглашение удалено.",
+    "old": "Старые",
+    "new": "Новые",
+    "select_role": "Выберите роль",
+    "select_member": "Выберите участника",
+    "members_added": "Участники добавлены."
+  }
 }

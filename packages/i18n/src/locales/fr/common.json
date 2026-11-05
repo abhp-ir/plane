@@ -687,7 +687,10 @@
       "copy_markdown": "Copier le markdown",
       "reply": "Répondre",
       "add_reaction": "Ajouter une réaction",
-      "show_non_working_days": "Afficher les jours non travaillés"
+      "show_non_working_days": "Afficher les jours non travaillés",
+      "edit_label": "Modifier l’étiquette",
+      "delete_label": "Supprimer l’étiquette",
+      "remove_from_group": "Retirer du groupe"
     },
     "name": "Nom",
     "discard": "Abandonner",
@@ -971,5 +974,18 @@
     "alt": "Image"
   },
   "working_day": "Jour travaillé",
-  "non_working_day": "Jour non travaillé"
+  "non_working_day": "Jour non travaillé",
+  "member_settings": {
+    "roles": "Rôles",
+    "suspended": "Suspendu",
+    "role_required": "La sélection d’un rôle est obligatoire.",
+    "role_update_failed": "Une erreur s’est produite lors de la mise à jour du rôle du membre. Veuillez réessayer.",
+    "cannot_change_role_yet": "Vous ne pouvez pas encore modifier ce rôle.",
+    "invitation_removed": "L’invitation a été supprimée.",
+    "old": "Anciens",
+    "new": "Nouveaux",
+    "select_role": "Sélectionnez un rôle",
+    "select_member": "Veuillez sélectionner un membre",
+    "members_added": "Les membres ont été ajoutés."
+  }
 }

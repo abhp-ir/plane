@@ -111,7 +111,7 @@ export class LabelStore implements ILabelStore {
    */
   get projectLabelsTree() {
     if (!this.projectLabels) return;
-    return buildTree(this.projectLabels);
+    return buildTree(this.projectLabels.map((label) => ({ ...label })));
   }
 
   getWorkspaceLabels = computedFn((workspaceSlug: string) => {
@@ -304,6 +304,7 @@ export class LabelStore implements ILabelStore {
       runInAction(() => {
         delete this.labelMap[labelId];
       });
+      return undefined;
     });
   };
 }

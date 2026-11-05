@@ -687,7 +687,10 @@
       "copy_markdown": "Copiază markdown",
       "reply": "Răspunde",
       "add_reaction": "Adaugă o reacție",
-      "show_non_working_days": "Afișați zilele nelucrătoare"
+      "show_non_working_days": "Afișați zilele nelucrătoare",
+      "edit_label": "Editați eticheta",
+      "delete_label": "Ștergeți eticheta",
+      "remove_from_group": "Eliminați din grup"
     },
     "name": "Nume",
     "discard": "Renunță",
@@ -971,5 +974,18 @@
     "alt": "Imagine"
   },
   "working_day": "Zi lucrătoare",
-  "non_working_day": "Zi nelucrătoare"
+  "non_working_day": "Zi nelucrătoare",
+  "member_settings": {
+    "roles": "Roluri",
+    "suspended": "Suspendat",
+    "role_required": "Selectarea unui rol este obligatorie.",
+    "role_update_failed": "A apărut o eroare la actualizarea rolului membrului. Încercați din nou.",
+    "cannot_change_role_yet": "Încă nu puteți schimba acest rol.",
+    "invitation_removed": "Invitația a fost eliminată.",
+    "old": "Vechi",
+    "new": "Noi",
+    "select_role": "Selectați un rol",
+    "select_member": "Selectați un membru",
+    "members_added": "Membrii au fost adăugați."
+  }
 }

@@ -687,7 +687,10 @@
       "copy_markdown": "Markdown'ı kopyala",
       "reply": "Yanıtla",
       "add_reaction": "Tepki ekle",
-      "show_non_working_days": "Çalışılmayan günleri göster"
+      "show_non_working_days": "Çalışılmayan günleri göster",
+      "edit_label": "Etiketi düzenle",
+      "delete_label": "Etiketi sil",
+      "remove_from_group": "Gruptan kaldır"
     },
     "name": "Ad",
     "discard": "Vazgeç",
@@ -971,5 +974,18 @@
     "alt": "Görsel"
   },
   "working_day": "Çalışma günü",
-  "non_working_day": "Çalışılmayan gün"
+  "non_working_day": "Çalışılmayan gün",
+  "member_settings": {
+    "roles": "Roller",
+    "suspended": "Askıya alındı",
+    "role_required": "Rol seçilmesi zorunludur.",
+    "role_update_failed": "Üyenin rolü güncellenirken bir hata oluştu. Lütfen tekrar deneyin.",
+    "cannot_change_role_yet": "Bu rolü henüz değiştiremezsiniz.",
+    "invitation_removed": "Davet başarıyla kaldırıldı.",
+    "old": "Eski",
+    "new": "Yeni",
+    "select_role": "Rol seçin",
+    "select_member": "Lütfen bir üye seçin",
+    "members_added": "Üyeler başarıyla eklendi."
+  }
 }

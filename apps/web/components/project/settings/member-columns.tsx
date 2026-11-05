@@ -15,7 +15,7 @@ import { MoreHorizontalOutline } from "@makeplane/propel/icons";
 // plane imports
 import { Select } from "@plane/blocks/select";
 import { setToast } from "@plane/blocks/toast";
-import { ROLE, EUserPermissions } from "@plane/constants";
+import { ROLE, ROLE_DETAILS, EUserPermissions } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import type { EUserProjectRoles, IUser, IWorkspaceMember, TProjectMembership } from "@plane/types";
 import { getFileURL } from "@plane/utils";
@@ -79,7 +79,7 @@ export function NameColumn(props: NameProps) {
         </div>
         {(isAdmin || id === currentUser?.id) && (
           <Menu>
-            <div className="opacity-0 transition-opacity group-hover:opacity-100">
+            <div className="opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100 has-[[data-popup-open]]:opacity-100">
               <MenuTrigger
                 render={
                   <IconButton
@@ -123,20 +123,18 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
     formState: { errors },
   } = useForm();
   // derived values
-  const roleLabel = ROLE[rowData.original_role ?? EUserPermissions.GUEST];
+  const roleLabel = t(ROLE_DETAILS[rowData.original_role ?? EUserPermissions.GUEST].i18n_title);
   const isCurrentUser = currentUser?.id === rowData.member.id;
   const isRowDataWorkspaceAdmin = [EUserPermissions.ADMIN].includes(
-    Number(getWorkspaceMemberDetails(rowData.member.id)?.role) ?? EUserPermissions.GUEST
+    Number(getWorkspaceMemberDetails(rowData.member.id)?.role)
   );
   const isCurrentUserWorkspaceAdmin = currentUser
-    ? [EUserPermissions.ADMIN].includes(
-        Number(getWorkspaceMemberDetails(currentUser.id)?.role) ?? EUserPermissions.GUEST
-      )
+    ? [EUserPermissions.ADMIN].includes(Number(getWorkspaceMemberDetails(currentUser.id)?.role))
     : false;
   const currentProjectRole = getProjectRoleByWorkspaceSlugAndProjectId(workspaceSlug, projectId);
 
   const isCurrentUserProjectAdmin = currentProjectRole
-    ? ![EUserPermissions.MEMBER, EUserPermissions.GUEST].includes(Number(currentProjectRole) ?? EUserPermissions.GUEST)
+    ? ![EUserPermissions.MEMBER, EUserPermissions.GUEST].includes(Number(currentProjectRole))
     : false;
 
   // logic
@@ -162,7 +160,7 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
         <Controller
           name="role"
           control={control}
-          rules={{ required: "Role is required." }}
+          rules={{ required: t("member_settings.role_required") }}
           render={() => {
             const roleOptions: TRoleOption[] = Object.entries(checkCurrentOptionWorkspaceRole(rowData.member.id)).map(
               ([key, label]) => ({ key, label })
@@ -179,20 +177,20 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
                       projectId.toString(),
                       rowData.member.id,
                       Number(value) as EUserProjectRoles
-                    ).catch((err) => {
+                    ).catch((err: unknown) => {
                       console.log(err, "err");
-                      const error = err.error;
+                      const error = (err as { error?: string | string[] } | undefined)?.error;
                       const errorString = Array.isArray(error) ? error[0] : error;
 
                       setToast({
                         type: "error",
-                        title: "You can’t change this role yet.",
-                        message: errorString ?? "An error occurred while updating member role. Please try again.",
+                        title: t("member_settings.cannot_change_role_yet"),
+                        message: errorString ?? t("member_settings.role_update_failed"),
                       });
                     });
                   }}
                   getOptionValue={(option) => option.key}
-                  getOptionLabel={(option) => option.label}
+                  getOptionLabel={(option) => t(ROLE_DETAILS[Number(option.key) as EUserPermissions].i18n_title)}
                   placeholder={t("role")}
                   showSearch={false}
                   pinSelected={false}
@@ -201,7 +199,7 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
                     variant="select-ghost-md"
                     className={errors.role ? "border border-danger-strong" : undefined}
                   >
-                    <span className="min-w-0 grow truncate text-left">{roleLabel}</span>
+                    <span className="min-w-0 grow truncate text-start">{roleLabel}</span>
                   </Select.Trigger>
                 </Select>
               </div>

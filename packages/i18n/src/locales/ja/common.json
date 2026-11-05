@@ -687,7 +687,10 @@
       "copy_markdown": "マークダウンをコピー",
       "reply": "返信",
       "add_reaction": "リアクションを追加",
-      "show_non_working_days": "非稼働日を表示"
+      "show_non_working_days": "非稼働日を表示",
+      "edit_label": "ラベルを編集",
+      "delete_label": "ラベルを削除",
+      "remove_from_group": "グループから削除"
     },
     "name": "名前",
     "discard": "破棄",
@@ -971,5 +974,18 @@
     "alt": "画像"
   },
   "working_day": "稼働日",
-  "non_working_day": "非稼働日"
+  "non_working_day": "非稼働日",
+  "member_settings": {
+    "roles": "ロール",
+    "suspended": "停止中",
+    "role_required": "ロールの選択は必須です。",
+    "role_update_failed": "メンバーのロールの更新中にエラーが発生しました。もう一度お試しください。",
+    "cannot_change_role_yet": "このロールはまだ変更できません。",
+    "invitation_removed": "招待を削除しました。",
+    "old": "古い",
+    "new": "新しい",
+    "select_role": "ロールを選択",
+    "select_member": "メンバーを選択してください",
+    "members_added": "メンバーを追加しました。"
+  }
 }

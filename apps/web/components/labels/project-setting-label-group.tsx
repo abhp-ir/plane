@@ -12,6 +12,7 @@ import { Icon } from "@makeplane/propel/components/icon";
 import { IconButton } from "@makeplane/propel/components/icon-button";
 import { ChevronDownOutline, DeleteOutline, EditOutline } from "@makeplane/propel/icons";
 import type { IIssueLabel } from "@plane/types";
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 // components
 import type { TLabelOperationsCallbacks } from "./create-update-label-inline";
@@ -39,6 +40,7 @@ type Props = {
 };
 
 export const ProjectSettingLabelGroup = observer(function ProjectSettingLabelGroup(props: Props) {
+  const { t } = useTranslation();
   const {
     label,
     labelChildren,
@@ -63,7 +65,7 @@ export const ProjectSettingLabelGroup = observer(function ProjectSettingLabelGro
         setIsUpdating(true);
       },
       isVisible: true,
-      text: "Edit label",
+      text: t("common.actions.edit_label"),
       key: "edit_label",
     },
     {
@@ -72,7 +74,7 @@ export const ProjectSettingLabelGroup = observer(function ProjectSettingLabelGro
         handleLabelDelete(label);
       },
       isVisible: true,
-      text: "Delete label",
+      text: t("common.actions.delete_label"),
       key: "delete_label",
     },
   ];
@@ -90,7 +92,7 @@ export const ProjectSettingLabelGroup = observer(function ProjectSettingLabelGro
               !isDroppingInLabel ? "border-[0.5px] border-subtle" : ""
             } ${isDragging ? "bg-layer-1" : "bg-surface-1"}`}
           >
-            <div className={`py-3 pr-3 pl-1 ${!isUpdating && "max-h-full overflow-y-hidden"}`}>
+            <div className={`py-3 ps-1 pe-3 ${!isUpdating && "max-h-full overflow-y-hidden"}`}>
               <div className="relative flex cursor-pointer items-center justify-between gap-2">
                 {isEditLabelForm ? (
                   <CreateUpdateLabelInline
@@ -133,7 +135,7 @@ export const ProjectSettingLabelGroup = observer(function ProjectSettingLabelGro
                 />
               </div>
               {isOpen && (
-                <div className="ml-6">
+                <div className="ms-6">
                   {labelChildren.map((child, index) => (
                     <div key={child.id} className={`group flex w-full items-center text-13`}>
                       <div className="w-full">

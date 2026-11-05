@@ -55,6 +55,55 @@ function ProjectDate() {
   return columns.at(-1)?.tdRender(row);
 }
 
+function WorkspaceAuthentication() {
+  const { columns } = useMemberColumns();
+  return columns.find((column) => column.key === "Authentication")?.tdRender(row);
+}
+
+it.each([
+  ["email", "ایمیل", "Email"],
+  ["magic-code", "کد یک‌بارمصرف", "Unique code"],
+  ["github", "GitHub", "GitHub"],
+  ["gitlab", "GitLab", "GitLab"],
+  ["google", "Google", "Google"],
+  ["gitea", "Gitea", "Gitea"],
+] as const)("localizes the %s sign-in method while preserving brands and stored values", async (medium, fa, en) => {
+  await initPromise;
+  await setLanguage("fa");
+  mocks.update.mockClear();
+  const environment = globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT?: boolean };
+  const previous = environment.IS_REACT_ACT_ENVIRONMENT;
+  environment.IS_REACT_ACT_ENVIRONMENT = true;
+  const container = document.createElement("div");
+  document.body.append(container);
+  const root = createRoot(container);
+  row.member.last_login_medium = medium;
+  try {
+    await act(async () =>
+      root.render(createElement(TranslationProvider, null, createElement(WorkspaceAuthentication)))
+    );
+    expect(container.textContent).toBe(fa);
+    await act(async () => setLanguage("en"));
+    expect(container.textContent).toBe(en);
+    await act(async () => setLanguage("fa"));
+    expect(container.textContent).toBe(fa);
+    expect(row.member.last_login_medium).toBe(medium);
+    expect(mocks.update).not.toHaveBeenCalled();
+    row.is_active = false;
+    await act(async () =>
+      root.render(createElement(TranslationProvider, null, createElement(WorkspaceAuthentication)))
+    );
+    expect(container.textContent).toBe("");
+  } finally {
+    await act(async () => root.unmount());
+    delete row.member.last_login_medium;
+    row.is_active = true;
+    container.remove();
+    environment.IS_REACT_ACT_ENVIRONMENT = previous;
+    await setLanguage("en");
+  }
+});
+
 it.each(["workspace", "project"])(
   "updates the mounted %s joining date with language without editing membership",
   async (scope) => {

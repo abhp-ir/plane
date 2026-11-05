@@ -687,7 +687,10 @@
       "copy_markdown": "Sao chép markdown",
       "reply": "Trả lời",
       "add_reaction": "Thêm biểu cảm",
-      "show_non_working_days": "Hiển thị ngày không làm việc"
+      "show_non_working_days": "Hiển thị ngày không làm việc",
+      "edit_label": "Chỉnh sửa nhãn",
+      "delete_label": "Xóa nhãn",
+      "remove_from_group": "Xóa khỏi nhóm"
     },
     "name": "Tên",
     "discard": "Hủy bỏ",
@@ -971,5 +974,18 @@
     "alt": "Hình ảnh"
   },
   "working_day": "Ngày làm việc",
-  "non_working_day": "Ngày không làm việc"
+  "non_working_day": "Ngày không làm việc",
+  "member_settings": {
+    "roles": "Vai trò",
+    "suspended": "Đã tạm ngưng",
+    "role_required": "Bắt buộc phải chọn vai trò.",
+    "role_update_failed": "Đã xảy ra lỗi khi cập nhật vai trò của thành viên. Vui lòng thử lại.",
+    "cannot_change_role_yet": "Bạn chưa thể thay đổi vai trò này.",
+    "invitation_removed": "Đã xóa lời mời thành công.",
+    "old": "Cũ",
+    "new": "Mới",
+    "select_role": "Chọn vai trò",
+    "select_member": "Vui lòng chọn một thành viên",
+    "members_added": "Đã thêm thành viên thành công."
+  }
 }

@@ -687,7 +687,10 @@
       "copy_markdown": "Скопіювати markdown",
       "reply": "Відповісти",
       "add_reaction": "Додати реакцію",
-      "show_non_working_days": "Показувати неробочі дні"
+      "show_non_working_days": "Показувати неробочі дні",
+      "edit_label": "Змінити мітку",
+      "delete_label": "Видалити мітку",
+      "remove_from_group": "Вилучити з групи"
     },
     "name": "Назва",
     "discard": "Скасувати",
@@ -971,5 +974,18 @@
     "alt": "Зображення"
   },
   "working_day": "Робочий день",
-  "non_working_day": "Неробочий день"
+  "non_working_day": "Неробочий день",
+  "member_settings": {
+    "roles": "Ролі",
+    "suspended": "Призупинено",
+    "role_required": "Необхідно вибрати роль.",
+    "role_update_failed": "Сталася помилка під час оновлення ролі учасника. Спробуйте ще раз.",
+    "cannot_change_role_yet": "Ви ще не можете змінити цю роль.",
+    "invitation_removed": "Запрошення успішно видалено.",
+    "old": "Старі",
+    "new": "Нові",
+    "select_role": "Виберіть роль",
+    "select_member": "Будь ласка, виберіть учасника",
+    "members_added": "Учасників успішно додано."
+  }
 }

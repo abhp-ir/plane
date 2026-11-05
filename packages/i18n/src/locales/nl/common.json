@@ -687,7 +687,10 @@
       "copy_markdown": "Markdown kopiëren",
       "reply": "Beantwoorden",
       "add_reaction": "Emoji-reactie toevoegen",
-      "show_non_working_days": "Niet-werkdagen tonen"
+      "show_non_working_days": "Niet-werkdagen tonen",
+      "edit_label": "Label bewerken",
+      "delete_label": "Label verwijderen",
+      "remove_from_group": "Uit groep verwijderen"
     },
     "name": "Naam",
     "discard": "Verwerpen",
@@ -971,5 +974,18 @@
     "alt": "Afbeelding"
   },
   "working_day": "Werkdag",
-  "non_working_day": "Niet-werkdag"
+  "non_working_day": "Niet-werkdag",
+  "member_settings": {
+    "roles": "Rollen",
+    "suspended": "Opgeschort",
+    "role_required": "Het selecteren van een rol is verplicht.",
+    "role_update_failed": "Er is een fout opgetreden bij het bijwerken van de rol van het lid. Probeer het opnieuw.",
+    "cannot_change_role_yet": "Deze rol kan nog niet worden gewijzigd.",
+    "invitation_removed": "Uitnodiging verwijderd.",
+    "old": "Oud",
+    "new": "Nieuw",
+    "select_role": "Selecteer een rol",
+    "select_member": "Selecteer een lid",
+    "members_added": "Leden toegevoegd."
+  }
 }
