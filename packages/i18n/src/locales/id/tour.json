@@ -191,5 +191,29 @@
       "title": "Temukan mengapa tim beralih ke Plane",
       "description": "Bandingkan Plane dengan alat yang Anda gunakan hari ini dan lihat perbedaannya."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Rencanakan dengan item kerja",
+      "description": "Item kerja adalah komponen dasar <brand/>. Sebagian besar konsep di <brand/> berkaitan dengan item kerja dan propertinya."
+    },
+    "cycles": {
+      "description": "Siklus membantu Anda dan tim Anda bergerak maju lebih cepat, serupa dengan sprint yang umum digunakan dalam pengembangan tangkas."
+    },
+    "modules": {
+      "description": "Modul membagi pekerjaan besar Anda menjadi proyek atau fitur agar Anda dapat mengaturnya dengan lebih baik."
+    },
+    "views": {
+      "description": "Buat filter khusus untuk hanya menampilkan item kerja yang penting bagi Anda. Simpan dan bagikan filter Anda hanya dengan beberapa klik."
+    },
+    "pages": {
+      "title": "Dokumentasikan dengan halaman",
+      "description": "Gunakan halaman untuk mencatat item kerja dengan cepat saat rapat atau memulai hari."
+    },
+    "welcome": "Selamat datang di <brand/>, <name/>",
+    "welcome_description": "Kami senang Anda memutuskan untuk mencoba <brand/>. Kini Anda dapat mengelola proyek dengan mudah. Mulailah dengan membuat proyek.",
+    "skip": "Tidak, terima kasih, saya akan menjelajahinya sendiri",
+    "start": "Mari kita mulai!",
+    "subtitle": "Manfaatkan <brand/> dengan lebih baik."
   }
 }

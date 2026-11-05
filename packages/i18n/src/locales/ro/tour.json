@@ -191,5 +191,29 @@
       "title": "Descoperă de ce echipele trec la Plane",
       "description": "Compară Plane cu instrumentele pe care le folosești astăzi și vezi diferența."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Planificați cu activități",
+      "description": "Activitatea este unitatea de bază a <brand/>. Majoritatea conceptelor din <brand/> sunt asociate cu activitățile și proprietățile acestora."
+    },
+    "cycles": {
+      "description": "Ciclurile vă ajută să progresați mai rapid împreună cu echipa dumneavoastră, la fel ca sprinturile utilizate frecvent în dezvoltarea agilă."
+    },
+    "modules": {
+      "description": "Modulele împart inițiativele dumneavoastră de amploare în proiecte sau funcționalități, pentru a vă ajuta să le organizați mai bine."
+    },
+    "views": {
+      "description": "Creați filtre personalizate pentru a afișa doar activitățile care contează pentru dumneavoastră. Salvați și partajați filtrele cu doar câteva clicuri."
+    },
+    "pages": {
+      "title": "Documentare cu pagini",
+      "description": "Folosiți paginile pentru a nota rapid activități în timpul unei ședințe sau la începutul zilei."
+    },
+    "welcome": "Bun venit în <brand/>, <name/>",
+    "welcome_description": "Ne bucurăm că ați decis să încercați <brand/>. Acum vă puteți gestiona proiectele cu ușurință. Începeți prin a crea un proiect.",
+    "skip": "Nu, mulțumesc, voi explora pe cont propriu",
+    "start": "Să începem!",
+    "subtitle": "Valorificați mai bine <brand/>."
   }
 }

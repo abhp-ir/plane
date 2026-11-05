@@ -191,5 +191,29 @@
       "title": "Discover why teams switch to Plane",
       "description": "Compare Plane with the tools you use today and see the difference."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Plan with work items",
+      "description": "The work item is the building block of the <brand/>. Most concepts in <brand/> are either associated with work items and their properties."
+    },
+    "cycles": {
+      "description": "Cycles help you and your team to progress faster, similar to the sprints commonly used in agile development."
+    },
+    "modules": {
+      "description": "Modules break your big thing into Projects or Features, to help you organize better."
+    },
+    "views": {
+      "description": "Create custom filters to display only the work items that matter to you. Save and share your filters in just a few clicks."
+    },
+    "pages": {
+      "title": "Document with pages",
+      "description": "Use Pages to quickly jot down work items when you're in a meeting or starting a day."
+    },
+    "welcome": "Welcome to <brand/>, <name/>",
+    "welcome_description": "We're glad that you decided to try out <brand/>. You can now manage your projects with ease. Get started by creating a project.",
+    "skip": "No thanks, I will explore it myself",
+    "start": "Let's get started!",
+    "subtitle": "Get more out of <brand/>."
   }
 }

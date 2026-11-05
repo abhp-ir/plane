@@ -191,5 +191,29 @@
       "title": "Odkryj, dlaczego zespoły przechodzą na Plane",
       "description": "Porównaj Plane z narzędziami, których używasz dzisiaj i zobacz różnicę."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Planowanie z elementami pracy",
+      "description": "Element pracy jest podstawowym budulcem <brand/>. Większość pojęć w <brand/> wiąże się z elementami pracy i ich właściwościami."
+    },
+    "cycles": {
+      "description": "Dzięki cyklom można szybciej robić postępy wraz z zespołem, podobnie jak dzięki sprintom powszechnie stosowanym w zwinnym wytwarzaniu oprogramowania."
+    },
+    "modules": {
+      "description": "Moduły dzielą duże przedsięwzięcia na projekty lub funkcje, pomagając w lepszej organizacji."
+    },
+    "views": {
+      "description": "Można tworzyć własne filtry, aby wyświetlać tylko ważne dla siebie elementy pracy. Filtry można zapisywać i udostępniać zaledwie kilkoma kliknięciami."
+    },
+    "pages": {
+      "title": "Dokumentowanie za pomocą stron",
+      "description": "Strony umożliwiają szybkie zapisywanie elementów pracy podczas spotkania lub na początku dnia."
+    },
+    "welcome": "Witamy w <brand/>, <name/>",
+    "welcome_description": "Cieszymy się z decyzji o wypróbowaniu <brand/>. Teraz można z łatwością zarządzać projektami. Pierwszym krokiem jest utworzenie projektu.",
+    "skip": "Nie, dziękuję, sprawdzę to samodzielnie",
+    "start": "Zaczynajmy!",
+    "subtitle": "Jeszcze więcej korzyści z <brand/>."
   }
 }

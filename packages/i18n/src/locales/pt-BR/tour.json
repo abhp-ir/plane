@@ -191,5 +191,29 @@
       "title": "Descubra por que as equipes mudam para o Plane",
       "description": "Compare o Plane com as ferramentas que você usa hoje e veja a diferença."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Planeje com itens de trabalho",
+      "description": "O item de trabalho é a unidade básica do <brand/>. A maioria dos conceitos no <brand/> está associada aos itens de trabalho e às suas propriedades."
+    },
+    "cycles": {
+      "description": "Os ciclos ajudam você e sua equipe a avançar mais rápido, de forma semelhante aos sprints comumente usados no desenvolvimento ágil."
+    },
+    "modules": {
+      "description": "Os módulos dividem suas grandes iniciativas em projetos ou funcionalidades para ajudar você a se organizar melhor."
+    },
+    "views": {
+      "description": "Crie filtros personalizados para exibir apenas os itens de trabalho que importam para você. Salve e compartilhe seus filtros com apenas alguns cliques."
+    },
+    "pages": {
+      "title": "Documente com páginas",
+      "description": "Use as páginas para anotar rapidamente itens de trabalho durante uma reunião ou no início do dia."
+    },
+    "welcome": "Boas-vindas ao <brand/>, <name/>",
+    "welcome_description": "Ficamos felizes que você tenha decidido experimentar o <brand/>. Agora você pode gerenciar seus projetos com facilidade. Comece criando um projeto.",
+    "skip": "Não, obrigado, vou explorar por conta própria",
+    "start": "Vamos começar!",
+    "subtitle": "Aproveite mais o <brand/>."
   }
 }

@@ -18,7 +18,9 @@ import { Header, EHeaderVariant } from "@plane/blocks/layout";
 import { calculateTotalFilters } from "@plane/utils";
 // assets
 import darkEmptyState from "@/app/assets/empty-state/disabled-feature/cycles-dark.webp?url";
+import persianDarkEmptyState from "@/app/assets/empty-state/disabled-feature/cycles-dark-fa.png?url";
 import lightEmptyState from "@/app/assets/empty-state/disabled-feature/cycles-light.webp?url";
+import persianLightEmptyState from "@/app/assets/empty-state/disabled-feature/cycles-light-fa.png?url";
 // components
 import { PageHead } from "@/components/core/page-title";
 import { CycleAppliedFiltersList } from "@/components/cycles/applied-filters";
@@ -46,12 +48,14 @@ function ProjectCyclesPage({ params }: Route.ComponentProps) {
   // theme hook
   const { resolvedTheme } = useTheme();
   // plane hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // cycle filters hook
   const { clearAllFilters, currentProjectFilters, updateFilters } = useCycleFilter();
   const { allowPermissions } = useUserPermissions();
   // derived values
-  const resolvedEmptyState = resolvedTheme === "light" ? lightEmptyState : darkEmptyState;
+  const lightAsset = currentLocale === "fa" ? persianLightEmptyState : lightEmptyState;
+  const darkAsset = currentLocale === "fa" ? persianDarkEmptyState : darkEmptyState;
+  const resolvedEmptyState = resolvedTheme === "light" ? lightAsset : darkAsset;
   const totalCycles = currentProjectCycleIds?.length ?? 0;
   const project = getProjectById(projectId);
   const pageTitle = project?.name ? `${project?.name} - ${t("common.cycles", { count: 2 })}` : undefined;

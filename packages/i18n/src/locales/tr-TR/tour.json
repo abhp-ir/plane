@@ -191,5 +191,29 @@
       "title": "Ekiplerin neden Plane e geçtiğini keşfedin",
       "description": "Bugün kullandığınız araçlarla Plane i karşılaştırın ve farkı görün."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "İş öğeleriyle planlama yapın",
+      "description": "İş öğesi, <brand/>'in temel yapı taşıdır. <brand/>'deki kavramların çoğu iş öğeleri ve bunların özellikleriyle ilişkilidir."
+    },
+    "cycles": {
+      "description": "Döngüler, çevik geliştirmede yaygın olarak kullanılan sprintlere benzer şekilde sizin ve ekibinizin daha hızlı ilerlemesine yardımcı olur."
+    },
+    "modules": {
+      "description": "Modüller, büyük çalışmalarınızı projelere veya özelliklere bölerek daha iyi organize olmanıza yardımcı olur."
+    },
+    "views": {
+      "description": "Yalnızca sizin için önemli olan iş öğelerini görüntülemek üzere özel filtreler oluşturun. Filtrelerinizi yalnızca birkaç tıklamayla kaydedin ve paylaşın."
+    },
+    "pages": {
+      "title": "Sayfalarla belgeleyin",
+      "description": "Toplantı sırasında veya güne başlarken iş öğelerini hızlıca not almak için sayfaları kullanın."
+    },
+    "welcome": "<brand/>'e hoş geldiniz, <name/>",
+    "welcome_description": "<brand/>'i denemeye karar verdiğiniz için mutluyuz. Artık projelerinizi kolayca yönetebilirsiniz. Bir proje oluşturarak başlayın.",
+    "skip": "Hayır, teşekkürler, kendim keşfedeceğim",
+    "start": "Başlayalım!",
+    "subtitle": "<brand/>'den daha fazla yararlanın."
   }
 }

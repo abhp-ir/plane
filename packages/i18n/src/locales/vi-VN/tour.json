@@ -191,5 +191,29 @@
       "title": "Khám phá lý do các nhóm chuyển sang Plane",
       "description": "So sánh Plane với các công cụ bạn sử dụng hôm nay và xem sự khác biệt."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Lập kế hoạch với mục công việc",
+      "description": "Mục công việc là thành phần cơ bản của <brand/>. Hầu hết các khái niệm trong <brand/> đều liên quan đến mục công việc và các thuộc tính của chúng."
+    },
+    "cycles": {
+      "description": "Chu kỳ giúp bạn và nhóm tiến triển nhanh hơn, tương tự như các sprint thường dùng trong phát triển linh hoạt."
+    },
+    "modules": {
+      "description": "Mô-đun chia công việc lớn của bạn thành các dự án hoặc tính năng, giúp bạn tổ chức tốt hơn."
+    },
+    "views": {
+      "description": "Tạo bộ lọc tùy chỉnh để chỉ hiển thị những mục công việc quan trọng với bạn. Lưu và chia sẻ bộ lọc chỉ với vài lần nhấp."
+    },
+    "pages": {
+      "title": "Soạn tài liệu bằng trang",
+      "description": "Sử dụng trang để ghi nhanh các mục công việc khi đang họp hoặc bắt đầu ngày mới."
+    },
+    "welcome": "Chào mừng đến với <brand/>, <name/>",
+    "welcome_description": "Chúng tôi rất vui vì bạn đã quyết định dùng thử <brand/>. Giờ đây, bạn có thể quản lý các dự án một cách dễ dàng. Hãy bắt đầu bằng việc tạo một dự án.",
+    "skip": "Không, cảm ơn, tôi sẽ tự khám phá",
+    "start": "Hãy bắt đầu!",
+    "subtitle": "Tận dụng <brand/> hiệu quả hơn."
   }
 }

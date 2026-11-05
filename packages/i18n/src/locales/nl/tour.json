@@ -191,5 +191,29 @@
       "title": "Ontdek waarom teams overstappen op Plane",
       "description": "Vergelijk Plane met de tools die je nu gebruikt en zie het verschil."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Plannen met werkitems",
+      "description": "Het werkitem is de bouwsteen van <brand/>. De meeste concepten in <brand/> zijn gekoppeld aan werkitems en hun eigenschappen."
+    },
+    "cycles": {
+      "description": "Cycli helpen u en uw team sneller vooruitgang te boeken, vergelijkbaar met de sprints die vaak bij agile ontwikkeling worden gebruikt."
+    },
+    "modules": {
+      "description": "Modules verdelen uw grote initiatieven in projecten of functies, zodat u ze beter kunt organiseren."
+    },
+    "views": {
+      "description": "Maak aangepaste filters om alleen de werkitems weer te geven die voor u van belang zijn. Sla uw filters met slechts een paar klikken op en deel ze."
+    },
+    "pages": {
+      "title": "Documenteren met pagina’s",
+      "description": "Gebruik pagina’s om tijdens een vergadering of aan het begin van de dag snel werkitems te noteren."
+    },
+    "welcome": "Welkom bij <brand/>, <name/>",
+    "welcome_description": "We zijn blij dat u hebt besloten <brand/> uit te proberen. U kunt uw projecten nu eenvoudig beheren. Begin met het maken van een project.",
+    "skip": "Nee bedankt, ik verken het zelf",
+    "start": "Laten we beginnen!",
+    "subtitle": "Haal meer uit <brand/>."
   }
 }

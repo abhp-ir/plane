@@ -191,5 +191,29 @@
       "title": "了解团队为何切换到Plane",
       "description": "将Plane与您今天使用的工具进行比较，看看差异。"
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "使用工作项规划",
+      "description": "工作项是 <brand/> 的基本组成单元。<brand/> 中的大多数概念都与工作项及其属性相关。"
+    },
+    "cycles": {
+      "description": "周期可帮助您和您的团队更快地推进工作，类似于敏捷开发中常用的冲刺。"
+    },
+    "modules": {
+      "description": "模块可将您的大型任务拆分为项目或功能，帮助您更好地组织工作。"
+    },
+    "views": {
+      "description": "创建自定义筛选器，只显示对您重要的工作项。只需点击几次，即可保存并分享您的筛选器。"
+    },
+    "pages": {
+      "title": "使用页面撰写文档",
+      "description": "使用页面，在会议期间或一天开始时快速记录工作项。"
+    },
+    "welcome": "欢迎使用 <brand/>，<name/>",
+    "welcome_description": "很高兴您决定试用 <brand/>。现在，您可以轻松管理您的项目。创建一个项目即可开始。",
+    "skip": "不用了，谢谢，我会自行探索",
+    "start": "让我们开始吧！",
+    "subtitle": "更充分地利用 <brand/>。"
   }
 }

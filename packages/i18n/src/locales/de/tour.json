@@ -191,5 +191,29 @@
       "title": "Entdecken Sie, warum Teams zu Plane wechseln",
       "description": "Vergleichen Sie Plane mit den Tools, die Sie heute verwenden, und sehen Sie den Unterschied."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Mit Arbeitselementen planen",
+      "description": "Das Arbeitselement ist der Grundbaustein von <brand/>. Die meisten Konzepte in <brand/> sind mit Arbeitselementen und deren Eigenschaften verknüpft."
+    },
+    "cycles": {
+      "description": "Zyklen helfen Ihnen und Ihrem Team, schneller voranzukommen, ähnlich wie die in der agilen Entwicklung üblichen Sprints."
+    },
+    "modules": {
+      "description": "Module unterteilen Ihre großen Vorhaben in Projekte oder Funktionen und helfen Ihnen so, sie besser zu organisieren."
+    },
+    "views": {
+      "description": "Sie können eigene Filter erstellen, um nur die Arbeitselemente anzuzeigen, die für Sie wichtig sind. Ihre Filter können Sie mit wenigen Klicks speichern und teilen."
+    },
+    "pages": {
+      "title": "Mit Seiten dokumentieren",
+      "description": "Mit Seiten können Sie während einer Besprechung oder zu Beginn des Tages schnell Arbeitselemente notieren."
+    },
+    "welcome": "Willkommen bei <brand/>, <name/>",
+    "welcome_description": "Wir freuen uns, dass Sie sich entschieden haben, <brand/> auszuprobieren. Jetzt können Sie Ihre Projekte ganz einfach verwalten. Der erste Schritt ist das Erstellen eines Projekts.",
+    "skip": "Nein danke, ich erkunde es selbst",
+    "start": "Beginnen wir!",
+    "subtitle": "Mehr aus <brand/> herausholen."
   }
 }

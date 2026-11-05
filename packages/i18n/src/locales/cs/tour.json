@@ -191,5 +191,29 @@
       "title": "Objevte, proč týmy přecházejí na Plane",
       "description": "Porovnejte Plane s nástroji, které dnes používáte, a uvidíte rozdíl."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Plánujte s pracovními položkami",
+      "description": "Pracovní položka je základním stavebním kamenem <brand/>. Většina konceptů v <brand/> souvisí s pracovními položkami a jejich vlastnostmi."
+    },
+    "cycles": {
+      "description": "Cykly Vám i Vašemu týmu pomáhají postupovat rychleji, podobně jako sprinty běžně používané při agilním vývoji."
+    },
+    "modules": {
+      "description": "Moduly rozdělují Vaši rozsáhlou práci na projekty nebo funkce, abyste ji mohli lépe uspořádat."
+    },
+    "views": {
+      "description": "Vytvořte si vlastní filtry a zobrazujte jen pracovní položky, na kterých Vám záleží. Ukládejte a sdílejte své filtry několika kliknutími."
+    },
+    "pages": {
+      "title": "Dokumentujte pomocí stránek",
+      "description": "Pomocí stránek si rychle zapisujte pracovní položky během schůzky nebo na začátku dne."
+    },
+    "welcome": "Vítejte v <brand/>, <name/>",
+    "welcome_description": "Jsme rádi, že jste se rozhodli vyzkoušet <brand/>. Nyní můžete snadno spravovat své projekty. Začněte vytvořením projektu.",
+    "skip": "Ne, děkuji, prozkoumám si to samostatně",
+    "start": "Pojďme začít!",
+    "subtitle": "Využívejte <brand/> ještě lépe."
   }
 }

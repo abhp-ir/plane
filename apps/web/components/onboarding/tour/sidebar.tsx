@@ -7,6 +7,7 @@
 // plane imports
 import { CyclesOutline, ModuleOutline, PagesOutline, ViewsOutline, WorkItemsOutline } from "@makeplane/propel/icons";
 import type { ISvgIcons } from "@plane/blocks/icons";
+import { i18nInstance, Trans, useTranslation } from "@plane/i18n";
 // types
 import type { TTourSteps } from "./root";
 
@@ -17,27 +18,27 @@ const sidebarOptions: {
 }[] = [
   {
     key: "work-items",
-    label: "Work items",
+    label: "work_items",
     Icon: WorkItemsOutline,
   },
   {
     key: "cycles",
-    label: "Cycles",
+    label: "cycles",
     Icon: CyclesOutline,
   },
   {
     key: "modules",
-    label: "Modules",
+    label: "modules",
     Icon: ModuleOutline,
   },
   {
     key: "views",
-    label: "Views",
+    label: "views",
     Icon: ViewsOutline,
   },
   {
     key: "pages",
-    label: "Pages",
+    label: "pages",
     Icon: PagesOutline,
   },
 ];
@@ -48,28 +49,33 @@ type Props = {
 };
 
 export function TourSidebar({ step, setStep }: Props) {
+  const { t, currentLocale } = useTranslation();
   return (
     <div className="col-span-3 hidden bg-surface-2 p-8 lg:block">
       <h3 className="text-16 font-medium">
-        Let{"'"}s get started!
+        {t("onboarding_tour.start")}
         <br />
-        Get more out of Plane.
+        <Trans
+          i18n={i18nInstance}
+          t={i18nInstance.getFixedT(currentLocale)}
+          i18nKey="onboarding_tour.subtitle"
+          components={{ brand: <bdi>Plane</bdi> }}
+        />
       </h3>
       <div className="mt-8 space-y-5">
         {sidebarOptions.map((option) => (
-          // oxlint-disable-next-line jsx_a11y/click-events-have-key-events
-          <h5
+          <button
             key={option.key}
-            className={`flex cursor-pointer items-center gap-2 border-l-[3px] py-0.5 pr-2 pl-3 text-13 font-medium capitalize ${
+            type="button"
+            className={`flex w-full cursor-pointer items-center gap-2 border-s-[3px] py-0.5 ps-3 pe-2 text-start text-13 font-medium capitalize focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong ${
               step === option.key ? "border-accent-strong text-accent-primary" : "border-transparent text-secondary"
             }`}
             onClick={() => setStep(option.key)}
-            // oxlint-disable-next-line jsx_a11y/prefer-tag-over-role
-            role="button"
+            aria-pressed={step === option.key}
           >
             <option.Icon className="h-4 w-4" aria-hidden="true" />
-            {option.label}
-          </h5>
+            {t(option.label)}
+          </button>
         ))}
       </div>
     </div>

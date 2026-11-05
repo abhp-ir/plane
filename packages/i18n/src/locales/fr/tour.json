@@ -191,5 +191,29 @@
       "title": "Découvrez pourquoi les équipes passent à Plane",
       "description": "Comparez Plane avec les outils que vous utilisez aujourd hui et voyez la différence."
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "Planifiez avec les éléments de travail",
+      "description": "L’élément de travail est l’unité de base de <brand/>. La plupart des concepts de <brand/> sont associés aux éléments de travail et à leurs propriétés."
+    },
+    "cycles": {
+      "description": "Les cycles vous aident, vous et votre équipe, à progresser plus vite, comme les sprints couramment utilisés dans le développement agile."
+    },
+    "modules": {
+      "description": "Les modules divisent vos grandes initiatives en projets ou en fonctionnalités pour vous aider à mieux vous organiser."
+    },
+    "views": {
+      "description": "Créez des filtres personnalisés pour afficher uniquement les éléments de travail qui comptent pour vous. Enregistrez et partagez vos filtres en quelques clics."
+    },
+    "pages": {
+      "title": "Documentez à l’aide des pages",
+      "description": "Utilisez les pages pour noter rapidement des éléments de travail pendant une réunion ou en début de journée."
+    },
+    "welcome": "Bienvenue dans <brand/>, <name/>",
+    "welcome_description": "Nous sommes ravis que vous ayez décidé d’essayer <brand/>. Vous pouvez désormais gérer facilement vos projets. Commencez par créer un projet.",
+    "skip": "Non merci, je vais l’explorer par moi-même",
+    "start": "Commençons !",
+    "subtitle": "Profitez davantage de <brand/>."
   }
 }

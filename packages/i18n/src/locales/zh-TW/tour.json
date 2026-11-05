@@ -191,5 +191,29 @@
       "title": "了解團隊為何切換到Plane",
       "description": "將Plane與您今天使用的工具進行比較，看看差異。"
     }
+  },
+  "onboarding_tour": {
+    "work_items": {
+      "title": "使用工作事項規劃",
+      "description": "工作事項是 <brand/> 的基本組成單元。<brand/> 中的大多數概念都與工作事項及其屬性相關。"
+    },
+    "cycles": {
+      "description": "週期可協助您和您的團隊更快地推進工作，類似於敏捷開發中常用的衝刺。"
+    },
+    "modules": {
+      "description": "模組可將您的大型任務拆分為專案或功能，協助您更妥善地組織工作。"
+    },
+    "views": {
+      "description": "建立自訂篩選器，只顯示對您重要的工作事項。只要按幾下，即可儲存並分享您的篩選器。"
+    },
+    "pages": {
+      "title": "使用頁面撰寫文件",
+      "description": "使用頁面，在會議期間或一天開始時快速記下工作事項。"
+    },
+    "welcome": "歡迎使用 <brand/>，<name/>",
+    "welcome_description": "很高興您決定試用 <brand/>。現在，您可以輕鬆管理您的專案。建立一個專案即可開始。",
+    "skip": "不用了，謝謝，我會自行探索",
+    "start": "讓我們開始吧！",
+    "subtitle": "更充分地運用 <brand/>。"
   }
 }
