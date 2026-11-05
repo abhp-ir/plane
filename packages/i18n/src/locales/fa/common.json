@@ -987,5 +987,24 @@
     "select_role": "انتخاب نقش",
     "select_member": "لطفاً یک عضو را انتخاب کنید",
     "members_added": "اعضا با موفقیت اضافه شدند."
+  },
+  "image_picker": {
+    "images": "تصاویر",
+    "upload": "بارگذاری",
+    "search_images": "جست‌وجوی تصاویر",
+    "select_image": "انتخاب تصویر",
+    "select_image_description": "انتخاب تصویر: {description}",
+    "no_images_found": "تصویری پیدا نشد.",
+    "select_cover_image": "انتخاب تصویر جلد {index, number}",
+    "cover_image_alt": "تصویر جلد {index, number}",
+    "file_size_limit": "حجم تصویر نباید از {size} بیشتر باشد.",
+    "upload_error": {
+      "title": "تصویر بارگذاری نشد",
+      "message": "بارگذاری تصویر انجام نشد"
+    },
+    "contrast_guidance": "رنگ‌ها برای ایجاد کنتراست کافی تنظیم می‌شوند."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "تغییر رنگ پوست"
   }
 }

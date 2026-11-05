@@ -987,5 +987,24 @@
     "select_role": "Rolle auswählen",
     "select_member": "Bitte wählen Sie ein Mitglied aus",
     "members_added": "Mitglieder erfolgreich hinzugefügt."
+  },
+  "image_picker": {
+    "images": "Bilder",
+    "upload": "Hochladen",
+    "search_images": "Nach Bildern suchen",
+    "select_image": "Bild auswählen",
+    "select_image_description": "Bild auswählen: {description}",
+    "no_images_found": "Keine Bilder gefunden.",
+    "select_cover_image": "Titelbild {index, number} auswählen",
+    "cover_image_alt": "Titelbild {index, number}",
+    "file_size_limit": "Die Bildgröße darf {size} nicht überschreiten.",
+    "upload_error": {
+      "title": "Bild nicht hochgeladen",
+      "message": "Das Bild konnte nicht hochgeladen werden"
+    },
+    "contrast_guidance": "Die Farben werden angepasst, um einen ausreichenden Kontrast sicherzustellen."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Hautton ändern"
   }
 }

@@ -987,5 +987,24 @@
     "select_role": "Selecione uma função",
     "select_member": "Selecione um membro",
     "members_added": "Membros adicionados com sucesso."
+  },
+  "image_picker": {
+    "images": "Imagens",
+    "upload": "Enviar",
+    "search_images": "Buscar imagens",
+    "select_image": "Selecionar imagem",
+    "select_image_description": "Selecionar imagem: {description}",
+    "no_images_found": "Nenhuma imagem encontrada.",
+    "select_cover_image": "Selecionar imagem de capa {index, number}",
+    "cover_image_alt": "Imagem de capa {index, number}",
+    "file_size_limit": "O tamanho da imagem não pode exceder {size}.",
+    "upload_error": {
+      "title": "Imagem não enviada",
+      "message": "Não foi possível enviar a imagem"
+    },
+    "contrast_guidance": "As cores serão ajustadas para garantir contraste suficiente."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Alterar o tom de pele"
   }
 }

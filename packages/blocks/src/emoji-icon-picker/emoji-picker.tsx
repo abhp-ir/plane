@@ -62,6 +62,7 @@ export function EmojiPicker(props: EmojiPickerProps) {
   const { t } = useTranslation();
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<EmojiIconPickerType>(showEmojiTab ? defaultOpen : "icon");
   const resolvedSearchPlaceholder = searchPlaceholder ?? t("common.search.label");
 
   const { finalSide, finalAlign } = useMemo(() => {
@@ -74,10 +75,11 @@ export function EmojiPicker(props: EmojiPickerProps) {
 
   const handleOpenChange = useCallback(
     (value: boolean) => {
+      if (value) setActiveTab(showEmojiTab ? defaultOpen : "icon");
       if (!value) setSearchQuery("");
       handleToggle(value);
     },
-    [handleToggle]
+    [handleToggle, showEmojiTab, defaultOpen]
   );
 
   const handleEmojiChange = useCallback(
@@ -178,7 +180,14 @@ export function EmojiPicker(props: EmojiPickerProps) {
         }}
       >
         <div className={cn("flex min-h-0 flex-col", dropdownClassName)}>
-          <Tabs variant="contained" stretch="full" defaultValue={showEmojiTab ? defaultOpen : "icon"}>
+          <Tabs
+            variant="contained"
+            stretch="full"
+            value={showEmojiTab ? activeTab : "icon"}
+            onValueChange={(value) => {
+              if (value === "emoji" || value === "icon") setActiveTab(value);
+            }}
+          >
             {tabs.length > 1 && (
               <TabsList>
                 {tabs.map((tab) => (

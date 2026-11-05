@@ -987,5 +987,24 @@
     "select_role": "选择角色",
     "select_member": "请选择成员",
     "members_added": "成员已成功添加。"
+  },
+  "image_picker": {
+    "images": "图片",
+    "upload": "上传",
+    "search_images": "搜索图片",
+    "select_image": "选择图片",
+    "select_image_description": "选择图片：{description}",
+    "no_images_found": "未找到图片。",
+    "select_cover_image": "选择封面图片 {index, number}",
+    "cover_image_alt": "封面图片 {index, number}",
+    "file_size_limit": "图片大小不能超过{size}。",
+    "upload_error": {
+      "title": "图片未上传",
+      "message": "无法上传图片"
+    },
+    "contrast_guidance": "将调整颜色以确保足够的对比度。"
+  },
+  "emoji_picker": {
+    "change_skin_tone": "更改肤色"
   }
 }

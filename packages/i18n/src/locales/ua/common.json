@@ -987,5 +987,24 @@
     "select_role": "Виберіть роль",
     "select_member": "Будь ласка, виберіть учасника",
     "members_added": "Учасників успішно додано."
+  },
+  "image_picker": {
+    "images": "Зображення",
+    "upload": "Завантажити",
+    "search_images": "Пошук зображень",
+    "select_image": "Вибрати зображення",
+    "select_image_description": "Вибрати зображення: {description}",
+    "no_images_found": "Зображень не знайдено.",
+    "select_cover_image": "Вибрати обкладинку {index, number}",
+    "cover_image_alt": "Обкладинка {index, number}",
+    "file_size_limit": "Розмір зображення не може перевищувати {size}.",
+    "upload_error": {
+      "title": "Зображення не завантажено",
+      "message": "Не вдалося завантажити зображення"
+    },
+    "contrast_guidance": "Кольори буде скориговано для забезпечення достатньої контрастності."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Змінити відтінок шкіри"
   }
 }

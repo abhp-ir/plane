@@ -987,5 +987,24 @@
     "select_role": "Seleccione un rol",
     "select_member": "Seleccione un miembro",
     "members_added": "Los miembros se añadieron correctamente."
+  },
+  "image_picker": {
+    "images": "Imágenes",
+    "upload": "Subir",
+    "search_images": "Buscar imágenes",
+    "select_image": "Seleccionar imagen",
+    "select_image_description": "Seleccionar imagen: {description}",
+    "no_images_found": "No se encontraron imágenes.",
+    "select_cover_image": "Seleccionar imagen de portada {index, number}",
+    "cover_image_alt": "Imagen de portada {index, number}",
+    "file_size_limit": "El tamaño de la imagen no puede superar {size}.",
+    "upload_error": {
+      "title": "Imagen no subida",
+      "message": "No se pudo subir la imagen"
+    },
+    "contrast_guidance": "Los colores se ajustarán para garantizar un contraste suficiente."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Cambiar tono de piel"
   }
 }

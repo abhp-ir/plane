@@ -987,5 +987,24 @@
     "select_role": "Proszę wybrać rolę",
     "select_member": "Proszę wybrać członka",
     "members_added": "Członkowie zostali dodani."
+  },
+  "image_picker": {
+    "images": "Obrazy",
+    "upload": "Prześlij",
+    "search_images": "Szukaj obrazów",
+    "select_image": "Wybierz obraz",
+    "select_image_description": "Wybierz obraz: {description}",
+    "no_images_found": "Nie znaleziono obrazów.",
+    "select_cover_image": "Wybierz obraz w tle {index, number}",
+    "cover_image_alt": "Obraz w tle {index, number}",
+    "file_size_limit": "Rozmiar obrazu nie może przekraczać {size}.",
+    "upload_error": {
+      "title": "Nie przesłano obrazu",
+      "message": "Nie udało się przesłać obrazu"
+    },
+    "contrast_guidance": "Kolory zostaną dostosowane, aby zapewnić wystarczający kontrast."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Zmień odcień skóry"
   }
 }

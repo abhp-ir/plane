@@ -987,5 +987,24 @@
     "select_role": "Selectați un rol",
     "select_member": "Selectați un membru",
     "members_added": "Membrii au fost adăugați."
+  },
+  "image_picker": {
+    "images": "Imagini",
+    "upload": "Încărcare",
+    "search_images": "Căutați imagini",
+    "select_image": "Selectați imaginea",
+    "select_image_description": "Selectați imaginea: {description}",
+    "no_images_found": "Nu s-au găsit imagini.",
+    "select_cover_image": "Selectați imaginea de copertă {index, number}",
+    "cover_image_alt": "Imagine de copertă {index, number}",
+    "file_size_limit": "Dimensiunea imaginii nu poate depăși {size}.",
+    "upload_error": {
+      "title": "Imagine neîncărcată",
+      "message": "Imaginea nu a putut fi încărcată"
+    },
+    "contrast_guidance": "Culorile vor fi ajustate pentru a asigura un contrast suficient."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Schimbați nuanța pielii"
   }
 }

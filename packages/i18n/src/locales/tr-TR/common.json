@@ -987,5 +987,24 @@
     "select_role": "Rol seçin",
     "select_member": "Lütfen bir üye seçin",
     "members_added": "Üyeler başarıyla eklendi."
+  },
+  "image_picker": {
+    "images": "Görseller",
+    "upload": "Yükle",
+    "search_images": "Görsel arayın",
+    "select_image": "Görsel seçin",
+    "select_image_description": "Görsel seçin: {description}",
+    "no_images_found": "Görsel bulunamadı.",
+    "select_cover_image": "{index, number} numaralı kapak resmini seçin",
+    "cover_image_alt": "{index, number} numaralı kapak resmi",
+    "file_size_limit": "Görselin boyutu en fazla {size} olabilir.",
+    "upload_error": {
+      "title": "Görsel yüklenmedi",
+      "message": "Görsel yüklenemedi"
+    },
+    "contrast_guidance": "Yeterli kontrastı sağlamak için renkler ayarlanacaktır."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Ten rengini değiştirin"
   }
 }

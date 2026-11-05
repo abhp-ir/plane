@@ -987,5 +987,24 @@
     "select_role": "აირჩიეთ როლი",
     "select_member": "გთხოვთ, აირჩიოთ წევრი",
     "members_added": "წევრები წარმატებით დაემატა."
+  },
+  "image_picker": {
+    "images": "სურათები",
+    "upload": "ატვირთვა",
+    "search_images": "სურათების ძიება",
+    "select_image": "აირჩიეთ სურათი",
+    "select_image_description": "აირჩიეთ სურათი: {description}",
+    "no_images_found": "სურათები ვერ მოიძებნა.",
+    "select_cover_image": "აირჩიეთ გარეკანის სურათი {index, number}",
+    "cover_image_alt": "გარეკანის სურათი {index, number}",
+    "file_size_limit": "სურათის მაქსიმალური ზომაა {size}.",
+    "upload_error": {
+      "title": "სურათი არ აიტვირთა",
+      "message": "სურათის ატვირთვა ვერ მოხერხდა"
+    },
+    "contrast_guidance": "ფერები დარეგულირდება საკმარისი კონტრასტის უზრუნველსაყოფად."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "კანის ტონის შეცვლა"
   }
 }

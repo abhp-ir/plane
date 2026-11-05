@@ -5,6 +5,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { EmojiRoot } from "./emoji/emoji";
 import { IconRoot } from "./icon/icon-root";
@@ -29,5 +30,22 @@ describe("emoji/icon picker search fields", () => {
   it("names the emoji tab search with the translated label", () => {
     render(<EmojiRoot onChange={vi.fn()} />);
     expect(screen.getByRole("searchbox", { name: "Search" }).getAttribute("aria-label")).toBe("Search");
+    expect(screen.getByRole("button", { name: "Change skin tone" }).getAttribute("aria-label")).toBe(
+      "Change skin tone"
+    );
+  });
+
+  it("names and focuses the hex input while preserving the technical value", async () => {
+    const user = userEvent.setup();
+    render(<IconRoot defaultColor="#123456" onChange={vi.fn()} iconType="lucide" />);
+    const hex = screen.getByRole<HTMLInputElement>("textbox", { name: "Hex color" });
+    expect(hex.value).toBe("123456");
+    expect(document.activeElement).toBe(hex);
+    expect(hex.closest('[dir="ltr"]')).not.toBeNull();
+    await user.click(screen.getByRole("button", { name: "Hex color" }));
+    expect(screen.queryByRole("textbox", { name: "Hex color" })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Hex color" }));
+    expect(document.activeElement).toBe(screen.getByRole("textbox", { name: "Hex color" }));
+    expect(screen.getByRole<HTMLInputElement>("textbox", { name: "Hex color" }).value).toBe("123456");
   });
 });

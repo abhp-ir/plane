@@ -987,5 +987,24 @@
     "select_role": "역할 선택",
     "select_member": "멤버를 선택해 주세요",
     "members_added": "멤버를 추가했습니다."
+  },
+  "image_picker": {
+    "images": "이미지",
+    "upload": "업로드",
+    "search_images": "이미지 검색",
+    "select_image": "이미지 선택",
+    "select_image_description": "이미지 선택: {description}",
+    "no_images_found": "이미지를 찾을 수 없습니다.",
+    "select_cover_image": "커버 이미지 {index, number} 선택",
+    "cover_image_alt": "커버 이미지 {index, number}",
+    "file_size_limit": "이미지 크기는 {size}를 초과할 수 없습니다.",
+    "upload_error": {
+      "title": "이미지 업로드 실패",
+      "message": "이미지를 업로드할 수 없습니다"
+    },
+    "contrast_guidance": "충분한 대비를 확보하도록 색상이 조정됩니다."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "피부색 변경"
   }
 }

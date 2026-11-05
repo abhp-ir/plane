@@ -37,6 +37,29 @@ function ControlledPicker() {
 }
 
 describe("EmojiPicker popover", () => {
+  it("keeps the current tab when its default changes and uses the new default on reopening", async () => {
+    const user = userEvent.setup();
+    const diagnostic = vi.spyOn(console, "error");
+    function Picker({ defaultOpen }: { defaultOpen: "emoji" | "icon" }) {
+      const [open, setOpen] = useState(true);
+      return (
+        <EmojiPicker isOpen={open} handleToggle={setOpen} defaultOpen={defaultOpen} onChange={vi.fn()} label="Pick" />
+      );
+    }
+    try {
+      const { rerender } = render(<Picker defaultOpen="icon" />);
+      expect(screen.getByRole("tab", { name: "آیکون" }).getAttribute("aria-selected")).toBe("true");
+      rerender(<Picker defaultOpen="emoji" />);
+      expect(screen.getByRole("tab", { name: "آیکون" }).getAttribute("aria-selected")).toBe("true");
+      await user.keyboard("{Escape}");
+      await user.click(screen.getByRole("button", { name: "Pick" }));
+      expect(screen.getByRole("tab", { name: "ایموجی" }).getAttribute("aria-selected")).toBe("true");
+      expect(diagnostic).not.toHaveBeenCalled();
+    } finally {
+      diagnostic.mockRestore();
+    }
+  });
+
   it("localizes both tab names", () => {
     render(<EmojiPicker isOpen handleToggle={vi.fn()} onChange={vi.fn()} label={<span>Pick emoji</span>} />);
     expect(screen.getByRole("tab", { name: "ایموجی" })).toBeDefined();

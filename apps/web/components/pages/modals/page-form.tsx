@@ -92,13 +92,16 @@ export function PageForm(props: Props) {
               buttonClassName="flex items-center justify-center bg-layer-2 hover:bg-layer-2-hover rounded-md"
               label={
                 <span className="grid h-9 w-9 place-items-center rounded-md">
-                  <>
+                  <span className="sr-only">
+                    {t(formData?.logo_props?.in_use ? "common.icon.change" : "common.icon.add")}
+                  </span>
+                  <span aria-hidden="true">
                     {formData?.logo_props?.in_use ? (
                       <Logo logo={formData?.logo_props} size={18} type="lucide" />
                     ) : (
                       <PagesOutline className="h-4 w-4 text-tertiary" />
                     )}
-                  </>
+                  </span>
                 </span>
               }
               onChange={(val: any) => {

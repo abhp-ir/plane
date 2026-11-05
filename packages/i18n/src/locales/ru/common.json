@@ -987,5 +987,24 @@
     "select_role": "Выберите роль",
     "select_member": "Выберите участника",
     "members_added": "Участники добавлены."
+  },
+  "image_picker": {
+    "images": "Изображения",
+    "upload": "Загрузить",
+    "search_images": "Поиск изображений",
+    "select_image": "Выбрать изображение",
+    "select_image_description": "Выбрать изображение: {description}",
+    "no_images_found": "Изображения не найдены.",
+    "select_cover_image": "Выбрать обложку {index, number}",
+    "cover_image_alt": "Обложка {index, number}",
+    "file_size_limit": "Размер изображения не может превышать {size}.",
+    "upload_error": {
+      "title": "Изображение не загружено",
+      "message": "Не удалось загрузить изображение"
+    },
+    "contrast_guidance": "Цвета будут скорректированы для обеспечения достаточной контрастности."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Изменить тон кожи"
   }
 }

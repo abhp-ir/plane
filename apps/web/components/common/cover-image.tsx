@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 // helpers
 import { getCoverImageDisplayURL, DEFAULT_COVER_IMAGE_URL } from "@/helpers/cover-image.helper";
@@ -32,12 +33,13 @@ type TCoverImageProps = {
 export function CoverImage(props: TCoverImageProps) {
   const {
     src,
-    alt = "Cover image",
+    alt,
     className,
     showDefaultWhenEmpty = false,
     fallbackUrl = DEFAULT_COVER_IMAGE_URL,
     ...restProps
   } = props;
+  const { t } = useTranslation();
 
   // Show loading skeleton when src is undefined/null and we don't want to show default
   if (!src && !showDefaultWhenEmpty) {
@@ -46,5 +48,7 @@ export function CoverImage(props: TCoverImageProps) {
 
   const displayUrl = getCoverImageDisplayURL(src, fallbackUrl);
 
-  return <img src={displayUrl} alt={alt} className={cn("object-cover", className)} {...restProps} />;
+  return (
+    <img src={displayUrl} alt={alt ?? t("cover_image")} className={cn("object-cover", className)} {...restProps} />
+  );
 }

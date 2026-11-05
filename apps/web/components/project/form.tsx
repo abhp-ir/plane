@@ -58,7 +58,6 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
     handleSubmit,
     watch,
     control,
-    setValue,
     setError,
     reset,
     formState: { errors },
@@ -84,13 +83,6 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
   }, [project, projectId]);
 
   // handlers
-  const handleIdentifierChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const alphanumericValue = value.replace(/[^a-zA-Z0-9]/g, "");
-    const formattedValue = alphanumericValue.toUpperCase();
-    setValue("identifier", formattedValue);
-  };
-
   const handleUpdateChange = async (payload: Partial<IProject>) => {
     if (!workspaceSlug || !project) return;
     return updateProject(workspaceSlug.toString(), project.id, payload)
@@ -184,7 +176,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
       setToast({
         type: "error",
         title: t("toast.error"),
-        message: error instanceof Error ? error.message : "Failed to process cover image",
+        message: t("entity.update.failed", { entity: t("cover_image") }),
       });
       setIsLoading(false);
       return;
@@ -208,7 +200,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="relative h-44 w-full">
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        <CoverImage src={coverImage} alt="Project cover image" className="h-44 w-full rounded-md" />
+        <CoverImage src={coverImage} alt={t("project_cover_image_alt")} className="h-44 w-full rounded-md" />
         <div className="absolute bottom-4 z-5 flex w-full items-end justify-between gap-3 px-4">
           <div className="flex flex-grow gap-3 truncate">
             <Controller
@@ -222,7 +214,14 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                   handleToggle={(val: boolean) => setIsOpen(val)}
                   className="flex items-center justify-center"
                   buttonClassName="flex h-[52px] w-[52px] flex-shrink-0 items-center justify-center rounded-lg bg-white/10"
-                  label={<Logo logo={value} size={28} />}
+                  label={
+                    <>
+                      <span className="sr-only">{t("common.icon.change")}</span>
+                      <span aria-hidden="true">
+                        <Logo logo={value} size={28} />
+                      </span>
+                    </>
+                  }
                   // TODO: fix types
                   onChange={(val: any) => {
                     let logoValue = {};
@@ -359,10 +358,12 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                   },
                   maxLength: {
                     value: 10,
-                    message: t("project_id_max_char"),
+                    message: t("project_id_max_char", {
+                      max: new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(10),
+                    }),
                   },
                 }}
-                render={({ field: { value, ref } }) => (
+                render={({ field: { value, ref, onChange } }) => (
                   <Field name="identifier" invalid={Boolean(errors.identifier)}>
                     <InputGroup size="2xl">
                       <Input
@@ -372,7 +373,7 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                         name="identifier"
                         type="text"
                         value={value}
-                        onChange={handleIdentifierChange}
+                        onChange={(event) => onChange(event.target.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase())}
                         ref={ref}
                         placeholder={t("project_settings.general.enter_project_id")}
                         disabled={!isAdmin}

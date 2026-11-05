@@ -2,7 +2,7 @@
   "project_settings": {
     "label": "تنظیمات پروژه",
     "general": {
-      "enter_project_id": "ID پروژه را وارد کنید",
+      "enter_project_id": "شناسهٔ پروژه را وارد کنید",
       "please_select_a_timezone": "لطفاً منطقهٔ زمانی را انتخاب کنید",
       "archive_project": {
         "title": "بایگانی پروژه",

@@ -987,5 +987,24 @@
     "select_role": "Изберете роля",
     "select_member": "Моля, изберете член",
     "members_added": "Членовете са добавени успешно."
+  },
+  "image_picker": {
+    "images": "Изображения",
+    "upload": "Качване",
+    "search_images": "Търсете изображения",
+    "select_image": "Избери изображение",
+    "select_image_description": "Избери изображение: {description}",
+    "no_images_found": "Няма намерени изображения.",
+    "select_cover_image": "Избери изображение на корицата {index, number}",
+    "cover_image_alt": "Изображение на корицата {index, number}",
+    "file_size_limit": "Размерът на изображението не може да надвишава {size}.",
+    "upload_error": {
+      "title": "Изображението не е качено",
+      "message": "Изображението не можа да бъде качено"
+    },
+    "contrast_guidance": "Цветовете ще се коригират, за да се осигури достатъчен контраст."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Промени тена на кожата"
   }
 }

@@ -35,7 +35,7 @@ function ProjectCommonAttributes(props: Props) {
   } = useFormContext<TProject>();
 
   const { getIndex } = getTabIndex(ETabIndices.PROJECT_CREATE, isMobile);
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   const handleNameChange =
     (onChange: (event: ChangeEvent<HTMLInputElement>) => void) => (e: ChangeEvent<HTMLInputElement>) => {
@@ -104,7 +104,9 @@ function ProjectCommonAttributes(props: Props) {
             },
             maxLength: {
               value: 10,
-              message: t("project_id_max_char"),
+              message: t("project_id_max_char", {
+                max: new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale).format(10),
+              }),
             },
           }}
           render={({ field: { value, onChange } }) => (

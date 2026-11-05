@@ -987,5 +987,24 @@
     "select_role": "Pilih peran",
     "select_member": "Silakan pilih anggota",
     "members_added": "Anggota berhasil ditambahkan."
+  },
+  "image_picker": {
+    "images": "Gambar",
+    "upload": "Unggah",
+    "search_images": "Cari gambar",
+    "select_image": "Pilih gambar",
+    "select_image_description": "Pilih gambar: {description}",
+    "no_images_found": "Tidak ada gambar yang ditemukan.",
+    "select_cover_image": "Pilih gambar sampul {index, number}",
+    "cover_image_alt": "Gambar sampul {index, number}",
+    "file_size_limit": "Ukuran gambar tidak boleh melebihi {size}.",
+    "upload_error": {
+      "title": "Gambar tidak diunggah",
+      "message": "Gambar tidak dapat diunggah"
+    },
+    "contrast_guidance": "Warna akan disesuaikan agar kontrasnya memadai."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Ubah warna kulit"
   }
 }

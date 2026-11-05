@@ -83,7 +83,10 @@ function ProjectCreateHeader(props: Props) {
               buttonClassName="flex items-center justify-center"
               label={
                 <span className="grid h-11 w-11 place-items-center rounded-md border border-subtle bg-layer-2">
-                  <Logo logo={value} size={20} />
+                  <span className="sr-only">{t(value?.in_use ? "common.icon.change" : "common.icon.add")}</span>
+                  <span aria-hidden="true">
+                    <Logo logo={value} size={20} />
+                  </span>
                 </span>
               }
               onChange={(val: any) => {

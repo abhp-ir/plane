@@ -132,13 +132,14 @@ export const ProjectViewForm = observer(function ProjectViewForm(props: Props) {
                 buttonClassName="flex items-center justify-center"
                 label={
                   <span className="grid h-9 w-9 place-items-center rounded-md bg-surface-2">
-                    <>
+                    <span className="sr-only">{t(logoValue?.in_use ? "common.icon.change" : "common.icon.add")}</span>
+                    <span aria-hidden="true">
                       {logoValue?.in_use ? (
                         <Logo logo={logoValue} size={18} type="lucide" />
                       ) : (
                         <ViewsOutline className="h-4 w-4 text-tertiary" />
                       )}
-                    </>
+                    </span>
                   </span>
                 }
                 // TODO: fix types

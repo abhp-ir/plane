@@ -17,9 +17,12 @@ type EmojiRootProps = {
   onSearchQueryChange?: (query: string) => void;
 };
 
-export function EmojiRoot(props: EmojiRootProps) {
-  const { onChange, searchPlaceholder, searchDisabled = false, searchQuery, onSearchQueryChange } = props;
-  const { t } = useTranslation();
+export function EmojiRoot(rootProps: EmojiRootProps) {
+  const { onChange, searchPlaceholder, searchDisabled = false, searchQuery, onSearchQueryChange } = rootProps;
+  const { t, currentLocale } = useTranslation();
+  const isPersian = currentLocale === "fa";
+  const appBaseUrl =
+    (import.meta as ImportMeta & { readonly env?: { readonly BASE_URL?: string } }).env?.BASE_URL ?? "/";
   const searchLabel = searchPlaceholder ?? t("common.search.label");
   const searchWrapperRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -38,6 +41,8 @@ export function EmojiRoot(props: EmojiRootProps) {
 
   return (
     <EmojiPicker.Root
+      locale={isPersian ? "fa" : undefined}
+      emojibaseUrl={isPersian ? `${appBaseUrl.replace(/\/$/, "")}/emojibase` : undefined}
       data-slot="emoji-picker"
       className="isolate flex h-full w-full flex-col rounded-md border-none"
       onEmojiSelect={(val) => onChange(val.emoji)}
@@ -54,6 +59,7 @@ export function EmojiRoot(props: EmojiRootProps) {
           />
         </div>
         <EmojiPicker.SkinToneSelector
+          aria-label={t("emoji_picker.change_skin_tone")}
           data-slot="emoji-picker-skin-tone-selector"
           className="hover:bg-accent mx-2 mb-1.5 size-8 flex-shrink-0 rounded-md text-body-md-regular"
         />

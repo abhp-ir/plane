@@ -987,5 +987,24 @@
     "select_role": "Chọn vai trò",
     "select_member": "Vui lòng chọn một thành viên",
     "members_added": "Đã thêm thành viên thành công."
+  },
+  "image_picker": {
+    "images": "Hình ảnh",
+    "upload": "Tải lên",
+    "search_images": "Tìm kiếm hình ảnh",
+    "select_image": "Chọn hình ảnh",
+    "select_image_description": "Chọn hình ảnh: {description}",
+    "no_images_found": "Không tìm thấy hình ảnh.",
+    "select_cover_image": "Chọn ảnh bìa {index, number}",
+    "cover_image_alt": "Ảnh bìa {index, number}",
+    "file_size_limit": "Dung lượng hình ảnh không được vượt quá {size}.",
+    "upload_error": {
+      "title": "Ảnh chưa được tải lên",
+      "message": "Không thể tải ảnh lên"
+    },
+    "contrast_guidance": "Màu sắc sẽ được điều chỉnh để đảm bảo đủ độ tương phản."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Thay đổi tông màu da"
   }
 }

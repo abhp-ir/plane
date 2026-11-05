@@ -528,6 +528,9 @@ overrides:
   source-map-js: '>=1.2.2 <2'
   tinypool@2: '>=2.1.2 <3'
 
+patchedDependencies:
+  frimousse@0.3.0: abba5bf94dc05ea80263f7941f5ed73bd24f02141ccda98cf4f05c213c2324aa
+
 importers:
 
   .:
@@ -1204,7 +1207,7 @@ importers:
         version: 4.1.0
       frimousse:
         specifier: 'catalog:'
-        version: 0.3.0(react@19.2.8)(typescript@5.8.3)
+        version: 0.3.0(patch_hash=abba5bf94dc05ea80263f7941f5ed73bd24f02141ccda98cf4f05c213c2324aa)(react@19.2.8)(typescript@5.8.3)
       lodash-es:
         specifier: 4.18.1
         version: 4.18.1
@@ -11913,7 +11916,7 @@ snapshots:
 
   fresh@2.0.0: {}
 
-  frimousse@0.3.0(react@19.2.8)(typescript@5.8.3):
+  frimousse@0.3.0(patch_hash=abba5bf94dc05ea80263f7941f5ed73bd24f02141ccda98cf4f05c213c2324aa)(react@19.2.8)(typescript@5.8.3):
     dependencies:
       react: 19.2.8
     optionalDependencies:

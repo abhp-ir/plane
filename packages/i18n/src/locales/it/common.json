@@ -987,5 +987,24 @@
     "select_role": "Selezioni un ruolo",
     "select_member": "Selezioni un membro",
     "members_added": "Membri aggiunti correttamente."
+  },
+  "image_picker": {
+    "images": "Immagini",
+    "upload": "Carica",
+    "search_images": "Cerca immagini",
+    "select_image": "Seleziona immagine",
+    "select_image_description": "Seleziona immagine: {description}",
+    "no_images_found": "Nessuna immagine trovata.",
+    "select_cover_image": "Seleziona immagine di copertina {index, number}",
+    "cover_image_alt": "Immagine di copertina {index, number}",
+    "file_size_limit": "La dimensione dell’immagine non può superare {size}.",
+    "upload_error": {
+      "title": "Immagine non caricata",
+      "message": "Non è stato possibile caricare l’immagine"
+    },
+    "contrast_guidance": "I colori verranno regolati per garantire un contrasto sufficiente."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Modifica tonalità della pelle"
   }
 }

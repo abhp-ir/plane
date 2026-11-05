@@ -987,5 +987,24 @@
     "select_role": "Vyberte roli",
     "select_member": "Vyberte prosím člena",
     "members_added": "Členové byli úspěšně přidáni."
+  },
+  "image_picker": {
+    "images": "Obrázky",
+    "upload": "Nahrát",
+    "search_images": "Hledat obrázky",
+    "select_image": "Vybrat obrázek",
+    "select_image_description": "Vybrat obrázek: {description}",
+    "no_images_found": "Nebyly nalezeny žádné obrázky.",
+    "select_cover_image": "Vybrat úvodní obrázek {index, number}",
+    "cover_image_alt": "Úvodní obrázek {index, number}",
+    "file_size_limit": "Velikost obrázku nesmí překročit {size}.",
+    "upload_error": {
+      "title": "Obrázek nebyl nahrán",
+      "message": "Obrázek se nepodařilo nahrát"
+    },
+    "contrast_guidance": "Barvy budou upraveny tak, aby byl zajištěn dostatečný kontrast."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Změnit odstín pleti"
   }
 }

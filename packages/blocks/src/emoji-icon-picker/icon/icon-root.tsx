@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 
 import { SearchOutline, InfoOutline } from "@makeplane/propel/icons";
 import { useTranslation } from "@plane/i18n";
@@ -24,6 +24,9 @@ type IconRootProps = {
 };
 
 const isPresetColor = (color: string) => DEFAULT_COLORS.includes(color.toLowerCase());
+const focusHexInput = (input: HTMLInputElement | null) => {
+  input?.focus();
+};
 
 export function IconRoot(props: IconRootProps) {
   const {
@@ -53,7 +56,6 @@ export function IconRoot(props: IconRootProps) {
     }
   }
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const hexLabelId = useId();
   // use shared search query from parent
   const query = searchQuery ?? "";
 
@@ -71,7 +73,7 @@ export function IconRoot(props: IconRootProps) {
               onFocus={() => setIsInputFocused(true)}
               onBlur={() => setIsInputFocused(false)}
             >
-              <SearchOutline aria-hidden="true" className="absolute bottom-3 left-2.5 h-3.5 w-3.5 text-placeholder" />
+              <SearchOutline aria-hidden="true" className="absolute start-2.5 bottom-3 h-3.5 w-3.5 text-placeholder" />
 
               <input
                 placeholder={searchLabel}
@@ -85,20 +87,18 @@ export function IconRoot(props: IconRootProps) {
         )}
         <div className="grid h-9 grid-cols-9 items-center justify-items-center gap-2 px-2.5 py-1">
           {showHexInput ? (
-            <div className="col-span-8 ml-2 flex items-center gap-1 justify-self-stretch">
+            <div dir="ltr" className="col-span-8 ml-2 flex items-center gap-1 justify-self-stretch">
               <span
                 className="mr-1 h-4 w-4 flex-shrink-0 rounded-full"
                 style={{
                   backgroundColor: `#${hexValue}`,
                 }}
               />
-              <span id={hexLabelId} className="flex-shrink-0 text-caption-sm-regular text-tertiary">
-                HEX
-              </span>
+              <span className="flex-shrink-0 text-caption-sm-regular text-tertiary">HEX</span>
               <span className="-mr-1 flex-shrink-0 text-caption-sm-regular text-secondary">#</span>
               <input
                 type="text"
-                aria-labelledby={hexLabelId}
+                aria-label={t("aria_labels.color_picker.hex_input")}
                 value={hexValue}
                 onChange={(e) => {
                   const value = e.target.value;
@@ -106,7 +106,7 @@ export function IconRoot(props: IconRootProps) {
                   if (/^[0-9A-Fa-f]{6}$/.test(value)) setActiveColor(adjustColorForContrast(`#${value}`));
                 }}
                 className="block flex-grow rounded-sm border-[0.5px] border-none border-subtle bg-transparent px-3 py-2 pl-0 text-caption-sm-regular text-secondary placeholder-(--text-color-placeholder) ring-0 focus:outline-none"
-                autoFocus
+                ref={focusHexInput}
               />
             </div>
           ) : (
@@ -144,9 +144,9 @@ export function IconRoot(props: IconRootProps) {
             )}
           </button>
         </div>
-        <div className="flex h-6 w-full items-center gap-2 py-1 pr-3 pl-4">
-          <InfoOutline className="h-3 w-3" />
-          <p className="text-caption-sm-regular"> Colors will be adjusted to ensure sufficient contrast.</p>
+        <div className="flex h-6 w-full items-center gap-2 py-1 ps-4 pe-3">
+          <InfoOutline aria-hidden="true" className="h-3 w-3" />
+          <p className="text-caption-sm-regular">{t("image_picker.contrast_guidance")}</p>
         </div>
       </div>
       <div className="mt-2 grid grid-cols-8 justify-items-center gap-1 px-2.5">

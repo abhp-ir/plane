@@ -987,5 +987,24 @@
     "select_role": "Selecteer een rol",
     "select_member": "Selecteer een lid",
     "members_added": "Leden toegevoegd."
+  },
+  "image_picker": {
+    "images": "Afbeeldingen",
+    "upload": "Uploaden",
+    "search_images": "Afbeeldingen zoeken",
+    "select_image": "Afbeelding selecteren",
+    "select_image_description": "Afbeelding selecteren: {description}",
+    "no_images_found": "Geen afbeeldingen gevonden.",
+    "select_cover_image": "Omslagafbeelding {index, number} selecteren",
+    "cover_image_alt": "Omslagafbeelding {index, number}",
+    "file_size_limit": "De afbeelding mag niet groter zijn dan {size}.",
+    "upload_error": {
+      "title": "Afbeelding niet geüpload",
+      "message": "De afbeelding kon niet worden geüpload"
+    },
+    "contrast_guidance": "De kleuren worden aangepast om voldoende contrast te garanderen."
+  },
+  "emoji_picker": {
+    "change_skin_tone": "Huidtint wijzigen"
   }
 }
