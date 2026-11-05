@@ -5,7 +5,7 @@
  */
 
 import { isEmpty } from "lodash-es";
-import { autorun, makeObservable, observable } from "mobx";
+import { autorun, makeObservable, observable, runInAction } from "mobx";
 // types
 import type { ICycle, IIssueLabel, IModule, IProject, IState, IUserLite, TIssueServiceType } from "@plane/types";
 import { EIssueServiceType } from "@plane/types";
@@ -200,15 +200,40 @@ export class IssueRootStore implements IIssueRootStore {
     this.rootStore = rootStore;
 
     autorun(() => {
+      const { workspaceSlug, projectId } = rootStore.router;
       if (rootStore?.user?.data?.id) this.currentUserId = rootStore?.user?.data?.id;
-      if (this.workspaceSlug !== rootStore.router.workspaceSlug) this.workspaceSlug = rootStore.router.workspaceSlug;
-      if (this.teamspaceId !== rootStore.router.teamspaceId) this.teamspaceId = rootStore.router.teamspaceId;
-      if (this.projectId !== rootStore.router.projectId) this.projectId = rootStore.router.projectId;
-      if (this.cycleId !== rootStore.router.cycleId) this.cycleId = rootStore.router.cycleId;
-      if (this.moduleId !== rootStore.router.moduleId) this.moduleId = rootStore.router.moduleId;
-      if (this.viewId !== rootStore.router.viewId) this.viewId = rootStore.router.viewId;
-      if (this.globalViewId !== rootStore.router.globalViewId) this.globalViewId = rootStore.router.globalViewId;
-      if (this.userId !== rootStore.router.userId) this.userId = rootStore.router.userId;
+      if (this.workspaceSlug !== workspaceSlug)
+        runInAction(() => {
+          this.workspaceSlug = workspaceSlug;
+        });
+      if (this.teamspaceId !== rootStore.router.teamspaceId)
+        runInAction(() => {
+          this.teamspaceId = rootStore.router.teamspaceId;
+        });
+      if (this.projectId !== projectId)
+        runInAction(() => {
+          this.projectId = projectId;
+        });
+      if (this.cycleId !== rootStore.router.cycleId)
+        runInAction(() => {
+          this.cycleId = rootStore.router.cycleId;
+        });
+      if (this.moduleId !== rootStore.router.moduleId)
+        runInAction(() => {
+          this.moduleId = rootStore.router.moduleId;
+        });
+      if (this.viewId !== rootStore.router.viewId)
+        runInAction(() => {
+          this.viewId = rootStore.router.viewId;
+        });
+      if (this.globalViewId !== rootStore.router.globalViewId)
+        runInAction(() => {
+          this.globalViewId = rootStore.router.globalViewId;
+        });
+      if (this.userId !== rootStore.router.userId)
+        runInAction(() => {
+          this.userId = rootStore.router.userId;
+        });
       if (!isEmpty(rootStore?.state?.stateMap)) this.stateMap = rootStore?.state?.stateMap;
       if (!isEmpty(rootStore?.state?.projectStates)) this.stateDetails = rootStore?.state?.projectStates;
       if (!isEmpty(rootStore?.state?.workspaceStates)) this.workspaceStateDetails = rootStore?.state?.workspaceStates;
