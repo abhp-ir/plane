@@ -147,5 +147,35 @@
     "light-blue": "آبی روشن",
     "dark-blue": "آبی تیره",
     "purple": "بنفش"
+  },
+  "editor_toolbar": {
+    "bold": "پررنگ",
+    "italic": "مورب",
+    "underline": "زیرخط",
+    "strikethrough": "خط‌خورده",
+    "color": "رنگ",
+    "align_left": "چپ‌چین",
+    "align_center": "وسط‌چین",
+    "align_right": "راست‌چین",
+    "label": "نوار ابزار قالب‌بندی",
+    "text_colors": "رنگ‌های متن",
+    "background_colors": "رنگ‌های پس‌زمینه",
+    "remove_text_color": "حذف رنگ متن",
+    "remove_background_color": "حذف رنگ پس‌زمینه",
+    "link": "پیوند",
+    "remove_link": "حذف پیوند",
+    "apply_link": "اعمال پیوند",
+    "multiple": "چند نوع",
+    "fit_to_width": "تنظیم بر اساس عرض"
+  },
+  "editor_image": {
+    "align": "تراز",
+    "download": "دریافت تصویر",
+    "view_full_screen": "نمایش تصویر در حالت تمام‌صفحه",
+    "full_screen_viewer": "نمایشگر تصویر در حالت تمام‌صفحه",
+    "close_viewer": "بستن نمایشگر تصویر",
+    "zoom_out": "کاهش بزرگ‌نمایی",
+    "zoom_in": "افزایش بزرگ‌نمایی",
+    "open_in_new_tab": "باز کردن تصویر در زبانهٔ جدید"
   }
 }

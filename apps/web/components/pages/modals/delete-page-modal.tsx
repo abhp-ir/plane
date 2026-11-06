@@ -10,6 +10,7 @@ import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 import { setToast } from "@plane/blocks/toast";
 import { ConfirmDialog } from "@plane/blocks/dialog";
+import { Trans, useTranslation } from "@plane/i18n";
 import { getPageName } from "@plane/utils";
 // constants
 // plane web hooks
@@ -28,6 +29,7 @@ type TConfirmPageDeletionProps = {
 
 export const DeletePageModal = observer(function DeletePageModal(props: TConfirmPageDeletionProps) {
   const { isOpen, onClose, page, storeType } = props;
+  const { t } = useTranslation();
   // states
   const [isDeleting, setIsDeleting] = useState(false);
   // store hooks
@@ -52,8 +54,8 @@ export const DeletePageModal = observer(function DeletePageModal(props: TConfirm
       handleClose();
       setToast({
         type: "success",
-        title: "Success!",
-        message: "Page deleted successfully.",
+        title: t("common.success"),
+        message: t("page_actions.delete_page.success_message"),
       });
 
       if (routePageId) {
@@ -62,8 +64,8 @@ export const DeletePageModal = observer(function DeletePageModal(props: TConfirm
     } catch {
       setToast({
         type: "error",
-        title: "Error!",
-        message: "Page could not be deleted. Please try again.",
+        title: t("common.errors.default.title"),
+        message: t("page_actions.delete_page.error_message"),
       });
     } finally {
       setIsDeleting(false);
@@ -78,13 +80,18 @@ export const DeletePageModal = observer(function DeletePageModal(props: TConfirm
       handleSubmit={handleDelete}
       isSubmitting={isDeleting}
       isOpen={isOpen}
-      title="Delete page"
+      title={t("page_actions.delete_page.title")}
       content={
-        <>
-          Are you sure you want to delete page-{" "}
-          <span className="font-medium break-words break-all text-primary">{getPageName(name)}</span> ? The Page will be
-          deleted permanently. This action cannot be undone.
-        </>
+        <Trans
+          i18nKey="page_actions.delete_page.confirmation"
+          components={{
+            page: (
+              <span className="font-medium break-words break-all text-primary">
+                <bdi>{getPageName(name)}</bdi>
+              </span>
+            ),
+          }}
+        />
       }
     />
   );

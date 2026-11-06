@@ -34,7 +34,8 @@ export const PageNavigationPaneInfoTabDocumentInfo = observer(function PageNavig
     editor: { editorRef },
   } = page;
   // translation
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const language = currentLocale === "ua" ? "uk-UA" : currentLocale;
   // subscribe to asset changes
   useEffect(() => {
     const unsubscribe = editorRef?.onDocumentInfoChange(setDocumentInfo);
@@ -48,25 +49,31 @@ export const PageNavigationPaneInfoTabDocumentInfo = observer(function PageNavig
   const secondsToReadableTime = useCallback(() => {
     const wordsCount = documentInfo.words;
     const readTimeInSeconds = Number(getReadTimeFromWordsCount(wordsCount).toFixed(0));
-    return readTimeInSeconds < 60 ? `${readTimeInSeconds}s` : `${Math.ceil(readTimeInSeconds / 60)}m`;
-  }, [documentInfo.words]);
+    const seconds = readTimeInSeconds < 60;
+    return new Intl.NumberFormat(language, {
+      style: "unit",
+      unit: seconds ? "second" : "minute",
+      unitDisplay: "short",
+      maximumFractionDigits: 0,
+    }).format(seconds ? readTimeInSeconds : Math.ceil(readTimeInSeconds / 60));
+  }, [documentInfo.words, language]);
 
   const documentInfoCards = useMemo(
     () => [
       {
         key: "words-count",
         title: t("page_navigation_pane.tabs.info.document_info.words"),
-        info: documentInfo.words,
+        info: documentInfo.words.toLocaleString(language),
       },
       {
         key: "characters-count",
         title: t("page_navigation_pane.tabs.info.document_info.characters"),
-        info: documentInfo.characters,
+        info: documentInfo.characters.toLocaleString(language),
       },
       {
         key: "paragraphs-count",
         title: t("page_navigation_pane.tabs.info.document_info.paragraphs"),
-        info: documentInfo.paragraphs,
+        info: documentInfo.paragraphs.toLocaleString(language),
       },
       {
         key: "read-time",
@@ -74,7 +81,7 @@ export const PageNavigationPaneInfoTabDocumentInfo = observer(function PageNavig
         info: secondsToReadableTime(),
       },
     ],
-    [documentInfo, secondsToReadableTime, t]
+    [documentInfo, language, secondsToReadableTime, t]
   );
 
   return (

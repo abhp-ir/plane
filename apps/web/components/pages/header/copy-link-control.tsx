@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { observer } from "mobx-react";
 
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export const PageCopyLinkControl = observer(function PageCopyLinkControl({ page }: Props) {
+  const { t } = useTranslation();
   const [isCopied, setIsCopied] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -57,13 +59,13 @@ export const PageCopyLinkControl = observer(function PageCopyLinkControl({ page 
   }, [pageOperations]);
 
   return (
-    <Tooltip label={isCopied ? "Copied!" : "Copy link"} side="bottom">
+    <Tooltip label={isCopied ? t("copied_to_clipboard") : t("common.actions.copy_link")} side="bottom">
       <IconButton
         variant="ghost"
         size="md"
         icon={isCopied ? <Icon icon={<TickOutline className="text-success-primary" />} /> : <Icon icon={LinkOutline} />}
         onClick={handleCopy}
-        aria-label={isCopied ? "Copied link" : "Copy link"}
+        aria-label={isCopied ? t("common.link_copied_to_clipboard") : t("common.actions.copy_link")}
       />
     </Tooltip>
   );

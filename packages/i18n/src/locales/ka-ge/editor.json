@@ -147,5 +147,35 @@
     "light-blue": "ღია ლურჯი",
     "dark-blue": "მუქი ლურჯი",
     "purple": "იისფერი"
+  },
+  "editor_toolbar": {
+    "bold": "სქელი",
+    "italic": "დახრილი",
+    "underline": "ხაზგასმა",
+    "strikethrough": "გადახაზვა",
+    "color": "ფერი",
+    "align_left": "მარცხნივ გასწორება",
+    "align_center": "ცენტრში გასწორება",
+    "align_right": "მარჯვნივ გასწორება",
+    "label": "ფორმატირების ხელსაწყოთა ზოლი",
+    "text_colors": "ტექსტის ფერები",
+    "background_colors": "ფონის ფერები",
+    "remove_text_color": "ტექსტის ფერის წაშლა",
+    "remove_background_color": "ფონის ფერის წაშლა",
+    "link": "ბმული",
+    "remove_link": "ბმულის წაშლა",
+    "apply_link": "ბმულის გამოყენება",
+    "multiple": "რამდენიმე",
+    "fit_to_width": "სიგანეზე მორგება"
+  },
+  "editor_image": {
+    "align": "გასწორება",
+    "download": "სურათის ჩამოტვირთვა",
+    "view_full_screen": "სურათის სრულ ეკრანზე ნახვა",
+    "full_screen_viewer": "სურათების სრულეკრანიანი მნახველი",
+    "close_viewer": "სურათების მნახველის დახურვა",
+    "zoom_out": "მასშტაბის შემცირება",
+    "zoom_in": "მასშტაბის გაზრდა",
+    "open_in_new_tab": "სურათის ახალ ჩანართში გახსნა"
   }
 }

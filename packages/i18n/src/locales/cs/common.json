@@ -11,7 +11,9 @@
     "property_removed": "Uživatel <actor/> odstranil „{property}“{showIssue, select, true { z <issue/>} other {}}.",
     "description_edited": "Uživatel <actor/> upravil popis{showIssue, select, true { u <issue/>} other {}}.",
     "work_item_created": "Uživatel <actor/> vytvořil {showIssue, select, true {<issue/>} other {pracovní položku}}{hasSource, select, true { přes <origin/>} other {}}.",
-    "work_item_deleted": "Uživatel <actor/> smazal {showIssue, select, true {<issue/>} other {pracovní položku}}."
+    "work_item_deleted": "Uživatel <actor/> smazal {showIssue, select, true {<issue/>} other {pracovní položku}}.",
+    "work_item_archived": "Uživatel <actor/> archivoval {showIssue, select, true {<issue/>} other {pracovní položku}}.",
+    "work_item_restored": "Uživatel <actor/> obnovil {showIssue, select, true {<issue/>} other {pracovní položku}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Pracujeme na tom. Pokud potřebujete okamžitou pomoc,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Změnit odstín pleti"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Archivované pracovní položky",
+      "cycles": "{project_name} - Archivované cykly",
+      "modules": "{project_name} - Archivované moduly"
+    }
+  },
+  "page_export": {
+    "title": "Exportovat stránku",
+    "format": "Formát exportu",
+    "include_content": "Zahrnutý obsah",
+    "page_format": "Formát stránky",
+    "content": {
+      "everything": "Vše",
+      "no_images": "Bez obrázků"
+    },
+    "success": "Stránka byla úspěšně exportována.",
+    "error": "Stránku se nepodařilo exportovat. Zkuste to prosím později znovu.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Plná šířka",
+    "sticky_toolbar": "Připnutý panel nástrojů",
+    "syncing": "Synchronizace...",
+    "syncing_description": "Vaše změny se synchronizují se serverem. Můžete pokračovat v úpravách.",
+    "connection_lost": "Připojení ztraceno",
+    "connection_lost_description": "Připojení ztraceno. Připojení k serveru WebSocket se nedaří. Vaše změny se budou synchronizovat a ukládat každých 10 sekund.",
+    "offline": "Offline",
+    "offline_description": "Jste offline. Můžete pokračovat v úpravách. Změny se synchronizují, až budete opět online.",
+    "locked": "Uzamčeno",
+    "unlocked": "Odemčeno"
   }
 }

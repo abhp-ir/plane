@@ -147,5 +147,35 @@
     "light-blue": "Biru muda",
     "dark-blue": "Biru tua",
     "purple": "Ungu"
+  },
+  "editor_toolbar": {
+    "bold": "Tebal",
+    "italic": "Miring",
+    "underline": "Garis bawah",
+    "strikethrough": "Coret",
+    "color": "Warna",
+    "align_left": "Rata kiri",
+    "align_center": "Rata tengah",
+    "align_right": "Rata kanan",
+    "label": "Bilah pemformatan",
+    "text_colors": "Warna teks",
+    "background_colors": "Warna latar belakang",
+    "remove_text_color": "Hapus warna teks",
+    "remove_background_color": "Hapus warna latar belakang",
+    "link": "Tautan",
+    "remove_link": "Hapus tautan",
+    "apply_link": "Terapkan tautan",
+    "multiple": "Beberapa",
+    "fit_to_width": "Sesuaikan dengan lebar"
+  },
+  "editor_image": {
+    "align": "Perataan",
+    "download": "Unduh gambar",
+    "view_full_screen": "Lihat gambar dalam layar penuh",
+    "full_screen_viewer": "Penampil gambar layar penuh",
+    "close_viewer": "Tutup penampil gambar",
+    "zoom_out": "Perkecil",
+    "zoom_in": "Perbesar",
+    "open_in_new_tab": "Buka gambar di tab baru"
   }
 }

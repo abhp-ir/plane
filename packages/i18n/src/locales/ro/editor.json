@@ -147,5 +147,35 @@
     "light-blue": "Albastru deschis",
     "dark-blue": "Albastru închis",
     "purple": "Violet"
+  },
+  "editor_toolbar": {
+    "bold": "Aldin",
+    "italic": "Cursiv",
+    "underline": "Subliniat",
+    "strikethrough": "Tăiat",
+    "color": "Culoare",
+    "align_left": "Aliniere la stânga",
+    "align_center": "Aliniere la centru",
+    "align_right": "Aliniere la dreapta",
+    "label": "Bară de formatare",
+    "text_colors": "Culorile textului",
+    "background_colors": "Culorile fundalului",
+    "remove_text_color": "Elimină culoarea textului",
+    "remove_background_color": "Elimină culoarea fundalului",
+    "link": "Link",
+    "remove_link": "Elimină linkul",
+    "apply_link": "Aplică linkul",
+    "multiple": "Mai multe",
+    "fit_to_width": "Potriviți la lățime"
+  },
+  "editor_image": {
+    "align": "Aliniați",
+    "download": "Descărcați imaginea",
+    "view_full_screen": "Afișați imaginea pe tot ecranul",
+    "full_screen_viewer": "Vizualizator de imagini pe tot ecranul",
+    "close_viewer": "Închideți vizualizatorul de imagini",
+    "zoom_out": "Micșorați",
+    "zoom_in": "Măriți",
+    "open_in_new_tab": "Deschideți imaginea într-un tab nou"
   }
 }

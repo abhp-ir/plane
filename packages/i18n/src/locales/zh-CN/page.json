@@ -110,6 +110,12 @@
       "label": "从集合中移除",
       "success_message": "页面已从集合中移除。",
       "error_message": "无法将页面从集合中移除。请重试。"
+    },
+    "delete_page": {
+      "title": "删除页面",
+      "confirmation": "确定要删除页面 <page/> 吗？该页面将被永久删除。此操作无法撤销。",
+      "success_message": "页面已成功删除。",
+      "error_message": "无法删除页面，请重试。"
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "归档日期"
+  },
+  "page_versions": {
+    "restored": "页面版本已恢复。",
+    "restore_error": "无法恢复页面版本。",
+    "load_error": "无法加载该版本，请重试。",
+    "loading": "正在加载版本详情",
+    "view_only": "仅查看",
+    "restoring": "正在恢复"
+  },
+  "page_views": {
+    "project_title": "{projectName} - 页面",
+    "not_found_title": "页面未找到",
+    "not_found_description": "您尝试访问的页面不存在，或您没有查看权限。",
+    "view_other_pages": "查看其他页面"
   }
 }

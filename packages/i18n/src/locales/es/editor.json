@@ -147,5 +147,35 @@
     "light-blue": "Azul claro",
     "dark-blue": "Azul oscuro",
     "purple": "Morado"
+  },
+  "editor_toolbar": {
+    "bold": "Negrita",
+    "italic": "Cursiva",
+    "underline": "Subrayado",
+    "strikethrough": "Tachado",
+    "color": "Color",
+    "align_left": "Alinear a la izquierda",
+    "align_center": "Centrar",
+    "align_right": "Alinear a la derecha",
+    "label": "Barra de formato",
+    "text_colors": "Colores de texto",
+    "background_colors": "Colores de fondo",
+    "remove_text_color": "Quitar color de texto",
+    "remove_background_color": "Quitar color de fondo",
+    "link": "Enlace",
+    "remove_link": "Quitar enlace",
+    "apply_link": "Aplicar enlace",
+    "multiple": "Varios",
+    "fit_to_width": "Ajustar al ancho"
+  },
+  "editor_image": {
+    "align": "Alinear",
+    "download": "Descargar imagen",
+    "view_full_screen": "Ver imagen a pantalla completa",
+    "full_screen_viewer": "Visor de imágenes a pantalla completa",
+    "close_viewer": "Cerrar visor de imágenes",
+    "zoom_out": "Alejar",
+    "zoom_in": "Acercar",
+    "open_in_new_tab": "Abrir imagen en una pestaña nueva"
   }
 }

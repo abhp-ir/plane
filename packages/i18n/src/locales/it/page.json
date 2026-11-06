@@ -110,6 +110,12 @@
       "label": "Rimuovi dalla raccolta",
       "success_message": "Pagina rimossa dalla raccolta.",
       "error_message": "Non è stato possibile rimuovere la pagina dalla raccolta. Riprova."
+    },
+    "delete_page": {
+      "title": "Elimina pagina",
+      "confirmation": "Conferma di voler eliminare la pagina <page/>? La pagina verrà eliminata definitivamente. Questa azione non può essere annullata.",
+      "success_message": "Pagina eliminata correttamente.",
+      "error_message": "Impossibile eliminare la pagina. Riprovi."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Data di archiviazione"
+  },
+  "page_versions": {
+    "restored": "Versione della pagina ripristinata.",
+    "restore_error": "Impossibile ripristinare la versione della pagina.",
+    "load_error": "Impossibile caricare la versione. Riprovi.",
+    "loading": "Caricamento dei dettagli della versione",
+    "view_only": "Sola lettura",
+    "restoring": "Ripristino in corso"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Pagine",
+    "not_found_title": "Pagina non trovata",
+    "not_found_description": "La pagina a cui sta tentando di accedere non esiste oppure non dispone dell’autorizzazione per visualizzarla.",
+    "view_other_pages": "Visualizza altre pagine"
   }
 }

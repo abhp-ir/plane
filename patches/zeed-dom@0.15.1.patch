@@ -1,0 +1,76 @@
+diff --git a/dist/chunk-YMRUYF4I.js b/dist/chunk-YMRUYF4I.js
+index f5d7163e68ad73d2dc507ed289f9de50af5c3e2f..6ac510393f79a775dfa896075227e4ecc7ae0caa 100644
+--- a/dist/chunk-YMRUYF4I.js
++++ b/dist/chunk-YMRUYF4I.js
+@@ -534,7 +534,14 @@ var VElement = class extends VNodeQuery {
+           styles[toCamelCase(name)] = value;
+         }
+       }
++      const element = this;
+       this._styles = {
++        get cssText() {
++          return element.getAttribute("style") || "";
++        },
++        set cssText(value) {
++          element.setAttribute("style", String(value));
++        },
+         get length() {
+           return count;
+         },
+diff --git a/dist/index.browser.cjs b/dist/index.browser.cjs
+index 76578139941128f0431d1340abaa3b64c1912e4c..74844d4bec00affbfff828b74c918fbea1d93e53 100644
+--- a/dist/index.browser.cjs
++++ b/dist/index.browser.cjs
+@@ -591,7 +591,14 @@ var VElement = class extends VNodeQuery {
+           styles[toCamelCase(name)] = value;
+         }
+       }
++      const element = this;
+       this._styles = {
++        get cssText() {
++          return element.getAttribute("style") || "";
++        },
++        set cssText(value) {
++          element.setAttribute("style", String(value));
++        },
+         get length() {
+           return count;
+         },
+diff --git a/dist/index.node.cjs b/dist/index.node.cjs
+index 130ff4d880bb8985dd0bea78fec21734ee3d08ed..02cee1be2fc9f279bcfcbb1bfc014645ce8ddf0c 100644
+--- a/dist/index.node.cjs
++++ b/dist/index.node.cjs
+@@ -592,7 +592,14 @@ var VElement = class extends VNodeQuery {
+           styles[toCamelCase(name)] = value;
+         }
+       }
++      const element = this;
+       this._styles = {
++        get cssText() {
++          return element.getAttribute("style") || "";
++        },
++        set cssText(value) {
++          element.setAttribute("style", String(value));
++        },
+         get length() {
+           return count;
+         },
+diff --git a/dist/jsx-runtime.cjs b/dist/jsx-runtime.cjs
+index 971c9978046172ea1f83009b111d70ddc77fefb8..919785e48b7e231e80a3a74c2db5fd9cf63b1525 100644
+--- a/dist/jsx-runtime.cjs
++++ b/dist/jsx-runtime.cjs
+@@ -562,7 +562,14 @@ var VElement = class extends VNodeQuery {
+           styles[toCamelCase(name)] = value;
+         }
+       }
++      const element = this;
+       this._styles = {
++        get cssText() {
++          return element.getAttribute("style") || "";
++        },
++        set cssText(value) {
++          element.setAttribute("style", String(value));
++        },
+         get length() {
+           return count;
+         },

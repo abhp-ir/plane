@@ -11,7 +11,9 @@
     "property_removed": "<actor/>移除了{showIssue, select, true {<issue/>的} other {}}“{property}”。",
     "description_edited": "<actor/>编辑了{showIssue, select, true {<issue/>的} other {}}描述。",
     "work_item_created": "<actor/>{hasSource, select, true {通过<origin/>} other {}}创建了{showIssue, select, true {<issue/>} other {工作项}}。",
-    "work_item_deleted": "<actor/>删除了{showIssue, select, true {<issue/>} other {工作项}}。"
+    "work_item_deleted": "<actor/>删除了{showIssue, select, true {<issue/>} other {工作项}}。",
+    "work_item_archived": "<actor/>归档了{showIssue, select, true {<issue/>} other {工作项}}。",
+    "work_item_restored": "<actor/>恢复了{showIssue, select, true {<issue/>} other {工作项}}。"
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "我们正在处理此问题。如果您需要紧急协助，",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "更改肤色"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - 已归档的工作项",
+      "cycles": "{project_name} - 已归档的周期",
+      "modules": "{project_name} - 已归档的模块"
+    }
+  },
+  "page_export": {
+    "title": "导出页面",
+    "format": "导出格式",
+    "include_content": "包含内容",
+    "page_format": "纸张尺寸",
+    "content": {
+      "everything": "全部",
+      "no_images": "不含图片"
+    },
+    "success": "页面已成功导出。",
+    "error": "无法导出页面。请稍后重试。",
+    "paper": {
+      "letter": "信纸",
+      "legal": "法律用纸",
+      "tabloid": "小报"
+    }
+  },
+  "page_editor": {
+    "full_width": "全宽",
+    "sticky_toolbar": "固定工具栏",
+    "syncing": "正在同步...",
+    "syncing_description": "正在将更改同步到服务器。你可以继续编辑。",
+    "connection_lost": "连接已断开",
+    "connection_lost_description": "连接已断开。连接WebSocket服务器时遇到问题。你的更改将每10秒同步并保存一次。",
+    "offline": "离线",
+    "offline_description": "你已离线。你可以继续编辑，恢复在线后更改将自动同步。",
+    "locked": "已锁定",
+    "unlocked": "已解锁"
   }
 }

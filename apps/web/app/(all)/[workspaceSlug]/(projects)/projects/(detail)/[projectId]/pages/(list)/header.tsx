@@ -13,6 +13,7 @@ import { EPageAccess } from "@plane/constants";
 import { Button } from "@makeplane/propel/components/button";
 import { PagesOutline } from "@makeplane/propel/icons";
 import { setToast } from "@plane/blocks/toast";
+import { useTranslation } from "@plane/i18n";
 import type { TPage } from "@plane/types";
 // plane ui
 import { Breadcrumbs } from "@plane/blocks/breadcrumb";
@@ -27,6 +28,7 @@ import { useProjectCrumbProps } from "@/components/breadcrumbs/use-project-crumb
 import { EPageStoreType, usePageStore } from "@/hooks/store";
 
 export const PagesListHeader = observer(function PagesListHeader() {
+  const { t } = useTranslation();
   // states
   const [isCreatingPage, setIsCreatingPage] = useState(false);
   // router
@@ -74,7 +76,7 @@ export const PagesListHeader = observer(function PagesListHeader() {
           <Breadcrumbs.Item
             component={
               <BreadcrumbLink
-                label="Pages"
+                label={t("pages")}
                 href={`/${workspaceSlug}/projects/${currentProjectDetails?.id}/pages/`}
                 icon={<PagesOutline className="h-4 w-4 text-tertiary" />}
                 isLast

@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import type { Editor } from "@tiptap/core";
 
 import { useCallback, useRef, useState } from "react";
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export function BubbleMenuLinkSelector(props: Props) {
+  const { t } = useTranslation();
   const { editor } = props;
   // states
   const [error, setError] = useState(false);
@@ -30,7 +32,11 @@ export function BubbleMenuLinkSelector(props: Props) {
   const { options, getReferenceProps, getFloatingProps } = useFloatingMenu({});
   const { context } = options;
   // refs
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const setInputRef = useCallback((node: HTMLInputElement | null) => {
+    inputRef.current = node;
+    node?.focus();
+  }, []);
 
   const handleLinkSubmit = useCallback(() => {
     const input = inputRef.current;
@@ -63,7 +69,7 @@ export function BubbleMenuLinkSelector(props: Props) {
       getReferenceProps={getReferenceProps}
       menuButton={
         <>
-          Link
+          {t("editor_toolbar.link")}
           <LinkOutline className="size-3 shrink-0" />
         </>
       }
@@ -76,11 +82,14 @@ export function BubbleMenuLinkSelector(props: Props) {
           })}
         >
           <input
-            ref={inputRef}
+            ref={setInputRef}
             type="url"
-            placeholder="Enter or paste a link"
+            dir="ltr"
+            aria-invalid={error}
+            placeholder={t("externalEmbedComponent.placeholder.link")}
+            aria-label={t("editor_toolbar.link")}
             onClick={(e) => e.stopPropagation()}
-            className="flex-1 rounded-sm border-r-[0.5px] border-strong bg-surface-1 px-1.5 py-2 text-11 outline-none placeholder:text-placeholder"
+            className="flex-1 rounded-sm bg-surface-1 px-1.5 py-2 text-11 outline-none placeholder:text-placeholder"
             defaultValue={editor.getAttributes("link").href || ""}
             onKeyDown={(e) => {
               setError(false);
@@ -90,12 +99,12 @@ export function BubbleMenuLinkSelector(props: Props) {
               }
             }}
             onFocus={() => setError(false)}
-            autoFocus
           />
           {editor.getAttributes("link").href ? (
             <button
               type="button"
-              className="grid place-items-center rounded-xs p-1 text-danger-primary transition-all hover:bg-danger-subtle-hover"
+              aria-label={t("editor_toolbar.remove_link")}
+              className="grid place-items-center rounded-xs border-s-[0.5px] border-strong p-1 text-danger-primary transition-all hover:bg-danger-subtle-hover"
               onClick={(e) => {
                 unsetLinkEditor(editor);
                 e.stopPropagation();
@@ -107,7 +116,8 @@ export function BubbleMenuLinkSelector(props: Props) {
           ) : (
             <button
               type="button"
-              className="grid aspect-square h-full place-items-center rounded-xs p-1 text-tertiary transition-all hover:bg-layer-1"
+              aria-label={t("editor_toolbar.apply_link")}
+              className="grid aspect-square h-full place-items-center rounded-xs border-s-[0.5px] border-strong p-1 text-tertiary transition-all hover:bg-layer-1"
               onClick={(e) => {
                 e.stopPropagation();
                 handleLinkSubmit();
@@ -119,7 +129,7 @@ export function BubbleMenuLinkSelector(props: Props) {
         </div>
         {error && (
           <p className="animate-in fade-in slide-in-from-top-0 pointer-events-none my-1 px-2 text-11 text-danger-primary">
-            Please enter a valid URL
+            {t("externalEmbedComponent.error.not_valid_link")}
           </p>
         )}
       </div>

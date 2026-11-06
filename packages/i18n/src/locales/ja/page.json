@@ -110,6 +110,12 @@
       "label": "コレクションから削除",
       "success_message": "ページをコレクションから削除しました。",
       "error_message": "ページをコレクションから削除できませんでした。もう一度お試しください。"
+    },
+    "delete_page": {
+      "title": "ページを削除",
+      "confirmation": "ページ「<page/>」を削除してもよろしいですか？ページは完全に削除されます。この操作は元に戻せません。",
+      "success_message": "ページを削除しました。",
+      "error_message": "ページを削除できませんでした。もう一度お試しください。"
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "アーカイブ日"
+  },
+  "page_versions": {
+    "restored": "ページのバージョンを復元しました。",
+    "restore_error": "ページのバージョンを復元できませんでした。",
+    "load_error": "バージョンを読み込めませんでした。もう一度お試しください。",
+    "loading": "バージョンの詳細を読み込み中",
+    "view_only": "閲覧のみ",
+    "restoring": "復元中"
+  },
+  "page_views": {
+    "project_title": "{projectName} - ページ",
+    "not_found_title": "ページが見つかりません",
+    "not_found_description": "アクセスしようとしているページは存在しないか、閲覧する権限がありません。",
+    "view_other_pages": "他のページを表示"
   }
 }

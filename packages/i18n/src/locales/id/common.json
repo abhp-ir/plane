@@ -11,7 +11,9 @@
     "property_removed": "<actor/> menghapus “{property}”{showIssue, select, true { dari <issue/>} other {}}.",
     "description_edited": "<actor/> mengedit deskripsi{showIssue, select, true { pada <issue/>} other {}}.",
     "work_item_created": "<actor/> membuat {showIssue, select, true {<issue/>} other {item pekerjaan}}{hasSource, select, true { melalui <origin/>} other {}}.",
-    "work_item_deleted": "<actor/> menghapus {showIssue, select, true {<issue/>} other {item pekerjaan}}."
+    "work_item_deleted": "<actor/> menghapus {showIssue, select, true {<issue/>} other {item pekerjaan}}.",
+    "work_item_archived": "<actor/> mengarsipkan {showIssue, select, true {<issue/>} other {item pekerjaan}}.",
+    "work_item_restored": "<actor/> memulihkan {showIssue, select, true {<issue/>} other {item pekerjaan}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Kami sedang mengerjakan ini. Jika Anda memerlukan bantuan segera,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Ubah warna kulit"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Item pekerjaan yang diarsipkan",
+      "cycles": "{project_name} - Siklus yang diarsipkan",
+      "modules": "{project_name} - Modul yang diarsipkan"
+    }
+  },
+  "page_export": {
+    "title": "Ekspor halaman",
+    "format": "Format ekspor",
+    "include_content": "Konten yang disertakan",
+    "page_format": "Format halaman",
+    "content": {
+      "everything": "Semuanya",
+      "no_images": "Tanpa gambar"
+    },
+    "success": "Halaman berhasil diekspor.",
+    "error": "Halaman tidak dapat diekspor. Silakan coba lagi nanti.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Lebar penuh",
+    "sticky_toolbar": "Bilah alat tetap",
+    "syncing": "Menyinkronkan...",
+    "syncing_description": "Perubahan Anda sedang disinkronkan dengan server. Anda dapat terus mengedit.",
+    "connection_lost": "Koneksi terputus",
+    "connection_lost_description": "Koneksi terputus. Ada masalah saat menghubungkan ke server WebSocket. Perubahan Anda akan disinkronkan dan disimpan setiap 10 detik.",
+    "offline": "Luring",
+    "offline_description": "Anda sedang luring. Anda dapat terus mengedit. Perubahan akan disinkronkan saat Anda kembali daring.",
+    "locked": "Terkunci",
+    "unlocked": "Terbuka"
   }
 }

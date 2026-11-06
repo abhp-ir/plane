@@ -138,7 +138,7 @@ export const ProjectViewIssuesHeader = observer(function ProjectViewIssuesHeader
           <Breadcrumbs.Item
             component={
               <BreadcrumbLink
-                label="Views"
+                label={t("views")}
                 href={`/${workspaceSlug}/projects/${projectId}/views/`}
                 icon={<ViewsOutline className="h-4 w-4 text-tertiary" />}
               />
@@ -211,7 +211,7 @@ export const ProjectViewIssuesHeader = observer(function ProjectViewIssuesHeader
             variant="primary"
             size="md"
             stretch="auto"
-            label="Add work item"
+            label={t("add_work_item")}
             onClick={() => {
               toggleCreateIssueModal(true, EIssuesStoreType.PROJECT_VIEW);
             }}

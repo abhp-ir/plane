@@ -1,0 +1,12 @@
+diff --git a/lib/index.js b/lib/index.js
+index 18c2618f4630b3c1296c8c3cac317b8d7666bbe8..e6e34e36c5aedab140d1433e21efcc41cc69bb45 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -2092,6 +2092,7 @@ const resolveTextLayout = (node, fontStore) => {
+ };
+
+ const BASE_INHERITABLE_PROPERTIES = [
++    'direction',
+     'color',
+     'fontFamily',
+     'fontSize',

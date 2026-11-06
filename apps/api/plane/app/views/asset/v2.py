@@ -484,6 +484,8 @@ class WorkspaceFileAssetEndpoint(BaseAPIView):
             disposition="attachment",
             filename=asset.attributes.get("name"),
         )
+        if request.query_params.get("response_format") == "json":
+            return Response({"url": signed_url}, headers={"Cache-Control": "private, no-store"})
         # Redirect to the signed URL
         return HttpResponseRedirect(signed_url)
 
@@ -691,6 +693,8 @@ class ProjectAssetEndpoint(BaseAPIView):
             disposition="attachment",
             filename=asset.attributes.get("name"),
         )
+        if request.query_params.get("response_format") == "json":
+            return Response({"url": signed_url}, headers={"Cache-Control": "private, no-store"})
         # Redirect to the signed URL
         return HttpResponseRedirect(signed_url)
 

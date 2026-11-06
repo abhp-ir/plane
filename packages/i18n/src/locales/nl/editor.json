@@ -147,5 +147,35 @@
     "light-blue": "Lichtblauw",
     "dark-blue": "Donkerblauw",
     "purple": "Paars"
+  },
+  "editor_toolbar": {
+    "bold": "Vet",
+    "italic": "Cursief",
+    "underline": "Onderstrepen",
+    "strikethrough": "Doorhalen",
+    "color": "Kleur",
+    "align_left": "Links uitlijnen",
+    "align_center": "Centreren",
+    "align_right": "Rechts uitlijnen",
+    "label": "Opmaakwerkbalk",
+    "text_colors": "Tekstkleuren",
+    "background_colors": "Achtergrondkleuren",
+    "remove_text_color": "Tekstkleur verwijderen",
+    "remove_background_color": "Achtergrondkleur verwijderen",
+    "link": "Link",
+    "remove_link": "Link verwijderen",
+    "apply_link": "Link toepassen",
+    "multiple": "Meerdere",
+    "fit_to_width": "Aan breedte aanpassen"
+  },
+  "editor_image": {
+    "align": "Uitlijnen",
+    "download": "Afbeelding downloaden",
+    "view_full_screen": "Afbeelding op volledig scherm bekijken",
+    "full_screen_viewer": "Afbeeldingsviewer op volledig scherm",
+    "close_viewer": "Afbeeldingsviewer sluiten",
+    "zoom_out": "Uitzoomen",
+    "zoom_in": "Inzoomen",
+    "open_in_new_tab": "Afbeelding openen in nieuw tabblad"
   }
 }

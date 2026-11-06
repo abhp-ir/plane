@@ -11,7 +11,9 @@
     "property_removed": "<actor/> heeft ‘{property}’{showIssue, select, true { uit <issue/>} other {}} verwijderd.",
     "description_edited": "<actor/> heeft de beschrijving{showIssue, select, true { van <issue/>} other {}} bewerkt.",
     "work_item_created": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}}{hasSource, select, true { via <origin/>} other {}} aangemaakt.",
-    "work_item_deleted": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}} verwijderd."
+    "work_item_deleted": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}} verwijderd.",
+    "work_item_archived": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}} gearchiveerd.",
+    "work_item_restored": "<actor/> heeft {showIssue, select, true {<issue/>} other {het werkitem}} hersteld."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "We werken hieraan. Als je direct hulp nodig hebt,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Huidtint wijzigen"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Gearchiveerde werkitems",
+      "cycles": "{project_name} - Gearchiveerde cycli",
+      "modules": "{project_name} - Gearchiveerde modules"
+    }
+  },
+  "page_export": {
+    "title": "Pagina exporteren",
+    "format": "Exportindeling",
+    "include_content": "Opgenomen inhoud",
+    "page_format": "Paginaformaat",
+    "content": {
+      "everything": "Alles",
+      "no_images": "Zonder afbeeldingen"
+    },
+    "success": "Pagina geëxporteerd.",
+    "error": "De pagina kon niet worden geëxporteerd. Probeer het later opnieuw.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Volledige breedte",
+    "sticky_toolbar": "Vaste werkbalk",
+    "syncing": "Synchroniseren...",
+    "syncing_description": "Je wijzigingen worden met de server gesynchroniseerd. Je kunt verder bewerken.",
+    "connection_lost": "Verbinding verbroken",
+    "connection_lost_description": "Verbinding verbroken. Er is een probleem met de verbinding met de WebSocket-server. Je wijzigingen worden elke 10 seconden gesynchroniseerd en opgeslagen.",
+    "offline": "Offline",
+    "offline_description": "Je bent offline. Je kunt verder bewerken. Je wijzigingen worden gesynchroniseerd zodra je weer online bent.",
+    "locked": "Vergrendeld",
+    "unlocked": "Ontgrendeld"
   }
 }

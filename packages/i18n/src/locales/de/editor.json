@@ -147,5 +147,35 @@
     "light-blue": "Hellblau",
     "dark-blue": "Dunkelblau",
     "purple": "Violett"
+  },
+  "editor_toolbar": {
+    "bold": "Fett",
+    "italic": "Kursiv",
+    "underline": "Unterstrichen",
+    "strikethrough": "Durchgestrichen",
+    "color": "Farbe",
+    "align_left": "Linksbündig",
+    "align_center": "Zentriert",
+    "align_right": "Rechtsbündig",
+    "label": "Formatierungsleiste",
+    "text_colors": "Textfarben",
+    "background_colors": "Hintergrundfarben",
+    "remove_text_color": "Textfarbe entfernen",
+    "remove_background_color": "Hintergrundfarbe entfernen",
+    "link": "Link",
+    "remove_link": "Link entfernen",
+    "apply_link": "Link anwenden",
+    "multiple": "Mehrere",
+    "fit_to_width": "An Breite anpassen"
+  },
+  "editor_image": {
+    "align": "Ausrichten",
+    "download": "Bild herunterladen",
+    "view_full_screen": "Bild im Vollbildmodus anzeigen",
+    "full_screen_viewer": "Bildbetrachter im Vollbildmodus",
+    "close_viewer": "Bildbetrachter schließen",
+    "zoom_out": "Verkleinern",
+    "zoom_in": "Vergrößern",
+    "open_in_new_tab": "Bild in neuem Tab öffnen"
   }
 }

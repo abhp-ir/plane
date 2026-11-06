@@ -110,6 +110,12 @@
       "label": "Odstrániť z kolekcie",
       "success_message": "Stránka bola odstránená z kolekcie.",
       "error_message": "Stránku sa nepodarilo odstrániť z kolekcie. Skúste to prosím znova."
+    },
+    "delete_page": {
+      "title": "Odstrániť stránku",
+      "confirmation": "Naozaj chcete odstrániť stránku <page/>? Stránka sa natrvalo odstráni. Túto akciu nemožno vrátiť späť.",
+      "success_message": "Stránka bola úspešne odstránená.",
+      "error_message": "Stránku sa nepodarilo odstrániť. Skúste to znova."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Dátum archivácie"
+  },
+  "page_versions": {
+    "restored": "Verzia stránky bola obnovená.",
+    "restore_error": "Verziu stránky sa nepodarilo obnoviť.",
+    "load_error": "Verziu sa nepodarilo načítať. Skúste to znova.",
+    "loading": "Načítavajú sa podrobnosti verzie",
+    "view_only": "Iba na čítanie",
+    "restoring": "Obnovovanie"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Stránky",
+    "not_found_title": "Stránka sa nenašla",
+    "not_found_description": "Stránka, ku ktorej sa pokúšate získať prístup, neexistuje alebo nemáte povolenie na jej zobrazenie.",
+    "view_other_pages": "Zobraziť ďalšie stránky"
   }
 }

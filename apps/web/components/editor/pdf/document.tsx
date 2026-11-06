@@ -4,8 +4,9 @@
  * See the LICENSE file for details.
  */
 
+import type { ComponentProps } from "react";
 import type { PageProps, Styles } from "@react-pdf/renderer";
-import { Document, Font, Page, StyleSheet } from "@react-pdf/renderer";
+import { Document, Font, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { Html } from "react-pdf-html";
 // assets
 import interBold from "@/app/assets/fonts/inter/bold.ttf?url";
@@ -17,13 +18,76 @@ import interSemibold from "@/app/assets/fonts/inter/semibold.ttf?url";
 import interThin from "@/app/assets/fonts/inter/thin.ttf?url";
 import interUltraBold from "@/app/assets/fonts/inter/ultrabold.ttf?url";
 import interUltraLight from "@/app/assets/fonts/inter/ultralight.ttf?url";
+import amiriRegular from "@/app/assets/fonts/amiri/Amiri-Regular.ttf?url";
+import amiriBold from "@/app/assets/fonts/amiri/Amiri-Bold.ttf?url";
+import amiriItalic from "@/app/assets/fonts/amiri/Amiri-Italic.ttf?url";
+import amiriBoldItalic from "@/app/assets/fonts/amiri/Amiri-BoldItalic.ttf?url";
 // plane imports
 import { convertRemToPixel } from "@plane/utils";
+import { getPDFTextDirection } from "./content-direction";
+
+type PDFRenderers = NonNullable<ComponentProps<typeof Html>["renderers"]>;
+type PDFRendererProps = ComponentProps<PDFRenderers[string]>;
+
+function getElementDirection(element: PDFRendererProps["element"]): "ltr" | "rtl" {
+  let ancestor = element;
+  while (ancestor) {
+    const dir = ancestor.getAttribute("dir");
+    if (dir === "ltr" || dir === "rtl") return dir;
+    ancestor = ancestor.parentNode;
+  }
+  return getPDFTextDirection(element.textContent);
+}
+
+function PDFBlock({ element, style, children }: PDFRendererProps) {
+  const direction = element.getAttribute("data-node-type") === "code-block" ? "ltr" : getElementDirection(element);
+  return <View style={[{ direction, textAlign: direction === "rtl" ? "right" : "left" }, ...style]}>{children}</View>;
+}
+
+function PDFListItem({ element, style, children, locale }: PDFRendererProps & { locale: string }) {
+  const direction = getElementDirection(element);
+  const rtl = direction === "rtl";
+  const list = element.parentNode;
+  const task = list.getAttribute("data-type") === "taskList";
+  const start = Number.parseInt(list.getAttribute("start") ?? "", 10);
+  let number = (Number.isNaN(start) ? 1 : start) + element.indexOfType;
+  let previous = element;
+  while (previous) {
+    const value = Number.parseInt(previous.getAttribute("value") ?? "", 10);
+    if (!Number.isNaN(value)) {
+      number = value + element.indexOfType - previous.indexOfType;
+      break;
+    }
+    previous = previous.previousElementSibling as typeof previous;
+  }
+  const marker = list.tag === "ol" ? `${new Intl.NumberFormat(locale, { useGrouping: false }).format(number)}.` : "•";
+  return (
+    <View style={[...style, { direction, flexDirection: rtl ? "row-reverse" : "row" }]}>
+      <View style={{ width: 30, flexShrink: 0, alignItems: rtl ? "flex-start" : "flex-end", paddingHorizontal: 5 }}>
+        {task ? (
+          <View
+            style={{
+              width: 12,
+              height: 12,
+              marginTop: 3,
+              borderWidth: 1.5,
+              borderRadius: 2,
+              backgroundColor: element.getAttribute("data-checked") === "true" ? "#3f76ff" : "#ffffff",
+            }}
+          />
+        ) : (
+          <Text style={{ direction: "ltr" }}>{marker}</Text>
+        )}
+      </View>
+      <View style={{ flexGrow: 1, flexBasis: 1, textAlign: rtl ? "right" : "left" }}>{children}</View>
+    </View>
+  );
+}
 
 const EDITOR_PDF_FONT_FAMILY_STYLES: Styles = {
-  "*:not(.courier, .courier-bold)": { fontFamily: "Inter" },
-  ".courier": { fontFamily: "Courier" },
-  ".courier-bold": { fontFamily: "Courier-Bold" },
+  "*:not(.courier, .courier-bold)": { fontFamily: ["Inter", "Amiri"] },
+  ".courier": { fontFamily: ["Courier", "Amiri"] },
+  ".courier-bold": { fontFamily: ["Courier-Bold", "Amiri"] },
 };
 
 const EDITOR_PDF_TYPOGRAPHY_STYLES: Styles = {
@@ -190,6 +254,15 @@ const EDITOR_PDF_DOCUMENT_STYLESHEET = StyleSheet.create({
 });
 
 Font.register({
+  family: "Amiri",
+  fonts: [
+    { src: amiriRegular, fontWeight: 400 },
+    { src: amiriBold, fontWeight: 700 },
+    { src: amiriItalic, fontWeight: 400, fontStyle: "italic" },
+    { src: amiriBoldItalic, fontWeight: 700, fontStyle: "italic" },
+  ],
+});
+Font.register({
   family: "Inter",
   fonts: [
     { src: interThin, fontWeight: "thin" },
@@ -216,10 +289,11 @@ Font.register({
 type Props = {
   content: string;
   pageFormat: PageProps["size"];
+  locale?: string;
 };
 
 export function PDFDocument(props: Props) {
-  const { content, pageFormat } = props;
+  const { content, pageFormat, locale = "en" } = props;
 
   return (
     <Document>
@@ -230,7 +304,22 @@ export function PDFDocument(props: Props) {
           padding: 64,
         }}
       >
-        <Html stylesheet={EDITOR_PDF_DOCUMENT_STYLESHEET}>{content}</Html>
+        <Html
+          stylesheet={EDITOR_PDF_DOCUMENT_STYLESHEET}
+          renderers={{
+            p: PDFBlock,
+            h1: PDFBlock,
+            h2: PDFBlock,
+            h3: PDFBlock,
+            h4: PDFBlock,
+            h5: PDFBlock,
+            h6: PDFBlock,
+            div: PDFBlock,
+            li: (item) => <PDFListItem {...item} locale={locale} />,
+          }}
+        >
+          {content}
+        </Html>
       </Page>
     </Document>
   );

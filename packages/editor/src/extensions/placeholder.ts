@@ -5,6 +5,8 @@
  */
 
 import { Placeholder } from "@tiptap/extension-placeholder";
+import { Plugin } from "@tiptap/pm/state";
+import { i18nInstance } from "@plane/i18n";
 // constants
 import { CORE_EXTENSIONS } from "@/constants/extension";
 // types
@@ -15,14 +17,30 @@ type TArgs = {
   showPlaceholderOnEmpty: IEditorProps["showPlaceholderOnEmpty"];
 };
 
+export const LocalizedPlaceholder = Placeholder.extend({
+  addProseMirrorPlugins() {
+    return [
+      ...(this.parent?.() ?? []),
+      new Plugin({
+        view: (view) => {
+          const refresh = () => view.dispatch(view.state.tr.setMeta("addToHistory", false));
+          i18nInstance.on("languageChanged", refresh);
+          return { destroy: () => i18nInstance.off("languageChanged", refresh) };
+        },
+      }),
+    ];
+  },
+});
+
 export const CustomPlaceholderExtension = (args: TArgs) => {
   const { placeholder, showPlaceholderOnEmpty = false } = args;
 
-  return Placeholder.configure({
+  return LocalizedPlaceholder.configure({
     placeholder: ({ editor, node }) => {
       if (!editor.isEditable) return "";
 
-      if (node.type.name === CORE_EXTENSIONS.HEADING) return `Heading ${node.attrs.level}`;
+      if (node.type.name === CORE_EXTENSIONS.HEADING)
+        return i18nInstance.t(`editor_commands.h${node.attrs.level}.title`);
 
       const isUploadInProgress = editor.storage.utility?.uploadInProgress;
 
@@ -48,7 +66,7 @@ export const CustomPlaceholderExtension = (args: TArgs) => {
         else return placeholder(editor.isFocused, editor.getHTML());
       }
 
-      return "Press '/' for commands...";
+      return i18nInstance.t("common.press_for_commands");
     },
     includeChildren: true,
   });

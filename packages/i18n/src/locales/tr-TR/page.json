@@ -110,6 +110,12 @@
       "label": "Koleksiyondan kaldır",
       "success_message": "Sayfa koleksiyondan kaldırıldı.",
       "error_message": "Sayfa koleksiyondan kaldırılamadı. Lütfen tekrar deneyin."
+    },
+    "delete_page": {
+      "title": "Sayfayı sil",
+      "confirmation": "<page/> sayfasını silmek istediğinizden emin misiniz? Sayfa kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+      "success_message": "Sayfa başarıyla silindi.",
+      "error_message": "Sayfa silinemedi. Lütfen tekrar deneyin."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Arşivlenme tarihi"
+  },
+  "page_versions": {
+    "restored": "Sayfa sürümü geri yüklendi.",
+    "restore_error": "Sayfa sürümü geri yüklenemedi.",
+    "load_error": "Sürüm yüklenemedi. Lütfen tekrar deneyin.",
+    "loading": "Sürüm ayrıntıları yükleniyor",
+    "view_only": "Yalnızca görüntüleme",
+    "restoring": "Geri yükleniyor"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Sayfalar",
+    "not_found_title": "Sayfa bulunamadı",
+    "not_found_description": "Erişmeye çalıştığınız sayfa mevcut değil veya sayfayı görüntüleme izniniz yok.",
+    "view_other_pages": "Diğer sayfaları görüntüle"
   }
 }

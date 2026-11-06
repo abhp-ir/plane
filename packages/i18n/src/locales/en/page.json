@@ -110,6 +110,12 @@
       "label": "Remove from collection",
       "success_message": "Page removed from collection.",
       "error_message": "Page could not be removed from the collection. Please try again."
+    },
+    "delete_page": {
+      "title": "Delete page",
+      "confirmation": "Are you sure you want to delete the page <page/>? The page will be permanently deleted. This action cannot be undone.",
+      "success_message": "Page deleted successfully.",
+      "error_message": "Page could not be deleted. Please try again."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Archive date"
+  },
+  "page_versions": {
+    "restored": "Page version restored.",
+    "restore_error": "Failed to restore page version.",
+    "load_error": "The version could not be loaded, please try again.",
+    "loading": "Loading version details",
+    "view_only": "View only",
+    "restoring": "Restoring"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Pages",
+    "not_found_title": "Page not found",
+    "not_found_description": "The page you are trying to access doesn't exist or you don't have permission to view it.",
+    "view_other_pages": "View other pages"
   }
 }

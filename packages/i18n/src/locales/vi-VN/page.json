@@ -110,6 +110,12 @@
       "label": "Xóa khỏi bộ sưu tập",
       "success_message": "Đã xóa trang khỏi bộ sưu tập.",
       "error_message": "Không thể xóa trang khỏi bộ sưu tập. Vui lòng thử lại."
+    },
+    "delete_page": {
+      "title": "Xóa trang",
+      "confirmation": "Bạn có chắc chắn muốn xóa trang <page/> không? Trang sẽ bị xóa vĩnh viễn. Không thể hoàn tác hành động này.",
+      "success_message": "Đã xóa trang thành công.",
+      "error_message": "Không thể xóa trang. Vui lòng thử lại."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Ngày lưu trữ"
+  },
+  "page_versions": {
+    "restored": "Đã khôi phục phiên bản trang.",
+    "restore_error": "Không thể khôi phục phiên bản trang.",
+    "load_error": "Không thể tải phiên bản. Vui lòng thử lại.",
+    "loading": "Đang tải chi tiết phiên bản",
+    "view_only": "Chỉ xem",
+    "restoring": "Đang khôi phục"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Trang",
+    "not_found_title": "Không tìm thấy trang",
+    "not_found_description": "Trang bạn đang cố truy cập không tồn tại hoặc bạn không có quyền xem trang đó.",
+    "view_other_pages": "Xem các trang khác"
   }
 }

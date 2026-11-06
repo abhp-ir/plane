@@ -11,7 +11,9 @@
     "property_removed": "Používateľ <actor/> odstránil „{property}“{showIssue, select, true { z <issue/>} other {}}.",
     "description_edited": "Používateľ <actor/> upravil popis{showIssue, select, true { v <issue/>} other {}}.",
     "work_item_created": "Používateľ <actor/> vytvoril {showIssue, select, true {<issue/>} other {pracovnú položku}}{hasSource, select, true { cez <origin/>} other {}}.",
-    "work_item_deleted": "Používateľ <actor/> odstránil {showIssue, select, true {<issue/>} other {pracovnú položku}}."
+    "work_item_deleted": "Používateľ <actor/> odstránil {showIssue, select, true {<issue/>} other {pracovnú položku}}.",
+    "work_item_archived": "Používateľ <actor/> archivoval {showIssue, select, true {<issue/>} other {pracovnú položku}}.",
+    "work_item_restored": "Používateľ <actor/> obnovil {showIssue, select, true {<issue/>} other {pracovnú položku}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Pracujeme na tom. Ak potrebujete okamžitú pomoc,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Zmeniť odtieň pokožky"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Archivované pracovné položky",
+      "cycles": "{project_name} - Archivované cykly",
+      "modules": "{project_name} - Archivované moduly"
+    }
+  },
+  "page_export": {
+    "title": "Exportovať stránku",
+    "format": "Formát exportu",
+    "include_content": "Zahrnutý obsah",
+    "page_format": "Formát stránky",
+    "content": {
+      "everything": "Všetko",
+      "no_images": "Bez obrázkov"
+    },
+    "success": "Stránka bola úspešne exportovaná.",
+    "error": "Stránku sa nepodarilo exportovať. Skúste to neskôr znova.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Plná šírka",
+    "sticky_toolbar": "Pripnutý panel nástrojov",
+    "syncing": "Synchronizácia...",
+    "syncing_description": "Vaše zmeny sa synchronizujú so serverom. Môžete pokračovať v úpravách.",
+    "connection_lost": "Pripojenie sa stratilo",
+    "connection_lost_description": "Pripojenie sa stratilo. Pri pripájaní k serveru WebSocket sa vyskytol problém. Vaše zmeny sa budú synchronizovať a ukladať každých 10 sekúnd.",
+    "offline": "Offline",
+    "offline_description": "Ste offline. Môžete pokračovať v úpravách. Zmeny sa synchronizujú po opätovnom pripojení.",
+    "locked": "Zamknuté",
+    "unlocked": "Odomknuté"
   }
 }

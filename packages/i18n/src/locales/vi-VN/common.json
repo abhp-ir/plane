@@ -11,7 +11,9 @@
     "property_removed": "<actor/> đã xóa “{property}”{showIssue, select, true { khỏi <issue/>} other {}}.",
     "description_edited": "<actor/> đã chỉnh sửa mô tả{showIssue, select, true { của <issue/>} other {}}.",
     "work_item_created": "<actor/> đã tạo {showIssue, select, true {<issue/>} other {mục công việc}}{hasSource, select, true { qua <origin/>} other {}}.",
-    "work_item_deleted": "<actor/> đã xóa {showIssue, select, true {<issue/>} other {mục công việc}}."
+    "work_item_deleted": "<actor/> đã xóa {showIssue, select, true {<issue/>} other {mục công việc}}.",
+    "work_item_archived": "<actor/> đã lưu trữ {showIssue, select, true {<issue/>} other {mục công việc}}.",
+    "work_item_restored": "<actor/> đã khôi phục {showIssue, select, true {<issue/>} other {mục công việc}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Chúng tôi đang xử lý vấn đề này. Nếu bạn cần hỗ trợ ngay lập tức,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Thay đổi tông màu da"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Mục công việc đã lưu trữ",
+      "cycles": "{project_name} - Chu kỳ đã lưu trữ",
+      "modules": "{project_name} - Mô-đun đã lưu trữ"
+    }
+  },
+  "page_export": {
+    "title": "Xuất trang",
+    "format": "Định dạng xuất",
+    "include_content": "Nội dung bao gồm",
+    "page_format": "Khổ trang",
+    "content": {
+      "everything": "Tất cả",
+      "no_images": "Không có hình ảnh"
+    },
+    "success": "Đã xuất trang thành công.",
+    "error": "Không thể xuất trang. Vui lòng thử lại sau.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Toàn chiều rộng",
+    "sticky_toolbar": "Thanh công cụ cố định",
+    "syncing": "Đang đồng bộ...",
+    "syncing_description": "Các thay đổi của bạn đang được đồng bộ với máy chủ. Bạn có thể tiếp tục chỉnh sửa.",
+    "connection_lost": "Mất kết nối",
+    "connection_lost_description": "Mất kết nối. Đã xảy ra sự cố khi kết nối với máy chủ WebSocket. Các thay đổi sẽ được đồng bộ và lưu mỗi 10 giây.",
+    "offline": "Ngoại tuyến",
+    "offline_description": "Bạn đang ngoại tuyến. Bạn có thể tiếp tục chỉnh sửa. Các thay đổi sẽ được đồng bộ khi bạn trực tuyến trở lại.",
+    "locked": "Đã khóa",
+    "unlocked": "Đã mở khóa"
   }
 }

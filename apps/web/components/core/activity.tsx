@@ -149,20 +149,6 @@ const activityDetails: {
     icon: <MembersOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   archived_at: {
-    message: (activity) => {
-      if (activity.new_value === "restore")
-        return (
-          <>
-            restored <IssueLink activity={activity} />
-          </>
-        );
-      else
-        return (
-          <>
-            archived <IssueLink activity={activity} />
-          </>
-        );
-    },
     icon: <ArchiveOutline width={12} height={12} className="text-secondary" aria-hidden="true" />,
   },
   attachment: {
@@ -506,6 +492,15 @@ export function ActivityMessage({ activity, showIssue = false, actor }: Activity
   const { workspaceSlug } = useParams();
   const activityField = activity.field ?? "issue";
   const issue = showIssue ? <IssueLink activity={activity} /> : undefined;
+  if (activityField === "archived_at") {
+    return (
+      <ActivitySentence
+        actor={actor}
+        issue={issue}
+        message={activity.new_value === "restore" ? "work_item_restored" : "work_item_archived"}
+      />
+    );
+  }
   if (Object.hasOwn(ACTIVITY_PROPERTY_LABELS, activityField)) {
     return <ActivityPropertyChange activity={activity} actor={actor} issue={issue} />;
   }

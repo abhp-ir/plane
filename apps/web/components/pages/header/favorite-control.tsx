@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { observer } from "mobx-react";
 import { StarOutline } from "@makeplane/propel/icons";
 // ui
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export const PageFavoriteControl = observer(function PageFavoriteControl({ page }: Props) {
+  const { t } = useTranslation();
   // derived values
   const { is_favorite, canCurrentUserFavoritePage } = page;
   // page operations
@@ -36,7 +38,11 @@ export const PageFavoriteControl = observer(function PageFavoriteControl({ page 
       onClick={() => {
         pageOperations.toggleFavorite();
       }}
-      aria-label={is_favorite ? "Remove favorite" : "Add to favorites"}
+      aria-label={
+        is_favorite
+          ? t("power_k.contextual_actions.page.remove_from_favorites")
+          : t("power_k.contextual_actions.page.add_to_favorites")
+      }
       render={
         <button
           type="button"

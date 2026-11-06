@@ -1,0 +1,44 @@
+diff --git a/dist/index.cjs b/dist/index.cjs
+index acc7ecdacc8caa46892e90f6ef7570b7306e67f9..38c60ec4633eb33f7e48c35f0ea5682226b87571 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -365,14 +365,14 @@ class PureEditorContent extends React__default.default.Component {
+         };
+     }
+     componentDidMount() {
+-        this.init();
++        queueMicrotask(() => this.init());
+     }
+     componentDidUpdate() {
+-        this.init();
++        queueMicrotask(() => this.init());
+     }
+     init() {
+         const editor = this.props.editor;
+-        if (editor && !editor.isDestroyed && editor.options.element) {
++        if (editor && !editor.isDestroyed && editor.options.element && this.editorContentRef.current) {
+             if (editor.contentComponent) {
+                 return;
+             }
+diff --git a/dist/index.js b/dist/index.js
+index 4adb36c890f5c8f701f094674d01ed15998b78f8..29362161431d7522a9fcd5d83bfb655e9a341687 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -359,14 +359,14 @@ class PureEditorContent extends React.Component {
+         };
+     }
+     componentDidMount() {
+-        this.init();
++        queueMicrotask(() => this.init());
+     }
+     componentDidUpdate() {
+-        this.init();
++        queueMicrotask(() => this.init());
+     }
+     init() {
+         const editor = this.props.editor;
+-        if (editor && !editor.isDestroyed && editor.options.element) {
++        if (editor && !editor.isDestroyed && editor.options.element && this.editorContentRef.current) {
+             if (editor.contentComponent) {
+                 return;
+             }

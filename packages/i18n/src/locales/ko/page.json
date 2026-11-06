@@ -110,6 +110,12 @@
       "label": "컬렉션에서 제거",
       "success_message": "페이지가 컬렉션에서 제거되었습니다.",
       "error_message": "페이지를 컬렉션에서 제거할 수 없습니다. 다시 시도해 주세요."
+    },
+    "delete_page": {
+      "title": "페이지 삭제",
+      "confirmation": "페이지 <page/> 삭제를 진행하시겠습니까? 페이지가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
+      "success_message": "페이지를 삭제했습니다.",
+      "error_message": "페이지를 삭제하지 못했습니다. 다시 시도하십시오."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "보관 날짜"
+  },
+  "page_versions": {
+    "restored": "페이지 버전을 복원했습니다.",
+    "restore_error": "페이지 버전을 복원하지 못했습니다.",
+    "load_error": "버전을 불러오지 못했습니다. 다시 시도하십시오.",
+    "loading": "버전 세부 정보 불러오는 중",
+    "view_only": "보기 전용",
+    "restoring": "복원 중"
+  },
+  "page_views": {
+    "project_title": "{projectName} - 페이지",
+    "not_found_title": "페이지를 찾을 수 없습니다",
+    "not_found_description": "접근하려는 페이지가 존재하지 않거나 볼 수 있는 권한이 없습니다.",
+    "view_other_pages": "다른 페이지 보기"
   }
 }

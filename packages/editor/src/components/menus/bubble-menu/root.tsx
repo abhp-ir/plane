@@ -4,6 +4,8 @@
  * See the LICENSE file for details.
  */
 
+import { getEditorMenuItemLabel } from "@/helpers/menu-labels";
+import { useTranslation } from "@plane/i18n";
 import { isNodeSelection } from "@tiptap/core";
 import type { Editor } from "@tiptap/core";
 import { BubbleMenu, useEditorState } from "@tiptap/react";
@@ -73,6 +75,7 @@ type Props = {
 };
 
 export function EditorBubbleMenu(props: Props) {
+  const { t } = useTranslation();
   const { editor } = props;
   // states
   const [isSelecting, setIsSelecting] = useState(false);
@@ -92,7 +95,7 @@ export function EditorBubbleMenu(props: Props) {
 
   const editorState: EditorStateType = useEditorState({
     editor,
-    selector: ({ editor }) => ({
+    selector: ({ editor: selectedEditor }) => ({
       code: formattingItems.code.isActive(),
       bold: formattingItems.bold.isActive(),
       italic: formattingItems.italic.isActive(),
@@ -101,8 +104,8 @@ export function EditorBubbleMenu(props: Props) {
       left: formattingItems["text-align"].isActive({ alignment: "left" }),
       right: formattingItems["text-align"].isActive({ alignment: "right" }),
       center: formattingItems["text-align"].isActive({ alignment: "center" }),
-      color: COLORS_LIST.find((c) => TextColorItem(editor).isActive({ color: c.key })),
-      backgroundColor: COLORS_LIST.find((c) => BackgroundColorItem(editor).isActive({ color: c.key })),
+      color: COLORS_LIST.find((c) => TextColorItem(selectedEditor).isActive({ color: c.key })),
+      backgroundColor: COLORS_LIST.find((c) => BackgroundColorItem(selectedEditor).isActive({ color: c.key })),
     }),
   });
 
@@ -112,15 +115,15 @@ export function EditorBubbleMenu(props: Props) {
 
   const bubbleMenuProps: EditorBubbleMenuProps = {
     editor,
-    shouldShow: ({ state, editor }) => {
+    shouldShow: ({ state, editor: currentEditor }) => {
       const { selection } = state;
       const { empty } = selection;
 
       if (
         empty ||
-        !editor.isEditable ||
-        editor.isActive(CORE_EXTENSIONS.IMAGE) ||
-        editor.isActive(CORE_EXTENSIONS.CUSTOM_IMAGE) ||
+        !currentEditor.isEditable ||
+        currentEditor.isActive(CORE_EXTENSIONS.IMAGE) ||
+        currentEditor.isActive(CORE_EXTENSIONS.CUSTOM_IMAGE) ||
         isNodeSelection(selection) ||
         isCellSelection(selection) ||
         isSelecting
@@ -211,6 +214,7 @@ export function EditorBubbleMenu(props: Props) {
               <button
                 key={item.key}
                 type="button"
+                aria-label={getEditorMenuItemLabel(item.key, item.name, t)}
                 onClick={(e) => {
                   item.command();
                   e.stopPropagation();

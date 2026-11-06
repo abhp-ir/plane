@@ -147,5 +147,35 @@
     "light-blue": "Xanh dương nhạt",
     "dark-blue": "Xanh dương đậm",
     "purple": "Tím"
+  },
+  "editor_toolbar": {
+    "bold": "In đậm",
+    "italic": "In nghiêng",
+    "underline": "Gạch chân",
+    "strikethrough": "Gạch ngang",
+    "color": "Màu",
+    "align_left": "Căn trái",
+    "align_center": "Căn giữa",
+    "align_right": "Căn phải",
+    "label": "Thanh công cụ định dạng",
+    "text_colors": "Màu văn bản",
+    "background_colors": "Màu nền",
+    "remove_text_color": "Xóa màu văn bản",
+    "remove_background_color": "Xóa màu nền",
+    "link": "Liên kết",
+    "remove_link": "Xóa liên kết",
+    "apply_link": "Áp dụng liên kết",
+    "multiple": "Nhiều loại",
+    "fit_to_width": "Vừa với chiều rộng"
+  },
+  "editor_image": {
+    "align": "Căn chỉnh",
+    "download": "Tải hình ảnh xuống",
+    "view_full_screen": "Xem hình ảnh ở chế độ toàn màn hình",
+    "full_screen_viewer": "Trình xem hình ảnh toàn màn hình",
+    "close_viewer": "Đóng trình xem hình ảnh",
+    "zoom_out": "Thu nhỏ",
+    "zoom_in": "Phóng to",
+    "open_in_new_tab": "Mở hình ảnh trong tab mới"
   }
 }

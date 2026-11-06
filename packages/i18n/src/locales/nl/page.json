@@ -110,6 +110,12 @@
       "label": "Uit collectie verwijderen",
       "success_message": "Pagina uit collectie verwijderd.",
       "error_message": "Pagina kon niet uit de collectie worden verwijderd. Probeer het opnieuw."
+    },
+    "delete_page": {
+      "title": "Pagina verwijderen",
+      "confirmation": "Weet u zeker dat u de pagina <page/> wilt verwijderen? De pagina wordt definitief verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+      "success_message": "Pagina is succesvol verwijderd.",
+      "error_message": "De pagina kon niet worden verwijderd. Probeer het opnieuw."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Archiveringsdatum"
+  },
+  "page_versions": {
+    "restored": "Paginaversie hersteld.",
+    "restore_error": "De paginaversie kon niet worden hersteld.",
+    "load_error": "De versie kon niet worden geladen. Probeer het opnieuw.",
+    "loading": "Versiegegevens laden",
+    "view_only": "Alleen weergeven",
+    "restoring": "Bezig met herstellen"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Pagina’s",
+    "not_found_title": "Pagina niet gevonden",
+    "not_found_description": "De pagina die u probeert te openen bestaat niet of u hebt geen toestemming om deze te bekijken.",
+    "view_other_pages": "Andere pagina’s bekijken"
   }
 }

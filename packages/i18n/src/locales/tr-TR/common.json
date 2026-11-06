@@ -11,7 +11,9 @@
     "property_removed": "<actor/>{showIssue, select, true {, <issue/> üzerinden} other {}}, “{property}” değerini kaldırdı.",
     "description_edited": "<actor/>{showIssue, select, true {, <issue/> için} other {}}, açıklamayı düzenledi.",
     "work_item_created": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}}{hasSource, select, true { <origin/> aracılığıyla} other {}} oluşturdu.",
-    "work_item_deleted": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}} sildi."
+    "work_item_deleted": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}} sildi.",
+    "work_item_archived": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}} arşivledi.",
+    "work_item_restored": "<actor/>, {showIssue, select, true {<issue/>} other {iş öğesini}} geri yükledi."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Bu konuda çalışıyoruz. Acil yardıma ihtiyacınız varsa,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Ten rengini değiştirin"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Arşivlenmiş iş öğeleri",
+      "cycles": "{project_name} - Arşivlenmiş döngüler",
+      "modules": "{project_name} - Arşivlenmiş modüller"
+    }
+  },
+  "page_export": {
+    "title": "Sayfayı dışa aktar",
+    "format": "Dışa aktarma biçimi",
+    "include_content": "Dahil edilecek içerik",
+    "page_format": "Sayfa biçimi",
+    "content": {
+      "everything": "Her şey",
+      "no_images": "Görseller hariç"
+    },
+    "success": "Sayfa başarıyla dışa aktarıldı.",
+    "error": "Sayfa dışa aktarılamadı. Lütfen daha sonra tekrar deneyin.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Tam genişlik",
+    "sticky_toolbar": "Sabit araç çubuğu",
+    "syncing": "Eşitleniyor...",
+    "syncing_description": "Değişiklikleriniz sunucuyla eşitleniyor. Düzenlemeye devam edebilirsiniz.",
+    "connection_lost": "Bağlantı kesildi",
+    "connection_lost_description": "Bağlantı kesildi. WebSocket sunucusuna bağlanırken bir sorun yaşanıyor. Değişiklikleriniz her 10 saniyede bir eşitlenip kaydedilecek.",
+    "offline": "Çevrimdışı",
+    "offline_description": "Çevrimdışısınız. Düzenlemeye devam edebilirsiniz. Yeniden çevrimiçi olduğunuzda değişiklikler eşitlenecek.",
+    "locked": "Kilitli",
+    "unlocked": "Kilidi açıldı"
   }
 }

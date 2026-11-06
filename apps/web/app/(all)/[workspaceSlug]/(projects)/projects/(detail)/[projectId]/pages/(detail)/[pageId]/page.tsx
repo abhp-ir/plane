@@ -10,6 +10,7 @@ import Link from "next/link";
 import useSWR from "swr";
 // plane types
 import { Button } from "@makeplane/propel/elements/button";
+import { useTranslation } from "@plane/i18n";
 import type { TSearchEntityRequestPayload, TWebhookConnectionQueryParams } from "@plane/types";
 import { EFileAssetType } from "@plane/types";
 // plane ui
@@ -39,6 +40,7 @@ const projectPageVersionService = new ProjectPageVersionService();
 const storeType = EPageStoreType.PROJECT;
 
 function PageDetailsPage({ params }: Route.ComponentProps) {
+  const { t } = useTranslation();
   // router
   const router = useAppRouter();
   const { workspaceSlug, projectId, pageId } = params;
@@ -78,20 +80,20 @@ function PageDetailsPage({ params }: Route.ComponentProps) {
   const pageRootHandlers: TPageRootHandlers = useMemo(
     () => ({
       create: createPage,
-      fetchAllVersions: async (pageId) =>
-        await projectPageVersionService.fetchAllVersions(workspaceSlug, projectId, pageId),
+      fetchAllVersions: async (selectedPageId) =>
+        await projectPageVersionService.fetchAllVersions(workspaceSlug, projectId, selectedPageId),
       fetchDescriptionBinary: async () => {
         if (!id) return;
         return await projectPageService.fetchDescriptionBinary(workspaceSlug, projectId, id);
       },
       fetchEntity: fetchEntityCallback,
-      fetchVersionDetails: async (pageId, versionId) =>
-        await projectPageVersionService.fetchVersionById(workspaceSlug, projectId, pageId, versionId),
-      restoreVersion: async (pageId, versionId) =>
-        await projectPageVersionService.restoreVersion(workspaceSlug, projectId, pageId, versionId),
-      getRedirectionLink: (pageId) => {
-        if (pageId) {
-          return `/${workspaceSlug}/projects/${projectId}/pages/${pageId}`;
+      fetchVersionDetails: async (selectedPageId, versionId) =>
+        await projectPageVersionService.fetchVersionById(workspaceSlug, projectId, selectedPageId, versionId),
+      restoreVersion: async (selectedPageId, versionId) =>
+        await projectPageVersionService.restoreVersion(workspaceSlug, projectId, selectedPageId, versionId),
+      getRedirectionLink: (selectedPageId) => {
+        if (selectedPageId) {
+          return `/${workspaceSlug}/projects/${projectId}/pages/${selectedPageId}`;
         } else {
           return `/${workspaceSlug}/projects/${projectId}/pages`;
         }
@@ -160,17 +162,15 @@ function PageDetailsPage({ params }: Route.ComponentProps) {
   if (pageDetailsError || !canCurrentUserAccessPage)
     return (
       <div className="flex h-full w-full flex-col items-center justify-center">
-        <h3 className="text-center text-16 font-semibold">Page not found</h3>
-        <p className="mt-3 text-center text-13 text-secondary">
-          The page you are trying to access doesn{"'"}t exist or you don{"'"}t have permission to view it.
-        </p>
+        <h3 className="text-center text-16 font-semibold">{t("page_views.not_found_title")}</h3>
+        <p className="mt-3 text-center text-13 text-secondary">{t("page_views.not_found_description")}</p>
         <Button
           variant="secondary"
           size="sm"
           stretch="auto"
           render={<Link href={`/${workspaceSlug}/projects/${projectId}/pages`} className="mt-5" />}
         >
-          View other Pages
+          {t("page_views.view_other_pages")}
         </Button>
       </div>
     );

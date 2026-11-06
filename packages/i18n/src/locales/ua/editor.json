@@ -147,5 +147,35 @@
     "light-blue": "Світло-синій",
     "dark-blue": "Темно-синій",
     "purple": "Фіолетовий"
+  },
+  "editor_toolbar": {
+    "bold": "Напівжирний",
+    "italic": "Курсив",
+    "underline": "Підкреслений",
+    "strikethrough": "Закреслений",
+    "color": "Колір",
+    "align_left": "За лівим краєм",
+    "align_center": "По центру",
+    "align_right": "За правим краєм",
+    "label": "Панель форматування",
+    "text_colors": "Кольори тексту",
+    "background_colors": "Кольори тла",
+    "remove_text_color": "Видалити колір тексту",
+    "remove_background_color": "Видалити колір тла",
+    "link": "Посилання",
+    "remove_link": "Видалити посилання",
+    "apply_link": "Застосувати посилання",
+    "multiple": "Кілька",
+    "fit_to_width": "Припасувати до ширини"
+  },
+  "editor_image": {
+    "align": "Вирівняти",
+    "download": "Завантажити зображення",
+    "view_full_screen": "Переглянути зображення на весь екран",
+    "full_screen_viewer": "Повноекранний переглядач зображень",
+    "close_viewer": "Закрити переглядач зображень",
+    "zoom_out": "Зменшити масштаб",
+    "zoom_in": "Збільшити масштаб",
+    "open_in_new_tab": "Відкрити зображення в новій вкладці"
   }
 }

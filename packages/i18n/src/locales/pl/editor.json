@@ -147,5 +147,35 @@
     "light-blue": "Jasnoniebieski",
     "dark-blue": "Ciemnoniebieski",
     "purple": "Fioletowy"
+  },
+  "editor_toolbar": {
+    "bold": "Pogrubienie",
+    "italic": "Kursywa",
+    "underline": "Podkreślenie",
+    "strikethrough": "Przekreślenie",
+    "color": "Kolor",
+    "align_left": "Wyrównaj do lewej",
+    "align_center": "Wyśrodkuj",
+    "align_right": "Wyrównaj do prawej",
+    "label": "Pasek formatowania",
+    "text_colors": "Kolory tekstu",
+    "background_colors": "Kolory tła",
+    "remove_text_color": "Usuń kolor tekstu",
+    "remove_background_color": "Usuń kolor tła",
+    "link": "Link",
+    "remove_link": "Usuń link",
+    "apply_link": "Zastosuj link",
+    "multiple": "Wiele typów",
+    "fit_to_width": "Dopasuj do szerokości"
+  },
+  "editor_image": {
+    "align": "Wyrównaj",
+    "download": "Pobierz obraz",
+    "view_full_screen": "Wyświetl obraz na pełnym ekranie",
+    "full_screen_viewer": "Pełnoekranowa przeglądarka obrazów",
+    "close_viewer": "Zamknij przeglądarkę obrazów",
+    "zoom_out": "Pomniejsz",
+    "zoom_in": "Powiększ",
+    "open_in_new_tab": "Otwórz obraz w nowej karcie"
   }
 }

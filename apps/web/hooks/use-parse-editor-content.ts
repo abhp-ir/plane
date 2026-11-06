@@ -5,11 +5,13 @@
  */
 
 import { useCallback } from "react";
+import { validate as isUUID } from "uuid";
 // plane types
 import type { TSearchEntities } from "@plane/types";
 // helpers
 import { getBase64Image, getEditorAssetSrc } from "@plane/utils";
 import type { TCustomComponentsMetaData } from "@plane/utils";
+import { isolatePDFCodeContent } from "@/components/editor/pdf/content-direction";
 // hooks
 import { useMember } from "@/hooks/store/use-member";
 // plane web hooks
@@ -77,7 +79,7 @@ export const useParseEditorContent = (args: TArgs) => {
           div.setAttribute("data-node-type", "code-block");
           div.setAttribute("class", "courier");
           // transfer the content from the code block
-          div.innerHTML = codeElement.innerHTML.replace(/\n/g, "<br>") || "";
+          div.innerHTML = isolatePDFCodeContent(codeElement.innerHTML).replace(/\n/g, "<br>") || "";
           // replace the pre element with the new div
           preElement.replaceWith(div);
         }
@@ -92,7 +94,7 @@ export const useParseEditorContent = (args: TArgs) => {
           span.setAttribute("data-node-type", "inline-code-block");
           span.setAttribute("class", "courier-bold");
           // transfer the code content
-          span.textContent = codeElement.textContent || "";
+          span.textContent = `\u2066${isolatePDFCodeContent(codeElement.textContent || "")}\u2069`;
           // replace the standalone code element with the new span
           codeElement.replaceWith(span);
         }
@@ -128,19 +130,19 @@ export const useParseEditorContent = (args: TArgs) => {
           // get the image src from the img element
           const src = img.getAttribute("src");
           if (src) {
-            try {
-              const base64Image = await getBase64Image(src);
-              img.src = base64Image;
-            } catch (error) {
-              // log the error if the image conversion fails
-              console.error("Failed to convert image to base64:", error);
-            }
+            const assetSrc = isUUID(src) ? (getEditorAssetSrc({ assetId: src, projectId, workspaceSlug }) ?? src) : src;
+            img.src = await getBase64Image(assetSrc);
           }
         })
       );
       // replace all checkbox elements
       const checkboxComponents = doc.querySelectorAll("input[type='checkbox']");
       checkboxComponents.forEach((component) => {
+        // Task list markers are rendered once by the PDF list renderer.
+        if (component.closest("ul[data-type='taskList']")) {
+          component.remove();
+          return;
+        }
         // get the checked status from the element
         const checked = component.getAttribute("checked");
         // create a div element to replace the input element
@@ -160,7 +162,7 @@ export const useParseEditorContent = (args: TArgs) => {
       serializedDoc = serializedDoc.replace(/background-color: null/g, "").replace(/color: null/g, "");
       return serializedDoc;
     },
-    [getUserDetails, parseAdditionalEditorContent]
+    [getUserDetails, parseAdditionalEditorContent, projectId, workspaceSlug]
   );
 
   /**
@@ -197,7 +199,7 @@ export const useParseEditorContent = (args: TArgs) => {
         }
       });
       // replace the matched image components with <img src={src} >
-      const imageComponentRegex = /<image-component[^>]*src="([^"]+)"[^>]*>[^]*<\/image-component>/g;
+      const imageComponentRegex = /<image-component[^>]*src="([^"]+)"[^>]*>[^]*?<\/image-component>/g;
       const imgTagRegex = /<img[^>]*src="([^"]+)"[^>]*\/?>/g;
       if (noAssets) {
         // remove all image components
@@ -206,15 +208,16 @@ export const useParseEditorContent = (args: TArgs) => {
         // replace the matched image components with <img src={src} >
         parsedMarkdownContent = parsedMarkdownContent.replace(
           imageComponentRegex,
-          (_match, src) => `<img src="${src}" >`
+          (_match, src) =>
+            `<img src="${isUUID(src) ? getEditorAssetSrc({ assetId: src, projectId, workspaceSlug }) : src}" >`
         );
       }
       // remove all issue-embed components
-      const issueEmbedRegex = /<issue-embed-component[^>]*>[^]*<\/issue-embed-component>/g;
+      const issueEmbedRegex = /<issue-embed-component[^>]*>[^]*?<\/issue-embed-component>/g;
       parsedMarkdownContent = parsedMarkdownContent.replace(issueEmbedRegex, "");
       return parsedMarkdownContent;
     },
-    [getUserDetails, parseAdditionalEditorContent, workspaceSlug]
+    [getUserDetails, parseAdditionalEditorContent, projectId, workspaceSlug]
   );
 
   const getEditorMetaData = useCallback(

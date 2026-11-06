@@ -529,7 +529,10 @@ overrides:
   tinypool@2: '>=2.1.2 <3'
 
 patchedDependencies:
+  '@react-pdf/layout@5.1.1': f81175b87a21f71a03c2460fe71d020ee34e8db74ed8d90d50998db29204e1f5
+  '@tiptap/react@2.26.1': 55c5d0292d9e63a4dd856ab77256c3a9d9c14591c2042b7584e77f114b285a01
   frimousse@0.3.0: abba5bf94dc05ea80263f7941f5ed73bd24f02141ccda98cf4f05c213c2324aa
+  zeed-dom@0.15.1: ecb668e91b3df505684f6d099d4870e7c6a00f20503a6fe0f3fc4a9b7d3802b4
 
 importers:
 
@@ -1419,7 +1422,7 @@ importers:
         version: 2.26.1
       '@tiptap/react':
         specifier: 'catalog:'
-        version: 2.26.1(@tiptap/core@2.27.3(@tiptap/pm@2.26.1))(@tiptap/pm@2.26.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 2.26.1(patch_hash=55c5d0292d9e63a4dd856ab77256c3a9d9c14591c2042b7584e77f114b285a01)(@tiptap/core@2.27.3(@tiptap/pm@2.26.1))(@tiptap/pm@2.26.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tiptap/starter-kit':
         specifier: 'catalog:'
         version: 2.26.1
@@ -9830,7 +9833,7 @@ snapshots:
       jay-peg: 1.1.1
       png-js: 2.0.0
 
-  '@react-pdf/layout@5.1.1':
+  '@react-pdf/layout@5.1.1(patch_hash=f81175b87a21f71a03c2460fe71d020ee34e8db74ed8d90d50998db29204e1f5)':
     dependencies:
       '@react-pdf/fns': 3.1.3
       '@react-pdf/image': 3.1.2
@@ -9871,7 +9874,7 @@ snapshots:
       '@babel/runtime': 7.29.7
       '@react-pdf/fns': 3.1.3
       '@react-pdf/font': 4.1.1
-      '@react-pdf/layout': 5.1.1
+      '@react-pdf/layout': 5.1.1(patch_hash=f81175b87a21f71a03c2460fe71d020ee34e8db74ed8d90d50998db29204e1f5)
       '@react-pdf/primitives': 4.4.0
       '@react-pdf/reconciler': 2.0.0(react@19.2.8)
       '@react-pdf/render': 4.6.4
@@ -10400,13 +10403,13 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.27.3(@tiptap/pm@2.26.1)
       '@tiptap/pm': 2.26.1
-      zeed-dom: 0.15.1
+      zeed-dom: 0.15.1(patch_hash=ecb668e91b3df505684f6d099d4870e7c6a00f20503a6fe0f3fc4a9b7d3802b4)
 
   '@tiptap/html@2.26.2(@tiptap/core@2.27.3(@tiptap/pm@3.6.6))(@tiptap/pm@3.6.6)':
     dependencies:
       '@tiptap/core': 2.27.3(@tiptap/pm@3.6.6)
       '@tiptap/pm': 3.6.6
-      zeed-dom: 0.15.1
+      zeed-dom: 0.15.1(patch_hash=ecb668e91b3df505684f6d099d4870e7c6a00f20503a6fe0f3fc4a9b7d3802b4)
 
   '@tiptap/pm@2.26.1':
     dependencies:
@@ -10450,7 +10453,7 @@ snapshots:
       prosemirror-transform: 1.10.4
       prosemirror-view: 1.42.6
 
-  '@tiptap/react@2.26.1(@tiptap/core@2.27.3(@tiptap/pm@2.26.1))(@tiptap/pm@2.26.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@tiptap/react@2.26.1(patch_hash=55c5d0292d9e63a4dd856ab77256c3a9d9c14591c2042b7584e77f114b285a01)(@tiptap/core@2.27.3(@tiptap/pm@2.26.1))(@tiptap/pm@2.26.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@tiptap/core': 2.27.3(@tiptap/pm@2.26.1)
       '@tiptap/extension-bubble-menu': 2.26.3(@tiptap/core@2.27.3(@tiptap/pm@2.26.1))(@tiptap/pm@2.26.1)
@@ -14894,7 +14897,7 @@ snapshots:
 
   yoga-layout@3.2.1: {}
 
-  zeed-dom@0.15.1:
+  zeed-dom@0.15.1(patch_hash=ecb668e91b3df505684f6d099d4870e7c6a00f20503a6fe0f3fc4a9b7d3802b4):
     dependencies:
       css-what: 6.2.2
       entities: 5.0.0

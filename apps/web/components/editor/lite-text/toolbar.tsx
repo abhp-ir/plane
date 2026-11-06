@@ -20,7 +20,7 @@ import { Tooltip } from "@makeplane/propel/components/tooltip";
 // constants
 import { cn } from "@plane/utils";
 import type { ToolbarMenuItem } from "@plane/editor";
-import { TOOLBAR_ITEMS } from "@plane/editor";
+import { getEditorMenuItemLabel, TOOLBAR_ITEMS } from "@plane/editor";
 // helpers
 
 type Props = {
@@ -143,9 +143,14 @@ export function IssueCommentToolbar(props: Props) {
                 const isItemActive = activeStates[item.renderKey];
 
                 return (
-                  <Tooltip key={item.renderKey} label={item.name} shortcut={item.shortcut?.join(" + ")}>
+                  <Tooltip
+                    key={item.renderKey}
+                    label={getEditorMenuItemLabel(item.renderKey, item.name, t)}
+                    shortcut={item.shortcut?.join(" + ")}
+                  >
                     <button
                       type="button"
+                      aria-label={getEditorMenuItemLabel(item.renderKey, item.name, t)}
                       onClick={() => executeCommand(item)}
                       className={cn(
                         "grid aspect-square place-items-center rounded-xs p-0.5 text-placeholder hover:bg-layer-1",

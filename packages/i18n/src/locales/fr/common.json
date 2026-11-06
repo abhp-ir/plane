@@ -11,7 +11,9 @@
     "property_removed": "<actor/> a supprimé « {property} »{showIssue, select, true { de <issue/>} other {}}.",
     "description_edited": "<actor/> a modifié la description{showIssue, select, true { de <issue/>} other {}}.",
     "work_item_created": "<actor/> a créé {showIssue, select, true {<issue/>} other {l’élément de travail}}{hasSource, select, true { via <origin/>} other {}}.",
-    "work_item_deleted": "<actor/> a supprimé {showIssue, select, true {<issue/>} other {l’élément de travail}}."
+    "work_item_deleted": "<actor/> a supprimé {showIssue, select, true {<issue/>} other {l’élément de travail}}.",
+    "work_item_archived": "<actor/> a archivé {showIssue, select, true {<issue/>} other {l’élément de travail}}.",
+    "work_item_restored": "<actor/> a restauré {showIssue, select, true {<issue/>} other {l’élément de travail}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Nous travaillons là-dessus. Si vous avez besoin d&apos;aide immédiate,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Modifier la couleur de peau"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Éléments de travail archivés",
+      "cycles": "{project_name} - Cycles archivés",
+      "modules": "{project_name} - Modules archivés"
+    }
+  },
+  "page_export": {
+    "title": "Exporter la page",
+    "format": "Format d’exportation",
+    "include_content": "Contenu inclus",
+    "page_format": "Format de page",
+    "content": {
+      "everything": "Tout",
+      "no_images": "Sans images"
+    },
+    "success": "La page a été exportée.",
+    "error": "Impossible d’exporter la page. Veuillez réessayer plus tard.",
+    "paper": {
+      "letter": "Lettre",
+      "legal": "Légal",
+      "tabloid": "Tabloïd"
+    }
+  },
+  "page_editor": {
+    "full_width": "Pleine largeur",
+    "sticky_toolbar": "Barre d’outils fixe",
+    "syncing": "Synchronisation...",
+    "syncing_description": "Vos modifications sont synchronisées avec le serveur. Vous pouvez continuer à modifier le contenu.",
+    "connection_lost": "Connexion perdue",
+    "connection_lost_description": "Connexion perdue. La connexion au serveur WebSocket rencontre un problème. Vos modifications seront synchronisées et enregistrées toutes les 10 secondes.",
+    "offline": "Hors ligne",
+    "offline_description": "Vous êtes hors ligne. Vous pouvez continuer à modifier le contenu. Les modifications seront synchronisées lorsque vous serez de nouveau en ligne.",
+    "locked": "Verrouillée",
+    "unlocked": "Déverrouillée"
   }
 }

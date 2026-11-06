@@ -11,7 +11,9 @@
     "property_removed": "<actor/> премахна „{property}“{showIssue, select, true { от <issue/>} other {}}.",
     "description_edited": "<actor/> редактира описанието{showIssue, select, true { на <issue/>} other {}}.",
     "work_item_created": "<actor/> създаде {showIssue, select, true {<issue/>} other {работния елемент}}{hasSource, select, true { чрез <origin/>} other {}}.",
-    "work_item_deleted": "<actor/> изтри {showIssue, select, true {<issue/>} other {работния елемент}}."
+    "work_item_deleted": "<actor/> изтри {showIssue, select, true {<issue/>} other {работния елемент}}.",
+    "work_item_archived": "<actor/> архивира {showIssue, select, true {<issue/>} other {работния елемент}}.",
+    "work_item_restored": "<actor/> възстанови {showIssue, select, true {<issue/>} other {работния елемент}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Работим по проблема. Ако се нуждаете от незабавна помощ,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Промени тена на кожата"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Архивирани работни елементи",
+      "cycles": "{project_name} - Архивирани цикли",
+      "modules": "{project_name} - Архивирани модули"
+    }
+  },
+  "page_export": {
+    "title": "Експортиране на страница",
+    "format": "Формат за експортиране",
+    "include_content": "Включено съдържание",
+    "page_format": "Формат на страницата",
+    "content": {
+      "everything": "Всичко",
+      "no_images": "Без изображения"
+    },
+    "success": "Страницата е експортирана успешно.",
+    "error": "Страницата не можа да бъде експортирана. Опитайте отново по-късно.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Пълна ширина",
+    "sticky_toolbar": "Фиксирана лента с инструменти",
+    "syncing": "Синхронизиране...",
+    "syncing_description": "Промените ви се синхронизират със сървъра. Можете да продължите да редактирате.",
+    "connection_lost": "Връзката е прекъсната",
+    "connection_lost_description": "Връзката е прекъсната. Има проблем със свързването към WebSocket сървъра. Промените ви ще се синхронизират и записват на всеки 10 секунди.",
+    "offline": "Офлайн",
+    "offline_description": "Офлайн сте. Можете да продължите да редактирате. Промените ще се синхронизират, когато отново сте онлайн.",
+    "locked": "Заключена",
+    "unlocked": "Отключена"
   }
 }

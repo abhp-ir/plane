@@ -110,6 +110,12 @@
       "label": "Odebrat z kolekce",
       "success_message": "Stránka byla odebrána z kolekce.",
       "error_message": "Stránku se nepodařilo odebrat z kolekce. Zkuste to prosím znovu."
+    },
+    "delete_page": {
+      "title": "Smazat stránku",
+      "confirmation": "Opravdu chcete smazat stránku <page/>? Stránka bude trvale smazána. Tuto akci nelze vrátit zpět.",
+      "success_message": "Stránka byla úspěšně smazána.",
+      "error_message": "Stránku se nepodařilo smazat. Zkuste to prosím znovu."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Datum archivace"
+  },
+  "page_versions": {
+    "restored": "Verze stránky byla obnovena.",
+    "restore_error": "Verzi stránky se nepodařilo obnovit.",
+    "load_error": "Verzi se nepodařilo načíst. Zkuste to prosím znovu.",
+    "loading": "Načítání podrobností verze",
+    "view_only": "Pouze pro čtení",
+    "restoring": "Obnovování"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Stránky",
+    "not_found_title": "Stránka nenalezena",
+    "not_found_description": "Stránka, ke které se pokoušíte získat přístup, neexistuje nebo nemáte oprávnění ji zobrazit.",
+    "view_other_pages": "Zobrazit další stránky"
   }
 }

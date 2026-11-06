@@ -147,5 +147,35 @@
     "light-blue": "Светло-синий",
     "dark-blue": "Тёмно-синий",
     "purple": "Фиолетовый"
+  },
+  "editor_toolbar": {
+    "bold": "Полужирный",
+    "italic": "Курсив",
+    "underline": "Подчёркнутый",
+    "strikethrough": "Зачёркнутый",
+    "color": "Цвет",
+    "align_left": "По левому краю",
+    "align_center": "По центру",
+    "align_right": "По правому краю",
+    "label": "Панель форматирования",
+    "text_colors": "Цвета текста",
+    "background_colors": "Цвета фона",
+    "remove_text_color": "Удалить цвет текста",
+    "remove_background_color": "Удалить цвет фона",
+    "link": "Ссылка",
+    "remove_link": "Удалить ссылку",
+    "apply_link": "Применить ссылку",
+    "multiple": "Несколько",
+    "fit_to_width": "Подогнать по ширине"
+  },
+  "editor_image": {
+    "align": "Выравнивание",
+    "download": "Скачать изображение",
+    "view_full_screen": "Открыть изображение на весь экран",
+    "full_screen_viewer": "Полноэкранный просмотр изображения",
+    "close_viewer": "Закрыть просмотр изображения",
+    "zoom_out": "Уменьшить масштаб",
+    "zoom_in": "Увеличить масштаб",
+    "open_in_new_tab": "Открыть изображение в новой вкладке"
   }
 }

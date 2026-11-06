@@ -17,6 +17,7 @@ export * from "@/constants/common";
 
 // helpers
 export * from "@/helpers/common";
+export * from "@/helpers/menu-labels";
 export * from "@/helpers/yjs-utils";
 
 export { CORE_EXTENSIONS } from "@/constants/extension";

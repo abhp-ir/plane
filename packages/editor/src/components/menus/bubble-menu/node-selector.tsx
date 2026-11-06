@@ -4,6 +4,8 @@
  * See the LICENSE file for details.
  */
 
+import { getEditorMenuItemLabel } from "@/helpers/menu-labels";
+import { useTranslation } from "@plane/i18n";
 import type { Editor } from "@tiptap/react";
 
 import { ChevronDownOutline, TickOutline } from "@makeplane/propel/icons";
@@ -36,6 +38,7 @@ type Props = {
 };
 
 export function BubbleMenuNodeSelector(props: Props) {
+  const { t } = useTranslation();
   const { editor } = props;
   // floating ui
   const { options, getReferenceProps, getFloatingProps } = useFloatingMenu({});
@@ -55,7 +58,8 @@ export function BubbleMenuNodeSelector(props: Props) {
     CodeItem(editor),
   ] as EditorMenuItem<TEditorCommands>[];
 
-  const activeItem = items.filter((item) => item.isActive()).pop() ?? {
+  const activeItem = items.findLast((item) => item.isActive()) ?? {
+    key: "multiple",
     name: "Multiple",
   };
 
@@ -72,7 +76,7 @@ export function BubbleMenuNodeSelector(props: Props) {
       }}
       menuButton={
         <>
-          <span>{activeItem?.name}</span>
+          <span>{getEditorMenuItemLabel(activeItem?.key ?? "text", activeItem?.name ?? "Text", t)}</span>
           <ChevronDownOutline className="size-3 shrink-0" />
         </>
       }
@@ -83,7 +87,7 @@ export function BubbleMenuNodeSelector(props: Props) {
       <section className="mt-1 flex max-h-[90vh] w-48 flex-col overflow-y-scroll rounded-md border-[0.5px] border-strong bg-surface-1 px-2 py-2.5 shadow-raised-200">
         {items.map((item) => (
           <button
-            key={item.name}
+            key={item.key}
             type="button"
             onClick={(e) => {
               item.command();
@@ -93,15 +97,15 @@ export function BubbleMenuNodeSelector(props: Props) {
             className={cn(
               "flex items-center justify-between rounded-sm px-1 py-1.5 text-13 text-secondary hover:bg-layer-1",
               {
-                "bg-layer-1": activeItem.name === item.name,
+                "bg-layer-1": activeItem.key === item.key,
               }
             )}
           >
             <div className="flex items-center space-x-2">
               <item.icon className="size-3 flex-shrink-0" />
-              <span>{item.name}</span>
+              <span>{getEditorMenuItemLabel(item.key, item.name, t)}</span>
             </div>
-            {activeItem.name === item.name && <TickOutline className="size-3 flex-shrink-0 text-tertiary" />}
+            {activeItem.key === item.key && <TickOutline className="size-3 flex-shrink-0 text-tertiary" />}
           </button>
         ))}
       </section>

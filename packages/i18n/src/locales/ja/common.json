@@ -11,7 +11,9 @@
     "property_removed": "<actor/>が{showIssue, select, true {<issue/>から} other {}}「{property}」を削除しました。",
     "description_edited": "<actor/>が{showIssue, select, true {<issue/>の} other {}}説明を編集しました。",
     "work_item_created": "<actor/>が{hasSource, select, true {<origin/>経由で} other {}}{showIssue, select, true {<issue/>} other {作業項目}}を作成しました。",
-    "work_item_deleted": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を削除しました。"
+    "work_item_deleted": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を削除しました。",
+    "work_item_archived": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}をアーカイブしました。",
+    "work_item_restored": "<actor/>が{showIssue, select, true {<issue/>} other {作業項目}}を復元しました。"
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "現在この問題に取り組んでいます。緊急のサポートが必要な場合は、",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "肌の色を変更"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - アーカイブされた作業項目",
+      "cycles": "{project_name} - アーカイブされたサイクル",
+      "modules": "{project_name} - アーカイブされたモジュール"
+    }
+  },
+  "page_export": {
+    "title": "ページをエクスポート",
+    "format": "エクスポート形式",
+    "include_content": "含めるコンテンツ",
+    "page_format": "用紙サイズ",
+    "content": {
+      "everything": "すべて",
+      "no_images": "画像なし"
+    },
+    "success": "ページをエクスポートしました。",
+    "error": "ページをエクスポートできませんでした。後でもう一度お試しください。",
+    "paper": {
+      "letter": "レター",
+      "legal": "リーガル",
+      "tabloid": "タブロイド"
+    }
+  },
+  "page_editor": {
+    "full_width": "全幅",
+    "sticky_toolbar": "ツールバーを固定",
+    "syncing": "同期中...",
+    "syncing_description": "変更をサーバーと同期しています。引き続き編集できます。",
+    "connection_lost": "接続が切断されました",
+    "connection_lost_description": "接続が切断されました。WebSocketサーバーへの接続に問題が発生しています。変更は10秒ごとに同期して保存されます。",
+    "offline": "オフライン",
+    "offline_description": "オフラインです。引き続き編集できます。オンラインに戻ると変更が同期されます。",
+    "locked": "ロック中",
+    "unlocked": "ロック解除済み"
   }
 }

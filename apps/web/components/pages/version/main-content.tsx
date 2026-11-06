@@ -13,7 +13,7 @@ import { Button } from "@makeplane/propel/components/button";
 import { setToast } from "@plane/blocks/toast";
 import { useTranslation } from "@plane/i18n";
 import type { TPageVersion } from "@plane/types";
-import { renderFormattedDate, renderFormattedTime } from "@plane/utils";
+import { renderFormattedDate, renderLocalizedDateTime } from "@plane/utils";
 // helpers
 import type { EPageStoreType } from "@/hooks/store";
 // local imports
@@ -41,7 +41,7 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
     restoreEnabled,
     storeType,
   } = props;
-  const { currentLocale } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // states
   const [isRestoring, setIsRestoring] = useState(false);
   const [isRetrying, setIsRetrying] = useState(false);
@@ -62,7 +62,7 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
       .then(() => {
         setToast({
           type: "success",
-          title: "Page version restored.",
+          title: t("page_versions.restored"),
         });
         handleClose();
         return undefined;
@@ -70,7 +70,7 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
       .catch(() =>
         setToast({
           type: "error",
-          title: "Failed to restore page version.",
+          title: t("page_versions.restore_error"),
         })
       )
       .finally(() => setIsRestoring(false));
@@ -93,14 +93,14 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
               <WarningTriangleOutline className="size-10" />
             </span>
             <div>
-              <h6 className="text-16 font-semibold">Something went wrong!</h6>
-              <p className="text-13 text-tertiary">The version could not be loaded, please try again.</p>
+              <h6 className="text-16 font-semibold">{t("common.something_went_wrong")}</h6>
+              <p className="text-13 text-tertiary">{t("page_versions.load_error")}</p>
             </div>
             <Button
               variant="ghost"
               size="sm"
               stretch="auto"
-              label="Try again"
+              label={t("common.retry")}
               onClick={() => void handleRetry()}
               loading={isRetrying}
             />
@@ -112,12 +112,12 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
             <div className="flex items-center gap-4">
               <h6 className="text-14 font-medium">
                 {versionDetails
-                  ? `${renderFormattedDate(versionDetails.last_saved_at, undefined, currentLocale)} ${renderFormattedTime(versionDetails.last_saved_at)}`
-                  : "Loading version details"}
+                  ? `${renderFormattedDate(versionDetails.last_saved_at, undefined, currentLocale)} ${renderLocalizedDateTime(versionDetails.last_saved_at, currentLocale).time}`
+                  : t("page_versions.loading")}
               </h6>
               <span className="flex flex-shrink-0 items-center gap-1 rounded-sm bg-accent-primary/20 px-1.5 py-1 text-11 font-medium text-accent-primary">
                 <ShowOutline className="size-3 flex-shrink-0" />
-                View only
+                {t("page_versions.view_only")}
               </span>
             </div>
             {restoreEnabled && (
@@ -125,7 +125,7 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
                 variant="primary"
                 size="sm"
                 stretch="auto"
-                label={isRestoring ? "Restoring" : "Restore"}
+                label={isRestoring ? t("page_versions.restoring") : t("common.actions.restore")}
                 onClick={() => void handleRestoreVersion()}
                 loading={isRestoring}
               />

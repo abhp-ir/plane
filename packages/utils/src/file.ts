@@ -43,19 +43,51 @@ export const getBase64Image = async (url: string): Promise<string> => {
   }
 
   // Try to create a URL object to validate the URL
+  let imageURL: URL;
   try {
-    new URL(url);
+    imageURL = new URL(url, url.startsWith("/") ? globalThis.location?.href : undefined);
   } catch {
     throw new Error("Invalid URL format");
   }
 
-  const response = await fetch(url);
+  const apiOrigin = API_BASE_URL ? new URL(API_BASE_URL).origin : globalThis.location?.origin;
+  const isPlaneAsset = imageURL.origin === apiOrigin && imageURL.pathname.startsWith("/api/assets/v2/workspaces/");
+  let imageSource = imageURL.href;
+  if (isPlaneAsset) {
+    // Resolve the protected asset first; storage requests must never carry the Plane session.
+    imageURL.searchParams.set("response_format", "json");
+    const assetResponse = await fetch(imageURL.href, { credentials: "include", redirect: "error" });
+    if (!assetResponse.ok) throw new Error(`Failed to fetch image: ${assetResponse.statusText}`);
+    const asset: { url: string } = await assetResponse.json();
+    const storageURL = new URL(asset.url);
+    if (!["http:", "https:"].includes(storageURL.protocol)) throw new Error("Invalid asset URL");
+    imageSource = storageURL.href;
+  }
+  const response = await fetch(imageSource, { credentials: isPlaneAsset ? "omit" : "same-origin" });
   // check if the response is OK
   if (!response.ok) {
     throw new Error(`Failed to fetch image: ${response.statusText}`);
   }
 
   const blob = await response.blob();
+  if (blob.type !== "image/svg+xml") {
+    const bitmap = await createImageBitmap(blob);
+    try {
+      if (!["image/png", "image/jpeg", "image/jpg"].includes(blob.type)) {
+        const canvas = document.createElement("canvas");
+        canvas.width = bitmap.width;
+        canvas.height = bitmap.height;
+        const context = canvas.getContext("2d");
+        if (!context) throw new Error("Failed to convert image for PDF");
+        context.drawImage(bitmap, 0, 0);
+        const png = canvas.toDataURL("image/png");
+        if (!png.startsWith("data:image/png;base64,")) throw new Error("Failed to convert image for PDF");
+        return png;
+      }
+    } finally {
+      bitmap.close();
+    }
+  }
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
@@ -67,9 +99,9 @@ export const getBase64Image = async (url: string): Promise<string> => {
       }
     };
 
-    reader.onerror = () => {
+    reader.addEventListener("error", () => {
       reject(new Error("Failed to read the image file."));
-    };
+    });
 
     reader.readAsDataURL(blob);
   });

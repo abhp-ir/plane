@@ -50,6 +50,8 @@ describe("editor content direction", () => {
       const nodes = (contentJSON as JSONContent).content;
       expect(nodes?.[0].attrs?.textAlign).toBe("center");
       expect(nodes?.[1].attrs?.textAlign).toBe("right");
+      expect(contentHTML).toMatch(/<h2\b[^>]*style="[^"]*text-align:\s*center/);
+      expect(contentHTML).toMatch(/<p\b[^>]*style="[^"]*text-align:\s*right/);
       expect(nodes?.find((node) => node.type === "codeBlock")?.content?.[0].text).toBe('const id = "ABC-42"; // فارسی');
       expect(contentHTML).toContain("const id = &quot;ABC-42&quot;; // فارسی");
       expect(contentHTML).not.toMatch(/<(?:pre|code)\b[^>]*dir="auto"/);

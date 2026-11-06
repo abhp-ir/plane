@@ -110,6 +110,12 @@
       "label": "Remove from collection",
       "success_message": "Page removed from collection.",
       "error_message": "Page could not be removed from the collection. Please try again."
+    },
+    "delete_page": {
+      "title": "გვერდის წაშლა",
+      "confirmation": "ნამდვილად გსურთ გვერდის <page/> წაშლა? გვერდი სამუდამოდ წაიშლება. ამ მოქმედების გაუქმება შეუძლებელია.",
+      "success_message": "გვერდი წარმატებით წაიშალა.",
+      "error_message": "გვერდის წაშლა ვერ მოხერხდა. გთხოვთ, სცადოთ ხელახლა."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "დაარქივების თარიღი"
+  },
+  "page_versions": {
+    "restored": "გვერდის ვერსია აღდგენილია.",
+    "restore_error": "გვერდის ვერსიის აღდგენა ვერ მოხერხდა.",
+    "load_error": "ვერსიის ჩატვირთვა ვერ მოხერხდა. გთხოვთ, სცადოთ ხელახლა.",
+    "loading": "ვერსიის დეტალები იტვირთება",
+    "view_only": "მხოლოდ ნახვა",
+    "restoring": "მიმდინარეობს აღდგენა"
+  },
+  "page_views": {
+    "project_title": "{projectName} - გვერდები",
+    "not_found_title": "გვერდი ვერ მოიძებნა",
+    "not_found_description": "გვერდი, რომელზეც წვდომას ცდილობთ, არ არსებობს ან მისი ნახვის ნებართვა არ გაქვთ.",
+    "view_other_pages": "სხვა გვერდების ნახვა"
   }
 }

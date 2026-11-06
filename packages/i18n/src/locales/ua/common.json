@@ -11,7 +11,9 @@
     "property_removed": "Користувач <actor/> видалив «{property}»{showIssue, select, true { з <issue/>} other {}}.",
     "description_edited": "Користувач <actor/> відредагував опис{showIssue, select, true { у <issue/>} other {}}.",
     "work_item_created": "Користувач <actor/> створив {showIssue, select, true {<issue/>} other {робочий елемент}}{hasSource, select, true { через <origin/>} other {}}.",
-    "work_item_deleted": "Користувач <actor/> видалив {showIssue, select, true {<issue/>} other {робочий елемент}}."
+    "work_item_deleted": "Користувач <actor/> видалив {showIssue, select, true {<issue/>} other {робочий елемент}}.",
+    "work_item_archived": "Користувач <actor/> архівував {showIssue, select, true {<issue/>} other {робочий елемент}}.",
+    "work_item_restored": "Користувач <actor/> відновив {showIssue, select, true {<issue/>} other {робочий елемент}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Ми працюємо над цим. Якщо вам потрібна негайна допомога,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Змінити відтінок шкіри"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Архівовані робочі елементи",
+      "cycles": "{project_name} - Архівовані цикли",
+      "modules": "{project_name} - Архівовані модулі"
+    }
+  },
+  "page_export": {
+    "title": "Експорт сторінки",
+    "format": "Формат експорту",
+    "include_content": "Включений вміст",
+    "page_format": "Формат сторінки",
+    "content": {
+      "everything": "Усе",
+      "no_images": "Без зображень"
+    },
+    "success": "Сторінку успішно експортовано.",
+    "error": "Не вдалося експортувати сторінку. Спробуйте ще раз пізніше.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Повна ширина",
+    "sticky_toolbar": "Закріплена панель інструментів",
+    "syncing": "Синхронізація...",
+    "syncing_description": "Ваші зміни синхронізуються із сервером. Можете продовжувати редагування.",
+    "connection_lost": "З’єднання втрачено",
+    "connection_lost_description": "З’єднання втрачено. Виникла проблема з підключенням до сервера WebSocket. Ваші зміни синхронізуватимуться та зберігатимуться кожні 10 секунд.",
+    "offline": "Не в мережі",
+    "offline_description": "Ви не в мережі. Можете продовжувати редагування. Зміни синхронізуються після відновлення підключення.",
+    "locked": "Заблоковано",
+    "unlocked": "Розблоковано"
   }
 }

@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import React, { useEffect, useState, useCallback } from "react";
 import { DeleteOutline, PaletteOutline } from "@makeplane/propel/icons";
 // editor
@@ -15,7 +16,7 @@ import type { TSticky } from "@plane/types";
 // constants
 import { cn } from "@plane/utils";
 import type { ToolbarMenuItem } from "@plane/editor";
-import { TOOLBAR_ITEMS } from "@plane/editor";
+import { getEditorMenuItemLabel, TOOLBAR_ITEMS } from "@plane/editor";
 // helpers
 import { ColorPalette } from "./color-palette";
 
@@ -29,6 +30,7 @@ type Props = {
 const toolbarItems = TOOLBAR_ITEMS.sticky;
 
 export function StickyEditorToolbar(props: Props) {
+  const { t } = useTranslation();
   const { executeCommand, editorRef, handleColorChange, handleDelete } = props;
 
   // State to manage active states of toolbar items
@@ -81,9 +83,14 @@ export function StickyEditorToolbar(props: Props) {
                   const isItemActive = activeStates[item.renderKey];
 
                   return (
-                    <Tooltip key={item.renderKey} label={item.name} shortcut={item.shortcut?.join(" + ")}>
+                    <Tooltip
+                      key={item.renderKey}
+                      label={getEditorMenuItemLabel(item.renderKey, item.name, t)}
+                      shortcut={item.shortcut?.join(" + ")}
+                    >
                       <button
                         type="button"
+                        aria-label={getEditorMenuItemLabel(item.renderKey, item.name, t)}
                         onClick={() => executeCommand(item)}
                         className={cn("grid aspect-square place-items-center rounded-xs p-0.5 text-primary/50", {})}
                       >

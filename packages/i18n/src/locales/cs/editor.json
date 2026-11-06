@@ -147,5 +147,35 @@
     "light-blue": "Světle modrá",
     "dark-blue": "Tmavě modrá",
     "purple": "Fialová"
+  },
+  "editor_toolbar": {
+    "bold": "Tučné",
+    "italic": "Kurzíva",
+    "underline": "Podtržení",
+    "strikethrough": "Přeškrtnutí",
+    "color": "Barva",
+    "align_left": "Zarovnat vlevo",
+    "align_center": "Zarovnat na střed",
+    "align_right": "Zarovnat vpravo",
+    "label": "Panel formátování",
+    "text_colors": "Barvy textu",
+    "background_colors": "Barvy pozadí",
+    "remove_text_color": "Odebrat barvu textu",
+    "remove_background_color": "Odebrat barvu pozadí",
+    "link": "Odkaz",
+    "remove_link": "Odebrat odkaz",
+    "apply_link": "Použít odkaz",
+    "multiple": "Více typů",
+    "fit_to_width": "Přizpůsobit šířce"
+  },
+  "editor_image": {
+    "align": "Zarovnat",
+    "download": "Stáhnout obrázek",
+    "view_full_screen": "Zobrazit obrázek na celou obrazovku",
+    "full_screen_viewer": "Prohlížeč obrázků na celou obrazovku",
+    "close_viewer": "Zavřít prohlížeč obrázků",
+    "zoom_out": "Oddálit",
+    "zoom_in": "Přiblížit",
+    "open_in_new_tab": "Otevřít obrázek v nové záložce"
   }
 }

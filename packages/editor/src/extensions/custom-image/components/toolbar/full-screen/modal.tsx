@@ -8,6 +8,7 @@ import { AddOutline, CloseOutline, DownloadOutline, MinusOutline, NewTabOutline 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 
 const MIN_ZOOM = 0.5;
@@ -27,6 +28,8 @@ type Props = {
 
 function ImageFullScreenModalWithoutPortal(props: Props) {
   const { aspectRatio, isFullScreenEnabled, isTouchDevice, downloadSrc, src, toggleFullScreenMode, width } = props;
+  const { t, currentLocale } = useTranslation();
+  const language = currentLocale === "ua" ? "uk-UA" : currentLocale;
   // refs
   const dragStart = useRef({ x: 0, y: 0 });
   const dragOffset = useRef({ x: 0, y: 0 });
@@ -81,7 +84,7 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
         targetZoom = ZOOM_STEPS.find((step) => step > prev) ?? MAX_ZOOM;
       } else {
         // Reverse the array to find the next lower step
-        targetZoom = [...ZOOM_STEPS].reverse().find((step) => step < prev) ?? MIN_ZOOM;
+        targetZoom = ZOOM_STEPS.toReversed().find((step) => step < prev) ?? MIN_ZOOM;
       }
 
       // Reset position when zoom matches initial magnification
@@ -96,6 +99,15 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (e.key === "Tab") {
+        const buttons = [...(modalRef.current?.querySelectorAll<HTMLButtonElement>("button:not([disabled])") ?? [])];
+        const first = buttons[0];
+        const last = buttons.at(-1);
+        if ((e.shiftKey && document.activeElement === first) || (!e.shiftKey && document.activeElement === last)) {
+          e.preventDefault();
+          (e.shiftKey ? last : first)?.focus();
+        }
+      }
       if (e.key === "Escape" || e.key === "+" || e.key === "=" || e.key === "-") {
         e.preventDefault();
         e.stopPropagation();
@@ -107,6 +119,13 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
     },
     [handleClose, handleMagnification]
   );
+
+  useEffect(() => {
+    if (!isFullScreenEnabled) return;
+    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    modalRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    return () => trigger?.focus();
+  }, [isFullScreenEnabled]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!imgRef.current) return;
@@ -205,9 +224,10 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
       })}
       role="dialog"
       aria-modal="true"
-      aria-label="Fullscreen image viewer"
+      aria-label={t("editor_image.full_screen_viewer")}
     >
       <div
+        role="presentation"
         ref={modalRef}
         onMouseDown={(e) => e.target === modalRef.current && handleClose()}
         className="relative grid size-full place-items-center overflow-hidden"
@@ -215,14 +235,15 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-10 right-10 grid size-8 place-items-center"
-          aria-label="Close image viewer"
+          className="absolute end-10 top-10 grid size-8 place-items-center"
+          aria-label={t("editor_image.close_viewer")}
         >
           <CloseOutline className="size-8 text-white/60 transition-colors hover:text-white" />
         </button>
         <img
           ref={setImageRef}
           src={src}
+          alt={t("image_upload.alt")}
           className="read-only-image rounded-lg"
           style={{
             width: `${widthInNumber * initialMagnification}px`,
@@ -249,11 +270,13 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
               }}
               className="grid size-6 place-items-center text-white/60 transition-colors duration-200 hover:text-white disabled:text-white/30"
               disabled={magnification <= MIN_ZOOM}
-              aria-label="Zoom out"
+              aria-label={t("editor_image.zoom_out")}
             >
               <MinusOutline className="size-4" />
             </button>
-            <span className="w-12 text-center text-13 text-white">{Math.round(100 * magnification)}%</span>
+            <span className="w-12 text-center text-13 text-white">
+              {new Intl.NumberFormat(language, { style: "percent", maximumFractionDigits: 0 }).format(magnification)}
+            </span>
             <button
               type="button"
               onClick={(e) => {
@@ -265,7 +288,7 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
               }}
               className="grid size-6 place-items-center text-white/60 transition-colors duration-200 hover:text-white disabled:text-white/30"
               disabled={magnification >= MAX_ZOOM}
-              aria-label="Zoom in"
+              aria-label={t("editor_image.zoom_in")}
             >
               <AddOutline className="size-4" />
             </button>
@@ -275,7 +298,7 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
               type="button"
               onClick={() => window.open(downloadSrc, "_blank")}
               className="grid size-8 flex-shrink-0 place-items-center text-white/60 transition-colors duration-200 hover:text-white"
-              aria-label="Download image"
+              aria-label={t("editor_image.download")}
             >
               <DownloadOutline className="size-4" />
             </button>
@@ -285,7 +308,7 @@ function ImageFullScreenModalWithoutPortal(props: Props) {
               type="button"
               onClick={() => window.open(src, "_blank")}
               className="grid size-8 flex-shrink-0 place-items-center text-white/60 transition-colors duration-200 hover:text-white"
-              aria-label="Open image in new tab"
+              aria-label={t("editor_image.open_in_new_tab")}
             >
               <NewTabOutline className="size-4" />
             </button>

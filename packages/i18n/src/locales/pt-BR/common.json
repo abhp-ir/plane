@@ -11,7 +11,9 @@
     "property_removed": "<actor/> removeu “{property}”{showIssue, select, true { de <issue/>} other {}}.",
     "description_edited": "<actor/> editou a descrição{showIssue, select, true { de <issue/>} other {}}.",
     "work_item_created": "<actor/> criou {showIssue, select, true {<issue/>} other {o item de trabalho}}{hasSource, select, true { por <origin/>} other {}}.",
-    "work_item_deleted": "<actor/> excluiu {showIssue, select, true {<issue/>} other {o item de trabalho}}."
+    "work_item_deleted": "<actor/> excluiu {showIssue, select, true {<issue/>} other {o item de trabalho}}.",
+    "work_item_archived": "<actor/> arquivou {showIssue, select, true {<issue/>} other {o item de trabalho}}.",
+    "work_item_restored": "<actor/> restaurou {showIssue, select, true {<issue/>} other {o item de trabalho}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Estamos trabalhando nisso. Se você precisar de assistência imediata,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Alterar o tom de pele"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Itens de trabalho arquivados",
+      "cycles": "{project_name} - Ciclos arquivados",
+      "modules": "{project_name} - Módulos arquivados"
+    }
+  },
+  "page_export": {
+    "title": "Exportar página",
+    "format": "Formato de exportação",
+    "include_content": "Conteúdo incluído",
+    "page_format": "Formato da página",
+    "content": {
+      "everything": "Tudo",
+      "no_images": "Sem imagens"
+    },
+    "success": "Página exportada com sucesso.",
+    "error": "Não foi possível exportar a página. Tente novamente mais tarde.",
+    "paper": {
+      "letter": "Carta",
+      "legal": "Legal",
+      "tabloid": "Tabloide"
+    }
+  },
+  "page_editor": {
+    "full_width": "Largura total",
+    "sticky_toolbar": "Barra de ferramentas fixa",
+    "syncing": "Sincronizando...",
+    "syncing_description": "Suas alterações estão sendo sincronizadas com o servidor. Você pode continuar editando.",
+    "connection_lost": "Conexão perdida",
+    "connection_lost_description": "Conexão perdida. Há um problema ao conectar ao servidor WebSocket. Suas alterações serão sincronizadas e salvas a cada 10 segundos.",
+    "offline": "Offline",
+    "offline_description": "Você está offline. Pode continuar editando. As alterações serão sincronizadas quando você voltar a ficar online.",
+    "locked": "Bloqueada",
+    "unlocked": "Desbloqueada"
   }
 }

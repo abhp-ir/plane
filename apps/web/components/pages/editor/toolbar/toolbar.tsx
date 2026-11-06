@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import React, { useEffect, useState, useCallback } from "react";
 import type { EditorRefApi } from "@plane/editor";
 // plane imports
@@ -20,7 +21,7 @@ import {
 import { Tooltip, TooltipProvider } from "@makeplane/propel/components/tooltip";
 // constants
 import type { ToolbarMenuItem } from "@plane/editor";
-import { TOOLBAR_ITEMS, TYPOGRAPHY_ITEMS } from "@plane/editor";
+import { getEditorMenuItemLabel, TOOLBAR_ITEMS, TYPOGRAPHY_ITEMS } from "@plane/editor";
 // local imports
 import { ColorDropdown } from "./color-dropdown";
 
@@ -38,6 +39,7 @@ type ToolbarItemProps = {
 
 const ToolbarItem = React.memo(function ToolbarItem(props: ToolbarItemProps) {
   const { item, isActive, isInsertAction, executeCommand } = props;
+  const { t } = useTranslation();
 
   const handleClick = () =>
     // TODO: update this while toolbar homogenization
@@ -49,11 +51,20 @@ const ToolbarItem = React.memo(function ToolbarItem(props: ToolbarItemProps) {
   const icon = <Icon icon={item.icon} />;
 
   return (
-    <Tooltip label={item.name} shortcut={item.shortcut?.join(" + ")}>
+    <Tooltip label={getEditorMenuItemLabel(item.renderKey, item.name, t)} shortcut={item.shortcut?.join(" + ")}>
       {isInsertAction ? (
-        <ToolbarButton aria-label={item.name} icon={icon} onClick={handleClick} />
+        <ToolbarButton
+          aria-label={getEditorMenuItemLabel(item.renderKey, item.name, t)}
+          icon={icon}
+          onClick={handleClick}
+        />
       ) : (
-        <ToolbarToggle aria-label={item.name} icon={icon} pressed={!!isActive} onPressedChange={handleClick} />
+        <ToolbarToggle
+          aria-label={getEditorMenuItemLabel(item.renderKey, item.name, t)}
+          icon={icon}
+          pressed={!!isActive}
+          onPressedChange={handleClick}
+        />
       )}
     </Tooltip>
   );
@@ -64,6 +75,7 @@ ToolbarItem.displayName = "ToolbarItem";
 const toolbarItems = TOOLBAR_ITEMS.document;
 
 export function PageToolbar(props: Props) {
+  const { t } = useTranslation();
   const { editorRef } = props;
   // states
   const [activeStates, setActiveStates] = useState<Record<string, boolean>>(() => {
@@ -111,14 +123,16 @@ export function PageToolbar(props: Props) {
   return (
     <TooltipProvider>
       <div className="animate-in fade-in flex items-center overflow-x-auto duration-200">
-        <Toolbar size="md" elevation="flat" aria-label="Formatting toolbar">
+        <Toolbar size="md" elevation="flat" aria-label={t("editor_toolbar.label")}>
           <Menu>
-            <ToolbarMenuTrigger label={activeTypography?.name || "Text"} />
+            <ToolbarMenuTrigger
+              label={getEditorMenuItemLabel(activeTypography?.renderKey ?? "text", activeTypography?.name ?? "Text", t)}
+            />
             <MenuContent side="bottom" align="start">
               {TYPOGRAPHY_ITEMS.map((item) => (
                 <MenuItem
                   key={item.renderKey}
-                  label={item.name}
+                  label={getEditorMenuItemLabel(item.renderKey, item.name, t)}
                   icon={<Icon icon={item.icon} />}
                   selected={activeTypography?.itemKey === item.itemKey}
                   onClick={() => {

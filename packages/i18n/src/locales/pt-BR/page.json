@@ -110,6 +110,12 @@
       "label": "Remover da coleção",
       "success_message": "Página removida da coleção.",
       "error_message": "Não foi possível remover a página da coleção. Tente novamente."
+    },
+    "delete_page": {
+      "title": "Excluir página",
+      "confirmation": "Tem certeza de que deseja excluir a página <page/>? A página será excluída permanentemente. Esta ação não pode ser desfeita.",
+      "success_message": "Página excluída com sucesso.",
+      "error_message": "Não foi possível excluir a página. Tente novamente."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Data de arquivamento"
+  },
+  "page_versions": {
+    "restored": "Versão da página restaurada.",
+    "restore_error": "Não foi possível restaurar a versão da página.",
+    "load_error": "Não foi possível carregar a versão. Tente novamente.",
+    "loading": "Carregando detalhes da versão",
+    "view_only": "Somente visualização",
+    "restoring": "Restaurando"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Páginas",
+    "not_found_title": "Página não encontrada",
+    "not_found_description": "A página que você está tentando acessar não existe ou você não tem permissão para visualizá-la.",
+    "view_other_pages": "Ver outras páginas"
   }
 }

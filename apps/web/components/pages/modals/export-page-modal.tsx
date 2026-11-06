@@ -9,6 +9,7 @@ import type { PageProps } from "@react-pdf/renderer";
 import { pdf } from "@react-pdf/renderer";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router";
+import { useTranslation } from "@plane/i18n";
 // plane editor
 import type { EditorRefApi } from "@plane/editor";
 // plane ui
@@ -29,6 +30,7 @@ import { setToast } from "@plane/blocks/toast";
 import { PDFDocument } from "@/components/editor/pdf";
 // hooks
 import { useParseEditorContent } from "@/hooks/use-parse-editor-content";
+import { getPageExportFileName, getPageExportHTML } from "./export-page-helpers";
 
 type Props = {
   editorRef: EditorRefApi | null;
@@ -79,15 +81,15 @@ const PAGE_FORMATS: {
   },
   {
     key: "LETTER",
-    label: "Letter",
+    label: "page_export.paper.letter",
   },
   {
     key: "LEGAL",
-    label: "Legal",
+    label: "page_export.paper.legal",
   },
   {
     key: "TABLOID",
-    label: "Tabloid",
+    label: "page_export.paper.tabloid",
   },
 ];
 
@@ -97,11 +99,11 @@ const CONTENT_VARIETY: {
 }[] = [
   {
     key: "everything",
-    label: "Everything",
+    label: "page_export.content.everything",
   },
   {
     key: "no-assets",
-    label: "No images",
+    label: "page_export.content.no_images",
   },
 ];
 
@@ -114,8 +116,20 @@ const defaultValues: TFormValues = {
   content_variety: "everything",
 };
 
+const initiateDownload = (blob: Blob, filename: string) => {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+  }, 1000);
+};
+
 export function ExportPageModal(props: Props) {
   const { editorRef, isOpen, onClose, pageTitle } = props;
+  const { t, currentLocale } = useTranslation();
   // states
   const [isExporting, setIsExporting] = useState(false);
   // params
@@ -134,10 +148,7 @@ export function ExportPageModal(props: Props) {
   const selectedPageFormat = watch("page_format");
   const selectedContentVariety = watch("content_variety");
   const isPDFSelected = selectedExportFormat === "pdf";
-  const fileName = pageTitle
-    ?.toLowerCase()
-    ?.replace(/[^a-z0-9-_]/g, "-")
-    .replace(/-+/g, "-");
+  const fileName = getPageExportFileName(pageTitle);
   // handle modal close
   const handleClose = () => {
     onClose();
@@ -146,27 +157,18 @@ export function ExportPageModal(props: Props) {
     }, 300);
   };
 
-  const initiateDownload = (blob: Blob, filename: string) => {
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    link.click();
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-    }, 1000);
-  };
-
   // handle export as a PDF
   const handleExportAsPDF = async () => {
     try {
-      const pageContent = `<h1 class="page-title">${pageTitle}</h1>${editorRef?.getDocument().html ?? "<p></p>"}`;
+      const pageContent = getPageExportHTML(pageTitle, editorRef?.getDocument().html ?? "<p></p>");
       const parsedPageContent = await replaceCustomComponentsFromHTMLContent({
         htmlContent: pageContent,
         noAssets: selectedContentVariety === "no-assets",
       });
 
-      const blob = await pdf(<PDFDocument content={parsedPageContent} pageFormat={selectedPageFormat} />).toBlob();
+      const blob = await pdf(
+        <PDFDocument content={parsedPageContent} pageFormat={selectedPageFormat} locale={currentLocale} />
+      ).toBlob();
       initiateDownload(blob, `${fileName}-${selectedPageFormat.toString().toLowerCase()}.pdf`);
     } catch (error) {
       throw new Error(`Error in exporting as a PDF: ${error}`, { cause: error });
@@ -199,16 +201,16 @@ export function ExportPageModal(props: Props) {
       }
       setToast({
         type: "success",
-        title: "Success!",
-        message: "Page exported successfully.",
+        title: t("toast.success"),
+        message: t("page_export.success"),
       });
       handleClose();
     } catch (error) {
       console.error("Error in exporting page:", error);
       setToast({
         type: "error",
-        title: "Error!",
-        message: "Page could not be exported. Please try again later.",
+        title: t("toast.error"),
+        message: t("page_export.error"),
       });
     } finally {
       setIsExporting(false);
@@ -226,18 +228,19 @@ export function ExportPageModal(props: Props) {
         <DialogMain>
           <DialogHeader>
             <DialogHeading>
-              <DialogTitle>Export page</DialogTitle>
+              <DialogTitle>{t("page_export.title")}</DialogTitle>
             </DialogHeading>
           </DialogHeader>
           <DialogBody>
             <div className="space-y-3">
               <div className="flex items-center justify-between gap-2">
-                <h6 className="flex-shrink-0 text-13 text-secondary">Export format</h6>
+                <h6 className="flex-shrink-0 text-13 text-secondary">{t("page_export.format")}</h6>
                 <Controller
                   control={control}
                   name="export_format"
                   render={({ field: { onChange, value } }) => (
                     <ExportOptionSelect
+                      label={t("page_export.format")}
                       options={EXPORT_FORMATS}
                       value={value}
                       onChange={(val) => onChange(val as TExportFormats)}
@@ -246,13 +249,14 @@ export function ExportPageModal(props: Props) {
                 />
               </div>
               <div className="flex items-center justify-between gap-2">
-                <h6 className="flex-shrink-0 text-13 text-secondary">Include content</h6>
+                <h6 className="flex-shrink-0 text-13 text-secondary">{t("page_export.include_content")}</h6>
                 <Controller
                   control={control}
                   name="content_variety"
                   render={({ field: { onChange, value } }) => (
                     <ExportOptionSelect
-                      options={CONTENT_VARIETY}
+                      label={t("page_export.include_content")}
+                      options={CONTENT_VARIETY.map(({ key, label }) => ({ key, label: t(label) }))}
                       value={value}
                       onChange={(val) => onChange(val as TContentVariety)}
                     />
@@ -261,13 +265,17 @@ export function ExportPageModal(props: Props) {
               </div>
               {isPDFSelected && (
                 <div className="flex items-center justify-between gap-2">
-                  <h6 className="flex-shrink-0 text-13 text-secondary">Page format</h6>
+                  <h6 className="flex-shrink-0 text-13 text-secondary">{t("page_export.page_format")}</h6>
                   <Controller
                     control={control}
                     name="page_format"
                     render={({ field: { onChange, value } }) => (
                       <ExportOptionSelect
-                        options={PAGE_FORMATS}
+                        label={t("page_export.page_format")}
+                        options={PAGE_FORMATS.map(({ key, label }) => ({
+                          key,
+                          label: label.startsWith("page_export.") ? t(label) : label,
+                        }))}
                         value={value}
                         onChange={(val) => onChange(val as TPageFormats)}
                       />
@@ -279,12 +287,12 @@ export function ExportPageModal(props: Props) {
           </DialogBody>
         </DialogMain>
         <DialogActions>
-          <Button variant="secondary" size="md" stretch="auto" label="Cancel" onClick={handleClose} />
+          <Button variant="secondary" size="md" stretch="auto" label={t("common.cancel")} onClick={handleClose} />
           <Button
             variant="primary"
             size="md"
             stretch="auto"
-            label={isExporting ? "Exporting" : "Export"}
+            label={isExporting ? t("workspace_settings.settings.exports.exporting") : t("export")}
             loading={isExporting}
             onClick={handleExport}
           />
@@ -297,8 +305,13 @@ export function ExportPageModal(props: Props) {
 type TExportOption<T> = { key: T; label: string };
 
 /** Borderless single-select for one export setting (legacy `CustomSelect` with `buttonClassName="border-none"`). */
-function ExportOptionSelect<T>(props: { options: TExportOption<T>[]; value: T; onChange: (value: string) => void }) {
-  const { options, value, onChange } = props;
+function ExportOptionSelect<T>(props: {
+  label: string;
+  options: TExportOption<T>[];
+  value: T;
+  onChange: (value: string) => void;
+}) {
+  const { label, options, value, onChange } = props;
   // derive the selection from the stored key, so an unknown key still renders instead of blanking
   const selected = options.find((option) => option.key === value) ?? { key: value, label: String(value) };
 
@@ -313,9 +326,10 @@ function ExportOptionSelect<T>(props: { options: TExportOption<T>[]; value: T; o
           getOptionLabel={(option) => option.label}
           showSearch={false}
           pinSelected={false}
+          placeholder={label}
         >
           <Select.Trigger variant="select-ghost-md">
-            <span className="grow truncate">{selected.label}</span>
+            <bdi className="grow truncate">{selected.label}</bdi>
           </Select.Trigger>
         </Select>
       </SelectDropdownPlacementContext.Provider>

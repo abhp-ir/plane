@@ -11,7 +11,9 @@
     "property_removed": "<actor/>: „{property}“{showIssue, select, true { ჩანაწერიდან <issue/>} other {}} წაიშალა.",
     "description_edited": "<actor/>: აღწერა{showIssue, select, true { ჩანაწერში <issue/>} other {}} ჩასწორდა.",
     "work_item_created": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}}{hasSource, select, true { <origin/>-ის მეშვეობით} other {}} შეიქმნა.",
-    "work_item_deleted": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}} წაიშალა."
+    "work_item_deleted": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}} წაიშალა.",
+    "work_item_archived": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}} დაარქივდა.",
+    "work_item_restored": "<actor/>: {showIssue, select, true {<issue/>} other {სამუშაო ელემენტი}} აღდგა."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "We're working on this. If you need immediate assistance,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "კანის ტონის შეცვლა"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - დაარქივებული სამუშაო ელემენტები",
+      "cycles": "{project_name} - დაარქივებული ციკლები",
+      "modules": "{project_name} - დაარქივებული მოდულები"
+    }
+  },
+  "page_export": {
+    "title": "გვერდის ექსპორტი",
+    "format": "ექსპორტის ფორმატი",
+    "include_content": "შესატანი კონტენტი",
+    "page_format": "გვერდის ფორმატი",
+    "content": {
+      "everything": "ყველაფერი",
+      "no_images": "სურათების გარეშე"
+    },
+    "success": "გვერდი წარმატებით ექსპორტირდა.",
+    "error": "გვერდის ექსპორტი ვერ მოხერხდა. გთხოვთ, მოგვიანებით სცადოთ ხელახლა.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "სრული სიგანე",
+    "sticky_toolbar": "ფიქსირებული ხელსაწყოთა ზოლი",
+    "syncing": "სინქრონიზაცია...",
+    "syncing_description": "თქვენი ცვლილებები სერვერთან სინქრონიზდება. შეგიძლიათ რედაქტირება გააგრძელოთ.",
+    "connection_lost": "კავშირი გაწყდა",
+    "connection_lost_description": "კავშირი გაწყდა. WebSocket სერვერთან დაკავშირება ვერ ხერხდება. თქვენი ცვლილებები ყოველ 10 წამში სინქრონიზდება და შეინახება.",
+    "offline": "ხაზგარეშე",
+    "offline_description": "ხაზგარეშე ხართ. შეგიძლიათ რედაქტირება გააგრძელოთ. ცვლილებები სინქრონიზდება, როცა კვლავ ონლაინ იქნებით.",
+    "locked": "ჩაკეტილია",
+    "unlocked": "განბლოკილია"
   }
 }

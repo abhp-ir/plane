@@ -147,5 +147,35 @@
     "light-blue": "Svetlomodrá",
     "dark-blue": "Tmavomodrá",
     "purple": "Fialová"
+  },
+  "editor_toolbar": {
+    "bold": "Tučné",
+    "italic": "Kurzíva",
+    "underline": "Podčiarknutie",
+    "strikethrough": "Prečiarknutie",
+    "color": "Farba",
+    "align_left": "Zarovnať vľavo",
+    "align_center": "Zarovnať na stred",
+    "align_right": "Zarovnať vpravo",
+    "label": "Panel formátovania",
+    "text_colors": "Farby textu",
+    "background_colors": "Farby pozadia",
+    "remove_text_color": "Odstrániť farbu textu",
+    "remove_background_color": "Odstrániť farbu pozadia",
+    "link": "Odkaz",
+    "remove_link": "Odstrániť odkaz",
+    "apply_link": "Použiť odkaz",
+    "multiple": "Viacero",
+    "fit_to_width": "Prispôsobiť šírke"
+  },
+  "editor_image": {
+    "align": "Zarovnať",
+    "download": "Stiahnuť obrázok",
+    "view_full_screen": "Zobraziť obrázok na celej obrazovke",
+    "full_screen_viewer": "Prehliadač obrázkov na celej obrazovke",
+    "close_viewer": "Zavrieť prehliadač obrázkov",
+    "zoom_out": "Oddialiť",
+    "zoom_in": "Priblížiť",
+    "open_in_new_tab": "Otvoriť obrázok na novej karte"
   }
 }

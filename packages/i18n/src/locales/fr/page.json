@@ -110,6 +110,12 @@
       "label": "Retirer de la collection",
       "success_message": "Page retirée de la collection.",
       "error_message": "La page n'a pas pu être retirée de la collection. Veuillez réessayer."
+    },
+    "delete_page": {
+      "title": "Supprimer la page",
+      "confirmation": "Voulez-vous vraiment supprimer la page <page/> ? La page sera définitivement supprimée. Cette action est irréversible.",
+      "success_message": "La page a été supprimée avec succès.",
+      "error_message": "Impossible de supprimer la page. Veuillez réessayer."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Date d’archivage"
+  },
+  "page_versions": {
+    "restored": "La version de la page a été restaurée.",
+    "restore_error": "Impossible de restaurer la version de la page.",
+    "load_error": "Impossible de charger la version. Veuillez réessayer.",
+    "loading": "Chargement des détails de la version",
+    "view_only": "Lecture seule",
+    "restoring": "Restauration en cours"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Pages",
+    "not_found_title": "Page introuvable",
+    "not_found_description": "La page à laquelle vous essayez d’accéder n’existe pas ou vous n’avez pas l’autorisation de la consulter.",
+    "view_other_pages": "Voir d’autres pages"
   }
 }

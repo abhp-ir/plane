@@ -11,7 +11,9 @@
     "property_removed": "<actor/>移除了{showIssue, select, true {<issue/>的} other {}}「{property}」。",
     "description_edited": "<actor/>編輯了{showIssue, select, true {<issue/>的} other {}}描述。",
     "work_item_created": "<actor/>{hasSource, select, true {透過<origin/>} other {}}建立了{showIssue, select, true {<issue/>} other {工作項目}}。",
-    "work_item_deleted": "<actor/>刪除了{showIssue, select, true {<issue/>} other {工作項目}}。"
+    "work_item_deleted": "<actor/>刪除了{showIssue, select, true {<issue/>} other {工作項目}}。",
+    "work_item_archived": "<actor/>封存了{showIssue, select, true {<issue/>} other {工作項目}}。",
+    "work_item_restored": "<actor/>還原了{showIssue, select, true {<issue/>} other {工作項目}}。"
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "我們正在處理此問題。如果您需要緊急協助，",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "變更膚色"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - 已封存的工作項目",
+      "cycles": "{project_name} - 已封存的週期",
+      "modules": "{project_name} - 已封存的模組"
+    }
+  },
+  "page_export": {
+    "title": "匯出頁面",
+    "format": "匯出格式",
+    "include_content": "包含內容",
+    "page_format": "紙張尺寸",
+    "content": {
+      "everything": "全部",
+      "no_images": "不含圖片"
+    },
+    "success": "頁面已成功匯出。",
+    "error": "無法匯出頁面。請稍後再試。",
+    "paper": {
+      "letter": "信紙",
+      "legal": "法律用紙",
+      "tabloid": "小報"
+    }
+  },
+  "page_editor": {
+    "full_width": "全寬",
+    "sticky_toolbar": "固定工具列",
+    "syncing": "正在同步...",
+    "syncing_description": "正在將變更同步至伺服器。你可以繼續編輯。",
+    "connection_lost": "連線已中斷",
+    "connection_lost_description": "連線已中斷。連接WebSocket伺服器時遇到問題。你的變更將每10秒同步並儲存一次。",
+    "offline": "離線",
+    "offline_description": "你已離線。你可以繼續編輯，恢復連線後變更將自動同步。",
+    "locked": "已鎖定",
+    "unlocked": "已解鎖"
   }
 }

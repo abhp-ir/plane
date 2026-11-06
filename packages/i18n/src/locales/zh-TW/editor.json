@@ -147,5 +147,35 @@
     "light-blue": "淺藍色",
     "dark-blue": "深藍色",
     "purple": "紫色"
+  },
+  "editor_toolbar": {
+    "bold": "粗體",
+    "italic": "斜體",
+    "underline": "底線",
+    "strikethrough": "刪除線",
+    "color": "顏色",
+    "align_left": "靠左對齊",
+    "align_center": "置中對齊",
+    "align_right": "靠右對齊",
+    "label": "格式工具列",
+    "text_colors": "文字顏色",
+    "background_colors": "背景顏色",
+    "remove_text_color": "移除文字顏色",
+    "remove_background_color": "移除背景顏色",
+    "link": "連結",
+    "remove_link": "移除連結",
+    "apply_link": "套用連結",
+    "multiple": "多種類型",
+    "fit_to_width": "符合寬度"
+  },
+  "editor_image": {
+    "align": "對齊",
+    "download": "下載圖片",
+    "view_full_screen": "以全螢幕檢視圖片",
+    "full_screen_viewer": "全螢幕圖片檢視器",
+    "close_viewer": "關閉圖片檢視器",
+    "zoom_out": "縮小",
+    "zoom_in": "放大",
+    "open_in_new_tab": "在新分頁中開啟圖片"
   }
 }

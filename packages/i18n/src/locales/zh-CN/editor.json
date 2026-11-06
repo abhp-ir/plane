@@ -147,5 +147,35 @@
     "light-blue": "浅蓝色",
     "dark-blue": "深蓝色",
     "purple": "紫色"
+  },
+  "editor_toolbar": {
+    "bold": "加粗",
+    "italic": "斜体",
+    "underline": "下划线",
+    "strikethrough": "删除线",
+    "color": "颜色",
+    "align_left": "左对齐",
+    "align_center": "居中对齐",
+    "align_right": "右对齐",
+    "label": "格式工具栏",
+    "text_colors": "文字颜色",
+    "background_colors": "背景颜色",
+    "remove_text_color": "移除文字颜色",
+    "remove_background_color": "移除背景颜色",
+    "link": "链接",
+    "remove_link": "移除链接",
+    "apply_link": "应用链接",
+    "multiple": "多种类型",
+    "fit_to_width": "适应宽度"
+  },
+  "editor_image": {
+    "align": "对齐",
+    "download": "下载图片",
+    "view_full_screen": "全屏查看图片",
+    "full_screen_viewer": "全屏图片查看器",
+    "close_viewer": "关闭图片查看器",
+    "zoom_out": "缩小",
+    "zoom_in": "放大",
+    "open_in_new_tab": "在新标签页中打开图片"
   }
 }

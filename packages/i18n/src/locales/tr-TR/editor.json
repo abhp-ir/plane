@@ -147,5 +147,35 @@
     "light-blue": "Açık mavi",
     "dark-blue": "Koyu mavi",
     "purple": "Mor"
+  },
+  "editor_toolbar": {
+    "bold": "Kalın",
+    "italic": "İtalik",
+    "underline": "Altı çizili",
+    "strikethrough": "Üstü çizili",
+    "color": "Renk",
+    "align_left": "Sola hizala",
+    "align_center": "Ortala",
+    "align_right": "Sağa hizala",
+    "label": "Biçimlendirme araç çubuğu",
+    "text_colors": "Metin renkleri",
+    "background_colors": "Arka plan renkleri",
+    "remove_text_color": "Metin rengini kaldır",
+    "remove_background_color": "Arka plan rengini kaldır",
+    "link": "Bağlantı",
+    "remove_link": "Bağlantıyı kaldır",
+    "apply_link": "Bağlantıyı uygula",
+    "multiple": "Birden fazla",
+    "fit_to_width": "Genişliğe sığdır"
+  },
+  "editor_image": {
+    "align": "Hizala",
+    "download": "Görseli indir",
+    "view_full_screen": "Görseli tam ekranda görüntüle",
+    "full_screen_viewer": "Tam ekran görsel görüntüleyici",
+    "close_viewer": "Görsel görüntüleyiciyi kapat",
+    "zoom_out": "Uzaklaştır",
+    "zoom_in": "Yakınlaştır",
+    "open_in_new_tab": "Görseli yeni sekmede aç"
   }
 }

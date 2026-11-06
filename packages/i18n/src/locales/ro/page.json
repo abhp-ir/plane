@@ -110,6 +110,12 @@
       "label": "Elimină din colecție",
       "success_message": "Pagina a fost eliminată din colecție.",
       "error_message": "Pagina nu a putut fi eliminată din colecție. Te rugăm să încerci din nou."
+    },
+    "delete_page": {
+      "title": "Ștergeți pagina",
+      "confirmation": "Sigur doriți să ștergeți pagina <page/>? Pagina va fi ștearsă definitiv. Această acțiune nu poate fi anulată.",
+      "success_message": "Pagina a fost ștearsă cu succes.",
+      "error_message": "Pagina nu a putut fi ștearsă. Încercați din nou."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Data arhivării"
+  },
+  "page_versions": {
+    "restored": "Versiunea paginii a fost restaurată.",
+    "restore_error": "Versiunea paginii nu a putut fi restaurată.",
+    "load_error": "Versiunea nu a putut fi încărcată. Încercați din nou.",
+    "loading": "Se încarcă detaliile versiunii",
+    "view_only": "Doar vizualizare",
+    "restoring": "Se restaurează"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Pagini",
+    "not_found_title": "Pagina nu a fost găsită",
+    "not_found_description": "Pagina pe care încercați să o accesați nu există sau nu aveți permisiunea de a o vizualiza.",
+    "view_other_pages": "Vedeți alte pagini"
   }
 }

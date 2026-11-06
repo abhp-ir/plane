@@ -14,6 +14,8 @@ type Props = {
     | "description_edited"
     | "work_item_created"
     | "work_item_deleted"
+    | "work_item_archived"
+    | "work_item_restored"
     | "collection_assigned"
     | "collection_removed"
     | "comment_posted"

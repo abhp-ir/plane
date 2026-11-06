@@ -18,6 +18,7 @@ import type { Editor } from "@tiptap/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CopyOutline, DeleteOutline } from "@makeplane/propel/icons";
 import type { ISvgIcons } from "@plane/blocks/icons";
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 // constants
 import { CORE_EXTENSIONS } from "@/constants/extension";
@@ -42,6 +43,7 @@ export type BlockMenuOption = {
 
 export function BlockMenu(props: Props) {
   const { editor } = props;
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimatedIn, setIsAnimatedIn] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -151,7 +153,7 @@ export function BlockMenu(props: Props) {
     {
       icon: DeleteOutline,
       key: "delete",
-      label: "Delete",
+      label: "common.actions.delete",
       onClick: (_e) => {
         // Execute the delete action
         editor.chain().deleteSelection().focus().run();
@@ -160,7 +162,7 @@ export function BlockMenu(props: Props) {
     {
       icon: CopyOutline,
       key: "duplicate",
-      label: "Duplicate",
+      label: "common.actions.make_a_copy",
       isDisabled:
         editor.state.selection.content().content.firstChild?.type.name === CORE_EXTENSIONS.IMAGE ||
         editor.isActive(CORE_EXTENSIONS.CUSTOM_IMAGE),
@@ -244,7 +246,7 @@ export function BlockMenu(props: Props) {
               disabled={item.isDisabled}
             >
               <item.icon className="h-3 w-3" />
-              {item.label}
+              {t(item.label)}
             </button>
           );
         })}

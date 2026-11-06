@@ -110,6 +110,12 @@
       "label": "Aus Sammlung entfernen",
       "success_message": "Seite aus Sammlung entfernt.",
       "error_message": "Die Seite konnte nicht aus der Sammlung entfernt werden. Bitte versuchen Sie es erneut."
+    },
+    "delete_page": {
+      "title": "Seite löschen",
+      "confirmation": "Möchten Sie die Seite <page/> wirklich löschen? Die Seite wird endgültig gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "success_message": "Seite erfolgreich gelöscht.",
+      "error_message": "Die Seite konnte nicht gelöscht werden. Bitte erneut versuchen."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Archivierungsdatum"
+  },
+  "page_versions": {
+    "restored": "Seitenversion wiederhergestellt.",
+    "restore_error": "Seitenversion konnte nicht wiederhergestellt werden.",
+    "load_error": "Die Version konnte nicht geladen werden. Bitte erneut versuchen.",
+    "loading": "Versionsdetails werden geladen",
+    "view_only": "Nur ansehen",
+    "restoring": "Wiederherstellung läuft"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Seiten",
+    "not_found_title": "Seite nicht gefunden",
+    "not_found_description": "Die Seite, auf die Sie zugreifen möchten, existiert nicht oder Sie haben keine Berechtigung, sie anzuzeigen.",
+    "view_other_pages": "Andere Seiten anzeigen"
   }
 }

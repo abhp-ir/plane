@@ -5,6 +5,7 @@
  */
 
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // components
 import { PageHead } from "@/components/core/page-title";
 import { ArchivedModuleLayoutRoot, ArchivedModulesHeader } from "@/components/modules";
@@ -15,11 +16,12 @@ import type { Route } from "./+types/page";
 function ProjectArchivedModulesPage({ params }: Route.ComponentProps) {
   // router
   const { projectId } = params;
+  const { t } = useTranslation();
   // store hooks
   const { getProjectById } = useProject();
   // derived values
   const project = getProjectById(projectId);
-  const pageTitle = project?.name && `${project?.name} - Archived modules`;
+  const pageTitle = project?.name && t("project_archives.document_title.modules", { project_name: project.name });
 
   return (
     <>

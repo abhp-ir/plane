@@ -147,5 +147,35 @@
     "light-blue": "Bleu clair",
     "dark-blue": "Bleu foncé",
     "purple": "Violet"
+  },
+  "editor_toolbar": {
+    "bold": "Gras",
+    "italic": "Italique",
+    "underline": "Souligné",
+    "strikethrough": "Barré",
+    "color": "Couleur",
+    "align_left": "Aligner à gauche",
+    "align_center": "Centrer",
+    "align_right": "Aligner à droite",
+    "label": "Barre de mise en forme",
+    "text_colors": "Couleurs du texte",
+    "background_colors": "Couleurs de fond",
+    "remove_text_color": "Supprimer la couleur du texte",
+    "remove_background_color": "Supprimer la couleur de fond",
+    "link": "Lien",
+    "remove_link": "Supprimer le lien",
+    "apply_link": "Appliquer le lien",
+    "multiple": "Plusieurs",
+    "fit_to_width": "Adapter à la largeur"
+  },
+  "editor_image": {
+    "align": "Aligner",
+    "download": "Télécharger l’image",
+    "view_full_screen": "Afficher l’image en plein écran",
+    "full_screen_viewer": "Visionneuse d’images en plein écran",
+    "close_viewer": "Fermer la visionneuse d’images",
+    "zoom_out": "Zoom arrière",
+    "zoom_in": "Zoom avant",
+    "open_in_new_tab": "Ouvrir l’image dans un nouvel onglet"
   }
 }

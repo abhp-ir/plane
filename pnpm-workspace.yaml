@@ -324,4 +324,7 @@ peerDependencyRules:
     "use-font-face-observer>react": "19"
 
 patchedDependencies:
+  "@react-pdf/layout@5.1.1": patches/@react-pdf__layout@5.1.1.patch
+  "@tiptap/react@2.26.1": patches/@tiptap__react@2.26.1.patch
   frimousse@0.3.0: patches/frimousse@0.3.0.patch
+  zeed-dom@0.15.1: patches/zeed-dom@0.15.1.patch

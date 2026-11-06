@@ -110,6 +110,11 @@ def detail_url(slug, asset_id):
     return f"/api/assets/v2/workspaces/{slug}/{asset_id}/"
 
 
+def image_export_url(workspace, project_asset, project_route):
+    scope = f"projects/{project_asset.project_id}/" if project_route else ""
+    return f"/api/assets/v2/workspaces/{workspace.slug}/{scope}{project_asset.id}/?response_format=json"
+
+
 @pytest.mark.contract
 class TestWorkspaceFileAssetProjectScope:
     """A workspace member who is not in the asset's project must be blocked."""
@@ -207,3 +212,42 @@ class TestWorkspaceFileAssetProjectScope:
             f"Got {response.status_code}: {getattr(response, 'data', None)!r}"
         )
         mock_storage.return_value.generate_presigned_url.assert_called_once()
+
+@pytest.mark.contract
+@pytest.mark.django_db
+@pytest.mark.parametrize("project_route", [False, True])
+class TestAssetImageExportURL:
+    def test_member_receives_private_signed_url(
+        self, session_client, workspace, project_asset, project_route
+    ):
+        with mock.patch(S3_STORAGE_PATH) as storage:
+            storage.return_value.generate_presigned_url.return_value = "https://signed.example/image"
+            response = session_client.get(image_export_url(workspace, project_asset, project_route))
+        assert response.status_code == status.HTTP_200_OK
+        assert response.json() == {"url": "https://signed.example/image"}
+        assert response["Cache-Control"] == "private, no-store"
+        storage.return_value.generate_presigned_url.assert_called_once()
+
+    def test_non_project_member_cannot_obtain_url(
+        self, outsider_client, workspace, project_asset, project_route
+    ):
+        with mock.patch(S3_STORAGE_PATH) as storage:
+            response = outsider_client.get(image_export_url(workspace, project_asset, project_route))
+        assert response.status_code == status.HTTP_403_FORBIDDEN
+        storage.return_value.generate_presigned_url.assert_not_called()
+
+    def test_unuploaded_asset_has_no_url(
+        self, session_client, workspace, project_asset, project_route
+    ):
+        project_asset.is_uploaded = False
+        project_asset.save(update_fields=["is_uploaded"])
+        with mock.patch(S3_STORAGE_PATH) as storage:
+            response = session_client.get(image_export_url(workspace, project_asset, project_route))
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        storage.return_value.generate_presigned_url.assert_not_called()
+
+    def test_anonymous_request_cannot_obtain_url(self, workspace, project_asset, project_route):
+        with mock.patch(S3_STORAGE_PATH) as storage:
+            response = APIClient().get(image_export_url(workspace, project_asset, project_route))
+        assert response.status_code in {status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN}
+        storage.return_value.generate_presigned_url.assert_not_called()

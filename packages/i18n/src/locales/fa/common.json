@@ -11,7 +11,9 @@
     "property_removed": "<actor/>{showIssue, select, true { در <issue/>،} other {}} {property} را حذف کرد.",
     "description_edited": "<actor/> توضیحات{showIssue, select, true {ِ <issue/>} other {}} را ویرایش کرد.",
     "work_item_created": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را{hasSource, select, true { از طریق <origin/>} other {}} ایجاد کرد.",
-    "work_item_deleted": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را حذف کرد."
+    "work_item_deleted": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را حذف کرد.",
+    "work_item_archived": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را بایگانی کرد.",
+    "work_item_restored": "<actor/> {showIssue, select, true {<issue/>} other {آیتم کاری}} را از بایگانی بازگرداند."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "در حال رفع این مشکل هستیم. اگر به کمک فوری نیاز دارید،",
@@ -504,7 +506,7 @@
     },
     "remove_filter": "حذف فیلتر",
     "selected_options": "{count, number} گزینهٔ انتخاب‌شده",
-    "more_options": "\u2066+{count, number}\u2069 مورد دیگر",
+    "more_options": "⁦+{count, number}⁩ مورد دیگر",
     "subscriber": "دنبال‌کننده",
     "display": "نمایش",
     "load_more": "بارگذاری بیشتر",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "تغییر رنگ پوست"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - آیتم‌های کاری بایگانی‌شده",
+      "cycles": "{project_name} - چرخه‌های بایگانی‌شده",
+      "modules": "{project_name} - ماژول‌های بایگانی‌شده"
+    }
+  },
+  "page_export": {
+    "title": "خروجی گرفتن از صفحه",
+    "format": "قالب خروجی",
+    "include_content": "محتوای خروجی",
+    "page_format": "اندازهٔ صفحه",
+    "content": {
+      "everything": "همهٔ محتوا",
+      "no_images": "بدون تصویر"
+    },
+    "success": "خروجی صفحه با موفقیت تهیه شد.",
+    "error": "خروجی صفحه تهیه نشد. لطفاً بعداً دوباره تلاش کنید.",
+    "paper": {
+      "letter": "لتر",
+      "legal": "لگال",
+      "tabloid": "تابلوید"
+    }
+  },
+  "page_editor": {
+    "full_width": "تمام‌عرض",
+    "sticky_toolbar": "نوار ابزار ثابت",
+    "syncing": "در حال همگام‌سازی…",
+    "syncing_description": "تغییرات شما در حال همگام‌سازی با سرور هستند. می‌توانید به ویرایش ادامه دهید.",
+    "connection_lost": "ارتباط قطع شده است",
+    "connection_lost_description": "ارتباط قطع شده است. اتصال به سرور WebSocket با مشکل روبه‌رو شده است. تغییرات شما هر ۱۰ ثانیه همگام‌سازی و ذخیره می‌شوند.",
+    "offline": "آفلاین",
+    "offline_description": "آفلاین هستید. می‌توانید به ویرایش ادامه دهید. تغییرات پس از اتصال دوباره به اینترنت همگام‌سازی می‌شوند.",
+    "locked": "قفل‌شده",
+    "unlocked": "قفل باز شد"
   }
 }

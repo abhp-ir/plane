@@ -147,5 +147,35 @@
     "light-blue": "연한 파랑",
     "dark-blue": "진한 파랑",
     "purple": "보라색"
+  },
+  "editor_toolbar": {
+    "bold": "굵게",
+    "italic": "기울임꼴",
+    "underline": "밑줄",
+    "strikethrough": "취소선",
+    "color": "색상",
+    "align_left": "왼쪽 맞춤",
+    "align_center": "가운데 맞춤",
+    "align_right": "오른쪽 맞춤",
+    "label": "서식 도구 모음",
+    "text_colors": "텍스트 색상",
+    "background_colors": "배경 색상",
+    "remove_text_color": "텍스트 색상 제거",
+    "remove_background_color": "배경 색상 제거",
+    "link": "링크",
+    "remove_link": "링크 제거",
+    "apply_link": "링크 적용",
+    "multiple": "여러 유형",
+    "fit_to_width": "너비에 맞추기"
+  },
+  "editor_image": {
+    "align": "정렬",
+    "download": "이미지 다운로드",
+    "view_full_screen": "이미지 전체 화면 보기",
+    "full_screen_viewer": "전체 화면 이미지 뷰어",
+    "close_viewer": "이미지 뷰어 닫기",
+    "zoom_out": "축소",
+    "zoom_in": "확대",
+    "open_in_new_tab": "새 탭에서 이미지 열기"
   }
 }

@@ -7,11 +7,18 @@
 import { useEffect, useRef, useState } from "react";
 // plane imports
 import { useOutsideClickDetector } from "@plane/hooks";
+import { useTranslation } from "@plane/i18n";
 import { ChevronDownOutline } from "@makeplane/propel/icons";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
 // local imports
 import type { TCustomImageAlignment } from "../../types";
 import { IMAGE_ALIGNMENT_OPTIONS } from "../../utils";
+
+const ALIGNMENT_LABEL_KEYS = {
+  left: "editor_toolbar.align_left",
+  center: "editor_toolbar.align_center",
+  right: "editor_toolbar.align_right",
+} as const;
 
 type Props = {
   activeAlignment: TCustomImageAlignment;
@@ -22,6 +29,7 @@ type Props = {
 
 export function ImageAlignmentAction(props: Props) {
   const { activeAlignment, handleChange, isTouchDevice, toggleToolbarViewStatus } = props;
+  const { t } = useTranslation();
   // states
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   // refs
@@ -37,9 +45,10 @@ export function ImageAlignmentAction(props: Props) {
 
   return (
     <div ref={dropdownRef} className="relative h-full">
-      <Tooltip disabled={isTouchDevice} label="Align">
+      <Tooltip disabled={isTouchDevice} label={t("editor_image.align")}>
         <button
           type="button"
+          aria-label={t("editor_image.align")}
           className="flex h-full items-center gap-1 text-white/60 transition-colors hover:text-white"
           onClick={() => setIsDropdownOpen((prev) => !prev)}
         >
@@ -50,9 +59,10 @@ export function ImageAlignmentAction(props: Props) {
       {isDropdownOpen && (
         <div className="absolute top-full left-1/2 mt-0.5 flex h-7 -translate-x-1/2 items-center gap-2 rounded-sm bg-black/80 px-2">
           {IMAGE_ALIGNMENT_OPTIONS.map((option) => (
-            <Tooltip disabled={isTouchDevice} key={option.value} label={option.label}>
+            <Tooltip disabled={isTouchDevice} key={option.value} label={t(ALIGNMENT_LABEL_KEYS[option.value])}>
               <button
                 type="button"
+                aria-label={t(ALIGNMENT_LABEL_KEYS[option.value])}
                 className="grid h-full flex-shrink-0 place-items-center text-white/60 transition-colors hover:text-white"
                 onClick={() => {
                   handleChange(option.value);

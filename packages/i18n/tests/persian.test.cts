@@ -390,7 +390,9 @@ for (const namespace of translatedNamespaces) {
       }
       // Explicit Persian terminology decision; other locales retain the DNT feature names.
       assert.doesNotMatch(target, /\b(?:Sticky|Stickies|Intake)\b/, `${key}: approved Persian feature terms`);
-      if (/\bStick(?:y|ies)\b/i.test(source)) assert.ok(target.includes("یادداشت"), `${key}: Sticky terminology`);
+      // Here "sticky" describes toolbar positioning, rather than the Sticky feature.
+      if (key === "page_editor.sticky_toolbar") assert.equal(target, "نوار ابزار ثابت");
+      else if (/\bStick(?:y|ies)\b/i.test(source)) assert.ok(target.includes("یادداشت"), `${key}: Sticky terminology`);
       if (/\bIntake\b/.test(source)) assert.ok(target.includes("درخواست"), `${key}: Intake terminology`);
     }
   });

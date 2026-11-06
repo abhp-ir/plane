@@ -11,7 +11,9 @@
     "property_removed": "<actor/> removed “{property}”{showIssue, select, true { from <issue/>} other {}}.",
     "description_edited": "<actor/> edited the description{showIssue, select, true { of <issue/>} other {}}.",
     "work_item_created": "<actor/> created {showIssue, select, true {<issue/>} other {the work item}}{hasSource, select, true { via <origin/>} other {}}.",
-    "work_item_deleted": "<actor/> deleted {showIssue, select, true {<issue/>} other {the work item}}."
+    "work_item_deleted": "<actor/> deleted {showIssue, select, true {<issue/>} other {the work item}}.",
+    "work_item_archived": "<actor/> archived {showIssue, select, true {<issue/>} other {the work item}}.",
+    "work_item_restored": "<actor/> restored {showIssue, select, true {<issue/>} other {the work item}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "We're working on this. If you need immediate assistance,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Change skin tone"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Archived work items",
+      "cycles": "{project_name} - Archived cycles",
+      "modules": "{project_name} - Archived modules"
+    }
+  },
+  "page_export": {
+    "title": "Export page",
+    "format": "Export format",
+    "include_content": "Include content",
+    "page_format": "Page format",
+    "content": {
+      "everything": "Everything",
+      "no_images": "No images"
+    },
+    "success": "Page exported successfully.",
+    "error": "Page could not be exported. Please try again later.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Full width",
+    "sticky_toolbar": "Sticky toolbar",
+    "syncing": "Syncing...",
+    "syncing_description": "Syncing... Your changes are being synced with the server. You can continue making changes.",
+    "connection_lost": "Connection lost",
+    "connection_lost_description": "Connection lost. We're having trouble connecting to the websocket server. Your changes will be synced and saved every 10 seconds.",
+    "offline": "Offline",
+    "offline_description": "You are offline. You can continue making changes. They will be synced when you are back online.",
+    "locked": "Locked",
+    "unlocked": "Unlocked"
   }
 }

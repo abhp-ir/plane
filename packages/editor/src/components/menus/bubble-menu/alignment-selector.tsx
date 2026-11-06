@@ -4,6 +4,8 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
+import { getEditorMenuItemLabel } from "@/helpers/menu-labels";
 import type { Editor } from "@tiptap/core";
 import type { ComponentType, SVGProps } from "react";
 import { AlignCenterOutline, AlignLeftOutline, AlignRightOutline } from "@makeplane/propel/icons";
@@ -21,6 +23,7 @@ type Props = {
 };
 
 export function TextAlignmentSelector(props: Props) {
+  const { t } = useTranslation();
   const { editor, editorState } = props;
   const menuItem = TextAlignItem(editor);
 
@@ -70,6 +73,7 @@ export function TextAlignmentSelector(props: Props) {
         <button
           key={item.renderKey}
           type="button"
+          aria-label={getEditorMenuItemLabel(item.renderKey, item.renderKey, t)}
           onClick={(e) => {
             e.stopPropagation();
             item.command();

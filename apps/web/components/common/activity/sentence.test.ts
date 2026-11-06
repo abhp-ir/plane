@@ -43,6 +43,35 @@ vi.mock("@plane/i18n", async () => {
 const actor = createElement("a", { href: "/owned/profile/actor" }, createElement("bdi", null, "نگار ABC-42"));
 const issue = createElement("a", { href: "/owned/browse/FA1405-1" }, createElement("bdi", null, "FA1405-1"));
 const text = (markup: string) => markup.replace(/<[^>]*>/g, "");
+it.each(["work_item_archived", "work_item_restored"] as const)(
+  "localizes %s while preserving rich actor/issue identity",
+  async (message) => {
+    const checkLocale = async (locale: string) => {
+      await i18nInstance.changeLanguage(locale);
+      for (const linked of [true, false]) {
+        const markup = renderToStaticMarkup(
+          createElement(ActivitySentence, { actor, issue: linked ? issue : undefined, message })
+        );
+        const verb =
+          locale === "fa"
+            ? message === "work_item_archived"
+              ? "بایگانی کرد."
+              : "از بایگانی بازگرداند."
+            : message === "work_item_archived"
+              ? "archived"
+              : "restored";
+        expect(text(markup)).toContain(verb);
+        expect(text(markup)).toContain("نگار ABC-42");
+        expect(markup).toContain('href="/owned/profile/actor"');
+        expect(markup.includes('href="/owned/browse/FA1405-1"')).toBe(linked);
+        expect(text(markup)).not.toContain("{showIssue");
+      }
+    };
+    await checkLocale("fa");
+    await checkLocale("en");
+    await checkLocale("fa");
+  }
+);
 
 afterEach(async () => {
   await i18nInstance.changeLanguage("fa");

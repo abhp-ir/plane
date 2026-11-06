@@ -11,7 +11,9 @@
     "property_removed": "<actor/> a eliminat „{property}”{showIssue, select, true { din <issue/>} other {}}.",
     "description_edited": "<actor/> a editat descrierea{showIssue, select, true { pentru <issue/>} other {}}.",
     "work_item_created": "<actor/> a creat {showIssue, select, true {<issue/>} other {elementul de lucru}}{hasSource, select, true { prin <origin/>} other {}}.",
-    "work_item_deleted": "<actor/> a șters {showIssue, select, true {<issue/>} other {elementul de lucru}}."
+    "work_item_deleted": "<actor/> a șters {showIssue, select, true {<issue/>} other {elementul de lucru}}.",
+    "work_item_archived": "<actor/> a arhivat {showIssue, select, true {<issue/>} other {elementul de lucru}}.",
+    "work_item_restored": "<actor/> a restaurat {showIssue, select, true {<issue/>} other {elementul de lucru}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Lucrăm la asta. Dacă aveți nevoie de asistență imediată,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Schimbați nuanța pielii"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Elemente de lucru arhivate",
+      "cycles": "{project_name} - Cicluri arhivate",
+      "modules": "{project_name} - Module arhivate"
+    }
+  },
+  "page_export": {
+    "title": "Exportă pagina",
+    "format": "Format de export",
+    "include_content": "Conținut inclus",
+    "page_format": "Formatul paginii",
+    "content": {
+      "everything": "Tot",
+      "no_images": "Fără imagini"
+    },
+    "success": "Pagina a fost exportată.",
+    "error": "Pagina nu a putut fi exportată. Încercați din nou mai târziu.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Lățime completă",
+    "sticky_toolbar": "Bară de instrumente fixă",
+    "syncing": "Se sincronizează...",
+    "syncing_description": "Modificările dvs. se sincronizează cu serverul. Puteți continua editarea.",
+    "connection_lost": "Conexiune pierdută",
+    "connection_lost_description": "Conexiune pierdută. Există o problemă de conectare la serverul WebSocket. Modificările dvs. vor fi sincronizate și salvate la fiecare 10 secunde.",
+    "offline": "Offline",
+    "offline_description": "Sunteți offline. Puteți continua editarea. Modificările vor fi sincronizate când veți reveni online.",
+    "locked": "Blocată",
+    "unlocked": "Deblocată"
   }
 }

@@ -11,7 +11,9 @@
     "property_removed": "Пользователь <actor/> удалил «{property}»{showIssue, select, true { из <issue/>} other {}}.",
     "description_edited": "Пользователь <actor/> отредактировал описание{showIssue, select, true { в <issue/>} other {}}.",
     "work_item_created": "Пользователь <actor/> создал {showIssue, select, true {<issue/>} other {рабочий элемент}}{hasSource, select, true { через <origin/>} other {}}.",
-    "work_item_deleted": "Пользователь <actor/> удалил {showIssue, select, true {<issue/>} other {рабочий элемент}}."
+    "work_item_deleted": "Пользователь <actor/> удалил {showIssue, select, true {<issue/>} other {рабочий элемент}}.",
+    "work_item_archived": "Пользователь <actor/> архивировал {showIssue, select, true {<issue/>} other {рабочий элемент}}.",
+    "work_item_restored": "Пользователь <actor/> восстановил {showIssue, select, true {<issue/>} other {рабочий элемент}}."
   },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Мы работаем над этим. Если вам нужна немедленная помощь,",
@@ -1006,5 +1008,41 @@
   },
   "emoji_picker": {
     "change_skin_tone": "Изменить тон кожи"
+  },
+  "project_archives": {
+    "document_title": {
+      "work_items": "{project_name} - Архивированные рабочие элементы",
+      "cycles": "{project_name} - Архивированные циклы",
+      "modules": "{project_name} - Архивированные модули"
+    }
+  },
+  "page_export": {
+    "title": "Экспорт страницы",
+    "format": "Формат экспорта",
+    "include_content": "Включаемое содержимое",
+    "page_format": "Формат страницы",
+    "content": {
+      "everything": "Всё",
+      "no_images": "Без изображений"
+    },
+    "success": "Страница успешно экспортирована.",
+    "error": "Не удалось экспортировать страницу. Повторите попытку позже.",
+    "paper": {
+      "letter": "Letter",
+      "legal": "Legal",
+      "tabloid": "Tabloid"
+    }
+  },
+  "page_editor": {
+    "full_width": "Полная ширина",
+    "sticky_toolbar": "Закреплённая панель инструментов",
+    "syncing": "Синхронизация...",
+    "syncing_description": "Ваши изменения синхронизируются с сервером. Вы можете продолжать редактирование.",
+    "connection_lost": "Соединение потеряно",
+    "connection_lost_description": "Соединение потеряно. Возникла проблема с подключением к серверу WebSocket. Ваши изменения будут синхронизироваться и сохраняться каждые 10 секунд.",
+    "offline": "Не в сети",
+    "offline_description": "Вы не в сети. Вы можете продолжать редактирование. Изменения синхронизируются после восстановления подключения.",
+    "locked": "Заблокирована",
+    "unlocked": "Разблокирована"
   }
 }

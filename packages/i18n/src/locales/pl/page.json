@@ -110,6 +110,12 @@
       "label": "Usuń z kolekcji",
       "success_message": "Strona została usunięta z kolekcji.",
       "error_message": "Nie udało się usunąć strony z kolekcji. Spróbuj ponownie."
+    },
+    "delete_page": {
+      "title": "Usuń stronę",
+      "confirmation": "Czy na pewno usunąć stronę <page/>? Strona zostanie trwale usunięta. Tej czynności nie można cofnąć.",
+      "success_message": "Strona została pomyślnie usunięta.",
+      "error_message": "Nie udało się usunąć strony. Proszę spróbować ponownie."
     }
   },
   "page_content_limit_banner": {
@@ -117,5 +123,19 @@
   },
   "page_metadata": {
     "archive_date": "Data archiwizacji"
+  },
+  "page_versions": {
+    "restored": "Wersja strony została przywrócona.",
+    "restore_error": "Nie udało się przywrócić wersji strony.",
+    "load_error": "Nie udało się wczytać wersji. Proszę spróbować ponownie.",
+    "loading": "Wczytywanie szczegółów wersji",
+    "view_only": "Tylko do odczytu",
+    "restoring": "Przywracanie"
+  },
+  "page_views": {
+    "project_title": "{projectName} - Strony",
+    "not_found_title": "Nie znaleziono strony",
+    "not_found_description": "Strona, do której próbują Państwo uzyskać dostęp, nie istnieje lub nie mają Państwo uprawnień do jej wyświetlenia.",
+    "view_other_pages": "Wyświetl inne strony"
   }
 }

@@ -6,13 +6,14 @@
 
 import type { HocuspocusProvider } from "@hocuspocus/provider";
 import type { Extensions } from "@tiptap/core";
-import { Placeholder } from "@tiptap/extension-placeholder";
 import { useEditor } from "@tiptap/react";
 import { useImperativeHandle } from "react";
+import { i18nInstance } from "@plane/i18n";
 // constants
 import { CORE_EDITOR_META } from "@/constants/meta";
 // extensions
 import { TitleExtensions } from "@/extensions/title-extension";
+import { LocalizedPlaceholder } from "@/extensions/placeholder";
 // helpers
 import { getEditorRefHelpers } from "@/helpers/editor-ref";
 // types
@@ -54,8 +55,8 @@ export const useTitleEditor = (props: TUseTitleEditorProps) => {
 
   const editor = useEditor(
     {
-      onUpdate: ({ editor }) => {
-        updatePageProperties?.(id, "property_updated", { name: editor?.getText() });
+      onUpdate: ({ editor: updatedEditor }) => {
+        updatePageProperties?.(id, "property_updated", { name: updatedEditor?.getText() });
       },
       editable,
       immediatelyRender: false,
@@ -63,8 +64,8 @@ export const useTitleEditor = (props: TUseTitleEditorProps) => {
       extensions: [
         ...TitleExtensions,
         ...(extensions ?? []),
-        Placeholder.configure({
-          placeholder: () => "Untitled",
+        LocalizedPlaceholder.configure({
+          placeholder: () => i18nInstance.t("wiki_collections.list.untitled"),
           includeChildren: true,
           showOnlyWhenEditable: false,
         }),
