@@ -108,8 +108,8 @@ export const PageVersionsMainContent = observer(function PageVersionsMainContent
         </div>
       ) : (
         <>
-          <div className="flex min-h-14 items-center justify-between gap-2 border-b border-subtle px-5 py-3">
-            <div className="flex items-center gap-4">
+          <div className="flex min-h-14 items-center justify-between gap-2 border-b border-subtle px-5 py-3 pe-14">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1">
               <h6 className="text-14 font-medium">
                 {versionDetails
                   ? `${renderFormattedDate(versionDetails.last_saved_at, undefined, currentLocale)} ${renderLocalizedDateTime(versionDetails.last_saved_at, currentLocale).time}`

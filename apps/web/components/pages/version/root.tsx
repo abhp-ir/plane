@@ -7,7 +7,9 @@
 import { useCallback } from "react";
 import { observer } from "mobx-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { CloseOutline } from "@makeplane/propel/icons";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import type { TPageVersion } from "@plane/types";
 import { cn } from "@plane/utils";
 // hooks
@@ -30,6 +32,7 @@ type Props = {
 
 export const PageVersionsOverlay = observer(function PageVersionsOverlay(props: Props) {
   const { editorComponent, fetchVersionDetails, handleRestore, pageId, restoreEnabled, storeType } = props;
+  const { t } = useTranslation();
   // navigation
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -48,8 +51,10 @@ export const PageVersionsOverlay = observer(function PageVersionsOverlay(props: 
 
   return (
     <div
+      inert={!isOpen}
+      aria-hidden={!isOpen}
       className={cn(
-        "pointer-events-none absolute inset-0 z-[16] flex h-full overflow-hidden bg-surface-1 opacity-0 transition-opacity",
+        "pointer-events-none absolute inset-0 z-[16] flex h-full overflow-hidden bg-surface-1 opacity-0 transition-opacity max-md:w-full!",
         {
           "pointer-events-auto opacity-100": isOpen,
         }
@@ -58,6 +63,14 @@ export const PageVersionsOverlay = observer(function PageVersionsOverlay(props: 
         width: `calc(100% - ${PAGE_NAVIGATION_PANE_WIDTH}px)`,
       }}
     >
+      <button
+        type="button"
+        aria-label={t("close")}
+        onClick={handleClose}
+        className="absolute end-3 top-3 z-10 grid size-8 place-items-center rounded-sm text-tertiary hover:bg-layer-1 hover:text-primary focus-visible:outline-2 focus-visible:outline-accent-strong"
+      >
+        <CloseOutline className="size-4" />
+      </button>
       <PageVersionsMainContent
         activeVersion={activeVersion}
         editorComponent={editorComponent}
