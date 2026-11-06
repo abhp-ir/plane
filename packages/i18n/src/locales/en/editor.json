@@ -176,6 +176,9 @@
     "close_viewer": "Close image viewer",
     "zoom_out": "Zoom out",
     "zoom_in": "Zoom in",
-    "open_in_new_tab": "Open image in new tab"
+    "open_in_new_tab": "Open image in new tab",
+    "error_loading": "Error loading image",
+    "uploading": "Uploading...",
+    "retry_duplication": "Retry duplication"
   }
 }

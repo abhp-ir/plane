@@ -176,6 +176,9 @@
     "close_viewer": "关闭图片查看器",
     "zoom_out": "缩小",
     "zoom_in": "放大",
-    "open_in_new_tab": "在新标签页中打开图片"
+    "open_in_new_tab": "在新标签页中打开图片",
+    "error_loading": "图片加载错误",
+    "uploading": "正在上传...",
+    "retry_duplication": "重试复制"
   }
 }

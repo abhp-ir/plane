@@ -176,6 +176,9 @@
     "close_viewer": "Zavřít prohlížeč obrázků",
     "zoom_out": "Oddálit",
     "zoom_in": "Přiblížit",
-    "open_in_new_tab": "Otevřít obrázek v nové záložce"
+    "open_in_new_tab": "Otevřít obrázek v nové záložce",
+    "error_loading": "Chyba při načítání obrázku",
+    "uploading": "Nahrávání...",
+    "retry_duplication": "Zkusit duplikování znovu"
   }
 }

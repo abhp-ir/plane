@@ -933,7 +933,8 @@
     "processing": "Verwerken",
     "invalid_file_type": "Ongeldig bestandstype",
     "missing_fields": "Ontbrekende velden",
-    "success": "{fileName} geüpload!"
+    "success": "{fileName} geüpload!",
+    "no_file_selected": "Geen bestand geselecteerd. Selecteer een bestand om te uploaden."
   },
   "date": "Datum",
   "exporter": {

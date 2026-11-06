@@ -176,6 +176,9 @@
     "close_viewer": "画像ビューアーを閉じる",
     "zoom_out": "縮小",
     "zoom_in": "拡大",
-    "open_in_new_tab": "画像を新しいタブで開く"
+    "open_in_new_tab": "画像を新しいタブで開く",
+    "error_loading": "画像の読み込みエラー",
+    "uploading": "アップロード中...",
+    "retry_duplication": "複製を再試行"
   }
 }

@@ -933,7 +933,8 @@
     "processing": "Đang xử lý",
     "invalid_file_type": "Loại tệp không hợp lệ",
     "missing_fields": "Thiếu trường",
-    "success": "{fileName} đã được tải lên!"
+    "success": "{fileName} đã được tải lên!",
+    "no_file_selected": "Chưa chọn tệp. Vui lòng chọn tệp để tải lên."
   },
   "date": "Ngày",
   "exporter": {

@@ -933,7 +933,8 @@
     "processing": "Traitement",
     "invalid_file_type": "Type de fichier invalide",
     "missing_fields": "Champs manquants",
-    "success": "{fileName} téléchargé !"
+    "success": "{fileName} téléchargé !",
+    "no_file_selected": "Aucun fichier sélectionné. Sélectionnez un fichier à téléverser."
   },
   "date": "Date",
   "exporter": {

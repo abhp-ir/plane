@@ -933,7 +933,8 @@
     "processing": "Обробка",
     "invalid_file_type": "Недійсний тип файлу",
     "missing_fields": "Відсутні поля",
-    "success": "{fileName} Завантажено!"
+    "success": "{fileName} Завантажено!",
+    "no_file_selected": "Файл не вибрано. Виберіть файл для завантаження."
   },
   "date": "Дата",
   "exporter": {

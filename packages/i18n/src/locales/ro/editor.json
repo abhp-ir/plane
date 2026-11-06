@@ -176,6 +176,9 @@
     "close_viewer": "Închideți vizualizatorul de imagini",
     "zoom_out": "Micșorați",
     "zoom_in": "Măriți",
-    "open_in_new_tab": "Deschideți imaginea într-un tab nou"
+    "open_in_new_tab": "Deschideți imaginea într-un tab nou",
+    "error_loading": "Eroare la încărcarea imaginii",
+    "uploading": "Se încarcă...",
+    "retry_duplication": "Reîncearcă duplicarea"
   }
 }

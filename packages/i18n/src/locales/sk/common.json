@@ -933,7 +933,8 @@
     "processing": "Spracováva sa",
     "invalid_file_type": "Neplatný typ súboru",
     "missing_fields": "Chýbajúce polia",
-    "success": "{fileName} nahraný!"
+    "success": "{fileName} nahraný!",
+    "no_file_selected": "Nie je vybraný žiadny súbor. Vyberte súbor na nahratie."
   },
   "date": "Dátum",
   "exporter": {

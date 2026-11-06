@@ -933,7 +933,8 @@
     "processing": "Verarbeite",
     "invalid_file_type": "Ungültiger Dateityp",
     "missing_fields": "Fehlende Felder",
-    "success": "{fileName} hochgeladen!"
+    "success": "{fileName} hochgeladen!",
+    "no_file_selected": "Keine Datei ausgewählt. Bitte wählen Sie eine Datei zum Hochladen aus."
   },
   "date": "Datum",
   "exporter": {

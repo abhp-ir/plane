@@ -176,6 +176,9 @@
     "close_viewer": "Zamknij przeglądarkę obrazów",
     "zoom_out": "Pomniejsz",
     "zoom_in": "Powiększ",
-    "open_in_new_tab": "Otwórz obraz w nowej karcie"
+    "open_in_new_tab": "Otwórz obraz w nowej karcie",
+    "error_loading": "Błąd ładowania obrazu",
+    "uploading": "Przesyłanie...",
+    "retry_duplication": "Ponów duplikowanie"
   }
 }

@@ -176,6 +176,9 @@
     "close_viewer": "Chiudi il visualizzatore di immagini",
     "zoom_out": "Riduci zoom",
     "zoom_in": "Aumenta zoom",
-    "open_in_new_tab": "Apri l’immagine in una nuova scheda"
+    "open_in_new_tab": "Apri l’immagine in una nuova scheda",
+    "error_loading": "Errore nel caricamento dell’immagine",
+    "uploading": "Caricamento...",
+    "retry_duplication": "Riprova duplicazione"
   }
 }

@@ -933,7 +933,8 @@
     "processing": "Memproses",
     "invalid_file_type": "Tipe file tidak valid",
     "missing_fields": "Bidang yang hilang",
-    "success": "{fileName} Diunggah!"
+    "success": "{fileName} Diunggah!",
+    "no_file_selected": "Tidak ada berkas yang dipilih. Pilih berkas untuk diunggah."
   },
   "date": "Tanggal",
   "exporter": {

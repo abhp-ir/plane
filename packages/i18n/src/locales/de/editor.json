@@ -176,6 +176,9 @@
     "close_viewer": "Bildbetrachter schließen",
     "zoom_out": "Verkleinern",
     "zoom_in": "Vergrößern",
-    "open_in_new_tab": "Bild in neuem Tab öffnen"
+    "open_in_new_tab": "Bild in neuem Tab öffnen",
+    "error_loading": "Fehler beim Laden des Bildes",
+    "uploading": "Wird hochgeladen...",
+    "retry_duplication": "Duplizieren erneut versuchen"
   }
 }

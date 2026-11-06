@@ -933,7 +933,8 @@
     "processing": "Procesando",
     "invalid_file_type": "Tipo de archivo inválido",
     "missing_fields": "Campos faltantes",
-    "success": "¡{fileName} subido!"
+    "success": "¡{fileName} subido!",
+    "no_file_selected": "No se ha seleccionado ningún archivo. Selecciona un archivo para subir."
   },
   "date": "Fecha",
   "exporter": {

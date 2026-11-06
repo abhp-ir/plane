@@ -933,7 +933,8 @@
     "processing": "處理中",
     "invalid_file_type": "無效的文件類型",
     "missing_fields": "缺少字段",
-    "success": "{fileName} 已上傳！"
+    "success": "{fileName} 已上傳！",
+    "no_file_selected": "未選取檔案。請選取要上傳的檔案。"
   },
   "date": "日期",
   "exporter": {

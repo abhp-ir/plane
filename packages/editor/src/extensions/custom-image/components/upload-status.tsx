@@ -7,6 +7,7 @@
 import type { Editor } from "@tiptap/core";
 import { useEditorState } from "@tiptap/react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   editor: Editor;
@@ -15,6 +16,7 @@ type Props = {
 
 export function ImageUploadStatus(props: Props) {
   const { editor, nodeId } = props;
+  const { t, currentLocale } = useTranslation();
   // Displayed status that will animate smoothly
   const [displayStatus, setDisplayStatus] = useState(0);
   // Animation frame ID for cleanup
@@ -22,7 +24,7 @@ export function ImageUploadStatus(props: Props) {
   // subscribe to image upload status
   const uploadStatus: number | undefined = useEditorState({
     editor,
-    selector: ({ editor }) => editor.storage.utility?.assetsUploadStatus?.[nodeId],
+    selector: ({ editor: activeEditor }) => activeEditor.storage.utility?.assetsUploadStatus?.[nodeId],
   });
 
   useEffect(() => {
@@ -59,8 +61,18 @@ export function ImageUploadStatus(props: Props) {
   if (uploadStatus === undefined) return null;
 
   return (
-    <div className="absolute top-1 right-1 z-20 w-10 rounded-sm bg-black/60 text-center text-11 font-medium">
-      {displayStatus}%
+    <div
+      role="progressbar"
+      aria-label={t("attachment.upload_progress")}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={displayStatus}
+      className="absolute end-1 top-1 z-20 w-10 rounded-sm bg-black/60 text-center text-11 font-medium"
+    >
+      {new Intl.NumberFormat(currentLocale === "ua" ? "uk-UA" : currentLocale, {
+        style: "percent",
+        maximumFractionDigits: 0,
+      }).format(displayStatus / 100)}
     </div>
   );
 }

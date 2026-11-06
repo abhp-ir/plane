@@ -933,7 +933,8 @@
     "processing": "İşleniyor",
     "invalid_file_type": "Geçersiz dosya tipi",
     "missing_fields": "Eksik alanlar",
-    "success": "{fileName} Yüklendi!"
+    "success": "{fileName} Yüklendi!",
+    "no_file_selected": "Dosya seçilmedi. Yüklemek için bir dosya seçin."
   },
   "date": "Tarih",
   "exporter": {

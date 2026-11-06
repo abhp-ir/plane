@@ -933,7 +933,8 @@
     "processing": "Przetwarzanie",
     "invalid_file_type": "Nieprawidłowy typ pliku",
     "missing_fields": "Brakujące pola",
-    "success": "{fileName} przesłany!"
+    "success": "{fileName} przesłany!",
+    "no_file_selected": "Nie wybrano pliku. Wybierz plik do przesłania."
   },
   "date": "Data",
   "exporter": {

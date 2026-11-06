@@ -933,7 +933,8 @@
     "processing": "処理中",
     "invalid_file_type": "無効なファイル形式",
     "missing_fields": "必須フィールドが不足しています",
-    "success": "{fileName}がアップロードされました！"
+    "success": "{fileName}がアップロードされました！",
+    "no_file_selected": "ファイルが選択されていません。アップロードするファイルを選択してください。"
   },
   "date": "日付",
   "exporter": {

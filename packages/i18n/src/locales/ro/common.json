@@ -933,7 +933,8 @@
     "processing": "Se procesează",
     "invalid_file_type": "Tip de fișier invalid",
     "missing_fields": "Câmpuri lipsă",
-    "success": "{fileName} Încărcat!"
+    "success": "{fileName} Încărcat!",
+    "no_file_selected": "Niciun fișier selectat. Selectează un fișier de încărcat."
   },
   "date": "Dată",
   "exporter": {

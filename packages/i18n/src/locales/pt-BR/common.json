@@ -933,7 +933,8 @@
     "processing": "Processando",
     "invalid_file_type": "Tipo de arquivo inválido",
     "missing_fields": "Campos ausentes",
-    "success": "{fileName} Enviado!"
+    "success": "{fileName} Enviado!",
+    "no_file_selected": "Nenhum arquivo selecionado. Selecione um arquivo para enviar."
   },
   "date": "Data",
   "exporter": {

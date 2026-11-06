@@ -933,7 +933,8 @@
     "processing": "Обработка",
     "invalid_file_type": "Недопустимый тип файла",
     "missing_fields": "Отсутствуют поля",
-    "success": "{fileName} загружен!"
+    "success": "{fileName} загружен!",
+    "no_file_selected": "Файл не выбран. Выберите файл для загрузки."
   },
   "date": "Дата",
   "exporter": {

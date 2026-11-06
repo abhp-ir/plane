@@ -933,7 +933,8 @@
     "processing": "Обработка",
     "invalid_file_type": "Невалиден тип файл",
     "missing_fields": "Липсващи полета",
-    "success": "{fileName} е качен!"
+    "success": "{fileName} е качен!",
+    "no_file_selected": "Не е избран файл. Изберете файл за качване."
   },
   "date": "Дата",
   "exporter": {

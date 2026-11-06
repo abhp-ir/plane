@@ -933,7 +933,8 @@
     "processing": "Elaborazione",
     "invalid_file_type": "Tipo di file non valido",
     "missing_fields": "Campi mancanti",
-    "success": "{fileName} Caricato!"
+    "success": "{fileName} Caricato!",
+    "no_file_selected": "Nessun file selezionato. Seleziona un file da caricare."
   },
   "date": "Data",
   "exporter": {

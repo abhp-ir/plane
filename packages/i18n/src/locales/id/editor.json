@@ -176,6 +176,9 @@
     "close_viewer": "Tutup penampil gambar",
     "zoom_out": "Perkecil",
     "zoom_in": "Perbesar",
-    "open_in_new_tab": "Buka gambar di tab baru"
+    "open_in_new_tab": "Buka gambar di tab baru",
+    "error_loading": "Gagal memuat gambar",
+    "uploading": "Mengunggah...",
+    "retry_duplication": "Coba duplikasi lagi"
   }
 }

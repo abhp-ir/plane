@@ -176,6 +176,9 @@
     "close_viewer": "이미지 뷰어 닫기",
     "zoom_out": "축소",
     "zoom_in": "확대",
-    "open_in_new_tab": "새 탭에서 이미지 열기"
+    "open_in_new_tab": "새 탭에서 이미지 열기",
+    "error_loading": "이미지 로드 오류",
+    "uploading": "업로드 중...",
+    "retry_duplication": "복제 다시 시도"
   }
 }

@@ -176,6 +176,9 @@
     "close_viewer": "Görsel görüntüleyiciyi kapat",
     "zoom_out": "Uzaklaştır",
     "zoom_in": "Yakınlaştır",
-    "open_in_new_tab": "Görseli yeni sekmede aç"
+    "open_in_new_tab": "Görseli yeni sekmede aç",
+    "error_loading": "Görsel yüklenirken hata oluştu",
+    "uploading": "Yükleniyor...",
+    "retry_duplication": "Çoğaltmayı yeniden dene"
   }
 }

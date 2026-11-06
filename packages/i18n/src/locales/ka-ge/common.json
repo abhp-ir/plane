@@ -933,7 +933,8 @@
     "processing": "Processing",
     "invalid_file_type": "Invalid file type",
     "missing_fields": "Missing fields",
-    "success": "{fileName} Uploaded!"
+    "success": "{fileName} Uploaded!",
+    "no_file_selected": "ფაილი არჩეული არ არის. აირჩიეთ ასატვირთი ფაილი."
   },
   "date": "Date",
   "exporter": {

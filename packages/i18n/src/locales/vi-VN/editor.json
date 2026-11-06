@@ -176,6 +176,9 @@
     "close_viewer": "Đóng trình xem hình ảnh",
     "zoom_out": "Thu nhỏ",
     "zoom_in": "Phóng to",
-    "open_in_new_tab": "Mở hình ảnh trong tab mới"
+    "open_in_new_tab": "Mở hình ảnh trong tab mới",
+    "error_loading": "Lỗi tải hình ảnh",
+    "uploading": "Đang tải lên...",
+    "retry_duplication": "Thử nhân bản lại"
   }
 }

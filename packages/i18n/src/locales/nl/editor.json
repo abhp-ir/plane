@@ -176,6 +176,9 @@
     "close_viewer": "Afbeeldingsviewer sluiten",
     "zoom_out": "Uitzoomen",
     "zoom_in": "Inzoomen",
-    "open_in_new_tab": "Afbeelding openen in nieuw tabblad"
+    "open_in_new_tab": "Afbeelding openen in nieuw tabblad",
+    "error_loading": "Fout bij het laden van de afbeelding",
+    "uploading": "Uploaden...",
+    "retry_duplication": "Dupliceren opnieuw proberen"
   }
 }

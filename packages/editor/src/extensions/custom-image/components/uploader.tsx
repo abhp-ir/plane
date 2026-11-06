@@ -8,6 +8,7 @@ import { ImageOutline, RefreshOutline } from "@makeplane/propel/icons";
 import type { ChangeEvent } from "react";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 // plane imports
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 // constants
 import { ACCEPTED_IMAGE_MIME_TYPES } from "@/constants/config";
@@ -30,6 +31,7 @@ type CustomImageUploaderProps = CustomImageNodeViewProps & {
 };
 
 export function CustomImageUploader(props: CustomImageUploaderProps) {
+  const { t } = useTranslation();
   const {
     editor,
     extension,
@@ -160,7 +162,7 @@ export function CustomImageUploader(props: CustomImageUploaderProps) {
       e.preventDefault();
       const filesList = e.target.files;
       const pos = getPos();
-      if (!filesList || pos === undefined) {
+      if (!filesList?.length || pos === undefined) {
         return;
       }
       await uploadFirstFileAndInsertRemaining({
@@ -184,19 +186,19 @@ export function CustomImageUploader(props: CustomImageUploaderProps) {
   const getDisplayMessage = useCallback(() => {
     const isUploading = isImageBeingUploaded;
     if (isErrorState) {
-      return "Error loading image";
+      return t("editor_image.error_loading");
     }
 
     if (isUploading) {
-      return "Uploading...";
+      return t("editor_image.uploading");
     }
 
     if (draggedInside && editor.isEditable) {
-      return "Drop image here";
+      return t("image_upload.drop");
     }
 
-    return "Add an image";
-  }, [draggedInside, editor.isEditable, isErrorState, isImageBeingUploaded]);
+    return t("onboarding.image.upload");
+  }, [draggedInside, editor.isEditable, isErrorState, isImageBeingUploaded, t]);
 
   const handleRetryClick = useCallback(
     (e: React.MouseEvent) => {
@@ -229,14 +231,19 @@ export function CustomImageUploader(props: CustomImageUploaderProps) {
       onDragOver={onDragEnter}
       onDragLeave={onDragLeave}
       contentEditable={false}
-      onClick={() => {
-        if (!failedToLoadImage && editor.isEditable && !hasDuplicationFailed) {
-          fileInputRef.current?.click();
-        }
-      }}
     >
       <ImageOutline className="size-4" />
-      <div className="flex-1 text-14 font-medium">{getDisplayMessage()}</div>
+      {editor.isEditable && !isErrorState ? (
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className="flex-1 rounded-sm text-start text-14 font-medium focus-visible:outline-2 focus-visible:outline-accent-strong"
+        >
+          {getDisplayMessage()}
+        </button>
+      ) : (
+        <div className="flex-1 text-14 font-medium">{getDisplayMessage()}</div>
+      )}
       {hasDuplicationFailed && editor.isEditable && (
         <button
           type="button"
@@ -247,10 +254,10 @@ export function CustomImageUploader(props: CustomImageUploaderProps) {
               "hover:bg-danger-subtle-hover": selected,
             }
           )}
-          title="Retry duplication"
+          title={t("editor_image.retry_duplication")}
         >
           <RefreshOutline className="size-3" />
-          <span className="text-11">Retry</span>
+          <span className="text-11">{t("common.retry")}</span>
         </button>
       )}
       <input
@@ -258,6 +265,7 @@ export function CustomImageUploader(props: CustomImageUploaderProps) {
         ref={fileInputRef}
         hidden
         type="file"
+        aria-label={t("onboarding.image.upload")}
         accept={ACCEPTED_IMAGE_MIME_TYPES.join(",")}
         onChange={onFileChange}
         multiple
